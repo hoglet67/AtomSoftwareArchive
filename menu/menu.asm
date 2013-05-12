@@ -71,9 +71,12 @@
 
 
 .WritePage
+    CLC
 	LDA ShortPublisherTablePtr
+	ADC #2
 	STA ShortPub
 	LDA ShortPublisherTablePtr + 1
+	ADC #0
 	STA ShortPub + 1
 	LDA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
