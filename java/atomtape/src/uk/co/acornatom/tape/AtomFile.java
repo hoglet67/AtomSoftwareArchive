@@ -1,3 +1,4 @@
+package uk.co.acornatom.tape;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
