@@ -11,6 +11,9 @@ import java.io.OutputStream;
 
 public class Convert {
 
+	private static final int DEFAULT_LOADADDR = 0x2900;
+	private static final int DEFAULT_EXECADDR = 0xc2b2;
+
 	private static final int ASCII_0 = 48;
 	private static final int ASCII_9 = 57;
 	private static final int ASCII_CR = 13;
@@ -53,7 +56,7 @@ public class Convert {
 		out.write(buffer);
 	}
 
-	private void convertToAtm(File srcFile, File dstFile) throws IOException {
+	private void convertToAtm(File srcFile, File dstFile, int loadAddr, int execAddr) throws IOException {
 		int b;
 		int offset = 0;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -108,14 +111,14 @@ public class Convert {
 		writeByte(bos, 13);
 		writeByte(bos, 255);
 		FileOutputStream fos = new FileOutputStream(dstFile);
-		writeATMFile(fos, dstFile.getName(), 0x2900, 0xC2B2, bos.toByteArray());
+		writeATMFile(fos, dstFile.getName(), loadAddr, execAddr, bos.toByteArray());
 		fos.close();
 	}
 
 	public static final void main(String[] args) {
 		try {
-			if (args.length != 2) {
-				System.err.println("usage: java -jar atombasic.jar <Src Atom Basic Text File> <Dst ATM File>");
+			if (args.length < 2 || args.length > 4) {
+				System.err.println("usage: java -jar atombasic.jar <Src Atom Basic Text File> <Dst ATM File> [loadAddr in hex] [exec Addr in hex]");
 				System.exit(1);
 			}
 			File srcFile = new File(args[0]);
@@ -127,16 +130,13 @@ public class Convert {
 				System.err.println("Source Atom Basic File: " + srcFile + " is not a file");
 				System.exit(1);
 			}
-
 			File dstFile = new File(args[1]);
-			// if (dstFile.exists()) {
-			// System.err.println("Destination ATM File: " + dstFile +
-			// " already exists");
-			// System.exit(1);
-			// }
 
+			int loadAddr = args.length > 2 ? Integer.parseInt(args[2], 16) : DEFAULT_LOADADDR;
+			int execAddr = args.length > 3 ? Integer.parseInt(args[3], 16) : DEFAULT_EXECADDR;
+			
 			Convert c = new Convert();
-			c.convertToAtm(srcFile, dstFile);
+			c.convertToAtm(srcFile, dstFile, loadAddr, execAddr);
 
 		} catch (IOException e) {
 			e.printStackTrace();
