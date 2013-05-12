@@ -36,7 +36,7 @@
 
 	Base = $3300
 
-        org     Base - 22
+	org     Base - 22
 
 .STARTOFHEADER
 
@@ -44,22 +44,22 @@
 
 	EQUS    "MENUMC"
 
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
+	EQUB    $00
 
-        EQUB    <Base
-        EQUB    >Base
-        
-        EQUB    <Base
-        EQUB    >Base
+	EQUB    <Base
+	EQUB    >Base
+	
+	EQUB    <Base
+	EQUB    >Base
 
 	EQUW	ENDOF - STARTOF
 
