@@ -20,6 +20,7 @@ MNU/SORTDAT:
 #3606 <Pointer to Collection Sort Table>
 
 Title Sort Table: (374 bytes)
+<Number of Entries>
 <Pointer to 1st title in main table>
 ...
 <Pointer to last title in main table>
@@ -65,14 +66,18 @@ Secondary Table for Short Publisher Names: (68 bytes)
 <Short name of Publisher N, terminated in #0D>
 
 Secondary Table for Publisher Names: (192 bytes)
-<Pointer full name of publisher 0>
-<Pointer to first occurrence of publisher 0 in publisher sort table>
+<Number of Entries>
+<Pointer record for publisher 0>
 ...
-<Pointer full name of publisher N>
-<Pointer to first occurrence of publisher N in publisher sort table>
-<Full name of Publisher 0, terminated in #0D>
+<Pointer record for publisher N>
+<Record for Publisher 0>
 ...
-<Full name of Publisher N, terminated in #0D>
+<Record for Publisher N>
+
+Publisher Record:
+<Index of first occurrence of publisher in publisher sort table>
+<Index of last occurrence of publisher in publisher sort table>
+<Full name of publisher, terminated in #0D>
 
 Secondary Table for Short Genre Names: (21 bytes)
 Same structure as the Secondary Table for Publisher Names

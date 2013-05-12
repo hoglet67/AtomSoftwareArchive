@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class Convert {
+	
+	public static boolean DEBUG = false;
 
 	private static final int DEFAULT_LOADADDR = 0x2900;
 	private static final int DEFAULT_EXECADDR = 0xc2b2;
@@ -64,7 +66,7 @@ public class Convert {
 		FileInputStream fis = new FileInputStream(srcFile);
 		try {
 			while ((b = fis.read()) > 0) {
-				// STATE oldState = state;
+				STATE oldState = state;
 				switch (state) {
 				case SEEKING:
 					if (b >= ASCII_0 && b <= ASCII_9) {
@@ -89,6 +91,9 @@ public class Convert {
 						writeByte(bos, lineNum / 256);
 						writeByte(bos, lineNum % 256);
 						writeByte(bos, b);
+						if (DEBUG) {
+							System.out.println("Line " + lineNum);
+						}
 						state = STATE.LINE;
 					} else {
 						lineNumBuf.append((char) b);
@@ -101,7 +106,9 @@ public class Convert {
 						writeByte(bos, b);
 					}
 				}
-				// System.out.println(b + " " + oldState + "->" + state);
+				if (DEBUG) {
+					System.out.println(b + " " + oldState + "->" + state);
+				}
 			}
 		} finally {
 			fis.close();

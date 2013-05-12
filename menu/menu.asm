@@ -21,6 +21,7 @@
 	ShortPubName = $86
 	Screen = $88
 	TmpY = $8a
+    Annotation = $8b
 
 	Key = $80
 
@@ -110,6 +111,8 @@
 	BNE WritePage2
 
 .WritePage3
+    LDA Annotation
+    BMI WritePage5
 	LDY #PubIdOffset
 	LDA (Title),Y
 	CLC
@@ -137,6 +140,8 @@
 	JSR WriteToScreen
 	DEX
 	BNE WritePage6
+	LDA Annotation
+	BMI WritePage8
 	LDY #0
 
 .WritePage7

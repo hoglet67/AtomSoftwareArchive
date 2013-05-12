@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,8 +154,8 @@ public class GenerateMenuFiles extends GenerateBase {
 		int menuAddr = menuAddrBase + 10;
 
 		// Place the sort tables in the Atom's lower text space
-		// The size of these tables is predictable: 2x number of titles + 2
-		int sortAddrBase = (0x3B - (((atomTitles.size() + 1) * 8) / 256)) * 256;		
+		// The size of these tables is predictable: 2x (number of titles + 2)
+		int sortAddrBase = (0x3B - (((atomTitles.size() + 2) * 8) / 256)) * 256;		
 
 		int sortAddr = sortAddrBase + 8;
 
@@ -175,32 +176,19 @@ public class GenerateMenuFiles extends GenerateBase {
 		// publisher/genre/collection
 		// ------------------------------------------------------------------------------------
 
-		
-		byte[] titleSortTable = createSortTable("Title Sort", sortAddr, atomTitles, new TitleOrderSort(), null,  null);		
+		byte[] titleSortTable = createSortTable("Title Sort", sortAddr, atomTitles, new TitleOrderSort(), null);		
 		sortAddr += titleSortTable.length;
 		
-		byte[] publisherSortTable = createSortTable("Publisher Sort", sortAddr, atomTitles, new PublisherOrderSort(), publishers,  new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getPublisher();
-			}
-		});
+		List<AtomTitle> publisherSortList = new ArrayList<AtomTitle>(atomTitles);
+		byte[] publisherSortTable = createSortTable("Publisher Sort", sortAddr, publisherSortList, new PublisherOrderSort(), publishers);
 		sortAddr += publisherSortTable.length;
 		
-		byte[] genreSortTable = createSortTable("Genre Sort", sortAddr, atomTitles, new GenreOrderSort(), genres, new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getGenre();
-			}
-		});		
+		List<AtomTitle> genreSortList = new ArrayList<AtomTitle>(atomTitles);
+		byte[] genreSortTable = createSortTable("Genre Sort", sortAddr, genreSortList, new GenreOrderSort(), genres);		
 		sortAddr += genreSortTable.length;
 
-		byte[] collectionSortTable = createSortTable("Collection Sort", sortAddr, atomTitles, new CollectionOrderSort(), collections,  new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getCollection();
-			}
-		});
+		List<AtomTitle> collectionSortList = new ArrayList<AtomTitle>(atomTitles);
+		byte[] collectionSortTable = createSortTable("Collection Sort", sortAddr, collectionSortList, new CollectionOrderSort(), collections);
 		sortAddr += collectionSortTable.length;
 
 		// ------------------------------------------------------------------------------------
@@ -209,16 +197,31 @@ public class GenerateMenuFiles extends GenerateBase {
 		// these reside in the Atom higher text space
 		// ------------------------------------------------------------------------------------
 
-		byte[] shortPublisherTable = createSecondaryTable("ShortPublisher", menuAddr, shortPublishers, false);
+		byte[] shortPublisherTable = createSecondaryTable("ShortPublisher", menuAddr, shortPublishers, null, null);
 		menuAddr += shortPublisherTable.length;
 
-		byte[] publisherTable = createSecondaryTable("Publisher", menuAddr, publishers, true);
+		byte[] publisherTable = createSecondaryTable("Publisher", menuAddr, publishers, publisherSortList, new IFieldSelector() {
+			@Override
+			public String getField(AtomTitle title) {
+				return title.getPublisher();
+			}
+		});
 		menuAddr += publisherTable.length;
 
-		byte[] genreTable = createSecondaryTable("Genre", menuAddr, genres, true);		
+		byte[] genreTable = createSecondaryTable("Genre", menuAddr, genres, genreSortList, new IFieldSelector() {
+			@Override
+			public String getField(AtomTitle title) {
+				return title.getGenre();
+			}
+		});		
 		menuAddr += genreTable.length;
 		
-		byte[] collectionsTable = createSecondaryTable("Collection", menuAddr, collections, true);
+		byte[] collectionsTable = createSecondaryTable("Collection", menuAddr, collections, collectionSortList, new IFieldSelector() {
+			@Override
+			public String getField(AtomTitle title) {
+				return title.getCollection();
+			}
+		});
 		menuAddr += collectionsTable.length;
 
 		// ------------------------------------------------------------------------------------
@@ -286,35 +289,51 @@ public class GenerateMenuFiles extends GenerateBase {
 	}
 	
 	
-	private byte[] createSecondaryTable(String tableName, int absoluteAddress, Map<String, Integer> map, boolean linkToSort) throws IOException {
+	private byte[] createSecondaryTable(String tableName, int absoluteAddress, Map<String, Integer> map, List<AtomTitle> sort, IFieldSelector fieldSelector) throws IOException {
 		System.out.println("----------------------------------------");
 		System.out.println("Secondary Table: " + tableName);
 		System.out.println("----------------------------------------");
 		System.out.println("address " + Integer.toHexString(absoluteAddress));
-		List<Integer> offsets = new ArrayList<Integer>();
-		if (linkToSort) {
-			absoluteAddress += map.size() * 4 + 2; // Skip over the pointers plus the terminator
-		} else {
-			absoluteAddress += map.size() * 2 + 2; // Skip over the pointers plus the terminator			
-		}
-		for (Map.Entry<String, Integer> entry : map.entrySet()) {
-			int textAddr = absoluteAddress;
-			offsets.add(textAddr);
-			absoluteAddress += entry.getKey().length() + 1;
-			if (linkToSort) {
-				int sortAddr = map.get(entry.getKey());
-				offsets.add(sortAddr);
-				System.out.println(Integer.toHexString(textAddr) + " " + Integer.toHexString(sortAddr) + " " + entry.getKey());
-			} else {
-				System.out.println(Integer.toHexString(textAddr) + " " + entry.getKey());				
-			}
-		}
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		for (int offset : offsets) {
-			writeShort(bos, offset);
+		absoluteAddress += map.size() * 2 + 4; // Skip over the pointers plus the length and terminator			
+		writeShort(bos, map.size());
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			writeShort(bos, absoluteAddress);
+			absoluteAddress += (sort != null ? 4 : 0) + entry.getKey().length() + 1;
 		}
 		writeShort(bos, 0xFFFF);
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			if (sort != null) {
+				// Find the first index of this secondary key in the specifed sort table
+				int firstIndex = -1;
+				int lastContigIndex = -1;
+				int lastIndex = -1;
+				for (int i = 0; i < sort.size(); i++) {
+					boolean match = fieldSelector.getField(sort.get(i)).equals(entry.getKey());
+					if (firstIndex == -1) {
+						if (match) {
+							firstIndex = i;
+						}
+					} else if (lastContigIndex == -1) {
+						if (!match) {
+							lastContigIndex = i - 1;
+						}
+					}
+					if (match) {
+						lastIndex = i;
+					}
+				}
+				if (lastContigIndex == -1) {
+					lastContigIndex = lastIndex;
+				}
+				if (firstIndex != -1 && lastIndex != lastContigIndex) {
+					dumpTitles(tableName, sort);
+					throw new RuntimeException("Entries for " + tableName + " " + entry.getKey() + " are not contiguous");
+				}
+				System.out.println(entry.getKey() + " spans indexes " + firstIndex + "..." + lastIndex);
+				writeShort(bos, firstIndex);
+				writeShort(bos, lastIndex + 1);
+			}
 			writeString(bos, entry.getKey());
 			writeByte(bos, 13);
 		}
@@ -322,30 +341,17 @@ public class GenerateMenuFiles extends GenerateBase {
 		return bos.toByteArray();
 	}
 
-	private byte[] createSortTable(String tableName, int absoluteAddress, List<AtomTitle> items, Comparator<AtomTitle> comparator, Map<String, Integer> map, IFieldSelector fieldSelector) throws IOException {
+	private byte[] createSortTable(String tableName, int absoluteAddress, List<AtomTitle> items, Comparator<AtomTitle> comparator, Map<String, Integer> map) throws IOException {
 		System.out.println("----------------------------------------");
 		System.out.println("Sort Table: " + tableName);
 		System.out.println("----------------------------------------");
 		System.out.println("address " + Integer.toHexString(absoluteAddress));
-		// First clear out the map
-		if (fieldSelector != null) {
-			for (String key : map.keySet()) {
-				map.put(key, -1);
-			}
-		}
 		// Sort items using the supplier comparator
 		Collections.sort(items, comparator);
 		// Build the data for the table
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		writeShort(bos, items.size());
 		for (AtomTitle item : items) {
-			// If this is the first time we have hit this field value (e.g. publisher) record the address in the sort table
-			// This will allow quick access by publisher, skipping to next publisher, etc.
-			if (fieldSelector != null) {
-				String field = fieldSelector.getField(item);
-				if (map.get(field) == -1) {
-					map.put(field, absoluteAddress + bos.size());
-				}
-			}
 			writeShort(bos, item.getAbsoluteAddress());
 		}
 		writeShort(bos, 0xFFFF);
@@ -395,28 +401,39 @@ public class GenerateMenuFiles extends GenerateBase {
 			return o1.getTitle().compareTo(o2.getTitle());
 		}
 	}
-
-	public class CollectionOrderSort implements Comparator<AtomTitle> {
-		@Override
-		public int compare(AtomTitle o1, AtomTitle o2) {
-			int ret1 = o1.getCollectionId() - o2.getCollectionId();
-			int ret2 = o1.getType() - o2.getType();
-			return ret1 != 0 ? ret1 : ret2 != 0 ? ret2 : o1.getTitle().compareTo(o2.getTitle());
+	
+	public abstract class ComparatorBase implements Comparator<AtomTitle> {
+		public int compareWithZeroLast(int o1, int o2) {
+			if (o1 == 0) {
+				o1 = Integer.MAX_VALUE;
+			}
+			if (o2 == 0) {
+				o2 = Integer.MAX_VALUE;
+			}
+			return o1 - o2;
 		}
 	}
 
-	public class GenreOrderSort implements Comparator<AtomTitle> {
+	public class CollectionOrderSort extends ComparatorBase  {
 		@Override
 		public int compare(AtomTitle o1, AtomTitle o2) {
-			int ret = o1.getGenreId() - o2.getGenreId();
+			int ret = compareWithZeroLast(o1.getCollectionId(), o2.getCollectionId());
 			return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
 		}
 	}
 
-	public class PublisherOrderSort implements Comparator<AtomTitle> {
+	public class GenreOrderSort extends ComparatorBase implements Comparator<AtomTitle> {
 		@Override
 		public int compare(AtomTitle o1, AtomTitle o2) {
-			int ret = o1.getPublisherId() - o2.getPublisherId();
+			int ret = compareWithZeroLast(o1.getGenreId(), o2.getGenreId());
+			return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
+		}
+	}
+
+	public class PublisherOrderSort extends ComparatorBase  {
+		@Override
+		public int compare(AtomTitle o1, AtomTitle o2) {
+			int ret = compareWithZeroLast(o1.getPublisherId(), o2.getPublisherId());
 			return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
 		}
 	}
