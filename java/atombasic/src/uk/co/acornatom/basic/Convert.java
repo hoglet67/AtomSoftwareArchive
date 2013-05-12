@@ -3,12 +3,24 @@ package uk.co.acornatom.basic;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 
 public class Convert {
+
+	private static final int ASCII_0 = 48;
+	private static final int ASCII_9 = 57;
+	private static final int ASCII_CR = 13;
+	private static final int ASCII_LF = 10;
+	private static final int ASCII_SPACE = 32;
+	private static final int ASCII_TAB = 9;
+
+	private enum STATE {
+		SEEKING, NUMBER, LINE
+	};
 
 	public Convert() {
 	}
@@ -42,48 +54,59 @@ public class Convert {
 	}
 
 	private void convertToAtm(File srcFile, File dstFile) throws IOException {
-		String line;
+		int b;
+		int offset = 0;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		BufferedReader reader = new BufferedReader(new FileReader(srcFile));
+
+		STATE state = STATE.SEEKING;
+		StringBuffer lineNumBuf = new StringBuffer();
+		FileInputStream fis = new FileInputStream(srcFile);
 		try {
-			while ((line = reader.readLine()) != null) {
-				String originalLine = line;
-				// Parse the line number
-				int i = 0;
-				while (i < line.length() && Character.isWhitespace(line.charAt(i))) {
-					i = i + 1;
+			while ((b = fis.read()) > 0) {
+				// STATE oldState = state;
+				switch (state) {
+				case SEEKING:
+					if (b >= ASCII_0 && b <= ASCII_9) {
+						lineNumBuf.setLength(0);
+						lineNumBuf.append((char) b);
+						state = STATE.NUMBER;
+					} else if (b != ASCII_CR && b != ASCII_LF && b != ASCII_SPACE && b != ASCII_TAB) {
+						throw new IOException("Encountered unexected character ascii: " + b + " in state " + state
+								+ " at file offset " + offset);
+					}
+					break;
+				case NUMBER:
+					if (b == ASCII_CR || b == ASCII_LF) {
+						System.err.println("Warning: skipping empty line: " + lineNumBuf.toString());
+						state = STATE.SEEKING;
+					} else if (b < ASCII_0 || b > ASCII_9) {
+						int lineNum = Integer.parseInt(lineNumBuf.toString());
+						if (lineNum > 0x7FFF) {
+							throw new IOException("Line number too large: " + lineNumBuf.toString());
+						}
+						writeByte(bos, 13);
+						writeByte(bos, lineNum / 256);
+						writeByte(bos, lineNum % 256);
+						writeByte(bos, b);
+						state = STATE.LINE;
+					} else {
+						lineNumBuf.append((char) b);
+					}
+					break;
+				case LINE:
+					if (b == ASCII_CR || b == ASCII_LF) {
+						state = STATE.SEEKING;
+					} else {
+						writeByte(bos, b);
+					}
 				}
-				if (i == line.length()) {
-					continue;
-				}
-				line = line.substring(i);
-				i = 0;
-				while (i < line.length() && Character.isDigit(line.charAt(i))) {
-					i = i + 1;
-				}
-				if (i == 0) {
-					throw new IOException("Malformed basic line: " + originalLine);
-				}
-				int lineNum = Integer.parseInt(line.substring(0, i));
-				if (lineNum > 32676) {
-					throw new IOException("Line number too large: " + originalLine);					
-				}
-				// Remove line number
-				line = line.substring(i);
-				if (line.length() == 0) {
-					System.err.println("Warning: empty line: " + originalLine);
-				}
-				// Write to the ATM file
-				writeByte(bos, 13);
-				writeByte(bos, lineNum / 256);
-				writeByte(bos, lineNum % 256);
-				writeString(bos, line);
+				// System.out.println(b + " " + oldState + "->" + state);
 			}
-			writeByte(bos, 13);
-			writeByte(bos, 255);
 		} finally {
-			reader.close();
+			fis.close();
 		}
+		writeByte(bos, 13);
+		writeByte(bos, 255);
 		FileOutputStream fos = new FileOutputStream(dstFile);
 		writeATMFile(fos, dstFile.getName(), 0x2900, 0xC2B2, bos.toByteArray());
 		fos.close();
@@ -106,10 +129,11 @@ public class Convert {
 			}
 
 			File dstFile = new File(args[1]);
-			if (dstFile.exists()) {
-				System.err.println("Destination ATM File: " + dstFile + " already exists");
-				System.exit(1);
-			}
+			// if (dstFile.exists()) {
+			// System.err.println("Destination ATM File: " + dstFile +
+			// " already exists");
+			// System.exit(1);
+			// }
 
 			Convert c = new Convert();
 			c.convertToAtm(srcFile, dstFile);
