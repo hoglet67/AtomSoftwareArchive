@@ -12,7 +12,6 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class SpreadsheetParser {
 
-	private static final String UNKNOWN = "unknown";
 	private static final String GENRE = "genre";
 	private static final String COLLECTION = "collection";
 	private static final String PUBLISHER = "publisher";
@@ -28,7 +27,6 @@ public class SpreadsheetParser {
 
 	private int numTitles = 0;
 	private int titleTotalChars = 0;
-	private int titlePresentChars = 0;
 	private Map<String, Integer> countsByPublisher = new TreeMap<String, Integer>();
 
 	public SpreadsheetParser(File file) {
@@ -37,12 +35,11 @@ public class SpreadsheetParser {
 
 	public List<SpreadsheetTitle> parseSpreadSheet() {
 		List<SpreadsheetTitle> items = new ArrayList<SpreadsheetTitle>();
-		FileReader reader = null;
+		CSVReader csvReader = null;
 		try {
 			resetStats();
 			
-			reader = new FileReader(file);
-			CSVReader csvReader = new CSVReader(reader);
+			csvReader = new CSVReader(new FileReader(file));
 
 			List<String[]> programs = csvReader.readAll();
 
@@ -121,12 +118,11 @@ public class SpreadsheetParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (reader != null) {
+			if (csvReader != null) {
 				try {
-					reader.close();
+					csvReader.close();
 				} catch (IOException e) {
 				}
-				;
 			}
 		}
 		return items;
@@ -135,7 +131,6 @@ public class SpreadsheetParser {
 	public void resetStats() {
 		numTitles = 0;
 		titleTotalChars = 0;
-		titlePresentChars = 0;
 		countsByPublisher = new TreeMap<String, Integer>();
 	}
 

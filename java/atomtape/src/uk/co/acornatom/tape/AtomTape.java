@@ -1,10 +1,6 @@
 package uk.co.acornatom.tape;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class AtomTape extends AtomBase {
 
@@ -48,6 +44,8 @@ public class AtomTape extends AtomBase {
 	}
 
 	class CorruptedException extends IOException {
+		private static final long serialVersionUID = 6236778406954962435L;
+
 		public CorruptedException(String m) {
 			super(m + " at index 0x" + Integer.toHexString(idx));
 		}

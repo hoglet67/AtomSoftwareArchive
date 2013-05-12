@@ -9,9 +9,13 @@ public class GenerateAll {
 
 	public static final void main(String[] args) {
 		try {
-			SpreadsheetParser parser = new SpreadsheetParser(new File("AtomSoftwareCatalog.csv"));
+			if (args.length != 2) {
+				System.err.println("usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Menu Base Dir>");
+				System.exit(1);
+			}			
+			SpreadsheetParser parser = new SpreadsheetParser(new File(args[0]));
 			List<SpreadsheetTitle> items = parser.parseSpreadSheet();
-			File menuDir = new File("MNU");
+			File menuDir = new File(args[1]);
 			menuDir.mkdirs();
 			List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
 			generators.add(new GenerateBootstrapFiles());
@@ -19,6 +23,7 @@ public class GenerateAll {
 			for (IFileGenerator generator : generators) {
 				generator.generateFiles(menuDir, items);
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
