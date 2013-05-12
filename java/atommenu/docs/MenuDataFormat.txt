@@ -1,0 +1,91 @@
+MENU DATA FILES
+===============
+
+We have ended up with two files:
+
+MNU/SORTDAT - Is a series of pointer tables sorting the main title records in various orders. This currently loads to #3600 and is #05E0 long (1504 bytes).
+
+MNU/MENUDAT - Is this main table (one row per title), plus secondary tables for Short Publisher Names, Publisher Names, Genres and Collections. This currently loads to #8200 and is #0E11 long (3601 bytes).
+
+The sizes are for V2 of the Atom Software Archive, which has 186 titles.
+
+More details, in case anyone else want to have a play....
+
+MNU/SORTDAT:
+============
+
+#3600 <Pointer to Title Sort Table>
+#3602 <Pointer to Publisher Sort Table>
+#3604 <Pointer to Genre Sort Table>
+#3606 <Pointer to Collection Sort Table>
+
+Title Sort Table: (374 bytes)
+<Pointer to 1st title in main table>
+...
+<Pointer to last title in main table>
+#FF #FF
+
+Publisher Sort Table: (374 bytes)
+Same structure as the Title Sort Table
+
+Genre Sort Table: (374 bytes)
+Same structure as the Title Sort Table
+
+Collection Sort Table: (374 bytes)
+Same structure as the Title Sort Table
+
+MNU/MENUDAT:
+============
+
+#8200 <Pointer to Main Title Table>
+#8202 <Pointer to Secondary Table for Short Publisher Names>
+#8204 <Pointer to Secondary Table for Publisher Names>
+#8206 <Pointer to Secondary Table for Genres>
+#8208 <Pointer to Secondary Table for Collections>
+
+Main Title Table: (2583 bytes)
+<1st Title Record>
+<2nd Title Record>
+...
+<Last title record>
+
+Title Record:
+Byte 0 - RunIndex[7..0]
+Byte 1 - GenreId[5..0], RunIndex[9..8]
+Byte 2 - PublisherId[7..0]
+Byte 3 - CollectionId[7..0]
+Byte 4 - Start of Title String, terminated by #0D
+
+Secondary Table for Short Publisher Names: (68 bytes)
+<Pointer to short name of publisher 0>
+...
+<Pointer to short name of publisher N>
+<Short name of Publisher 0, terminated in #0D>
+...
+<Short name of Publisher N, terminated in #0D>
+
+Secondary Table for Publisher Names: (192 bytes)
+<Pointer full name of publisher 0>
+<Pointer to first occurrence of publisher 0 in publisher sort table>
+...
+<Pointer full name of publisher N>
+<Pointer to first occurrence of publisher N in publisher sort table>
+<Full name of Publisher 0, terminated in #0D>
+...
+<Full name of Publisher N, terminated in #0D>
+
+Secondary Table for Short Genre Names: (21 bytes)
+Same structure as the Secondary Table for Publisher Names
+
+Secondary Table for Collection Names: (727 bytes)
+Same structure as the Secondary Table for Publisher Names
+
+The additional pointer in the Publisher, Genre and Collection tables back to the respective sort table should make filtering a bit faster, when we come to implement this.
+
+Note: Genres are not currently present in the spreadsheet (apart from Adventure).
+
+OTHER LINKS
+===========
+
+See also thread on stardor.org.uk:
+http://stardot.org.uk/forums/viewtopic.php?f=1&t=6507
