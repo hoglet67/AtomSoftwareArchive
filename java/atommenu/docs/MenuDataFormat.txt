@@ -75,8 +75,8 @@ Secondary Table for Publisher Names: (192 bytes)
 <Record for Publisher N>
 
 Publisher Record:
+<Number of occurrences of the publisher>
 <Index of first occurrence of publisher in publisher sort table>
-<Index of last occurrence of publisher in publisher sort table>
 <Full name of publisher, terminated in #0D>
 
 Secondary Table for Short Genre Names: (21 bytes)

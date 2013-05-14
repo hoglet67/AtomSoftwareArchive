@@ -14,22 +14,39 @@
 
 	PubIdOffset = 2
 	TitleNameOffset = 4
+	
+	; Value to set on input
 
+	; This should point to the first row in the sort index
 	Sort = $80
+
+	; This should point to the index of the row to search for (starting at 0) 
+    StartRow = $8e 
+
+	; The annotation to show: 0 = Publisher, 255 = Nothing
+    Annotation = $8b
+
+    ; The filter key: 1 = Genre, 2 = Publisher, 3 = Collection
+    Filter = $8c
+
+	; The filter value
+    FilterVal = $8d
+
+
+	; These are working values
 	Title = $82
 	ShortPub = $84
 	ShortPubName = $86
 	Screen = $88
-	TmpY = $8a
-    Annotation = $8b
-
+	TmpY = $8a    
+	RowCount =$90
 	Key = $80
 
 
+	; Miscellaneous constants
 	Space = $20
 	Return = $0d
 	Dot = $2e
-
 	ScreenStart = $8000
 	CharsPerLine = 32
 	StartLine = 2
@@ -71,6 +88,7 @@
 
 
 .WritePage
+
     CLC
 	LDA ShortPublisherTablePtr
 	ADC #2
@@ -82,40 +100,151 @@
 	STA Screen
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
 	STA Screen + 1
-	LDY #0
 
-.WritePage1
-	LDA (Sort),Y
+	LDA #LinesPerPage
+	STA RowCount
+
+
+	LDY Filter
+	BNE WriteLines
+	
+	; if no filtering, calculate index into sort table directly
+	ASL StartRow
+	ROL StartRow + 1
+	LDA Sort
+	ADC StartRow
+	STA Sort
+	LDA Sort + 1
+	ADC StartRow + 1
+	STA Sort + 1
+	
+.WriteLines
+
+	LDX #0
+
+	; Follow the sort pointer to the title record, and increment the sort pointer
+	LDA (Sort, X)
 	STA Title
-	INY
-	LDA (Sort),Y
+	INC Sort
+	BNE IncSort1
+	INC Sort + 1		
+.IncSort1
+	LDA (Sort, X)
 	STA Title + 1
-	INY
+	INC Sort
+	BNE IncSort2
+	INC Sort + 1		
+.IncSort2
+	
+	; Test if we have run off the end of the list
 	CMP #$FF
 	BEQ WritePageEndOfList
-	TYA
-	PHA
-	CLC
+	
+	; If there is no filter, we've found the row
+	LDY Filter
+	BEQ FoundRow
+
+.FilterLoop
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;; Start of loop that needs to be *very efficient*
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	; Otherwise compare what's the the title record with the filter value
+	LDA (Title), Y
+
+	; Genre is packed into byte 1 with index, so we need to shift by two places
+	CPY #1
+	BNE FilterCompare
 	LSR A
-	ADC #64
+	LSR A	
+
+	;; Do the filter comparison, skip to next row if no match
+.FilterCompare
+	CMP FilterVal
+	BNE NextRow
+
+	;; Have we reached the required start row yet?
+	LDA StartRow
+	BNE DecRow
+	LDA StartRow + 1
+	BEQ FoundRow
+
+	;; Decrement the start row count by one
+.DecRow
+	SEC
+	LDA StartRow
+	SBC #1
+	STA StartRow
+	BCS NextRow
+	DEC StartRow + 1
+	
+	; Move to the next row in the sort table
+.NextRow
+	LDA (Sort, X)
+	STA Title
+	INC Sort
+	BNE IncSort3
+	INC Sort + 1		
+.IncSort3
+	LDA (Sort, X)
+	STA Title + 1
+	INC Sort
+	BNE IncSort4
+	INC Sort + 1		
+.IncSort4
+
+	; Test if we have run off the end of the list
+	CMP #$FF
+	BNE FilterLoop
+	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;; End of loop that needs to be *very efficient*
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	BEQ WritePageEndOfList
+	
+.FoundRow
+	JSR WriteLine
+
+	DEC RowCount
+	BNE WriteLines
+
+	RTS
+
+.WritePageEndOfList
+	LDX #CharsPerLine
+.WritePageEndOfList1
+	LDA #Space
+	JSR WriteToScreen
+	DEX
+	BNE WritePageEndOfList1
+	DEC RowCount
+	BNE WritePageEndOfList
+	RTS
+
+.WriteLine
+	SEC
+	LDA #65 + LinesPerPage
+	SBC RowCount
 	JSR WriteToScreen
 	LDA #Dot
 	JSR WriteToScreen
 	LDX #CharsPerLine - 2
 	LDY #TitleNameOffset
 
-.WritePage2
+.WriteLine2
 	LDA (Title),Y
 	CMP #Return
-	BEQ WritePage3
+	BEQ WriteLine3
 	JSR WriteToScreen
 	DEX
 	INY
-	BNE WritePage2
+	BNE WriteLine2
 
-.WritePage3
+.WriteLine3
     LDA Annotation
-    BMI WritePage5
+    BMI WriteLine5
 	LDY #PubIdOffset
 	LDA (Title),Y
 	CLC
@@ -128,55 +257,34 @@
 	STA ShortPubName + 1
 	LDY #0
 
-.WritePage4
+.WriteLine4
 	LDA (ShortPubName),Y
 	CMP #Return
-	BEQ WritePage5
+	BEQ WriteLine5
 	DEX
 	INY
-	BNE WritePage4
+	BNE WriteLine4
 
-.WritePage5
+.WriteLine5
 	LDA #Space
 
-.WritePage6
+.WriteLine6
 	JSR WriteToScreen
 	DEX
-	BNE WritePage6
+	BNE WriteLine6
 	LDA Annotation
-	BMI WritePage8
+	BMI WriteLine8
 	LDY #0
 
-.WritePage7
+.WriteLine7
 	LDA (ShortPubName),Y
 	CMP #Return
-	BEQ WritePage8
+	BEQ WriteLine8
 	JSR WriteToScreen 
 	INY
-	BNE WritePage7
-
-.WritePage8
-	PLA
-	TAY
-	CPY #LinesPerPage * 2
-	BNE WritePage1
-
-.WritePage9
+	BNE WriteLine7
+.WriteLine8	
 	RTS
-
-.WritePageEndOfList
-	CPY #LinesPerPage * 2 + 2
-	BEQ WritePage9
-	LDX #CharsPerLine
-.WritePageEndOfList1
-	LDA #Space
-	JSR WriteToScreen
-	DEX
-	BNE WritePageEndOfList1
-	INY
-	INY
-	BNE WritePageEndOfList
-
 
 .Inkey
 	JSR $FE71

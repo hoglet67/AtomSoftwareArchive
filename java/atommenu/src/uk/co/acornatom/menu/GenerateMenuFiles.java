@@ -331,8 +331,8 @@ public class GenerateMenuFiles extends GenerateBase {
 					throw new RuntimeException("Entries for " + tableName + " " + entry.getKey() + " are not contiguous");
 				}
 				System.out.println(entry.getKey() + " spans indexes " + firstIndex + "..." + lastIndex);
+				writeShort(bos, lastIndex + 1 - firstIndex);
 				writeShort(bos, firstIndex);
-				writeShort(bos, lastIndex + 1);
 			}
 			writeString(bos, entry.getKey());
 			writeByte(bos, 13);
