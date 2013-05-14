@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Convert {
 	
@@ -63,6 +65,8 @@ public class Convert {
 
 		STATE state = STATE.SEEKING;
 		StringBuffer lineNumBuf = new StringBuffer();
+		int lastLineNum = -1;
+		Set<Integer> lineNumSet = new HashSet<Integer>();
 		FileInputStream fis = new FileInputStream(srcFile);
 		try {
 			while ((b = fis.read()) > 0) {
@@ -84,6 +88,12 @@ public class Convert {
 						state = STATE.SEEKING;
 					} else if (b < ASCII_0 || b > ASCII_9) {
 						int lineNum = Integer.parseInt(lineNumBuf.toString());
+						if (lineNum < lastLineNum) {
+							throw new IOException("Line number out of sequence: " + lineNumBuf.toString());
+						}
+						if (lineNumSet.contains(lineNum)) {
+							throw new IOException("Line number duplicate: " + lineNumBuf.toString());
+						}
 						if (lineNum > 0x7FFF) {
 							throw new IOException("Line number too large: " + lineNumBuf.toString());
 						}
@@ -95,6 +105,8 @@ public class Convert {
 							System.out.println("Line " + lineNum);
 						}
 						state = STATE.LINE;
+						lineNumSet.add(lineNum);
+						lastLineNum = lineNum;
 					} else {
 						lineNumBuf.append((char) b);
 					}
