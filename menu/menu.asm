@@ -31,6 +31,9 @@
 
 	; The filter value
     FilterVal = $8d
+    
+    ; The Address to store the found rows, so that the basic program can access them
+    RowRet = $92
 
 
 	; These are working values
@@ -101,7 +104,7 @@
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
 	STA Screen + 1
 
-	LDA #LinesPerPage
+	LDA #0
 	STA RowCount
 
 
@@ -205,11 +208,24 @@
 	BEQ WritePageEndOfList
 	
 .FoundRow
+
+	; Write the line at (Title) to the screen
 	JSR WriteLine
-
-	DEC RowCount
+	
+	; Store Title so that the basic program knows what's on each line
+	LDA RowCount
+	ASL A
+	TAY
+	LDA Title
+	STA (RowRet),Y
+	INY
+	LDA Title + 1
+	STA (RowRet),Y
+	
+	LDA RowCount
+	INC RowCount
+	CMP #LinesPerPage-1
 	BNE WriteLines
-
 	RTS
 
 .WritePageEndOfList
@@ -219,14 +235,16 @@
 	JSR WriteToScreen
 	DEX
 	BNE WritePageEndOfList1
-	DEC RowCount
+	INC RowCount
+	LDA RowCount
+	CMP #LinesPerPage
 	BNE WritePageEndOfList
 	RTS
 
 .WriteLine
-	SEC
-	LDA #65 + LinesPerPage
-	SBC RowCount
+	CLC
+	LDA #65
+	ADC RowCount
 	JSR WriteToScreen
 	LDA #Dot
 	JSR WriteToScreen

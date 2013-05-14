@@ -16,15 +16,18 @@ public class Convert {
 	private static final int DEFAULT_LOADADDR = 0x2900;
 	private static final int DEFAULT_EXECADDR = 0xc2b2;
 
-	private static final int ASCII_0 = 48;
-	private static final int ASCII_9 = 57;
-	private static final int ASCII_CR = 13;
-	private static final int ASCII_LF = 10;
-	private static final int ASCII_SPACE = 32;
 	private static final int ASCII_TAB = 9;
+	private static final int ASCII_LF = 10;
+	private static final int ASCII_CR = 13;
+	private static final int ASCII_0 = '0';
+	private static final int ASCII_9 = '9';
+	private static final int ASCII_SPACE = ' ';
+	private static final int ASCII_SLASH = '/';
+	private static final int ASCII_SEMICOLON = ';';
+	private static final int ASCII_HASH = '#';
 
 	private enum STATE {
-		SEEKING, NUMBER, LINE
+		SEEKING, NUMBER, LINE, COMMENT
 	};
 
 	public Convert() {
@@ -77,7 +80,9 @@ public class Convert {
 						lineNumBuf.setLength(0);
 						lineNumBuf.append((char) b);
 						state = STATE.NUMBER;
-					} else if (b != ASCII_CR && b != ASCII_LF && b != ASCII_SPACE && b != ASCII_TAB) {
+					} else if (b == ASCII_HASH || b == ASCII_SLASH || b == ASCII_SEMICOLON) {
+						state = STATE.COMMENT;
+ 					} else if (b != ASCII_CR && b != ASCII_LF && b != ASCII_SPACE && b != ASCII_TAB) {
 						throw new IOException("Encountered unexected character ascii: " + b + " in state " + state
 								+ " at file offset " + offset);
 					}
@@ -117,6 +122,12 @@ public class Convert {
 					} else {
 						writeByte(bos, b);
 					}
+					break;
+				case COMMENT:
+					if (b == ASCII_CR || b == ASCII_LF) {
+						state = STATE.SEEKING;
+					}
+					break;
 				}
 				if (DEBUG) {
 					System.out.println(b + " " + oldState + "->" + state);
