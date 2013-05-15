@@ -52,18 +52,27 @@ public class SpreadsheetTitle {
 		return boot;
 	}
 	public void setPublisher(String publisher) {
+		if (publisher.isEmpty()) {
+			publisher = "???";
+		}
 		this.publisher = publisher;
 	}
 	public String getPublisher() {
 		return publisher;
 	}
 	public void setCollection(String collection) {
+		if (collection.isEmpty()) {
+			collection = "???";
+		}
 		this.collection = collection;
 	}
 	public String getCollection() {
 		return collection;
 	}
 	public void setGenre(String genre) {
+		if (genre.isEmpty()) {
+			genre = "???";
+		}
 		this.genre = genre;
 	}
 	public String getGenre() {

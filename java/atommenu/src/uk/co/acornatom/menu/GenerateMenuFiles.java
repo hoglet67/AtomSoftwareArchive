@@ -57,11 +57,11 @@ public class GenerateMenuFiles extends GenerateBase {
 		HashMap<String, String> longPubShortPub = new HashMap<String, String>();
 		
 		publishers.clear();
-		addToIndex("", publishers);
+		// addToIndex("", publishers);
 		genres.clear(); 
-		addToIndex("", genres);
+		// addToIndex("", genres);
 		collections.clear(); 
-		addToIndex("", collections);
+		// addToIndex("", collections);
 		
 		maxCollectionLen = 0;
 		maxGenreLen = 0;
@@ -69,7 +69,6 @@ public class GenerateMenuFiles extends GenerateBase {
 		maxShortPublisherLen = 0;
 		maxTitleLen = 0;
 		
-		collections.put("", -1);
 		for (SpreadsheetTitle item : items) {
 			if (item.isPresent()) {
 				if (item.getTitle().length() > maxTitleLen) {
@@ -100,7 +99,6 @@ public class GenerateMenuFiles extends GenerateBase {
 
 		// Build the short publisher map so the key order is the same as the long publisher
 		shortPublishers.clear();
-		shortPublishers.put("", 0);
 		for (String key : publishers.keySet()) {
 			if (longPubShortPub.containsKey(key)) {
 				shortPublishers.put(longPubShortPub.get(key), publishers.get(key));
