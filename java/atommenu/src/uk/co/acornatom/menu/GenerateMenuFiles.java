@@ -423,7 +423,7 @@ public class GenerateMenuFiles extends GenerateBase {
 	public class GenreOrderSort extends ComparatorBase implements Comparator<AtomTitle> {
 		@Override
 		public int compare(AtomTitle o1, AtomTitle o2) {
-			int ret = compareWithZeroLast(o1.getGenreId(), o2.getGenreId());
+			int ret = o1.getGenreId() - o2.getGenreId();
 			return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
 		}
 	}
@@ -431,7 +431,7 @@ public class GenerateMenuFiles extends GenerateBase {
 	public class PublisherOrderSort extends ComparatorBase  {
 		@Override
 		public int compare(AtomTitle o1, AtomTitle o2) {
-			int ret = compareWithZeroLast(o1.getPublisherId(), o2.getPublisherId());
+			int ret = o1.getPublisherId() - o2.getPublisherId();
 			return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
 		}
 	}
