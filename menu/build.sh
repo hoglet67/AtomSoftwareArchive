@@ -21,9 +21,13 @@ java -jar ../java/atombasic/atombasic.jar menu.bas MENU 2900 ce86
 # Zip everything up
 zip -qr $DIR.zip MENU $DIR
 
+# Copy to somewhere nice
+cp $DIR.zip $HOME
+
+# Also copy to Atomulator
+cp -a MENU $DIR ../../Atomulator/mmc
+
 # Cleanup
 rm -rf MENU $DIR
 
-# Copy to somewhere nice
-cp $DIR.zip $HOME
 
