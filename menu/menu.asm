@@ -325,7 +325,7 @@
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
 	AND #$81
-	LDA Screen + 1
+	STA Screen + 1
 	
 .WriteToScreen1
 	LDY TmpY
