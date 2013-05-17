@@ -251,25 +251,12 @@
 	RTS
 
 .WriteLine
-	CLC
-	LDA #65
-	ADC RowCount
-	JSR WriteToScreen
-	LDA #Dot
-	JSR WriteToScreen
-	LDX #CharsPerLine - 2
-	LDY #TitleNameOffset
-
-.WriteLine2
-	LDA (Title),Y
-	CMP #Return
-	BEQ WriteLine3
-	JSR WriteToScreen
-	DEX
-	INY
-	BNE WriteLine2
-
-.WriteLine3
+	
+	; Keep track of how many chars we have available
+	
+	LDX #CharsPerLine - 3
+	; Prepare the Annotation first (so we know how long it is...) 
+	
     LDA Annotation
     BPL WriteShortPub
 
@@ -286,7 +273,7 @@
 	LDA #>CountString
 	STA AnnotationString + 1
 	
-	JMP WriteAnnotation
+	JMP LengthOfAnnotation
 
 .WriteShortPub 
 	LDY #PubIdOffset
@@ -300,35 +287,53 @@
 	LDA (ShortPub),Y
 	STA AnnotationString + 1
 
-.WriteAnnotation
+.LengthOfAnnotation
 	LDY #0
 
-.WriteLine4
+.LengthOfAnnotationLoop
 	LDA (AnnotationString),Y
 	CMP #Return
-	BEQ WriteLine5
-	DEX
+	BEQ WriteLetter
 	INY
-	BNE WriteLine4
+	DEX
+	BNE LengthOfAnnotationLoop
 
-.WriteLine5
+.WriteLetter
+	CLC
+	LDA #65
+	ADC RowCount
+	JSR WriteToScreen
+	LDA #Dot
+	JSR WriteToScreen
+	LDY #TitleNameOffset
+
+.WriteTitle
+	LDA (Title),Y
+	CMP #Return
+	BEQ WriteSpaces
+	JSR WriteToScreen
+	INY
+	DEX
+	BNE WriteTitle
+
+.WriteSpaces
 	LDA #Space
 
-.WriteLine6
+.WriteSpacesLoop
 	JSR WriteToScreen
 	DEX
-	BNE WriteLine6
+	BPL WriteSpacesLoop
 
 	LDY #0
-.WriteLine7
+.WriteAnnotation
 	LDA (AnnotationString),Y
 	CMP #Return
-	BEQ WriteLine8
+	BEQ WriteLineExit
 	JSR WriteToScreen 
 	INY
-	BNE WriteLine7
+	BNE WriteAnnotation
 
-.WriteLine8	
+.WriteLineExit
 	RTS
 
 .Inkey
