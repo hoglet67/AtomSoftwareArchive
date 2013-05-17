@@ -7,11 +7,7 @@
 
 	MenuTableBase = $8200	
 	TitleTablePtr = MenuTableBase;	
-	ShortPublisherTablePtr = MenuTableBase + 2;	
-	PublisherTablePtr = MenuTableBase + 4;	
-	GenreTablePtr = MenuTableBase + 6;	
-	CollectionTablePtr = MenuTableBase + 8;
-	
+		
 	CountBuffer = $100;
 
 	CountOffset = 0
@@ -41,7 +37,7 @@
 
 	; These are working values
 	Title = $82
-	ShortPub = $84
+	AnnotationPtr = $84
 	AnnotationString = $86
 	Screen = $88
 	TmpY = $8a    
@@ -98,16 +94,33 @@
 	JMP WritePage
 	JMP Inkey
 
+.AnnotationIdMap
+	EQUB 	2 ; Short Publisher
+	EQUB 	2 ; Publisher
+	EQUB 	1 ; Genre
+	EQUB 	3 ; Collection
+
+.AnnotationOffset
+	EQUB 	0 ; Short Publisher
+	EQUB 	4 ; Publisher
+	EQUB 	4 ; Genre
+	EQUB 	4 ; Collection
 
 .WritePage
 
+
+	; Calculate a pointer to the requested annotation table, skipping the length field
+    LDA Annotation
+    ASL A
+    TAX
     CLC
-	LDA ShortPublisherTablePtr
+	LDA MenuTableBase + 2,X
 	ADC #2
-	STA ShortPub
-	LDA ShortPublisherTablePtr + 1
+	STA AnnotationPtr
+	LDA MenuTableBase + 3,X
 	ADC #0
-	STA ShortPub + 1
+	STA AnnotationPtr + 1
+	
 	LDA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
@@ -115,7 +128,6 @@
 
 	LDA #0
 	STA RowCount
-
 
 	LDY Filter
 	BNE WriteLines
@@ -258,7 +270,7 @@
 	; Prepare the Annotation first (so we know how long it is...) 
 	
     LDA Annotation
-    BPL WriteShortPub
+    BPL NormalAnnotation
 
 	LDY #CountOffset
 	LDA (Title),Y
@@ -275,16 +287,27 @@
 	
 	JMP LengthOfAnnotation
 
-.WriteShortPub 
-	LDY #PubIdOffset
+.NormalAnnotation
+	LDY Annotation
+	LDA AnnotationOffset,Y
+	PHA
+	LDA AnnotationIdMap,Y
+	TAY
 	LDA (Title),Y
-	CLC
+	CPY #1
+	BNE NotGenre
+	LSR A
+	LSR A
+.NotGenre	
 	ASL A
 	TAY
-	LDA (ShortPub),Y
+	PLA
+	CLC
+	ADC (AnnotationPtr),Y
 	STA AnnotationString
 	INY
-	LDA (ShortPub),Y
+	LDA #0
+	ADC (AnnotationPtr),Y
 	STA AnnotationString + 1
 
 .LengthOfAnnotation
@@ -310,19 +333,19 @@
 .WriteTitle
 	LDA (Title),Y
 	CMP #Return
-	BEQ WriteSpaces
+	BEQ WriteSeperator
 	JSR WriteToScreen
 	INY
 	DEX
 	BNE WriteTitle
 
-.WriteSpaces
+.WriteSeperator
 	LDA #Space
 
-.WriteSpacesLoop
+.WriteSeperatorLoop
 	JSR WriteToScreen
 	DEX
-	BPL WriteSpacesLoop
+	BPL WriteSeperatorLoop
 
 	LDY #0
 .WriteAnnotation

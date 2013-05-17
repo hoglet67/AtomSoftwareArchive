@@ -35,7 +35,7 @@
  80 *LOAD MNU/MENUDAT
 
     // Initialize the variables
- 90 L=13;S=0;F=0;A=0;G=0;R=#2880;!#92=R
+ 90 L=13;S=0;F=0;A=1;G=0;R=#2880;!#92=R
 
     // Turn off the cursor and refresh the screen
 100 ?#E1=0;GOS.x
@@ -62,7 +62,7 @@
 420 IF P<M P=P+1;GOS.i;Y=0;G.a
 
     // Repeat Key is pressed (next annotation)
-500dIF?#B002&64=0 A=(A+1)&3;GOS.i;Y=0;G.a
+500dIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.a
 
     // Call InKey()
 510 LINK #3303
@@ -95,7 +95,7 @@
 670 J=R!(Y*2)
 
     // Handle selection of a filter item
-680 IF F>0 G=F;F=0;A=0;E=J;H=(P-1)*L+Y;GOS.x;G.a
+680 IF F>0 G=F;F=0;A=A&127;E=J;H=(P-1)*L+Y;GOS.x;G.a
 
     // Handle *RUN of a title - K is the title index
 800 K=(!J)&#3FF
