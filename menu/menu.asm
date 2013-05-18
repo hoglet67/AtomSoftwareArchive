@@ -362,7 +362,7 @@
 .Inkey
 	JSR $FE71
 	BCC Inkey1
-	LDY #0
+	LDY #$ff
 .Inkey1
 	STY Key
 	RTS

@@ -72,7 +72,7 @@
 510 LINK #3303
 
     // No key pressed
-520 IF ?#80=0 G.b
+520 IF ?#80=255 G.b
 
     // < key pressed (previous page)
 600 IF ?#80=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.a
@@ -89,17 +89,20 @@
     // 6..8 key pressed (filter by publisher, genre or connection)
 640 IF ?#80>21 AND ?#80<25 F=?#80-21;G=0;A=A|128;GOS.x;G.a
 
+    // <Return> or <Space> pressed (select current item)
+650 IF ?#80=0 OR ?#80=13 G.e 
+
     // A..M key pressed (select an item)
-650 Y=0;IF ?#80>32 AND ?#80<46 Y=?#80-33
+660 IF ?#80<33 OR ?#80>45 G.b 
 
     // Make sure that the row is not blank
-660 IF ?(#8040+Y*32)=32 G.b
+670 Y=?#80-33;IF ?(#8040+Y*32)=32 G.b
 
     // Get the address of the record selected
-670 J=R!(Y*2)
+680eJ=R!(Y*2)
 
     // Handle selection of a filter item
-680 IF F>0 G=F;F=0;A=A&127;E=J;H=(P-1)*L+Y;GOS.x;G.a
+690 IF F>0 G=F;F=0;A=A&127;E=J;H=(P-1)*L+Y;GOS.x;G.a
 
     // Handle *RUN of a title - K is the title index
 800 K=(!J)&#3FF
