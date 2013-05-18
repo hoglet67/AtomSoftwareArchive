@@ -75,7 +75,7 @@
 	StartLine = 2
 	LinesPerPage = 13 
 
-	Base = $3300
+	Base = $3200
 
 	org     Base - 22
 
@@ -122,14 +122,9 @@
 	EQUB 	0 ; Short Publisher
 	EQUB 	4 ; Publisher
 	EQUB 	4 ; Genre
-	EQUB 	4 ; Collection
 
 .WritePage
 
-	LDA StartRow
-	STA CurrentRow
-	LDA StartRow + 1
-	STA CurrentRow + 1
 
 	LDA Sort
 	STA CurrentSort
@@ -156,6 +151,8 @@
 
 	LDA #0
 	STA RowCount
+	STA CurrentRow
+	STA CurrentRow + 1
 	
 .WriteLines
 
@@ -227,23 +224,21 @@
 
 .MatchingRow
 
-	;; Have we reached the required start row yet?
-	LDA CurrentRow
-	BNE DecRow
-	LDA CurrentRow + 1
-	BEQ FoundRow
+	INC CurrentRow
+	BNE MatchingRow1
+	INC CurrentRow + 1
+.MatchingRow1
 
-	;; Decrement the start row count by one
-.DecRow
+	;; Have we reached the required start row yet?
 	SEC
 	LDA CurrentRow
-	SBC #1
-	STA CurrentRow
-	BCS NextRow
-	DEC CurrentRow + 1
-	
+	SBC StartRow
+	LDA CurrentRow + 1
+	SBC StartRow+1
+	BCS FoundRow
+
+.NextRow	
 	; Move to the next row in the sort table
-.NextRow
 	LDX #0
 	LDA (CurrentSort, X)
 	STA Title
@@ -267,9 +262,15 @@
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
 	BEQ WritePageEndOfList
-
 	
 .FoundRow
+
+	LDA RowCount
+	CMP #LinesPerPage
+	BEQ WriteLines
+
+	; Increment the count of the number of rows displayed
+	INC RowCount
 
 	; Write the line at (Title) to the screen
 	JSR WriteLine
@@ -284,16 +285,12 @@
 	LDA Title + 1
 	STA (RowRet),Y
 	
-	LDA RowCount
-	INC RowCount
-	CMP #LinesPerPage-1
-	BEQ FoundAll
 	JMP WriteLines
 	
-.FoundAll
-	RTS
-
 .WritePageEndOfList
+	LDA RowCount
+	CMP #LinesPerPage
+	BEQ UpdateTotalRows		
 	LDX #CharsPerLine
 .WritePageEndOfList1
 	LDA #Space
@@ -301,9 +298,15 @@
 	DEX
 	BNE WritePageEndOfList1
 	INC RowCount
-	LDA RowCount
-	CMP #LinesPerPage
 	BNE WritePageEndOfList
+
+.UpdateTotalRows
+	LDY #0
+	LDA CurrentRow
+	STA (RowRet), Y
+	INY
+	LDA CurrentRow + 1
+	STA (RowRet), Y	
 	RTS
 
 .WriteLine
@@ -367,7 +370,7 @@
 
 .WriteLetter
 	CLC
-	LDA #65
+	LDA #64
 	ADC RowCount
 	JSR WriteToScreen
 	LDA #Dot
@@ -649,6 +652,8 @@
 	STA SearchBuffer,Y
 
 	JSR WritePage
+	
+	JSR UpdateTotalPages
 
 	JMP Search
 	
@@ -709,14 +714,49 @@
 	EQUS "  SEARCH="
 	EQUB 0
 
-	
+.UpdateTotalPages
 
+	; Inefficiently divide number of rows by the rows per page
+	LDY #0
+	LDA (RowRet),Y
+	STA BinBuffer
+	INY
+	LDA (RowRet),Y
+	STA BinBuffer+1
 
-	
-.Test
-	JSR OSRDCH
-	STA $80
+	LDA #0
+.UpdateTotalPages1
+	SED
+	CLC
+	ADC #1
+	CLD
+	PHA
+	SEC
+	LDA BinBuffer
+	SBC #LinesPerPage
+	STA BinBuffer
+	LDA BinBuffer+1
+	SBC #0
+	STA BinBuffer+1
+	PLA
+	BCS UpdateTotalPages1
+
+	LDX	#$FF
+	STX SuppressFlag
+	INX
+	JSR WriteHex
+
+	LDX #0
+.UpdateTotalPages2
+	LDA CountString,X
+	AND #$3F
+	ORA #$80
+	STA ScreenStart + CharsPerLine - 2,X
+	INX
+	CPX #2
+	BNE UpdateTotalPages2
 	RTS
+	
 
 .ENDOF
 

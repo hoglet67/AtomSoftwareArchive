@@ -50,16 +50,16 @@
     // Turn off the cursor and refresh the screen
 130a?#E1=0;GOS.x
 
-    // Refresh page number and the rows
-200b?#801B=P/10+176;?#801C=P%10+176
-210 ?#801E=M/10+176;?#801F=M%10+176
-220 !#80=Z
-230 !#82=(P-1)*L
-240 !#84=R
-250 ?#86=A
-260 ?#87=(G&1)*2+(G&2)/2
-270 ?#88=H
-280 LINK B
+    // Refresh rows, page number and total number of pages
+200b!#80=Z
+210 !#82=1+(P-1)*L
+220 !#84=R
+230 ?#86=A
+240 ?#87=(G&1)*2+(G&2)/2
+250 ?#88=H
+260 LINK B;M=(L+1+!R&#FFFF)/L
+270 ?#801B=P/10+176;?#801C=P%10+176
+280 ?#801E=M/10+176;?#801F=M%10+176
 290 GOS.i
 
     // Shift Key is pressed (scroll down)
@@ -112,7 +112,7 @@
 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 
     // Get the address of the record selected
-680fI=R!(Y*2)
+680fI=R!(Y*2 + 2)
 
     // Handle selection of a filter item
 690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;GOS.x;G.b
@@ -155,9 +155,7 @@
 1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
 1050 IF F>0 Z=!(D+F*2 + 2)&#FFFF
 1060 IF F=0 Z=!(C+S*2)&#FFFF
-1070 IF G>0 M=!E&#FFFF
-1080 IF G=0 M=!Z&#FFFF
-1090 M=(M+L-1)/L;Z=Z+2
+1090 Z=Z+2
 1100 Y=-2;GOS.i;Y=0;P=1;R.
 
     // Subroutine to print the filter name padded with spaces to 10 chars
