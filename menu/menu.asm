@@ -1,5 +1,6 @@
 
 	WaitUntilVSync = $FE66
+	OSRDCH = $FFE3
 	
 	SortTableBase = $3600
 	TitleSortPtr = SortTableBase;
@@ -11,6 +12,8 @@
 	TitleTablePtr = MenuTableBase;	
 		
 	CountBuffer = $100;
+
+	SearchBuffer = $140;
 
 	CountOffset = 0
 	PubIdOffset = 2
@@ -35,10 +38,11 @@
     FilterVal = $88
 
 	; The value used to return InKey
-	Key = $80
+	Key = $89
 
 	; The row address to highlight
-	Row = $80
+	Row = $89
+
 
 	; These are working values
 	Title = $90
@@ -52,6 +56,11 @@
 	BinBuffer = $9A
 	BcdBuffer = $9C
 	SuppressFlag = $9E
+	
+	; Copies of some of the input params so they are not modified
+	CurrentRow = $A0
+	CurrentSort = $A2
+	
 
 	; Location that count annotation is written out to	
 	CountString = $100
@@ -99,6 +108,9 @@
 	JMP WritePage
 	JMP Inkey
 	JMP HighlightRow
+	JMP Search
+	JMP ShowCurrentSearch
+	
 
 .AnnotationIdMap
 	EQUB 	2 ; Short Publisher
@@ -113,6 +125,16 @@
 	EQUB 	4 ; Collection
 
 .WritePage
+
+	LDA StartRow
+	STA CurrentRow
+	LDA StartRow + 1
+	STA CurrentRow + 1
+
+	LDA Sort
+	STA CurrentSort
+	LDA Sort + 1
+	STA CurrentSort + 1
 
 
 	; Calculate a pointer to the requested annotation table, skipping the length field
@@ -139,42 +161,42 @@
 	BNE WriteLines
 	
 	; if no filtering, calculate index into sort table directly
-	ASL StartRow
-	ROL StartRow + 1
-	LDA Sort
-	ADC StartRow
-	STA Sort
-	LDA Sort + 1
-	ADC StartRow + 1
-	STA Sort + 1
+	ASL CurrentRow
+	ROL CurrentRow + 1
+	LDA CurrentSort
+	ADC CurrentRow
+	STA CurrentSort
+	LDA CurrentSort + 1
+	ADC CurrentRow + 1
+	STA CurrentSort + 1
 	
 .WriteLines
 
 	LDX #0
 
 	; Follow the sort pointer to the title record, and increment the sort pointer
-	LDA (Sort, X)
+	LDA (CurrentSort, X)
 	STA Title
-	INC Sort
+	INC CurrentSort
 	BNE IncSort1
-	INC Sort + 1		
+	INC CurrentSort + 1		
 .IncSort1
-	LDA (Sort, X)
+	LDA (CurrentSort, X)
 	STA Title + 1
-	INC Sort
+	INC CurrentSort
 	BNE IncSort2
-	INC Sort + 1		
+	INC CurrentSort + 1		
 .IncSort2
 	
 	; Test if we have run off the end of the list
 	CMP #$FF
 	BEQ WritePageEndOfList
 	
+.FilterLoop
+
 	; If there is no filter, we've found the row
 	LDY Filter
-	BEQ FoundRow
-
-.FilterLoop
+	BEQ SearchCompare
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Start of loop that needs to be *very efficient*
@@ -194,34 +216,48 @@
 	CMP FilterVal
 	BNE NextRow
 
+	; Do the search comparison 
+.SearchCompare
+	LDY #4
+.SearchCompare1
+	LDA SearchBuffer - 4,Y
+	CMP #Return
+	BEQ MatchingRow
+	CMP (Title),Y
+	BNE NextRow
+	INY
+	BNE SearchCompare1
+
+.MatchingRow
+
 	;; Have we reached the required start row yet?
-	LDA StartRow
+	LDA CurrentRow
 	BNE DecRow
-	LDA StartRow + 1
+	LDA CurrentRow + 1
 	BEQ FoundRow
 
 	;; Decrement the start row count by one
 .DecRow
 	SEC
-	LDA StartRow
+	LDA CurrentRow
 	SBC #1
-	STA StartRow
+	STA CurrentRow
 	BCS NextRow
-	DEC StartRow + 1
+	DEC CurrentRow + 1
 	
 	; Move to the next row in the sort table
 .NextRow
-	LDA (Sort, X)
+	LDA (CurrentSort, X)
 	STA Title
-	INC Sort
+	INC CurrentSort
 	BNE IncSort3
-	INC Sort + 1		
+	INC CurrentSort + 1		
 .IncSort3
-	LDA (Sort, X)
+	LDA (CurrentSort, X)
 	STA Title + 1
-	INC Sort
+	INC CurrentSort
 	BNE IncSort4
-	INC Sort + 1		
+	INC CurrentSort + 1		
 .IncSort4
 
 	; Test if we have run off the end of the list
@@ -233,6 +269,7 @@
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
 	BEQ WritePageEndOfList
+
 	
 .FoundRow
 
@@ -252,7 +289,10 @@
 	LDA RowCount
 	INC RowCount
 	CMP #LinesPerPage-1
-	BNE WriteLines
+	BEQ FoundAll
+	JMP WriteLines
+	
+.FoundAll
 	RTS
 
 .WritePageEndOfList
@@ -373,10 +413,6 @@
 	STY Key
 	RTS
 	
-; X=#8040+Y*32
-; F.I=0TO31S.4;I!X=I!X:#80808080;N.
-; R.
-
 .HighlightRow
 	
 	LDA #<(ScreenStart)
@@ -508,6 +544,108 @@
 	STA CountString,X
 	INX
 .WriteHex4
+	RTS
+	
+
+	
+.Search
+
+	; Returns with Y being the end of the search buffer
+	LDA #$A0
+	JSR ShowCurrentSearch
+	
+	; Read a character
+	JSR OSRDCH
+
+	; Return terminates the search
+	CMP #$0d
+	BEQ SearchExit
+
+	CMP #$7F
+	BNE SearchRefreshPage
+	
+	; Delete at the beginning of the line also terminates the search
+	CPY #0
+	BEQ SearchExit
+
+	DEY
+	LDA #Return
+	
+.SearchRefreshPage
+
+	STA SearchBuffer,Y
+	INY
+	LDA #Return
+	STA SearchBuffer,Y
+
+	JSR WritePage
+
+	JMP Search
+	
+.SearchExit
+	CPY #0
+	BNE ShowCurrentSearchNoCursor
+	
+	LDA #Space
+	LDY #CharsPerLine - 1
+.SearchExit2
+	STA ScreenStart + $1E0,Y
+	DEY
+	BPL SearchExit2
+	RTS
+	
+.ShowCurrentSearchNoCursor
+	LDA #$20
+	
+.ShowCurrentSearch
+	; Save the cursor
+	PHA
+	
+	LDA #<(ScreenStart + $1E0)
+	STA Screen
+	LDA #>(ScreenStart + $1E0)
+	STA Screen + 1
+
+	LDY #0
+.ShowCurrentSearch1
+	LDA SearchString,Y
+	BEQ ShowCurrentSearch2
+	JSR WriteToScreen
+	INY
+	BNE ShowCurrentSearch1
+	
+.ShowCurrentSearch2
+	LDY #0
+.ShowCurrentSearch3
+	LDA SearchBuffer,Y
+	CMP #Return
+	BEQ ShowCurrentSearch4
+	JSR WriteToScreen
+	INY
+	BNE ShowCurrentSearch3
+	
+.ShowCurrentSearch4
+	STY TmpY
+	PLA
+	LDY #0
+	STA (Screen),Y
+	INY
+	LDA #$20
+	STA (Screen),Y	
+	LDY TmpY
+	RTS
+	
+.SearchString
+	EQUS "  SEARCH: "
+	EQUB 0
+
+	
+
+
+	
+.Test
+	JSR OSRDCH
+	STA $80
 	RTS
 
 .ENDOF

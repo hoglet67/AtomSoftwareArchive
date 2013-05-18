@@ -13,6 +13,7 @@
 // L - The number of lines per page
 // M - The current number of pages
 // P - The current page (1..M)
+// Q - The constant #89 
 // R - The address of a buffer into which the machine code stores the rendered row addresses
 // S - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
 // X - Temporary screen address for highlighting current row
@@ -20,12 +21,13 @@
 // Z - The currently base address of the current sort index or filter pointer table)
 
 // ?#80,#81 - Set from Z just before calling "RenderPage" machine code
-// ?#80 - Value set by "InKey" machine code (from calling #FE71)
 // ?#82,#83 - Set from P,M,L just before calling machine code
 // ?#84,#85 - The value of R being passed to the "RenderPage" machine code
 // ?#86 - Set from A just before calling machine code
 // ?#87 - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
 // ?#88 - The currently active filter value
+// ?Q - Value set by "InKey" machine code (from calling #FE71)
+// ?Q - Row to highlight, used by "Highlight" machine code
 
  10 *NOMON
  20 CLEAR 4
@@ -40,7 +42,10 @@
 110 D=!#CD&#FFFF
 
     // Initialize the variables
-120 L=13;S=0;F=0;A=1;G=0;R=#2880
+120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#89
+
+    // Initialize the search buffer to empty
+125 ?#140=13
 
     // Turn off the cursor and refresh the screen
 130 ?#E1=0;GOS.x
@@ -57,12 +62,12 @@
 280 LINK B
 290 GOS.i
 
-    // Shift Key is pressed (page down)
+    // Shift Key is pressed (scroll down)
 300bIF ?#B001&128>0 G.c
 310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.b
 320 IF P>1 P=P-1;GOS.i;Y=L-1;G.a
 
-    // Control Key is pressed (page up)
+    // Control Key is pressed (scroll up)
 400cIF?#B001&64>0 G.d
 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.b
 420 IF P<M P=P+1;GOS.i;Y=0;G.a
@@ -74,31 +79,34 @@
 510 LINK (B+3)
 
     // No key pressed
-520 IF ?#80=255 G.b
+520 IF ?Q=255 G.b
 
     // < key pressed (previous page)
-600 IF ?#80=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.a
+600 IF ?Q=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.a
 
     // > key pressed (next page)
-610 IF ?#80=30 P=P+1-(P=M)*M;GOS.i;Y=0;G.a
+610 IF ?Q=30 P=P+1-(P=M)*M;GOS.i;Y=0;G.a
 
     // 1..4 key pressed (change sort)
-620 IF ?#80>16 AND ?#80<21 S=?#80-17;F=0;A=A&127;GOS.x;G.a
+620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;GOS.x;G.a
 
     // 5 key pressed (clear filter>
-630 IF ?#80=21 F=0;G=0;A=A&127;GOS.x;G.a
+630 IF ?Q=21 F=0;G=0;A=A&127;GOS.x;G.a
 
     // 6..8 key pressed (filter by publisher, genre or connection)
-640 IF ?#80>21 AND ?#80<25 F=?#80-21;G=0;A=A|128;GOS.x;G.a
+640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;GOS.x;G.a
 
     // <Return> or <Space> pressed (select current item)
-650 IF ?#80=0 OR ?#80=13 G.e 
+650 IF ?Q=0 OR ?Q=13 G.e 
+
+    // S key pressed (start search)
+655 IF ?Q=51 LINK(B+9);GOS.x;G.a;
 
     // A..M key pressed (select an item)
-660 IF ?#80<33 OR ?#80>45 G.b 
+660 IF ?Q<33 OR ?Q>45 G.b 
 
     // Make sure that the row is not blank
-670 Y=?#80-33;IF ?(#8040+Y*32)=32 G.b
+670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.b
 
     // Get the address of the record selected
 680eI=R!(Y*2)
@@ -118,7 +126,7 @@
 880 END
 
     // Subroutine to invert line 2+Y on the screen 
-900i?#80=Y+2;LINK(B+6);R.
+900i?Q=Y+2;LINK(B+6);R.
 
     // Subroutine to update the page header
 
@@ -158,3 +166,4 @@
 1520 IF I=2 P."GENRE"
 1530 IF I=3 P."COLLECTION"
 1540 R.
+
