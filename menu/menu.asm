@@ -109,7 +109,6 @@
 	JMP Inkey
 	JMP HighlightRow
 	JMP Search
-	JMP ShowCurrentSearch
 	
 
 .AnnotationIdMap
@@ -156,19 +155,6 @@
 
 	LDA #0
 	STA RowCount
-
-	LDY Filter
-	BNE WriteLines
-	
-	; if no filtering, calculate index into sort table directly
-	ASL CurrentRow
-	ROL CurrentRow + 1
-	LDA CurrentSort
-	ADC CurrentRow
-	STA CurrentSort
-	LDA CurrentSort + 1
-	ADC CurrentRow + 1
-	STA CurrentSort + 1
 	
 .WriteLines
 
@@ -194,7 +180,7 @@
 	
 .FilterLoop
 
-	; If there is no filter, we've found the row
+	; If there is no filter, we move on to compare the search (if there is one)
 	LDY Filter
 	BEQ SearchCompare
 
