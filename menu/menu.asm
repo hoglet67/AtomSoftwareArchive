@@ -706,7 +706,7 @@
 	RTS
 	
 .SearchString
-	EQUS "  SEARCH: "
+	EQUS "  SEARCH="
 	EQUB 0
 
 	
