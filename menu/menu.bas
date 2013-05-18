@@ -51,12 +51,7 @@
 130a?#E1=0;GOS.x
 
     // Refresh rows, page number and total number of pages
-200b!#80=Z
-210 !#82=1+(P-1)*L
-220 !#84=R
-230 ?#86=A
-240 ?#87=(G&1)*2+(G&2)/2
-250 ?#88=H
+200bGOS.j
 260 LINK B;M=(L+1+!R&#FFFF)/L
 270 ?#801B=P/10+176;?#801C=P%10+176
 280 ?#801E=M/10+176;?#801F=M%10+176
@@ -103,7 +98,7 @@
 650 IF ?Q=0 OR ?Q=13 G.f 
 
     // S key pressed (start search)
-655 IF ?Q=51 LINK(B+9);GOS.x;G.b;
+655 IF ?Q=51 P=1;GOS.j;LINK(B+9);GOS.x;G.b;
 
     // A..M key pressed (select an item)
 660 IF ?Q<33 OR ?Q>45 G.c 
@@ -157,6 +152,15 @@
 1060 IF F=0 Z=!(C+S*2)&#FFFF
 1090 Z=Z+2
 1100 Y=-2;GOS.i;Y=0;P=1;R.
+
+	 // Subroutine to set the zero page locations prior to calling machine code 
+1150j!#80=Z
+1151 !#82=1+(P-1)*L
+1152 !#84=R
+1153 ?#86=A
+1154 ?#87=(G&1)*2+(G&2)/2
+1155 ?#88=H
+1156 R.
 
     // Subroutine to print the filter name padded with spaces to 10 chars
 1200yGOS.z

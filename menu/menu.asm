@@ -716,14 +716,33 @@
 
 .UpdateTotalPages
 
-	; Inefficiently divide number of rows by the rows per page
-	LDY #0
+	
+
+	; X is used as the index into CountString
+	LDX #00
+
+	; Make sure that we don't supress zeros
+	LDY	#$FF
+	STY SuppressFlag
+
+	; Read the total number of filtered rows returned
+	INY
 	LDA (RowRet),Y
 	STA BinBuffer
 	INY
 	LDA (RowRet),Y
 	STA BinBuffer+1
 
+	; Write 01 to the CountString
+	TYA
+	JSR WriteHex
+
+	; Write the page separator into CountString
+	LDA #'/'
+	STA CountString, X
+	INX
+		
+	; Inefficiently divide number of rows by the rows per page
 	LDA #0
 .UpdateTotalPages1
 	SED
@@ -741,9 +760,7 @@
 	PLA
 	BCS UpdateTotalPages1
 
-	LDX	#$FF
-	STX SuppressFlag
-	INX
+	; Write the number of pages into to the CountString
 	JSR WriteHex
 
 	LDX #0
@@ -751,9 +768,9 @@
 	LDA CountString,X
 	AND #$3F
 	ORA #$80
-	STA ScreenStart + CharsPerLine - 2,X
+	STA ScreenStart + CharsPerLine - 5,X
 	INX
-	CPX #2
+	CPX #5
 	BNE UpdateTotalPages2
 	RTS
 	
