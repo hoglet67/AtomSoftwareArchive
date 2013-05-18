@@ -1,6 +1,8 @@
 // Variable Usage
 //
 // A - the annotation to show on the RHS (0 = ShortPublisher, 255 = None)
+// B - the load address of the SORTDAT file
+// C - the load address of the MENUDAT file
 // E - current filter record address
 // F - 0=Normal title selection, F=1,2,3 showing the filter selection pages
 // G - current filter 0=No filter; 1=Publisher, 2=Genre, 3=Collection
@@ -28,17 +30,19 @@
  10 *NOMON
  20 CLEAR 4
  30 *LOAD MNU/SCREEN2
- 40 *LOAD MNU/SORTDAT
- 50 *LOAD MNU/MENUMC
- 60 FOR I=1TO60;WAIT;N.
- 70 CLEAR 0
- 80 *LOAD MNU/MENUDAT
+ 40 *LOAD MNU/MENUMC
+ 50 *LOAD MNU/SORTDAT
+ 60 B=!#CD&#FFFF
+ 70 FOR I=1TO60;WAIT;N.
+ 80 CLEAR 0
+ 90 *LOAD MNU/MENUDAT
+100 C=!#CD&#FFFF
 
     // Initialize the variables
- 90 L=13;S=0;F=0;A=1;G=0;R=#2880;!#92=R
+110 L=13;S=0;F=0;A=1;G=0;R=#2880;!#92=R
 
     // Turn off the cursor and refresh the screen
-100 ?#E1=0;GOS.x
+120 ?#E1=0;GOS.x
 
     // Refresh page number and the rows
 200a?#801B=P/10+176;?#801C=P%10+176
@@ -132,8 +136,8 @@
 1020 IF F>0 P."FILTER";I=F
 1030 P." BY ";GOS.y;P."  PAGE   /  "
 1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
-1050 IF F>0 Z=!(#8202+F*2)&#FFFF
-1060 IF F=0 Z=!(#3600+S*2)&#FFFF
+1050 IF F>0 Z=!(C+F*2 + 2)&#FFFF
+1060 IF F=0 Z=!(B+S*2)&#FFFF
 1070 IF G>0 M=!E&#FFFF;
 1080 IF G=0 M=!Z&#FFFF;
 1090 M=(M+L-1)/L;Z=Z+2
