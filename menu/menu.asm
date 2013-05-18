@@ -49,13 +49,14 @@
 	AnnotationPtr = $92
 	AnnotationString = $94
 	Screen = $96
-	TmpY = $98    
-	RowCount =$99
+	TmpX = $98    
+	TmpY = $99
+	RowCount =$9A
 	
 	; For the Decimal Output routines
-	BinBuffer = $9A
-	BcdBuffer = $9C
-	SuppressFlag = $9E
+	BinBuffer = $9B
+	BcdBuffer = $9D
+	SuppressFlag = $9F
 	
 	; Copies of some of the input params so they are not modified
 	CurrentRow = $A0
@@ -371,20 +372,22 @@
 	JSR WriteToScreen
 	LDA #Dot
 	JSR WriteToScreen
-	LDY #TitleNameOffset
-
+	
 .WriteTitle
-	LDA (Title),Y
+
+	LDA SearchBuffer
 	CMP #Return
+	BNE WriteTitle1
+	; There is no active search filter, so don't try to highlight
+	JSR WriteTitleNoHighlight
 	BEQ WriteSeperator
-	JSR WriteToScreen
-	INY
-	DEX
-	BNE WriteTitle
+.WriteTitle1
+	; There is an active search filter, so try to highlight
+	JSR WriteTitleHighlight
 
 .WriteSeperator
 	LDA #Space
-
+	
 .WriteSeperatorLoop
 	JSR WriteToScreen
 	DEX
@@ -402,6 +405,76 @@
 .WriteLineExit
 	RTS
 
+.WriteTitleNoHighlight
+	LDY #TitleNameOffset
+.WriteTitleNoHighlight1
+	LDA (Title),Y
+	CMP #Return
+	BEQ WriteTitleNoHighlight2
+	JSR WriteToScreen
+	INY
+	DEX
+	BNE WriteTitleNoHighlight1
+.WriteTitleNoHighlight2
+	RTS
+
+.WriteTitleHighlight
+	STX TmpX
+	LDY #TitleNameOffset	
+.WriteTitleHighlight1
+	LDA (Title),Y
+	CMP #Return
+	BEQ WriteTitleHighlight3
+	CMP SearchBuffer
+	BEQ PossibleMatch	
+.WriteTitleHighlight2
+	JSR WriteToScreen
+	INY
+	DEC TmpX
+	BNE WriteTitleHighlight1
+.WriteTitleHighlight3
+	LDX TmpX
+	RTS
+	
+	
+.PossibleMatch
+	PHA
+	TYA
+	PHA
+	LDX #0
+.PossibleMatchTestNext
+	INX
+	INY
+	LDA SearchBuffer,X
+	CMP #Return
+	BEQ Match
+	LDA (Title),Y
+	CMP #Return
+	BEQ NoMatch
+	CMP SearchBuffer,X
+	BEQ PossibleMatchTestNext
+
+.NoMatch
+	PLA
+	TAY
+	PLA
+	JMP WriteTitleHighlight2
+	
+.Match
+	PLA
+	TAY
+	PLA
+.Match1
+	LDA (Title),Y
+	ORA #$80
+	JSR WriteToScreen
+	INY
+	DEC TmpX
+	BEQ WriteTitleHighlight3
+	DEX
+	BEQ WriteTitleHighlight1
+	BNE Match1	
+	
 .Inkey
 	JSR $FE71
 	BCC Inkey1
@@ -448,7 +521,7 @@
 	STY TmpY
 	LDY #0
 
-	AND #$3F
+	AND #$BF
 	STA (Screen),Y
 	INC Screen
 	BNE WriteToScreen1
