@@ -14,42 +14,42 @@
 	PubIdOffset = 2
 	TitleNameOffset = 4
 	
-	; Value to set on input
-
 	; This should point to the first row in the sort index
 	Sort = $80
 
 	; This should point to the index of the row to search for (starting at 0) 
-    StartRow = $8e 
+    StartRow = $82 
 
-	; The annotation to show: 0 = Publisher, 255 = Nothing
-    Annotation = $8b
+    ; The Address to store the found rows, so that the basic program can access them
+    RowRet = $84
+
+	; The annotation to show: 0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count
+    Annotation = $86
 
     ; The filter key: 1 = Genre, 2 = Publisher, 3 = Collection
-    Filter = $8c
+    Filter = $87
 
 	; The filter value
-    FilterVal = $8d
-    
-    ; The Address to store the found rows, so that the basic program can access them
-    RowRet = $92
+    FilterVal = $88
 
+	; The value used to return InKey
+	Key = $80
 
 	; These are working values
-	Title = $82
-	AnnotationPtr = $84
-	AnnotationString = $86
-	Screen = $88
-	TmpY = $8a    
-	RowCount =$90
-	Key = $80
+	Title = $90
+	AnnotationPtr = $92
+	AnnotationString = $94
+	Screen = $96
+	TmpY = $98    
+	RowCount =$99
 	
 	; For the Decimal Output routines
-	BinBuffer = $94
-	SuppressFlag = $96
-	BcdBuffer = $97
-	CountString = $800
-	
+	BinBuffer = $9A
+	BcdBuffer = $9C
+	SuppressFlag = $9E
+
+	; Location that count annotation is written out to	
+	CountString = $100
 	
 	; Miscellaneous constants
 	Space = $20

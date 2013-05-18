@@ -39,7 +39,7 @@
 100 C=!#CD&#FFFF
 
     // Initialize the variables
-110 L=13;S=0;F=0;A=1;G=0;R=#2880;!#92=R
+110 L=13;S=0;F=0;A=1;G=0;R=#2880
 
     // Turn off the cursor and refresh the screen
 120 ?#E1=0;GOS.x
@@ -48,12 +48,13 @@
 200a?#801B=P/10+176;?#801C=P%10+176
 210 ?#801E=M/10+176;?#801F=M%10+176
 220 !#80=Z
-230 ?#8B=A
-240 ?#8C=(G&1)*2+(G&2)/2
-250 ?#8D=H
-260 !#8E=(P-1)*L
-270 LINK #3300
-280 GOS.i
+230 !#82=(P-1)*L
+240 !#84=R
+250 ?#86=A
+260 ?#87=(G&1)*2+(G&2)/2
+270 ?#88=H
+280 LINK #3300
+290 GOS.i
 
     // Shift Key is pressed (page down)
 300bIF ?#B001&128>0 G.c
@@ -141,13 +142,13 @@
 1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
 1050 IF F>0 Z=!(C+F*2 + 2)&#FFFF
 1060 IF F=0 Z=!(B+S*2)&#FFFF
-1070 IF G>0 M=!E&#FFFF;
-1080 IF G=0 M=!Z&#FFFF;
+1070 IF G>0 M=!E&#FFFF
+1080 IF G=0 M=!Z&#FFFF
 1090 M=(M+L-1)/L;Z=Z+2
 1100 Y=-2;GOS.i;Y=0;P=1;R.
 
     // Subroutine to print the filter name padded with spaces to 10 chars
-1200yGOS.z;
+1200yGOS.z
 1220 IF I=1 P." "
 1230 IF I=2 P."     "
 1240 R.
