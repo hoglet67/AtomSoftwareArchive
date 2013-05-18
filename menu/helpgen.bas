@@ -1,7 +1,7 @@
 100 P.$12" ATOMMC GAME MENU V1.0 MAY 2013"';?#E1=0;Y=-2;GOS.i 
 110 P."       KEYS/INSTRUCTIONS"'';Y=-1;GOS.i
 115 I=128
-120 P." "$I$I$I"sorting"$I$I$I"   "$I$I$I"filtering"$I$I'
+120 P." "$I$I$I"sorting"$I$I$I$I"  "$I$I$I"filtering"$I$I'
 130 P."  1  TITLE        5  CLEAR"'
 140 P."  2  PUBLISHER    6  PUBLISHER"'
 150 P."  3  GENRE        7  GENRE"'
