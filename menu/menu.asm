@@ -1,4 +1,6 @@
 
+	WaitUntilVSync = $FE66
+	
 	SortTableBase = $3600
 	TitleSortPtr = SortTableBase;
 	PublisherSortPtr = SortTableBase + 2;
@@ -34,6 +36,9 @@
 
 	; The value used to return InKey
 	Key = $80
+
+	; The row address to highlight
+	Row = $80
 
 	; These are working values
 	Title = $90
@@ -93,6 +98,7 @@
 
 	JMP WritePage
 	JMP Inkey
+	JMP HighlightRow
 
 .AnnotationIdMap
 	EQUB 	2 ; Short Publisher
@@ -365,6 +371,44 @@
 	LDY #$ff
 .Inkey1
 	STY Key
+	RTS
+	
+; X=#8040+Y*32
+; F.I=0TO31S.4;I!X=I!X:#80808080;N.
+; R.
+
+.HighlightRow
+	
+	LDA #<(ScreenStart)
+	STA Screen	
+	LDA #>(ScreenStart)
+	STA Screen+1
+	LDA Row
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	BCC HighlightRow1
+	INC Screen+1
+.HighlightRow1	
+	CLC
+	ADC Screen
+	STA Screen
+	
+	LDY #2
+.HighlightRow2
+	JSR WaitUntilVSync
+	DEY
+	BNE HighlightRow2
+	
+	LDY #$1F
+.HighlightRow3
+	LDA (Screen),Y
+	EOR #$80
+	STA (Screen),Y
+	DEY
+	BPL	HighlightRow3
 	RTS
 
 .WriteToScreen

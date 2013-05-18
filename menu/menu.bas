@@ -119,9 +119,7 @@
 880 END
 
     // Subroutine to invert line 2+Y on the screen 
-900iX=#8040+Y*32
-910 F.I=0TO31S.4;I!X=I!X:#80808080;N.
-920 R.
+900i?#80=Y+2;LINK(B+6);R.
 
     // Subroutine to update the page header
 
