@@ -1,8 +1,9 @@
 // Variable Usage
 //
 // A - the annotation to show on the RHS (0 = ShortPublisher, 255 = None)
-// B - the load address of the SORTDAT file
-// C - the load address of the MENUDAT file
+// B - the load address of the MENUMC file
+// C - the load address of the SORTDAT file
+// D - the load address of the MENUDAT file
 // E - current filter record address
 // F - 0=Normal title selection, F=1,2,3 showing the filter selection pages
 // G - current filter 0=No filter; 1=Publisher, 2=Genre, 3=Collection
@@ -31,18 +32,19 @@
  20 CLEAR 4
  30 *LOAD MNU/SCREEN2
  40 *LOAD MNU/MENUMC
- 50 *LOAD MNU/SORTDAT
- 60 B=!#CD&#FFFF
- 70 FOR I=1TO60;WAIT;N.
- 80 CLEAR 0
- 90 *LOAD MNU/MENUDAT
-100 C=!#CD&#FFFF
+ 50 B=!#CD&#FFFF
+ 60 *LOAD MNU/SORTDAT
+ 70 C=!#CD&#FFFF
+ 80 FOR I=1TO60;WAIT;N.
+ 90 CLEAR 0
+100 *LOAD MNU/MENUDAT
+110 D=!#CD&#FFFF
 
     // Initialize the variables
-110 L=13;S=0;F=0;A=1;G=0;R=#2880
+120 L=13;S=0;F=0;A=1;G=0;R=#2880
 
     // Turn off the cursor and refresh the screen
-120 ?#E1=0;GOS.x
+130 ?#E1=0;GOS.x
 
     // Refresh page number and the rows
 200a?#801B=P/10+176;?#801C=P%10+176
@@ -53,7 +55,7 @@
 250 ?#86=A
 260 ?#87=(G&1)*2+(G&2)/2
 270 ?#88=H
-280 LINK #3300
+280 LINK B
 290 GOS.i
 
     // Shift Key is pressed (page down)
@@ -70,7 +72,7 @@
 500dIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.a
 
     // Call InKey()
-510 LINK #3303
+510 LINK (B+3)
 
     // No key pressed
 520 IF ?#80=255 G.b
@@ -140,8 +142,8 @@
 1020 IF F>0 P."FILTER";I=F
 1030 P." BY ";GOS.y;P."  PAGE   /  "
 1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
-1050 IF F>0 Z=!(C+F*2 + 2)&#FFFF
-1060 IF F=0 Z=!(B+S*2)&#FFFF
+1050 IF F>0 Z=!(D+F*2 + 2)&#FFFF
+1060 IF F=0 Z=!(C+S*2)&#FFFF
 1070 IF G>0 M=!E&#FFFF
 1080 IF G=0 M=!Z&#FFFF
 1090 M=(M+L-1)/L;Z=Z+2
