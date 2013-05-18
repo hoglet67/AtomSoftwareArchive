@@ -13,7 +13,7 @@
 // L - The number of lines per page
 // M - The current number of pages
 // P - The current page (1..M)
-// Q - The constant #89 
+// Q - The constant #8f 
 // R - The address of a buffer into which the machine code stores the rendered row addresses
 // S - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
 // X - Temporary screen address for highlighting current row
@@ -26,6 +26,7 @@
 // ?#86 - Set from A just before calling machine code
 // ?#87 - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
 // ?#88 - The currently active filter value
+// ?#89 - Whether to enable search filtering (0 = Yes, >0 = No)
 // ?Q - Value set by "InKey" machine code (from calling #FE71)
 // ?Q - Row to highlight, used by "Highlight" machine code
 
@@ -42,7 +43,7 @@
 110 D=!#CD&#FFFF
 
     // Initialize the variables
-120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#89
+120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
 
     // Initialize the search buffer to empty
 125 ?#120=13
@@ -52,7 +53,7 @@
 
     // Refresh rows, page number and total number of pages
 200bGOS.j
-260 LINK B;M=(L+1+!R&#FFFF)/L
+260 LINK B;M=(!R&#FFFF+L-1)/L
 270 ?#801B=P/10+176;?#801C=P%10+176
 280 ?#801E=M/10+176;?#801F=M%10+176
 290 GOS.i
@@ -77,10 +78,10 @@
 520 IF ?Q=255 G.c
 
     // < key pressed (previous page)
-600 IF ?Q=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
+600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
 
     // > key pressed (next page)
-610 IF ?Q=30 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
+610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
 
 	// ? key pressed (help)
 615 IF ?Q=31 GOS.h;G.a
@@ -98,7 +99,7 @@
 650 IF ?Q=0 OR ?Q=13 G.f 
 
     // S key pressed (start search)
-655 IF ?Q=51 P=1;GOS.j;LINK(B+9);GOS.x;G.b;
+655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);GOS.x;G.b;
 
     // A..M key pressed (select an item)
 660 IF ?Q<33 OR ?Q>45 G.c 
@@ -160,7 +161,8 @@
 1153 ?#86=A
 1154 ?#87=(G&1)*2+(G&2)/2
 1155 ?#88=H
-1156 R.
+1156 ?#89=F
+1157 R.
 
     // Subroutine to print the filter name padded with spaces to 10 chars
 1200yGOS.z

@@ -37,12 +37,16 @@
 	; The filter value
     FilterVal = $88
 
+	; Search mode value
+	; Bits 0..1 : 0 = Enable search filtering, 1,2,3 = Disable search filtering
+	; Bit 7 : 0 =  Hight Matches, 1 = Don't Highlight Matches
+    SearchMode = $89
+
 	; The value used to return InKey
-	Key = $89
+	Key = $8f
 
 	; The row address to highlight
-	Row = $89
-
+	Row = $8f
 
 	; These are working values
 	Title = $90
@@ -62,7 +66,6 @@
 	CurrentRow = $A0
 	CurrentSort = $A2
 	
-
 	; Location that count annotation is written out to	
 	CountString = $100
 	
@@ -77,7 +80,7 @@
 
 	Base = $3200
 
-	org     Base - 22
+	org Base - 22
 
 .STARTOFHEADER
 
@@ -122,9 +125,9 @@
 	EQUB 	0 ; Short Publisher
 	EQUB 	4 ; Publisher
 	EQUB 	4 ; Genre
+	EQUB 	4 ; Collection
 
 .WritePage
-
 
 	LDA Sort
 	STA CurrentSort
@@ -154,7 +157,7 @@
 	STA CurrentRow
 	STA CurrentRow + 1
 	
-.WriteLines
+.NextRow
 
 	LDX #0
 
@@ -202,6 +205,10 @@
 
 	; Do the search comparison 
 .SearchCompare
+	LDA SearchMode
+	AND #3
+	BNE MatchingRow
+	
 	LDY #3
 	STY TmpY
 .SearchCompare1
@@ -223,51 +230,33 @@
 	BNE SearchCompare2
 
 .MatchingRow
-
 	INC CurrentRow
 	BNE MatchingRow1
 	INC CurrentRow + 1
-.MatchingRow1
-
+	
 	;; Have we reached the required start row yet?
+.MatchingRow1
 	SEC
 	LDA CurrentRow
 	SBC StartRow
 	LDA CurrentRow + 1
 	SBC StartRow+1
-	BCS FoundRow
-
-.NextRow	
-	; Move to the next row in the sort table
-	LDX #0
-	LDA (CurrentSort, X)
-	STA Title
-	INC CurrentSort
-	BNE IncSort3
-	INC CurrentSort + 1		
-.IncSort3
-	LDA (CurrentSort, X)
-	STA Title + 1
-	INC CurrentSort
-	BNE IncSort4
-	INC CurrentSort + 1		
-.IncSort4
-
-	; Test if we have run off the end of the list
-	CMP #$FF
-	BNE FilterLoop
+	BCC NextRow
 	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; End of loop that needs to be *very efficient*
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
-	BEQ WritePageEndOfList
-	
+	; Found a row that matches all filter and search
+
 .FoundRow
 
+	; Have we displayed the requested number of rows
 	LDA RowCount
 	CMP #LinesPerPage
-	BEQ WriteLines
+	BEQ NextRow
+
+.FoundRow1
 
 	; Increment the count of the number of rows displayed
 	INC RowCount
@@ -283,11 +272,11 @@
 	STA (RowRet),Y
 	INY
 	LDA Title + 1
-	STA (RowRet),Y
-	
-	JMP WriteLines
+	STA (RowRet),Y	
+	BNE NextRow
 	
 .WritePageEndOfList
+	; We have hit the end of the sort list
 	LDA RowCount
 	CMP #LinesPerPage
 	BEQ UpdateTotalRows		
@@ -377,16 +366,20 @@
 	JSR WriteToScreen
 	
 .WriteTitle
-
+	
+	LDA SearchMode
+	BPL WriteTitle1
 	LDA SearchBuffer
 	CMP #Return
-	BNE WriteTitle1
-	; There is no active search filter, so don't try to highlight
-	JSR WriteTitleNoHighlight
-	BEQ WriteSeperator
-.WriteTitle1
+	BEQ WriteTitle1
+	
 	; There is an active search filter, so try to highlight
 	JSR WriteTitleHighlight
+	JMP WriteSeperator
+
+.WriteTitle1
+	; There is no active search filter, so don't try to highlight
+	JSR WriteTitleNoHighlight
 
 .WriteSeperator
 	LDA #Space
@@ -539,7 +532,6 @@
 	LDY TmpY
 	RTS
 
-
 	; Converts the 16-bit value in $BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
 
 .WriteDecimal:
@@ -618,10 +610,15 @@
 	INX
 .WriteHex4
 	RTS
-	
-
-	
+		
 .Search
+
+	LDA #$80
+	STA SearchMode
+	
+	; Update current results set and number of pages
+	JSR WritePage
+	JSR UpdateTotalPages
 
 	; Returns with Y being the end of the search buffer
 	LDA #$A0
@@ -635,7 +632,7 @@
 	BEQ SearchExit
 
 	CMP #$7F
-	BNE SearchRefreshPage
+	BNE Search1
 	
 	; Delete at the beginning of the line also terminates the search
 	CPY #0
@@ -644,16 +641,12 @@
 	DEY
 	LDA #Return
 	
-.SearchRefreshPage
+.Search1
 
 	STA SearchBuffer,Y
 	INY
 	LDA #Return
 	STA SearchBuffer,Y
-
-	JSR WritePage
-	
-	JSR UpdateTotalPages
 
 	JMP Search
 	
@@ -715,8 +708,6 @@
 	EQUB 0
 
 .UpdateTotalPages
-
-	
 
 	; X is used as the index into CountString
 	LDX #00
