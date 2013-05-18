@@ -13,7 +13,7 @@
 		
 	CountBuffer = $100;
 
-	SearchBuffer = $140;
+	SearchBuffer = $120;
 
 	CountOffset = 0
 	PubIdOffset = 2

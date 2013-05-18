@@ -31,7 +31,7 @@
 
  10 *NOMON
  20 CLEAR 4
- 30 *LOAD MNU/SCREEN2
+ 30 *LOAD MNU/SCREEN3
  40 *LOAD MNU/MENUMC
  50 B=!#CD&#FFFF
  60 *LOAD MNU/SORTDAT
@@ -45,13 +45,13 @@
 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#89
 
     // Initialize the search buffer to empty
-125 ?#140=13
+125 ?#120=13
 
     // Turn off the cursor and refresh the screen
-130 ?#E1=0;GOS.x
+130a?#E1=0;GOS.x
 
     // Refresh page number and the rows
-200a?#801B=P/10+176;?#801C=P%10+176
+200b?#801B=P/10+176;?#801C=P%10+176
 210 ?#801E=M/10+176;?#801F=M%10+176
 220 !#80=Z
 230 !#82=(P-1)*L
@@ -63,56 +63,59 @@
 290 GOS.i
 
     // Shift Key is pressed (scroll down)
-300bIF ?#B001&128>0 G.c
-310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.b
-320 IF P>1 P=P-1;GOS.i;Y=L-1;G.a
+300cIF ?#B001&128>0 G.d
+310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.c
+320 IF P>1 P=P-1;GOS.i;Y=L-1;G.b
 
     // Control Key is pressed (scroll up)
-400cIF?#B001&64>0 G.d
-410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.b
-420 IF P<M P=P+1;GOS.i;Y=0;G.a
+400dIF?#B001&64>0 G.e
+410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
+420 IF P<M P=P+1;GOS.i;Y=0;G.b
 
     // Repeat Key is pressed (next annotation)
-500dIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.a
+500eIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.b
 
     // Call InKey()
 510 LINK (B+3)
 
     // No key pressed
-520 IF ?Q=255 G.b
+520 IF ?Q=255 G.c
 
     // < key pressed (previous page)
-600 IF ?Q=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.a
+600 IF ?Q=28 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
 
     // > key pressed (next page)
-610 IF ?Q=30 P=P+1-(P=M)*M;GOS.i;Y=0;G.a
+610 IF ?Q=30 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
+
+	// ? key pressed (help)
+615 IF ?Q=31 GOS.h;G.a
 
     // 1..4 key pressed (change sort)
-620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;GOS.x;G.a
+620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;GOS.x;G.b
 
     // 5 key pressed (clear filter>
-630 IF ?Q=21 F=0;G=0;A=A&127;GOS.x;G.a
+630 IF ?Q=21 F=0;G=0;A=A&127;GOS.x;G.b
 
     // 6..8 key pressed (filter by publisher, genre or connection)
-640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;GOS.x;G.a
+640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;GOS.x;G.b
 
     // <Return> or <Space> pressed (select current item)
-650 IF ?Q=0 OR ?Q=13 G.e 
+650 IF ?Q=0 OR ?Q=13 G.f 
 
     // S key pressed (start search)
-655 IF ?Q=51 LINK(B+9);GOS.x;G.a;
+655 IF ?Q=51 LINK(B+9);GOS.x;G.b;
 
     // A..M key pressed (select an item)
-660 IF ?Q<33 OR ?Q>45 G.b 
+660 IF ?Q<33 OR ?Q>45 G.c 
 
     // Make sure that the row is not blank
-670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.b
+670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 
     // Get the address of the record selected
-680eI=R!(Y*2)
+680fI=R!(Y*2)
 
     // Handle selection of a filter item
-690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;GOS.x;G.a
+690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;GOS.x;G.b
 
     // Handle *RUN of a title - K is the title index
 800 K=(!I)&#3FF
@@ -124,6 +127,9 @@
 860 ?P=48+K%10;P?1=13;P?2=13
 870 P.$12;LINK #FFF7
 880 END
+
+890h*LOAD MNU/HELP 8000
+895 LINK#FFE3;P.$12;R.
 
     // Subroutine to invert line 2+Y on the screen 
 900i?Q=Y+2;LINK(B+6);R.
