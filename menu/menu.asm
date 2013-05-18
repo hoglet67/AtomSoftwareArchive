@@ -204,15 +204,25 @@
 
 	; Do the search comparison 
 .SearchCompare
-	LDY #4
+	LDY #3
+	STY TmpY
 .SearchCompare1
-	LDA SearchBuffer - 4,Y
+	LDY TmpY
+	INY
+	STY TmpY
+	LDA (Title),Y
+	CMP #Return
+	BEQ NextRow
+	LDX #0
+.SearchCompare2
+	LDA SearchBuffer,X
 	CMP #Return
 	BEQ MatchingRow
 	CMP (Title),Y
-	BNE NextRow
-	INY
 	BNE SearchCompare1
+	INX
+	INY
+	BNE SearchCompare2
 
 .MatchingRow
 
@@ -233,6 +243,7 @@
 	
 	; Move to the next row in the sort table
 .NextRow
+	LDX #0
 	LDA (CurrentSort, X)
 	STA Title
 	INC CurrentSort
