@@ -1,15 +1,14 @@
 // Variable Usage
 //
-// A - the annotation to show on the RHS (0 = ShortPublisher, 255 = None)
+// A - the annotation to show on the RHS (0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count)
 // B - the load address of the MENUMC file
 // C - the load address of the SORTDAT file
 // D - the load address of the MENUDAT file
 // E - current filter record address
-// F - 0=Normal title selection, F=1,2,3 showing the filter selection pages
-// G - current filter 0=No filter; 1=Publisher, 2=Genre, 3=Collection
-// H - current filter value (as an int)
-// I - A temporary loop variable
-// J
+// F - page state variable (0=Normal title selection, F=1,2,3 showing the filter selection pages)
+// G - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Collection)
+// H - current filter value (as an integer)
+// I - A temporary variable
 // K - The index number of the program about to be *RUN
 // L - The number of lines per page
 // M - The current number of pages
@@ -22,11 +21,11 @@
 
 // ?#80,#81 - Set from Z just before calling "RenderPage" machine code
 // ?#80 - Value set by "InKey" machine code (from calling #FE71)
-// ?#8E,#8F - Set from P,M,L just before calling machine code
-// ?#8B - Set from A just before calling machine code
-// ?#8C - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
-// ?#8D - The currently active filter value
-// ?#92 - The value of R being passed to the "RenderPage" machine code
+// ?#82,#83 - Set from P,M,L just before calling machine code
+// ?#84,#85 - The value of R being passed to the "RenderPage" machine code
+// ?#86 - Set from A just before calling machine code
+// ?#87 - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
+// ?#88 - The currently active filter value
 
  10 *NOMON
  20 CLEAR 4
@@ -102,13 +101,13 @@
 670 Y=?#80-33;IF ?(#8040+Y*32)=32 G.b
 
     // Get the address of the record selected
-680eJ=R!(Y*2)
+680eI=R!(Y*2)
 
     // Handle selection of a filter item
-690 IF F>0 G=F;F=0;A=A&127;E=J;H=(P-1)*L+Y;GOS.x;G.a
+690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;GOS.x;G.a
 
     // Handle *RUN of a title - K is the title index
-800 K=(!J)&#3FF
+800 K=(!I)&#3FF
 810 P=#100
 820 $P="RUN MNU/"
 830 P=P+LEN(P)
