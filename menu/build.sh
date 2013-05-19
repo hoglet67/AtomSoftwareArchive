@@ -17,7 +17,7 @@ cp splash/SCREEN3.ATM $DIR/SCREEN3
 cp splash/HELP.ATM $DIR/HELP
 
 # Compile the Assembly file
-../../BeebASM/beebasm/beebasm -i menu.asm
+../../BeebASM/beebasm/beebasm -i menumc.asm
 mv MENUMC $DIR
 
 # Translate the Basic from text to ATM
