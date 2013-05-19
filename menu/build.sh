@@ -4,8 +4,11 @@ DIR=MNU
 # Delete the old MNU folder
 rm -rf $DIR.zip MENU $DIR
 
+# Compile the Boot Loader
+../../BeebASM/beebasm/beebasm -i boot.asm
+
 # Compile the menu data and boostrap files
-java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $DIR
+java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $DIR BOOT.bin
 
 # Add in splash screens
 cp splash/SCREEN1.ATM $DIR/SCREEN1
@@ -34,6 +37,6 @@ cp $DIR.zip $HOME
 cp -a MENU $DIR ../../Atomulator/mmc
 
 # Cleanup
-rm -rf MENU $DIR
+rm -rf MENU BOOT.bin $DIR
 
 

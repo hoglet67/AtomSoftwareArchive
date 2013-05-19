@@ -48,7 +48,7 @@ public class GenerateMenuFiles extends GenerateBase {
 		}
 	}
 
-	public void generateFiles(File menuDir, List<SpreadsheetTitle> items) throws IOException {
+	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
 
 		// ------------------------------------------------------------------------------------
 		// Process the spreadsheet items to generate IDs for Publishers, Genres and Collections

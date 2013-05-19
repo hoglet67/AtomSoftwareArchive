@@ -5,5 +5,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IFileGenerator {
-	void generateFiles(File menuDir, List<SpreadsheetTitle> items) throws IOException;
+	void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException;
 }

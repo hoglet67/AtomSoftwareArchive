@@ -15,32 +15,7 @@
 	Top = $0d
 	Page = $12
 	
-	org     Base - 22
-
-.STARTOFHEADER
-
-; 22 byte ATM header
-
-	EQUS    "MENUMC"
-
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-
-	EQUB    <Base
-	EQUB    >Base
-	
-	EQUB    <Base
-	EQUB    >Base
-
-	EQUW	ENDOF - STARTOF
+	org     Base
 
 .STARTOF
 
@@ -70,6 +45,8 @@
 	BEQ CmdReturn
 	CMP #$03
 	BEQ CmdPage
+	CMP #$04
+	BEQ CmdDirect
 
 	; Implement the default command: Pass to Oscli
 
@@ -143,8 +120,19 @@
 	LDA #Return
 	STA DirectModeBuffer + 3
 	JMP DirectMode
+	
+.CmdDirect
+	LDX #0
+	INY
+.CmdDirectLoop
+	LDA (Tmp),Y
+	STA DirectModeBuffer,X
+	INY
+	INX
+	CMP #Return
+	BNE CmdDirectLoop
+	JMP DirectMode
 
 .ENDOF
 
-
-SAVE "BOOT",STARTOFHEADER, ENDOF
+SAVE "BOOT.bin",STARTOF, ENDOF
