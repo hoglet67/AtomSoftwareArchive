@@ -655,14 +655,14 @@
 	JSR WriteHex
 
 	LDX #0
-.UpdateTotalPages2
+.UpdateTotalPages1
 	LDA CountString,X
 	AND #$3F
 	ORA #$80
 	STA ScreenStart + CharsPerLine - 5,X
 	INX
 	CPX #5
-	BNE UpdateTotalPages2
+	BNE UpdateTotalPages1
 	RTS
 	
 
@@ -672,14 +672,18 @@
 	; Returns the number of pages in Binary in Y	
 .CalculateNumPages
 	LDY #0
+	SEC
 	LDA (RowRet),Y
+	SBC #1
 	STA BinBuffer
 	INY
 	LDA (RowRet),Y
+	SBC #0
 	STA BinBuffer+1
-	LDA #0
-	TAY
-.UpdateTotalPages1
+	BCC CalculateNumPages2
+	DEY
+	TYA
+.CalculateNumPages1
 	INY
 	SED
 	CLC
@@ -694,7 +698,10 @@
 	SBC #0
 	STA BinBuffer+1
 	PLA
-	BCS UpdateTotalPages1
+	BCS CalculateNumPages1
+	RTS
+.CalculateNumPages2
+	TYA
 	RTS
 	
 
