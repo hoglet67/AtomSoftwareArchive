@@ -236,7 +236,6 @@ include "renderer_header.asm"
 
     ; // No key pressed
     ; 520 IF ?Q=255 G.c
-	LDY Key
 	CPY #$FF
 	BEQ LabelC
 
@@ -343,6 +342,13 @@ include "renderer_header.asm"
 	STA Page
 	JSR LabelJ
 	JSR Search
+	
+	; Wait for the key to be release
+.WaitForKeyReleased
+	JSR Inkey
+	CPY #255
+	BNE WaitForKeyReleased
+	
 	JMP LabelA
 	
 .JumpToLabelC
