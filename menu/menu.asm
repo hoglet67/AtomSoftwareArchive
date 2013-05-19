@@ -160,6 +160,15 @@ include "renderer_header.asm"
 	; 290 GOS.i
 	JSR LabelI	
 
+	LDX #0
+	STA TmpX
+.WaitForKeyRelease
+	JSR Inkey
+	CPY #255
+	BEQ LabelC
+	DEC TmpX
+	BNE WaitForKeyRelease
+
 .LabelC
 	; // Shift Key is pressed (scroll up)
 	; 300cIF ?#B001&128>0 G.d
@@ -342,12 +351,6 @@ include "renderer_header.asm"
 	STA Page
 	JSR LabelJ
 	JSR Search
-	
-	; Wait for the key to be release
-.WaitForKeyReleased
-	JSR Inkey
-	CPY #255
-	BNE WaitForKeyReleased
 	
 	JMP LabelA
 	
