@@ -20,23 +20,26 @@ cp splash/HELP.ATM $DIR/HELP
 ../../BeebASM/beebasm/beebasm -i menumc.asm
 mv MENUMC $DIR
 
+# Compile the Stanalone Menu
+../../BeebASM/beebasm/beebasm -i menu.asm
+
 # Translate the Basic from text to ATM
-java -jar ../java/atombasic/atombasic.jar menu.bas MENU 2900 ce86
+java -jar ../java/atombasic/atombasic.jar menu.bas MENUBAS 2900 ce86
 
 # Translate the Help from text to ATM
 java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
 mv HELPGEN $DIR
 
 # Zip everything up
-zip -qr $DIR.zip MENU $DIR
+zip -qr $DIR.zip MENU MENUBAS $DIR
 
 # Copy to somewhere nice
 cp $DIR.zip $HOME
 
 # Also copy to Atomulator
-cp -a MENU $DIR ../../Atomulator/mmc
+cp -a MENU MENUBAS $DIR ../../Atomulator/mmc
 
 # Cleanup
-rm -rf MENU BOOT.bin $DIR
+rm -rf MENU MENUBAS BOOT.bin $DIR
 
 

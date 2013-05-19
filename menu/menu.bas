@@ -16,19 +16,20 @@
 // Q - The constant #8f 
 // R - The address of a buffer into which the machine code stores the rendered row addresses
 // S - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
-// X - Temporary screen address for highlighting current row
-// Y - the currently highlighted row (0..L-1)
+// Y - The currently highlighted row (0..L-1)
 // Z - The currently base address of the current sort index or filter pointer table)
 
-// ?#80,#81 - Set from Z just before calling "RenderPage" machine code
+// ?#80,#81 - Set from Z just before calling "WritePage" machine code
 // ?#82,#83 - Set from P,M,L just before calling machine code
-// ?#84,#85 - The value of R being passed to the "RenderPage" machine code
-// ?#86 - Set from A just before calling machine code
-// ?#87 - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
-// ?#88 - The currently active filter value
-// ?#89 - Whether to enable search filtering (0 = Yes, >0 = No)
-// ?Q - Value set by "InKey" machine code (from calling #FE71)
-// ?Q - Row to highlight, used by "Highlight" machine code
+// ?#84,#85 - The value of R being passed to the "WritePage" machine code
+// ?#86     - Set from A just before calling machine code
+// ?#87     - The currently active filter (0=Title,1=Genre,2=Publisher,3=Collection) (different order reflects data layout of title records_
+// ?#88     - The currently active filter value
+// ?#89     - Whether to enable search filtering (0 = Yes, >0 = No)
+// ?#8A     - Current Page
+// ?#8B,#8C - Set to D just before calling  "WritePage" machine code
+// ?#8F     - Value set by "InKey" machine code (from calling #FE71)
+// ?#8F     - Row to highlight, used by "Highlight" machine code
 
  10 *NOMON
  20 CLEAR 4
@@ -43,7 +44,7 @@
 110 D=!#CD&#FFFF
 
     // Initialize the variables
-120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
+120 L=13;S=0;F=0;A=1;G=0;R=#021C;Q=#8F
 
     // Initialize the search buffer to empty
 125 ?#120=13
@@ -54,16 +55,17 @@
     // Refresh rows, page number and total number of pages
 200bGOS.j
 260 LINK B;M=(!R&#FFFF+L-1)/L
-270 ?#801B=P/10+176;?#801C=P%10+176
-280 ?#801E=M/10+176;?#801F=M%10+176
+270 LINK (B+12)
+    // 270 ?#801B=P/10+176;?#801C=P%10+176
+    // 280 ?#801E=M/10+176;?#801F=M%10+176
 290 GOS.i
 
-    // Shift Key is pressed (scroll down)
+    // Shift Key is pressed (scroll up)
 300cIF ?#B001&128>0 G.d
 310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.c
 320 IF P>1 P=P-1;GOS.i;Y=L-1;G.b
 
-    // Control Key is pressed (scroll up)
+    // Control Key is pressed (scroll down)
 400dIF?#B001&64>0 G.e
 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
 420 IF P<M P=P+1;GOS.i;Y=0;G.b
@@ -111,7 +113,7 @@
 680fI=R!(Y*2 + 2)
 
     // Handle selection of a filter item
-690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;G.a
+690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
 
     // Handle *RUN of a title - K is the title index
 800 K=(!I)&#3FF
@@ -124,11 +126,24 @@
 870 P.$12;LINK #FFF7
 880 END
 
+    // Subroutine to show the help
 890h*LOAD MNU/HELP 8000
 895 LINK#FFE3;P.$12;R.
 
     // Subroutine to invert line 2+Y on the screen 
 900i?Q=Y+2;LINK(B+6);R.
+
+   // Subroutine to set the zero page locations prior to calling machine code 
+950j!#80=Z
+951 !#82=1+(P-1)*L
+952 !#84=R
+953 ?#86=A
+954 ?#87=(G&1)*2+(G&2)/2
+955 ?#88=H
+956 ?#89=F
+957 ?#8A=P
+958 !#8B=D
+959 R.
 
     // Subroutine to update the page header
 
@@ -140,29 +155,18 @@
     //   E is the filter value string - valid only when G>0
     //   L is the number of lines per page to show (typically 13)
     // Outputs
-    //   M is updated with the number of pages
     //   Z is updated to point to the appropriate record pointer table
     //   Y is set to 0, which will select the first row
     //   P is set to 1, which will select the first page
+    
 1000xP.$30'"                                "$30
-1010 IF F=0 P."ATOMMC";I=S
-1020 IF F>0 P."FILTER";I=F
+1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
+1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2+2)&#FFFF
 1030 P." BY ";GOS.y;P."  PAGE   /  "
-1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
-1050 IF F>0 Z=!(D+F*2 + 2)&#FFFF
-1060 IF F=0 Z=!(C+S*2)&#FFFF
-1090 Z=Z+2
-1100 Y=-2;GOS.i;Y=0;P=1;R.
+1040 IF G>0 I=G;P."  ";GOS.z;P."="$E'
+1050 Z=Z+2
+1060 Y=-2;GOS.i;Y=0;P=1;R.
 
-	 // Subroutine to set the zero page locations prior to calling machine code 
-1150j!#80=Z
-1151 !#82=1+(P-1)*L
-1152 !#84=R
-1153 ?#86=A
-1154 ?#87=(G&1)*2+(G&2)/2
-1155 ?#88=H
-1156 ?#89=F
-1157 R.
 
     // Subroutine to print the filter name padded with spaces to 10 chars
 1200yGOS.z

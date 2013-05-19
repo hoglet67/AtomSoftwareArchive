@@ -21,12 +21,15 @@
 	; Calculate a pointer to the requested annotation table, skipping the length field
     LDA Annotation
     ASL A
-    TAX
+    TAY
+    INY
+    INY
     CLC
-	LDA MenuTableBase + 2,X
+	LDA (MenuTablePtr),Y
 	ADC #2
 	STA AnnotationPtr
-	LDA MenuTableBase + 3,X
+	INY
+	LDA (MenuTablePtr),Y
 	ADC #0
 	STA AnnotationPtr + 1
 	
@@ -197,7 +200,7 @@
 	INY
 	LDA (Title),Y
 	STA BinBuffer + 1		
-	JSR WriteDecimal
+	JSR WriteCount
 
 	LDA #<CountString
 	STA AnnotationString
@@ -397,6 +400,7 @@
 	RTS
 
 .WriteToScreen
+	PHA
 	STY TmpY
 	LDY #0
 
@@ -413,21 +417,48 @@
 	
 .WriteToScreen1
 	LDY TmpY
+	PLA
 	RTS
-
 	; Converts the 16-bit value in $BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
 
-.WriteDecimal:
+.WriteCount:
 	TXA
 	PHA
-	SED
+	LDA #'('
+	STA CountString
+	LDX #1
+	JSR WriteDecimal
+	LDA #')'
+	STA CountString,X
+	INX
+	LDA #Return
+	STA CountString,X
+	PLA
+	TAX
+	RTS
+	
+.WriteDecimal:
+	JSR BinToDecimal16
+	; Set the flag to support suppression of leading zeros
+	STY SuppressFlag
+	LDY #2
+	; Output the BcdBuffer digits, MS first
+.DecLoop
+	LDA BcdBuffer,Y
+	JSR WriteHex
+	DEY
+	BPL DecLoop
+	RTS
+
+.BinToDecimal16
 	LDA #0
 	STA BcdBuffer
 	STA BcdBuffer+1
 	STA BcdBuffer+2
+	SED
+	LDY #16
+.BinToDecimal16Loop:
 	; Handle the binary bits one at a time
-	LDY #16        
-.BcdLoop:
     ASL BinBuffer
 	ROL BinBuffer+1
 	; Add into the BCD accumulator
@@ -441,31 +472,33 @@
 	ADC BcdBuffer+2
 	STA BcdBuffer+2
 	DEY
-	BNE BcdLoop
+	BNE BinToDecimal16Loop
 	CLD
-
-	; Set the flag to support suppression of leading zeros
-	STY SuppressFlag
-
-	; Output the BcdBuffer digits, MS first
-	LDA #'('
-	STA CountString
-	LDX #1
-	LDY #2
-.DecLoop
-	LDA BcdBuffer,Y
-	JSR WriteHex
-	DEY
-	BPL DecLoop
-	LDA #')'
-	STA CountString,X
-	INX
-	LDA #Return
-	STA CountString,X
-	PLA
-	TAX
 	RTS
 
+.BinToDecimal8
+	LDA #0
+	STA BcdBuffer
+	STA BcdBuffer+1
+	SED
+	LDY #8
+.BinToDecimal8Loop:
+	; Handle the binary bits one at a time
+    ASL BinBuffer
+	; Add into the BCD accumulator
+	LDA BcdBuffer
+	ADC BcdBuffer
+	STA BcdBuffer
+	LDA BcdBuffer+1
+	ADC BcdBuffer+1
+	STA BcdBuffer+1
+	DEY
+	BNE BinToDecimal8Loop
+	CLD
+	LDA BcdBuffer
+	RTS
+
+	
 .WriteHex
 	PHA
 	LSR A
@@ -508,7 +541,7 @@
 	JSR ShowCurrentSearch
 	
 	; Read a character
-	JSR OSRDCH
+	JSR Osrdch
 
 	; Return terminates the search
 	CMP #$0d
@@ -592,33 +625,62 @@
 
 .UpdateTotalPages
 
-	; X is used as the index into CountString
-	LDX #00
 
-	; Make sure that we don't supress zeros
+	; Write Page to the CountString
+	LDA Page
+	STA BinBuffer
+	LDA #0
+	STA BinBuffer+1
+	
+	JSR BinToDecimal8
+
+	; X is used as the index into CountString
+	LDX #0
+
+	; Make sure that we don't suppress zeros
 	LDY	#$FF
 	STY SuppressFlag
 
-	; Read the total number of filtered rows returned
-	INY
+	JSR WriteHex
+
+	; Write the page separator into CountString
+	LDA #'/'
+	LDX #2
+	STA CountString, X
+		
+	JSR CalculateNumPages
+	
+	; Write the number of pages into to the CountString
+	LDX #3
+	JSR WriteHex
+
+	LDX #0
+.UpdateTotalPages2
+	LDA CountString,X
+	AND #$3F
+	ORA #$80
+	STA ScreenStart + CharsPerLine - 5,X
+	INX
+	CPX #5
+	BNE UpdateTotalPages2
+	RTS
+	
+
+	; Reads the total number of filtered rows returned
+	; Inefficiently divide number of rows by the rows per page
+	; Returns the number of pages in BCD in A
+	; Returns the number of pages in Binary in Y	
+.CalculateNumPages
+	LDY #0
 	LDA (RowRet),Y
 	STA BinBuffer
 	INY
 	LDA (RowRet),Y
 	STA BinBuffer+1
-
-	; Write 01 to the CountString
-	TYA
-	JSR WriteHex
-
-	; Write the page separator into CountString
-	LDA #'/'
-	STA CountString, X
-	INX
-		
-	; Inefficiently divide number of rows by the rows per page
 	LDA #0
+	TAY
 .UpdateTotalPages1
+	INY
 	SED
 	CLC
 	ADC #1
@@ -633,18 +695,8 @@
 	STA BinBuffer+1
 	PLA
 	BCS UpdateTotalPages1
-
-	; Write the number of pages into to the CountString
-	JSR WriteHex
-
-	LDX #0
-.UpdateTotalPages2
-	LDA CountString,X
-	AND #$3F
-	ORA #$80
-	STA ScreenStart + CharsPerLine - 5,X
-	INX
-	CPX #5
-	BNE UpdateTotalPages2
 	RTS
+	
+
+	
 	

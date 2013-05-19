@@ -35,6 +35,7 @@ include "renderer_header.asm"
 	JMP Inkey
 	JMP HighlightRow
 	JMP Search
+	JMP UpdateTotalPages
 		
 include "renderer_body.asm"
 
