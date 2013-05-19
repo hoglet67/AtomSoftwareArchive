@@ -87,19 +87,19 @@
 615 IF ?Q=31 GOS.h;G.a
 
     // 1..4 key pressed (change sort)
-620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;GOS.x;G.b
+620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
 
     // 5 key pressed (clear filter>
-630 IF ?Q=21 F=0;G=0;A=A&127;GOS.x;G.b
+630 IF ?Q=21 F=0;G=0;A=A&127;G.a
 
     // 6..8 key pressed (filter by publisher, genre or connection)
-640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;GOS.x;G.b
+640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 
     // <Return> or <Space> pressed (select current item)
 650 IF ?Q=0 OR ?Q=13 G.f 
 
     // S key pressed (start search)
-655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);GOS.x;G.b;
+655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);G.a
 
     // A..M key pressed (select an item)
 660 IF ?Q<33 OR ?Q>45 G.c 
@@ -111,15 +111,15 @@
 680fI=R!(Y*2 + 2)
 
     // Handle selection of a filter item
-690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;GOS.x;G.b
+690 IF F>0 G=F;F=0;A=A&127;E=I;H=(P-1)*L+Y;G.a
 
     // Handle *RUN of a title - K is the title index
 800 K=(!I)&#3FF
 810 P=#100
 820 $P="RUN MNU/"
 830 P=P+LEN(P)
-840 IF K>99 THEN ?P=48+(K/100)%10;P=P+1
-850 IF K>9 THEN ?P=48+(K/10)%10;P=P+1
+840 IF K>99 P?0=48+(K/100)%10;P=P+1
+850 IF K>9 P?0=48+(K/10)%10;P=P+1
 860 ?P=48+K%10;P?1=13;P?2=13
 870 P.$12;LINK #FFF7
 880 END
