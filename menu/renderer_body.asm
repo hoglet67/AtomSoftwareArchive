@@ -803,7 +803,7 @@ IF properAnnotationCounts
 	; Clear the 2nd and 3rd byte of each annotation record
 	; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
-	LDY #2
+	LDY #4
 .ClearAnnotationCounts1
 	CLC
 	LDA (MenuTablePtr),Y
