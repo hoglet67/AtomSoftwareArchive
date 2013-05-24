@@ -30,14 +30,14 @@ java -jar ../java/atombasic/atombasic.jar menu.bas MENUBAS 2900 ce86
 java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
 mv HELPGEN $DIR
 
+# Also copy to Atomulator
+cp -a MENU MENUBAS $DIR ../../Atomulator/mmc
+
 # Zip everything up
 zip -qr $DIR.zip MENU MENUBAS $DIR
 
 # Copy to somewhere nice
 cp $DIR.zip $HOME
-
-# Also copy to Atomulator
-cp -a MENU MENUBAS $DIR ../../Atomulator/mmc
 
 # Cleanup
 rm -rf MENU MENUBAS BOOT.bin $DIR

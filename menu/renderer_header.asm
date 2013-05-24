@@ -1,3 +1,8 @@
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+	; Conditional Assembly Constants
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+
+	properAnnotationCounts=1
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
 	; Operating System Subroutines
@@ -77,6 +82,7 @@
 	AnnotationPtr    = $92
 	AnnotationString = $94
 	Screen           = $96
+	Tmp              = $98
 	TmpX             = $98    
 	TmpY             = $99
 	RowCount         = $9A

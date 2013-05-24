@@ -12,11 +12,20 @@
 
 .WritePage
 
+IF properAnnotationCounts	
+
+	LDA SearchMode
+	AND #3
+	BNE WritePage1
+	JSR ClearAnnotationCounts
+.WritePage1
+
+ENDIF
+
 	LDA Sort
 	STA CurrentSort
 	LDA Sort + 1
 	STA CurrentSort + 1
-
 
 	; Calculate a pointer to the requested annotation table, skipping the length field
     LDA Annotation
@@ -42,6 +51,11 @@
 	STA RowCount
 	STA CurrentRow
 	STA CurrentRow + 1
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;; Start of loop that needs to be efficient
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
 	
 .NextRow
 
@@ -64,36 +78,16 @@
 	; Test if we have run off the end of the list
 	CMP #$FF
 	BEQ WritePageEndOfList
-	
-.FilterLoop
-
-	; If there is no filter, we move on to compare the search (if there is one)
-	LDY Filter
-	BEQ SearchCompare
-
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	;; Start of loop that needs to be *very efficient*
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
-	; Otherwise compare what's the the title record with the filter value
-	LDA (Title), Y
-
-	; Genre is packed into byte 1 with index, so we need to shift by two places
-	CPY #1
-	BNE FilterCompare
-	LSR A
-	LSR A	
-
-	;; Do the filter comparison, skip to next row if no match
-.FilterCompare
-	CMP FilterVal
-	BNE NextRow
+		
 
 	; Do the search comparison 
 .SearchCompare
 	LDA SearchMode
 	AND #3
-	BNE MatchingRow
+	BNE FilterCompare
+	LDA SearchBuffer
+	CMP #Return
+	BEQ FilterCompare
 	
 	LDY #3
 	STY TmpY
@@ -108,12 +102,37 @@
 .SearchCompare2
 	LDA SearchBuffer,X
 	CMP #Return
-	BEQ MatchingRow
+	BEQ SearchMatch
 	CMP (Title),Y
 	BNE SearchCompare1
 	INX
 	INY
 	BNE SearchCompare2
+.SearchMatch
+
+IF properAnnotationCounts
+	JSR AccumulateAnnotationCounts	
+ENDIF
+
+.FilterCompare
+	; If there is no filter, we move on to compare the search (if there is one)
+	LDY Filter
+	BEQ MatchingRow
+
+	; Otherwise compare what's the the title record with the filter value
+	LDA (Title), Y
+
+	; Genre is packed into byte 1 with index, so we need to shift by two places
+	CPY #1
+	BNE CompareFilterValue
+	LSR A
+	LSR A	
+
+	;; Do the filter comparison, skip to next row if no match
+.CompareFilterValue
+	CMP FilterVal
+	BNE NextRow
+
 
 .MatchingRow
 	INC CurrentRow
@@ -159,7 +178,7 @@
 	INY
 	LDA Title + 1
 	STA (RowRet),Y	
-	BNE NextRow
+	JMP NextRow
 	
 .WritePageEndOfList
 	; We have hit the end of the sort list
@@ -195,6 +214,16 @@
     BPL NormalAnnotation
 
 	LDY #CountOffset
+
+IF properAnnotationCounts	
+	LDA SearchBuffer
+	CMP #13
+	BEQ NoSearch
+	INY
+	INY
+.NoSearch
+ENDIF
+
 	LDA (Title),Y
 	STA BinBuffer
 	INY
@@ -428,6 +457,12 @@
 	STA CountString
 	LDX #1
 	JSR WriteDecimal
+	CPX #1
+	BNE NotZero
+	LDA #'0'
+	STA CountString,X
+	INX
+.NotZero
 	LDA #')'
 	STA CountString,X
 	INX
@@ -703,7 +738,113 @@
 .CalculateNumPages2
 	TYA
 	RTS
-	
 
+
+IF properAnnotationCounts
+	
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;; Accumulate the annotation counts
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.AccumulateAnnotationCounts
+		
+	LDX #3
+.AnnotationCountLoop		
+	LDA AnnotationIdMap,X
+	TAY	
+	LDA (Title),Y
+	CPY #1
+	BNE AnnotationNotGenre	
+	LSR A
+	LSR A
+.AnnotationNotGenre	
+	JSR IncAnnotationCounts
+	DEX
+	BNE AnnotationCountLoop
+	RTS
 	
 	
+	; Increment an annotation count
+	; X=Annotation value (1 = Long Publisher, 2 = Genre, 3 = Collection)
+	; A=Annotation Value
+
+.IncAnnotationCounts
+	CLC
+	ADC #1
+	ASL A
+	PHA
+	TXA
+    ASL A
+    TAY
+    INY
+    INY
+    CLC 
+    PLA 
+	ADC (MenuTablePtr),Y
+	STA Tmp
+	INY
+	LDA (MenuTablePtr),Y
+	ADC #0
+	STA Tmp + 1
+	LDY #0
+	LDA (Tmp),Y
+	STA AnnotationString
+	INY	
+	LDA (Tmp),Y
+	STA AnnotationString + 1
+	INY
+	CLC
+	LDA (AnnotationString),Y
+	ADC #1
+	STA (AnnotationString),Y
+	RTS
+	
+	
+	; Clear the 2nd and 3rd byte of each annotation record
+	; We will use these to store counts of the number of search filtered items
+.ClearAnnotationCounts
+	LDY #2
+.ClearAnnotationCounts1
+	CLC
+	LDA (MenuTablePtr),Y
+	ADC #2
+	STA Tmp
+	INY
+	LDA (MenuTablePtr),Y
+	ADC #0
+	STA Tmp + 1
+	JSR ClearAnnotationCounts2
+	INY
+	CPY #10
+	BNE ClearAnnotationCounts1
+	RTS
+.ClearAnnotationCounts2
+	TYA
+	PHA
+	LDX #0
+	LDY #0
+.ClearAnnotationCounts3
+	LDA (Tmp),Y
+	STA AnnotationString
+	INY
+	LDA (Tmp),Y
+	STA AnnotationString + 1
+	INY
+	CMP #$ff
+	BEQ ClearAnnotationCounts6
+	TYA
+	PHA
+	LDY #2
+	TXA
+	STA (AnnotationString),Y
+	INY
+	STA (AnnotationString),Y
+	PLA
+	TAY
+	BNE	ClearAnnotationCounts3
+.ClearAnnotationCounts6
+	PLA
+	TAY
+	RTS	
+
+ENDIF

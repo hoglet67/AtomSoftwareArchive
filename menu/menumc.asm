@@ -1,8 +1,10 @@
-	Base = $3200
+	Base = $3100
 
 include "renderer_header.asm"
 
 	org Base - 22
+
+	guard $3600
 
 .STARTOFHEADER
 
@@ -38,6 +40,7 @@ include "renderer_header.asm"
 	JMP UpdateTotalPages
 		
 include "renderer_body.asm"
+
 
 .ENDOF
 
