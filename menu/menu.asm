@@ -13,11 +13,14 @@ include "renderer_header.asm"
 	SortType     = $79
 	FilterType   = $7a	
 	FilterString = $7b
+	AutoRepeat   = $7d 
 	
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
 	
 	RowReturnBuf = $021c 
 
+	AutoRepeat1  = -$200
+	AutoRepeat2  = -$20
 	
 ; Basic -> Machine Code Variable Mapping
 ;
@@ -136,7 +139,6 @@ include "renderer_header.asm"
 	LDA #Return
 	STA SearchBuffer
 
-
 .LabelA
 	; // Turn off the cursor and refresh the screen
 	; 130a?#E1=0;GOS.x
@@ -160,14 +162,8 @@ include "renderer_header.asm"
 	; 290 GOS.i
 	JSR LabelI	
 
-	LDX #0
-	STA TmpX
-.WaitForKeyRelease
-	JSR Inkey
-	CPY #255
-	BEQ LabelC
-	DEC TmpX
-	BNE WaitForKeyRelease
+.ReleaseKey
+	JSR HandleAutoRepeat
 
 .LabelC
 	; // Shift Key is pressed (scroll up)
@@ -181,7 +177,7 @@ include "renderer_header.asm"
 	JSR LabelI
 	DEC Item
 	JSR LabelI
-	BMI LabelC ; Always
+	BMI ReleaseKey ; Always
 
 .LabelC1
 	; 320 IF P>1 P=P-1;GOS.i;Y=L-1;G.b
@@ -211,7 +207,7 @@ include "renderer_header.asm"
 	JSR LabelI
 	INC Item
 	JSR LabelI
-	JMP LabelC
+	JMP ReleaseKey
 		
 .LabelD1
 	; 420 IF P<M P=P+1;GOS.i;Y=0;G.b
@@ -865,7 +861,40 @@ include "renderer_header.asm"
 	STA 1,X
 	RTS
 	
-
+.HandleAutoRepeat
+	LDA AutoRepeat
+	STA TmpPtr
+	LDA AutoRepeat + 1
+	STA TmpPtr + 1
+.HandleAutoRepeatLoop
+	JSR Inkey
+	CPY #255
+	BNE HandleAutoRepeatPressed
+	BIT $b001
+	BPL HandleAutoRepeatPressed
+	BVC HandleAutoRepeatPressed
+	BIT $b002
+	BVS HandleAutoRepeatKeyReleased
+.HandleAutoRepeatPressed
+	INC TmpPtr
+	BNE HandleAutoRepeatLoop
+	INC TmpPtr + 1
+	BNE HandleAutoRepeatLoop
+	; Key was not released
+	; Update the auto repeat timer to the repeat value
+	LDA #<AutoRepeat2
+	STA AutoRepeat
+	LDA #>AutoRepeat2
+	STA AutoRepeat + 1
+	RTS	
+.HandleAutoRepeatKeyReleased
+	; Key was released
+	; Update the auto repeat timer to the delay value
+	LDA #<AutoRepeat1
+	STA AutoRepeat
+	LDA #>AutoRepeat1
+	STA AutoRepeat + 1
+	RTS
 		
 include "renderer_body.asm"
 
