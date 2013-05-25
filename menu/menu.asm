@@ -2,7 +2,9 @@
 
 include "renderer_header.asm"
 
-	GraphicsCtrl = $F6DD
+	GraphicsCtrl = $f6dd
+	KernelOsrdch = $fe94
+	RDCVEC       = $20a
 
 	TmpPtr       = $70
 	DerefTmp     = $72
@@ -76,6 +78,12 @@ include "renderer_header.asm"
 
 
 .Menu
+	; Work around for issue with older versions of AtomMMC on some titles (e.g. SUB HUNT)
+	LDA #<KernelOsrdch
+	STA RDCVEC
+	LDA #>KernelOsrdch
+	STA RDCVEC + 1
+
 	; 10 *NOMON
 	JSR OscliString
 	EQUS "NOMON", Return
