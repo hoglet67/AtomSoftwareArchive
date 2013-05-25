@@ -3,6 +3,7 @@ package uk.co.acornatom.menu;
 public class SpreadsheetTitle {
 
 	private static final String STATUS_PRESENT = "present";
+	private static final String STATUS_UPDATED = "updated";
 	
 	private int index;
 	private String title;
@@ -79,7 +80,7 @@ public class SpreadsheetTitle {
 		return genre;
 	}
 	public boolean isPresent() {
-		return STATUS_PRESENT.equalsIgnoreCase(status);
+		return STATUS_PRESENT.equalsIgnoreCase(status) || STATUS_UPDATED.equalsIgnoreCase(status);
 	}
 	public void setShortPublisher(String shortPublisher) {
 		this.shortPublisher = shortPublisher;
