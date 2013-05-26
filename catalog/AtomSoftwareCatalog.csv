@@ -362,7 +362,7 @@ RUN",Works,"171
 171B
 DRAGONC",present,,,,
 265,V3,RS,Retro S/W,Castle Quest (32K),Game,,RS/CASQUEST,8200,"CH.""CAST""","Works - but really set up for a Joystick Keys are: 3 - G Q (player 1) 2 , F P (player 2)","CAST
-DATA",updated,,Yes,,
+DATA",updated,RS Mono,Yes,,
 266,V2,RS,Retro S/W,Chuckie Egg (32K),Game,,RS/CHUCKIE,8200,"CH.""RUNME""",Works,"ASM
 CCH-EGG
 CCHUCK
@@ -371,7 +371,7 @@ MCH-EGG
 MCHUCK
 MENU
 ROTDATA
-RUNME",present,Chuckie Egg,Yes,,
+RUNME",obsolete,,Yes,,
 267,V2,RS,Retro S/W,Galaforce (32K),Game,,RS/GALA,8200,"CH.""RUNME""",Works,"ASM
 CGALA
 CGALSCR
@@ -381,25 +381,25 @@ MGALA
 MGALSCR
 ROTDATA
 RUNME
-SCORE",present,Galaforce,Yes,,
+SCORE",obsolete,,Yes,,
 268,V2,RS,Retro S/W,Hard Hat Harry (32K),Game,,RS/HARRY,8200,"CH.""LOADER""",Works,"HARRY
-LOADER",present,,Yes,,
+LOADER",present,RS Colour,Yes,,
 269,V2,RS,Retro S/W,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPERV
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
-MHYPER",present,Hyper Viper,,,
+MHYPER",obsolete,,,,
 270,V2,RS,Retro S/W,Jet Set Miner,Game,,RS/MINER,8200,"CH.""LOADER""",Works,"CMINER
 DAT0
 DAT1
 EDITOR
 LOADER
-MMINER",present,Jet Set Miner,,,
+MMINER",obsolete,,,,
 271,V2,RS,Retro S/W,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
 JUNGLE
 MUSIC
-RUNME",present,,Yes,,
+RUNME",present,RS Colour,Yes,,
 272,V2,A&F,A&F S/W,Frogger,Game,,AF,,"CH.""FROGGER""",Works,FROGGER,found - move location,,,,
 273,,PP,Prog Power,Dodge,Game,S. Draper,PP,,,,,missing,,,,
 274,,PP,Prog Power,Reaction Race,Game,R.M.P. Hanson,PP,,,,,missing,,,,
@@ -447,7 +447,7 @@ MCH-EGG
 MCHUCK
 MENU
 ROTDATA
-RUNME",present,Chuckie Egg,Yes,,
+RUNME",present,RS Mono,Yes,,
 304,V3,RS,Retro S/W,Chuckie Egg (C)(32K),Game,,RS/CHUCKIE,8200,*RUN CCH-EGG,Works,"ASM
 CCH-EGG
 CCHUCK
@@ -456,7 +456,7 @@ MCH-EGG
 MCHUCK
 MENU
 ROTDATA
-RUNME",present,Chuckie Egg,Yes,,
+RUNME",present,RS Colour,Yes,,
 305,V3,RS,Retro S/W,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
 CGALA
 CGALSCR
@@ -466,7 +466,7 @@ MGALA
 MGALSCR
 ROTDATA
 RUNME
-SCORE",present,Galaforce,Yes,,
+SCORE",present,RS Mono,Yes,,
 306,V3,RS,Retro S/W,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
 CGALA
 CGALSCR
@@ -476,28 +476,28 @@ MGALA
 MGALSCR
 ROTDATA
 RUNME
-SCORE",present,Galaforce,Yes,,
+SCORE",present,RS Colour,Yes,,
 307,V3,RS,Retro S/W,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPERV
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
-MHYPER",present,Hyper Viper,,,
+MHYPER",present,RS Mono,,,
 308,V3,RS,Retro S/W,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPERV
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
-MHYPER",present,Hyper Viper,,,
+MHYPER",present,RS Colour,,,
 309,V3,RS,Retro S/W,Jet Set Miner (M),Game,,RS/MINER,8200,*RUN MMINER,Works,"CMINER
 DAT0
 DAT1
 EDITOR
 LOADER
-MMINER",present,Jet Set Miner,,,
+MMINER",present,RS Mono,,,
 310,V3,RS,Retro S/W,Jet Set Miner (C),Game,,RS/MINER,8200,*RUN CMINER,Works,"CMINER
 DAT0
 DAT1
 EDITOR
 LOADER
-MMINER",present,Jet Set Miner,,,
+MMINER",present,RS Colour,,,
