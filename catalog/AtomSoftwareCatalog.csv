@@ -268,7 +268,7 @@ RUN",Works,"AIRATTA
 DATA",present,,,,
 182,,PP,Prog Power,Alien Maze,Game,A. Stevens,PP,,,,,missing,,,,
 183,,PP,Prog Power,Anteater,Game,R. Jewsbury,PP,,,,,missing,,,,
-184,,PP,Prog Power,Astrafire,Game,R. Howells,PP,,,"Kees provided a version of GAMES.zip but it depends on all sorts of extension roms (USR, ATOMVDU) and is bigger than 12K.",,missing,,,,
+184,V3,PP,Prog Power,Astrafire,Game,R. Howells,PP,8200,"CH.""ASTFIRE""",Works,ASTFIRE,present,,,,
 185,,PP,Prog Power,Astro Warrior,Game,,PP,,,,,missing,,,,
 186,V1,PP,Prog Power,Astrobirds,Game,J.M. Dyson,PP,8200,"CH.""ASTROBI""",Works,ASTROBI,present,,,,
 187,V1,PP,Prog Power,Atom Business Game,Game,G.R. Davies,PP,8200,"CH.""BUSINESS""",Works,BUSINESS,present,,,,
@@ -400,7 +400,7 @@ MMINER",obsolete,,,,
 JUNGLE
 MUSIC
 RUNME",present,RS Colour,Yes,,
-272,V2,A&F,A&F S/W,Frogger,Game,,AF,,"CH.""FROGGER""",Works,FROGGER,found - move location,,,,
+272,V3,A&F,A&F S/W,Frogger,Game,,AF,8200,"CH.""FROGGER""",Works,FROGGER,present,,,,
 273,,PP,Prog Power,Dodge,Game,S. Draper,PP,,,,,missing,,,,
 274,,PP,Prog Power,Reaction Race,Game,R.M.P. Hanson,PP,,,,,missing,,,,
 275,,PP,Prog Power,Space Battle,Game,T. Mabbs,PP,,,Acl1-14/SPBAT,,found,,,,
