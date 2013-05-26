@@ -424,8 +424,8 @@ RUNME",present,RS Colour,Yes,,
 293,V3,L9,Level 9,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSS32,Works,COLOSS32,present,,Yes,,
 294,V3,L9,Level 9,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBL32,Works,SNOWBL32,present,,Yes,,
 295,,MO,Magnus Olsson,Diamonds,Adventure,Magnus Olsson,MO,,,,,found,,,,
-296,,???,???,Intra Terrestrial,Adventure,,,,,,,,,,,
-297,,BS,Bearsoft,Wolf Pack,Game,B. Barwise,BS,,,,,found,,,,
+296,,???,???,Intra Terrestrial,Adventure,,,,,,,missing,,,,
+297,V3,BS,Bearsoft,Wolf Pack,Game,B. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
 298,V3,L9,Level 9,Colossal Adv (B),Adventure,"Mike, Nick and Pete Austin",L9,8200,"*RUN SCREENB
 *RUN COLOSS40",Works,"VDUBLO
 COLOSS40",found,,Yes,,
