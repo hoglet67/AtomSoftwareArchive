@@ -382,7 +382,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",obsolete,,Yes,,
-268,V2,RS,Retro S/W,Hard Hat Harry (32K),Game,,RS/HARRY,8200,"CH.""LOADER""",Works,"HARRY
+268,V2,RS,Retro S/W,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
 LOADER",present,RS Colour,Yes,,
 269,V2,RS,Retro S/W,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPERV
 LOA-ASM
