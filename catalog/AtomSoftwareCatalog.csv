@@ -428,16 +428,16 @@ RUNME",present,RS Colour,Yes,,
 295,V3,MO,Magnus Olsson,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Test,DIAMONDS,present,,,,
 296,,???,???,Intra Terrestrial,Adventure,,,,,,,missing,,,,
 297,V3,BS,Bearsoft,Wolf Pack,Game,B. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
-298,V3,L9,Level 9,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,"*RUN VDUBLO
+298,V3,L9,Level 9,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN COLOSSAL",Test,"VDUBLO
 COLOSSAL",present,,Yes,,
-299,V3,L9,Level 9,Snowball (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,"*RUN VDUBLO
+299,V3,L9,Level 9,Snowball (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN SNOWBALL",Test,"VDUBLO
 SNOWBALL",present,,Yes,,
-300,V3,L9,Level 9,Colossal Adv (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,"*RUN VDUWLO
+300,V3,L9,Level 9,Colossal Adv (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN COLOSSAL",Test,"VDUWLO
 COLOSSAL",present,,Yes,,
-301,V3,L9,Level 9,Snowball (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,"*RUN VDUWLO
+301,V3,L9,Level 9,Snowball (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN SNOWBALL",Test,"VDUWLO
 SNOWBALL",present,,Yes,,
 302,,,,Astrofire (Kees),,,,,,Duplicate of Prog Power Astrafire,,duplicate,,,,
