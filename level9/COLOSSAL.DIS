@@ -1,0 +1,14 @@
+load $1100 COLOSAL
+save COLOSAL.ASM
+hexdump
+entry $1100
+byte $110d
+entry $7320
+byte $7323
+entry $7351
+entry $7420
+string $7468
+entry $7472
+byte $7b84
+
+

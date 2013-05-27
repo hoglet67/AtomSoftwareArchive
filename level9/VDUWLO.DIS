@@ -1,0 +1,5 @@
+load $27EA VDUW
+save VDUWLO.ASM
+entry $2C00
+byte $2c1B
+entry $2c1f
