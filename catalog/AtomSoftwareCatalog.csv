@@ -42,7 +42,7 @@ SPHINXH",present,Atom Adventures,Yes,No,
 28,V1,AS,Acornsoft,QUE,Business,,AS/Business,8200,"CH.""QUE""",Works,QUE,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
 29,V2,AS,Acornsoft,Chess,Game,,AS/Chess,8200,*RUN CHESS,Works - Keys: [ ] history; X reset; moves e.g. A2 A4; R - let computer move.,CHESS,present,,,No,
 30,V2,AS,Acornsoft,Database,Business,,AS/Database,2800,"*LOAD WINELIST
-CH.""DATABASE""","Works - slow to start; seems to be scanning all memory in basic and getting confused by 32K RAM. If you have 32K RAM, *LOAD WINELIST 4000 will speed things up. Loads to command promt after a minute. ","DATABASE
+CH.""DATABASE""","Works - slow to start; seems to be scanning all memory in basic and getting confused by 32K RAM. If you have 32K RAM, *LOAD WINELIST 4000 will speed things up. Loads to command prompt after a minute. ","DATABASE
 WINELIST",present,,,No,http://atomclub.nl/atom_handleidingen/dbase/dbase01.htm
 31,V3,AS,Acornsoft,Address Book,Business,,AS/Diary,8200,"CH.""ADRBOOK""",Works,ADRBOOK,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
 32,V1,AS,Acornsoft,Planner,Business,,AS/Diary,8200,"CH.""PLANNER""",Works,PLANNER,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
@@ -65,7 +65,7 @@ DEMO2
 DEMO3
 DEMO4
 DEMO5
-PROTOVDU",updated,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/ForthTheory&Practice_00-09.pdf
+PROTOVDU",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/ForthTheory&Practice_00-09.pdf
 34,V1,AS,Acornsoft,Asteroids,Game,,AS/Games01,8200,"CH.""ASTEROID""",Works,ASTEROID,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
 35,V1,AS,Acornsoft,Sub Hunt,Game,,AS/Games01,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Games Pack 1,,Yes,http://atomclub.nl/atom_handleidingen/misc/gp1.html
 36,V1,AS,Acornsoft,Breakout,Game,,AS/Games01,8200,"CH.""BREAKOUT""",Works,BREAKOUT,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
@@ -154,7 +154,7 @@ LISP2",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/LispThe
 100,V1,AS,Acornsoft,Rational,Utility,,AS/Maths2,8200,"CH.""RATIONAL""",Works,RATIONAL,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
 101,V3,AS,Acornsoft,Triginometry,Utility,,AS/Maths2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
 102,V1,AS,Acornsoft,Fourier,Utility,,AS/Maths2,8200,"CH.""FOURIER""",Works,FOURIER,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
-103,V1,AS,Acornsoft,Pascal (32K),Language,,AS/Pascal,8200,*RUN PASCAL,Works - Needs 32K RAM,PASCAL,present,,Yes,No,http://members.casema.nl/hhaydn/pascal/pascal.html
+103,V1,AS,Acornsoft,Pascal (32K),Language,,AS/Pascal,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,http://members.casema.nl/hhaydn/pascal/pascal.html
 104,V1,AS,Acornsoft,Peeko Computer,Educational,,AS/Peeko,8200,"CH.""PEEKO""",Works,"PEEKO
 ADD
 COPY
@@ -168,10 +168,10 @@ TOCCATA
 SEASIDE
 PICNIC",present,,,No,
 109,V3,AS,Acornsoft,Disassembler,Utility,,AS/Utils1,8200,*RUN DISASAS,Works,DISASAS,present,Utility Pack 1,,No,
-110,V3,AS,Acornsoft,Fast Cassette OS,Utility,,AS/Utils1,8200,"?18=130
-CH.""FASTCOS""",Works,FASTCOS,present,Utility Pack 1,,No,
+110,V3,AS,Acornsoft,Fast Cassette OS,Utility,,AS/Utils1,9700,"?18=130
+CH.""FASTCOS""",Test,FASTCOS,present,Utility Pack 1,,No,
 111,V1,AS,Acornsoft,Renumber,Utility,,AS/Utils1,8200,*RUN RENUM,Works,RENUM,present,Utility Pack 1,,No,
-112,V1,AS,Acornsoft,Wordpack (32K),Business,,AS/Wordpack,8200,*RUN ED64,Works - Needs 32K RAM (loads to #7000),ED64,present,,Yes,,
+112,V1,AS,Acornsoft,Wordpack (32K),Business,,AS/Wordpack,8200,*RUN ED64,Works,ED64,present,,Yes,,
 113,V1,AS,Acornsoft,Pairs,Educational,,AS/Wordtut,3B00,"*LOAD PAIRSD
 CH.""PAIRS""",Works,"PAIRS
 PAIRSD",present,Atom Word Tutor,,No,
@@ -216,7 +216,7 @@ BKOUTINS",present,,,,
 *LOAD PROG
 *RUN 2.12",Works,"CHESSBB
 PROG
-2.12",updated,,Yes,,
+2.12",present,,Yes,,
 147,,BB,Bug Byte,Disassembler,Utility,,BB,,,,,missing,,,,
 148,V1,BB,Bug Byte,Fruit Machine,Game,,BB,8200,"CH.""FRUITBB""",Works,FRUITBB,present,,,,
 149,V1,BB,Bug Byte,Galaxian,Game,,BB,8200,"CH.""GALAXBB""",Works,GALAXBB,present,,,,
@@ -231,7 +231,7 @@ LABYMD
 LABYINS",present,,,,
 153,V1,BB,Bug Byte,Last Run,Game,,BB,8200,"CH.""LASTRUN""",Works,LASTRUN,present,,,,
 154,V1,BB,Bug Byte,Lunar Lander,Game,,BB,8200,"CH.""LUNARBB""",Works,LUNARBB,present,,,,
-155,V1,BB,Bug Byte,Minefield,Game,,BB,8200,"CH.""MINEFIEL""",Works - BUT SAME AS PP,MINEFIEL,present,,,,
+155,,BB,Bug Byte,Minefield,Game,,BB,,,,,missing,,,,
 156,,BB,Bug Byte,Parachute,Game,,BB,,,,,missing,,,,
 157,V1,BB,Bug Byte,Pinball,Game,,BB,8200,"CH.""PINBALL""",Works,PINBALL,present,,,,
 158,V1,BB,Bug Byte,Pontoon,Game,,BB,8200,"*LOAD PONTOON
@@ -277,7 +277,7 @@ STDAT",present,,,,
 189,V1,PP,Prog Power,Awari,Game,T.Madden,PP,8200,"CH.""AWARI""",Works,AWARI,present,,,,
 190,,PP,Prog Power,Aztec,Game,R. Ellis,PP,,,,,missing,,,,
 191,,PP,Prog Power,Breakaway,Game,R.M.P. Hanson,PP,,,,,missing,,,,
-192,V2,PP,Prog Power,Chess,Game,D. Thompson,PP,8200,"CH.""CHESSPP""",Works - with version 2.91E of AtomMMC - othewise you will get SYN Error 135 line 50.,"CHESSPP
+192,V2,PP,Prog Power,Chess,Game,D. Thompson,PP,8200,"CH.""CHESSPP""",Works,"CHESSPP
 TEXT
 2.12",present,,,,
 193,V1,PP,Prog Power,Constellation,Simulation,R.M.P. Hanson,PP,8200,"CH.""CONSTELL""",Works,CONSTELL,present,,,,
@@ -300,17 +300,17 @@ ROME2",present,,,,
 206,,PP,Prog Power,Lunar Lander,Game,J.M. Dyson,PP,,,,,missing,,,,
 207,V1,PP,Prog Power,Martians,Game,R.M.P. Hanson,PP,8200,"CH.""MARTIANS""",Works,MARTIANS,present,,,,
 208,,PP,Prog Power,Mazeball,Game,S. Draper,PP,,,,,missing,,,,
-209,V3,PP,Prog Power,Micro-Budget,Business,R.M.P. Hanson,PP,8200,"CH.""MICROB""",Test,MICROB,present,,,,
-210,V1,PP,Prog Power,Minefield,Game,T.Madden,PP,8200,"CH.""MINEFIEL""",Works - BUT SAME AS BB,MINEFIEL,present,,,,
+209,V3,PP,Prog Power,Micro-Budget,Business,R.M.P. Hanson,PP,8200,"CH.""MICROB""",Works,MICROB,present,,,,
+210,,PP,Prog Power,Minefield,Game,T.Madden,PP,,,,,missing,,,,
 211,,PP,Prog Power,Mode 4 VDU,Utility,R.M.P. Hanson,PP,,,,,arcadian,,,,
 212,V1,PP,Prog Power,Moon Patrol,Game,,PP,8200,*RUN MOONPATR,Works,MOONPATR,present,,,,
-213,V3,PP,Prog Power,Munchyman,Game,D. Wood,PP,8200,"CH.""MUNCHY""",Works - but is a Joystick version,MUNCHY,updated,,,,
+213,V3,PP,Prog Power,Munchyman,Game,D. Wood,PP,8200,"CH.""MUNCHY""",Works,MUNCHY,present,,,,
 214,V1,PP,Prog Power,Murder at the Manor,Game,,PP,8200,"*LOAD MURDER
 RUN",Works,MURDER,present,,,,
 215,V2,PP,Prog Power,Music Box,Music,R.M.P. Hanson,PP,8200,"CH.""MUBOX""",Works,MUBOX,present,,,,
 216,,PP,Prog Power,Ravine,Game,S. Draper,PP,,,,,missing,,,,
 217,V3,PP,Prog Power,Reversi (Othello) ,Game,D. Thompson,PP,8200,"?18=40
-CH.""OTHELLO""",Test,"OTHELLO
+CH.""OTHELLO""",Works,"OTHELLO
 OTHINST",present,,,,
 218,,PP,Prog Power,Sheepdog Trial,Game,R.M.P. Hanson,PP,,,,,missing,,,,
 220,,PP,Prog Power,Sketchpad,Graphics,R.M.P. Hanson,PP,,,,,missing,,,,
@@ -333,7 +333,7 @@ OTHINST",present,,,,
 237,V1,TD,Timedata,Cupball,Game,,TD,8200,"CH.""CUPBALL""",Works,CUPBALL,present,,,,
 238,V1,TD,Timedata,Hammurabi,Game,,TD,8200,"CH.""HAMMUR""",Works,HAMMUR,present,,,,
 239,V1,TD,Timedata,Hexpawn,Game,,TD,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,,,,
-240,V1,TD,Timedata,Letters,Game,,TD,8200,"CH.""LETTERS""",Broken - NOT TIMEDATA VERSION,LETTERS,present,,,,
+240,V1,TD,Timedata,Letters,Game,,TD,8200,"CH.""LETTERS""",,LETTERS,missing,,,,
 241,V1,TD,Timedata,Othello,Game,,TD,8200,"CH.""OTHELLO""",Works,OTHELLO,present,,,,
 242,V1,TD,Timedata,Pinball,Game,,TD,8200,"CH.""PINBALL""",Works,PINBALL,present,,,,
 243,V1,TD,Timedata,Scramble,Game,,TD,8200,"CH.""SCRAMB""",Works,SCRAMB,present,,,,
@@ -363,8 +363,8 @@ ATOMIDAT",present,,,,
 RUN",Works,"171
 171B
 DRAGONC",present,,,,
-265,V3,RS,Retro S/W,Castle Quest (32K),Game,,RS/CASQUEST,8200,"CH.""CAST""","Works - but really set up for a Joystick Keys are: 3 - G Q (player 1) 2 , F P (player 2)","CAST
-DATA",updated,RS Mono,Yes,,
+265,V3,RS,Retro S/W,Castle Quest (32K),Game,,RS/CASQUEST,8200,"CH.""CAST""",Broken - depends on ?? + easy to crash,"CAST
+DATA",present,RS Mono,Yes,,
 266,V2,RS,Retro S/W,Chuckie Egg (32K),Game,,RS/CHUCKIE,8200,"CH.""RUNME""",Works,"ASM
 CCH-EGG
 CCHUCK
@@ -384,7 +384,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",obsolete,,Yes,,
-268,V2,RS,Retro S/W,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
+268,V3,RS,Retro S/W,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
 LOADER",present,RS Colour,Yes,,
 269,V2,RS,Retro S/W,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPERV
 LOA-ASM
@@ -398,15 +398,15 @@ DAT1
 EDITOR
 LOADER
 MMINER",obsolete,,,,
-271,V2,RS,Retro S/W,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
+271,V3,RS,Retro S/W,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
 JUNGLE
 MUSIC
 RUNME",present,RS Colour,Yes,,
 272,V3,A&F,A&F S/W,Frogger,Game,,AF,8200,"CH.""FROGGER""",Works,FROGGER,present,,,,
 273,,PP,Prog Power,Dodge,Game,S. Draper,PP,,,,,missing,,,,
 274,,PP,Prog Power,Reaction Race,Game,R.M.P. Hanson,PP,,,,,missing,,,,
-275,V3,PP,Prog Power,Space Battle,Game,T. Mabbs,PP,8200,"CH.""SPBAT""",Test,SPBAT,present,,,,
-276,V3,PP,Prog Power,Wampus,Game,T. Mabbs,PP,8200,"CH.""WAMPUS""",Test,WAMPUS,present,,,,
+275,V3,PP,Prog Power,Space Battle,Game,T. Mabbs,PP,8200,"CH.""SPBAT""",Works,SPBAT,present,,,,
+276,V3,PP,Prog Power,Wampus,Game,T. Mabbs,PP,8200,"CH.""WAMPUS""",Works,WAMPUS,present,,,,
 277,,PP,Prog Power,Hidden,Game,T. Mabbs,PP,,,,,missing,,,,
 278,,PP,Prog Power,Labyrinth,Game,M.D. Bates,PP,,,,,missing,,,,
 279,,PP,Prog Power,Slot Racer,Game,M.D. Bates,PP,,,,,missing,,,,
@@ -423,22 +423,22 @@ RUNME",present,RS Colour,Yes,,
 290,,PP,Prog Power,Blitz,Game,S. Skippo,PP,,,,,missing,,,,
 291,,PP,Prog Power,Rat Race,Game,S. Skippo,PP,,,,,missing,,,,
 292,,PP,Prog Power,Galactica,Game,S. Vout,PP,,,,,missing,,,,
-293,V3,L9,Level 9,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSS32,Works,COLOSS32,obsolete,,Yes,,
-294,V3,L9,Level 9,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBL32,Works,SNOWBL32,obsolete,,Yes,,
-295,V3,MO,Magnus Olsson,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Test,DIAMONDS,present,,,,
+293,V2,L9,Level 9,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,Test,COLOSSAL,obsolete,,Yes,,
+294,V2,L9,Level 9,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,Test,SNOWBALL,obsolete,,Yes,,
+295,V3,MO,Magnus Olsson,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Works,DIAMONDS,present,,,,
 296,,???,???,Intra Terrestrial,Adventure,,,,,,,missing,,,,
-297,V3,BS,Bearsoft,Wolf Pack,Game,B. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
+297,V3,BS,Bearsoft,Wolf Pack,Game,M. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
 298,V3,L9,Level 9,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
-*RUN COLOSSAL",Test,"VDUBLO
+*RUN COLOSSAL",Works,"VDUBLO
 COLOSSAL",present,,Yes,,
 299,V3,L9,Level 9,Snowball (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
-*RUN SNOWBALL",Test,"VDUBLO
+*RUN SNOWBALL",Works,"VDUBLO
 SNOWBALL",present,,Yes,,
 300,V3,L9,Level 9,Colossal Adv (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
-*RUN COLOSSAL",Test,"VDUWLO
+*RUN COLOSSAL",Works,"VDUWLO
 COLOSSAL",present,,Yes,,
 301,V3,L9,Level 9,Snowball (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
-*RUN SNOWBALL",Test,"VDUWLO
+*RUN SNOWBALL",Works,"VDUWLO
 SNOWBALL",present,,Yes,,
 302,,,,Astrofire (Kees),,,,,,Duplicate of Prog Power Astrafire,,duplicate,,,,
 303,V3,RS,Retro S/W,Chuckie Egg (M)(32K),Game,,RS/CHUCKIE,8200,*RUN MCH-EGG,Works,"ASM
@@ -503,3 +503,4 @@ DAT1
 EDITOR
 LOADER
 MMINER",present,RS Colour,,,
+311,V3,A&F,A&F S/W,Minefield,Game,,AF,8200,"CH.""MINEFIEL""",Works,MINEFIEL,present,,,,
