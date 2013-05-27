@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 function package() {
 
 # echo $src
@@ -65,6 +67,9 @@ cp atms/gamebase/171/171 $ARCHIVE/$MO
 cp atms/gamebase/171B/171B $ARCHIVE/$MO
 cp atms/gamebase/DRAGONC/DRAGONC $ARCHIVE/$MO
 
+# Diamonds
+package "atms/Magnus2/DIAMONDS" "$ARCHIVE/$MO"
+
 ##############################################################
 # Retro Software
 ##############################################################
@@ -83,8 +88,13 @@ package "atms/gamebase/229-DATA/*" "$ARCHIVE/$RS/CASQUEST"
 # Level9
 ##############################################################
 
-package "atms/SNOWBALL/*" "$ARCHIVE/$L9"
-package "atms/COLOSSAL/*" "$ARCHIVE/$L9"
+mkdir -p $ARCHIVE/$L9
+pushd $ARCHIVE/$L9
+../../../../BeebASM/beebasm/beebasm -i ../../../level9/COLOSSAL.ASM
+../../../../BeebASM/beebasm/beebasm -i ../../../level9/SNOWBALL.ASM
+../../../../BeebASM/beebasm/beebasm -i ../../../level9/VDUBLO.ASM
+../../../../BeebASM/beebasm/beebasm -i ../../../level9/VDUWLO.ASM
+popd
 
 ##############################################################
 # Acornsoft
@@ -301,6 +311,12 @@ cp atms/gamebase/178/178 $ARCHIVE/$PP/MURDER
 package "atms/Acl1-13/ATOMSTO" "$ARCHIVE/$PP"
 package "atms/Acl2-04/STDAT" "$ARCHIVE/$PP"
 
+package "atms/Acl1-13/MICROB" "$ARCHIVE/$PP"
+package "atms/spellen3/OTHELLO" "$ARCHIVE/$PP"
+package "atms/spellen3/OTHINST" "$ARCHIVE/$PP"
+package "atms/Acl1-14/SPBAT" "$ARCHIVE/$PP"
+package "atms/Acl1-14/WAMPUS" "$ARCHIVE/$PP"
+
 ##############################################################
 # A&F Software
 ##############################################################
@@ -357,13 +373,32 @@ package "atms/Acl1-24/TRAP" "$ARCHIVE/$AR"
 # Dave/Kees's Patches
 ##############################################################
 
-cp -a DAVE/* $ARCHIVE
+cp -a dave/* $ARCHIVE
+
+##############################################################
+# Build the menu
+##############################################################
+pushd ../menu
+./build.sh
+popd
+pushd $ARCHIVE
+unzip ../../menu/MNU.zip
+popd
 
 ##############################################################
 # Zip up the archive
 ##############################################################
 
-cd $ARCHIVE
+pushd $ARCHIVE
 zip -qr ../$ARCHIVE.zip .
-cd ..
+popd
 mv $ARCHIVE.zip ~
+
+##############################################################
+# Deploy to Atomulator for testing
+##############################################################
+
+pushd $ARCHIVE
+cp -a * ../../../Atomulator/mmc
+popd
+

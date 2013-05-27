@@ -25,13 +25,14 @@ LFE71   = $FE71
 LFEB2   = $FEB2
 LFEFB   = $FEFB
 
-        org     $27EA
+        org     $AEA
 .BeebDisStartAddr
         EQUB    $56
         EQUB    $44
         EQUB    $55
-        EQUB    $2D
         EQUB    $57
+        EQUB    $4C
+        EQUB    $4F
         EQUB    $00
         EQUB    $00
         EQUB    $00
@@ -43,10 +44,9 @@ LFEFB   = $FEFB
         EQUB    $00
         EQUB    $00
         EQUB    $00
+        EQUB    $0B
         EQUB    $00
-        EQUB    $28
-        EQUB    $00
-        EQUB    $2C
+        EQUB    $0F
         EQUB    $00
         EQUB    $06
         EQUB    $FF
@@ -1084,17 +1084,15 @@ LFEFB   = $FEFB
 
         STX     L2900
         STX     L2901
-        LDA     #$2E
-        STA     L0012
+;        LDA     #$11
+;        STA     L0012
         JSR     L2D35
-
-        JMP     LC2B6
+		RTS
+;        JMP     LC2B6
 
 .L2C1B
-        EQUB    $EF
-        EQUB    $2D
-        EQUB    $69
-        EQUB    $2D
+        EQUW    L2DEF
+        EQUW    L2D69
 .L2C1F
         LDY     L0099
         RTS
@@ -1126,10 +1124,10 @@ LFEFB   = $FEFB
 .L2C3F
         CLC
         LDA     #$20
-        EOR     L0093
+        ADC     L0093
         STA     L0093
         LDA     #$01
-        EOR     L0094
+        ADC     L0094
         STA     L0094
         LDA     L0092
         BNE     L2C3C
@@ -1176,18 +1174,19 @@ LFEFB   = $FEFB
         ASL     A
         ASL     A
         STA     L0097
-        LDA     #$0A
+        LDA     #$00
         ROL     A
         ASL     L0097
         ROL     A
+        ADC		#$0B
         STA     L0098
         TYA
         PHA
         LDY     #$00
-        EOR     L0093
+        ADC     L0093
         STA     L0095
         TYA
-        EOR     L0094
+        ADC     L0094
         STA     L0096
 .L2CA4
         LDA     (L0097),Y
@@ -1344,6 +1343,7 @@ LFEFB   = $FEFB
         LDY     L0099
         JMP     L2CE9
 
+.L2D69
         PHP
         CLD
         STX     L00E4
@@ -1390,16 +1390,16 @@ LFEFB   = $FEFB
 .L2DA1
         LDA     #$00
         STA     L0097
-        LDA     #$29
+        LDA     #$0C
         STA     L0098
 .L2DA9
         LDA     L0093
         CLC
-        EOR     L0099
+        ADC     L0099
         STA     L0095
         LDY     #$00
         TYA
-        EOR     L0094
+        ADC     L0094
         STA     L0096
 .L2DB7
         LDA     (L0097),Y
@@ -1436,13 +1436,14 @@ LFEFB   = $FEFB
 
         INC     L0098
         LDA     L0098
-        CMP     #$2C
+        CMP     #$0F
         BNE     L2DA9
 
         LDA     #$3F
 .L2DEC
         JMP     LFE60
 
+.L2DEF
         JSR     LFEFB
 
         PHP
@@ -1454,7 +1455,6 @@ LFEFB   = $FEFB
 
         JMP     LFE5F
 
-; PC=2DFF INVALID opcode 5F
 .BeebDisEndAddr
-SAVE "VDUWLO.bin",BeebDisStartAddr,BeebDisEndAddr
+SAVE "VDUWLO",BeebDisStartAddr,BeebDisEndAddr
 
