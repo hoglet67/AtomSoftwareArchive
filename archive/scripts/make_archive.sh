@@ -235,7 +235,6 @@ package "atms/Acl1-11/GOLFBB" "$ARCHIVE/$BB"
 # package "atms/Steve/LABYRINT" "$ARCHIVE/$BB" # not bugbyte
 package "atms/Acl1-08/LASTRUN" "$ARCHIVE/$BB"
 package "atms/Acl1-15/LUNARBB" "$ARCHIVE/$BB"
-package "atms/Leendert/MINEFIEL" "$ARCHIVE/$BB"
 package "atms/Acl1-08/PINBALL" "$ARCHIVE/$BB"
 package "atms/Games2/PONTOON" "$ARCHIVE/$BB"
 # package "atms/Acl1-09/STRTREK" "$ARCHIVE/$BB" # not bugbyte
@@ -270,7 +269,6 @@ package "atms/Leendert/3DMAZE" "$ARCHIVE/$TD"
 package "atms/spellen3/PINBALL" "$ARCHIVE/$TD"
 package "atms/Leendert/SPACEWAR" "$ARCHIVE/$TD"
 package "atms/Leendert/DRIVE" "$ARCHIVE/$TD"
-package "atms/Acl1-14/LETTERS" "$ARCHIVE/$TD"
 
  
 ##############################################################
@@ -296,7 +294,6 @@ package "atms/dd-01/FIGHTER" "$ARCHIVE/$PP"
 package "atms/Acl1-25/HYPERFI" "$ARCHIVE/$PP"
 package "atms/Steve/INVADERF" "$ARCHIVE/$PP"
 package "atms/Games1/MARTIANS" "$ARCHIVE/$PP"
-package "atms/Leendert/MINEFIEL" "$ARCHIVE/$PP"
 package "atms/Menno1/MOONPATR" "$ARCHIVE/$PP"
 package "atms/dd-09/MUNCHY" "$ARCHIVE/$PP"
 package "atms/Menno1/SHOOTOUT" "$ARCHIVE/$PP"
@@ -362,6 +359,7 @@ package "atms/Acl1-11/POLECAT" "$ARCHIVE/$AF"
 # LOST DURTCHMAN'S GOLD, needs P-Charme
 #_ADV_LDG 2900 afaf 3dc2 4a8c20ed07940afe8bd1d825367304c4 Acl1-25
 
+package "atms/Leendert/MINEFIEL" "$ARCHIVE/$AF"
 
 ##############################################################
 # A&R Software
