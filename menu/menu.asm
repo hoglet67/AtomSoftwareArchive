@@ -174,11 +174,24 @@ include "renderer_header.asm"
 	JSR HandleAutoRepeat
 
 .LabelC
-	; // Shift Key is pressed (scroll up)
+	; // Check for original Atom
+	LDA $bd00
+	CMP #$bd
+	BEQ HandleUpKeyOriginal
+	
+	; // Shift Key is pressed emulator (scroll up)
 	; 300cIF ?#B001&128>0 G.d
 	BIT $b001
 	BMI LabelD
+	JMP LabelC2
 	
+.HandleUpKeyOriginal
+	; // Ctrl Key is pressed Original Atom (scroll up)
+	; 300cIF ?#B001&64>0 G.d
+	BIT $b001
+	BVS LabelD
+
+.LabelC2
 	; 310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.c
 	LDA Item
 	BEQ LabelC1
@@ -199,11 +212,24 @@ include "renderer_header.asm"
 	JMP LabelB
 		
 .LabelD
-	; // Control Key is pressed (scroll down)		
+	; // Check for original Atom
+	LDA $bd00
+	CMP #$bd
+	BEQ HandleDownKeyOriginal
+
+	; // Control Key is pressed emulator (scroll down)		
 	; 400dIF?#B001&64>0 G.e
 	BIT $b001
 	BVS LabelE
+	JMP LabelD2
+
+.HandleDownKeyOriginal
+	; // Shift Key is pressed Original Atom (scroll down)
+	; 300cIF ?#B001&128>0 G.d
+	BIT $b001
+	BMI LabelE
 	
+.LabelD2
 	; 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
 	LDA Item
 	CMP #(LinesPerPage - 1)
