@@ -176,8 +176,8 @@ include "renderer_header.asm"
 .LabelC
 	; // Check for original Atom
 	LDA $bd00
-	CMP #$bd
-	BEQ HandleUpKeyOriginal
+	CMP #$bf
+	BNE HandleUpKeyOriginal
 	
 	; // Shift Key is pressed emulator (scroll up)
 	; 300cIF ?#B001&128>0 G.d
@@ -214,8 +214,8 @@ include "renderer_header.asm"
 .LabelD
 	; // Check for original Atom
 	LDA $bd00
-	CMP #$bd
-	BEQ HandleDownKeyOriginal
+	CMP #$bf
+	BNE HandleDownKeyOriginal
 
 	; // Control Key is pressed emulator (scroll down)		
 	; 400dIF?#B001&64>0 G.e
