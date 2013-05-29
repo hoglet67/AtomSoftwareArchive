@@ -254,7 +254,7 @@ include "renderer_header.asm"
 	JSR LabelI
 	LDA #0
 	STA Item
-	BEQ LabelB
+	JMP LabelB
 	
 .LabelE
 	; 500eIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.b
@@ -276,7 +276,8 @@ include "renderer_header.asm"
     ; // No key pressed
     ; 520 IF ?Q=255 G.c
 	CPY #$FF
-	BEQ LabelC
+	BNE TestForPrevPage
+	JMP LabelC
 
 .TestForPrevPage
     ; // < key pressed (previous page)
