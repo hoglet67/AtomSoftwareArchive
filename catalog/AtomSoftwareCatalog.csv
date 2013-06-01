@@ -4,9 +4,9 @@ Index,Updated,ShortPub,Publisher,Title,Genre,Author (if known),Directory,Boot Ad
 *RUN ADV1D",Works,"ADV1P
 ADV1D",present,,,,
 3,V1,A&F,A&F S/W,Early Warning,Game,,AF,8200,"CH.""EARLYWAR""",Works,EARLYWAR,present,,,,
-4,V1,A&F,A&F S/W,Painter (32K),Game,,AF,8200,*RUN PAINTER,Works,PAINTER,present,,Yes,,
+4,V1,A&F,A&F S/W,Painter (32K),Game,,AF,8200,*RUN PAINTER,Works,PAINTER,present,,Yes*,,
 5,V1,A&F,A&F S/W,Polecat,Game,,AF,8200,"CH.""POLECAT""",Works,POLECAT,present,,,,
-6,V1,A&F,A&F S/W,Space Panic (32K),Game,,AF,8200,*RUN PANIC,Works,PANIC,present,,Yes,,
+6,V1,A&F,A&F S/W,Space Panic (32K),Game,,AF,8200,*RUN PANIC,Works,PANIC,present,,Yes*,,
 7,,A&F,A&F S/W,Starburst,Game,,AF,,,,,missing,,,,
 8,V1,A&F,A&F S/W,Torpedo Run,Game,,AF,8200,*RUN TORPEDOR,Works,TORPEDOR,present,,,,
 9,V2,A&F,A&F S/W,Zodiac,Adventure,,AF,8200,"*LOAD ADV2P
@@ -169,7 +169,7 @@ SEASIDE
 PICNIC",present,,,No,
 109,V3,AS,Acornsoft,Disassembler,Utility,,AS/Utils1,8200,*RUN DISASAS,Works,DISASAS,present,Utility Pack 1,,No,
 110,V3,AS,Acornsoft,Fast Cassette OS,Utility,,AS/Utils1,9700,"?18=130
-CH.""FASTCOS""",Test,FASTCOS,present,Utility Pack 1,,No,
+CH.""FASTCOS""",Works,FASTCOS,present,Utility Pack 1,,No,
 111,V1,AS,Acornsoft,Renumber,Utility,,AS/Utils1,8200,*RUN RENUM,Works,RENUM,present,Utility Pack 1,,No,
 112,V1,AS,Acornsoft,Wordpack (32K),Business,,AS/Wordpack,8200,*RUN ED64,Works,ED64,present,,Yes,,
 113,V1,AS,Acornsoft,Pairs,Educational,,AS/Wordtut,3B00,"*LOAD PAIRSD
@@ -216,7 +216,7 @@ BKOUTINS",present,,,,
 *LOAD PROG
 *RUN 2.12",Works,"CHESSBB
 PROG
-2.12",present,,Yes,,
+2.12",present,,Yes*,,
 147,,BB,Bug Byte,Disassembler,Utility,,BB,,,,,missing,,,,
 148,V1,BB,Bug Byte,Fruit Machine,Game,,BB,8200,"CH.""FRUITBB""",Works,FRUITBB,present,,,,
 149,V1,BB,Bug Byte,Galaxian,Game,,BB,8200,"CH.""GALAXBB""",Works,GALAXBB,present,,,,
@@ -245,7 +245,7 @@ RUN",Works,PONTOON,present,,,,
 165,V1,BB,Bug Byte,UFO Bomber,Game,,BB,8200,"CH.""UFO""",Works,UFO,present,,,,
 166,V1,BB,Bug Byte,Wiggle,Game,,BB,8200,"CH.""WIGGEL""",Works,WIGGEL,present,,, ,
 167,,HS,Hopesoft,Atom Adventure,Adventure,,HS,,*RUN ADV,,ADV,arcadian,,,,
-168,V2,HS,Hopesoft,Atom Man (32K),Game,,HS,8200,*RUN AMAN,Works,AMAN,present,,Yes,,
+168,V2,HS,Hopesoft,Atom Man (32K),Game,,HS,8200,*RUN AMAN,Works,AMAN,present,,Yes*,,
 169,,HS,Hopesoft,Chaser,Game,,HS,,"CH.""CHASER""",,CHASER,arcadian,,,,
 170,,HS,Hopesoft,Disassembler,Utility,,HS,,,,,missing,,,,
 171,,HS,Hopesoft,Pirate Island,Adventure,,HS,,*RUN PIA,,PIA,arcadian,,,,
@@ -504,3 +504,9 @@ EDITOR
 LOADER
 MMINER",present,RS Colour,,,
 311,V3,A&F,A&F S/W,Minefield,Game,,AF,8200,"CH.""MINEFIEL""",Works,MINEFIEL,present,,,,
+312,V3,NC,Non Comm,Bell Hop,Game,ML & JMF,OTHER,8200,*RUN BELLHOP,Test,BELLHOP,present,Non Comm,,,
+313,V3,NC,Non Comm,Boxes,Game,,OTHER,8200,"CH.""BOXES""",Test,BOXES,present,Non Comm,,,
+314,V3,NC,Non Comm,Cement,Game,RK,OTHER,8200,"*LOAD CEMENT
+RUN",Test,CEMENT,present,Non Comm,,,
+315,V3,NC,Non Comm,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Test,PENGO,present,Non Comm,,,
+316,V3,NC,Non Comm,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Test,STITCH,present,Non Comm,,,
