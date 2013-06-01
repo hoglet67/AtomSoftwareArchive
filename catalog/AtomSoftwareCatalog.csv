@@ -15,38 +15,38 @@ ADV2D",present,,,,
 10,V1,A&R,A&R S/W,Trap,Game,,AR,8200,*RUN TRAP,Works,TRAP,present,,,,
 11,,AA,Aardvark,Hedgehog,Game,,AA,,,,,missing,,,,
 12,,AA,Aardvark,Invaders,Game,,AA,,,,,missing,,,,
-13,V1,AS,Acornsoft,House,Adventure,,AS/Advent,8200,"*LOAD ADVENTUR
+13,V1,AS,Acornsoft,House,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN HOUSE",Works,"ADVENTUR
 HOUSE",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/scans/acornsoft/adventures/thumbnails.html
-14,V1,AS,Acornsoft,Dungeon,Adventure,,AS/Advent,8200,"*LOAD ADVENTUR
+14,V1,AS,Acornsoft,Dungeon,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN DUNGEON",Works,"ADVENTUR
 DUNGEON",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/scans/acornsoft/adventures/thumbnails.html
-15,V1,AS,Acornsoft,Intergalactic,Adventure,,AS/Advent,8200,"*LOAD ADVENTUR
+15,V1,AS,Acornsoft,Intergalactic,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN INTERGAL",Works,"ADVENTUR
 INTERGAL",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/scans/acornsoft/adventures/thumbnails.html
-16,V1,AS,Acornsoft,Sphinx Adv (32K),Adventure,,AS/Advent,8200,*RUN SPHINX,Works,"SPHINX
+16,V1,AS,Acornsoft,Sphinx Adv (32K),Adventure,,AS/ADVENT,8200,*RUN SPHINX,Works,"SPHINX
 SPHINX1
 SPHINX2
 SPHINXH",present,Atom Adventures,Yes,No,
-17,V1,AS,Acornsoft,AtomCalc,Business,,AS/AtomCalc,8200,*RUN ATOMCALC,Works,ATOMCALC,present,,,Yes,http://members.casema.nl/hhaydn/manual/calc/calc.htm
-18,V1,AS,Acornsoft,ADDUP,Business,,AS/Business,8200,"CH.""ADDUP""",Works,ADDUP,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-19,V1,AS,Acornsoft,LABEL,Business,,AS/Business,8200,"CH.""LABEL""",Works,LABEL,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-20,V1,AS,Acornsoft,WTMS,Business,,AS/Business,8200,"CH.""WTMS""",Works,WTMS,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-21,V1,AS,Acornsoft,DCF,Business,,AS/Business,8200,"CH.""DCF""",Works,DCF,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-22,V1,AS,Acornsoft,SALES,Business,,AS/Business,8200,"CH.""SALES""","Broken - Uses FOUT, SPUT, FPUT so won't work with AtomMMC",SALES,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-23,V1,AS,Acornsoft,GRAPH,Business,,AS/Business,8200,"CH.""GRAPH""","Broken - Uses FIN, SGET, FGET so won't work with AtomMMC",GRAPH,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-24,V1,AS,Acornsoft,NOM,Business,,AS/Business,8200,"CH.""NOM""",Works,NOM,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-25,V1,AS,Acornsoft,BUDG,Business,,AS/Business,8200,"CH.""BUDG""",Works,BUDG,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-26,V1,AS,Acornsoft,EXS,Business,,AS/Business,8200,"CH.""EXS""",Works,EXS,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-27,V1,AS,Acornsoft,STD,Business,,AS/Business,8200,"CH.""STD""",Works,STD,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-28,V1,AS,Acornsoft,QUE,Business,,AS/Business,8200,"CH.""QUE""",Works,QUE,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
-29,V2,AS,Acornsoft,Chess,Game,,AS/Chess,8200,*RUN CHESS,Works - Keys: [ ] history; X reset; moves e.g. A2 A4; R - let computer move.,CHESS,present,,,No,
-30,V2,AS,Acornsoft,Database,Business,,AS/Database,2800,"*LOAD WINELIST
+17,V1,AS,Acornsoft,AtomCalc,Business,,AS/ATOMCALC,8200,*RUN ATOMCALC,Works,ATOMCALC,present,,,Yes,http://members.casema.nl/hhaydn/manual/calc/calc.htm
+18,V1,AS,Acornsoft,ADDUP,Business,,AS/BUSINESS,8200,"CH.""ADDUP""",Works,ADDUP,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+19,V1,AS,Acornsoft,LABEL,Business,,AS/BUSINESS,8200,"CH.""LABEL""",Works,LABEL,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+20,V1,AS,Acornsoft,WTMS,Business,,AS/BUSINESS,8200,"CH.""WTMS""",Works,WTMS,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+21,V1,AS,Acornsoft,DCF,Business,,AS/BUSINESS,8200,"CH.""DCF""",Works,DCF,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+22,V1,AS,Acornsoft,SALES,Business,,AS/BUSINESS,8200,"CH.""SALES""","Broken - Uses FOUT, SPUT, FPUT so won't work with AtomMMC",SALES,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+23,V1,AS,Acornsoft,GRAPH,Business,,AS/BUSINESS,8200,"CH.""GRAPH""","Broken - Uses FIN, SGET, FGET so won't work with AtomMMC",GRAPH,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+24,V1,AS,Acornsoft,NOM,Business,,AS/BUSINESS,8200,"CH.""NOM""",Works,NOM,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+25,V1,AS,Acornsoft,BUDG,Business,,AS/BUSINESS,8200,"CH.""BUDG""",Works,BUDG,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+26,V1,AS,Acornsoft,EXS,Business,,AS/BUSINESS,8200,"CH.""EXS""",Works,EXS,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+27,V1,AS,Acornsoft,STD,Business,,AS/BUSINESS,8200,"CH.""STD""",Works,STD,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+28,V1,AS,Acornsoft,QUE,Business,,AS/BUSINESS,8200,"CH.""QUE""",Works,QUE,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
+29,V2,AS,Acornsoft,Chess,Game,,AS/CHESS,8200,*RUN CHESS,Works - Keys: [ ] history; X reset; moves e.g. A2 A4; R - let computer move.,CHESS,present,,,No,
+30,V2,AS,Acornsoft,Database,Business,,AS/DATABASE,2800,"*LOAD WINELIST
 CH.""DATABASE""","Works - slow to start; seems to be scanning all memory in basic and getting confused by 32K RAM. If you have 32K RAM, *LOAD WINELIST 4000 will speed things up. Loads to command prompt after a minute. ","DATABASE
 WINELIST",present,,,No,http://atomclub.nl/atom_handleidingen/dbase/dbase01.htm
-31,V3,AS,Acornsoft,Address Book,Business,,AS/Diary,8200,"CH.""ADRBOOK""",Works,ADRBOOK,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
-32,V1,AS,Acornsoft,Planner,Business,,AS/Diary,8200,"CH.""PLANNER""",Works,PLANNER,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
-33,V3,AS,Acornsoft,Forth,Language,,AS/Forth,8200,"*LOAD FORTH-D
+31,V3,AS,Acornsoft,Address Book,Business,,AS/DIARY,8200,"CH.""ADRBOOK""",Works,ADRBOOK,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
+32,V1,AS,Acornsoft,Planner,Business,,AS/DIARY,8200,"CH.""PLANNER""",Works,PLANNER,present,Atom Desk Diary,,No,http://members.casema.nl/hhaydn/manual/desk.html
+33,V3,AS,Acornsoft,Forth,Language,,AS/FORTH,8200,"*LOAD FORTH-D
 *RUN FORTH-C",Works,"FORTH
 FORTH-C
 FORTH-D
@@ -66,119 +66,119 @@ DEMO3
 DEMO4
 DEMO5
 PROTOVDU",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/ForthTheory&Practice_00-09.pdf
-34,V1,AS,Acornsoft,Asteroids,Game,,AS/Games01,8200,"CH.""ASTEROID""",Works,ASTEROID,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
-35,V1,AS,Acornsoft,Sub Hunt,Game,,AS/Games01,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Games Pack 1,,Yes,http://atomclub.nl/atom_handleidingen/misc/gp1.html
-36,V1,AS,Acornsoft,Breakout,Game,,AS/Games01,8200,"CH.""BREAKOUT""",Works,BREAKOUT,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
-37,V1,AS,Acornsoft,Dog Fight,Game,,AS/Games02,8200,"CH. ""DOGFIGHT""",Works,DOGFIGHT,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
-38,V1,AS,Acornsoft,Mastermind,Game,,AS/Games02,8200,"CH. ""MASTERMI""",Works,MASTERMI,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
-39,V1,AS,Acornsoft,Zombie,Game,,AS/Games02,8200,"CH. ""ZOMBIE""",Works,ZOMBIE,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
-40,V1,AS,Acornsoft,Rat Trap,Game,,AS/Games03,8200,"CH.""RATTRAP""",Works,RATTRAP,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
-41,V1,AS,Acornsoft,Lunar Lander,Game,,AS/Games03,8200,"CH.""LANDER""",Works,LANDER,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
-42,V1,AS,Acornsoft,Black Box,Game,,AS/Games03,8200,"CH.""BLACKBOX""",Works,BLACKBOX,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
-43,V1,AS,Acornsoft,Star Trek,Game,,AS/Games04,8200,"CH.""STARTREK""",Works,STARTREK,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
-44,V1,AS,Acornsoft,Four Row,Game,,AS/Games04,8200,"CH.""FOURROW""",Works,FOURROW,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
-45,V1,AS,Acornsoft,Space Attack,Game,,AS/Games04,8200,"CH.""ATTACK""",Works,ATTACK,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
-46,V1,AS,Acornsoft,Invaders,Game,,AS/Games05,8200,"CH.""INVADERS""",Works,INVADERS,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
-47,V1,AS,Acornsoft,Wumpus,Game,,AS/Games05,8200,"CH.""WUMPUS""",Works,WUMPUS,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
-48,V1,AS,Acornsoft,Reverse,Game,,AS/Games05,8200,"CH.""REVERSI""",Works,REVERSI,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
-49,V1,AS,Acornsoft,Dodgems,Game,,AS/Games06,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
-50,V1,AS,Acornsoft,Simon,Game,,AS/Games06,8200,"CH.""SIMON""",Works,SIMON,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
-51,V1,AS,Acornsoft,Amoeba,Game,,AS/Games06,8200,"CH.""AMOEBA""",Works,AMOEBA,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
-52,V1,AS,Acornsoft,Green Things,Game,,AS/Games07,8200,"CH.""GREENTHI""",Works,GREENTHI,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
-53,V1,AS,Acornsoft,Balistics,Game,,AS/Games07,8200,"CH.""BALLISTI""",Works,BALLISTI,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
-54,V1,AS,Acornsoft,Snake,Game,,AS/Games07,8200,"CH.""SNAKE""",Works,SNAKE,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
-55,V1,AS,Acornsoft,Star Gate,Game,,AS/Games08,8200,"CH.""STARGATE""",Works,STARGATE,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
-56,V1,AS,Acornsoft,Go Moku,Game,,AS/Games08,8200,"CH.""GOMOKU""",Works,GOMOKU,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
-57,V1,AS,Acornsoft,Robots,Game,,AS/Games08,8200,"CH.""ROBOTS""",Works,ROBOTS,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
-58,V1,AS,Acornsoft,Snapper,Game,,AS/Games09,8200,"CH.""SNAPPER""",Works,SNAPPER,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
-59,V1,AS,Acornsoft,Minotaur,Game,,AS/Games09,8200,"CH.""MINOTAUR""",Works,MINOTAUR,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
-60,V1,AS,Acornsoft,Babies,Game,,AS/Games09,8200,"CH.""BABIES""",Works,BABIES,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
-61,V2,AS,Acornsoft,Bombs Away,Game,,AS/Games10,2800,"?18=130
+34,V1,AS,Acornsoft,Asteroids,Game,,AS/GAMES01,8200,"CH.""ASTEROID""",Works,ASTEROID,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
+35,V1,AS,Acornsoft,Sub Hunt,Game,,AS/GAMES01,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Games Pack 1,,Yes,http://atomclub.nl/atom_handleidingen/misc/gp1.html
+36,V1,AS,Acornsoft,Breakout,Game,,AS/GAMES01,8200,"CH.""BREAKOUT""",Works,BREAKOUT,present,Games Pack 1,,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
+37,V1,AS,Acornsoft,Dog Fight,Game,,AS/GAMES02,8200,"CH. ""DOGFIGHT""",Works,DOGFIGHT,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
+38,V1,AS,Acornsoft,Mastermind,Game,,AS/GAMES02,8200,"CH. ""MASTERMI""",Works,MASTERMI,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
+39,V1,AS,Acornsoft,Zombie,Game,,AS/GAMES02,8200,"CH. ""ZOMBIE""",Works,ZOMBIE,present,Games Pack 2,,No,http://atomclub.nl/atom_handleidingen/misc/gp2.html
+40,V1,AS,Acornsoft,Rat Trap,Game,,AS/GAMES03,8200,"CH.""RATTRAP""",Works,RATTRAP,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
+41,V1,AS,Acornsoft,Lunar Lander,Game,,AS/GAMES03,8200,"CH.""LANDER""",Works,LANDER,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
+42,V1,AS,Acornsoft,Black Box,Game,,AS/GAMES03,8200,"CH.""BLACKBOX""",Works,BLACKBOX,present,Games Pack 3,,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
+43,V1,AS,Acornsoft,Star Trek,Game,,AS/GAMES04,8200,"CH.""STARTREK""",Works,STARTREK,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
+44,V1,AS,Acornsoft,Four Row,Game,,AS/GAMES04,8200,"CH.""FOURROW""",Works,FOURROW,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
+45,V1,AS,Acornsoft,Space Attack,Game,,AS/GAMES04,8200,"CH.""ATTACK""",Works,ATTACK,present,Games Pack 4,,No,http://atomclub.nl/atom_handleidingen/misc/gp4.html
+46,V1,AS,Acornsoft,Invaders,Game,,AS/GAMES05,8200,"CH.""INVADERS""",Works,INVADERS,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
+47,V1,AS,Acornsoft,Wumpus,Game,,AS/GAMES05,8200,"CH.""WUMPUS""",Works,WUMPUS,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
+48,V1,AS,Acornsoft,Reverse,Game,,AS/GAMES05,8200,"CH.""REVERSI""",Works,REVERSI,present,Games Pack 5,,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
+49,V1,AS,Acornsoft,Dodgems,Game,,AS/GAMES06,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
+50,V1,AS,Acornsoft,Simon,Game,,AS/GAMES06,8200,"CH.""SIMON""",Works,SIMON,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
+51,V1,AS,Acornsoft,Amoeba,Game,,AS/GAMES06,8200,"CH.""AMOEBA""",Works,AMOEBA,present,Games Pack 6,,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
+52,V1,AS,Acornsoft,Green Things,Game,,AS/GAMES07,8200,"CH.""GREENTHI""",Works,GREENTHI,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
+53,V1,AS,Acornsoft,Balistics,Game,,AS/GAMES07,8200,"CH.""BALLISTI""",Works,BALLISTI,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
+54,V1,AS,Acornsoft,Snake,Game,,AS/GAMES07,8200,"CH.""SNAKE""",Works,SNAKE,present,Games Pack 7,,No,http://atomclub.nl/atom_handleidingen/misc/gp7.html
+55,V1,AS,Acornsoft,Star Gate,Game,,AS/GAMES08,8200,"CH.""STARGATE""",Works,STARGATE,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
+56,V1,AS,Acornsoft,Go Moku,Game,,AS/GAMES08,8200,"CH.""GOMOKU""",Works,GOMOKU,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
+57,V1,AS,Acornsoft,Robots,Game,,AS/GAMES08,8200,"CH.""ROBOTS""",Works,ROBOTS,present,Games Pack 8,,No,http://silicon-heaven.com/atom/manual/gp/gp8.html
+58,V1,AS,Acornsoft,Snapper,Game,,AS/GAMES09,8200,"CH.""SNAPPER""",Works,SNAPPER,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
+59,V1,AS,Acornsoft,Minotaur,Game,,AS/GAMES09,8200,"CH.""MINOTAUR""",Works,MINOTAUR,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
+60,V1,AS,Acornsoft,Babies,Game,,AS/GAMES09,8200,"CH.""BABIES""",Works,BABIES,present,Games Pack 9,,No,http://atomclub.nl/atom_handleidingen/misc/gp9.html
+61,V2,AS,Acornsoft,Bombs Away,Game,,AS/GAMES10,2800,"?18=130
 *RUN BOMBSAW",Works,BOMBSAW,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-62,V2,AS,Acornsoft,Breakout,Game,,AS/Games10,2800,"?18=130
+62,V2,AS,Acornsoft,Breakout,Game,,AS/GAMES10,2800,"?18=130
 *RUN BREAKOUT",Works,BREAKOUT,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-63,V2,AS,Acornsoft,Hectic,Game,,AS/Games10,2800,"?18=130
+63,V2,AS,Acornsoft,Hectic,Game,,AS/GAMES10,2800,"?18=130
 *RUN HECTIC",Works,HECTIC,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-64,V2,AS,Acornsoft,Mastermind,Game,,AS/Games10,2800,"?18=130
+64,V2,AS,Acornsoft,Mastermind,Game,,AS/GAMES10,2800,"?18=130
 *RUN MASTERMI",Works,MASTERMI,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-65,V2,AS,Acornsoft,Moon,Game,,AS/Games10,2800,"?18=130
+65,V2,AS,Acornsoft,Moon,Game,,AS/GAMES10,2800,"?18=130
 *RUN MOON",Works,MOON,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-66,V2,AS,Acornsoft,Simon,Game,,AS/Games10,2800,"?18=130
+66,V2,AS,Acornsoft,Simon,Game,,AS/GAMES10,2800,"?18=130
 *RUN SIMON",Works,SIMON,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-67,V2,AS,Acornsoft,Ski Run,Game,,AS/Games10,2800,"?18=130
+67,V2,AS,Acornsoft,Ski Run,Game,,AS/GAMES10,2800,"?18=130
 *RUN SKIRUN",Works,SKIRUN,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-68,V2,AS,Acornsoft,Snake,Game,,AS/Games10,2800,"?18=130
+68,V2,AS,Acornsoft,Snake,Game,,AS/GAMES10,2800,"?18=130
 *RUN SNAKE",Works,SNAKE,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-69,V2,AS,Acornsoft,Squash,Game,,AS/Games10,2800,"?18=130
+69,V2,AS,Acornsoft,Squash,Game,,AS/GAMES10,2800,"?18=130
 *RUN SQUASH",Works,SQUASH,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-70,V2,AS,Acornsoft,Track,Game,,AS/Games10,2800,"?18=130
+70,V2,AS,Acornsoft,Track,Game,,AS/GAMES10,2800,"?18=130
 *RUN TRACK",Works,TRACK,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
-71,V2,AS,Acornsoft,Missile Base,Game,,AS/Games11,8200,"*LOAD PART2
+71,V2,AS,Acornsoft,Missile Base,Game,,AS/GAMES11,8200,"*LOAD PART2
 *RUN MISSILE",Works,MISSILE,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
-72,V1,AS,Acornsoft,Snooker,Game,,AS/Games11,8200,"CH.""SNOOKER""",Works,SNOOKER,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
-73,V1,AS,Acornsoft,Dominoes,Game,,AS/Games11,8200,"CH.""DOMINO""",Works,DOMINO,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
-74,V1,AS,Acornsoft,Introduction,Educational,,AS/Intro1,8200,*RUN INTRODUC,Works,INTRODUC,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-75,V1,AS,Acornsoft,Numbers,Educational,,AS/Intro1,8200,*RUN NUMBERS,Works,NUMBERS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-76,V1,AS,Acornsoft,Text,Educational,,AS/Intro1,8200,*RUN TEXT,Works,TEXT,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-77,V1,AS,Acornsoft,Programs,Educational,,AS/Intro1,8200,*RUN PROGRAMS,Works,PROGRAMS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-78,V1,AS,Acornsoft,Functions,Educational,,AS/Intro1,8200,*RUN FUNCTION,Works,FUNCTION,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-79,V1,AS,Acornsoft,Input,Educational,,AS/Intro1,8200,*RUN INPUT,Works,INPUT,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-80,V1,AS,Acornsoft,Jumps,Educational,,AS/Intro1,8200,*RUN JUMPS,Works,JUMPS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-81,V1,AS,Acornsoft,Tests,Educational,,AS/Intro1,8200,*RUN TESTS,Works,TESTS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-82,V1,AS,Acornsoft,Loops,Educational,,AS/Intro1,8200,*RUN LOOPS,Works,LOOPS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-83,V1,AS,Acornsoft,Graphics,Educational,,AS/Intro1,8200,*RUN GRAPHICS,Works,GRAPHICS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-84,V1,AS,Acornsoft,MiniCalc,Business,,AS/Intro2,8200,*RUN MINICALC,Works,MINICALC,present,Intro Pack 2,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-85,V1,AS,Acornsoft,Sales,Business,,AS/Intro2,8200,*RUN SALES,Works,SALES,present,Intro Pack 2,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-86,V1,AS,Acornsoft,Telephone Book,Business,,AS/Intro3,8200,*RUN TBOOK,Works,"TBOOK
+72,V1,AS,Acornsoft,Snooker,Game,,AS/GAMES11,8200,"CH.""SNOOKER""",Works,SNOOKER,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
+73,V1,AS,Acornsoft,Dominoes,Game,,AS/GAMES11,8200,"CH.""DOMINO""",Works,DOMINO,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
+74,V1,AS,Acornsoft,Introduction,Educational,,AS/INTRO1,8200,*RUN INTRODUC,Works,INTRODUC,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+75,V1,AS,Acornsoft,Numbers,Educational,,AS/INTRO1,8200,*RUN NUMBERS,Works,NUMBERS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+76,V1,AS,Acornsoft,Text,Educational,,AS/INTRO1,8200,*RUN TEXT,Works,TEXT,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+77,V1,AS,Acornsoft,Programs,Educational,,AS/INTRO1,8200,*RUN PROGRAMS,Works,PROGRAMS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+78,V1,AS,Acornsoft,Functions,Educational,,AS/INTRO1,8200,*RUN FUNCTION,Works,FUNCTION,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+79,V1,AS,Acornsoft,Input,Educational,,AS/INTRO1,8200,*RUN INPUT,Works,INPUT,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+80,V1,AS,Acornsoft,Jumps,Educational,,AS/INTRO1,8200,*RUN JUMPS,Works,JUMPS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+81,V1,AS,Acornsoft,Tests,Educational,,AS/INTRO1,8200,*RUN TESTS,Works,TESTS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+82,V1,AS,Acornsoft,Loops,Educational,,AS/INTRO1,8200,*RUN LOOPS,Works,LOOPS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+83,V1,AS,Acornsoft,Graphics,Educational,,AS/INTRO1,8200,*RUN GRAPHICS,Works,GRAPHICS,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+84,V1,AS,Acornsoft,MiniCalc,Business,,AS/INTRO2,8200,*RUN MINICALC,Works,MINICALC,present,Intro Pack 2,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+85,V1,AS,Acornsoft,Sales,Business,,AS/INTRO2,8200,*RUN SALES,Works,SALES,present,Intro Pack 2,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+86,V1,AS,Acornsoft,Telephone Book,Business,,AS/INTRO3,8200,*RUN TBOOK,Works,"TBOOK
 TDATA",present,Intro Pack 3,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-87,V1,AS,Acornsoft,Touch Types,Educational,,AS/Intro3,8200,*RUN TYPER,Works,TYPER,present,Intro Pack 3,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-88,V1,AS,Acornsoft,Timer,Utility,,AS/Intro3,8200,*RUN TIMER,Works,TIMER,present,Intro Pack 3,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-89,V1,AS,Acornsoft,Attack,Game,,AS/Intro4,8200,*RUN ATTACK,Works,ATTACK,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-90,V1,AS,Acornsoft,Connect 4,Game,,AS/Intro4,8200,*RUN CONNECT4,Works,CONNECT4,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-91,V1,AS,Acornsoft,Breakout,Game,,AS/Intro4,8200,*RUN BREAKOUT,Works,BREAKOUT,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-92,V1,AS,Acornsoft,Memory,Game,,AS/Intro4,8200,*RUN MEMORY,Works,MEMORY,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-93,V1,AS,Acornsoft,Mastermind,Game,,AS/Intro4,8200,*RUN MASTERMI,Works,MASTERMI,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
-94,V2,AS,Acornsoft,Life,Simulation,,AS/Life,8200,"CH.""LIFE""",Works,"LIFE
+87,V1,AS,Acornsoft,Touch Types,Educational,,AS/INTRO3,8200,*RUN TYPER,Works,TYPER,present,Intro Pack 3,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+88,V1,AS,Acornsoft,Timer,Utility,,AS/INTRO3,8200,*RUN TIMER,Works,TIMER,present,Intro Pack 3,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+89,V1,AS,Acornsoft,Attack,Game,,AS/INTRO4,8200,*RUN ATTACK,Works,ATTACK,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+90,V1,AS,Acornsoft,Connect 4,Game,,AS/INTRO4,8200,*RUN CONNECT4,Works,CONNECT4,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+91,V1,AS,Acornsoft,Breakout,Game,,AS/INTRO4,8200,*RUN BREAKOUT,Works,BREAKOUT,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+92,V1,AS,Acornsoft,Memory,Game,,AS/INTRO4,8200,*RUN MEMORY,Works,MEMORY,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+93,V1,AS,Acornsoft,Mastermind,Game,,AS/INTRO4,8200,*RUN MASTERMI,Works,MASTERMI,present,Intro Pack 4,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
+94,V2,AS,Acornsoft,Life,Simulation,,AS/LIFE,8200,"CH.""LIFE""",Works,"LIFE
 LIFEPA
 LIFEPB
 LIFEPC
 LIFEPD
 LIFEPE",present,,,No,http://atomclub.nl/atom_handleidingen/misc/life.html
-95,V1,AS,Acornsoft,Lisp,Language,,AS/Lisp,3B00,"*LOAD LISP
+95,V1,AS,Acornsoft,Lisp,Language,,AS/LISP,3B00,"*LOAD LISP
 *RUN LISP2",Works,"LISP
 LISP2",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/LispTheory&Practice.pdf
-96,V1,AS,Acornsoft,Plot,Utility,,AS/Maths1,8200,"CH.""PLOT""",Works,PLOT,present,Maths Pack 1,,No,
-97,V1,AS,Acornsoft,Simultaneous Equations,Utility,,AS/Maths1,8200,"CH.""SIMULTAN""",Works,SIMULTAN,present,Maths Pack 1,,No,
-98,V1,AS,Acornsoft,Linear Regression,Utility,,AS/Maths1,8200,"CH.""REGRESSI""",Works,REGRESSI,present,Maths Pack 1,,No,
-99,V1,AS,Acornsoft,Polynomial,Utility,,AS/Maths2,8200,"CH.""POLYNOM""",Works,POLYNOM,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
-100,V1,AS,Acornsoft,Rational,Utility,,AS/Maths2,8200,"CH.""RATIONAL""",Works,RATIONAL,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
-101,V3,AS,Acornsoft,Triginometry,Utility,,AS/Maths2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
-102,V1,AS,Acornsoft,Fourier,Utility,,AS/Maths2,8200,"CH.""FOURIER""",Works,FOURIER,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
-103,V1,AS,Acornsoft,Pascal (32K),Language,,AS/Pascal,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,http://members.casema.nl/hhaydn/pascal/pascal.html
-104,V1,AS,Acornsoft,Peeko Computer,Educational,,AS/Peeko,8200,"CH.""PEEKO""",Works,"PEEKO
+96,V1,AS,Acornsoft,Plot,Utility,,AS/MATHS1,8200,"CH.""PLOT""",Works,PLOT,present,Maths Pack 1,,No,
+97,V1,AS,Acornsoft,Simultaneous Equations,Utility,,AS/MATHS1,8200,"CH.""SIMULTAN""",Works,SIMULTAN,present,Maths Pack 1,,No,
+98,V1,AS,Acornsoft,Linear Regression,Utility,,AS/MATHS1,8200,"CH.""REGRESSI""",Works,REGRESSI,present,Maths Pack 1,,No,
+99,V1,AS,Acornsoft,Polynomial,Utility,,AS/MATHS2,8200,"CH.""POLYNOM""",Works,POLYNOM,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
+100,V1,AS,Acornsoft,Rational,Utility,,AS/MATHS2,8200,"CH.""RATIONAL""",Works,RATIONAL,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
+101,V3,AS,Acornsoft,Triginometry,Utility,,AS/MATHS2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
+102,V1,AS,Acornsoft,Fourier,Utility,,AS/MATHS2,8200,"CH.""FOURIER""",Works,FOURIER,present,Maths Pack 2,,Yes,http://atomclub.nl/atom_handleidingen/misc/math2.html
+103,V1,AS,Acornsoft,Pascal (32K),Language,,AS/PASCAL,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,http://members.casema.nl/hhaydn/pascal/pascal.html
+104,V1,AS,Acornsoft,Peeko Computer,Educational,,AS/PEEKO,8200,"CH.""PEEKO""",Works,"PEEKO
 ADD
 COPY
 FACTOR",present,,,No,http://atomclub.nl/atom_handleidingen/asof/peeko.html
-105,V1,AS,Acornsoft,White on Black,Utility,,AS/SoftVDU,8200,*RUN VDUB,Works,VDUW,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
-106,V1,AS,Acornsoft,Black on White,Utility,,AS/SoftVDU,8200,*RUN VDUW,Works,VDUB,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
-107,V1,AS,Acornsoft,Designer,Utility,,AS/SoftVDU,8200,"*RUN VDUB
+105,V1,AS,Acornsoft,White on Black,Utility,,AS/SOFTVDU,8200,*RUN VDUB,Works,VDUW,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
+106,V1,AS,Acornsoft,Black on White,Utility,,AS/SOFTVDU,8200,*RUN VDUW,Works,VDUB,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
+107,V1,AS,Acornsoft,Designer,Utility,,AS/SOFTVDU,8200,"*RUN VDUB
 CH.""DESIGN""",Works,DESIGN,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
-108,V1,AS,Acornsoft,Synthesiser,Music,,AS/Synth,8200,"CH.""SYNTH""",Works,"SYNTH
+108,V1,AS,Acornsoft,Synthesiser,Music,,AS/SYNTH,8200,"CH.""SYNTH""",Works,"SYNTH
 TOCCATA
 SEASIDE
 PICNIC",present,,,No,
-109,V3,AS,Acornsoft,Disassembler,Utility,,AS/Utils1,8200,*RUN DISASAS,Works,DISASAS,present,Utility Pack 1,,No,
-110,V3,AS,Acornsoft,Fast Cassette OS,Utility,,AS/Utils1,9700,"?18=130
+109,V3,AS,Acornsoft,Disassembler,Utility,,AS/UTILS1,8200,*RUN DISASAS,Works,DISASAS,present,Utility Pack 1,,No,
+110,V3,AS,Acornsoft,Fast Cassette OS,Utility,,AS/UTILS1,9700,"?18=130
 CH.""FASTCOS""",Works,FASTCOS,present,Utility Pack 1,,No,
-111,V1,AS,Acornsoft,Renumber,Utility,,AS/Utils1,8200,*RUN RENUM,Works,RENUM,present,Utility Pack 1,,No,
-112,V1,AS,Acornsoft,Wordpack (32K),Business,,AS/Wordpack,8200,*RUN ED64,Works,ED64,present,,Yes,,
-113,V1,AS,Acornsoft,Pairs,Educational,,AS/Wordtut,3B00,"*LOAD PAIRSD
+111,V1,AS,Acornsoft,Renumber,Utility,,AS/UTILS1,8200,*RUN RENUM,Works,RENUM,present,Utility Pack 1,,No,
+112,V1,AS,Acornsoft,Wordpack (32K),Business,,AS/WORDPACK,8200,*RUN ED64,Works,ED64,present,,Yes,,
+113,V1,AS,Acornsoft,Pairs,Educational,,AS/WORDTUT,3B00,"*LOAD PAIRSD
 CH.""PAIRS""",Works,"PAIRS
 PAIRSD",present,Atom Word Tutor,,No,
-114,V1,AS,Acornsoft,Relations,Educational,,AS/Wordtut,3B00,"*LOAD RELATD
+114,V1,AS,Acornsoft,Relations,Educational,,AS/WORDTUT,3B00,"*LOAD RELATD
 CH.""RELAT""",Works,"RELAT
 RELATD",present,Atom Word Tutor,,No,
-115,V1,AS,Acornsoft,Sentences,Educational,,AS/Wordtut,3B00,"*LOAD SENTD
+115,V1,AS,Acornsoft,Sentences,Educational,,AS/WORDTUT,3B00,"*LOAD SENTD
 CH.""SENTENS""",Works,"SENTENS
 SENTD",present,Atom Word Tutor,,No,
 116,,AT,Atomic S/W,3-Towers,Game,,AT,,,,,missing,,,,
