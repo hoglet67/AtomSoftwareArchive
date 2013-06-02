@@ -388,7 +388,7 @@ popd
 ##############################################################
 
 pushd $ARCHIVE
-zip -qr ../$ARCHIVE.zip .
+find . -type f | sort | zip -@ ../$ARCHIVE.zip
 popd
 mv $ARCHIVE.zip ~
 
