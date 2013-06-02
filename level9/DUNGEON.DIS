@@ -1,5 +1,5 @@
-load $1900 ADQUEST.BBC
-save ADQUEST.ASM.ORIG
+load $0e00 DUNGEON.BBC
+save DUNGEON.ASM.ORIG
 # hexdump
 entry $7320
 byte $7323

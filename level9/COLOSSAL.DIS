@@ -1,8 +1,9 @@
-load $1100 COLOSAL
-save COLOSAL.ASM
-hexdump
+load $1100 COLOSSAL.BBC
+save COLOSSAL.ASM.ORIG
+# hexdump
 entry $1100
 byte $110d
+entry $7420
 entry $7320
 byte $7323
 entry $7351

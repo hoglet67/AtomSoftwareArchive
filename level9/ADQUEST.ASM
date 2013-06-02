@@ -65,34 +65,15 @@ LFFFC   = $FFFC
 
 .BeebDisStartAddr
 
-	EQUB    $41
-	EQUB    $44
-	EQUB    $51
-	EQUB    $55
-	EQUB    $45
-	EQUB    $53
-	EQUB    $54
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
+        EQUS    "ADQUEST"
 
-	EQUB    $00
-	EQUB    $19
-	
-	EQUB    $20
-	EQUB    $73
+        org BeebDisStartAddr + 16
 
-	EQUW	ENDOF - STARTOF
+        EQUW	STARTOF
+        EQUW    L7420	
+        EQUW	ENDOF - STARTOF
 
 .STARTOF
-
-; 22 byte ATM Header
 
         EQUB    $0D,$00,$0A,$0A,$D6,$26,$37,$34
         EQUB    $32,$30,$0D,$FF,$00,$00,$00,$00
@@ -4530,77 +4511,8 @@ LFFFC   = $FFFC
         EQUB    $34,$2B,$3E,$2B,$48,$2B,$52,$04
         EQUB    $51,$44,$41,$54,$00,$0D,$04,$00
 
-.OSWRCH
-	PHA
-IF  UpperCaseOnly
-	CMP	#$60
-	BCC	OSWRCH1
-	AND	#$DF
-.OSWRCH1
-ENDIF
-	JSR	$FFE9
-	PLA
-	CLC
-	RTS
+include "OSEMUL.ASM"
 
-.READLINE
-	LDA #$00
-	JSR $CD0F
-	TYA
-	PHA
-.READLINE1
-	LDA $100,Y
-	STA $0,Y
-	DEY
-	BPL READLINE1
-	PLA
-	TAY
-	CLC
-	RTS
-
-.OSFILE
-	PHA
-	LDX     #$00
-	LDY     #$00
-.OSFILE1
-	LDA     (L0037),Y
-	STA     $140,X
-	INX
-	INY
-	CMP	#$0D
-	BNE     OSFILE1	
-	LDA     #$40
-	STA     L0037
-	LDA     #$01
-	STA     L0038
-	LDA     #$00
-	STA     L0039
-	LDA     #$04
-	STA     L003A
-	LDA     #$FF
-	STA     L003B
-	STA     L003C
-	LDA     #$00
-	STA     L003C + 1
-	LDA     #$04
-	STA     L003C + 2
-	LDA     #$00
-	STA     L003C + 3
-	LDA     #$0B
-	STA     L003C + 4
-	LDX     #$37
-	LDY     #$00
-	PLA
-	BEQ     OSFILE2
-	SEC
-	JSR	$FFE0
-	LDA 	#$01
-	RTS
-.OSFILE2
-	SEC
-	JSR     $FFDD
-	LDA 	#$01
-	RTS
 .ENDOF
 
 .BeebDisEndAddr

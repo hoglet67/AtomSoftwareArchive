@@ -1,0 +1,71 @@
+.OSWRCH
+	PHA
+IF  UpperCaseOnly
+	CMP	#$60
+	BCC	OSWRCH1
+	AND	#$DF
+.OSWRCH1
+ENDIF
+	JSR	$FFE9
+	PLA
+	CLC
+	RTS
+
+.READLINE
+	LDA #$00
+	JSR $CD0F
+	TYA
+	PHA
+.READLINE1
+	LDA $100,Y
+	STA $0,Y
+	DEY
+	BPL READLINE1
+	PLA
+	TAY
+	CLC
+	RTS
+
+.OSFILE
+	PHA
+	LDX     #$00
+	LDY     #$00
+.OSFILE1
+	LDA     (L0037),Y
+	STA     $140,X
+	INX
+	INY
+	CMP	#$0D
+	BNE     OSFILE1	
+	LDA     #$40
+	STA     L0037
+	LDA     #$01
+	STA     L0038
+	LDA     #$00
+	STA     L0039
+	LDA     #$04
+	STA     L003A
+	LDA     #$FF
+	STA     L003B
+	STA     L003C
+	LDA     #$00
+	STA     L003C + 1
+	LDA     #$04
+	STA     L003C + 2
+	LDA     #$00
+	STA     L003C + 3
+	LDA     #$0B
+	STA     L003C + 4
+	LDX     #$37
+	LDY     #$00
+	PLA
+	BEQ     OSFILE2
+	SEC
+	JSR	$FFE0
+	LDA 	#$01
+	RTS
+.OSFILE2
+	SEC
+	JSR     $FFDD
+	LDA 	#$01
+	RTS

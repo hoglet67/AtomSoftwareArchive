@@ -1,6 +1,6 @@
-load $1100 SNOWBAL
-save SNOWBAL.ASM
-hexdump
+load $1100 SNOWBALL.BBC
+save SNOWBALL.ASM.ORIG
+#hexdump
 byte $7326
 entry $7320
 entry $7357
