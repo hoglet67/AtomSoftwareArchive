@@ -1,0 +1,13 @@
+load $1900 ADQUEST
+save ADQUEST.ASM
+hexdump
+entry $7320
+byte $7323
+entry $7351
+byte $741F
+entry $7420
+string $7468
+entry $7471
+byte $7b84
+
+
