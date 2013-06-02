@@ -100,16 +100,6 @@ include "renderer_header.asm"
 	; Not Needed
     ; 50 B=!#CD&#FFFF
 	
-	; 60 *LOAD MNU/SORTDAT
-	JSR OscliString
-	EQUS "LOAD MNU/SORTDAT", Return
-	
-	; 70 C=!#CD&#FFFF
-	LDA ExecAddr
-	STA SortTablePtr
-	LDA ExecAddr + 1
-	STA SortTablePtr + 1
-
 	; 80 FOR I=1TO60;WAIT;N.	
 	LDX #60
 .SplashLoop
@@ -141,6 +131,8 @@ include "renderer_header.asm"
 	STY FilterType  ; G=0
 	INY
 	STY Annotation  ; A=1
+
+	JSR LoadSortTable
 	
 	; // Initialize the search buffer to empty
 	; 125 ?#120=13
@@ -328,6 +320,9 @@ include "renderer_header.asm"
 	TYA
 	SBC #16
 	STA SortType
+	
+	; Page in the appropriate sort table
+	JSR LoadSortTable
 	
 .PageStateZero
 	LDA #0
@@ -631,14 +626,14 @@ include "renderer_header.asm"
 	STA TmpPtr
 	LDA #>LabelXString1
 	STA TmpPtr + 1
+	
 	LDA SortType
 	PHA
-	ASL A
-	ADC SortTablePtr
+	LDA SortTablePtr
 	STA Sort
 	LDA SortTablePtr + 1
-	ADC #0
 	STA Sort + 1
+
 	BNE LabelX3	
 
 .LabelX2
@@ -657,11 +652,11 @@ include "renderer_header.asm"
 	LDA MenuTablePtr + 1
 	ADC #0
 	STA Sort + 1
-	
-.LabelX3
 
 	LDX #Sort
 	JSR Dereference
+	
+.LabelX3
 	
 	;1030 P." BY ";GOS.y;P."  PAGE   /  "
 	JSR ScreenString
@@ -930,6 +925,23 @@ include "renderer_header.asm"
 	LDA #>AutoRepeat1
 	STA AutoRepeat + 1
 	RTS
+	
+.LoadSortTable
+	; 60 *LOAD MNU/SORTDAT
+	LDA SortType
+	ORA #'0'
+	STA LoadSortTable1 - 2
+	JSR OscliString
+	EQUS "LOAD MNU/SORTDATx", Return
+
+.LoadSortTable1	
+	; 70 C=!#CD&#FFFF
+	LDA ExecAddr
+	STA SortTablePtr
+	LDA ExecAddr + 1
+	STA SortTablePtr + 1
+	RTS
+	
 		
 include "renderer_body.asm"
 

@@ -244,13 +244,24 @@ public class GenerateMenuFiles extends GenerateBase {
 
 		writeTables(menuDir, "MENUDAT", menuAddrBase, new byte[][] { mainTable, shortPublisherTable, publisherTable, genreTable, collectionsTable});
 		writeTables(menuDir, "SORTDAT", sortAddrBase, new byte[][] { titleSortTable, publisherSortTable, genreSortTable, collectionSortTable});
+		
+		// ------------------------------------------------------------------------------------
+		// Write out the sort tables individually
+		// ------------------------------------------------------------------------------------
+		
+		sortAddrBase = (0x3B - (((atomTitles.size() + 2) * 2) / 256)) * 256;		
+		writeTable(menuDir, "SORTDAT0", sortAddrBase, titleSortTable);
+		writeTable(menuDir, "SORTDAT1", sortAddrBase, publisherSortTable);
+		writeTable(menuDir, "SORTDAT2", sortAddrBase, genreSortTable);
+		writeTable(menuDir, "SORTDAT3", sortAddrBase, collectionSortTable);
+		
 	}
 	
 	private void writeTables(File menuDir, String name, int loadAddr, byte[][] tables) throws IOException {
 		System.out.println("----------------------------------------");
 		System.out.println("Atom file: " + name);
 		System.out.println("----------------------------------------");
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		int addr =  loadAddr + 2 * tables.length;
 		for (byte[] table : tables) {
 			writeShort(bos, addr);
@@ -266,7 +277,20 @@ public class GenerateMenuFiles extends GenerateBase {
 		System.out.println("  end address " + Integer.toHexString(loadAddr + bos.size()));
 		System.out.println("       length " + bos.size() + " bytes");
 	}
-	
+
+	private void writeTable(File menuDir, String name, int loadAddr, byte[] table) throws IOException {
+		System.out.println("----------------------------------------");
+		System.out.println("Atom file: " + name);
+		System.out.println("----------------------------------------");
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		bos.write(table);			
+		FileOutputStream fosSort = new FileOutputStream(new File(menuDir, name));
+		writeATMFile(fosSort, name, loadAddr, loadAddr, bos.toByteArray());
+		fosSort.close();
+		System.out.println("start address " + Integer.toHexString(loadAddr));
+		System.out.println("  end address " + Integer.toHexString(loadAddr + bos.size()));
+		System.out.println("       length " + bos.size() + " bytes");
+	}
 	
 	private byte[] createMainTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
 		System.out.println("----------------------------------------");
