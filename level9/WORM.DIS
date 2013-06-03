@@ -1,0 +1,31 @@
+load $8c0 WORM.BBC
+save WORM.ASM.ORIG
+# hexdump
+byte $1e42
+byte $1e0d
+byte $1e0e
+byte $1e0f
+
+entry $8c0
+byte $8c3
+entry $a09
+byte $cfc
+entry $1200
+byte $1af2
+entry $1b00
+byte $1b09
+byte $1bab
+entry $1bd5
+string $1d6c
+entry $1d71
+byte $1dff
+entry $7800
+byte $7a16
+entry $7a62
+byte $7abe
+entry $7abf
+
+
+
+
+

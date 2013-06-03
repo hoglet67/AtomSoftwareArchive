@@ -1,0 +1,8522 @@
+UpperCaseOnly = 0
+LineWidth = $20
+
+L0010   = $0010
+L0011   = $0011
+L0014   = $0014
+L0015   = $0015
+L0018   = $0018
+L0019   = $0019
+L001A   = $001A
+L001B   = $001B
+L001C   = $001C
+L001D   = $001D
+L001E   = $001E
+L001F   = $001F
+L0020   = $0020
+L0021   = $0021
+L0022   = $0022
+L0023   = $0023
+L0024   = $0024
+L0025   = $0025
+L0026   = $0026
+L0027   = $0027
+L0028   = $0028
+L0029   = $0029
+L002A   = $002A
+L002B   = $002B
+L002C   = $002C
+L002D   = $002D
+L002E   = $002E
+L002F   = $002F
+L0030   = $0030
+L0031   = $0031
+L0032   = $0032
+L0033   = $0033
+L0034   = $0034
+L0035   = $0035
+L0037   = $0037
+L0038   = $0038
+L0039   = $0039
+L003A   = $003A
+L003B   = $003B
+L0048   = $0048
+L0049   = $0049
+L004A   = $004A
+L004B   = $004B
+L004C   = $004C
+L004D   = $004D
+L004E   = $004E
+L004F   = $004F
+L0050   = $0050
+L0051   = $0051
+L0066   = $0066
+L00FD   = $00FD
+L00FE   = $00FE
+L0202   = $0202
+L0203   = $0203
+L020E   = $0208
+L0400   = $0400
+L0401   = $0401
+L04FE   = $04FE
+L04FF   = $04FF
+L7C00   = $7C00
+L7C2E   = $7C2E
+L7C34   = $7C34
+LFFF4   = $FFF4
+LFFF7   = $FFF7
+
+        org     $08C0 - 22
+        
+.AtmHeader
+
+        EQUS    "WORM"
+
+        org AtmHeader + 16
+
+        EQUW	BeebDisStartAddr
+        EQUW    L1B06	
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
+
+.BeebDisStartAddr
+        JMP     L0A09
+
+.L08C3
+        EQUB    $27
+
+.L08C4
+        EQUB    $00,$04,$06,$07,$01,$08,$02,$03
+        EQUB    $05,$0A,$09,$0C,$0B,$FF,$FF,$0F
+
+.L08D4
+        EQUB    $00
+
+.L08D5
+        EQUB    $00
+
+.L08D6
+        EQUB    $00
+
+.L08D7
+        EQUB    $00,$00,$00
+
+.L08DA
+        EQUB    $00
+
+.L08DB
+        EQUB    $00
+
+.L08DC
+        EQUB    $00
+
+.L08DD
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00
+
+.L08E8
+        EQUB    $00
+
+.L08E9
+        EQUB    $00
+
+.L08EA
+        EQUB    $00
+
+.L08EB
+        EQUB    $00
+
+.L08EC
+        EQUB    $20
+
+.L08ED
+        EQUB    $20
+
+.L08EE
+        EQUB    $20
+
+.L08EF
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20
+
+.L093E
+        EQUB    $20
+
+.L093F
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20
+
+.L0980
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20
+
+.L09A1
+        EQUB    $00
+
+.L09A2
+        EQUB    $00
+
+.L09A3
+        EQUB    $00
+
+.L09A4
+        EQUB    $00
+
+.L09A5
+        EQUB    $00
+
+.L09A6
+        EQUB    $00
+
+.L09A7
+        EQUB    $00
+
+.L09A8
+        EQUB    $00
+
+.L09A9
+        EQUB    $00,$00
+
+.L09AB
+        EQUB    $00
+
+.L09AC
+        EQUB    $00
+
+.L09AD
+        EQUB    $00
+
+.L09AE
+        EQUB    $00
+
+.L09AF
+        EQUB    $00
+
+.L09B0
+        EQUB    $00
+
+.L09B1
+        EQUB    $00
+
+.L09B2
+        EQUB    $00
+
+.L09B3
+        EQUB    $00
+
+.L09B4
+        EQUB    $00
+
+.L09B5
+        EQUB    $00
+
+.L09B6
+        EQUB    $00
+
+.L09B7
+        EQUB    $00
+
+.L09B8
+        EQUB    $00
+
+.L09B9
+        EQUB    $00
+
+.L09BA
+        EQUB    $00
+
+.L09BB
+        EQUB    $00
+
+.L09BC
+        EQUB    $00
+
+.L09BD
+        EQUB    $00
+
+.L09BE
+        EQUB    $00
+
+.L09BF
+        EQUB    $00
+
+.L09C0
+        EQUB    $00
+
+.L09C1
+        EQUB    $00
+
+.L09C2
+        EQUB    $00
+
+.L09C3
+        EQUB    $00
+
+.L09C4
+        EQUB    $00
+
+.L09C5
+        EQUB    $00
+
+.L09C6
+        EQUB    $00
+
+.L09C7
+        EQUB    $00
+
+.L09C8
+        EQUB    $00
+
+.L09C9
+        EQUB    $00,$00
+
+.L09CB
+        EQUB    $00,$00
+
+.L09CD
+        EQUB    $00,$00,$00
+
+.L09D0
+        EQUB    $31
+
+.L09D1
+        EQUB    $32
+
+.L09D2
+        EQUB    $33
+
+.L09D3
+        EQUB    $00
+
+.L09D4
+        EQUB    $00
+
+.L09D5
+        EQUB    $00
+
+.L09D6
+        EQUB    $00
+
+.L09D7
+        EQUB    $00
+
+.L09D8
+        EQUB    $00
+
+.L09D9
+        EQUB    $00
+
+.L09DA
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20
+
+.L09E8
+        EQUB    $20
+
+.L09E9
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+        EQUB    $20,$20,$20,$20,$20,$20,$20,$20
+
+.L0A09
+        CLD
+        LDA     #$00
+        JSR     L1B00
+
+        LDA     #$01
+        STA     L09A1
+        JSR     L0AEA
+
+        LDX     #$00
+        LDY     #$0E
+.L0A1B
+        LDA     L1E12,X
+        CLC
+        ADC     #$00
+        STA     L08D4,X
+        LDA     L1E13,X
+        ADC     #$1E
+        STA     L08D5,X
+        LDA     L1E13,X
+        CMP     #$7E
+        BCC     L0A4E
+
+        CMP     #$8F
+        BCS     L0A4E
+
+        SEC
+        SBC     #$80
+        STA     L08D5,X
+        LDA     L1E12,X
+        CLC
+        ADC     #$00
+        STA     L08D4,X
+        LDA     L08D5,X
+        ADC     #$05
+        STA     L08D5,X
+.L0A4E
+        INX
+        INX
+        DEY
+        BNE     L0A1B
+
+        LDA     L1E02
+        CLC
+        ADC     #$00
+        STA     L09B9
+        LDA     L1E03
+        ADC     #$1E
+        STA     L09BA
+        LDA     L09B9
+        CLC
+        ADC     L1E04
+        STA     L09BB
+        LDA     L09BA
+        ADC     L1E05
+        STA     L09BC
+        LDA     L1E06
+        CLC
+        ADC     #$05
+        STA     L0029
+        LDA     L1E07
+        ADC     #$1E
+        STA     L002A
+        LDA     L1E08
+        CLC
+        ADC     L0029
+        STA     L09BD
+        LDA     L1E09
+        ADC     L002A
+        STA     L09BE
+        LDA     L08DA
+        STA     L19F8
+        LDA     L08DB
+        STA     L19F9
+        LDA     L08DC
+        STA     L1A55
+        LDA     L08DD
+        STA     L1A56
+        LDA     L08EA
+        STA     L0027
+        LDA     L08EB
+        STA     L0028
+        JSR     L144F
+
+        LDA     #$00
+        STA     L001F
+        STA     L0020
+.L0AC2
+        LDA     #$0A
+        PHA
+        LDA     #$C1
+        PHA
+        JSR     L0E7C
+
+        BMI     L0AE7
+
+        TAX
+        AND     #$40
+        STA     L09C5
+        TXA
+        AND     #$20
+        STA     L09C6
+        TXA
+        AND     #$1F
+        ASL     A
+        TAY
+        LDA     L1023,Y
+        PHA
+        LDA     L1022,Y
+        PHA
+        RTS
+
+.L0AE7
+        JMP     L0E01
+
+.L0AEA
+        LDA     #$00
+        STA     L08EC
+        LDA     #$1E
+        STA     L08ED
+        LDA     L1E00
+        CLC
+        ADC     #$00
+        STA     L08EE
+        LDA     L1E01
+        ADC     #$1E
+        STA     L08EF
+        LDY     #$08
+        LDX     #$EC
+        LDA     #$01
+        JSR     L1B00
+
+        LDA     L08EC
+        BNE     L0B14
+
+        RTS
+
+.L0B14
+        LDA     #$45
+.L0B16
+        JSR     L1073
+
+        LDA     #$3F
+        JMP     L1073
+
+        LDA     #$41
+        JSR     L0B16
+
+        LDA     #$04
+        JSR     L1B00
+
+        JMP     L0A09
+
+.L0B2B
+        JSR     L0E7C
+
+        ASL     A
+        TAX
+        LDA     L0400,X
+        RTS
+
+        JSR     L0B80
+
+        BEQ     L0BA6
+
+.L0B39
+        LDA     L09C6
+        BNE     L0B41
+
+        JSR     L0E7C
+
+.L0B41
+        JMP     L0E7C
+
+        JSR     L0B80
+
+        BNE     L0BA6
+
+        JMP     L0B39
+
+        JSR     L0B80
+
+        BCC     L0B39
+
+        BEQ     L0B39
+
+        JMP     L0BA6
+
+        JSR     L0B80
+
+        BCS     L0B39
+
+        JMP     L0BA6
+
+        JSR     L0B99
+
+        BNE     L0B39
+
+        JMP     L0BA6
+
+        JSR     L0B99
+
+        BEQ     L0B39
+
+        JMP     L0BA6
+
+        JSR     L0B99
+
+        BEQ     L0B39
+
+        BCC     L0B39
+
+        JMP     L0BA6
+
+        JSR     L0B99
+
+        BCS     L0B39
+
+        JMP     L0BA6
+
+.L0B80
+        JSR     L0B2B
+
+        TXA
+        TAY
+        JSR     L0B2B
+
+.L0B88
+        SEC
+        LDA     L0401,X
+        SBC     L0401,Y
+        BNE     L0B98
+
+        SEC
+        LDA     L0400,X
+        SBC     L0400,Y
+.L0B98
+        RTS
+
+.L0B99
+        JSR     L0B2B
+
+        JSR     L0E8D
+
+        TXA
+        TAY
+        LDX     #$FE
+        JMP     L0B88
+
+.L0BA6
+        LDA     L09C6
+        BNE     L0BC1
+
+        JSR     L0E7C
+
+        CLC
+        ADC     L08EA
+        PHA
+        PHP
+        JSR     L0E7C
+
+        PLP
+        ADC     L08EB
+        STA     L0028
+        PLA
+        STA     L0027
+        RTS
+
+.L0BC1
+        LDX     #$00
+        LDA     L0027
+        STA     L002A
+        LDA     L0028
+        STA     L09C3
+        JSR     L0E7C
+
+        BPL     L0BD3
+
+        LDX     #$FF
+.L0BD3
+        CLC
+        ADC     L002A
+        STA     L0027
+        TXA
+        ADC     L09C3
+        STA     L0028
+        RTS
+
+        PLA
+        STA     L002E
+        PLA
+        STA     L002F
+        LDY     #$02
+        LDX     L09C6
+        BEQ     L0BED
+
+        DEY
+.L0BED
+        TYA
+        CLC
+        ADC     L0027
+        PHA
+        LDA     L0028
+        ADC     #$00
+        PHA
+        LDA     L002F
+        PHA
+        LDA     L002E
+        PHA
+        JMP     L0BA6
+
+        PLA
+        PLA
+        PLA
+        STA     L0028
+        PLA
+        STA     L0027
+        JMP     L0AC2
+
+        JSR     L0E7C
+
+        CMP     #$02
+        BNE     L0C15
+
+        JMP     L0C6B
+
+.L0C15
+        CMP     #$03
+        BNE     L0C1C
+
+        JMP     L108D
+
+.L0C1C
+        CMP     #$04
+        BNE     L0C23
+
+        JMP     L1080
+
+.L0C23
+        CMP     #$05
+        BEQ     L0C57
+
+        CMP     #$06
+        BEQ     L0C61
+
+        LDX     L08E8
+        STX     L0029
+        LDA     L08E9
+        STA     L002A
+        LDY     #$00
+        LDA     (L0029),Y
+        CMP     #$09
+        BEQ     L0C47
+
+        LDY     L08E9
+        INX
+        BNE     L0C44
+
+        INY
+.L0C44
+        JMP     L1B00
+
+.L0C47
+        JSR     L0AEA
+
+        LDX     #$00
+.L0C4C
+        DEY
+        BNE     L0C4C
+
+        DEX
+        BNE     L0C4C
+
+        LDA     #$09
+        JMP     L1B00
+
+.L0C57
+        LDX     #$00
+        TXA
+.L0C5A
+        STA     L0400,X
+        DEX
+        BNE     L0C5A
+
+        RTS
+
+.L0C61
+        PLA
+        TAY
+        PLA
+        LDX     #$FF
+        TXS
+        PHA
+        TYA
+        PHA
+        RTS
+
+.L0C6B
+        LDA     #$0A
+        SEC
+        SBC     L09C1
+        STA     L04FE
+        LDA     L09C1
+        SBC     L09C2
+        STA     L04FF
+        CLC
+        ROL     L04FE
+        ROL     L04FF
+        CLC
+        ROL     L04FE
+        ROL     L04FF
+        LDA     L04FE
+        SEC
+        ADC     L09C1
+        STA     L09C1
+        LDA     L04FF
+        ADC     L09C2
+        STA     L09C2
+        LDA     L09C1
+        JMP     L10A9
+
+        JSR     L0B2B
+
+        TAY
+        LDA     L0401,X
+        TAX
+        JMP     L0FA3
+
+        JSR     L0B2B
+
+        STA     L04FE
+        LDA     L0401,X
+        STA     L04FF
+        JMP     L10CA
+
+        JSR     L0E8D
+
+        JMP     L10CA
+
+        JSR     L0B2B
+
+        TXA
+        TAY
+        JSR     L0B2B
+
+        CLC
+        LDA     L0400,Y
+        ADC     L0400,X
+        STA     L0400,X
+        LDA     L0401,Y
+        ADC     L0401,X
+        STA     L0401,X
+        RTS
+
+        JSR     L0B2B
+
+        TXA
+        TAY
+        JSR     L0B2B
+
+        SEC
+        LDA     L0400,X
+        SBC     L0400,Y
+        STA     L0400,X
+        LDA     L0401,X
+        SBC     L0401,Y
+        STA     L0401,X
+        RTS
+
+.L0CFC
+        EQUB    $00
+
+.L0CFD
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00
+
+.L0E01
+        BRK
+.L0E02
+        EQUB    $00
+
+        BRK
+.L0E04
+        EQUB    $00
+
+        BRK
+.L0E06
+        EQUB    $00
+
+        BRK
+.L0E08
+        EQUB    $00
+
+        BRK
+.L0E0A
+        EQUB    $00
+
+        BRK
+.L0E0C
+        EQUB    $00
+
+        BRK
+.L0E0E
+        EQUB    $00
+
+        BRK
+.L0E10
+        EQUB    $00
+
+        BRK
+.L0E12
+        EQUB    $00
+
+        BRK
+.L0E14
+        EQUB    $00
+
+        BRK
+.L0E16
+        EQUB    $00
+
+        BRK
+.L0E18
+        EQUB    $00
+
+        BRK
+.L0E1A
+        EQUB    $00
+
+        BRK
+.L0E1C
+        EQUB    $00
+
+        BRK
+.L0E1E
+        EQUB    $00
+
+        BRK
+.L0E20
+        EQUB    $00
+
+.L0E21
+        BRK
+.L0E22
+        EQUB    $00
+
+        BRK
+.L0E24
+        EQUB    $00
+
+        BRK
+.L0E26
+        EQUB    $00
+
+        BRK
+.L0E28
+        EQUB    $00
+
+        BRK
+.L0E2A
+        EQUB    $00
+
+        BRK
+.L0E2C
+        EQUB    $00
+
+        BRK
+.L0E2E
+        EQUB    $00
+
+        BRK
+.L0E30
+        EQUB    $00
+
+        BRK
+.L0E32
+        EQUB    $00
+
+        BRK
+.L0E34
+        EQUB    $00
+
+        BRK
+.L0E36
+        EQUB    $00
+
+        BRK
+.L0E38
+        EQUB    $00
+
+        BRK
+.L0E3A
+        EQUB    $00
+
+        BRK
+.L0E3C
+        EQUB    $00
+
+        BRK
+.L0E3E
+        EQUB    $00
+
+.L0E3F
+        BRK
+.L0E40
+        EQUB    $00
+
+        BRK
+.L0E42
+        EQUB    $00
+
+        BRK
+.L0E44
+        EQUB    $00
+
+        BRK
+.L0E46
+        EQUB    $00
+
+        BRK
+.L0E48
+        EQUB    $00
+
+        BRK
+.L0E4A
+        EQUB    $00
+
+        BRK
+.L0E4C
+        EQUB    $00
+
+        BRK
+.L0E4E
+        EQUB    $00
+
+        BRK
+.L0E50
+        EQUB    $00
+
+        BRK
+.L0E52
+        EQUB    $00
+
+        BRK
+.L0E54
+        EQUB    $00
+
+        BRK
+.L0E56
+        EQUB    $00
+
+        BRK
+.L0E58
+        EQUB    $00
+
+        BRK
+.L0E5A
+        EQUB    $00
+
+        BRK
+.L0E5C
+        EQUB    $00
+
+        BRK
+.L0E5E
+        EQUB    $00
+
+.L0E5F
+        BRK
+.L0E60
+        EQUB    $00
+
+        BRK
+.L0E62
+        EQUB    $00
+
+        BRK
+.L0E64
+        EQUB    $00
+
+        BRK
+.L0E66
+        EQUB    $00
+
+        BRK
+.L0E68
+        EQUB    $00
+
+        BRK
+.L0E6A
+        EQUB    $00
+
+        BRK
+.L0E6C
+        EQUB    $00
+
+        BRK
+.L0E6E
+        EQUB    $00
+
+        BRK
+.L0E70
+        EQUB    $00
+
+        BRK
+.L0E72
+        EQUB    $00
+
+        BRK
+.L0E74
+        EQUB    $00
+
+        BRK
+.L0E76
+        EQUB    $00
+
+        BRK
+.L0E78
+        EQUB    $00
+
+        BRK
+.L0E7A
+        EQUB    $00
+
+        BRK
+.L0E7C
+        BRK
+.L0E7D
+        EQUB    $00
+
+        BRK
+.L0E7F
+        EQUB    $00
+
+        BRK
+.L0E81
+        EQUB    $00
+
+        BRK
+.L0E83
+        EQUB    $00
+
+        BRK
+.L0E85
+        EQUB    $00
+
+        BRK
+.L0E87
+        EQUB    $00
+
+        BRK
+.L0E89
+        EQUB    $00
+
+        BRK
+.L0E8B
+        EQUB    $00
+
+        BRK
+.L0E8D
+        EQUB    $00
+
+        BRK
+.L0E8F
+        EQUB    $00
+
+        BRK
+.L0E91
+        EQUB    $00
+
+        BRK
+.L0E93
+        EQUB    $00
+
+        BRK
+.L0E95
+        EQUB    $00
+
+        BRK
+.L0E97
+        EQUB    $00
+
+        BRK
+.L0E99
+        EQUB    $00
+
+        BRK
+.L0E9B
+        EQUB    $00
+
+        BRK
+.L0E9D
+        EQUB    $00
+
+        BRK
+.L0E9F
+        EQUB    $00
+
+        BRK
+.L0EA1
+        EQUB    $00
+
+        BRK
+.L0EA3
+        EQUB    $00
+
+        BRK
+.L0EA5
+        EQUB    $00
+
+        BRK
+.L0EA7
+        EQUB    $00
+
+        BRK
+.L0EA9
+        EQUB    $00
+
+        BRK
+.L0EAB
+        EQUB    $00
+
+        BRK
+.L0EAD
+        EQUB    $00
+
+        BRK
+.L0EAF
+        EQUB    $00
+
+        BRK
+.L0EB1
+        EQUB    $00
+
+        BRK
+.L0EB3
+        EQUB    $00
+
+        BRK
+.L0EB5
+        EQUB    $00
+
+        BRK
+.L0EB7
+        EQUB    $00
+
+        BRK
+.L0EB9
+        EQUB    $00
+
+        BRK
+.L0EBB
+        EQUB    $00
+
+        BRK
+.L0EBD
+        EQUB    $00
+
+        BRK
+.L0EBF
+        EQUB    $00
+
+        BRK
+.L0EC1
+        EQUB    $00
+
+        BRK
+.L0EC3
+        EQUB    $00
+
+        BRK
+.L0EC5
+        EQUB    $00
+
+        BRK
+.L0EC7
+        EQUB    $00
+
+        BRK
+.L0EC9
+        EQUB    $00
+
+        BRK
+.L0ECB
+        EQUB    $00
+
+        BRK
+.L0ECD
+        EQUB    $00
+
+        BRK
+.L0ECF
+        EQUB    $00
+
+        BRK
+.L0ED1
+        EQUB    $00
+
+        BRK
+.L0ED3
+        EQUB    $00
+
+        BRK
+.L0ED5
+        EQUB    $00
+
+        BRK
+.L0ED7
+        EQUB    $00
+
+        BRK
+.L0ED9
+        EQUB    $00
+
+        BRK
+.L0EDB
+        EQUB    $00
+
+        BRK
+.L0EDD
+        EQUB    $00
+
+        BRK
+.L0EDF
+        EQUB    $00
+
+        BRK
+.L0EE1
+        EQUB    $00
+
+        BRK
+.L0EE3
+        EQUB    $00
+
+        BRK
+.L0EE5
+        EQUB    $00
+
+        BRK
+.L0EE7
+        EQUB    $00
+
+        BRK
+.L0EE9
+        EQUB    $00
+
+.L0EEA
+        BRK
+.L0EEB
+        EQUB    $00
+
+        BRK
+.L0EED
+        EQUB    $00
+
+        BRK
+.L0EEF
+        EQUB    $00
+
+        BRK
+.L0EF1
+        EQUB    $00
+
+        BRK
+.L0EF3
+        EQUB    $00
+
+        BRK
+.L0EF5
+        EQUB    $00
+
+        BRK
+.L0EF7
+        EQUB    $00
+
+        BRK
+.L0EF9
+        EQUB    $00
+
+        BRK
+.L0EFB
+        EQUB    $00
+
+        BRK
+.L0EFD
+        EQUB    $00
+
+        BRK
+.L0EFF
+        EQUB    $00
+
+        BRK
+.L0F01
+        EQUB    $00
+
+        BRK
+.L0F03
+        EQUB    $00
+
+        BRK
+.L0F05
+        EQUB    $00
+
+        BRK
+.L0F07
+        EQUB    $00
+
+        BRK
+.L0F09
+        EQUB    $00
+
+        BRK
+.L0F0B
+        EQUB    $00
+
+        BRK
+.L0F0D
+        EQUB    $00
+
+        BRK
+.L0F0F
+        EQUB    $00
+
+        BRK
+.L0F11
+        EQUB    $00
+
+        BRK
+.L0F13
+        EQUB    $00
+
+        BRK
+.L0F15
+        EQUB    $00
+
+        BRK
+.L0F17
+        EQUB    $00
+
+        BRK
+.L0F19
+        EQUB    $00
+
+        BRK
+.L0F1B
+        EQUB    $00
+
+        BRK
+.L0F1D
+        EQUB    $00
+
+        BRK
+.L0F1F
+        EQUB    $00
+
+        BRK
+.L0F21
+        EQUB    $00
+
+        BRK
+.L0F23
+        EQUB    $00
+
+        BRK
+.L0F25
+        EQUB    $00
+
+        BRK
+.L0F27
+        EQUB    $00
+
+.L0F28
+        BRK
+.L0F29
+        EQUB    $00
+
+        BRK
+.L0F2B
+        EQUB    $00
+
+        BRK
+.L0F2D
+        EQUB    $00
+
+        BRK
+.L0F2F
+        EQUB    $00
+
+        BRK
+.L0F31
+        EQUB    $00
+
+        BRK
+.L0F33
+        EQUB    $00
+
+        BRK
+.L0F35
+        EQUB    $00
+
+        BRK
+.L0F37
+        EQUB    $00
+
+        BRK
+.L0F39
+        EQUB    $00
+
+        BRK
+.L0F3B
+        EQUB    $00
+
+        BRK
+.L0F3D
+        EQUB    $00
+
+        BRK
+.L0F3F
+        EQUB    $00
+
+        BRK
+.L0F41
+        EQUB    $00
+
+        BRK
+.L0F43
+        EQUB    $00
+
+        BRK
+.L0F45
+        EQUB    $00
+
+        BRK
+.L0F47
+        EQUB    $00
+
+        BRK
+.L0F49
+        EQUB    $00
+
+        BRK
+.L0F4B
+        EQUB    $00
+
+        BRK
+.L0F4D
+        EQUB    $00
+
+        BRK
+.L0F4F
+        EQUB    $00
+
+        BRK
+.L0F51
+        EQUB    $00
+
+        BRK
+.L0F53
+        EQUB    $00
+
+        BRK
+.L0F55
+        EQUB    $00
+
+        BRK
+.L0F57
+        EQUB    $00
+
+        BRK
+.L0F59
+        EQUB    $00
+
+        BRK
+.L0F5B
+        EQUB    $00
+
+        BRK
+.L0F5D
+        EQUB    $00
+
+        BRK
+.L0F5F
+        EQUB    $00
+
+        BRK
+.L0F61
+        EQUB    $00
+
+        BRK
+.L0F63
+        EQUB    $00
+
+        BRK
+.L0F65
+        EQUB    $00
+
+        BRK
+.L0F67
+        EQUB    $00
+
+        BRK
+.L0F69
+        EQUB    $00
+
+        BRK
+.L0F6B
+        EQUB    $00
+
+        BRK
+.L0F6D
+        EQUB    $00
+
+        BRK
+.L0F6F
+        EQUB    $00
+
+        BRK
+.L0F71
+        EQUB    $00
+
+        BRK
+.L0F73
+        EQUB    $00
+
+        BRK
+.L0F75
+        EQUB    $00
+
+        BRK
+.L0F77
+        EQUB    $00
+
+        BRK
+.L0F79
+        EQUB    $00
+
+        BRK
+.L0F7B
+        EQUB    $00
+
+        BRK
+.L0F7D
+        EQUB    $00
+
+        BRK
+.L0F7F
+        EQUB    $00
+
+        BRK
+.L0F81
+        EQUB    $00
+
+        BRK
+.L0F83
+        EQUB    $00
+
+        BRK
+.L0F85
+        EQUB    $00
+
+        BRK
+.L0F87
+        EQUB    $00
+
+        BRK
+.L0F89
+        EQUB    $00
+
+        BRK
+.L0F8B
+        EQUB    $00
+
+        BRK
+.L0F8D
+        EQUB    $00
+
+        BRK
+.L0F8F
+        EQUB    $00
+
+        BRK
+.L0F91
+        EQUB    $00
+
+        BRK
+.L0F93
+        EQUB    $00
+
+        BRK
+.L0F95
+        EQUB    $00
+
+        BRK
+.L0F97
+        EQUB    $00
+
+        BRK
+.L0F99
+        EQUB    $00
+
+        BRK
+.L0F9B
+        EQUB    $00
+
+        BRK
+.L0F9D
+        EQUB    $00
+
+        BRK
+.L0F9F
+        EQUB    $00
+
+        BRK
+.L0FA1
+        EQUB    $00
+
+        BRK
+.L0FA3
+        EQUB    $00
+
+        BRK
+.L0FA5
+        EQUB    $00
+
+        BRK
+.L0FA7
+        EQUB    $00
+
+        BRK
+.L0FA9
+        EQUB    $00
+
+        BRK
+.L0FAB
+        EQUB    $00
+
+        BRK
+.L0FAD
+        EQUB    $00
+
+        BRK
+.L0FAF
+        EQUB    $00
+
+        BRK
+.L0FB1
+        EQUB    $00
+
+        BRK
+.L0FB3
+        EQUB    $00
+
+        BRK
+.L0FB5
+        EQUB    $00
+
+        BRK
+.L0FB7
+        EQUB    $00
+
+        BRK
+.L0FB9
+        EQUB    $00
+
+        BRK
+.L0FBB
+        EQUB    $00
+
+        BRK
+.L0FBD
+        EQUB    $00
+
+        BRK
+.L0FBF
+        EQUB    $00
+
+        BRK
+.L0FC1
+        EQUB    $00
+
+        BRK
+.L0FC3
+        EQUB    $00
+
+        BRK
+.L0FC5
+        EQUB    $00
+
+        BRK
+.L0FC7
+        EQUB    $00
+
+        BRK
+.L0FC9
+        EQUB    $00
+
+        BRK
+.L0FCB
+        EQUB    $00
+
+        BRK
+.L0FCD
+        EQUB    $00
+
+        BRK
+.L0FCF
+        EQUB    $00
+
+        BRK
+.L0FD1
+        EQUB    $00
+
+        BRK
+.L0FD3
+        EQUB    $00
+
+        BRK
+.L0FD5
+        EQUB    $00
+
+        BRK
+.L0FD7
+        EQUB    $00
+
+        BRK
+.L0FD9
+        EQUB    $00
+
+        BRK
+.L0FDB
+        EQUB    $00
+
+        BRK
+.L0FDD
+        EQUB    $00
+
+        BRK
+.L0FDF
+        EQUB    $00
+
+        BRK
+.L0FE1
+        EQUB    $00
+
+.L0FE2
+        BRK
+.L0FE3
+        EQUB    $00
+
+        BRK
+.L0FE5
+        EQUB    $00
+
+        BRK
+.L0FE7
+        EQUB    $00
+
+        BRK
+.L0FE9
+        EQUB    $00
+
+        BRK
+.L0FEB
+        EQUB    $00
+
+        BRK
+.L0FED
+        EQUB    $00
+
+        BRK
+.L0FEF
+        EQUB    $00
+
+        BRK
+.L0FF1
+        EQUB    $00
+
+        BRK
+.L0FF3
+        EQUB    $00
+
+        BRK
+.L0FF5
+        EQUB    $00
+
+        BRK
+.L0FF7
+        EQUB    $00
+
+        BRK
+.L0FF9
+        EQUB    $00
+
+        BRK
+.L0FFB
+        EQUB    $00
+
+        BRK
+.L0FFD
+        EQUB    $00
+
+        BRK
+.L0FFF
+        EQUB    $00
+
+        BRK
+.L1001
+        EQUB    $00
+
+        BRK
+.L1003
+        EQUB    $00
+
+        BRK
+.L1005
+        EQUB    $00
+
+        BRK
+.L1007
+        EQUB    $00
+
+        BRK
+.L1009
+        EQUB    $00
+
+        BRK
+.L100B
+        EQUB    $00
+
+        BRK
+.L100D
+        EQUB    $00
+
+        BRK
+.L100F
+        EQUB    $00
+
+        BRK
+.L1011
+        EQUB    $00
+
+        BRK
+.L1013
+        EQUB    $00
+
+        BRK
+.L1015
+        EQUB    $00
+
+        BRK
+.L1017
+        EQUB    $00
+
+        BRK
+.L1019
+        EQUB    $00
+
+        BRK
+.L101B
+        EQUB    $00
+
+        BRK
+.L101D
+        EQUB    $00
+
+        BRK
+.L101F
+        EQUB    $00
+
+        BRK
+.L1021
+        EQUB    $00
+
+.L1022
+        BRK
+.L1023
+        EQUB    $00
+
+        BRK
+.L1025
+        EQUB    $00
+
+        BRK
+.L1027
+        EQUB    $00
+
+        BRK
+.L1029
+        EQUB    $00
+
+        BRK
+.L102B
+        EQUB    $00
+
+        BRK
+.L102D
+        EQUB    $00
+
+        BRK
+.L102F
+        EQUB    $00
+
+        BRK
+.L1031
+        EQUB    $00
+
+        BRK
+.L1033
+        EQUB    $00
+
+        BRK
+.L1035
+        EQUB    $00
+
+        BRK
+.L1037
+        EQUB    $00
+
+        BRK
+.L1039
+        EQUB    $00
+
+        BRK
+.L103B
+        EQUB    $00
+
+        BRK
+.L103D
+        EQUB    $00
+
+        BRK
+.L103F
+        EQUB    $00
+
+        BRK
+.L1041
+        EQUB    $00
+
+        BRK
+.L1043
+        EQUB    $00
+
+        BRK
+.L1045
+        EQUB    $00
+
+        BRK
+.L1047
+        EQUB    $00
+
+        BRK
+.L1049
+        EQUB    $00
+
+        BRK
+.L104B
+        EQUB    $00
+
+        BRK
+.L104D
+        EQUB    $00
+
+        BRK
+.L104F
+        EQUB    $00
+
+        BRK
+.L1051
+        EQUB    $00
+
+        BRK
+.L1053
+        EQUB    $00
+
+        BRK
+.L1055
+        EQUB    $00
+
+        BRK
+.L1057
+        EQUB    $00
+
+        BRK
+.L1059
+        EQUB    $00
+
+        BRK
+.L105B
+        EQUB    $00
+
+        BRK
+.L105D
+        EQUB    $00
+
+        BRK
+.L105F
+        EQUB    $00
+
+        BRK
+.L1061
+        EQUB    $00
+
+        BRK
+.L1063
+        EQUB    $00
+
+        BRK
+.L1065
+        EQUB    $00
+
+        BRK
+.L1067
+        EQUB    $00
+
+        BRK
+.L1069
+        EQUB    $00
+
+        BRK
+.L106B
+        EQUB    $00
+
+        BRK
+.L106D
+        EQUB    $00
+
+        BRK
+.L106F
+        EQUB    $00
+
+        BRK
+.L1071
+        EQUB    $00
+
+        BRK
+.L1073
+        EQUB    $00
+
+        BRK
+.L1075
+        EQUB    $00
+
+        BRK
+.L1077
+        EQUB    $00
+
+        BRK
+.L1079
+        EQUB    $00
+
+        BRK
+.L107B
+        EQUB    $00
+
+        BRK
+.L107D
+        EQUB    $00
+
+        BRK
+.L107F
+        EQUB    $00
+
+.L1080
+        BRK
+.L1081
+        EQUB    $00
+
+        BRK
+.L1083
+        EQUB    $00
+
+        BRK
+.L1085
+        EQUB    $00
+
+        BRK
+.L1087
+        EQUB    $00
+
+        BRK
+.L1089
+        EQUB    $00
+
+        BRK
+.L108B
+        EQUB    $00
+
+        BRK
+.L108D
+        EQUB    $00
+
+        BRK
+.L108F
+        EQUB    $00
+
+        BRK
+.L1091
+        EQUB    $00
+
+        BRK
+.L1093
+        EQUB    $00
+
+        BRK
+.L1095
+        EQUB    $00
+
+        BRK
+.L1097
+        EQUB    $00
+
+        BRK
+.L1099
+        EQUB    $00
+
+        BRK
+.L109B
+        EQUB    $00
+
+        BRK
+.L109D
+        EQUB    $00
+
+        BRK
+.L109F
+        EQUB    $00
+
+        BRK
+.L10A1
+        EQUB    $00
+
+        BRK
+.L10A3
+        EQUB    $00
+
+        BRK
+.L10A5
+        EQUB    $00
+
+        BRK
+.L10A7
+        EQUB    $00
+
+        BRK
+.L10A9
+        EQUB    $00
+
+        BRK
+.L10AB
+        EQUB    $00
+
+        BRK
+.L10AD
+        EQUB    $00
+
+        BRK
+.L10AF
+        EQUB    $00
+
+        BRK
+.L10B1
+        EQUB    $00
+
+        BRK
+.L10B3
+        EQUB    $00
+
+        BRK
+.L10B5
+        EQUB    $00
+
+        BRK
+.L10B7
+        EQUB    $00
+
+        BRK
+.L10B9
+        EQUB    $00
+
+        BRK
+.L10BB
+        EQUB    $00
+
+        BRK
+.L10BD
+        EQUB    $00
+
+.L10BE
+        BRK
+.L10BF
+        EQUB    $00
+
+        BRK
+.L10C1
+        EQUB    $00
+
+        BRK
+.L10C3
+        EQUB    $00
+
+        BRK
+.L10C5
+        EQUB    $00
+
+        BRK
+.L10C7
+        EQUB    $00
+
+        BRK
+.L10C9
+        EQUB    $00
+
+.L10CA
+        BRK
+.L10CB
+        EQUB    $00
+
+        BRK
+.L10CD
+        EQUB    $00
+
+        BRK
+.L10CF
+        EQUB    $00
+
+        BRK
+.L10D1
+        EQUB    $00
+
+        BRK
+.L10D3
+        EQUB    $00
+
+        BRK
+.L10D5
+        EQUB    $00
+
+        BRK
+.L10D7
+        EQUB    $00
+
+        BRK
+.L10D9
+        EQUB    $00
+
+        BRK
+.L10DB
+        EQUB    $00
+
+        BRK
+.L10DD
+        EQUB    $00
+
+        BRK
+.L10DF
+        EQUB    $00
+
+        BRK
+.L10E1
+        EQUB    $00
+
+        BRK
+.L10E3
+        EQUB    $00
+
+        BRK
+.L10E5
+        EQUB    $00
+
+        BRK
+.L10E7
+        EQUB    $00
+
+        BRK
+.L10E9
+        EQUB    $00
+
+        BRK
+.L10EB
+        EQUB    $00
+
+        BRK
+.L10ED
+        EQUB    $00
+
+        BRK
+.L10EF
+        EQUB    $00
+
+.L10F0
+        BRK
+.L10F1
+        EQUB    $00
+
+        BRK
+.L10F3
+        EQUB    $00
+
+        BRK
+.L10F5
+        EQUB    $00
+
+        BRK
+.L10F7
+        EQUB    $00
+
+        BRK
+.L10F9
+        EQUB    $00
+
+        BRK
+.L10FB
+        EQUB    $00
+
+        BRK
+.L10FD
+        EQUB    $00
+
+        BRK
+.L10FF
+        EQUB    $00
+
+        BRK
+.L1101
+        EQUB    $00
+
+        BRK
+.L1103
+        EQUB    $00
+
+        BRK
+.L1105
+        EQUB    $00
+
+        BRK
+.L1107
+        EQUB    $00
+
+        BRK
+.L1109
+        EQUB    $00
+
+        BRK
+.L110B
+        EQUB    $00
+
+        BRK
+.L110D
+        EQUB    $00
+
+        BRK
+.L110F
+        EQUB    $00
+
+        BRK
+.L1111
+        EQUB    $00
+
+        BRK
+.L1113
+        EQUB    $00
+
+        BRK
+.L1115
+        EQUB    $00
+
+        BRK
+.L1117
+        EQUB    $00
+
+        BRK
+.L1119
+        EQUB    $00
+
+        BRK
+.L111B
+        EQUB    $00
+
+        BRK
+.L111D
+        EQUB    $00
+
+        BRK
+.L111F
+        EQUB    $00
+
+        BRK
+.L1121
+        EQUB    $00
+
+        BRK
+.L1123
+        EQUB    $00
+
+        BRK
+.L1125
+        EQUB    $00
+
+        BRK
+.L1127
+        EQUB    $00
+
+        BRK
+.L1129
+        EQUB    $00
+
+        BRK
+.L112B
+        EQUB    $00
+
+        BRK
+.L112D
+        EQUB    $00
+
+        BRK
+.L112F
+        EQUB    $00
+
+        BRK
+.L1131
+        EQUB    $00
+
+        BRK
+.L1133
+        EQUB    $00
+
+        BRK
+.L1135
+        EQUB    $00
+
+        BRK
+.L1137
+        EQUB    $00
+
+        BRK
+.L1139
+        EQUB    $00
+
+        BRK
+.L113B
+        EQUB    $00
+
+        BRK
+.L113D
+        EQUB    $00
+
+        BRK
+.L113F
+        EQUB    $00
+
+        BRK
+.L1141
+        EQUB    $00
+
+        BRK
+.L1143
+        EQUB    $00
+
+        BRK
+.L1145
+        EQUB    $00
+
+        BRK
+.L1147
+        EQUB    $00
+
+        BRK
+.L1149
+        EQUB    $00
+
+        BRK
+.L114B
+        EQUB    $00
+
+        BRK
+.L114D
+        EQUB    $00
+
+        BRK
+.L114F
+        EQUB    $00
+
+.L1150
+        BRK
+.L1151
+        EQUB    $00
+
+        BRK
+.L1153
+        EQUB    $00
+
+        BRK
+.L1155
+        EQUB    $00
+
+        BRK
+.L1157
+        EQUB    $00
+
+        BRK
+.L1159
+        EQUB    $00
+
+        BRK
+.L115B
+        EQUB    $00
+
+        BRK
+.L115D
+        EQUB    $00
+
+        BRK
+.L115F
+        EQUB    $00
+
+        BRK
+.L1161
+        EQUB    $00
+
+        BRK
+.L1163
+        EQUB    $00
+
+        BRK
+.L1165
+        EQUB    $00
+
+        BRK
+.L1167
+        EQUB    $00
+
+        BRK
+.L1169
+        EQUB    $00
+
+.L116A
+        BRK
+.L116B
+        EQUB    $00
+
+        BRK
+.L116D
+        EQUB    $00
+
+        BRK
+.L116F
+        EQUB    $00
+
+        BRK
+.L1171
+        EQUB    $00
+
+        BRK
+.L1173
+        EQUB    $00
+
+        BRK
+.L1175
+        EQUB    $00
+
+        BRK
+.L1177
+        EQUB    $00
+
+        BRK
+.L1179
+        EQUB    $00
+
+        BRK
+.L117B
+        EQUB    $00
+
+        BRK
+.L117D
+        EQUB    $00
+
+        BRK
+.L117F
+        EQUB    $00
+
+        BRK
+.L1181
+        EQUB    $00
+
+        BRK
+.L1183
+        EQUB    $00
+
+        BRK
+.L1185
+        EQUB    $00
+
+        BRK
+.L1187
+        EQUB    $00
+
+        BRK
+.L1189
+        EQUB    $00
+
+        BRK
+.L118B
+        EQUB    $00
+
+        BRK
+.L118D
+        EQUB    $00
+
+        BRK
+.L118F
+        EQUB    $00
+
+        BRK
+.L1191
+        EQUB    $00
+
+        BRK
+.L1193
+        EQUB    $00
+
+        BRK
+.L1195
+        EQUB    $00
+
+        BRK
+.L1197
+        EQUB    $00
+
+        BRK
+.L1199
+        EQUB    $00
+
+        BRK
+.L119B
+        EQUB    $00
+
+        BRK
+.L119D
+        EQUB    $00
+
+        BRK
+.L119F
+        EQUB    $00
+
+        BRK
+.L11A1
+        EQUB    $00
+
+        BRK
+.L11A3
+        EQUB    $00
+
+        BRK
+.L11A5
+        EQUB    $00
+
+        BRK
+.L11A7
+        EQUB    $00
+
+        BRK
+.L11A9
+        EQUB    $00
+
+        BRK
+.L11AB
+        EQUB    $00
+
+        BRK
+.L11AD
+        EQUB    $00
+
+        BRK
+.L11AF
+        EQUB    $00
+
+        BRK
+.L11B1
+        EQUB    $00
+
+        BRK
+.L11B3
+        EQUB    $00
+
+        BRK
+.L11B5
+        EQUB    $00
+
+        BRK
+.L11B7
+        EQUB    $00
+
+        BRK
+.L11B9
+        EQUB    $00
+
+        BRK
+.L11BB
+        EQUB    $00
+
+        BRK
+.L11BD
+        EQUB    $00
+
+        BRK
+.L11BF
+        EQUB    $00
+
+        BRK
+.L11C1
+        EQUB    $00
+
+        BRK
+.L11C3
+        EQUB    $00
+
+        BRK
+.L11C5
+        EQUB    $00
+
+        BRK
+.L11C7
+        EQUB    $00
+
+        BRK
+.L11C9
+        EQUB    $00
+
+        BRK
+.L11CB
+        EQUB    $00
+
+.L11CC
+        BRK
+.L11CD
+        EQUB    $00
+
+        BRK
+.L11CF
+        EQUB    $00
+
+        BRK
+.L11D1
+        EQUB    $00
+
+        BRK
+.L11D3
+        EQUB    $00
+
+        BRK
+.L11D5
+        EQUB    $00
+
+        BRK
+.L11D7
+        EQUB    $00
+
+        BRK
+.L11D9
+        EQUB    $00
+
+        BRK
+.L11DB
+        EQUB    $00
+
+        BRK
+.L11DD
+        EQUB    $00
+
+        BRK
+.L11DF
+        EQUB    $00
+
+        BRK
+.L11E1
+        EQUB    $00
+
+        BRK
+.L11E3
+        EQUB    $00
+
+        BRK
+.L11E5
+        EQUB    $00
+
+        BRK
+.L11E7
+        EQUB    $00
+
+        BRK
+.L11E9
+        EQUB    $00
+
+        BRK
+.L11EB
+        EQUB    $00
+
+        BRK
+.L11ED
+        EQUB    $00
+
+        BRK
+.L11EF
+        EQUB    $00
+
+        BRK
+.L11F1
+        EQUB    $00
+
+        BRK
+.L11F3
+        EQUB    $00
+
+        BRK
+.L11F5
+        EQUB    $00
+
+        BRK
+.L11F7
+        EQUB    $00
+
+        BRK
+.L11F9
+        EQUB    $00
+
+        BRK
+.L11FB
+        EQUB    $00
+
+        BRK
+.L11FD
+        EQUB    $00
+
+        BRK
+.L11FF
+        EQUB    $00
+
+.L1200
+        PLA
+        STA     L0022
+        PLA
+        STA     L0021
+        LDY     #$00
+        LDA     (L0021),Y
+        STA     L09A5
+        JSR     L12AB
+
+        LDA     (L0021),Y
+        STA     L09A6
+        JSR     L12AB
+
+        LDA     (L0021),Y
+        STA     L09A7
+        JSR     L12AB
+
+        LDA     (L0021),Y
+        STA     L09A8
+        JSR     L12AB
+
+        JSR     L12B9
+
+        JMP     L11CC
+
+        PLA
+        STA     L0022
+        PLA
+        STA     L0021
+        LDA     L09C7
+        SEC
+        SBC     L09A7
+        STA     L09C7
+        LDA     L09C8
+        SBC     L09A8
+        STA     L09C8
+        LDX     L09A5
+        LDY     L09A6
+        JSR     L1322
+
+        JMP     L125A
+
+.L1253
+        JSR     L135A
+
+        STA     L0980,X
+        INX
+.L125A
+        JSR     L1335
+
+        CMP     #$1C
+        BCC     L1253
+
+        AND     #$03
+        TAX
+        LDA     L09C7
+        BNE     L1271
+
+        ORA     L09C8
+        BEQ     L1277
+
+        DEC     L09C8
+.L1271
+        DEC     L09C7
+        JMP     L125A
+
+.L1277
+        TXA
+        LDX     #$00
+.L127A
+        CMP     #$00
+        BEQ     L128C
+
+        PHA
+        LDA     L0980,X
+        JSR     L1463
+
+        INX
+        PLA
+        SEC
+        SBC     #$01
+        BNE     L127A
+
+.L128C
+        JSR     L1335
+
+        CMP     #$1B
+        BCS     L129C
+
+        JSR     L135A
+
+        JSR     L1463
+
+        JMP     L128C
+
+.L129C
+        RTS
+
+.L129D
+        LDA     L001B
+        CLC
+        ADC     #$01
+        STA     L001B
+        LDA     L001C
+        ADC     #$00
+        STA     L001C
+        RTS
+
+.L12AB
+        LDA     L0021
+        CLC
+        ADC     #$01
+        STA     L0021
+        LDA     L0022
+        ADC     #$00
+        STA     L0022
+        RTS
+
+.L12B9
+        LDA     L04FE
+        SEC
+        SBC     #$01
+        STA     L04FE
+        LDA     L04FF
+        SBC     #$00
+        STA     L04FF
+        RTS
+
+.L12CB
+        LDA     #$00
+        STA     L002E
+        STA     L002F
+.L12D1
+        LDY     #$00
+        LDA     (L002C),Y
+        PHA
+        JSR     L131B
+
+        PLA
+        AND     #$3F
+        BNE     L12EE
+
+        LDA     L002E
+        CLC
+        ADC     #$3F
+        STA     L002E
+        LDA     L002F
+        ADC     #$00
+        STA     L002F
+        JMP     L12D1
+
+.L12EE
+        TAY
+        DEY
+        TYA
+        CLC
+        ADC     L002E
+        STA     L002E
+        LDA     L002F
+        ADC     #$00
+        STA     L002F
+        RTS
+
+.L12FD
+        JSR     L12CB
+
+        LDA     L002C
+        CLC
+        ADC     L002E
+        STA     L002C
+        LDA     L002D
+        ADC     L002F
+        STA     L002D
+        RTS
+
+.L130E
+        LDA     L002D
+        CMP     L09BC
+        BNE     L131A
+
+        LDA     L002C
+        CMP     L09BB
+.L131A
+        RTS
+
+.L131B
+        INC     L002C
+        BNE     L1321
+
+        INC     L002D
+.L1321
+        RTS
+
+.L1322
+        TXA
+        CLC
+        ADC     #$00
+        STA     L0010
+        TYA
+        ADC     #$1E
+        STA     L0011
+        LDA     #$08
+        STA     L09A9
+        JMP     L1389
+
+.L1335
+        TXA
+        PHA
+        LDA     L09A9
+        CMP     #$08
+        BNE     L1341
+
+        JSR     L13C9
+
+.L1341
+        PHA
+        CLC
+        ADC     #$01
+        STA     L09A9
+        PLA
+        ADC     #$AB
+        STA     L0029
+        LDA     #$09
+        ADC     #$00
+        STA     L002A
+        LDY     #$00
+        PLA
+        TAX
+        LDA     (L0029),Y
+        RTS
+
+.L135A
+        CMP     #$1A
+        BCS     L1362
+
+        CLC
+        ADC     #$61
+        RTS
+
+.L1362
+        JSR     L1335
+
+        CMP     #$10
+        BNE     L1374
+
+        LDA     #$01
+        STA     L09A4
+        JSR     L1335
+
+        JMP     L135A
+
+.L1374
+        ROL     A
+        ROL     A
+        ROL     A
+        ROL     A
+        ROL     A
+        AND     #$E0
+        PHA
+        JSR     L1335
+
+        AND     #$1F
+        STA     L0029
+        PLA
+        ORA     L0029
+        ORA     #$80
+        RTS
+
+.L1389
+        LDA     #$00
+.L138B
+        AND     #$03
+        CLC
+        ADC     #$80
+        STA     L001B
+        LDA     #$09
+        ADC     #$00
+        STA     L001C
+        RTS
+
+.L1399
+        LDA     #$00
+        STA     L09A7
+        STA     L09A8
+        LDA     L1E06
+        STA     L09A5
+        LDA     L1E07
+        STA     L09A6
+        LDA     L1E0A
+        CLC
+        ADC     #$00
+        STA     L0021
+        LDA     L1E0B
+        ADC     #$1E
+        STA     L0022
+        LDA     L1E0C
+        STA     L04FE
+        LDA     L1E0D
+        STA     L04FF
+        RTS
+
+.L13C9
+        LDY     #$00
+        LDA     (L0010),Y
+        ROR     A
+        ROR     A
+        ROR     A
+        AND     #$1F
+        STA     L09AB
+        LDA     (L0010),Y
+        STA     L0029
+        JSR     L1448
+
+        LDA     (L0010),Y
+        ROL     A
+        ROL     L0029
+        ROL     A
+        ROL     L0029
+        LDA     L0029
+        AND     #$1F
+        STA     L09AC
+        LDA     (L0010),Y
+        STA     L0029
+        ROR     A
+        AND     #$1F
+        STA     L09AD
+        JSR     L1448
+
+        LDA     L0029
+        ROR     A
+        LDA     (L0010),Y
+        ROR     A
+        ROR     A
+        ROR     A
+        ROR     A
+        AND     #$1F
+        STA     L09AE
+        LDA     (L0010),Y
+        STA     L0029
+        JSR     L1448
+
+        LDA     (L0010),Y
+        ROL     A
+        ROL     L0029
+        LDA     L0029
+        AND     #$1F
+        STA     L09AF
+        LDA     (L0010),Y
+        STA     L0029
+        JSR     L1448
+
+        LDA     (L0010),Y
+        ROR     L0029
+        ROR     A
+        ROR     L0029
+        ROR     A
+        TAY
+        LDA     L0029
+        AND     #$1F
+        STA     L09B0
+        TYA
+        ROR     A
+        ROR     A
+        ROR     A
+        AND     #$1F
+        STA     L09B1
+        LDY     #$00
+        LDA     (L0010),Y
+        AND     #$1F
+        STA     L09B2
+        JSR     L1448
+
+        LDA     #$00
+        RTS
+
+.L1448
+        INC     L0010
+        BNE     L144E
+
+        INC     L0011
+.L144E
+        RTS
+
+.L144F
+        LDA     #$00
+        STA     L09A3
+        STA     L09B5
+        LDA     #$2E
+        STA     L09B3
+        JMP     L1562
+
+.L145F
+        LDA     #$20
+        BNE     L1484
+
+.L1463
+        CMP     #$80
+        BCS     L1484
+
+        STA     L0029
+        LDA     L09A4
+        BNE     L147F
+
+        LDA     L09A2
+        CMP     #$06
+        BCS     L147A
+
+        LDA     L0029
+        JMP     L1484
+
+.L147A
+        LDA     #$00
+        STA     L09A2
+.L147F
+        LDA     L0029
+        JSR     L1579
+
+.L1484
+        PHA
+        CMP     #$80
+        BCS     L14A5
+
+        CMP     #$21
+        BEQ     L1491
+
+        CMP     #$2A
+        BCC     L14B4
+
+.L1491
+        LDA     L09B3
+        CMP     #$21
+        BEQ     L14A0
+
+        CMP     #$3F
+        BEQ     L14A0
+
+        CMP     #$2E
+        BNE     L14A5
+
+.L14A0
+        PLA
+        JSR     L1579
+
+        PHA
+.L14A5
+        PLA
+        AND     #$7F
+        CMP     #$21
+        BEQ     L14B0
+
+        CMP     #$29
+        BCC     L14B3
+
+.L14B0
+        STA     L09B3
+.L14B3
+        PHA
+.L14B4
+        CMP     #$20
+        BNE     L14C3
+
+        JSR     L1517
+
+        LDA     #$FF
+        STA     L09B4
+        JMP     L14E3
+
+.L14C3
+        CMP     #$0D
+        BNE     L14D2
+
+        JSR     L1517
+
+        LDA     #$0D
+        JSR     L14E5
+
+        JMP     L14E3
+
+.L14D2
+        LDY     #$00
+        STA     (L0034),Y
+        LDA     L0034
+        CLC
+        ADC     #$01
+        STA     L0034
+        LDA     L0035
+        ADC     #$00
+        STA     L0035
+.L14E3
+        PLA
+        RTS
+
+.L14E5
+        CMP     #$0D
+        BNE     L14FF
+
+        LDA     L09B5
+        BEQ     L150E
+
+        LDA     L08C3
+        CMP     L09B5
+        BCC     L14FB
+
+        LDA     #$0D
+        JSR     L150F
+
+.L14FB
+        LDA     #$00
+        BEQ     L150B
+
+.L14FF
+        JSR     L150F
+
+        LDA     L09B5
+        CLC
+        ADC     #$01
+        STA     L09B5
+.L150B
+        STA     L09B5
+.L150E
+        RTS
+
+.L150F
+        STA     L10BE
+        LDA     #$02
+        JMP     L10B7
+
+.L1517
+        LDA     L09B4
+        BEQ     L154C
+
+        JSR     L1570
+
+        LDA     L09B5
+        STA     L09C3
+.L1525
+        LDA     L0029
+        CMP     L0034
+        BCS     L153A
+
+        JSR     L1869
+
+        LDA     L09C3
+        CLC
+        ADC     #$01
+        STA     L09C3
+        JMP     L1525
+
+.L153A
+        LDA     L08C3
+        CMP     L09C3
+        BCS     L1547
+
+        LDA     #$0D
+        JMP     L1549
+
+.L1547
+        LDA     #$20
+.L1549
+        JSR     L14E5
+
+.L154C
+        JSR     L1570
+
+.L154F
+        LDA     L0029
+        CMP     L0034
+        BCS     L1562
+
+        LDY     #$00
+        LDA     (L0029),Y
+        JSR     L14E5
+
+        JSR     L1869
+
+        JMP     L154F
+
+.L1562
+        LDA     #$00
+        STA     L09B4
+        LDA     #$5F
+        STA     L0034
+        LDA     #$09
+        STA     L0035
+        RTS
+
+.L1570
+        LDA     #$5F
+        STA     L0029
+        LDA     #$09
+        STA     L002A
+        RTS
+
+.L1579
+        CMP     #$61
+        BCC     L1584
+
+        CMP     #$7B
+        BCS     L1584
+
+        CLC
+        ADC     #$E0
+.L1584
+        RTS
+
+.L1585
+        CMP     #$41
+        BCC     L1590
+
+        CMP     #$5B
+        BCS     L1590
+
+        CLC
+        ADC     #$20
+.L1590
+        RTS
+
+        LDA     L001F
+        ORA     L0020
+        BNE     L15AA
+
+        JSR     L1517
+
+        JSR     L144F
+
+        LDX     #$EC
+        STX     L001F
+        LDY     #$08
+        STY     L0020
+        LDA     #$04
+        JSR     L1B00
+
+.L15AA
+        LDA     #$3E
+        STA     L0029
+        LDA     #$09
+        STA     L002A
+.L15B2
+        LDY     #$00
+        LDA     (L001F),Y
+        BNE     L15CF
+
+        JSR     L184C
+
+        LDA     #$00
+        STA     (L0023),Y
+        STA     L001F
+        STA     L0020
+.L15C3
+        JSR     L0E7C
+
+        JSR     L0E7C
+
+        JSR     L0E7C
+
+        JMP     L0E7C
+
+.L15CF
+        JSR     L18B3
+
+        BEQ     L15F9
+
+        LDY     #$00
+        LDA     (L001F),Y
+        PHA
+        JSR     L1862
+
+        PLA
+        CMP     #$20
+        BEQ     L15B2
+
+        PHA
+        STA     L093E
+        JSR     L184C
+
+        LDA     #$20
+        STA     L093F
+        LDA     #$FF
+        STA     L09BF
+        STA     L09C0
+        PLA
+        JMP     L17F6
+
+.L15F9
+        LDY     #$00
+        LDA     (L001F),Y
+        CMP     #$2D
+        BEQ     L1623
+
+        JSR     L18B3
+
+        BEQ     L160D
+
+.L1606
+        LDA     #$20
+        STA     (L0029),Y
+        JMP     L1629
+
+.L160D
+        LDA     (L001F),Y
+        JSR     L1585
+
+        STA     (L0029),Y
+        JSR     L1869
+
+        LDA     L002A
+        CMP     #$09
+        BNE     L1621
+
+        LDA     L0029
+        CMP     #$5D
+.L1621
+        BCS     L1606
+
+.L1623
+        JSR     L1862
+
+        JMP     L15F9
+
+.L1629
+        LDA     #$FF
+        STA     L09B6
+        STA     L09B7
+        STA     L09BF
+        STA     L09C0
+        LDA     L08E8
+        STA     L0023
+        LDA     L08E9
+        STA     L0024
+        JSR     L1399
+
+        LDA     L093E
+        SEC
+        SBC     #$61
+        BCS     L1663
+
+        LDA     L1E06
+        STA     L09A5
+        LDA     L1E07
+        STA     L09A6
+        LDA     #$00
+        STA     L09A7
+        STA     L09A8
+        JMP     L16C6
+
+.L1663
+        CMP     #$1A
+        BCC     L166C
+
+        LDA     #$67
+        JMP     L1686
+
+.L166C
+        STA     L0029
+        ASL     L0029
+        ASL     L0029
+        LDA     L093F
+        CMP     #$20
+        BEQ     L1686
+
+        SEC
+        SBC     #$61
+        ROR     A
+        ROR     A
+        ROR     A
+        AND     #$03
+        CLC
+        ADC     L0029
+        STA     L0029
+.L1686
+        LDA     L0029
+        CMP     L1E0C
+        BCC     L1690
+
+        JMP     L1775
+
+.L1690
+        LDA     #$00
+        CLC
+        ROL     L0029
+        ROL     A
+        ROL     L0029
+        ROL     A
+        STA     L002A
+        LDA     L0029
+        ADC     L0021
+        STA     L0029
+        LDA     L002A
+        ADC     L0022
+        STA     L002A
+        LDY     #$00
+        LDA     (L0029),Y
+        STA     L09A5
+        JSR     L1869
+
+        LDA     (L0029),Y
+        STA     L09A6
+        JSR     L1869
+
+        LDA     (L0029),Y
+        STA     L09A7
+        JSR     L1869
+
+        LDA     (L0029),Y
+        STA     L09A8
+.L16C6
+        LDX     L09A5
+        LDY     L09A6
+        JSR     L1870
+
+.L16CF
+        JSR     L1878
+
+        BCS     L16D7
+
+        JMP     L176B
+
+.L16D7
+        LDX     #$00
+        LDY     #$00
+.L16DB
+        LDA     L0980,Y
+        AND     #$7F
+        JSR     L1585
+
+        CMP     L093E,X
+        BNE     L16ED
+
+        INX
+        INY
+        JMP     L16DB
+
+.L16ED
+        LDA     L093E,X
+        CMP     #$20
+        BNE     L1716
+
+        LDA     L0980,Y
+        BEQ     L1737
+
+        LDA     L09B6
+        AND     L09B7
+        CMP     #$FF
+        BNE     L1775
+
+        CPX     #$04
+        BCS     L1737
+
+        LDA     L09A7
+        STA     L09B6
+        LDA     L09A8
+        STA     L09B7
+        JMP     L1720
+
+.L1716
+        LDA     L09B6
+        AND     L09B7
+        CMP     #$FF
+        BNE     L172B
+
+.L1720
+        INC     L09A7
+        BNE     L16CF
+
+        INC     L09A8
+        JMP     L16CF
+
+.L172B
+        LDA     L09B6
+        STA     L09A7
+        LDA     L09B7
+        STA     L09A8
+.L1737
+        LDA     L09A7
+        STA     L09BF
+        LDA     L09A8
+        STA     L09C0
+        JSR     L18D0
+
+        LDA     #$FF
+        STA     L09B6
+        STA     L09B7
+        LDA     L0023
+        CMP     L08E8
+        BNE     L175C
+
+        LDA     L0024
+        CMP     L08E9
+        BEQ     L1720
+
+.L175C
+        LDA     #$00
+        TAY
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDA     #$00
+        STA     (L0023),Y
+        JMP     L15C3
+
+.L176B
+        LDA     L09B6
+        AND     L09B7
+        CMP     #$FF
+        BNE     L172B
+
+.L1775
+        LDA     L093E
+        CMP     #$30
+        BCC     L17F1
+
+        CMP     #$3A
+        BCS     L17F1
+
+        LDA     #$00
+        STA     L09D0
+        STA     L09D1
+        STA     L09D2
+        LDA     #$3E
+        STA     L0010
+        LDA     #$09
+        STA     L0011
+.L1793
+        LDY     #$00
+        LDA     (L0010),Y
+        CMP     #$20
+        BEQ     L17C3
+
+        SEC
+        SBC     #$30
+        BCC     L17F1
+
+        CMP     #$0A
+        BCS     L17F1
+
+        STA     L09C7
+        LDA     #$D0
+        STA     L002E
+        LDA     #$09
+        STA     L002F
+        JSR     L17FE
+
+        JSR     L17FE
+
+        JSR     L17FE
+
+        LDA     L09C7
+        BNE     L17F1
+
+        JSR     L1448
+
+        JMP     L1793
+
+.L17C3
+        LDA     L08E8
+        STA     L0023
+        LDA     L08E9
+        STA     L0024
+        LDA     #$01
+        LDY     #$00
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDA     L09D0
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDA     L09D1
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDA     L09D2
+        STA     (L0023),Y
+        JSR     L185B
+
+        JMP     L175C
+
+.L17F1
+        JSR     L184C
+
+        LDA     #$80
+.L17F6
+        STA     (L0023),Y
+        JSR     L185B
+
+        JMP     L175C
+
+.L17FE
+        LDY     #$00
+        LDA     (L002E),Y
+        STA     L0029
+        CLC
+        ROL     A
+        STA     L0029
+        STA     L09C3
+        LDA     #$00
+        ADC     #$00
+        STA     L002A
+        STA     L09C4
+        JSR     L1846
+
+        JSR     L1846
+
+        LDA     L0029
+        CLC
+        ADC     L09C3
+        STA     L0029
+        LDA     L002A
+        ADC     L09C4
+        STA     L002A
+        LDA     L0029
+        CLC
+        ADC     L09C7
+        STA     (L002E),Y
+        LDA     L002A
+        ADC     #$00
+        STA     L09C7
+        LDA     L002E
+        CLC
+        ADC     #$01
+        STA     L002E
+        LDA     L002F
+        ADC     #$00
+        STA     L002F
+        RTS
+
+.L1846
+        CLC
+        ROL     L0029
+        ROL     L002A
+        RTS
+
+.L184C
+        LDA     L08E8
+        STA     L0023
+        LDA     L08E9
+        STA     L0024
+        LDA     #$00
+        TAY
+        STA     (L0023),Y
+.L185B
+        INC     L0023
+        BNE     L1861
+
+        INC     L0024
+.L1861
+        RTS
+
+.L1862
+        INC     L001F
+        BNE     L1868
+
+        INC     L0020
+.L1868
+        RTS
+
+.L1869
+        INC     L0029
+        BNE     L186F
+
+        INC     L002A
+.L186F
+        RTS
+
+.L1870
+        JSR     L1322
+
+        LDA     #$1C
+        STA     L09B8
+.L1878
+        LDA     L09B8
+        CMP     #$1B
+        BEQ     L1895
+
+        JSR     L138B
+
+.L1882
+        JSR     L1335
+
+        PHA
+        LDA     L09BD
+        CMP     L0010
+        BNE     L1897
+
+        LDA     L09BE
+        CMP     L0011
+        BNE     L1897
+
+        PLA
+.L1895
+        CLC
+        RTS
+
+.L1897
+        PLA
+        CMP     #$1B
+        BCS     L18A9
+
+        JSR     L135A
+
+        LDY     #$00
+        STA     (L001B),Y
+        JSR     L129D
+
+        JMP     L1882
+
+.L18A9
+        STA     L09B8
+        LDA     #$00
+        TAY
+        STA     (L001B),Y
+        SEC
+        RTS
+
+.L18B3
+        JSR     L1579
+
+        CMP     #$27
+        BEQ     L18CD
+
+        CMP     #$30
+        BCC     L18CA
+
+        CMP     #$3A
+        BCC     L18CD
+
+        CMP     #$41
+        BCC     L18CA
+
+        CMP     #$5B
+        BCC     L18CD
+
+.L18CA
+        LDA     #$01
+        RTS
+
+.L18CD
+        LDA     #$00
+.L18CF
+        RTS
+
+.L18D0
+        LDA     #$00
+        STA     L0014
+        STA     L0015
+        JSR     L10BF
+
+        JMP     L18DF
+
+.L18DC
+        JSR     L0EE3
+
+.L18DF
+        JSR     L130E
+
+        BCS     L18CF
+
+        LDY     #$00
+        LDA     (L002C),Y
+        PHA
+        JSR     L131B
+
+        PLA
+        BMI     L18FC
+
+        AND     #$40
+        BNE     L190A
+
+        JSR     L1990
+
+        JSR     L12FD
+
+        JMP     L18DC
+
+.L18FC
+        AND     #$7F
+        SEC
+        ADC     L0014
+        STA     L0014
+        BCC     L18DF
+
+        INC     L0015
+        JMP     L18DF
+
+.L190A
+        JSR     L1990
+
+        JSR     L12CB
+
+        LDX     L002E
+        LDY     L002C
+        LDA     #$00
+        STA     L002C
+        JMP     L1931
+
+.L191B
+        INY
+        BNE     L1920
+
+        INC     L002D
+.L1920
+        TXA
+        BNE     L1925
+
+        DEC     L002F
+.L1925
+        DEX
+.L1926
+        INY
+        BNE     L192B
+
+        INC     L002D
+.L192B
+        TXA
+        BNE     L1930
+
+        DEC     L002F
+.L1930
+        DEX
+.L1931
+        TXA
+        ORA     L002F
+        BEQ     L1989
+
+        LDA     (L002C),Y
+        BPL     L1926
+
+        CMP     #$90
+        BCC     L191B
+
+        AND     #$0F
+        CMP     L09A8
+        BNE     L191B
+
+        LDA     (L002C),Y
+        STA     L09C7
+        INY
+        BNE     L194F
+
+        INC     L002D
+.L194F
+        TXA
+        BNE     L1954
+
+        DEC     L002F
+.L1954
+        DEX
+        TXA
+        BNE     L195A
+
+        DEC     L002F
+.L195A
+        DEX
+        LDA     (L002C),Y
+        INY
+        BNE     L1962
+
+        INC     L002D
+.L1962
+        CMP     L09A7
+        BNE     L1931
+
+        STY     L002C
+        LDY     #$00
+        LDA     L09C7
+        CLC
+        ROL     A
+        AND     #$E0
+        ORA     L0015
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDA     L0014
+        STA     (L0023),Y
+        JSR     L185B
+
+        LDY     L002C
+        LDA     #$00
+        STA     L002C
+        JMP     L1931
+
+.L1989
+        STY     L002C
+        LDY     #$00
+        JMP     L18DC
+
+.L1990
+        LDA     L002C
+        BNE     L1996
+
+        DEC     L002D
+.L1996
+        DEC     L002C
+.L1998
+        RTS
+
+        LDA     L09BF
+        AND     L09C0
+        CMP     #$FF
+        BNE     L19BC
+
+        LDA     #$3E
+        STA     L002C
+        LDA     #$09
+        STA     L002D
+.L19AB
+        LDY     #$00
+        LDA     (L002C),Y
+        CMP     #$20
+        BEQ     L1998
+
+        JSR     L1484
+
+        JSR     L131B
+
+        JMP     L19AB
+
+.L19BC
+        LDA     L09BF
+        STA     L09C7
+        LDA     L09C0
+        STA     L09C8
+        JMP     L1173
+
+        JSR     L0B2B
+
+        STA     L09D9
+        JSR     L0B2B
+
+        STA     L001D
+        STX     L001E
+        JSR     L0B2B
+
+        STA     L09D4
+        STX     L002B
+.L19E0
+        ORA     L001D
+        BNE     L19E7
+
+        JMP     L1AB7
+
+.L19E7
+        LDA     L09D6
+        BNE     L19F1
+
+        LDA     L001D
+        STA     L09D7
+.L19F1
+        INC     L09D5
+        LDX     L09D5
+.L19F7
+        LDA     L08DA,X
+        L19F8   = L19F7+1
+        L19F9   = L19F7+2
+        CMP     L09D4
+        BEQ     L1A51
+
+        CPX     L09D9
+        BCC     L19F1
+
+        LDA     L09D7
+        CMP     #$1F
+        BNE     L1A2D
+
+        TAX
+        LDA     #$00
+        STA     L09E9,X
+        STA     L001D
+.L1A13
+        LDX     L001D
+        LDA     L09E9,X
+        BEQ     L1A25
+
+        LDA     L09D4
+        JSR     L1AD7
+
+        LDA     L001D
+        JSR     L1AD7
+
+.L1A25
+        INC     L001D
+        LDA     L001D
+        CMP     #$1F
+        BCC     L1A13
+
+.L1A2D
+        JSR     L1AE7
+
+        STA     L001D
+        JSR     L1AE7
+
+        STA     L09D4
+        LDA     #$00
+        STA     L09D6
+        LDA     L001D
+        CMP     #$1F
+        BNE     L1A46
+
+        INC     L09D3
+.L1A46
+        JSR     L1AC6
+
+        LDA     L09D4
+        BEQ     L1A8C
+
+        JMP     L19E0
+
+.L1A51
+        LDX     L09D5
+.L1A54
+        LDA     L08DC,X
+        L1A55   = L1A54+1
+        L1A56   = L1A54+2
+        AND     #$1F
+        STA     L09D8
+        CMP     L001D
+        BEQ     L1A7B
+
+        CMP     #$00
+        BEQ     L19F1
+
+        LDA     L001D
+        BEQ     L19F1
+
+        CMP     #$1F
+        BEQ     L1A76
+
+        LDX     L09D8
+        TXA
+        STA     L09E9,X
+        JMP     L19F1
+
+.L1A76
+        LDA     L09D8
+        STA     L001D
+.L1A7B
+        INC     L09D6
+        LDA     L09D5
+        JSR     L1AD7
+
+        LDA     #$1F
+        JSR     L1AD7
+
+        JMP     L1A96
+
+.L1A8C
+        LDA     #$00
+        STA     L09D5
+        STA     L09D4
+        STA     L001D
+.L1A96
+        LDA     L001D
+        LDX     L001E
+        STA     L0400,X
+        LDA     L09D4
+        LDX     L002B
+        STA     L0400,X
+        LDA     L09D5
+        JSR     L10A9
+
+        LDA     L09D6
+        JSR     L10A9
+
+        LDA     L09D3
+        JMP     L10A9
+
+.L1AB7
+        LDA     #$00
+        STA     L001A
+        LDA     #$00
+        STA     L09D3
+        JSR     L1AC6
+
+        JMP     L1A96
+
+.L1AC6
+        LDA     #$00
+        STA     L09D6
+        STA     L09D5
+        LDX     #$1F
+.L1AD0
+        STA     L09E8,X
+        DEX
+        BNE     L1AD0
+
+        RTS
+
+.L1AD7
+        LDX     L001A
+        STA     L09DA,X
+        INX
+        STX     L001A
+        CPX     #$0F
+        BEQ     L1AE7
+
+        RTS
+
+.L1AE4
+        LDA     #$00
+        RTS
+
+.L1AE7
+        LDX     L001A
+        BEQ     L1AE4
+
+        DEX
+        STX     L001A
+        LDA     L09DA,X
+        RTS
+
+.L1AF2
+        EQUB    $5C
+
+.L1AF3
+        EQUB    $73,$65,$74,$20,$66,$6C,$61,$67
+        EQUB    $73,$0D,$17,$E8,$0E
+
+.L1B00
+        JMP     L1B89
+
+        JMP     L1C45
+
+.L1B06
+        JMP     L1B29
+
+.L1B09
+        EQUB    $50
+
+.L1B0A
+        EQUB    $4F,$53,$49,$54,$49,$4F,$0D,$00
+
+.L1B12
+        EQUB    $00
+
+.L1B13
+        EQUB    $00
+
+.L1B14
+        EQUB    $00
+
+.L1B15
+        EQUB    $00,$00,$00
+
+.L1B18
+        EQUB    $00
+
+.L1B19
+        EQUB    $00,$00,$00
+
+.L1B1C
+        EQUB    $00
+
+.L1B1D
+        EQUB    $00,$00,$00
+
+.L1B20
+        EQUB    $00
+
+.L1B21
+        EQUB    $00,$00,$00
+
+.L1B24
+        EQUB    $00
+
+.L1B25
+        EQUB    $00
+
+.L1B26
+        EQUB    $00
+
+.L1B27
+        EQUB    $00
+
+.L1B28
+        EQUB    $00
+
+.L1B29
+        JSR     L1B39
+
+        LDA     #$16
+        JSR     L1CCF
+
+        LDA     #$07
+        JSR     L1CCF
+
+        JMP     BeebDisStartAddr
+
+.L1B39
+        LDA     #$00
+        STA     L004E
+        STA     L0050
+        LDA     #$78
+        STA     L0051
+        LDA     #$0E
+        STA     L004F
+.L1B47
+        JSR     L1CF8
+
+        CMP     #$7C
+        BNE     L1B47
+
+        LDA     L1B24
+        AND     #$01
+        STA     L1B24
+        RTS
+
+.L1B57
+        LDA     L1B24
+        ORA     #$02
+        STA     L1B24
+        LDA     #$00
+        STA     L004E
+        STA     L0050
+        LDA     #$0E
+        STA     L0051
+        LDA     #$78
+        STA     L004F
+.L1B6D
+        JSR     L1CF8
+
+        CMP     #$12
+        BNE     L1B6D
+
+        LDA     #$00
+        STA     L004E
+        LDA     #$0E
+        STA     L004F
+.L1B7C
+        LDA     #$00
+        TAY
+        STA     (L004E),Y
+        JSR     L1CDC
+
+        CMP     #$12
+        BNE     L1B7C
+
+        RTS
+
+.L1B89
+        PHA
+        PHP
+        STY     L004B
+        STX     L004A
+        ASL     A
+        TAX
+        LDA     L1BAB,X
+        STA     L0048
+        LDA     L1BAC,X
+        STA     L0049
+        LDA     #$1B
+        PHA
+        LDA     #$A7
+        PHA
+        LDY     #$00
+        LDA     (L004A),Y
+        JMP     (L0048)
+
+        PLP
+        PLA
+        RTS
+
+.L1BAB
+        EQUB    $46
+
+.L1BAC
+        EQUB    $1C,$D5,$1B,$BB,$1C,$A4,$1C,$11
+        EQUB    $1D,$71,$1D,$81,$1D,$45,$1C,$45
+        EQUB    $1C,$45,$1C,$45,$1C,$45,$1C,$45
+        EQUB    $1C,$45,$1C,$45,$1C,$45,$1C,$45
+        EQUB    $1C,$45,$1C,$45,$1C,$45,$1C,$45
+        EQUB    $1C
+
+.L1BD5
+        LDY     #$02
+        LDA     (L004A),Y
+        LDY     #$00
+        SEC
+        SBC     (L004A),Y
+        STA     L1B26
+        LDY     #$03
+        LDA     (L004A),Y
+        LDY     #$01
+        SBC     (L004A),Y
+        STA     L1B27
+        LDA     L1B26
+        CLC
+        ADC     #$01
+        STA     L1B26
+        LDA     L1B27
+        ADC     #$00
+        STA     L1B27
+        LDA     #$00
+        STA     L0048
+        LDY     #$00
+        LDA     (L004A),Y
+        STA     L004C
+        LDY     #$01
+        LDA     (L004A),Y
+        STA     L004D
+.L1C0D
+        LDA     L1B26
+        ORA     L1B27
+        BEQ     L1C3F
+
+        LDY     #$00
+        LDA     (L004C),Y
+        CLC
+        ADC     L0048
+        STA     L0048
+        LDA     L004C
+        CLC
+        ADC     #$01
+        STA     L004C
+        LDA     L004D
+        ADC     #$00
+        STA     L004D
+        LDA     L1B26
+        SEC
+        SBC     #$01
+        STA     L1B26
+        LDA     L1B27
+        SBC     #$00
+        STA     L1B27
+        JMP     L1C0D
+
+.L1C3F
+        LDA     L0048
+        LDY     #$00
+        STA     (L004A),Y
+.L1C45
+        RTS
+
+        LDA     #$C8
+        LDX     #$02
+        JSR     LFFF4
+
+        LDA     #$00
+        STA     L1B24
+        LDA     #$61
+        STA     L0202
+        LDA     #$1C
+        STA     L0203
+        LDA     #$0C
+        JMP     L1CCF
+
+.L1C61
+        LDA     L00FD
+        CLC
+        ADC     #$01
+        STA     L00FD
+        LDA     L00FE
+        ADC     #$00
+        STA     L00FE
+        LDY     #$00
+        LDA     (L00FD),Y
+        BEQ     L1C7A
+
+        JSR     L1CCF
+
+        JMP     L1C61
+
+.L1C7A
+        LDA     L1B24
+        AND     #$02
+        BEQ     L1C84
+
+        JSR     L1B39
+
+.L1C84
+        JSR     L1CAC
+
+        BEQ     L1C84
+
+        LDA     #$0D
+        JSR     L1CCF
+
+        LDA     L1B24
+        PHA
+        LDA     #$00
+        STA     L1B24
+        PLA
+        AND     #$01
+        BEQ     L1CA1
+
+        LDX     L1B25
+        TXS
+        RTS
+
+.L1CA1
+        JMP     BeebDisStartAddr
+
+        JSR     L1CAC
+
+        LDY     #$00
+        STA     (L004A),Y
+        RTS
+
+.L1CAC
+        LDA     #$91
+        LDX     #$00
+        JSR     LFFF4
+
+        BCC     L1CB7
+
+        LDY     #$00
+.L1CB7
+        TYA
+        CMP     #$00
+        RTS
+
+        LDY     #$00
+        LDA     (L004A),Y
+        CMP     #$02
+        BEQ     L1CDB
+
+        CMP     #$03
+        BEQ     L1CDB
+
+        CMP     #$0E
+        BEQ     L1CDB
+
+        CMP     #$0F
+        BEQ     L1CDB
+
+.L1CCF
+        CMP     #$0D
+        BNE     L1CD8
+
+        JSR     L1CD8
+
+        LDA     #$0A
+.L1CD8
+        JMP     (L020E)
+
+.L1CDB
+        RTS
+
+.L1CDC
+        LDA     L004E
+        CLC
+        ADC     #$01
+        STA     L004E
+        LDA     L004F
+        ADC     #$00
+        STA     L004F
+        RTS
+
+        LDA     L0050
+        CLC
+        ADC     #$01
+        STA     L0050
+        LDA     L0051
+        ADC     #$00
+        STA     L0051
+        RTS
+
+.L1CF8
+        LDY     #$00
+.L1CFA
+        LDA     (L0050),Y
+        STA     (L004E),Y
+        INY
+        TYA
+        BNE     L1CFA
+
+        LDA     L004F
+        CLC
+        ADC     #$01
+        STA     L004F
+        LDA     L0051
+        CLC
+        ADC     #$01
+        STA     L0051
+        RTS
+
+        LDY     #$00
+        STY     L1B28
+.L1D16
+        JSR     L1CAC
+
+        CMP     #$7F
+        BEQ     L1D2F
+
+        CMP     #$61
+        BCC     L1D27
+
+        CMP     #$7B
+        BCS     L1D16
+
+        AND     #$DF
+.L1D27
+        CMP     #$0D
+        BEQ     L1D5A
+
+        CMP     #$08
+        BNE     L1D41
+
+.L1D2F
+        LDY     L1B28
+        CPY     #$00
+        BEQ     L1D16
+
+        DEC     L1B28
+        LDA     #$7F
+        JSR     L1CCF
+
+        JMP     L1D16
+
+.L1D41
+        CMP     #$20
+        BCC     L1D16
+
+        LDY     L1B28
+        CPY     #$1E
+        BCS     L1D16
+
+        LDY     L1B28
+        STA     (L004A),Y
+        INC     L1B28
+        JSR     L1CCF
+
+        JMP     L1D16
+
+.L1D5A
+        LDA     #$0D
+        JSR     L1CCF
+
+        LDY     L1B28
+        LDA     #$20
+        STA     (L004A),Y
+        INY
+        LDA     #$00
+        STA     (L004A),Y
+        RTS
+
+.L1D6C
+        EQUS    "DISC"
+
+.L1D70
+        EQUB    $0D
+
+.L1D71
+        TSX
+        STX     L1B25
+        LDA     L1B24
+        ORA     #$01
+        STA     L1B24
+        LDA     #$00
+        BEQ     L1D83
+
+        LDA     #$FF
+.L1D83
+        PHA
+        JSR     L1DA9
+
+        LDA     #$09
+        STA     L1B12
+        LDA     #$1B
+        STA     L1B13
+        PLA
+        LDX     #$12
+        LDY     #$1B
+        JSR     LFFDD
+
+        LDA     #$00
+        TAY
+        STA     (L004A),Y
+        LDA     L1B24
+        AND     #$02
+        STA     L1B24
+        JMP     L1B39
+
+.L1DA9
+        JSR     L1B57
+
+        LDY     #$1D
+        LDX     #$6C
+        JSR     LFFF7
+
+        LDX     #$00
+.L1DB5
+        LDA     #$FF
+        STA     L1B12,X
+        INX
+        TXA
+        CMP     #$12
+        BNE     L1DB5
+
+        LDY     #$00
+        LDA     (L004A),Y
+        STA     L1B14
+        STA     L1B18
+        STA     L1B1C
+        LDY     #$01
+        LDA     (L004A),Y
+        STA     L1B15
+        STA     L1B19
+        STA     L1B1D
+        LDY     #$02
+        LDA     (L004A),Y
+        STA     L1B20
+        LDY     #$03
+        LDA     (L004A),Y
+        STA     L1B21
+        RTS
+
+        LDA     L09B5
+        BEQ     L1E0E
+
+        LDA     L08C3
+        CMP     L09B5
+        BCC     L1DFB
+
+        LDA     #$0D
+        JSR     L150F
+
+.L1DFB
+        LDA     #$00
+        BEQ     L1E0B
+
+.L1DFF
+        EQUB    $20
+
+.L1E00
+        EQUB    $28
+
+.L1E01
+        EQUB    $58
+
+.L1E02
+        EQUB    $BD
+
+.L1E03
+        EQUB    $04
+
+.L1E04
+        EQUB    $FE
+
+.L1E05
+        EQUB    $1C
+
+.L1E06
+        EQUB    $BB
+
+.L1E07
+        EQUB    $21
+
+.L1E08
+        EQUB    $3C
+
+.L1E09
+        EQUB    $0D
+
+.L1E0A
+        EQUB    $F7
+
+.L1E0B
+        EQUB    $2e
+        EQUB    $66
+
+        L1E0C   = L1E0B+1
+        L1E0D   = L1E0B+2
+        EQUB    $00
+
+.L1E0E
+        EQUB    $8F
+
+.L1E0F
+        EQUB    $30
+
+.L1E10
+        EQUB    $30,$32
+
+.L1E12
+        EQUB    $2A
+
+.L1E13
+        EQUB    $00,$00,$00,$F0,$02,$00,$80,$96
+        EQUB    $80,$0A,$04,$57,$04,$86,$81,$2C
+        EQUB    $81,$36,$81,$66,$81,$92,$31,$14
+        EQUB    $03,$11,$02,$93,$03,$87,$01,$11
+        EQUB    $02,$93,$AF,$A4,$05,$9A,$D1,$9A
+        EQUB    $07,$9A,$0B,$9A,$09,$93,$0A
+
+.L1E42
+        EQUB    $91
+
+.L1E43
+        EQUB    $0B,$91,$0C,$91,$0F,$99,$28,$9B
+        EQUB    $0D,$13,$B7,$A1,$10,$04,$0F,$91
+        EQUB    $AC,$94,$1B,$94,$1A,$80,$00,$17
+        EQUB    $15,$94,$18,$11,$17,$94,$21,$80
+        EQUB    $00,$97,$4C,$17,$21,$94,$1F,$17
+        EQUB    $18,$94,$1E,$17,$19,$94,$1D,$17
+        EQUB    $1A,$94,$1C,$97,$1D,$97,$1E,$97
+        EQUB    $1F,$17,$20,$94,$23,$34,$5D,$9B
+        EQUB    $5D,$14,$20,$97,$22,$81,$39,$9A
+        EQUB    $86,$97,$1B,$93,$26,$90,$00,$80
+        EQUB    $00,$84,$32,$83,$3B,$87,$2F,$84
+        EQUB    $3C,$81,$33,$81,$3E,$84,$37,$86
+        EQUB    $30,$88,$31,$01,$28,$82,$32,$03
+        EQUB    $29,$85,$2F,$07,$3F,$88,$34,$01
+        EQUB    $3F,$82,$35,$03,$3F,$85,$36,$04
+        EQUB    $2B,$86,$33,$03,$4E,$85,$38,$06
+        EQUB    $39,$84,$22,$07,$68,$88,$3A,$01
+        EQUB    $2D,$82,$37,$02,$3C,$81,$2C,$03
+        EQUB    $52,$85,$3D,$04,$2E,$86,$3E,$18
+        EQUB    $3B,$87,$2A,$04,$35,$33,$3F,$32
+        EQUB    $40,$38,$40,$B1,$40,$33,$40,$32
+        EQUB    $41,$38,$41,$B1,$41,$33,$41,$32
+        EQUB    $42,$38,$42,$B1,$42,$33,$42,$32
+        EQUB    $43,$38,$43,$B1,$43,$33,$43,$32
+        EQUB    $44,$38,$44,$B1,$44,$33,$44,$32
+        EQUB    $45,$38,$45,$B1,$45,$33,$45,$32
+        EQUB    $46,$38,$46,$B1,$46,$33,$46,$32
+        EQUB    $47,$38,$47,$B1,$47,$33,$47,$32
+        EQUB    $48,$38,$48,$B1,$48,$33,$48,$32
+        EQUB    $49,$38,$49,$B1,$49,$33,$49,$32
+        EQUB    $4A,$38,$4A,$B1,$4A,$33,$4A,$32
+        EQUB    $4B,$38,$4B,$B1,$4B,$33,$4B,$22
+        EQUB    $3F,$28,$3F,$A1,$3F,$97,$4D,$91
+        EQUB    $73,$87,$38,$17,$4E,$91,$50,$1B
+        EQUB    $64,$B1,$64,$1B,$65,$91,$4F,$07
+        EQUB    $3D,$91,$53,$91,$54,$91,$55,$91
+        EQUB    $56,$91,$57,$91,$6F,$91,$58,$9A
+        EQUB    $62,$93,$6F,$97,$55,$97,$54,$80
+        EQUB    $00,$94,$24,$81,$3F,$81,$3F,$81
+        EQUB    $3F,$97,$63,$80,$00,$80,$00,$B1
+        EQUB    $51,$03,$72,$98,$65,$80,$00,$03
+        EQUB    $3A,$91,$8D,$12,$A8,$98,$A7,$94
+        EQUB    $68,$83,$3A,$80,$00,$80,$00,$93
+        EQUB    $57,$80,$00,$94,$6F,$80,$00,$80
+        EQUB    $00,$93,$AB,$80,$00,$80,$00,$97
+        EQUB    $75,$80,$00,$97,$7F,$94,$78,$97
+        EQUB    $78,$96,$78,$98,$78,$91,$78,$92
+        EQUB    $78,$97,$57,$95,$78,$93,$56,$93
+        EQUB    $55,$93,$54,$80,$00,$93,$80,$BB
+        EQUB    $85,$94,$88,$94,$8A,$97,$87,$93
+        EQUB    $8D,$11,$89,$13,$8E,$14,$8D,$97
+        EQUB    $88,$97,$89,$93,$8F,$91,$8C,$91
+        EQUB    $8E,$99,$6B,$80,$00,$03,$3A,$97
+        EQUB    $91,$94,$92,$97,$67,$14,$94,$81
+        EQUB    $3F,$97,$6A,$97,$96,$97,$97,$94
+        EQUB    $96,$94,$97,$94,$98,$91,$96,$91
+        EQUB    $97,$91,$98,$97,$98,$87,$6A,$94
+        EQUB    $A0,$91,$A0,$07,$A0,$99,$A4,$91
+        EQUB    $A5,$91,$A6,$80,$00,$81,$A9,$81
+        EQUB    $A9,$94,$6A,$91,$6A,$91,$69,$91
+        EQUB    $AD,$91,$AE,$93,$AF,$29,$29,$93
+        EQUB    $B0,$29,$3E,$91,$B2,$29,$5C,$97
+        EQUB    $B0,$29,$2C,$91,$B3,$29,$35,$91
+        EQUB    $B5,$93,$B3,$80,$00,$97,$B3,$29
+        EQUB    $39,$91,$B0,$29,$AB,$97,$B7,$80
+        EQUB    $00,$8C,$4B,$87,$BC,$87,$4E,$9C
+        EQUB    $50,$81,$3F,$80,$00,$94,$C1,$97
+        EQUB    $BE,$97,$C1,$80,$00,$81,$3F,$80
+        EQUB    $00,$94,$C7,$97,$C4,$97,$C7,$80
+        EQUB    $00,$8C,$DC,$91,$CC,$A3,$DE,$80
+        EQUB    $00,$80,$00,$9B,$84,$80,$00,$8A
+        EQUB    $3F,$11,$D5,$13,$D7,$14,$D9,$97
+        EQUB    $D3,$91,$D4,$93,$D5,$93,$D6,$94
+        EQUB    $D7,$94,$D8,$97,$D9,$97,$DA,$91
+        EQUB    $D3,$13,$D3,$97,$DC,$11,$E2,$97
+        EQUB    $DD,$11,$E3,$97,$DE,$11,$E4,$97
+        EQUB    $DF,$97,$E1,$13,$E1,$91,$E8,$80
+        EQUB    $00,$14,$DC,$13,$E4,$91,$E5,$11
+        EQUB    $E6,$93,$E2,$11,$E7,$93,$E3,$11
+        EQUB    $DC,$93,$E7,$11,$DD,$93,$E5,$11
+        EQUB    $DE,$93,$E6,$91,$E9,$91,$EA,$47
+        EQUB    $D7,$91,$79,$91,$EC,$91,$ED,$91
+        EQUB    $EE,$91,$EF,$91,$F0,$91,$F1,$91
+        EQUB    $F2,$91,$F3,$91,$F4,$91,$F5,$91
+        EQUB    $F6,$91,$F7,$91,$F8,$91,$F9,$91
+        EQUB    $FA,$91,$01,$00,$00,$00,$00,$26
+        EQUB    $0F,$0B,$07,$5E,$00,$8B,$05,$23
+        EQUB    $07,$7D,$0E,$00,$00,$20,$07,$00
+        EQUB    $00,$7C,$0E,$3E,$04,$33,$08,$10
+        EQUB    $01,$21,$07,$20,$07,$22,$07,$7B
+        EQUB    $0E,$8B,$05,$24,$05,$8B,$05,$00
+        EQUB    $00,$3C,$0E,$46,$0E,$46,$0E,$46
+        EQUB    $0E,$7C,$0E,$00,$00,$3D,$0E,$34
+        EQUB    $0B,$00,$00,$00,$00,$79,$0E,$24
+        EQUB    $04,$49,$0E,$7A,$0E,$6A,$03,$24
+        EQUB    $05,$8B,$05,$AE,$00,$D4,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$D2,$00,$E2,$00,$00
+        EQUB    $00,$00,$00,$8D,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$1B,$80,$22
+        EQUB    $80,$19,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$5F,$80,$67,$80,$00,$00,$5D
+        EQUB    $80,$6F,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$AE,$00,$92,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$56
+        EQUB    $01,$6E,$00,$00,$80,$00,$00,$00
+        EQUB    $00,$C1,$00,$00,$00,$0F,$00,$00
+        EQUB    $00,$0B,$00,$00,$00,$18,$00,$00
+        EQUB    $00,$A0,$00,$94,$00,$C0,$00,$A6
+        EQUB    $00,$00,$00,$C1,$00,$AD,$00,$A6
+        EQUB    $00,$81,$80,$0F,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$DF,$80,$83,$00,$00
+        EQUB    $80,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$5A
+        EQUB    $80,$5B,$80,$5C,$80,$60,$80,$61
+        EQUB    $80,$6A,$80,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $D7,$D8,$D9,$DA,$D3,$D4,$D5,$D6
+        EQUB    $D7,$D2,$D3,$DB,$DC,$DD,$DE,$DF
+        EQUB    $E1,$E0,$E8,$E9,$EA,$FF,$00,$82
+        EQUB    $55,$56,$81,$81,$56,$55,$82,$00
+        EQUB    $21,$18,$18,$19,$1A,$1B,$1C,$1D
+        EQUB    $1E,$1F,$20,$00,$02,$01,$03,$AF
+        EQUB    $B0,$B2,$B3,$B4,$B3,$B5,$B3,$B6
+        EQUB    $B3,$B2,$B0,$B1,$B0,$B7,$B8,$B7
+        EQUB    $0F,$B7,$B0,$AF,$03,$00,$AE,$AD
+        EQUB    $AC,$AD,$AE,$00,$01,$00,$00,$00
+        EQUB    $00,$00,$03,$00,$00,$00,$00,$00
+        EQUB    $07,$02,$00,$00,$00,$00,$01,$08
+        EQUB    $00,$00,$00,$00,$03,$04,$02,$00
+        EQUB    $00,$00,$09,$02,$07,$00,$00,$00
+        EQUB    $07,$08,$01,$02,$00,$00,$01,$06
+        EQUB    $05,$06,$00,$00,$03,$08,$06,$09
+        EQUB    $01,$00,$09,$04,$00,$09,$05,$00
+        EQUB    $07,$04,$01,$07,$07,$01,$01,$04
+        EQUB    $04,$01,$03,$05,$4E,$4F,$54,$46
+        EQUB    $4F,$55,$4E,$44,$20,$08,$E7,$2C
+        EQUB    $14,$00,$FE,$1C,$12,$1D,$3C,$0D
+        EQUB    $4E,$2A,$66,$00,$E6,$2B,$30,$32
+        EQUB    $00,$00,$80,$02,$00,$03,$8F,$BA
+        EQUB    $03,$0D,$00,$03,$05,$00,$03,$8F
+        EQUB    $8D,$03,$0C,$00,$04,$05,$8F,$8D
+        EQUB    $04,$19,$8F,$8D,$03,$05,$00,$05
+        EQUB    $81,$39,$1B,$00,$06,$0F,$2A,$82
+        EQUB    $08,$00,$81,$07,$8F,$8D,$84,$25
+        EQUB    $1B,$00,$05,$2F,$83,$64,$0B,$80
+        EQUB    $09,$8F,$8D,$83,$F9,$82,$68,$9F
+        EQUB    $BF,$04,$8F,$BA,$00,$02,$09,$03
+        EQUB    $07,$00,$03,$06,$00,$03,$0F,$00
+        EQUB    $02,$42,$05,$08,$70,$83,$1E,$47
+        EQUB    $B2,$73,$8F,$80,$B2,$78,$44,$B3
+        EQUB    $C3,$00,$44,$B0,$52,$00,$81,$48
+        EQUB    $81,$A8,$0A,$8F,$80,$B0,$34,$44
+        EQUB    $B1,$C5,$00,$05,$81,$94,$21,$00
+        EQUB    $44,$C4,$0A,$00,$05,$81,$E2,$0A
+        EQUB    $00,$05,$82,$20,$0B,$00,$05,$82
+        EQUB    $26,$0B,$00,$05,$83,$3A,$0B,$00
+        EQUB    $80,$05,$81,$48,$10,$00,$80,$02
+        EQUB    $11,$02,$11,$02,$11,$04,$11,$80
+        EQUB    $89,$03,$11,$57,$03,$11,$00,$02
+        EQUB    $11,$02,$11,$80,$02,$11,$02,$11
+        EQUB    $81,$04,$11,$83,$24,$02,$11,$94
+        EQUB    $05,$1B,$83,$64,$0B,$81,$03,$82
+        EQUB    $8B,$03,$1B,$57,$85,$05,$1B,$82
+        EQUB    $26,$0B,$05,$1B,$83,$3A,$0B,$43
+        EQUB    $B2,$6E,$43,$B3,$C7,$43,$B0,$FA
+        EQUB    $43,$B3,$A9,$80,$05,$81,$26,$21
+        EQUB    $06,$06,$82,$0B,$03,$81,$80,$05
+        EQUB    $81,$25,$21,$06,$05,$43,$03,$81
+        EQUB    $80,$81,$49,$92,$5E,$8F,$80,$92
+        EQUB    $49,$92,$5B,$47,$92,$61,$8F,$80
+        EQUB    $92,$4B,$47,$91,$11,$8F,$80,$91
+        EQUB    $0D,$47,$93,$53,$8F,$80,$93,$04
+        EQUB    $47,$93,$55,$8F,$80,$93,$18,$47
+        EQUB    $93,$56,$8F,$80,$93,$76,$47,$93
+        EQUB    $F8,$8F,$80,$93,$D8,$47,$92,$62
+        EQUB    $8F,$80,$92,$6A,$47,$93,$C8,$8F
+        EQUB    $80,$93,$C1,$47,$90,$FB,$8F,$80
+        EQUB    $90,$D4,$49,$91,$C5,$8F,$80,$91
+        EQUB    $CD,$91,$D1,$47,$92,$85,$8F,$80
+        EQUB    $92,$87,$47,$90,$C8,$8F,$80,$90
+        EQUB    $0D,$43,$90,$9F,$43,$91,$EA,$84
+        EQUB    $45,$90,$10,$90,$07,$45,$91,$D5
+        EQUB    $91,$D2,$80,$45,$92,$D1,$92,$E7
+        EQUB    $45,$92,$E8,$92,$1B,$43,$93,$0D
+        EQUB    $43,$93,$14,$81,$45,$93,$DA,$93
+        EQUB    $D9,$43,$93,$3B,$43,$92,$73,$43
+        EQUB    $92,$6E,$43,$92,$A5,$43,$94,$10
+        EQUB    $84,$4B,$90,$37,$8F,$80,$91,$F5
+        EQUB    $91,$F4,$90,$6F,$43,$92,$1E,$43
+        EQUB    $92,$18,$43,$93,$19,$49,$91,$30
+        EQUB    $8F,$80,$92,$D6,$93,$E9,$81,$43
+        EQUB    $93,$DB,$47,$93,$3E,$8F,$80,$93
+        EQUB    $43,$8A,$49,$93,$7D,$8F,$80,$91
+        EQUB    $78,$90,$7D,$43,$93,$F2,$43,$91
+        EQUB    $04,$43,$92,$CD,$43,$92,$E3,$43
+        EQUB    $93,$9E,$43,$91,$7A,$43,$93,$64
+        EQUB    $43,$92,$13,$43,$93,$37,$81,$43
+        EQUB    $92,$7A,$82,$49,$92,$C1,$8F,$80
+        EQUB    $92,$FF,$93,$22,$43,$92,$CB,$47
+        EQUB    $91,$47,$8F,$80,$90,$36,$47,$93
+        EQUB    $C4,$8F,$80,$93,$C6,$81,$47,$91
+        EQUB    $13,$8F,$80,$90,$61,$82,$43,$91
+        EQUB    $CC,$43,$93,$0E,$43,$92,$A3,$43
+        EQUB    $93,$60,$A7,$43,$C0,$3F,$43,$C0
+        EQUB    $76,$47,$C2,$31,$8F,$80,$C2,$B3
+        EQUB    $43,$C3,$83,$43,$C0,$47,$43,$C3
+        EQUB    $A0,$43,$C0,$86,$43,$C0,$B5,$43
+        EQUB    $C1,$D6,$47,$C3,$CA,$8F,$80,$C3
+        EQUB    $81,$43,$C3,$E3,$43,$C0,$29,$43
+        EQUB    $C2,$A6,$45,$C2,$0E,$C0,$D0,$43
+        EQUB    $C4,$08,$43,$C2,$AD,$43,$C2,$A9
+        EQUB    $43,$C0,$A6,$45,$C0,$78,$C1,$A3
+        EQUB    $43,$C3,$D5,$43,$C0,$A6,$43,$C1
+        EQUB    $54,$46,$C0,$6D,$0E,$C1,$5E,$45
+        EQUB    $C2,$BD,$C2,$AB,$43,$C4,$1A,$43
+        EQUB    $C3,$D0,$80,$43,$C2,$53,$43,$C3
+        EQUB    $10,$81,$43,$C0,$6B,$43,$C0,$CD
+        EQUB    $43,$C0,$6E,$43,$C0,$D5,$47,$C1
+        EQUB    $C8,$C1,$F7,$C1,$F8,$43,$C2,$0F
+        EQUB    $43,$C3,$AF,$45,$C0,$15,$C0,$BA
+        EQUB    $43,$C0,$56,$45,$C0,$29,$C0,$B4
+        EQUB    $88,$43,$C3,$B7,$43,$C0,$51,$43
+        EQUB    $C4,$17,$80,$43,$C0,$87,$45,$C2
+        EQUB    $1A,$C1,$02,$45,$C1,$08,$C1,$02
+        EQUB    $45,$C3,$A7,$C1,$02,$80,$43,$C1
+        EQUB    $55,$43,$C2,$54,$43,$C3,$48,$43
+        EQUB    $C3,$B1,$43,$C3,$AD,$43,$C3,$AD
+        EQUB    $45,$C0,$15,$C3,$E8,$82,$43,$C1
+        EQUB    $5D,$45,$C1,$E5,$C1,$02,$43,$C0
+        EQUB    $B2,$43,$C2,$A7,$43,$C0,$D1,$43
+        EQUB    $C1,$6F,$81,$46,$82,$8F,$0E,$C3
+        EQUB    $85,$43,$C3,$DD,$84,$43,$C0,$2D
+        EQUB    $45,$82,$76,$C0,$41,$43,$C0,$4C
+        EQUB    $80,$43,$C0,$7C,$43,$C0,$C0,$43
+        EQUB    $C1,$8A,$45,$C1,$EF,$C1,$9F,$45
+        EQUB    $C1,$C7,$C2,$15,$43,$C3,$AE,$47
+        EQUB    $C2,$2A,$C0,$BF,$82,$89,$43,$C2
+        EQUB    $35,$43,$C2,$38,$48,$C1,$9E,$82
+        EQUB    $3C,$80,$64,$15,$43,$C2,$66,$43
+        EQUB    $C2,$69,$43,$C2,$82,$47,$C2,$95
+        EQUB    $46,$06,$80,$D6,$47,$C2,$BC,$8F
+        EQUB    $80,$C3,$BF,$43,$C3,$0C,$43,$C3
+        EQUB    $11,$43,$C3,$16,$43,$C3,$33,$43
+        EQUB    $C3,$E4,$81,$43,$C2,$D3,$43,$C0
+        EQUB    $BB,$43,$C0,$91,$85,$47,$C1,$B0
+        EQUB    $0A,$06,$C3,$E2,$43,$C3,$08,$43
+        EQUB    $C3,$08,$43,$C3,$08,$43,$C3,$08
+        EQUB    $45,$C3,$B6,$C0,$12,$47,$C2,$CE
+        EQUB    $C2,$DA,$C1,$02,$8C,$47,$C4,$26
+        EQUB    $8F,$80,$C2,$2F,$88,$45,$C1,$2D
+        EQUB    $C0,$17,$45,$C1,$31,$C0,$7A,$49
+        EQUB    $C1,$DA,$8F,$80,$C3,$8B,$C3,$91
+        EQUB    $81,$43,$A3,$93,$83,$43,$C0,$62
+        EQUB    $43,$C0,$77,$43,$C2,$DC,$43,$C2
+        EQUB    $7E,$43,$C4,$1F,$43,$C1,$87,$43
+        EQUB    $C0,$65,$43,$C3,$D4,$43,$C1,$89
+        EQUB    $43,$C4,$03,$80,$46,$27,$80,$CA
+        EQUB    $C0,$8C,$46,$27,$80,$CA,$C0,$8C
+        EQUB    $46,$27,$80,$CA,$C0,$8C,$81,$48
+        EQUB    $0B,$06,$3D,$C0,$9A,$C0,$F5,$46
+        EQUB    $81,$24,$0A,$C3,$D3,$47,$0B,$0F
+        EQUB    $80,$22,$C0,$9E,$46,$0A,$81,$69
+        EQUB    $C1,$4B,$45,$29,$07,$C2,$F3,$4A
+        EQUB    $0B,$07,$81,$87,$C1,$AA,$64,$C0
+        EQUB    $9A,$47,$0A,$0F,$83,$C2,$C3,$BB
+        EQUB    $4A,$0B,$C0,$72,$C3,$69,$10,$06
+        EQUB    $C1,$67,$45,$0A,$06,$C1,$67,$4A
+        EQUB    $41,$0E,$07,$80,$8A,$83,$C2,$C3
+        EQUB    $ED,$45,$55,$06,$C3,$ED,$45,$0A
+        EQUB    $06,$C1,$B4,$49,$0B,$C3,$99,$0E
+        EQUB    $C3,$0A,$C0,$A9,$46,$0B,$C3,$CC
+        EQUB    $C3,$0B,$44,$12,$C1,$0F,$50,$0B
+        EQUB    $06,$C3,$2B,$0E,$C0,$DD,$75,$06
+        EQUB    $51,$C2,$F4,$11,$82,$3F,$80,$53
+        EQUB    $0B,$06,$C1,$D8,$0E,$06,$C2,$3A
+        EQUB    $75,$06,$51,$C2,$F4,$11,$82,$68
+        EQUB    $82,$3F,$4A,$12,$06,$48,$C1,$1C
+        EQUB    $0E,$06,$C2,$F6,$4B,$0B,$07,$82
+        EQUB    $1D,$0C,$84,$07,$6A,$C2,$F6,$4A
+        EQUB    $0B,$0F,$6A,$C4,$1F,$C0,$72,$C2
+        EQUB    $F6,$48,$12,$06,$C1,$75,$0E,$C1
+        EQUB    $DF,$48,$29,$06,$C1,$67,$0E,$C2
+        EQUB    $93,$49,$0A,$06,$81,$69,$C0,$FF
+        EQUB    $C2,$94,$46,$0A,$C1,$09,$C4,$0F
+        EQUB    $46,$0A,$C4,$1E,$C4,$0F,$4B,$29
+        EQUB    $07,$82,$1A,$C1,$B6,$0B,$06,$C2
+        EQUB    $C0,$44,$0B,$C1,$59,$46,$0B,$C1
+        EQUB    $7C,$C2,$F5,$48,$29,$06,$C3,$F6
+        EQUB    $0E,$C3,$51,$46,$0A,$80,$22,$C2
+        EQUB    $00,$82,$45,$29,$07,$C1,$67,$45
+        EQUB    $0B,$06,$C2,$9C,$45,$0B,$06,$C2
+        EQUB    $9C,$45,$0B,$06,$C2,$9C,$45,$0B
+        EQUB    $06,$C2,$9C,$45,$0B,$06,$C2,$9C
+        EQUB    $45,$0B,$06,$C2,$9C,$46,$6B,$0E
+        EQUB    $07,$C2,$FD,$46,$41,$0E,$07,$C2
+        EQUB    $FD,$48,$12,$06,$C1,$67,$C2,$FD
+        EQUB    $2A,$47,$82,$5E,$0E,$07,$C2,$FD
+        EQUB    $48,$12,$0F,$C1,$2B,$C2,$FD,$2A
+        EQUB    $48,$12,$0F,$C1,$2B,$C2,$FD,$2A
+        EQUB    $48,$12,$0F,$C1,$2B,$C2,$FD,$2A
+        EQUB    $46,$6B,$0E,$07,$C2,$FD,$48,$12
+        EQUB    $06,$C2,$45,$C2,$FD,$2A,$4A,$12
+        EQUB    $06,$C3,$92,$C2,$94,$C2,$FD,$2A
+        EQUB    $48,$12,$06,$C4,$12,$C2,$FD,$2A
+        EQUB    $46,$48,$0E,$07,$C2,$FD,$46,$48
+        EQUB    $0E,$07,$C2,$FD,$4A,$12,$06,$C2
+        EQUB    $B2,$C0,$F5,$C2,$FD,$2A,$46,$6B
+        EQUB    $0E,$07,$C2,$FD,$46,$41,$0E,$07
+        EQUB    $C2,$FD,$5B,$0B,$07,$C3,$E1,$46
+        EQUB    $06,$C1,$16,$C3,$B3,$83,$7B,$04
+        EQUB    $81,$39,$82,$07,$82,$5F,$10,$80
+        EQUB    $01,$C1,$2B,$C2,$F2,$4F,$0B,$0F
+        EQUB    $82,$86,$C1,$2B,$C2,$F1,$1E,$81
+        EQUB    $39,$80,$17,$46,$49,$0B,$0F,$82
+        EQUB    $86,$C1,$2B,$C2,$F1,$47,$0B,$0F
+        EQUB    $C1,$2B,$C2,$F1,$47,$0B,$0F,$C1
+        EQUB    $2B,$C2,$F1,$49,$0B,$07,$80,$8E
+        EQUB    $C1,$2B,$C2,$F1,$49,$0B,$07,$80
+        EQUB    $8E,$C1,$2B,$C2,$F1,$49,$0B,$07
+        EQUB    $80,$8E,$C1,$2B,$C2,$F1,$47,$0B
+        EQUB    $0F,$C1,$2B,$C2,$F1,$47,$0B,$0F
+        EQUB    $C1,$2B,$C2,$F1,$49,$0B,$0F,$81
+        EQUB    $CA,$C1,$2B,$C2,$F1,$49,$0B,$0F
+        EQUB    $81,$CA,$C1,$2B,$C2,$F1,$59,$41
+        EQUB    $0E,$06,$C1,$2B,$C1,$B9,$C3,$E2
+        EQUB    $04,$81,$39,$82,$07,$83,$54,$10
+        EQUB    $06,$C1,$16,$C3,$B3,$83,$7B,$08
+        EQUB    $0A,$0F,$80,$3A,$0E,$83,$B8,$4A
+        EQUB    $29,$06,$C1,$76,$10,$07,$3D,$C2
+        EQUB    $CE,$49,$0B,$06,$82,$0D,$81,$93
+        EQUB    $C1,$01,$47,$0A,$06,$C0,$9A,$C3
+        EQUB    $5E,$47,$29,$06,$C2,$B8,$C3,$68
+        EQUB    $45,$29,$06,$C1,$B3,$47,$64,$06
+        EQUB    $C2,$B2,$C0,$F5,$45,$29,$07,$C3
+        EQUB    $BE,$51,$0A,$07,$82,$60,$C0,$B7
+        EQUB    $80,$59,$07,$54,$C1,$91,$0C,$07
+        EQUB    $C1,$F9,$51,$0A,$06,$82,$60,$C0
+        EQUB    $B7,$80,$59,$06,$C4,$2E,$0C,$C2
+        EQUB    $A1,$C3,$2A,$4B,$0A,$06,$82,$60
+        EQUB    $C0,$B7,$64,$06,$C2,$46,$54,$0A
+        EQUB    $07,$82,$60,$C0,$B7,$80,$59,$07
+        EQUB    $C0,$8B,$0C,$C2,$EC,$3D,$C0,$FF
+        EQUB    $C0,$F5,$81,$47,$12,$06,$C3,$87
+        EQUB    $C0,$44,$47,$0A,$07,$C2,$A1,$C3
+        EQUB    $2A,$47,$0A,$07,$C2,$DF,$C1,$F9
+        EQUB    $47,$0A,$06,$82,$1A,$C1,$FA,$49
+        EQUB    $0A,$06,$82,$72,$C0,$CF,$C3,$2A
+        EQUB    $49,$0A,$07,$81,$69,$C1,$5D,$C3
+        EQUB    $2A,$47,$0A,$07,$C1,$99,$C3,$E7
+        EQUB    $47,$0A,$07,$C3,$B6,$C0,$12,$81
+        EQUB    $47,$29,$07,$C2,$DA,$C0,$E7,$47
+        EQUB    $0A,$06,$C1,$B3,$C1,$68,$47,$0A
+        EQUB    $06,$C0,$67,$C0,$43,$47,$12,$07
+        EQUB    $C2,$AC,$C0,$BD,$48,$12,$07,$51
+        EQUB    $C2,$70,$81,$27,$46,$0A,$07,$51
+        EQUB    $C1,$68,$47,$29,$07,$C2,$DA,$C0
+        EQUB    $14,$46,$0A,$07,$3D,$C2,$70,$81
+        EQUB    $46,$0A,$07,$1F,$C0,$8B,$48,$0A
+        EQUB    $07,$51,$C3,$87,$C1,$27,$47,$0A
+        EQUB    $06,$C1,$CA,$C3,$09,$81,$46,$12
+        EQUB    $07,$3D,$C1,$76,$83,$47,$80,$59
+        EQUB    $C0,$72,$C0,$2A,$48,$0A,$07,$56
+        EQUB    $C1,$73,$C0,$14,$47,$0A,$07,$C2
+        EQUB    $CE,$C0,$14,$49,$0A,$0F,$C0,$15
+        EQUB    $C3,$B8,$C0,$14,$47,$0A,$07,$80
+        EQUB    $E8,$C0,$14,$47,$0A,$07,$80,$E8
+        EQUB    $C0,$14,$47,$0A,$07,$C3,$BB,$C0
+        EQUB    $14,$46,$0A,$07,$1F,$C3,$BB,$49
+        EQUB    $0A,$07,$C3,$34,$C0,$FF,$C0,$14
+        EQUB    $47,$0A,$07,$C1,$AE,$C0,$14,$47
+        EQUB    $0A,$07,$80,$EE,$C4,$2E,$46,$0A
+        EQUB    $07,$54,$C1,$91,$81,$48,$0A,$06
+        EQUB    $C3,$F6,$0E,$C3,$51,$47,$12,$0F
+        EQUB    $81,$5B,$C0,$E7,$04,$27,$3E,$39
+        EQUB    $04,$27,$3E,$39,$04,$27,$3E,$39
+        EQUB    $04,$27,$3E,$39,$04,$27,$3E,$39
+        EQUB    $04,$27,$3E,$39,$04,$27,$3E,$39
+        EQUB    $04,$27,$3E,$39,$45,$12,$07,$C4
+        EQUB    $14,$47,$0A,$07,$C3,$DD,$C0,$A4
+        EQUB    $47,$0A,$07,$80,$EE,$C4,$13,$45
+        EQUB    $0A,$07,$C3,$E7,$49,$0A,$0F,$81
+        EQUB    $1B,$81,$E6,$C3,$E7,$46,$0A,$07
+        EQUB    $1F,$C2,$BA,$48,$48,$0E,$07,$82
+        EQUB    $1D,$C0,$B7,$48,$0A,$07,$82,$1D
+        EQUB    $6A,$C0,$B7,$4C,$12,$06,$6B,$81
+        EQUB    $1C,$0E,$06,$82,$1D,$C0,$B7,$47
+        EQUB    $0A,$07,$82,$DC,$C2,$70,$47,$0A
+        EQUB    $0F,$82,$7E,$C2,$70,$46,$0A,$07
+        EQUB    $73,$C2,$70,$47,$0A,$07,$81,$87
+        EQUB    $C2,$70,$47,$0A,$07,$80,$65,$C2
+        EQUB    $70,$47,$0A,$07,$83,$D4,$C2,$70
+        EQUB    $47,$0A,$07,$84,$03,$C2,$70,$47
+        EQUB    $0A,$07,$83,$2C,$C0,$B7,$48,$0A
+        EQUB    $07,$51,$C0,$BC,$C0,$92,$47,$0A
+        EQUB    $0F,$80,$39,$C0,$66,$46,$0B,$83
+        EQUB    $1C,$C3,$63,$46,$0B,$83,$1C,$C3
+        EQUB    $63,$48,$0A,$06,$80,$8F,$0E,$C2
+        EQUB    $BF,$48,$0B,$06,$C3,$1B,$0E,$C2
+        EQUB    $BF,$49,$82,$62,$0E,$0F,$80,$39
+        EQUB    $C1,$68,$49,$82,$61,$0E,$0F,$80
+        EQUB    $39,$C1,$68,$45,$0A,$0F,$C1,$18
+        EQUB    $47,$55,$07,$C2,$DA,$C0,$E7,$4A
+        EQUB    $0A,$06,$C2,$CE,$0E,$C2,$BF,$C2
+        EQUB    $CF,$5A,$27,$80,$EE,$C4,$03,$C2
+        EQUB    $FC,$04,$0A,$07,$80,$8D,$10,$06
+        EQUB    $82,$5E,$83,$39,$0F,$C0,$15,$C1
+        EQUB    $5F,$C3,$0C,$47,$0A,$07,$C1,$5B
+        EQUB    $C0,$8D,$4A,$81,$CD,$0F,$C1,$C3
+        EQUB    $C1,$5F,$C3,$0C,$48,$0A,$0F,$6A
+        EQUB    $C0,$B0,$C0,$B7,$47,$12,$07,$C0
+        EQUB    $B0,$C1,$EC,$4D,$0A,$07,$76,$1E
+        EQUB    $06,$83,$78,$C3,$3E,$0E,$C1,$32
+        EQUB    $49,$0A,$07,$82,$60,$C0,$B0,$C0
+        EQUB    $B7,$47,$12,$07,$C1,$BB,$C1,$EC
+        EQUB    $4A,$83,$75,$2E,$7A,$0E,$C0,$B0
+        EQUB    $C2,$A8,$4A,$83,$75,$2E,$7A,$0E
+        EQUB    $C0,$B0,$C2,$A8,$4A,$83,$75,$2E
+        EQUB    $7A,$0E,$C0,$B0,$C2,$A8,$47,$12
+        EQUB    $07,$C0,$EE,$C1,$EC,$46,$27,$C2
+        EQUB    $DC,$C3,$82,$44,$0A,$C2,$C4,$83
+        EQUB    $45,$0A,$16,$C1,$91,$80,$47,$0A
+        EQUB    $16,$83,$A3,$C0,$68,$45,$0A,$16
+        EQUB    $C1,$92,$4C,$0B,$07,$80,$72,$C0
+        EQUB    $40,$1E,$07,$51,$C3,$D2,$80,$47
+        EQUB    $0A,$07,$82,$ED,$C1,$91,$80,$47
+        EQUB    $0A,$07,$80,$EE,$C0,$68,$47,$0A
+        EQUB    $07,$83,$17,$C1,$92,$47,$0B,$07
+        EQUB    $83,$62,$C0,$40,$88,$4C,$0B,$07
+        EQUB    $56,$C2,$05,$27,$06,$C2,$93,$C1
+        EQUB    $73,$4E,$80,$59,$82,$4D,$C1,$5E
+        EQUB    $C0,$4D,$29,$06,$48,$C3,$E2,$54
+        EQUB    $0A,$06,$82,$62,$C0,$B6,$0E,$07
+        EQUB    $C1,$73,$C2,$93,$03,$82,$C8,$2E
+        EQUB    $07,$C3,$E2,$4E,$0A,$07,$83,$A2
+        EQUB    $C0,$1B,$C1,$73,$41,$0E,$06,$C3
+        EQUB    $E2,$4D,$0A,$06,$81,$69,$82,$61
+        EQUB    $C0,$B6,$0E,$06,$C1,$73,$4D,$12
+        EQUB    $07,$82,$1C,$C0,$F8,$0A,$06,$C1
+        EQUB    $73,$C3,$E2,$51,$83,$C3,$C1,$87
+        EQUB    $C3,$B8,$0A,$06,$83,$55,$C0,$B6
+        EQUB    $0E,$06,$C1,$73,$4F,$0B,$07,$81
+        EQUB    $69,$C1,$65,$C2,$05,$29,$06,$C1
+        EQUB    $73,$C3,$E2,$4D,$0B,$07,$84,$07
+        EQUB    $C2,$99,$69,$06,$C0,$72,$C3,$E2
+        EQUB    $49,$83,$64,$0B,$07,$83,$12,$C1
+        EQUB    $AA,$46,$0B,$80,$48,$C1,$86,$48
+        EQUB    $0A,$0F,$6A,$C3,$0A,$C1,$6E,$4A
+        EQUB    $0A,$07,$80,$E2,$6A,$C3,$0A,$C1
+        EQUB    $6E,$47,$29,$07,$82,$4A,$C2,$D3
+        EQUB    $46,$48,$0E,$06,$C2,$D3,$80,$46
+        EQUB    $0B,$C0,$F7,$C1,$0A,$06,$0B,$82
+        EQUB    $9A,$82,$FA,$46,$0B,$81,$E1,$C1
+        EQUB    $86,$47,$0B,$07,$C0,$69,$C2,$AA
+        EQUB    $45,$0A,$07,$C3,$98,$46,$0B,$C1
+        EQUB    $58,$C2,$FA,$47,$0B,$07,$C0,$48
+        EQUB    $C2,$30,$45,$69,$74,$C3,$AE,$50
+        EQUB    $41,$0E,$06,$C1,$37,$04,$C1,$EE
+        EQUB    $82,$EA,$80,$11,$07,$C3,$E2,$C1
+        EQUB    $05,$80,$E1,$1E,$00,$05,$80,$E1
+        EQUB    $1E,$00,$0B,$80,$62,$80,$ED,$0B
+        EQUB    $07,$82,$1D,$80,$90,$0A,$07,$80
+        EQUB    $A8,$82,$06,$0A,$16,$84,$1C,$06
+        EQUB    $07,$82,$50,$82,$D7,$07,$07,$83
+        EQUB    $1A,$7F,$83,$A0,$07,$20,$82,$75
+        EQUB    $80,$DB,$32,$02,$1F,$15,$10,$83
+        EQUB    $1C,$82,$32,$12,$80,$04,$04,$80
+        EQUB    $74,$07,$83,$CA,$0C,$82,$31,$10
+        EQUB    $81,$E8,$04,$3C,$83,$59,$04,$81
+        EQUB    $C3,$1F,$03,$80,$E3,$03,$82,$ED
+        EQUB    $03,$82,$25,$03,$81,$53,$02,$1F
+        EQUB    $03,$81,$C3,$04,$83,$72,$1F,$05
+        EQUB    $83,$57,$81,$A3,$02,$1F,$04,$36
+        EQUB    $82,$71,$07,$20,$06,$81,$20,$83
+        EQUB    $CE,$02,$56,$02,$1F,$04,$0A,$82
+        EQUB    $36,$04,$83,$60,$15,$80,$09,$80
+        EQUB    $C7,$0E,$06,$83,$96,$81,$F8,$07
+        EQUB    $07,$3D,$80,$2E,$83,$10,$81,$02
+        EQUB    $1F,$02,$1F,$04,$5A,$83,$72,$07
+        EQUB    $07,$80,$D3,$1C,$80,$F4,$07,$06
+        EQUB    $81,$66,$0E,$81,$20,$06,$83,$72
+        EQUB    $31,$83,$70,$04,$1F,$80,$A3,$06
+        EQUB    $36,$82,$16,$0F,$23,$03,$83,$35
+        EQUB    $03,$81,$89,$88,$07,$07,$3D,$80
+        EQUB    $29,$83,$B7,$06,$0F,$80,$2E,$82
+        EQUB    $3E,$05,$07,$3D,$81,$10,$80,$02
+        EQUB    $56,$03,$80,$9B,$03,$80,$9B,$03
+        EQUB    $80,$9B,$80,$03,$07,$1C,$03,$07
+        EQUB    $1C,$04,$83,$5D,$19,$03,$83,$17
+        EQUB    $07,$69,$83,$90,$1C,$81,$8F,$07
+        EQUB    $69,$83,$90,$1C,$81,$8F,$08,$36
+        EQUB    $82,$16,$06,$23,$81,$D3,$82,$03
+        EQUB    $07,$1C,$03,$07,$1C,$03,$07,$1C
+        EQUB    $03,$07,$1C,$05,$07,$1C,$81,$8E
+        EQUB    $0A,$81,$9A,$07,$80,$65,$81,$57
+        EQUB    $81,$9D,$81,$03,$81,$BA,$03,$07
+        EQUB    $1C,$84,$03,$81,$AB,$48,$07,$1A
+        EQUB    $1E,$81,$7D,$C1,$3B,$02,$54,$80
+        EQUB    $15,$80,$62,$80,$77,$82,$DC,$82
+        EQUB    $7E,$73,$81,$87,$80,$65,$83,$D4
+        EQUB    $81,$89,$0C,$84,$03,$03,$83,$5E
+        EQUB    $06,$82,$08,$10,$07,$76,$03,$81
+        EQUB    $EF,$03,$82,$15,$04,$37,$83,$AE
+        EQUB    $45,$0A,$06,$C2,$FB,$09,$10,$06
+        EQUB    $83,$96,$84,$15,$83,$E6,$80,$47
+        EQUB    $82,$08,$10,$07,$C0,$B7,$06,$80
+        EQUB    $18,$35,$81,$E6,$06,$07,$83,$30
+        EQUB    $82,$69,$06,$80,$09,$16,$81,$9D
+        EQUB    $0A,$83,$B2,$1F,$80,$64,$06,$58
+        EQUB    $82,$5E,$46,$1F,$28,$C2,$90,$05
+        EQUB    $03,$81,$C4,$05,$7A,$0E,$83,$D1
+        EQUB    $08,$83,$B2,$1F,$46,$06,$81,$35
+        EQUB    $08,$09,$6C,$81,$72,$81,$A5,$09
+        EQUB    $03,$73,$1F,$81,$04,$5A,$84,$05
+        EQUB    $02,$54,$02,$54,$85,$06,$83,$3D
+        EQUB    $2E,$06,$74,$03,$07,$1C,$03,$07
+        EQUB    $1C,$03,$07,$1C,$03,$07,$1C,$03
+        EQUB    $07,$1C,$03,$07,$1C,$8C,$04,$35
+        EQUB    $83,$8A,$FF,$A1,$06,$08,$1D,$83
+        EQUB    $C9,$00,$05,$00,$82,$16,$17,$84
+        EQUB    $05,$4D,$82,$E4,$17,$05,$08,$1D
+        EQUB    $83,$1E,$05,$08,$80,$F6,$67,$04
+        EQUB    $08,$71,$67,$06,$1D,$83,$0E,$17
+        EQUB    $04,$8E,$08,$83,$8C,$81,$F0,$83
+        EQUB    $13,$04,$07,$83,$8C,$3C,$83,$59
+        EQUB    $04,$05,$81,$C0,$15,$04,$08,$4D
+        EQUB    $81,$7A,$0F,$82,$6B,$04,$0A,$17
+        EQUB    $83,$CB,$82,$4F,$0F,$82,$6B,$04
+        EQUB    $09,$83,$FA,$13,$0F,$82,$6B,$9F
+        EQUB    $BF,$07,$81,$0B,$17,$83,$CB,$04
+        EQUB    $81,$07,$83,$8C,$33,$80,$AE,$04
+        EQUB    $81,$04,$08,$1D,$00,$05,$00,$0B
+        EQUB    $17,$04,$04,$08,$1D,$00,$03,$17
+        EQUB    $04,$83,$09,$1D,$83,$C9,$80,$10
+        EQUB    $1E,$17,$04,$08,$1D,$80,$F0,$17
+        EQUB    $80,$10,$04,$05,$7D,$03,$1D,$04
+        EQUB    $AE,$30,$83,$F4,$10,$06,$84,$16
+        EQUB    $0A,$82,$92,$03,$80,$B3,$AF,$A8
+        EQUB    $80,$80,$9F,$A9,$80,$02,$21,$82
+        EQUB    $11,$80,$05,$80,$AF,$04,$3A,$06
+        EQUB    $81,$71,$7C,$03,$08,$70,$82,$E2
+        EQUB    $3C,$04,$82,$41,$82,$6C,$05,$8F
+        EQUB    $8D,$05,$08,$1D,$83,$1E,$05,$08
+        EQUB    $80,$F6,$67,$04,$08,$71,$67,$81
+        EQUB    $07,$08,$82,$8B,$3C,$9F,$A1,$81
+        EQUB    $05,$3C,$81,$95,$04,$05,$80,$F3
+        EQUB    $32,$04,$05,$3C,$81,$95,$04,$80
+        EQUB    $04,$00,$3C,$04,$07,$08,$1D,$50
+        EQUB    $17,$58,$04,$84,$07,$08,$1D,$82
+        EQUB    $42,$17,$04,$06,$30,$33,$81,$A1
+        EQUB    $04,$06,$30,$33,$80,$5B,$04,$09
+        EQUB    $08,$1D,$82,$CD,$15,$83,$94,$04
+        EQUB    $80,$08,$08,$1D,$50,$83,$94,$9F
+        EQUB    $A1,$06,$6C,$15,$81,$52,$04,$06
+        EQUB    $08,$1D,$6F,$17,$04,$06,$08,$1D
+        EQUB    $6C,$17,$04,$05,$83,$FB,$9F,$A1
+        EQUB    $07,$81,$0B,$75,$15,$11,$04,$06
+        EQUB    $2F,$0B,$15,$9F,$A1,$05,$83,$FA
+        EQUB    $9F,$BF,$04,$75,$9F,$BF,$06,$2F
+        EQUB    $57,$15,$9F,$A1,$86,$07,$08,$1D
+        EQUB    $83,$F2,$17,$04,$0A,$08,$1D,$82
+        EQUB    $D4,$15,$21,$81,$A5,$04,$07,$83
+        EQUB    $95,$35,$82,$B5,$04,$07,$83,$95
+        EQUB    $35,$82,$B5,$04,$07,$83,$95,$35
+        EQUB    $82,$B5,$04,$06,$2F,$71,$57,$17
+        EQUB    $04,$09,$08,$80,$F6,$82,$4E,$10
+        EQUB    $9F,$A1,$80,$04,$83,$7E,$04,$04
+        EQUB    $81,$05,$04,$04,$84,$18,$04,$04
+        EQUB    $82,$71,$04,$05,$84,$23,$9F,$A1
+        EQUB    $09,$83,$A5,$81,$7F,$2E,$04,$04
+        EQUB    $04,$04,$83,$07,$04,$82,$0C,$8F
+        EQUB    $8D,$84,$21,$82,$7D,$82,$5A,$4D
+        EQUB    $8F,$8D,$8A,$07,$82,$5D,$83,$E5
+        EQUB    $17,$04,$08,$08,$81,$A0,$3C,$83
+        EQUB    $59,$04,$08,$08,$83,$3E,$3C,$83
+        EQUB    $59,$04,$8E,$03,$8F,$A8,$04,$8F
+        EQUB    $A9,$04,$87,$07,$82,$D9,$82,$E7
+        EQUB    $9F,$BF,$0B,$8F,$8D,$82,$C1,$83
+        EQUB    $57,$10,$82,$E7,$04,$07,$82,$D9
+        EQUB    $82,$E8,$9F,$BF,$0C,$8F,$8D,$84
+        EQUB    $21,$82,$7D,$82,$5A,$4D,$8F,$8D
+        EQUB    $05,$08,$83,$14,$00,$09,$00,$2D
+        EQUB    $0E,$80,$00,$0C,$1B,$00,$07,$47
+        EQUB    $80,$4E,$82,$DB,$04,$AA,$06,$07
+        EQUB    $82,$37,$80,$50,$04,$07,$82,$AF
+        EQUB    $04,$0F,$80,$0E,$06,$0F,$81,$3A
+        EQUB    $80,$0E,$06,$07,$80,$E4,$81,$F8
+        EQUB    $FF,$F4,$1D,$30,$80,$E3,$04,$5B
+        EQUB    $82,$41,$0E,$07,$74,$81,$44,$21
+        EQUB    $06,$80,$B4,$0C,$84,$1B,$03,$81
+        EQUB    $8D,$03,$0B,$06,$81,$8B,$04,$06
+        EQUB    $04,$81,$DB,$80,$33,$80,$09,$04
+        EQUB    $15,$84,$1B,$80,$0D,$06,$5F,$4B
+        EQUB    $03,$80,$70,$83,$9D,$06,$C1,$73
+        EQUB    $C3,$E2,$07,$06,$45,$83,$DC,$2C
+        EQUB    $04,$05,$06,$45,$11,$69,$09,$06
+        EQUB    $81,$23,$45,$11,$82,$F0,$55,$08
+        EQUB    $06,$45,$11,$80,$18,$0B,$08,$12
+        EQUB    $06,$45,$83,$03,$12,$08,$04,$08
+        EQUB    $80,$F2,$82,$58,$03,$15,$82,$8A
+        EQUB    $00,$0A,$31,$83,$BD,$0C,$81,$EB
+        EQUB    $0B,$08,$04,$08,$0C,$4B,$81,$D1
+        EQUB    $06,$5F,$04,$0B,$0C,$81,$79,$81
+        EQUB    $24,$0A,$06,$83,$98,$04,$08,$06
+        EQUB    $5F,$11,$33,$84,$05,$04,$06,$30
+        EQUB    $33,$83,$41,$04,$08,$06,$81,$23
+        EQUB    $45,$80,$54,$04,$08,$06,$74,$83
+        EQUB    $5B,$80,$0C,$00,$80,$0B,$0C,$08
+        EQUB    $81,$40,$10,$80,$F2,$04,$82,$84
+        EQUB    $12,$31,$2F,$82,$C8,$2E,$06,$45
+        EQUB    $83,$10,$0C,$82,$D4,$06,$2A,$04
+        EQUB    $80,$B1,$0C,$08,$6F,$2C,$06,$81
+        EQUB    $EF,$0C,$63,$06,$28,$04,$49,$07
+        EQUB    $C2,$57,$83,$7A,$82,$89,$04,$08
+        EQUB    $07,$80,$D3,$83,$61,$5C,$04,$49
+        EQUB    $07,$C0,$C3,$80,$97,$81,$96,$04
+        EQUB    $49,$07,$C0,$45,$83,$7A,$82,$89
+        EQUB    $04,$49,$0F,$C1,$B8,$81,$15,$81
+        EQUB    $17,$04,$48,$C1,$CB,$80,$E5,$0B
+        EQUB    $08,$04,$48,$C3,$D7,$80,$98,$80
+        EQUB    $09,$04,$08,$4A,$81,$2F,$11,$83
+        EQUB    $EB,$04,$49,$07,$C3,$15,$84,$1B
+        EQUB    $80,$3D,$04,$09,$30,$2D,$0E,$82
+        EQUB    $D4,$82,$89,$04,$08,$30,$33,$81
+        EQUB    $A9,$10,$6F,$04,$10,$80,$E9,$06
+        EQUB    $80,$56,$03,$06,$28,$11,$83,$6B
+        EQUB    $33,$81,$A9,$04,$86,$0C,$07,$83
+        EQUB    $D6,$83,$2E,$03,$09,$83,$A4,$2C
+        EQUB    $09,$13,$04,$5B,$52,$81,$3F,$04
+        EQUB    $09,$83,$89,$08,$20,$81,$00,$82
+        EQUB    $EC,$18,$09,$04,$0E,$4A,$83,$6E
+        EQUB    $08,$04,$09,$4D,$43,$06,$83,$D5
+        EQUB    $09,$04,$11,$06,$83,$D5,$80,$9D
+        EQUB    $82,$59,$83,$A6,$0C,$08,$81,$43
+        EQUB    $80,$33,$04,$09,$00,$6E,$03,$82
+        EQUB    $71,$19,$9F,$A2,$03,$47,$00,$05
+        EQUB    $00,$6E,$82,$0D,$04,$08,$1B,$00
+        EQUB    $06,$00,$6E,$0A,$80,$DF,$81,$06
+        EQUB    $09,$80,$85,$09,$04,$0C,$09,$49
+        EQUB    $82,$93,$82,$B2,$80,$F5,$80,$B9
+        EQUB    $00,$2D,$08,$18,$13,$06,$82,$5C
+        EQUB    $0C,$80,$1E,$81,$19,$84,$04,$82
+        EQUB    $FF,$81,$20,$84,$09,$03,$80,$E9
+        EQUB    $80,$37,$21,$82,$ED,$83,$49,$0C
+        EQUB    $81,$1F,$72,$03,$83,$EB,$63,$62
+        EQUB    $83,$9D,$83,$90,$80,$A7,$0E,$08
+        EQUB    $18,$13,$81,$20,$27,$06,$23,$81
+        EQUB    $ED,$0E,$81,$16,$06,$08,$18,$13
+        EQUB    $81,$0E,$0E,$08,$18,$11,$13,$07
+        EQUB    $83,$E6,$80,$11,$83,$57,$81,$D3
+        EQUB    $11,$08,$18,$13,$82,$39,$81,$0E
+        EQUB    $1E,$56,$80,$FD,$0C,$80,$D8,$82
+        EQUB    $C3,$09,$08,$18,$13,$06,$83,$44
+        EQUB    $80,$05,$80,$0D,$06,$80,$42,$81
+        EQUB    $3B,$50,$80,$D9,$03,$5B,$06,$00
+        EQUB    $06,$80,$7B,$82,$15,$04,$0D,$06
+        EQUB    $80,$42,$81,$3B,$81,$56,$0C,$83
+        EQUB    $6D,$0B,$00,$1E,$06,$80,$42,$81
+        EQUB    $3B,$81,$56,$80,$73,$04,$09,$81
+        EQUB    $E0,$9F,$A1,$08,$82,$24,$03,$82
+        EQUB    $24,$82,$A0,$9F,$A1,$08,$84,$06
+        EQUB    $00,$07,$09,$84,$25,$84,$06,$00
+        EQUB    $05,$00,$6E,$09,$04,$32,$06,$80
+        EQUB    $41,$83,$58,$04,$09,$81,$A7,$03
+        EQUB    $80,$99,$04,$83,$F5,$10,$06,$80
+        EQUB    $8B,$04,$80,$17,$80,$58,$82,$75
+        EQUB    $80,$C1,$03,$81,$E0,$80,$03,$6E
+        EQUB    $04,$83,$22,$16,$80,$A8,$0C,$82
+        EQUB    $CB,$82,$48,$80,$2D,$09,$04,$11
+        EQUB    $06,$80,$BB,$81,$7B,$08,$82,$75
+        EQUB    $80,$C1,$0E,$81,$28,$83,$80,$04
+        EQUB    $07,$83,$FF,$80,$7B,$9F,$BF,$80
+        EQUB    $07,$00,$06,$83,$A5,$11,$00,$04
+        EQUB    $00,$0C,$00,$06,$06,$7B,$80,$7E
+        EQUB    $04,$81,$0B,$06,$4C,$83,$58,$04
+        EQUB    $09,$80,$B8,$11,$00,$07,$09,$83
+        EQUB    $4B,$14,$9F,$A2,$82,$48,$42,$C2
+        EQUB    $9F,$83,$02,$2E,$04,$4B,$07,$81
+        EQUB    $4A,$C2,$9F,$81,$BC,$82,$98,$04
+        EQUB    $48,$C3,$AD,$82,$CC,$82,$98,$04
+        EQUB    $0F,$07,$1A,$83,$5A,$82,$D0,$82
+        EQUB    $6E,$81,$D1,$06,$80,$EF,$04,$53
+        EQUB    $07,$83,$C5,$C0,$99,$83,$71,$81
+        EQUB    $D1,$83,$D2,$0C,$82,$2B,$0B,$82
+        EQUB    $98,$04,$0C,$07,$81,$8C,$0E,$81
+        EQUB    $97,$62,$81,$E7,$2E,$04,$0B,$16
+        EQUB    $81,$63,$81,$14,$0A,$06,$82,$56
+        EQUB    $04,$07,$80,$17,$11,$83,$6B,$04
+        EQUB    $09,$08,$81,$A0,$83,$2D,$82,$7F
+        EQUB    $04,$80,$09,$08,$81,$49,$82,$D2
+        EQUB    $83,$A8,$04,$08,$08,$81,$49,$5A
+        EQUB    $83,$A8,$04,$07,$2F,$82,$4C,$81
+        EQUB    $34,$04,$80,$07,$08,$6C,$21,$81
+        EQUB    $34,$04,$06,$2F,$65,$83,$A8,$04
+        EQUB    $83,$0E,$06,$80,$4C,$11,$54,$0C
+        EQUB    $83,$3B,$80,$AB,$82,$D0,$04,$0D
+        EQUB    $2F,$65,$5A,$54,$31,$83,$4E,$81
+        EQUB    $43,$80,$33,$04,$07,$08,$6C,$75
+        EQUB    $08,$1B,$04,$80,$07,$08,$80,$3C
+        EQUB    $82,$DE,$04,$0D,$08,$80,$3C,$03
+        EQUB    $83,$6A,$31,$81,$41,$82,$DE,$04
+        EQUB    $09,$08,$1B,$84,$0C,$2E,$07,$37
+        EQUB    $04,$82,$0A,$08,$18,$13,$81,$97
+        EQUB    $82,$F9,$82,$B0,$09,$08,$18,$13
+        EQUB    $07,$83,$CF,$82,$91,$06,$08,$18
+        EQUB    $13,$83,$06,$08,$08,$18,$13,$81
+        EQUB    $1D,$83,$E6,$0D,$08,$18,$13,$83
+        EQUB    $DF,$80,$1A,$0F,$81,$1D,$82,$F6
+        EQUB    $0D,$08,$18,$08,$1B,$80,$19,$0A
+        EQUB    $07,$80,$63,$80,$E6,$83,$08,$08
+        EQUB    $18,$13,$07,$56,$81,$92,$0B,$08
+        EQUB    $18,$13,$0F,$80,$37,$0A,$06,$82
+        EQUB    $94,$08,$08,$18,$13,$80,$6C,$80
+        EQUB    $79,$09,$08,$18,$13,$81,$1E,$55
+        EQUB    $06,$28,$08,$08,$18,$13,$0F,$23
+        EQUB    $81,$D4,$0E,$08,$18,$17,$08,$81
+        EQUB    $FC,$33,$82,$44,$31,$65,$81,$22
+        EQUB    $97,$18,$06,$80,$D2,$11,$80,$25
+        EQUB    $04,$09,$83,$97,$11,$07,$82,$C5
+        EQUB    $82,$96,$2E,$81,$D6,$82,$77,$09
+        EQUB    $04,$08,$09,$82,$97,$81,$6B,$09
+        EQUB    $04,$15,$06,$80,$D2,$83,$6E,$08
+        EQUB    $04,$09,$7D,$03,$06,$82,$32,$81
+        EQUB    $9A,$71,$83,$66,$09,$04,$1B,$62
+        EQUB    $83,$DE,$82,$98,$06,$80,$D2,$04
+        EQUB    $42,$83,$2F,$0F,$81,$D6,$0C,$82
+        EQUB    $83,$81,$F0,$83,$26,$66,$81,$93
+        EQUB    $04,$09,$06,$62,$43,$03,$81,$80
+        EQUB    $41,$04,$1C,$06,$82,$32,$7C,$0C
+        EQUB    $06,$81,$84,$82,$2E,$80,$5D,$80
+        EQUB    $32,$08,$10,$80,$74,$06,$83,$CA
+        EQUB    $0C,$82,$31,$83,$AA,$04,$15,$49
+        EQUB    $82,$32,$7C,$0C,$06,$81,$84,$82
+        EQUB    $2E,$80,$5D,$83,$0F,$08,$70,$81
+        EQUB    $E8,$20,$00,$20,$08,$81,$AF,$16
+        EQUB    $83,$81,$0C,$80,$46,$82,$B3,$03
+        EQUB    $82,$CB,$6D,$16,$82,$0D,$83,$4A
+        EQUB    $0C,$82,$09,$06,$83,$1C,$80,$5D
+        EQUB    $81,$B2,$04,$0B,$06,$80,$5F,$82
+        EQUB    $1E,$80,$1F,$0C,$43,$04,$00,$01
+        EQUB    $80,$06,$81,$8C,$0E,$80,$60,$81
+        EQUB    $25,$04,$82,$75,$82,$67,$16,$81
+        EQUB    $CE,$80,$A6,$04,$09,$08,$81,$BE
+        EQUB    $09,$03,$81,$9C,$84,$20,$03,$09
+        EQUB    $49,$61,$1B,$83,$EB,$83,$9D,$17
+        EQUB    $14,$9F,$A2,$81,$70,$80,$94,$0A
+        EQUB    $0B,$80,$CC,$03,$82,$10,$06,$80
+        EQUB    $5F,$50,$31,$81,$4E,$08,$04,$09
+        EQUB    $06,$7E,$4B,$80,$3D,$83,$C8,$04
+        EQUB    $08,$06,$78,$82,$9D,$12,$52,$04
+        EQUB    $08,$06,$7E,$4B,$80,$3E,$6D,$04
+        EQUB    $08,$06,$7E,$11,$0A,$06,$58,$04
+        EQUB    $08,$06,$7E,$84,$0E,$80,$6F,$04
+        EQUB    $0A,$15,$84,$0E,$50,$63,$06,$83
+        EQUB    $AF,$04,$09,$30,$83,$C3,$06,$83
+        EQUB    $AF,$9F,$A1,$10,$06,$81,$8F,$82
+        EQUB    $67,$47,$83,$6C,$4A,$0C,$80,$81
+        EQUB    $06,$61,$04,$14,$06,$78,$83,$31
+        EQUB    $0B,$83,$1F,$08,$9F,$A1,$83,$90
+        EQUB    $81,$8F,$80,$81,$06,$61,$04,$8A
+        EQUB    $1C,$81,$70,$80,$27,$21,$80,$17
+        EQUB    $46,$0C,$80,$FC,$06,$83,$48,$80
+        EQUB    $3D,$04,$81,$9C,$81,$06,$4A,$0A
+        EQUB    $06,$80,$37,$04,$88,$0C,$06,$83
+        EQUB    $B4,$83,$7B,$80,$20,$16,$82,$42
+        EQUB    $04,$4C,$06,$C0,$F8,$83,$21,$10
+        EQUB    $80,$4A,$82,$1C,$04,$4A,$06,$C1
+        EQUB    $5C,$11,$C0,$A8,$80,$A5,$02,$4E
+        EQUB    $07,$C0,$9B,$C2,$F8,$81,$7B,$15
+        EQUB    $80,$3E,$10,$08,$04,$0A,$09,$80
+        EQUB    $0A,$80,$EA,$82,$E6,$09,$04,$84
+        EQUB    $0C,$07,$80,$4C,$83,$79,$6D,$21
+        EQUB    $06,$80,$C0,$04,$08,$06,$80,$4C
+        EQUB    $83,$79,$2C,$00,$06,$81,$D1,$06
+        EQUB    $28,$04,$07,$1E,$08,$0B,$15,$9F
+        EQUB    $A1,$0A,$09,$4D,$82,$E3,$16,$80
+        EQUB    $A3,$09,$04,$0B,$06,$83,$30,$83
+        EQUB    $5C,$83,$EC,$63,$52,$04,$83,$09
+        EQUB    $06,$1A,$83,$77,$2C,$82,$FE,$04
+        EQUB    $0D,$06,$1A,$81,$06,$42,$82,$FE
+        EQUB    $29,$06,$83,$33,$04,$0E,$06,$80
+        EQUB    $B5,$82,$B9,$2D,$0C,$84,$08,$83
+        EQUB    $5C,$46,$04,$0A,$15,$83,$5C,$06
+        EQUB    $82,$2A,$80,$BF,$04,$09,$08,$6F
+        EQUB    $83,$9D,$06,$82,$2A,$04,$0E,$08
+        EQUB    $1D,$82,$D4,$06,$82,$2A,$80,$BF
+        EQUB    $21,$81,$A5,$04,$0C,$06,$80,$6B
+        EQUB    $11,$80,$A1,$1E,$07,$80,$B5,$04
+        EQUB    $0A,$83,$97,$80,$BF,$82,$4F,$82
+        EQUB    $23,$04,$81,$07,$06,$82,$BC,$80
+        EQUB    $9D,$04,$80,$0A,$0F,$80,$0F,$20
+        EQUB    $07,$81,$5D,$12,$00,$18,$0F,$81
+        EQUB    $99,$80,$0F,$04,$42,$82,$C2,$1B
+        EQUB    $82,$22,$03,$82,$22,$03,$82,$22
+        EQUB    $10,$82,$F9,$12,$00,$0A,$0F,$80
+        EQUB    $0F,$20,$06,$81,$E5,$12,$00,$09
+        EQUB    $07,$82,$52,$13,$0F,$80,$30,$04
+        EQUB    $0A,$08,$81,$D0,$13,$06,$23,$81
+        EQUB    $D3,$04,$0D,$82,$51,$0E,$23,$80
+        EQUB    $DE,$83,$9B,$80,$11,$08,$04,$81
+        EQUB    $09,$07,$82,$52,$13,$23,$81,$D3
+        EQUB    $04,$1E,$07,$82,$CA,$81,$C9,$80
+        EQUB    $75,$04,$06,$81,$83,$81,$9A,$82
+        EQUB    $6F,$07,$3D,$82,$EF,$20,$81,$2E
+        EQUB    $13,$80,$26,$23,$83,$5D,$04,$20
+        EQUB    $07,$82,$CA,$81,$C9,$80,$75,$13
+        EQUB    $06,$22,$83,$7B,$04,$81,$EA,$10
+        EQUB    $82,$D4,$06,$81,$B9,$82,$7D,$83
+        EQUB    $0E,$2A,$10,$43,$82,$D0,$04,$80
+        EQUB    $06,$83,$37,$81,$52,$04,$80,$08
+        EQUB    $8F,$8D,$49,$82,$C6,$11,$00,$0B
+        EQUB    $0F,$80,$0F,$20,$07,$77,$80,$12
+        EQUB    $12,$00,$81,$04,$80,$C8,$00,$03
+        EQUB    $56,$00,$04,$83,$73,$00,$03,$1F
+        EQUB    $00,$80,$03,$82,$F7,$03,$81,$3E
+        EQUB    $03,$83,$5F,$03,$82,$3B,$04,$03
+        EQUB    $07,$00,$06,$83,$47,$82,$7B,$00
+        EQUB    $04,$80,$F1,$00,$04,$83,$38,$00
+        EQUB    $04,$82,$AE,$00,$03,$13,$00,$04
+        EQUB    $84,$29,$00,$04,$80,$D3,$00,$04
+        EQUB    $82,$24,$00,$04,$80,$35,$00,$80
+        EQUB    $03,$80,$D7,$02,$61,$03,$82,$E1
+        EQUB    $03,$80,$24,$02,$04,$A2,$07,$06
+        EQUB    $26,$36,$80,$D3,$04,$08,$06,$26
+        EQUB    $36,$5A,$83,$05,$04,$06,$06,$26
+        EQUB    $84,$01,$04,$0A,$06,$26,$83,$B9
+        EQUB    $10,$68,$81,$6A,$04,$07,$06,$26
+        EQUB    $84,$1B,$13,$04,$09,$06,$26,$82
+        EQUB    $12,$16,$81,$3D,$04,$0A,$06,$26
+        EQUB    $81,$EB,$0C,$82,$12,$08,$04,$0A
+        EQUB    $06,$26,$81,$62,$08,$5A,$80,$A2
+        EQUB    $04,$07,$06,$26,$36,$12,$52,$04
+        EQUB    $09,$06,$26,$81,$EB,$20,$81,$E9
+        EQUB    $04,$07,$49,$26,$83,$0F,$03,$09
+        EQUB    $83,$08,$81,$82,$03,$80,$6A,$09
+        EQUB    $04,$0B,$06,$26,$81,$4D,$4A,$55
+        EQUB    $06,$83,$E4,$04,$82,$10,$80,$2B
+        EQUB    $83,$F0,$81,$80,$10,$80,$F0,$4A
+        EQUB    $80,$D8,$19,$9F,$A2,$0A,$81,$A6
+        EQUB    $03,$83,$E9,$2D,$14,$9F,$A2,$10
+        EQUB    $09,$82,$8D,$9F,$A1,$82,$48,$81
+        EQUB    $1A,$60,$11,$82,$17,$09,$04,$0F
+        EQUB    $09,$83,$4F,$80,$6A,$04,$82,$48
+        EQUB    $60,$11,$81,$33,$09,$04,$07,$83
+        EQUB    $88,$08,$14,$9F,$A2,$80,$0C,$81
+        EQUB    $81,$09,$03,$3A,$15,$83,$EA,$08
+        EQUB    $43,$04,$96,$0A,$07,$37,$80,$28
+        EQUB    $0C,$36,$08,$63,$03,$06,$5B,$83
+        EQUB    $E0,$0B,$04,$06,$08,$1B,$81,$4F
+        EQUB    $00,$05,$00,$6E,$20,$00,$80,$0B
+        EQUB    $06,$80,$A6,$80,$71,$1E,$07,$83
+        EQUB    $42,$04,$83,$09,$82,$BB,$0E,$0F
+        EQUB    $81,$C2,$82,$6B,$09,$82,$BB,$0E
+        EQUB    $07,$82,$46,$82,$6B,$0B,$57,$35
+        EQUB    $80,$A6,$04,$06,$37,$82,$E9,$15
+        EQUB    $06,$80,$53,$07,$80,$5E,$04,$80
+        EQUB    $3B,$32,$06,$81,$85,$83,$8F,$59
+        EQUB    $05,$82,$0C,$16,$32,$0B,$80,$DF
+        EQUB    $04,$15,$80,$FE,$08,$10,$81,$B3
+        EQUB    $03,$81,$C6,$0E,$80,$70,$06,$80
+        EQUB    $CE,$04,$06,$37,$79,$08,$0A,$82
+        EQUB    $C4,$1A,$06,$37,$81,$88,$08,$04
+        EQUB    $09,$10,$82,$E5,$80,$C5,$08,$82
+        EQUB    $47,$81,$7A,$82,$2F,$81,$98,$81
+        EQUB    $2E,$09,$04,$08,$06,$37,$83,$65
+        EQUB    $12,$08,$04,$10,$06,$37,$83,$7F
+        EQUB    $15,$04,$09,$83,$89,$08,$20,$16
+        EQUB    $81,$2E,$04,$13,$30,$65,$82,$C7
+        EQUB    $0E,$80,$C4,$31,$83,$F1,$81,$F1
+        EQUB    $15,$20,$82,$DD,$09,$04,$0F,$09
+        EQUB    $06,$83,$E3,$80,$55,$10,$07,$83
+        EQUB    $48,$80,$C6,$09,$04,$16,$09,$3A
+        EQUB    $07,$82,$EF,$08,$70,$83,$C9,$06
+        EQUB    $1C,$83,$1D,$04,$83,$0E,$81,$B1
+        EQUB    $64,$09,$04,$11,$09,$31,$47,$83
+        EQUB    $6C,$4A,$21,$66,$82,$8C,$0C,$1B
+        EQUB    $81,$4F,$09,$04,$23,$09,$15,$82
+        EQUB    $C9,$17,$06,$23,$81,$D3,$1B,$82
+        EQUB    $D8,$04,$50,$10,$06,$82,$CE,$0E
+        EQUB    $60,$20,$07,$83,$BF,$81,$CF,$04
+        EQUB    $30,$80,$5A,$06,$7F,$09,$04,$19
+        EQUB    $07,$37,$0A,$0F,$23,$80,$BA,$81
+        EQUB    $F6,$08,$0B,$06,$4E,$04,$82,$40
+        EQUB    $81,$2E,$17,$06,$72,$81,$36,$04
+        EQUB    $0C,$07,$1A,$79,$08,$2D,$82,$78
+        EQUB    $06,$83,$6F,$04,$26,$08,$1B,$81
+        EQUB    $29,$2E,$81,$18,$10,$06,$83,$AC
+        EQUB    $81,$5C,$0C,$81,$D0,$13,$06,$72
+        EQUB    $0B,$83,$BF,$04,$06,$83,$96,$81
+        EQUB    $F8,$82,$28,$08,$07,$82,$96,$82
+        EQUB    $33,$04,$93,$14,$06,$44,$5C,$04
+        EQUB    $09,$84,$19,$08,$82,$16,$10,$83
+        EQUB    $23,$42,$82,$81,$19,$9F,$A2,$80
+        EQUB    $08,$06,$44,$83,$BD,$80,$3D,$04
+        EQUB    $10,$06,$44,$82,$B6,$6B,$04,$09
+        EQUB    $4D,$83,$DE,$83,$97,$58,$09,$04
+        EQUB    $12,$06,$44,$36,$80,$25,$04,$09
+        EQUB    $08,$1D,$43,$84,$00,$0A,$80,$DF
+        EQUB    $09,$04,$0A,$08,$43,$81,$B3,$06
+        EQUB    $69,$80,$DA,$04,$0E,$47,$33,$81
+        EQUB    $4A,$82,$81,$10,$82,$9B,$16,$80
+        EQUB    $E0,$04,$0D,$07,$1A,$81,$2A,$08
+        EQUB    $64,$83,$FC,$08,$80,$3C,$04,$09
+        EQUB    $06,$44,$82,$EB,$10,$66,$32,$04
+        EQUB    $07,$06,$44,$81,$C1,$08,$04,$14
+        EQUB    $06,$44,$5C,$04,$09,$84,$19,$08
+        EQUB    $82,$16,$10,$80,$7D,$42,$82,$81
+        EQUB    $19,$9F,$A2,$89,$11,$06,$1A,$5C
+        EQUB    $04,$09,$81,$B7,$13,$07,$84,$2D
+        EQUB    $80,$BE,$19,$9F,$A2,$0A,$09,$07
+        EQUB    $84,$24,$80,$BE,$19,$9F,$A2,$0D
+        EQUB    $09,$83,$74,$08,$82,$4E,$07,$81
+        EQUB    $E4,$19,$9F,$A2,$07,$09,$82,$D9
+        EQUB    $19,$9F,$A2,$1C,$09,$7D,$03,$81
+        EQUB    $BD,$67,$35,$82,$40,$32,$04,$80
+        EQUB    $AA,$80,$3E,$83,$AA,$09,$04,$06
+        EQUB    $1A,$83,$27,$16,$81,$93,$04,$10
+        EQUB    $09,$82,$71,$03,$83,$FA,$13,$80
+        EQUB    $53,$07,$80,$9C,$19,$9F,$A2,$80
+        EQUB    $0D,$09,$83,$F9,$13,$80,$53,$07
+        EQUB    $81,$FE,$19,$9F,$A2,$26,$5B,$66
+        EQUB    $83,$D6,$80,$93,$04,$09,$82,$79
+        EQUB    $03,$82,$48,$82,$3D,$04,$81,$B7
+        EQUB    $13,$80,$53,$82,$29,$80,$EC,$0E
+        EQUB    $81,$21,$80,$EB,$81,$FD,$82,$80
+        EQUB    $19,$9F,$A2,$0E,$09,$83,$7D,$83
+        EQUB    $97,$80,$86,$10,$06,$84,$12,$09
+        EQUB    $04,$10,$06,$1A,$5C,$04,$09,$7D
+        EQUB    $03,$2F,$71,$82,$E0,$20,$32,$09
+        EQUB    $04,$81,$0A,$06,$82,$A9,$11,$81
+        EQUB    $41,$80,$E3,$04,$06,$30,$71,$81
+        EQUB    $6D,$04,$82,$0A,$83,$95,$07,$83
+        EQUB    $3E,$0E,$81,$74,$04,$13,$0F,$80
+        EQUB    $13,$83,$52,$03,$82,$01,$81,$56
+        EQUB    $0C,$81,$74,$82,$BE,$06,$5D,$04
+        EQUB    $06,$30,$82,$B7,$9F,$A1,$1C,$07
+        EQUB    $83,$84,$57,$07,$81,$74,$82,$2C
+        EQUB    $82,$9E,$21,$06,$5D,$0C,$83,$2E
+        EQUB    $81,$CD,$04,$09,$81,$46,$80,$13
+        EQUB    $09,$04,$1B,$06,$83,$84,$36,$2D
+        EQUB    $0C,$83,$2E,$81,$CD,$03,$09,$81
+        EQUB    $45,$80,$13,$80,$10,$04,$83,$BC
+        EQUB    $15,$82,$6E,$09,$04,$2C,$82,$74
+        EQUB    $83,$84,$82,$D5,$20,$07,$81,$90
+        EQUB    $04,$09,$81,$F5,$83,$91,$9F,$A1
+        EQUB    $81,$BF,$82,$C7,$81,$79,$0B,$83
+        EQUB    $BF,$17,$06,$72,$1B,$81,$42,$03
+        EQUB    $06,$81,$83,$11,$81,$50,$14,$9F
+        EQUB    $A2,$06,$83,$28,$81,$51,$04,$17
+        EQUB    $06,$26,$81,$FB,$81,$A4,$81,$90
+        EQUB    $80,$3D,$04,$09,$83,$0D,$84,$2C
+        EQUB    $03,$80,$6A,$14,$9F,$A2,$0E,$06
+        EQUB    $83,$84,$81,$4D,$81,$A4,$81,$90
+        EQUB    $0C,$81,$51,$04,$07,$49,$26,$83
+        EQUB    $01,$2C,$04,$80,$0A,$0F,$23,$81
+        EQUB    $9D,$36,$21,$06,$5D,$00,$07,$0C
+        EQUB    $82,$67,$08,$9F,$A1,$08,$0C,$81
+        EQUB    $7F,$80,$3E,$0A,$04,$80,$0C,$06
+        EQUB    $80,$82,$80,$7E,$3A,$08,$82,$A2
+        EQUB    $52,$04,$83,$0E,$07,$1A,$79,$08
+        EQUB    $2D,$04,$2F,$33,$82,$03,$20,$32
+        EQUB    $04,$0E,$07,$1A,$79,$08,$2D,$04
+        EQUB    $2F,$65,$82,$E0,$20,$32,$04,$0F
+        EQUB    $08,$68,$07,$80,$DB,$83,$B0,$1E
+        EQUB    $06,$81,$E5,$81,$F3,$04,$12,$08
+        EQUB    $68,$06,$82,$7C,$10,$83,$E9,$82
+        EQUB    $8E,$81,$07,$0A,$06,$81,$E5,$04
+        EQUB    $0B,$07,$1A,$83,$7F,$16,$81,$E5
+        EQUB    $80,$86,$04,$84,$05,$81,$AD,$12
+        EQUB    $08,$08,$82,$02,$2D,$1E,$66,$83
+        EQUB    $7C,$06,$11,$83,$6B,$81,$8D,$06
+        EQUB    $82,$A2,$06,$81,$35,$05,$80,$95
+        EQUB    $81,$38,$05,$83,$20,$83,$9C,$07
+        EQUB    $82,$A4,$2C,$42,$82,$19,$07,$80
+        EQUB    $AD,$13,$06,$81,$0C,$07,$83,$32
+        EQUB    $13,$03,$80,$9B,$05,$83,$65,$12
+        EQUB    $08,$03,$36,$46,$07,$80,$96,$81
+        EQUB    $AC,$82,$B4,$87,$07,$06,$39,$83
+        EQUB    $45,$46,$08,$0B,$03,$31,$06,$26
+        EQUB    $81,$F2,$15,$12,$80,$49,$0D,$08
+        EQUB    $32,$3A,$07,$80,$9C,$0C,$1B,$81
+        EQUB    $29,$2D,$04,$0D,$08,$32,$3A,$82
+        EQUB    $29,$80,$EC,$20,$07,$80,$DA,$04
+        EQUB    $12,$08,$70,$83,$4E,$82,$42,$06
+        EQUB    $59,$13,$3A,$81,$BF,$15,$83,$F7
+        EQUB    $08,$04,$0A,$08,$1B,$81,$29,$21
+        EQUB    $06,$80,$A4,$04,$14,$3A,$06,$59
+        EQUB    $81,$26,$06,$84,$13,$03,$16,$80
+        EQUB    $38,$82,$EB,$10,$06,$80,$A4,$04
+        EQUB    $0C,$09,$81,$77,$82,$21,$03,$83
+        EQUB    $B5,$70,$09,$04,$08,$8F,$8D,$84
+        EQUB    $2A,$59,$11,$00,$13,$06,$1A,$83
+        EQUB    $0F,$03,$09,$82,$71,$03,$30,$0B
+        EQUB    $06,$80,$9A,$80,$0B,$09,$04,$89
+        EQUB    $0B,$09,$83,$FD,$11,$16,$83,$A0
+        EQUB    $19,$9F,$A2,$09,$06,$7F,$80,$C9
+        EQUB    $06,$82,$F3,$04,$15,$06,$77,$80
+        EQUB    $12,$83,$27,$16,$81,$93,$04,$09
+        EQUB    $7D,$03,$35,$83,$A1,$82,$0D,$09
+        EQUB    $04,$0D,$06,$77,$80,$12,$83,$27
+        EQUB    $16,$81,$93,$0C,$5C,$04,$1B,$06
+        EQUB    $5E,$1A,$83,$BD,$08,$80,$3E,$04
+        EQUB    $09,$68,$82,$21,$03,$81,$5A,$9F
+        EQUB    $A1,$82,$96,$82,$34,$82,$77,$09
+        EQUB    $04,$0A,$06,$5E,$1A,$83,$EE,$08
+        EQUB    $82,$98,$04,$83,$0D,$06,$81,$18
+        EQUB    $7C,$1E,$07,$81,$E3,$0C,$82,$43
+        EQUB    $00,$0C,$06,$81,$18,$7C,$2E,$81
+        EQUB    $DE,$0C,$82,$43,$00,$0B,$15,$83
+        EQUB    $6E,$0C,$06,$80,$F9,$82,$7A,$04
+        EQUB    $81,$07,$06,$82,$3C,$82,$EE,$04
+        EQUB    $0D,$06,$4F,$4B,$6D,$03,$80,$64
+        EQUB    $06,$2A,$82,$5E,$04,$06,$06,$4F
+        EQUB    $4B,$2C,$04,$08,$06,$4F,$4B,$6D
+        EQUB    $82,$78,$00,$06,$0C,$80,$CB,$15
+        EQUB    $04,$10,$0C,$83,$6E,$03,$84,$02
+        EQUB    $03,$0C,$4B,$2C,$07,$82,$1A,$58
+        EQUB    $04,$14,$81,$60,$82,$BE,$21,$06
+        EQUB    $82,$82,$03,$81,$4C,$06,$83,$57
+        EQUB    $55,$06,$4F,$9F,$A1,$13,$06,$81
+        EQUB    $60,$80,$AB,$2C,$80,$09,$16,$81
+        EQUB    $9D,$0C,$83,$25,$81,$98,$9F,$A1
+        EQUB    $0E,$08,$80,$A0,$06,$82,$82,$0C
+        EQUB    $83,$6D,$06,$81,$60,$04,$20,$84
+        EQUB    $25,$83,$9A,$10,$83,$86,$06,$83
+        EQUB    $BA,$13,$06,$81,$C3,$72,$03,$31
+        EQUB    $67,$35,$53,$81,$2E,$04,$37,$81
+        EQUB    $03,$80,$A0,$0A,$05,$05,$31,$84
+        EQUB    $25,$83,$9A,$10,$83,$86,$06,$83
+        EQUB    $BA,$13,$06,$81,$C3,$72,$1E,$06
+        EQUB    $80,$BA,$3A,$82,$C7,$04,$81,$2C
+        EQUB    $07,$80,$DC,$11,$82,$27,$1E,$08
+        EQUB    $3A,$80,$E4,$81,$F8,$04,$80,$B1
+        EQUB    $9F,$A1,$47,$84,$0D,$9F,$A1,$08
+        EQUB    $49,$4F,$11,$0A,$06,$58,$04,$0A
+        EQUB    $81,$D9,$81,$FF,$83,$C3,$06,$4F
+        EQUB    $04,$81,$09,$83,$8C,$80,$11,$06
+        EQUB    $82,$04,$04,$08,$06,$80,$5C,$1B
+        EQUB    $83,$36,$04,$0B,$52,$83,$3F,$82
+        EQUB    $55,$0A,$82,$93,$9F,$A1,$86,$10
+        EQUB    $16,$7B,$80,$7E,$04,$09,$80,$CE
+        EQUB    $0A,$82,$75,$81,$B5,$09,$04,$0C
+        EQUB    $16,$7B,$80,$7E,$04,$09,$80,$CE
+        EQUB    $63,$09,$04,$0D,$07,$4C,$80,$81
+        EQUB    $06,$61,$10,$83,$9E,$08,$2D,$04
+        EQUB    $0B,$16,$7B,$80,$7E,$04,$09,$80
+        EQUB    $CE,$09,$04,$0E,$47,$33,$81,$4A
+        EQUB    $82,$81,$10,$82,$9B,$16,$80,$E0
+        EQUB    $04,$0A,$06,$4C,$83,$BD,$2C,$66
+        EQUB    $82,$63,$04,$83,$10,$07,$80,$99
+        EQUB    $83,$29,$08,$10,$68,$06,$23,$83
+        EQUB    $5D,$82,$EF,$04,$0B,$82,$67,$06
+        EQUB    $23,$80,$BA,$0C,$83,$29,$04,$1A
+        EQUB    $07,$1A,$82,$67,$08,$6F,$21,$06
+        EQUB    $82,$2A,$04,$2F,$65,$07,$82,$96
+        EQUB    $82,$33,$83,$46,$15,$79,$08,$2D
+        EQUB    $04,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+        EQUB    $FF,$FF,$FF,$FF,$FF,$FF,$FF,$AC
+        EQUB    $45,$C4,$22,$C4,$1D,$45,$C2,$5B
+        EQUB    $C2,$49,$43,$C1,$A2,$49,$C2,$73
+        EQUB    $C2,$14,$C3,$30,$C2,$BC,$43,$C2
+        EQUB    $6E,$45,$C0,$4C,$C3,$3B,$43,$C1
+        EQUB    $37,$55,$83,$C0,$81,$03,$83,$00
+        EQUB    $2C,$1E,$07,$83,$1D,$80,$91,$0C
+        EQUB    $80,$88,$08,$C1,$B1,$04,$DB,$51
+        EQUB    $C3,$8E,$C0,$07,$C1,$7E,$C0,$23
+        EQUB    $C0,$1D,$C0,$4F,$C3,$DE,$C3,$00
+        EQUB    $E6,$83,$1D,$06,$1A,$0C,$34,$18
+        EQUB    $77,$41,$97,$74,$1C,$E8,$38,$D0
+        EQUB    $6B,$CD,$06,$5A,$0C,$39,$A0,$DB
+        EQUB    $9A,$0E,$77,$E6,$84,$1E,$03,$A1
+        EQUB    $75,$27,$FA,$93,$A2,$11,$25,$2F
+        EQUB    $BA,$8D,$9F,$90,$3F,$45,$D2,$97
+        EQUB    $34,$20,$8E,$A4,$6C,$E9,$12,$47
+        EQUB    $80,$1D,$49,$19,$F4,$C0,$43,$7E
+        EQUB    $86,$CA,$7E,$23,$67,$B6,$E0,$16
+        EQUB    $08,$B3,$C2,$75,$49,$E4,$11,$BF
+        EQUB    $23,$65,$E5,$F9,$8E,$94,$FC,$E6
+        EQUB    $93,$ED,$37,$9E,$86,$93,$D1,$20
+        EQUB    $07,$8F,$49,$DE,$9C,$68,$89,$4D
+        EQUB    $02,$EB,$01,$92,$0F,$CF,$5A,$0A
+        EQUB    $82,$4B,$AD,$F0,$90,$46,$CF,$C3
+        EQUB    $F2,$18,$05,$CB,$CD,$76,$08,$3F
+        EQUB    $63,$AF,$79,$01,$1F,$90,$11,$97
+        EQUB    $D6,$4D,$90,$E0,$22,$23,$92,$5C
+        EQUB    $D0,$83,$12,$70,$11,$27,$99,$F7
+        EQUB    $52,$24,$1F,$9D,$46,$8F,$D1,$24
+        EQUB    $A7,$D9,$79,$52,$F2,$C8,$47,$F6
+        EQUB    $7E,$3A,$C9,$34,$0B,$D3,$00,$8F
+        EQUB    $F0,$09,$5F,$23,$66,$87,$37,$F1
+        EQUB    $00,$A6,$8A,$93,$B5,$23,$68,$4F
+        EQUB    $39,$03,$43,$4D,$DB,$01,$44,$FE
+        EQUB    $37,$E0,$40,$25,$78,$66,$27,$96
+        EQUB    $27,$37,$1E,$68,$D1,$3F,$8D,$13
+        EQUB    $D0,$4F,$2F,$AB,$D1,$F4,$FE,$7F
+        EQUB    $BC,$0A,$FC,$C9,$12,$0F,$D8,$E9
+        EQUB    $3C,$0A,$4D,$05,$A2,$FC,$3F,$CB
+        EQUB    $C4,$6F,$8A,$E8,$93,$C6,$43,$5A
+        EQUB    $48,$F8,$E4,$63,$A6,$7F,$A1,$A3
+        EQUB    $F2,$1A,$6F,$2D,$6E,$B4,$BE,$E6
+        EQUB    $98,$83,$F3,$44,$7F,$49,$03,$27
+        EQUB    $A7,$2F,$D8,$84,$6F,$B0,$E6,$8F
+        EQUB    $64,$E0,$50,$6F,$44,$72,$E6,$84
+        EQUB    $24,$49,$CD,$E0,$51,$27,$37,$9A
+        EQUB    $10,$91,$27,$36,$5C,$0A,$24,$E6
+        EQUB    $CB,$D3,$27,$56,$01,$2B,$C4,$02
+        EQUB    $BC,$E1,$29,$0D,$37,$A8,$4E,$B8
+        EQUB    $11,$1C,$5C,$E6,$78,$78,$FE,$18
+        EQUB    $04,$36,$7E,$69,$3D,$29,$7A,$73
+        EQUB    $59,$3D,$46,$89,$0D,$37,$E1,$42
+        EQUB    $4F,$D7,$DF,$E0,$62,$40,$2B,$E0
+        EQUB    $52,$1A,$6F,$81,$52,$F2,$04,$AF
+        EQUB    $98,$F3,$5E,$3E,$D3,$79,$C0,$18
+        EQUB    $81,$29,$FD,$C2,$3F,$EC,$DE,$D0
+        EQUB    $21,$59,$3C,$52,$81,$6E,$97,$A7
+        EQUB    $F9,$B9,$BF,$9B,$9B,$2F,$63,$D9
+        EQUB    $C9,$25,$BF,$E0,$71,$BF,$E0,$BA
+        EQUB    $05,$AE,$5E,$61,$22,$0F,$37,$FA
+        EQUB    $09,$E7,$CD,$08,$60,$68,$88,$B5
+        EQUB    $90,$7C,$10,$22,$3F,$BC,$93,$FC
+        EQUB    $71,$F8,$E1,$0D,$37,$A4,$20,$0D
+        EQUB    $0D,$37,$D0,$D7,$7A,$60,$13,$98
+        EQUB    $19,$7A,$A4,$E9,$1B,$38,$81,$7F
+        EQUB    $9C,$49,$D3,$81,$0D,$FA,$23,$F6
+        EQUB    $04,$91,$FB,$4C,$49,$7E,$26,$27
+        EQUB    $E7,$32,$47,$C4,$12,$A5,$E4,$45
+        EQUB    $F2,$DA,$E0,$91,$11,$2C,$9E,$9A
+        EQUB    $32,$46,$FF,$1D,$59,$00,$D4,$34
+        EQUB    $DF,$8A,$BC,$81,$2A,$5F,$29,$7E
+        EQUB    $C0,$F9,$D2,$27,$E4,$41,$FE,$44
+        EQUB    $5E,$3F,$33,$92,$5D,$70,$9C,$E6
+        EQUB    $F8,$64,$1F,$96,$B0,$47,$EB,$04
+        EQUB    $65,$F7,$52,$3F,$75,$23,$2F,$30
+        EQUB    $9F,$24,$BE,$57,$46,$60,$0A,$C9
+        EQUB    $F7,$AC,$08,$6C,$BE,$F5,$92,$FC
+        EQUB    $D0,$86,$E6,$3E,$93,$43,$4D,$C1
+        EQUB    $39,$A2,$89,$26,$4F,$9A,$20,$9D
+        EQUB    $16,$09,$A1,$CD,$97,$E5,$45,$CC
+        EQUB    $0D,$9F,$9F,$88,$A0,$C7,$9F,$A2
+        EQUB    $4F,$AB,$ED,$24,$7F,$14,$0D,$D1
+        EQUB    $F4,$A7,$F9,$CB,$F3,$A3,$09,$EA
+        EQUB    $08,$FF,$68,$90,$BF,$B6,$64,$8F
+        EQUB    $E3,$22,$7A,$A4,$8E,$E3,$E0,$A2
+        EQUB    $01,$2B,$C4,$1F,$C7,$2F,$20,$4A
+        EQUB    $24,$FE,$C2,$7D,$84,$97,$D8,$86
+        EQUB    $81,$7F,$9A,$04,$05,$F9,$D2,$97
+        EQUB    $E5,$22,$4B,$D4,$60,$56,$86,$9B
+        EQUB    $F2,$39,$25,$DA,$13,$CF,$F4,$4A
+        EQUB    $4B,$7D,$0E,$92,$27,$8F,$4A,$60
+        EQUB    $88,$F9,$A1,$0E,$92,$9B,$86,$80
+        EQUB    $37,$82,$A4,$A6,$E1,$A0,$0D,$F4
+        EQUB    $C9,$B1,$E0,$FA,$03,$18,$93,$F2
+        EQUB    $25,$E6,$88,$91,$97,$CC,$48,$BA
+        EQUB    $92,$F4,$55,$EC,$7F,$41,$3C,$BA
+        EQUB    $40,$2F,$9A,$11,$08,$09,$9F,$83
+        EQUB    $20,$26,$7F,$06,$7F,$9C,$BC,$27
+        EQUB    $44,$13,$20,$FC,$47,$F9,$68,$12
+        EQUB    $1D,$49,$79,$F4,$9E,$3D,$21,$11
+        EQUB    $A3,$F9,$23,$3F,$AB,$EE,$58,$26
+        EQUB    $4F,$BD,$13,$27,$AA,$81,$13,$73
+        EQUB    $E0,$D1,$12,$0A,$7F,$20,$A6,$E8
+        EQUB    $FA,$42,$F9,$A9,$29,$A1,$A6,$FC
+        EQUB    $C0,$D1,$13,$AE,$F0,$A8,$C2,$36
+        EQUB    $60,$8E,$3C,$33,$13,$C4,$93,$74
+        EQUB    $13,$CF,$C6,$F3,$09,$E6,$E8,$27
+        EQUB    $9F,$34,$22,$39,$CC,$E0,$DC,$E8
+        EQUB    $FE,$32,$F5,$9B,$F6,$D8,$11,$1C
+        EQUB    $B7,$E0,$E2,$03,$7C,$CE,$6C,$BE
+        EQUB    $69,$78,$80,$67,$C0,$C4,$34,$DE
+        EQUB    $45,$49,$E7,$20,$7F,$40,$E5,$F7
+        EQUB    $FD,$EF,$20,$FE,$F9,$7B,$1D,$A3
+        EQUB    $1F,$8E,$68,$44,$A3,$45,$37,$37
+        EQUB    $E4,$E0,$E8,$D6,$BB,$D2,$9E,$E8
+        EQUB    $E1,$39,$A1,$14,$11,$99,$FF,$33
+        EQUB    $C8,$80,$E1,$01,$19,$9E,$CE,$8B
+        EQUB    $3D,$29,$FE,$7A,$0B,$6C,$49,$4F
+        EQUB    $D3,$E8,$8E,$EF,$B8,$92,$E6,$84
+        EQUB    $51,$91,$BC,$21,$22,$85,$E3,$7C
+        EQUB    $E1,$16,$4A,$82,$6E,$8F,$91,$32
+        EQUB    $75,$84,$89,$88,$D1,$63,$CF,$9E
+        EQUB    $3A,$D1,$FD,$64,$94,$BC,$46,$20
+        EQUB    $92,$FB,$31,$CD,$08,$AD,$70,$8F
+        EQUB    $F1,$1F,$41,$3C,$B8,$46,$BA,$86
+        EQUB    $3F,$A2,$03,$10,$7E,$98,$1A,$65
+        EQUB    $90,$7F,$24,$7E,$48,$CB,$F1,$03
+        EQUB    $44,$4D,$CB,$E6,$84,$58,$A0,$60
+        EQUB    $6A,$38,$49,$09,$D1,$99,$07,$F7
+        EQUB    $46,$72,$E6,$84,$5D,$0A,$9C,$25
+        EQUB    $48,$D9,$D0,$0B,$5E,$3F,$1C,$4C
+        EQUB    $E8,$69,$BC,$81,$91,$A2,$27,$D7
+        EQUB    $DB,$81,$88,$69,$3C,$22,$3E,$7F
+        EQUB    $24,$A5,$E3,$82,$92,$99,$07,$F0
+        EQUB    $52,$53,$43,$9B,$F4,$05,$13,$97
+        EQUB    $91,$29,$FE,$7F,$99,$06,$BC,$7E
+        EQUB    $72,$E6,$84,$5B,$BC,$91,$41,$1A
+        EQUB    $22,$0F,$71,$E1,$30,$49,$6F,$E1
+        EQUB    $40,$1A,$2D,$D4,$97,$84,$4F,$92
+        EQUB    $5E,$19,$25,$E4,$2F,$F1,$5E,$3C
+        EQUB    $A2,$79,$6B,$FA,$E5,$CD,$08,$C0
+        EQUB    $5C,$89,$C2,$81,$72,$27,$A5,$32
+        EQUB    $37,$F3,$23,$48,$3E,$90,$8B,$F5
+        EQUB    $B6,$E1,$50,$45,$8E,$5E,$5A,$D0
+        EQUB    $D3,$79,$A3,$97,$C9,$F2,$0F,$E8
+        EQUB    $91,$C8,$3F,$44,$92,$FC,$A7,$EC
+        EQUB    $E7,$1D,$58,$0D,$F3,$48,$8B,$59
+        EQUB    $23,$F9,$1F,$F2,$3A,$1A,$6F,$CF
+        EQUB    $F3,$58,$1A,$39,$78,$92,$3A,$09
+        EQUB    $E7,$38,$6B,$44,$FE,$E8,$FE,$28
+        EQUB    $94,$FF,$62,$46,$5E,$C2,$1A,$6E
+        EQUB    $B8,$0C,$F2,$D6,$EB,$21,$A6,$FA
+        EQUB    $DD,$69,$79,$D3,$94,$C8,$F9,$7A
+        EQUB    $3F,$24,$A7,$EA,$34,$64,$8F,$DB
+        EQUB    $30,$21,$BE,$C1,$23,$B0,$E1,$62
+        EQUB    $03,$44,$0D,$9F,$88,$4F,$20,$8D
+        EQUB    $1F,$9C,$CE,$D1,$6B,$F4,$62,$EB
+        EQUB    $7B,$21,$74,$FE,$17,$4E,$5B,$E1
+        EQUB    $80,$C2,$7A,$21,$01,$89,$F1,$91
+        EQUB    $BE,$97,$34,$23,$82,$64,$E1,$81
+        EQUB    $32,$73,$42,$39,$27,$C3,$12,$7F
+        EQUB    $96,$E7,$E1,$91,$52,$7C,$92,$E6
+        EQUB    $84,$75,$BA,$38,$E1,$96,$EB,$21
+        EQUB    $A6,$EB,$BC,$49,$79,$0D,$37,$34
+        EQUB    $23,$B9,$C3,$0E,$09,$F1,$B5,$06
+        EQUB    $3C,$F8,$67,$54,$91,$6B,$08,$D9
+        EQUB    $EC,$E6,$84,$78,$81,$A3,$E1,$A2
+        EQUB    $06,$8F,$F5,$22,$FC,$42,$37,$E4
+        EQUB    $9C,$BF,$8F,$21,$6B,$F3,$A8,$D1
+        EQUB    $FE,$8F,$FD,$90,$D3,$76,$80,$88
+        EQUB    $FC,$81,$93,$CD,$D8,$E1,$C0,$14
+        EQUB    $1C,$0B,$5F,$D0,$77,$30,$9E,$68
+        EQUB    $FE,$64,$34,$DE,$7B,$C8,$D9,$7D
+        EQUB    $E8,$5E,$3E,$FC,$7A,$23,$F8,$EC
+        EQUB    $08,$93,$D2,$F5,$49,$D2,$78,$03
+        EQUB    $F8,$F4,$16,$9D,$06,$3F,$DF,$F8
+        EQUB    $FE,$B8,$F2,$D6,$EF,$B0,$93,$F4
+        EQUB    $7E,$4E,$68,$48,$26,$36,$E1,$D1
+        EQUB    $A0,$B4,$64,$D0,$5A,$74,$78,$63
+        EQUB    $23,$7C,$63,$F9,$6B,$F3,$4C,$41
+        EQUB    $FA,$5F,$91,$25,$F9,$BA,$38,$EB
+        EQUB    $96,$3F,$93,$CC,$27,$9C,$59,$1C
+        EQUB    $0A,$27,$A4,$F4,$4C,$0B,$F4,$CE
+        EQUB    $EA,$48,$9E,$A4,$7F,$22,$7A,$DF
+        EQUB    $5E,$FF,$E1,$E8,$1F,$30,$0D,$FB
+        EQUB    $10,$D3,$7A,$31,$C6,$D0,$E6,$84
+        EQUB    $9E,$20,$68,$74,$FA,$5E,$99,$AE
+        EQUB    $89,$3E,$E8,$92,$5B,$E2,$16,$B2
+        EQUB    $18,$0B,$EB,$11,$30,$4D,$0E,$6F
+        EQUB    $9F,$12,$4A,$48,$A9,$3A,$DF,$0C
+        EQUB    $82,$23,$45,$8F,$A0,$40,$9B,$A3
+        EQUB    $E2,$AC,$13,$00,$56,$4F,$BA,$2C
+        EQUB    $04,$D0,$E6,$F9,$A4,$8F,$A4,$41
+        EQUB    $4E,$5F,$24,$67,$F4,$0C,$9E,$98
+        EQUB    $05,$3F,$92,$35,$41,$2D,$F2,$46
+        EQUB    $A8,$25,$88,$3F,$BB,$D5,$F8,$06
+        EQUB    $48,$CB,$E0,$92,$1C,$DF,$91,$B3
+        EQUB    $74,$71,$F4,$4C,$13,$43,$9B,$B4
+        EQUB    $E2,$25,$CD,$09,$32,$58,$1A,$3E
+        EQUB    $CF,$88,$9F,$34,$34,$CF,$41,$3C
+        EQUB    $B8,$89,$E8,$27,$97,$A5,$F2,$2C
+        EQUB    $BC,$D0,$93,$58,$A1,$7B,$E2,$40
+        EQUB    $25,$3D,$D3,$F1,$8C,$41,$F9,$8C
+        EQUB    $20,$FA,$48,$AB,$6C,$E2,$5C,$1F
+        EQUB    $88,$8D,$9C,$49,$F9,$78,$DE,$43
+        EQUB    $7D,$8D,$F8,$E2,$68,$C7,$FD,$F2
+        EQUB    $F3,$45,$34,$39,$BF,$32,$C9,$CD
+        EQUB    $09,$54,$6A,$B8,$9A,$35,$5E,$94
+        EQUB    $F6,$E2,$88,$47,$FD,$F2,$F4,$E6
+        EQUB    $B2,$6D,$E2,$90,$25,$79,$6B,$FA
+        EQUB    $E5,$CD,$09,$68,$67,$C2,$48,$AC
+        EQUB    $98,$E2,$90,$E9,$2B,$D3,$11,$C8
+        EQUB    $DE,$B5,$C2,$54,$BF,$6D,$B5,$E2
+        EQUB    $C0,$17,$52,$3F,$75,$22,$48,$F9
+        EQUB    $A3,$97,$34,$26,$01,$AA,$3B,$01
+        EQUB    $1E,$2C,$12,$24,$65,$F3,$92,$5E
+        EQUB    $99,$3D,$6F,$B7,$9A,$13,$34,$21
+        EQUB    $E8,$44,$E2,$C8,$01,$FC,$72,$FC
+        EQUB    $5B,$FA,$93,$F5,$24,$BF,$54,$34
+        EQUB    $DE,$2C,$FC,$D9,$A1,$7E,$74,$C1
+        EQUB    $11,$FA,$7C,$D0,$98,$4A,$91,$7B
+        EQUB    $E2,$D0,$25,$4B,$C4,$F1,$8F,$3F
+        EQUB    $9E,$72,$F2,$89,$E6,$22,$64,$1F
+        EQUB    $A5,$32,$37,$D3,$99,$23,$F9,$AC
+        EQUB    $9D,$70,$07,$E1,$28,$83,$F3,$4D
+        EQUB    $E7,$2B,$EA,$97,$E4,$4F,$4A,$7E
+        EQUB    $B6,$E4,$E2,$E8,$18,$A0,$40,$9A
+        EQUB    $1C,$DF,$09,$58,$F3,$1F,$8D,$89
+        EQUB    $E2,$F0,$86,$9B,$78,$E3,$00,$32
+        EQUB    $79,$44,$97,$9A,$03,$21,$A6,$F9
+        EQUB    $DC,$B2,$7A,$22,$39,$25,$E9,$2B
+        EQUB    $F2,$45,$49,$CD,$09,$A0,$94,$C9
+        EQUB    $1E,$30,$9E,$00,$DD,$6F,$0C,$0B
+        EQUB    $5A,$1C,$DF,$12,$68,$69,$BC,$C0
+        EQUB    $92,$3F,$09,$23,$2F,$BA,$28,$02
+        EQUB    $FE,$E8,$A0,$0C,$F4,$49,$E9,$92
+        EQUB    $3B,$E6,$84,$D4,$0C,$6B,$27,$8C
+        EQUB    $79,$E3,$8C,$43,$69,$32,$4B,$D1
+        EQUB    $8B,$A3,$E9,$4C,$0A,$27,$5C,$D9
+        EQUB    $4C,$91,$F3,$A2,$41,$FA,$24,$F4
+        EQUB    $A7,$EA,$93,$E4,$96,$E7,$E3,$28
+        EQUB    $23,$F9,$A8,$12,$1E,$05,$FA,$44
+        EQUB    $A3,$3F,$3D,$FA,$E3,$31,$BD,$E3
+        EQUB    $7A,$08,$C5,$D6,$E9,$3C,$08,$FE
+        EQUB    $7E,$20,$FE,$39,$7A,$A4,$8F,$AD
+        EQUB    $2F,$C8,$AB,$04,$8F,$F9,$3C,$0F
+        EQUB    $24,$7F,$2A,$91,$A3,$74,$77,$E3
+        EQUB    $50,$22,$78,$C7,$9F,$CF,$34,$34
+        EQUB    $C0,$59,$3C,$C0,$AF,$1E,$69,$39
+        EQUB    $A1,$3B,$42,$7F,$1A,$EF,$05,$64
+        EQUB    $FB,$87,$8F,$46,$67,$FC,$CF,$A0
+        EQUB    $B5,$12,$3F,$E6,$7D,$05,$B2,$75
+        EQUB    $26,$7F,$CC,$E4,$04,$A7,$F9,$9E
+        EQUB    $C4,$94,$FD,$22,$7A,$7F,$3A,$1A
+        EQUB    $6F,$A0,$44,$FA,$04,$49,$7A,$DE
+        EQUB    $CE,$56,$4D,$FA,$E3,$6D,$BD,$E3
+        EQUB    $82,$92,$0A,$7D,$18,$FA,$5F,$17
+        EQUB    $E4,$89,$07,$F4,$08,$9B,$E6,$84
+        EQUB    $FD,$09,$7C,$72,$C7,$D6,$F3,$42
+        EQUB    $7B,$49,$C7,$34,$9F,$D0,$5A,$08
+        EQUB    $B0,$83,$F2,$F1,$E9,$BB,$AE,$7C
+        EQUB    $BA,$F2,$37,$F1,$07,$9E,$E8,$CE
+        EQUB    $8D,$44,$F1,$B8,$E3,$A3,$E0,$34
+        EQUB    $C4,$F0,$C9,$19,$78,$C0,$6A,$24
+        EQUB    $09,$A1,$CD,$F8,$1B,$2F,$20,$A8
+        EQUB    $11,$3B,$33,$92,$32,$ED,$04,$7F
+        EQUB    $4F,$E4,$8F,$E4,$81,$93,$B5,$24
+        EQUB    $7F,$13,$90,$03,$FC,$64,$77,$3A
+        EQUB    $72,$ED,$9B,$F2,$47,$72,$E6,$84
+        EQUB    $FC,$6F,$E3,$C0,$86,$CF,$F1,$F3
+        EQUB    $48,$BF,$44,$03,$27,$34,$28,$02
+        EQUB    $20,$1A,$24,$4E,$3C,$11,$00,$D1
+        EQUB    $22,$7D,$5F,$9A,$26,$87,$37,$F3
+        EQUB    $C7,$34,$28,$02,$52,$E3,$C1,$29
+        EQUB    $FA,$67,$FC,$C9,$16,$90,$7E,$C7
+        EQUB    $48,$3B,$03,$1E,$24,$7F,$19,$79
+        EQUB    $CF,$59,$3D,$19,$39,$BE,$9F,$4E
+        EQUB    $E9,$B8,$D1,$03,$CF,$B9,$E3,$D0
+        EQUB    $25,$7D,$52,$FC,$E9,$12,$4B,$C4
+        EQUB    $E6,$85,$04,$11,$80,$6F,$1E,$85
+        EQUB    $AC,$11,$97,$B3,$90,$75,$60,$43
+        EQUB    $7E,$D9,$FE,$53,$40,$BF,$32,$7F
+        EQUB    $1C,$D0,$A0,$B0,$60,$91,$E3,$D6
+        EQUB    $0C,$21,$A6,$F1,$01,$22,$7C,$12
+        EQUB    $A4,$49,$EA,$1B,$AE,$12,$89,$39
+        EQUB    $79,$0D,$9F,$DB,$39,$7E,$4E,$6F
+        EQUB    $96,$81,$13,$CF,$97,$A2,$23,$FA
+        EQUB    $52,$24,$A4,$87,$37,$F3,$24,$7D
+        EQUB    $3F,$52,$32,$F5,$89,$1D,$D2,$E3
+        EQUB    $E2,$04,$45,$04,$F1,$25,$2F,$20
+        EQUB    $44,$97,$DA,$22,$4A,$44,$97,$E4
+        EQUB    $E6,$FE,$A0,$99,$3C,$E3,$44,$0C
+        EQUB    $61,$3E,$E2,$FE,$64,$14,$C8,$3F
+        EQUB    $D4,$92,$ED,$02,$B4,$0B,$CB,$5F
+        EQUB    $A4,$7F,$4F,$6B,$E3,$F1,$10,$31
+        EQUB    $03,$DB,$E4,$28,$01,$F9,$02,$52
+        EQUB    $F1,$F9,$ED,$E4,$41,$33,$92,$3E
+        EQUB    $AA,$1A,$4E,$90,$02,$3F,$C4,$72
+        EQUB    $4B,$E3,$F8,$F1,$F5,$FD,$6B,$C7
+        EQUB    $84,$47,$CD,$0E,$6F,$F0,$25,$90
+        EQUB    $7E,$1F,$8A,$48,$91,$A2,$27,$E2
+        EQUB    $49,$1C,$83,$FC,$49,$23,$B0,$8D
+        EQUB    $9F,$8C,$89,$4C,$91,$20,$FC,$B0
+        EQUB    $4D,$0E,$6C,$8E,$87,$CB,$CC,$23
+        EQUB    $02,$48,$FD,$D5,$27,$9E,$78,$82
+        EQUB    $44,$FB,$A3,$3F,$42,$88,$89,$07
+        EQUB    $E9,$4C,$11,$9F,$E6,$E8,$93,$F3
+        EQUB    $74,$49,$2F,$CE,$5E,$9D,$22,$D9
+        EQUB    $73,$42,$91,$2A,$45,$A1,$A4,$D0
+        EQUB    $4F,$2E,$44,$95,$72,$E6,$86,$9B
+        EQUB    $EE,$5D,$49,$2F,$58,$11,$1E,$C9
+        EQUB    $E4,$50,$63,$CF,$CD,$37,$CD,$2F
+        EQUB    $54,$91,$F9,$22,$17,$02,$7C,$D0
+        EQUB    $A4,$E0,$0F,$91,$70,$07,$F1,$CB
+        EQUB    $C1,$74,$FE,$E9,$CB,$C2,$57,$9C
+        EQUB    $5F,$CE,$5E,$A3,$46,$00,$BA,$93
+        EQUB    $DB,$E4,$68,$10,$A2,$47,$F2,$C9
+        EQUB    $E6,$FE,$5E,$91,$FE,$72,$4B,$7E
+        EQUB    $E4,$BA,$01,$F8,$A4,$9E,$3C,$81
+        EQUB    $F9,$64,$90,$E2,$E4,$0F,$CD,$14
+        EQUB    $E8,$CF,$8F,$E3,$97,$A8,$22,$47
+        EQUB    $D5,$27,$B1,$F9,$74,$40,$59,$3E
+        EQUB    $D6,$92,$32,$FC,$62,$41,$F8,$8D
+        EQUB    $24,$71,$E7,$44,$9F,$8B,$D0,$E6
+        EQUB    $FA,$24,$23,$7F,$42,$97,$1D,$27
+        EQUB    $81,$11,$1F,$F2,$73,$7F,$3F,$0A
+        EQUB    $24,$9F,$86,$06,$F8,$9F,$43,$4D
+        EQUB    $F6,$7D,$92,$F2,$C8,$29,$FD,$7F
+        EQUB    $5A,$1A,$6F,$4E,$5D,$38,$14,$4F
+        EQUB    $A8,$92,$F1,$3C,$E7,$4E,$5F,$7F
+        EQUB    $34,$29,$9D,$D1,$27,$24,$77,$46
+        EQUB    $7F,$A4,$C8,$3F,$D2,$72,$FD,$BF
+        EQUB    $62,$47,$D1,$41,$15,$EA,$14,$AB
+        EQUB    $24,$B7,$E4,$90,$66,$85,$C0,$88
+        EQUB    $FC,$B4,$09,$CD,$F3,$34,$16,$D9
+        EQUB    $CE,$1F,$9A,$64,$34,$DE,$9F,$C4
+        EQUB    $E6,$7E,$5F,$9A,$1A,$6E,$AC,$84
+        EQUB    $7F,$90,$32,$4B,$AC,$04,$8E,$41
+        EQUB    $F8,$8B,$5F,$D6,$B9,$79,$0B,$24
+        EQUB    $BC,$E7,$4C,$FD,$68,$1F,$E4,$14
+        EQUB    $BC,$D0,$A6,$D7,$58,$20,$5A,$F9
+        EQUB    $26,$D0,$C6,$59,$25,$D7,$78,$0F
+        EQUB    $F0,$90,$05,$A2,$53,$FA,$00,$B4
+        EQUB    $4A,$72,$FA,$B9,$A1,$4D,$CB,$1F
+        EQUB    $24,$E6,$13,$E4,$99,$D0,$D3,$79
+        EQUB    $CD,$E6,$85,$37,$46,$38,$E4,$9D
+        EQUB    $18,$E3,$9A,$14,$DD,$45,$CB,$92
+        EQUB    $75,$1A,$39,$7E,$67,$FC,$CF,$A0
+        EQUB    $B5,$12,$3F,$E6,$72,$02,$53,$FC
+        EQUB    $CF,$62,$4A,$7D,$78,$04,$4F,$10
+        EQUB    $0A,$97,$C4,$80,$2F,$E4,$1C,$BC
+        EQUB    $89,$CB,$D1,$06,$25,$EC,$6F,$E4
+        EQUB    $A1,$40,$44,$9F,$04,$49,$2F,$90
+        EQUB    $99,$27,$D1,$18,$91,$7D,$98,$10
+        EQUB    $D2,$0F,$E8,$8C,$BE,$D1,$A1,$A6
+        EQUB    $FC,$49,$2F,$C6,$64,$1F,$E3,$39
+        EQUB    $7E,$68,$73,$7C,$47,$CB,$C8,$29
+        EQUB    $7E,$B5,$F9,$CB,$23,$7E,$FF,$BE
+        EQUB    $5E,$89,$09,$3F,$92,$62,$3E,$3E
+        EQUB    $81,$92,$5F,$73,$4D,$DA,$3C,$91
+        EQUB    $F4,$49,$F8,$BA,$8D,$19,$07,$DB
+        EQUB    $78,$84,$7C,$BE,$49,$F9,$0D,$34
+        EQUB    $BC,$E7,$3E,$5B,$E4,$B1,$29,$91
+        EQUB    $9B,$E4,$C0,$85,$F9,$44,$F9,$1B
+        EQUB    $F2,$4B,$CD,$F3,$FE,$4F,$4E,$6E
+        EQUB    $77,$48,$23,$B5,$02,$40,$1B,$F3
+        EQUB    $B5,$02,$40,$1B,$2F,$2D,$7E,$63
+        EQUB    $D6,$4E,$68,$54,$38,$1A,$AE,$4C
+        EQUB    $E0,$6A,$BE,$D5,$4B,$F3,$FC,$F4
+        EQUB    $13,$CB,$9A,$15,$0E,$4E,$4C,$E4
+        EQUB    $F9,$67,$F4,$47,$EC,$FB,$09,$F6
+        EQUB    $FE,$24,$FC,$49,$A0,$9E,$5E,$44
+        EQUB    $47,$F9,$79,$D1,$68,$69,$23,$FE
+        EQUB    $92,$03,$47,$2F,$44,$80,$99,$1B
+        EQUB    $F2,$02,$72,$FA,$16,$B2,$0F,$EE
+        EQUB    $A1,$8F,$F7,$5B,$EE,$B4,$B7,$E4
+        EQUB    $D0,$25,$12,$7F,$51,$27,$2F,$0F
+        EQUB    $1E,$59,$07,$CD,$0A,$88,$61,$39
+        EQUB    $34,$30,$9F,$24,$BC,$DC,$7A,$24
+        EQUB    $1F,$5D,$E6,$3A,$31,$75,$BC,$EF
+        EQUB    $3F,$D4,$8A,$25,$39,$6F,$E4,$E2
+        EQUB    $01,$2A,$5F,$18,$96,$01,$CB,$E8
+        EQUB    $6A,$1A,$6F,$B1,$FF,$6C,$9E,$08
+        EQUB    $91,$B3,$E6,$85,$48,$81,$B2,$7B
+        EQUB    $A3,$3E,$4E,$20,$6C,$9E,$E8,$CF
+        EQUB    $F2,$3F,$EA,$45,$F8,$84,$F9,$25
+        EQUB    $E4,$12,$5E,$A4,$CF,$DA,$35,$A4
+        EQUB    $5F,$A2,$DF,$B6,$5F,$6C,$A6,$85
+        EQUB    $93,$B5,$ED,$9D,$B5,$E5,$37,$E5
+        EQUB    $1A,$32,$44,$D1,$75,$1A,$3F,$92
+        EQUB    $2D,$20,$26,$7F,$14,$12,$99,$1B
+        EQUB    $E4,$15,$D1,$61,$07,$E9,$A0,$9D
+        EQUB    $7F,$AC,$08,$8E,$5B,$E5,$24,$4D
+        EQUB    $8E,$E5,$40,$BA,$93,$A4,$88,$7E
+        EQUB    $C4,$2D,$68,$73,$7F,$8E,$68,$56
+        EQUB    $24,$C9,$10,$36,$5B,$E5,$50,$29
+        EQUB    $BA,$38,$F0,$C4,$06,$7C,$40,$64
+        EQUB    $BC,$4B,$79,$A4,$97,$9C,$B2,$4F
+        EQUB    $D2,$74,$7A,$E4,$08,$9B,$E5,$68
+        EQUB    $B9,$D2,$24,$96,$E8,$E5,$BA,$0F
+        EQUB    $22,$7E,$51,$3E,$49,$79,$63,$8B
+        EQUB    $90,$3F,$AB,$EA,$43,$4D,$F5,$4B
+        EQUB    $EA,$B0,$31,$F5,$FD,$64,$9F,$D6
+        EQUB    $F0,$3C,$91,$F3,$67,$2F,$47,$E4
+        EQUB    $3B,$A9,$22,$7E,$28,$74,$7D,$31
+        EQUB    $1F,$E2,$39,$25,$F1,$1D,$0D,$37
+        EQUB    $C9,$1F,$92,$25,$02,$D7,$EA,$92
+        EQUB    $5E,$C7,$49,$ED,$04,$EB,$5F,$81
+        EQUB    $1F,$C5,$0D,$37,$34,$2B,$91,$62
+        EQUB    $73,$09,$CB,$11,$62,$73,$09,$CD
+        EQUB    $0A,$E4,$5A,$F9,$62,$44,$9E,$94
+        EQUB    $F9,$A1,$5C,$E0,$9F,$2C,$70,$4F
+        EQUB    $9A,$15,$CE,$42,$72,$C7,$23,$79
+        EQUB    $A1,$5C,$E4,$89,$39,$63,$92,$24
+        EQUB    $F2,$04,$7F,$AC,$9F,$63,$C9,$19
+        EQUB    $7E,$31,$97,$E6,$4F,$3B,$71,$E5
+        EQUB    $90,$32,$79,$BF,$1A,$1A,$6F,$93
+        EQUB    $D2,$22,$F1,$E9,$9F,$E7,$43,$7A
+        EQUB    $E5,$11,$BE,$6F,$F4,$13,$CF,$CE
+        EQUB    $1F,$A2,$39,$7D,$5F,$53,$D6,$01
+        EQUB    $13,$EA,$91,$DC,$FF,$AA,$53,$04
+        EQUB    $D0,$E6,$FD,$63,$E6,$85,$77,$45
+        EQUB    $9C,$B3,$A2,$CF,$B7,$D4,$58,$F6
+        EQUB    $E5,$A2,$40,$4C,$FE,$41,$8C,$B2
+        EQUB    $4B,$F2,$9E,$CC,$E6,$3A,$40,$47
+        EQUB    $CB,$5B,$AD,$F5,$CB,$9A,$16,$74
+        EQUB    $22,$E8,$53,$E6,$09,$2F,$50,$47
+        EQUB    $DE,$E6,$85,$9D,$09,$FA,$14,$3A
+        EQUB    $EA,$73,$0E,$A7,$F4,$13,$C4,$9F
+        EQUB    $D0,$4F,$52,$7D,$A6,$E6,$85,$97
+        EQUB    $52,$3C,$C3,$A9,$1F,$C6,$44,$59
+        EQUB    $77,$E6,$85,$9D,$0A,$9A,$14,$F7
+        EQUB    $E6,$5C,$ED,$8A,$D6,$21,$06,$00
+        EQUB    $01,$22,$13,$00,$46,$22,$2A,$00
+        EQUB    $84,$22,$3E,$00,$84,$22,$3E,$00
+        EQUB    $D4,$22,$5B,$00,$16,$23,$6F,$00
+        EQUB    $46,$23,$7F,$00,$49,$23,$80,$00
+        EQUB    $95,$23,$98,$00,$19,$24,$C0,$00
+        EQUB    $5D,$24,$D4,$00,$5D,$24,$D4,$00
+        EQUB    $A3,$24,$EB,$00,$DC,$24,$FC,$00
+        EQUB    $0B,$25,$0D,$01,$0B,$25,$0D,$01
+        EQUB    $33,$25,$18,$01,$6E,$25,$28,$01
+        EQUB    $BE,$25,$3B,$01,$C2,$25,$3C,$01
+        EQUB    $EC,$25,$4B,$01,$49,$26,$69,$01
+        EQUB    $62,$26,$71,$01,$62,$26,$71,$01
+        EQUB    $7D,$26,$7A,$01,$A4,$26,$84,$01
+        EQUB    $C8,$26,$91,$01,$C8,$26,$91,$01
+        EQUB    $01,$27,$A7,$01,$35,$27,$B9,$01
+        EQUB    $41,$27,$BD,$01,$41,$27,$BD,$01
+        EQUB    $50,$27,$C2,$01,$A3,$27,$D7,$01
+        EQUB    $C1,$27,$E0,$01,$C1,$27,$E0,$01
+        EQUB    $D0,$27,$E4,$01,$DE,$27,$EA,$01
+        EQUB    $F4,$27,$F1,$01,$F4,$27,$F1,$01
+        EQUB    $FD,$27,$F4,$01,$1A,$28,$FD,$01
+        EQUB    $1A,$28,$FD,$01,$1A,$28,$FD,$01
+        EQUB    $5B,$28,$12,$02,$85,$28,$23,$02
+        EQUB    $93,$28,$26,$02,$98,$28,$27,$02
+        EQUB    $D4,$28,$39,$02,$F9,$28,$44,$02
+        EQUB    $07,$29,$48,$02,$0A,$29,$49,$02
+        EQUB    $2A,$29,$55,$02,$6F,$29,$6A,$02
+        EQUB    $72,$29,$6B,$02,$72,$29,$6B,$02
+        EQUB    $81,$29,$71,$02,$A7,$29,$7D,$02
+        EQUB    $D9,$29,$8D,$02,$DD,$29,$8E,$02
+        EQUB    $21,$2A,$A3,$02,$7A,$2A,$C0,$02
+        EQUB    $A7,$2A,$CE,$02,$AD,$2A,$CF,$02
+        EQUB    $AD,$2A,$CF,$02,$AD,$2A,$CF,$02
+        EQUB    $B6,$2A,$D2,$02,$B6,$2A,$D2,$02
+        EQUB    $2B,$2B,$F0,$02,$54,$2B,$FE,$02
+        EQUB    $63,$2B,$04,$03,$63,$2B,$04,$03
+        EQUB    $DD,$2B,$33,$03,$72,$2C,$5E,$03
+        EQUB    $C7,$2C,$7B,$03,$CC,$2C,$7C,$03
+        EQUB    $32,$2D,$A0,$03,$59,$2D,$AE,$03
+        EQUB    $98,$2D,$C1,$03,$98,$2D,$C1,$03
+        EQUB    $9A,$2D,$C2,$03,$B8,$2D,$C9,$03
+        EQUB    $BC,$2D,$CA,$03,$BC,$2D,$CA,$03
+        EQUB    $D0,$2D,$CF,$03,$E9,$2D,$D7,$03
+        EQUB    $F0,$2D,$D8,$03,$F0,$2D,$D8,$03
+        EQUB    $72,$2E,$05,$04,$AB,$2E,$1A,$04
+        EQUB    $B7,$2E,$1D,$04,$B7,$2E,$1D,$04
+        EQUB    $B7,$2E,$1D,$04,$B7,$2E,$1D,$04
+        EQUB    $B7,$2E,$1D,$04,$B7,$2E,$1D,$04
+        EQUB    $CC,$2E,$24,$04,$EC,$2E,$2D,$04
+        EQUB    $F3,$2E,$2E,$04,$F3,$2E,$2E,$04
+        EQUB    $F3,$2E,$2E,$04,$0F,$A0,$2F,$A2
+        EQUB    $1F,$BA,$1F,$AC,$1F,$AE,$0F,$AE
+        EQUB    $03,$8E,$00,$07,$04,$26,$0F,$A2
+        EQUB    $01,$C5,$02,$73,$00,$23,$0F,$AC
+        EQUB    $02,$6D,$00,$21,$03,$A9,$01,$D7
+        EQUB    $00,$34,$00,$08,$0F,$A1,$01,$DA
+        EQUB    $04,$2B,$03,$8B,$00,$FF,$0F,$BF
+        EQUB    $01,$02,$00,$2C,$02,$F8,$00,$84
+        EQUB    $04,$0A,$02,$AC,$01,$64,$01,$6C
+        EQUB    $01,$2B,$00,$15,$0F,$DF,$02,$FD
+        EQUB    $00,$D5,$04,$0B,$03,$E2,$00,$57
+        EQUB    $01,$37,$0F,$A5,$03,$C7,$02,$85
+        EQUB    $00,$7F,$04,$27,$01,$DC,$00,$7A
+        EQUB    $04,$11,$03,$AB,$02,$F1,$02,$5B
+        EQUB    $02,$1F,$01,$6F,$00,$B7,$00,$87
+        EQUB    $00,$31,$02,$70,$02,$65,$02,$2D
+        EQUB    $01,$9E,$01,$73,$00,$14,$03,$53
+        EQUB    $03,$4C,$02,$0A,$00,$B2,$00,$51
+        EQUB    $00,$2F,$04,$28,$03,$F8,$03,$8D
+        EQUB    $03,$4D,$03,$3C,$03,$08,$02,$B1
+        EQUB    $02,$9C,$02,$95,$01,$7E,$01,$3C
+        EQUB    $01,$2D,$00,$B0,$00,$AC,$00,$52
+        EQUB    $00,$4B,$03,$F3,$03,$EF,$03,$DD
+        EQUB    $03,$CD,$03,$93,$03,$40,$03,$0C
+        EQUB    $02,$DA,$02,$D3,$02,$BF,$02,$B8
+        EQUB    $02,$9F,$02,$88,$02,$87,$02,$64
+        EQUB    $01,$DD,$01,$9B,$01,$78,$01,$61
+        EQUB    $01,$12,$01,$11,$01,$04,$00,$FA
+        EQUB    $00,$C2,$00,$9F,$00,$83,$00,$1C
+        EQUB    $00,$16,$04,$1F,$04,$17,$03,$FE
+        EQUB    $03,$BB,$03,$B6,$03,$AD,$03,$9F
+        EQUB    $03,$99,$03,$83,$03,$67,$03,$50
+        EQUB    $03,$16,$02,$F4,$B8,$98,$26,$00
+        EQUB    $26,$0E,$48,$FF,$23,$01,$EC,$10
+        EQUB    $01,$41,$08,$78,$28,$01,$0A,$05
+        EQUB    $54,$04,$48,$00,$2D,$15,$01,$02
+        EQUB    $01,$18,$26,$01,$56,$0B,$09,$17
+        EQUB    $1F,$48,$00,$20,$08,$F4,$01,$01
+        EQUB    $0A,$17,$01,$7A,$17,$40,$09,$7B
+        EQUB    $17,$4C,$05,$08,$34,$02,$01,$30
+        EQUB    $01,$2D,$08,$15,$01,$16,$01,$09
+        EQUB    $01,$2D,$08,$90,$01,$01,$0A,$17
+        EQUB    $01,$04,$01,$45,$09,$21,$36,$09
+        EQUB    $17,$1F,$48,$00,$20,$01,$F1,$00
+        EQUB    $21,$05,$01,$DE,$0F,$02,$C3,$8C
+        EQUB    $01,$78,$01,$0C,$09,$78,$01,$0D
+        EQUB    $05,$79,$01,$01,$0E,$05,$72,$01
+        EQUB    $48,$4C,$02,$0A,$02,$01,$04,$01
+        EQUB    $20,$02,$02,$C2,$8C,$01,$01,$DD
+        EQUB    $01,$45,$09,$02,$48,$01,$27,$48
+        EQUB    $00,$19,$48,$01,$18,$09,$17,$12
+        EQUB    $01,$07,$02,$48,$00,$01,$48,$00
+        EQUB    $02,$78,$1A,$00,$13,$48,$64,$01
+        EQUB    $0A,$18,$01,$0A,$06,$19,$79,$19
+        EQUB    $02,$03,$45,$0A,$01,$77,$01,$0A
+        EQUB    $06,$18,$7A,$18,$0E,$D8,$7B,$19
+        EQUB    $01,$07,$78,$19,$00,$0C,$45,$0B
+        EQUB    $48,$00,$01,$48,$00,$02,$01,$77
+        EQUB    $01,$02,$48,$01,$2C,$A3,$1C,$01
+        EQUB    $78,$01,$00,$1C,$A2,$1C,$01,$78
+        EQUB    $01,$8C,$15,$0A,$01,$01,$0A,$06
+        EQUB    $01,$A1,$01,$02,$7B,$02,$7F,$08
+        EQUB    $78,$2B,$00,$04,$48,$00,$2C,$02
+        EQUB    $48,$02,$27,$01,$43,$01,$48,$00
+        EQUB    $23,$48,$00,$22,$21,$2F,$78,$1C
+        EQUB    $00,$07,$21,$C7,$78,$2C,$00,$1D
+        EQUB    $79,$21,$01,$10,$0A,$06,$22,$48
+        EQUB    $00,$01,$48,$00,$02,$01,$77,$01
+        EQUB    $01,$51,$01,$09,$1C,$01,$48,$00
+        EQUB    $02,$01,$77,$01,$79,$1C,$00,$D5
+        EQUB    $48,$FF,$23,$02,$48,$8A,$01,$17
+        EQUB    $01,$20,$1F,$1C,$21,$2B,$33,$1C
+        EQUB    $01,$02,$02,$48,$00,$1C,$48,$00
+        EQUB    $21,$02,$48,$01,$2B,$48,$00,$01
+        EQUB    $17,$01,$01,$01,$01,$01,$01,$02
+        EQUB    $48,$18,$03,$78,$20,$1F,$1F,$79
+        EQUB    $1F,$8C,$04,$48,$3C,$03,$0A,$20
+        EQUB    $03,$04,$03,$78,$20,$00,$0F,$09
+        EQUB    $1F,$01,$01,$DD,$01,$48,$10,$01
+        EQUB    $0A,$01,$03,$04,$03,$02,$78,$01
+        EQUB    $00,$39,$78,$26,$04,$0E,$E7,$26
+        EQUB    $01,$0A,$06,$26,$E7,$26,$02,$0A
+        EQUB    $06,$26,$02,$87,$04,$01,$87,$05
+        EQUB    $02,$C7,$00,$01,$C7,$01,$02,$21
+        EQUB    $3A,$48,$00,$01,$48,$02,$02,$A7
+        EQUB    $02,$03,$E7,$01,$03,$0A,$06,$01
+        EQUB    $0A,$06,$02,$7A,$01,$06,$F1,$45
+        EQUB    $03,$02,$78,$26,$00,$D5,$C7,$00
+        EQUB    $01,$C7,$01,$02,$21,$15,$78,$26
+        EQUB    $02,$0B,$45,$06,$C7,$02,$01,$C7
+        EQUB    $03,$02,$21,$07,$48,$00,$26,$45
+        EQUB    $09,$02,$58,$27,$02,$76,$08,$04
+        EQUB    $01,$04,$02,$02,$31,$01,$23,$05
+        EQUB    $05,$7E,$01,$02,$78,$01,$8C,$03
+        EQUB    $45,$15,$20,$07,$45,$17,$20,$03
+        EQUB    $45,$16,$78,$23,$FF,$04,$09,$01
+        EQUB    $23,$7B,$01,$8D,$09,$48,$E6,$02
+        EQUB    $0A,$01,$02,$04,$02,$02,$21,$04
+        EQUB    $00,$0B,$10,$48,$00,$1A,$0F,$12
+        EQUB    $18,$16,$15,$78,$15,$00,$12,$09
+        EQUB    $16,$01,$7A,$01,$04,$04,$0B,$09
+        EQUB    $01,$7B,$01,$01,$04,$48,$01,$1A
+        EQUB    $02,$48,$0F,$18,$0B,$06,$18,$21
+        EQUB    $DB,$78,$18,$00,$05,$31,$15,$13
+        EQUB    $F4,$02,$45,$05,$0A,$06,$72,$7A
+        EQUB    $72,$03,$04,$48,$00,$72,$09,$2A
+        EQUB    $01,$0A,$72,$01,$04,$01,$02,$01
+        EQUB    $1B,$07,$01,$AD,$1A,$06,$06,$78
+        EQUB    $36,$00,$10,$48,$00,$36,$78,$3E
+        EQUB    $00,$09,$45,$11,$06,$02,$01,$48
+        EQUB    $00,$3E,$01,$E1,$04,$79,$0A,$00
+        EQUB    $03,$20,$E3,$21,$04,$00,$83,$19
+        EQUB    $48,$00,$18,$01,$E0,$1E,$09,$0A
+        EQUB    $3B,$01,$0E,$1F,$78,$34,$01,$31
+        EQUB    $48,$01,$1B,$A8,$1B,$1C,$78,$1C
+        EQUB    $00,$1D,$01,$00,$04,$78,$28,$01
+        EQUB    $09,$01,$9B,$04,$48,$01,$3D,$20
+        EQUB    $09,$09,$1C,$0C,$48,$01,$3D,$21
+        EQUB    $48,$0A,$06,$1B,$20,$DE,$78,$3D
+        EQUB    $01,$06,$48,$FF,$0C,$21,$3A,$02
+        EQUB    $48,$8B,$1B,$48,$FF,$0C,$09,$1B
+        EQUB    $1C,$01,$00,$04,$78,$28,$00,$1A
+        EQUB    $48,$01,$2B,$01,$CB,$00,$78,$2C
+        EQUB    $00,$10,$01,$4D,$06,$78,$28,$01
+        EQUB    $09,$09,$1B,$0C,$48,$01,$3D,$21
+        EQUB    $10,$0B,$06,$1B,$3A,$1B,$30,$75
+        EQUB    $D6,$78,$3D,$01,$03,$21,$02,$02
+        EQUB    $45,$05,$09,$20,$35,$78,$0C,$FF
+        EQUB    $11,$78,$34,$01,$05,$7A,$3C,$02
+        EQUB    $09,$09,$0C,$01,$01,$F3,$01,$45
+        EQUB    $12,$21,$05,$09,$35,$20,$02,$48
+        EQUB    $01,$3F,$09,$0C,$1C,$48,$1F,$20
+        EQUB    $48,$01,$28,$01,$24,$1F,$58,$28
+        EQUB    $01,$FB,$03,$09,$0D,$1C,$01,$DB
+        EQUB    $19,$58,$28,$01,$FB,$03,$09,$0C
+        EQUB    $1C,$01,$DB,$19,$58,$28,$01,$FB
+        EQUB    $03,$58,$0A,$0E,$AD,$11,$58,$0A
+        EQUB    $0F,$8E,$11,$5A,$0A,$10,$C1,$08
+        EQUB    $58,$0A,$16,$87,$09,$58,$0A,$19
+        EQUB    $42,$09,$58,$0A,$1A,$38,$09,$58
+        EQUB    $0A,$18,$17,$09,$58,$0A,$2A,$03
+        EQUB    $00,$58,$0A,$1E,$E7,$1D,$58,$0A
+        EQUB    $1F,$EE,$1D,$58,$0A,$22,$B8,$08
+        EQUB    $58,$0A,$23,$B3,$08,$58,$0A,$44
+        EQUB    $AB,$09,$58,$0A,$45,$DF,$09,$58
+        EQUB    $0A,$46,$E4,$09,$58,$0A,$1B,$86
+        EQUB    $0D,$58,$0A,$5D,$86,$26,$58,$0A
+        EQUB    $5C,$8D,$26,$79,$0C,$FF,$08,$08
+        EQUB    $09,$04,$2A,$00,$3D,$02,$7A,$0A
+        EQUB    $29,$5A,$58,$0A,$49,$8B,$23,$58
+        EQUB    $0A,$3D,$99,$09,$58,$0A,$59,$99
+        EQUB    $09,$58,$0A,$3E,$63,$0A,$58,$0A
+        EQUB    $3F,$93,$0A,$58,$0A,$40,$D0,$0A
+        EQUB    $58,$0A,$2D,$67,$09,$58,$0A,$29
+        EQUB    $AC,$0A,$58,$0A,$41,$86,$0A,$58
+        EQUB    $0A,$42,$B4,$25,$58,$0A,$53,$5D
+        EQUB    $17,$58,$0A,$4D,$94,$20,$58,$0A
+        EQUB    $4E,$05,$21,$58,$0A,$43,$86,$24
+        EQUB    $58,$0A,$30,$B0,$0A,$58,$0A,$5A
+        EQUB    $0C,$26,$58,$0A,$4F,$74,$11,$05
+        EQUB    $0C,$04,$02,$05,$0F,$04,$02,$7A
+        EQUB    $1C,$A0,$14,$7B,$1C,$AA,$10,$48
+        EQUB    $A0,$01,$09,$1C,$0E,$0B,$01,$0E
+        EQUB    $09,$0E,$3A,$48,$59,$1C,$5B,$1C
+        EQUB    $8D,$FB,$05,$79,$20,$1F,$19,$09
+        EQUB    $17,$1E,$48,$00,$1D,$01,$45,$08
+        EQUB    $78,$28,$01,$37,$48,$8C,$1E,$48
+        EQUB    $1F,$1D,$01,$45,$08,$20,$2C,$79
+        EQUB    $20,$01,$0C,$48,$8C,$1E,$48,$1F
+        EQUB    $1D,$01,$45,$08,$20,$1D,$48,$8C
+        EQUB    $1E,$48,$1F,$1D,$01,$45,$08,$09
+        EQUB    $28,$01,$48,$00,$28,$78,$01,$01
+        EQUB    $0A,$09,$17,$1E,$48,$00,$1D,$01
+        EQUB    $45,$08,$02,$45,$13,$1C,$45,$13
+        EQUB    $02,$05,$E9,$03,$20,$25,$05,$EA
+        EQUB    $03,$20,$20,$05,$EB,$03,$21,$EC
+        EQUB    $05,$EC,$03,$20,$16,$48,$00,$1C
+        EQUB    $48,$01,$3D,$0A,$06,$3C,$1C,$45
+        EQUB    $12,$05,$6A,$04,$02,$05,$F2,$03
+        EQUB    $20,$01,$45,$07,$01,$1B,$07,$00
+        EQUB    $8E,$17,$78,$1C,$00,$16,$78,$20
+        EQUB    $02,$13,$78,$20,$1F,$1C,$05,$F4
+        EQUB    $03,$45,$15,$09,$1C,$01,$01,$F3
+        EQUB    $01,$45,$09,$02,$48,$8C,$1E,$48
+        EQUB    $1F,$1D,$01,$45,$08,$78,$28,$01
+        EQUB    $13,$48,$8C,$1E,$48,$1F,$1D,$01
+        EQUB    $45,$08,$78,$28,$01,$06,$05,$F3
+        EQUB    $03,$20,$D7,$78,$0A,$44,$06,$05
+        EQUB    $F5,$03,$20,$CE,$05,$66,$04,$02
+        EQUB    $48,$00,$3D,$01,$2F,$07,$48,$00
+        EQUB    $0A,$58,$32,$01,$9E,$05,$48,$02
+        EQUB    $2E,$01,$95,$06,$79,$0F,$00,$0F
+        EQUB    $48,$08,$2E,$01,$95,$06,$3B,$0F
+        EQUB    $B9,$0E,$DE,$00,$74,$04,$79,$0F
+        EQUB    $15,$13,$09,$3B,$0A,$58,$3F,$01
+        EQUB    $9E,$05,$08,$1A,$04,$2A,$01,$3D
+        EQUB    $02,$00,$50,$02,$09,$0F,$0A,$09
+        EQUB    $0A,$3B,$E8,$05,$05,$E8,$06,$05
+        EQUB    $48,$00,$34,$48,$00,$30,$48,$00
+        EQUB    $0B,$48,$FF,$0C,$48,$FF,$0D,$08
+        EQUB    $FF,$FF,$0E,$48,$00,$3C,$48,$00
+        EQUB    $3F,$7A,$0A,$0D,$59,$01,$E0,$1E
+        EQUB    $01,$0E,$1F,$01,$2F,$07,$78,$33
+        EQUB    $01,$FA,$78,$32,$01,$48,$58,$0A
+        EQUB    $58,$59,$22,$78,$0A,$3F,$0B,$48
+        EQUB    $06,$2E,$01,$95,$06,$79,$0F,$00
+        EQUB    $36,$01,$C6,$06,$79,$1C,$00,$3F
+        EQUB    $78,$37,$01,$D8,$48,$00,$2E,$01
+        EQUB    $95,$06,$78,$0F,$2C,$CE,$79,$0F
+        EQUB    $00,$CA,$48,$0E,$2E,$01,$95,$06
+        EQUB    $78,$0F,$00,$0F,$09,$0F,$0E,$09
+        EQUB    $0E,$3A,$48,$59,$1C,$0A,$06,$3C
+        EQUB    $20,$B2,$01,$8E,$07,$02,$59,$0B
+        EQUB    $00,$74,$04,$09,$0F,$0B,$01,$E0
+        EQUB    $1E,$01,$0E,$1F,$20,$9E,$79,$1C
+        EQUB    $98,$07,$09,$39,$1C,$09,$3A,$0E
+        EQUB    $59,$0B,$00,$8A,$06,$78,$1C,$96
+        EQUB    $27,$58,$1C,$97,$84,$06,$09,$1C
+        EQUB    $39,$08,$FF,$FF,$3A,$7A,$1C,$A0
+        EQUB    $08,$7B,$1C,$AA,$04,$00,$4C,$05
+        EQUB    $48,$C0,$01,$78,$30,$01,$04,$48
+        EQUB    $80,$01,$21,$35,$00,$4C,$05,$48
+        EQUB    $01,$34,$00,$4C,$05,$7A,$01,$40
+        EQUB    $09,$48,$40,$02,$0B,$02,$01,$20
+        EQUB    $F5,$02,$48,$E6,$01,$0A,$1C,$01
+        EQUB    $3B,$01,$E7,$03,$0C,$08,$90,$01
+        EQUB    $02,$0B,$02,$01,$31,$01,$17,$05
+        EQUB    $48,$01,$28,$02,$48,$00,$28,$02
+        EQUB    $A8,$05,$02,$78,$02,$00,$06,$11
+        EQUB    $01,$02,$8E,$04,$48,$01,$02,$A8
+        EQUB    $02,$03,$30,$03,$1C,$1E,$78,$03
+        EQUB    $00,$06,$0A,$06,$02,$20,$F1,$5B
+        EQUB    $02,$0F,$8E,$04,$0A,$06,$3C,$E8
+        EQUB    $05,$01,$E8,$02,$1C,$0A,$06,$02
+        EQUB    $E8,$02,$05,$02,$48,$00,$28,$A8
+        EQUB    $05,$01,$79,$01,$C0,$15,$48,$01
+        EQUB    $02,$A8,$02,$01,$0A,$06,$02,$78
+        EQUB    $01,$00,$08,$31,$01,$1C,$F3,$48
+        EQUB    $01,$28,$02,$48,$01,$3D,$1C,$45
+        EQUB    $12,$01,$24,$1F,$48,$00,$1C,$78
+        EQUB    $28,$01,$08,$08,$06,$04,$2A,$01
+        EQUB    $3D,$02,$02,$48,$01,$30,$00,$4C
+        EQUB    $05,$59,$0D,$FF,$8E,$04,$09,$1C
+        EQUB    $0D,$00,$4C,$05,$48,$00,$10,$01
+        EQUB    $9B,$07,$79,$2F,$0E,$04,$0A,$07
+        EQUB    $10,$0A,$07,$10,$78,$0F,$00,$1D
+        EQUB    $48,$01,$3E,$31,$2F,$2E,$E9,$79
+        EQUB    $2F,$08,$12,$3A,$0F,$D6,$01,$0D
+        EQUB    $3B,$0F,$BB,$02,$08,$08,$D6,$01
+        EQUB    $01,$0B,$01,$0F,$02,$48,$01,$37
+        EQUB    $48,$08,$2E,$48,$00,$10,$21,$C5
+        EQUB    $48,$00,$1C,$3B,$0F,$B9,$0E,$24
+        EQUB    $3B,$0F,$10,$0E,$11,$09,$0F,$1C
+        EQUB    $01,$00,$04,$78,$28,$01,$2B,$21
+        EQUB    $AF,$79,$0F,$00,$E7,$7B,$1C,$8D
+        EQUB    $12,$78,$1C,$00,$22,$01,$9B,$04
+        EQUB    $48,$01,$3D,$48,$00,$28,$48,$00
+        EQUB    $1C,$02,$78,$1C,$96,$11,$78,$1C
+        EQUB    $98,$0D,$78,$1C,$97,$09,$00,$7E
+        EQUB    $04,$5B,$1C,$8D,$6C,$06,$48,$00
+        EQUB    $37,$02,$48,$00,$10,$21,$7C,$78
+        EQUB    $0F,$00,$08,$48,$01,$38,$21,$07
+        EQUB    $20,$F1,$48,$00,$38,$02,$78,$36
+        EQUB    $01,$1A,$78,$31,$01,$16,$07,$01
+        EQUB    $01,$01,$01,$48,$00,$2E,$01,$95
+        EQUB    $06,$7A,$0F,$21,$05,$7A,$0F,$26
+        EQUB    $E6,$21,$05,$48,$00,$31,$02,$48
+        EQUB    $00,$10,$21,$47,$48,$00,$33,$48
+        EQUB    $00,$32,$78,$0F,$00,$29,$48,$04
+        EQUB    $2E,$01,$95,$06,$38,$0F,$81,$01
+        EQUB    $21,$48,$00,$2E,$01,$95,$06,$78
+        EQUB    $38,$01,$06,$58,$0F,$80,$74,$04
+        EQUB    $78,$0F,$2C,$06,$78,$0F,$2E,$0A
+        EQUB    $02,$48,$01,$33,$20,$04,$48,$01
+        EQUB    $36,$48,$01,$32,$02,$48,$00,$10
+        EQUB    $21,$09,$78,$0F,$00,$04,$48,$01
+        EQUB    $31,$02,$A9,$10,$0F,$79,$0F,$01
+        EQUB    $0E,$48,$0E,$2F,$09,$10,$01,$0A
+        EQUB    $06,$01,$A9,$01,$0F,$02,$09,$0F
+        EQUB    $2F,$48,$20,$01,$7A,$0F,$20,$06
+        EQUB    $0B,$01,$0F,$20,$F8,$21,$69,$48
+        EQUB    $01,$01,$0A,$10,$01,$A9,$01,$02
+        EQUB    $0A,$02,$0F,$09,$2F,$02,$48,$00
+        EQUB    $2F,$48,$00,$01,$7A,$02,$20,$43
+        EQUB    $48,$02,$2F,$48,$64,$01,$7A,$02
+        EQUB    $40,$39,$48,$04,$2F,$48,$00,$01
+        EQUB    $7A,$02,$60,$2F,$48,$06,$2F,$48
+        EQUB    $18,$01,$7A,$02,$80,$25,$48,$08
+        EQUB    $2F,$48,$E6,$01,$7A,$02,$A0,$1B
+        EQUB    $48,$0A,$2F,$48,$00,$01,$7A,$02
+        EQUB    $C0,$11,$48,$0C,$2F,$48,$00,$01
+        EQUB    $7A,$02,$E0,$07,$48,$07,$2F,$48
+        EQUB    $00,$01,$0B,$01,$0F,$3B,$0F,$60
+        EQUB    $EA,$02,$02,$48,$00,$0F,$02,$0A
+        EQUB    $0F,$0F,$0A,$0F,$0F,$0A,$0F,$0F
+        EQUB    $0A,$0F,$0F,$0A,$0F,$0F,$0A,$0F
+        EQUB    $0F,$0A,$0F,$0F,$0A,$0F,$0F,$02
+        EQUB    $48,$01,$28,$02,$09,$1C,$04,$78
+        EQUB    $1E,$00,$08,$A2,$04,$01,$31,$01
+        EQUB    $1E,$18,$A3,$04,$01,$78,$01,$00
+        EQUB    $05,$78,$1D,$1F,$05,$31,$01,$1D
+        EQUB    $09,$48,$01,$28,$02,$48,$00,$28
+        EQUB    $02,$A3,$04,$01,$78,$01,$00,$F6
+        EQUB    $A2,$04,$04,$20,$D3,$78,$01,$6C
+        EQUB    $37,$78,$01,$0F,$33,$78,$01,$0E
+        EQUB    $2F,$78,$01,$26,$2B,$78,$01,$40
+        EQUB    $27,$78,$01,$59,$23,$78,$01,$69
+        EQUB    $1F,$58,$01,$0C,$F1,$01,$58,$01
+        EQUB    $55,$F1,$01,$58,$01,$09,$F1,$01
+        EQUB    $58,$01,$65,$F1,$01,$58,$01,$27
+        EQUB    $F1,$01,$45,$14,$00,$F3,$01,$00
+        EQUB    $ED,$01,$14,$00,$00,$5F,$0A,$14
+        EQUB    $01,$05,$48,$00,$2D,$00,$03,$00
+        EQUB    $59,$0B,$00,$8E,$04,$59,$1C,$FF
+        EQUB    $8E,$04,$09,$0A,$18,$09,$17,$12
+        EQUB    $01,$07,$02,$78,$15,$00,$04,$00
+        EQUB    $C5,$11,$05,$5A,$04,$02,$05,$F1
+        EQUB    $07,$48,$27,$1C,$48,$8C,$1E,$48
+        EQUB    $1F,$1D,$01,$45,$08,$78,$28,$01
+        EQUB    $07,$05,$F2,$07,$00,$06,$09,$05
+        EQUB    $F3,$07,$48,$22,$6E,$01,$23,$26
+        EQUB    $01,$86,$0D,$20,$1C,$7A,$17,$D2
+        EQUB    $06,$5A,$17,$EB,$CB,$1E,$05,$B6
+        EQUB    $04,$01,$86,$0D,$20,$0B,$05,$B0
+        EQUB    $04,$01,$B9,$1F,$78,$28,$00,$21
+        EQUB    $05,$B1,$04,$48,$03,$01,$E9,$05
+        EQUB    $01,$06,$01,$A9,$06,$01,$79,$01
+        EQUB    $20,$F2,$45,$05,$00,$26,$0E,$06
+        EQUB    $03,$08,$1C,$07,$2A,$01,$38,$22
+        EQUB    $02,$05,$B2,$04,$01,$B9,$1F,$78
+        EQUB    $28,$00,$0D,$06,$04,$48,$00,$2D
+        EQUB    $08,$1C,$07,$2A,$01,$38,$22,$01
+        EQUB    $03,$00,$48,$00,$36,$48,$00,$32
+        EQUB    $01,$2F,$07,$00,$50,$02,$59,$0B
+        EQUB    $00,$A8,$0A,$08,$BC,$02,$01,$0A
+        EQUB    $1C,$01,$04,$01,$01,$4F,$21,$78
+        EQUB    $28,$01,$03,$45,$09,$09,$1C,$1F
+        EQUB    $48,$1F,$20,$00,$F1,$00,$48,$8C
+        EQUB    $1F,$48,$1F,$20,$01,$F1,$00,$79
+        EQUB    $22,$00,$04,$05,$52,$04,$02,$02
+        EQUB    $59,$0B,$00,$A8,$0A,$48,$8C,$1E
+        EQUB    $48,$04,$1D,$08,$7E,$04,$47,$00
+        EQUB    $9D,$0C,$78,$0B,$01,$15,$78,$0B
+        EQUB    $42,$08,$78,$0B,$43,$04,$00,$8E
+        EQUB    $04,$09,$17,$15,$48,$00,$14,$00
+        EQUB    $C5,$11,$09,$0B,$14,$20,$20,$05
+        EQUB    $12,$04,$48,$64,$2A,$0A,$0A,$2A
+        EQUB    $04,$2A,$48,$18,$2A,$0A,$0B,$2A
+        EQUB    $04,$2A,$05,$15,$04,$02,$48,$0C
+        EQUB    $14,$20,$04,$48,$0D,$14,$48,$01
+        EQUB    $0B,$48,$00,$37,$79,$0A,$45,$06
+        EQUB    $48,$57,$1C,$21,$28,$48,$28,$1C
+        EQUB    $21,$23,$48,$70,$1C,$21,$1E,$48
+        EQUB    $71,$1C,$21,$19,$48,$34,$1C,$21
+        EQUB    $14,$48,$5C,$1C,$21,$0F,$79,$0A
+        EQUB    $46,$06,$48,$71,$1C,$21,$06,$78
+        EQUB    $37,$00,$AD,$02,$78,$37,$01,$10
+        EQUB    $A2,$1C,$01,$31,$01,$17,$09,$78
+        EQUB    $0D,$FF,$29,$30,$0D,$1C,$27,$02
+        EQUB    $05,$A6,$04,$48,$64,$01,$0A,$0A
+        EQUB    $01,$04,$01,$09,$0C,$01,$01,$F3
+        EQUB    $01,$48,$18,$01,$0A,$0B,$01,$04
+        EQUB    $01,$09,$1C,$01,$01,$DD,$01,$05
+        EQUB    $A7,$04,$02,$21,$DC,$48,$01,$37
+        EQUB    $09,$1C,$15,$00,$C5,$11,$05,$81
+        EQUB    $04,$02,$A3,$0C,$01,$79,$01,$05
+        EQUB    $0C,$A2,$0C,$01,$79,$01,$8C,$05
+        EQUB    $05,$7B,$04,$02,$79,$0B,$00,$30
+        EQUB    $48,$8C,$1E,$48,$05,$1D,$08,$80
+        EQUB    $04,$47,$00,$9D,$0C,$48,$8C,$1E
+        EQUB    $48,$04,$1D,$08,$81,$04,$47,$00
+        EQUB    $9D,$0C,$79,$0B,$00,$0E,$09,$17
+        EQUB    $1E,$48,$00,$1D,$08,$7F,$04,$47
+        EQUB    $00,$9D,$0C,$05,$6C,$04,$02,$05
+        EQUB    $6D,$04,$02,$78,$0C,$12,$08,$08
+        EQUB    $78,$04,$2A,$00,$3D,$02,$C2,$12
+        EQUB    $01,$82,$15,$01,$82,$12,$05,$83
+        EQUB    $12,$05,$48,$04,$01,$83,$15,$01
+        EQUB    $05,$3F,$07,$48,$15,$39,$02,$78
+        EQUB    $0D,$FF,$D5,$09,$0D,$1C,$01,$00
+        EQUB    $04,$58,$28,$00,$7B,$0D,$09,$0C
+        EQUB    $1C,$78,$0B,$01,$0D,$78,$0B,$02
+        EQUB    $67,$78,$0B,$07,$2B,$05,$63,$04
+        EQUB    $02,$78,$0D,$28,$13,$78,$0D,$34
+        EQUB    $0F,$78,$0D,$70,$0B,$78,$0D,$57
+        EQUB    $07,$78,$0D,$71,$03,$20,$E7,$09
+        EQUB    $0C,$1C,$09,$0D,$1E,$09,$0B,$1D
+        EQUB    $08,$81,$04,$47,$00,$9D,$0C,$78
+        EQUB    $0C,$27,$09,$33,$0C,$0D,$25,$78
+        EQUB    $0D,$0B,$0B,$78,$0D,$23,$07,$78
+        EQUB    $0C,$08,$DD,$20,$C1,$01,$43,$01
+        EQUB    $48,$00,$1C,$48,$1F,$20,$09,$0D
+        EQUB    $1F,$48,$8C,$01,$01,$30,$01,$78
+        EQUB    $1C,$00,$05,$05,$90,$07,$02,$21
+        EQUB    $BF,$58,$1C,$05,$FE,$0F,$02,$78
+        EQUB    $0D,$33,$B5,$20,$99,$48,$8C,$04
+        EQUB    $A2,$04,$17,$A3,$04,$01,$78,$01
+        EQUB    $00,$06,$09,$17,$04,$20,$F2,$02
+        EQUB    $09,$42,$03,$A4,$03,$02,$30,$02
+        EQUB    $1E,$0D,$78,$02,$00,$09,$0A,$06
+        EQUB    $03,$20,$F1,$48,$00,$03,$09,$03
+        EQUB    $42,$02,$A2,$1C,$01,$31,$01,$17
+        EQUB    $15,$06,$02,$01,$7B,$01,$A0,$0E
+        EQUB    $09,$1C,$01,$01,$DD,$01,$45,$01
+        EQUB    $01,$3D,$02,$45,$09,$7A,$1C,$38
+        EQUB    $52,$7B,$1C,$3A,$4E,$06,$02,$01
+        EQUB    $7B,$01,$A0,$47,$A2,$1C,$01,$C2
+        EQUB    $6B,$02,$31,$01,$02,$17,$C2,$5C
+        EQUB    $03,$30,$03,$02,$05,$79,$03,$00
+        EQUB    $32,$82,$5C,$01,$31,$01,$17,$2B
+        EQUB    $05,$AF,$06,$02,$06,$02,$02,$7B
+        EQUB    $02,$A0,$20,$C2,$6B,$02,$30,$01
+        EQUB    $02,$11,$C2,$5C,$02,$31,$01,$02
+        EQUB    $0A,$82,$5C,$05,$48,$0F,$01,$82
+        EQUB    $5B,$01,$31,$01,$17,$04,$05,$AE
+        EQUB    $06,$02,$A4,$42,$13,$58,$13,$FF
+        EQUB    $93,$0C,$0A,$06,$42,$79,$13,$00
+        EQUB    $07,$09,$43,$42,$00,$83,$0B,$A4
+        EQUB    $42,$13,$79,$13,$00,$06,$09,$43
+        EQUB    $42,$20,$F5,$78,$13,$FF,$7C,$A2
+        EQUB    $1C,$12,$E2,$1C,$13,$E3,$1C,$05
+        EQUB    $30,$12,$13,$6F,$48,$60,$2A,$79
+        EQUB    $1C,$40,$04,$48,$62,$2A,$30,$12
+        EQUB    $17,$18,$31,$13,$17,$34,$48,$5F
+        EQUB    $2A,$79,$1C,$40,$04,$48,$61,$2A
+        EQUB    $09,$13,$01,$09,$12,$13,$09,$01
+        EQUB    $12,$09,$1C,$01,$78,$2A,$60,$0A
+        EQUB    $78,$2A,$62,$06,$01,$76,$08,$20
+        EQUB    $04,$01,$DD,$01,$04,$2A,$01,$2A
+        EQUB    $02,$48,$64,$01,$0A,$18,$01,$04
+        EQUB    $01,$A2,$1C,$01,$79,$01,$DB,$0B
+        EQUB    $79,$17,$D3,$04,$05,$E0,$05,$82
+        EQUB    $78,$01,$A2,$1C,$01,$79,$01,$E1
+        EQUB    $08,$79,$17,$DF,$04,$05,$DF,$05
+        EQUB    $30,$12,$17,$05,$31,$13,$17,$03
+        EQUB    $45,$09,$02,$48,$00,$1E,$48,$00
+        EQUB    $1D,$48,$00,$47,$78,$1C,$6B,$0B
+        EQUB    $58,$1C,$24,$7B,$0D,$5B,$1C,$31
+        EQUB    $7B,$0D,$79,$1E,$8C,$50,$78,$1D
+        EQUB    $00,$4C,$79,$1D,$05,$1B,$78,$1C
+        EQUB    $04,$17,$78,$1C,$26,$13,$78,$1C
+        EQUB    $12,$0F,$78,$1C,$25,$0B,$5A,$1C
+        EQUB    $12,$82,$0D,$5B,$1C,$15,$82,$0D
+        EQUB    $09,$1C,$40,$09,$1E,$15,$09,$1D
+        EQUB    $14,$09,$1C,$1E,$48,$1F,$1D,$48
+        EQUB    $8C,$1C,$01,$45,$08,$09,$40,$1C
+        EQUB    $09,$15,$1E,$09,$14,$1D,$58,$28
+        EQUB    $01,$77,$0D,$48,$01,$28,$01,$B0
+        EQUB    $10,$78,$28,$00,$79,$A2,$1C,$01
+        EQUB    $79,$01,$8C,$1E,$A3,$1C,$01,$78
+        EQUB    $01,$00,$17,$79,$01,$05,$0C,$78
+        EQUB    $34,$00,$08,$05,$6E,$04,$48,$00
+        EQUB    $28,$02,$01,$7C,$10,$78,$28,$00
+        EQUB    $55,$79,$1C,$08,$09,$C2,$0F,$01
+        EQUB    $58,$01,$20,$8F,$23,$10,$1E,$1C
+        EQUB    $EE,$0A,$A2,$1C,$12,$E2,$1C,$1E
+        EQUB    $E3,$1C,$1D,$04,$47,$79,$1E,$23
+        EQUB    $15,$78,$1D,$00,$11,$79,$1C,$05
+        EQUB    $06,$01,$FE,$0F,$20,$08,$08,$1D
+        EQUB    $07,$2A,$01,$38,$22,$79,$1C,$05
+        EQUB    $0F,$C2,$05,$01,$78,$01,$23,$08
+        EQUB    $79,$12,$23,$04,$05,$1E,$07,$79
+        EQUB    $1E,$65,$08,$79,$1C,$08,$04,$00
+        EQUB    $DF,$08,$48,$01,$28,$02,$05,$6B
+        EQUB    $04,$02,$08,$60,$04,$2A,$00,$3D
+        EQUB    $02,$05,$76,$04,$02,$05,$B4,$04
+        EQUB    $21,$32,$03,$04,$05,$B5,$04,$08
+        EQUB    $E2,$04,$2A,$7A,$04,$96,$20,$08
+        EQUB    $E3,$04,$2A,$3A,$04,$2C,$01,$17
+        EQUB    $08,$E4,$04,$2A,$3A,$04,$F4,$01
+        EQUB    $0E,$08,$E5,$04,$2A,$3A,$04,$20
+        EQUB    $03,$05,$08,$E6,$04,$2A,$04,$2A
+        EQUB    $45,$09,$02,$48,$00,$04,$48,$10
+        EQUB    $03,$48,$28,$02,$A7,$03,$01,$78
+        EQUB    $01,$00,$04,$0A,$02,$04,$0A,$06
+        EQUB    $03,$7A,$03,$26,$F0,$C3,$16,$01
+        EQUB    $78,$01,$0E,$04,$0A,$02,$04,$C2
+        EQUB    $19,$01,$79,$01,$18,$04,$0A,$02
+        EQUB    $04,$C2,$0D,$01,$79,$01,$00,$07
+        EQUB    $48,$14,$01,$0B,$01,$04,$C3,$1C
+        EQUB    $01,$78,$01,$0E,$07,$48,$14,$01
+        EQUB    $0B,$01,$04,$C7,$22,$01,$78,$01
+        EQUB    $00,$04,$0A,$02,$04,$3A,$04,$30
+        EQUB    $75,$04,$48,$00,$04,$02,$05,$14
+        EQUB    $04,$48,$64,$2A,$0A,$0A,$2A,$04
+        EQUB    $2A,$05,$15,$04,$02,$05,$4C,$04
+        EQUB    $06,$05,$48,$00,$05,$48,$01,$06
+        EQUB    $48,$02,$07,$48,$03,$08,$48,$04
+        EQUB    $09,$14,$01,$05,$48,$64,$4E,$48
+        EQUB    $28,$39,$08,$FF,$FF,$3A,$48,$01
+        EQUB    $36,$21,$24,$48,$05,$4A,$48,$02
+        EQUB    $54,$48,$19,$57,$48,$21,$58,$48
+        EQUB    $2D,$5A,$48,$38,$5B,$48,$40,$5C
+        EQUB    $48,$47,$69,$48,$01,$3E,$21,$2F
+        EQUB    $01,$08,$20,$00,$8E,$17,$48,$00
+        EQUB    $1C,$01,$39,$20,$0A,$06,$1C,$7A
+        EQUB    $1C,$8D,$F7,$48,$00,$01,$E6,$01
+        EQUB    $05,$E7,$01,$05,$7B,$01,$20,$07
+        EQUB    $E8,$01,$05,$E9,$01,$05,$0A,$06
+        EQUB    $01,$7A,$01,$26,$EA,$02,$48,$38
+        EQUB    $10,$E6,$10,$05,$0B,$06,$10,$7B
+        EQUB    $10,$00,$F7,$48,$0E,$10,$48,$00
+        EQUB    $04,$48,$00,$59,$01,$CF,$20,$09
+        EQUB    $59,$01,$0A,$10,$01,$E6,$01,$29
+        EQUB    $79,$59,$04,$04,$E6,$01,$04,$79
+        EQUB    $59,$06,$07,$01,$EE,$20,$E6,$01
+        EQUB    $29,$0A,$06,$59,$7A,$59,$07,$DD
+        EQUB    $0A,$06,$04,$48,$07,$01,$0A,$01
+        EQUB    $10,$7A,$10,$38,$CD,$02,$48,$00
+        EQUB    $0F,$09,$05,$03,$09,$10,$04,$A6
+        EQUB    $03,$01,$A5,$04,$02,$0A,$02,$01
+        EQUB    $0A,$0F,$01,$48,$0A,$02,$48,$00
+        EQUB    $0F,$32,$01,$02,$09,$0B,$02,$01
+        EQUB    $0A,$06,$0F,$20,$F5,$E6,$03,$01
+        EQUB    $0A,$06,$03,$0A,$06,$04,$7A,$03
+        EQUB    $06,$D6,$02,$48,$00,$0F,$09,$05
+        EQUB    $03,$09,$10,$04,$A6,$03,$01,$A5
+        EQUB    $04,$02,$0B,$02,$01,$0B,$0F,$01
+        EQUB    $48,$0A,$02,$48,$00,$0F,$7A,$01
+        EQUB    $0A,$09,$0A,$02,$01,$0A,$06,$0F
+        EQUB    $20,$F5,$E6,$03,$01,$0A,$06,$03
+        EQUB    $0A,$06,$04,$7A,$03,$06,$D6,$02
+        EQUB    $48,$07,$10,$21,$49,$78,$28,$00
+        EQUB    $0B,$C6,$06,$01,$48,$33,$0F,$0A
+        EQUB    $01,$0F,$02,$21,$39,$48,$BE,$0F
+        EQUB    $78,$28,$01,$31,$21,$30,$48,$C4
+        EQUB    $0F,$78,$28,$01,$28,$21,$27,$48
+        EQUB    $5F,$0F,$78,$28,$01,$1F,$21,$1E
+        EQUB    $48,$60,$0F,$78,$28,$01,$16,$21
+        EQUB    $15,$48,$61,$0F,$78,$28,$01,$0D
+        EQUB    $21,$0C,$48,$95,$0F,$78,$28,$01
+        EQUB    $04,$48,$00,$0F,$02,$48,$00,$28
+        EQUB    $48,$00,$03,$09,$10,$04,$A6,$03
+        EQUB    $01,$A6,$04,$02,$31,$01,$02,$0E
+        EQUB    $0A,$06,$03,$0A,$06,$04,$7A,$03
+        EQUB    $06,$ED,$48,$01,$28,$48,$07,$01
+        EQUB    $0A,$01,$10,$02,$48,$06,$59,$09
+        EQUB    $10,$01,$0A,$59,$01,$A6,$01,$29
+        EQUB    $01,$C5,$20,$0B,$06,$59,$3A,$59
+        EQUB    $50,$C3,$ED,$45,$09,$02,$08,$55
+        EQUB    $04,$2A,$00,$3D,$02,$7A,$17,$3F
+        EQUB    $0E,$5B,$17,$4B,$EF,$0F,$05,$9C
+        EQUB    $06,$48,$00,$10,$21,$CF,$79,$17
+        EQUB    $AC,$0B,$01,$91,$25,$78,$28,$00
+        EQUB    $04,$05,$94,$07,$02,$48,$00,$64
+        EQUB    $48,$00,$65,$08,$20,$07,$2A,$00
+        EQUB    $38,$22,$48,$00,$14,$C3,$8C,$01
+        EQUB    $78,$01,$00,$24,$48,$34,$1E,$48
+        EQUB    $1F,$1D,$48,$8C,$1C,$01,$45,$08
+        EQUB    $78,$28,$00,$14,$79,$18,$03,$06
+        EQUB    $48,$DF,$15,$20,$0B,$79,$18,$07
+        EQUB    $44,$48,$E0,$15,$48,$01,$1A,$79
+        EQUB    $12,$0F,$0C,$79,$15,$0C,$08,$C2
+        EQUB    $5C,$01,$30,$01,$12,$2F,$C2,$78
+        EQUB    $01,$7B,$01,$00,$11,$79,$12,$D3
+        EQUB    $05,$78,$15,$DB,$20,$79,$12,$DB
+        EQUB    $05,$78,$15,$D3,$18,$79,$15,$E1
+        EQUB    $0B,$79,$41,$0A,$10,$48,$34,$15
+        EQUB    $48,$01,$14,$79,$15,$91,$05,$78
+        EQUB    $6C,$01,$02,$02,$48,$00,$15,$48
+        EQUB    $00,$1A,$02,$78,$1C,$04,$2A,$78
+        EQUB    $1C,$12,$26,$79,$1C,$25,$0D,$C3
+        EQUB    $26,$01,$79,$01,$05,$17,$05,$82
+        EQUB    $06,$20,$19,$7A,$17,$3F,$0E,$7B
+        EQUB    $17,$4B,$0A,$79,$1D,$00,$06,$05
+        EQUB    $9D,$06,$20,$08,$48,$01,$28,$02
+        EQUB    $05,$68,$04,$48,$00,$28,$02,$48
+        EQUB    $01,$28,$79,$0A,$3E,$2E,$59,$1C
+        EQUB    $14,$CD,$10,$05,$07,$06,$48,$09
+        EQUB    $04,$01,$94,$1F,$58,$28,$01,$E7
+        EQUB    $1F,$00,$50,$02,$79,$1C,$25,$0D
+        EQUB    $C3,$26,$01,$79,$01,$05,$07,$05
+        EQUB    $81,$06,$20,$0C,$02,$48,$1A,$6E
+        EQUB    $01,$23,$26,$48,$01,$28,$02,$48
+        EQUB    $00,$28,$02,$78,$17,$D3,$05,$79
+        EQUB    $17,$DB,$0B,$C2,$78,$01,$78,$01
+        EQUB    $00,$04,$82,$78,$17,$78,$17,$DF
+        EQUB    $05,$79,$17,$E0,$04,$82,$6F,$17
+        EQUB    $48,$14,$1C,$7A,$17,$79,$13,$7B
+        EQUB    $17,$80,$0F,$78,$17,$7F,$0B,$C3
+        EQUB    $14,$01,$79,$01,$00,$04,$82,$14
+        EQUB    $17,$79,$17,$6E,$0D,$48,$56,$01
+        EQUB    $82,$59,$01,$48,$01,$01,$83,$59
+        EQUB    $01,$7A,$17,$AF,$10,$7B,$17,$B8
+        EQUB    $0C,$7B,$17,$B6,$05,$7B,$17,$B3
+        EQUB    $04,$82,$5F,$17,$79,$17,$64,$04
+        EQUB    $82,$4B,$17,$79,$17,$66,$04,$82
+        EQUB    $48,$17,$7A,$17,$88,$08,$7B,$17
+        EQUB    $8F,$04,$82,$37,$17,$79,$17,$A9
+        EQUB    $07,$82,$59,$17,$83,$59,$05,$78
+        EQUB    $17,$69,$05,$79,$17,$6A,$04,$82
+        EQUB    $7E,$17,$02,$59,$0D,$26,$EE,$0A
+        EQUB    $78,$0C,$02,$06,$59,$0C,$01,$EE
+        EQUB    $0A,$E2,$0C,$0D,$48,$0F,$01,$E3
+        EQUB    $0C,$01,$00,$5F,$0A,$7A,$17,$3F
+        EQUB    $10,$7B,$17,$4B,$0C,$48,$4B,$15
+        EQUB    $48,$00,$14,$48,$00,$18,$20,$25
+        EQUB    $79,$17,$DF,$05,$05,$E9,$05,$02
+        EQUB    $05,$69,$04,$02,$79,$1C,$33,$05
+        EQUB    $05,$EA,$05,$02,$79,$1C,$5C,$09
+        EQUB    $48,$5C,$15,$48,$01,$14,$20,$05
+        EQUB    $05,$67,$04,$02,$01,$56,$0B,$09
+        EQUB    $17,$12,$01,$98,$13,$58,$28,$00
+        EQUB    $97,$13,$09,$17,$12,$82,$8C,$15
+        EQUB    $83,$8C,$14,$48,$00,$46,$09,$17
+        EQUB    $15,$01,$56,$0B,$C3,$8C,$01,$78
+        EQUB    $01,$00,$07,$01,$5F,$00,$00,$F5
+        EQUB    $11,$01,$03,$00,$79,$17,$6E,$04
+        EQUB    $05,$1E,$06,$79,$17,$66,$29,$78
+        EQUB    $62,$00,$11,$3A,$4E,$50,$C3,$07
+        EQUB    $05,$06,$08,$00,$06,$09,$05,$77
+        EQUB    $07,$20,$09,$58,$6C,$01,$EC,$16
+        EQUB    $05,$6D,$07,$01,$B9,$1F,$58,$28
+        EQUB    $01,$FF,$16,$05,$75,$07,$02,$79
+        EQUB    $17,$AD,$06,$5A,$6A,$02,$C5,$25
+        EQUB    $79,$17,$AE,$32,$05,$99,$07,$48
+        EQUB    $23,$1C,$09,$17,$1E,$48,$00,$1D
+        EQUB    $01,$45,$08,$78,$28,$00,$19,$05
+        EQUB    $9B,$07,$48,$01,$6B,$48,$13,$6E
+        EQUB    $01,$23,$26,$09,$17,$1E,$48,$00
+        EQUB    $1D,$48,$00,$47,$00,$9D,$0C,$05
+        EQUB    $9A,$07,$00,$06,$09,$79,$17,$64
+        EQUB    $10,$59,$6B,$00,$06,$26,$01,$C1
+        EQUB    $1C,$79,$2A,$00,$04,$05,$4E,$07
+        EQUB    $58,$17,$67,$E0,$24,$79,$17,$87
+        EQUB    $2E,$05,$C9,$07,$08,$F4,$01,$04
+        EQUB    $48,$1F,$6E,$01,$23,$26,$08,$90
+        EQUB    $01,$4C,$0A,$04,$4E,$48,$00,$5F
+        EQUB    $48,$3A,$15,$48,$00,$14,$01,$A6
+        EQUB    $16,$78,$28,$00,$07,$82,$23,$15
+        EQUB    $83,$23,$14,$00,$C5,$11,$79,$17
+        EQUB    $90,$09,$05,$C8,$07,$48,$0A,$04
+        EQUB    $20,$CF,$79,$17,$91,$1C,$05,$CA
+        EQUB    $07,$08,$2C,$01,$4C,$01,$AD,$1A
+        EQUB    $01,$52,$20,$82,$4F,$05,$48,$92
+        EQUB    $01,$82,$8C,$01,$48,$01,$6C,$20
+        EQUB    $2A,$79,$17,$92,$29,$78,$6C,$00
+        EQUB    $25,$05,$CC,$07,$82,$4F,$17,$48
+        EQUB    $8C,$1E,$48,$4F,$15,$48,$1F,$14
+        EQUB    $01,$5B,$20,$C2,$0A,$01,$01,$7E
+        EQUB    $20,$48,$91,$01,$82,$8C,$01,$48
+        EQUB    $00,$6C,$01,$03,$00,$79,$17,$A9
+        EQUB    $1D,$06,$02,$01,$7A,$01,$28,$05
+        EQUB    $79,$70,$08,$12,$05,$E5,$07,$01
+        EQUB    $CF,$20,$78,$29,$09,$FA,$30,$29
+        EQUB    $70,$F6,$00,$2A,$26,$79,$17,$A5
+        EQUB    $34,$79,$71,$00,$09,$05,$EA,$07
+        EQUB    $82,$66,$17,$20,$28,$05,$EC,$07
+        EQUB    $09,$71,$01,$01,$DD,$01,$E2,$71
+        EQUB    $05,$09,$71,$01,$48,$00,$71,$79
+        EQUB    $01,$22,$0C,$05,$EE,$07,$48,$23
+        EQUB    $6E,$01,$23,$26,$20,$07,$05,$ED
+        EQUB    $07,$82,$66,$17,$79,$17,$A6,$0D
+        EQUB    $05,$EF,$07,$82,$66,$17,$48,$15
+        EQUB    $6E,$01,$23,$26,$79,$17,$69,$24
+        EQUB    $78,$60,$00,$20,$48,$00,$60,$05
+        EQUB    $58,$07,$48,$01,$6D,$08,$E8,$03
+        EQUB    $04,$0A,$04,$4E,$48,$21,$6E,$01
+        EQUB    $23,$26,$82,$06,$05,$83,$06,$05
+        EQUB    $01,$53,$23,$01,$56,$0B,$02,$48
+        EQUB    $01,$28,$79,$17,$EA,$08,$79,$15
+        EQUB    $D7,$04,$05,$F0,$05,$79,$15,$79
+        EQUB    $21,$79,$17,$EA,$1D,$05,$EC,$05
+        EQUB    $C2,$1D,$01,$78,$01,$8C,$07,$05
+        EQUB    $EE,$05,$00,$06,$09,$05,$EF,$05
+        EQUB    $48,$16,$6E,$01,$23,$26,$00,$CB
+        EQUB    $1E,$79,$15,$34,$0F,$78,$14,$00
+        EQUB    $0B,$C2,$1D,$01,$79,$01,$34,$04
+        EQUB    $05,$EB,$05,$C3,$14,$01,$78,$01
+        EQUB    $00,$0B,$7B,$17,$D1,$07,$05,$06
+        EQUB    $06,$00,$FB,$16,$79,$17,$6F,$2B
+        EQUB    $78,$15,$57,$27,$78,$56,$01,$0E
+        EQUB    $C2,$09,$01,$78,$01,$8C,$07,$05
+        EQUB    $72,$06,$00,$FB,$16,$79,$4A,$06
+        EQUB    $0F,$7A,$4B,$06,$0B,$7B,$4B,$0F
+        EQUB    $07,$05,$74,$06,$00,$FB,$16,$05
+        EQUB    $73,$06,$79,$15,$54,$18,$79,$17
+        EQUB    $53,$14,$58,$6C,$01,$EC,$16,$05
+        EQUB    $10,$06,$48,$09,$04,$01,$89,$1F
+        EQUB    $58,$28,$00,$FB,$16,$79,$15,$3F
+        EQUB    $22,$7A,$12,$33,$1E,$7B,$12,$35
+        EQUB    $1A,$48,$00,$01,$E6,$01,$05,$0A
+        EQUB    $06,$01,$7A,$01,$06,$F7,$09,$12
+        EQUB    $02,$48,$33,$03,$0B,$03,$02,$E6
+        EQUB    $01,$02,$7A,$15,$3F,$3C,$7B,$15
+        EQUB    $4B,$38,$7A,$12,$3F,$34,$7B,$12
+        EQUB    $4B,$30,$7A,$18,$02,$2C,$78,$18
+        EQUB    $04,$28,$09,$15,$01,$48,$3F,$02
+        EQUB    $0B,$02,$01,$09,$01,$10,$0A,$10
+        EQUB    $10,$09,$10,$01,$0A,$10,$10,$0A
+        EQUB    $01,$10,$05,$9A,$06,$7A,$18,$06
+        EQUB    $06,$01,$14,$0F,$20,$04,$01,$DF
+        EQUB    $0E,$79,$12,$4B,$08,$79,$15,$3F
+        EQUB    $04,$05,$9A,$06,$79,$15,$35,$15
+        EQUB    $79,$12,$3F,$11,$01,$49,$0F,$79
+        EQUB    $0F,$00,$07,$05,$9B,$06,$00,$FB
+        EQUB    $16,$09,$0F,$15,$79,$12,$3F,$56
+        EQUB    $48,$8C,$1E,$48,$1F,$1D,$48,$02
+        EQUB    $1C,$79,$15,$C4,$16,$01,$45,$08
+        EQUB    $58,$28,$00,$F8,$16,$48,$C6,$01
+        EQUB    $48,$C7,$02,$48,$C4,$03,$78,$15
+        EQUB    $C4,$22,$48,$01,$1C,$01,$45,$08
+        EQUB    $79,$15,$BE,$2A,$58,$28,$00,$F8
+        EQUB    $16,$48,$C0,$01,$48,$C1,$02,$48
+        EQUB    $BE,$03,$48,$01,$68,$48,$10,$6E
+        EQUB    $01,$23,$26,$82,$64,$01,$82,$71
+        EQUB    $02,$82,$67,$02,$82,$5A,$02,$82
+        EQUB    $57,$05,$82,$6C,$03,$79,$18,$09
+        EQUB    $3F,$7A,$12,$04,$09,$7B,$12,$B8
+        EQUB    $37,$7A,$12,$AF,$33,$C3,$8C,$01
+        EQUB    $78,$01,$01,$07,$05,$B3,$06,$00
+        EQUB    $FB,$16,$79,$12,$B8,$0B,$78,$5D
+        EQUB    $01,$07,$05,$B5,$06,$00,$FB,$16
+        EQUB    $05,$B2,$06,$79,$15,$AB,$11,$78
+        EQUB    $6D,$01,$0D,$05,$0E,$08,$48,$4F
+        EQUB    $15,$48,$00,$14,$00,$D3,$11,$79
+        EQUB    $12,$66,$1A,$79,$15,$65,$16,$3B
+        EQUB    $4E,$50,$C3,$0B,$78,$61,$00,$0D
+        EQUB    $05,$6F,$07,$00,$E8,$16,$05,$71
+        EQUB    $07,$00,$50,$02,$79,$15,$72,$09
+        EQUB    $58,$61,$01,$0F,$17,$00,$14,$12
+        EQUB    $79,$15,$68,$43,$78,$6C,$01,$36
+        EQUB    $7A,$4A,$05,$0D,$05,$A8,$07,$48
+        EQUB    $07,$1C,$01,$94,$0C,$00,$FB,$16
+        EQUB    $C2,$07,$01,$59,$01,$8C,$F3,$16
+        EQUB    $58,$63,$00,$F3,$16,$82,$07,$05
+        EQUB    $83,$07,$05,$05,$AC,$07,$78,$63
+        EQUB    $05,$15,$79,$63,$03,$04,$48,$6B
+        EQUB    $15,$79,$63,$04,$0A,$48,$0A,$04
+        EQUB    $0A,$04,$4E,$48,$92,$15,$78,$15
+        EQUB    $68,$3B,$C2,$37,$01,$31,$01,$17
+        EQUB    $34,$05,$C6,$07,$C2,$23,$01,$30
+        EQUB    $01,$17,$1F,$01,$EE,$20,$09,$29
+        EQUB    $04,$01,$EE,$20,$0A,$29,$04,$48
+        EQUB    $88,$15,$0A,$04,$15,$06,$02,$04
+        EQUB    $7B,$04,$1E,$0F,$48,$68,$15,$20
+        EQUB    $0C,$05,$C7,$07,$48,$11,$6E,$01
+        EQUB    $23,$26,$45,$09,$78,$12,$17,$05
+        EQUB    $79,$12,$15,$19,$78,$15,$17,$05
+        EQUB    $79,$15,$15,$11,$C2,$06,$01,$78
+        EQUB    $01,$8C,$07,$05,$DA,$07,$00,$FB
+        EQUB    $16,$05,$DB,$07,$79,$12,$A9,$12
+        EQUB    $48,$6A,$15,$79,$70,$00,$0B,$48
+        EQUB    $A7,$15,$78,$6F,$00,$04,$48,$A8
+        EQUB    $15,$79,$12,$69,$16,$78,$15,$A7
+        EQUB    $05,$79,$15,$A8,$0E,$78,$6D,$01
+        EQUB    $07,$05,$DE,$07,$00,$FB,$16,$05
+        EQUB    $DF,$07,$79,$15,$96,$15,$05,$DF
+        EQUB    $07,$79,$70,$09,$0E,$79,$6F,$0A
+        EQUB    $0A,$48,$14,$6E,$01,$23,$26,$48
+        EQUB    $A0,$15,$79,$15,$A9,$12,$48,$00
+        EQUB    $01,$78,$12,$A7,$08,$48,$0A,$01
+        EQUB    $79,$12,$A8,$04,$09,$01,$6F,$79
+        EQUB    $15,$A4,$0B,$79,$12,$A5,$07,$05
+        EQUB    $EB,$07,$82,$66,$05,$C2,$66,$01
+        EQUB    $31,$01,$12,$06,$05,$F4,$07,$20
+        EQUB    $62,$79,$14,$00,$4B,$21,$07,$78
+        EQUB    $28,$01,$26,$20,$43,$09,$17,$1E
+        EQUB    $48,$00,$1D,$48,$23,$1C,$01,$45
+        EQUB    $08,$78,$28,$00,$10,$C3,$23,$01
+        EQUB    $78,$01,$04,$09,$78,$01,$0E,$05
+        EQUB    $48,$01,$28,$02,$48,$00,$28,$02
+        EQUB    $78,$64,$01,$15,$30,$15,$12,$09
+        EQUB    $7B,$18,$08,$0D,$78,$12,$AE,$09
+        EQUB    $82,$23,$15,$83,$23,$05,$20,$08
+        EQUB    $08,$22,$07,$2A,$01,$38,$22,$48
+        EQUB    $01,$28,$02,$05,$CD,$07,$48,$00
+        EQUB    $28,$02,$05,$A9,$07,$20,$04,$05
+        EQUB    $9E,$06,$48,$00,$28,$02,$78,$6C
+        EQUB    $01,$EA,$05,$6E,$07,$05,$70,$07
+        EQUB    $48,$01,$61,$00,$50,$02,$48,$00
+        EQUB    $61,$05,$72,$07,$78,$62,$00,$12
+        EQUB    $3B,$4E,$50,$C3,$3A,$08,$84,$03
+        EQUB    $04,$0B,$04,$4E,$48,$00,$62,$20
+        EQUB    $10,$48,$01,$62,$08,$20,$03,$04
+        EQUB    $0A,$04,$4E,$3B,$4E,$50,$C3,$1F
+        EQUB    $48,$1C,$6E,$01,$23,$26,$05,$74
+        EQUB    $07,$48,$65,$15,$48,$00,$14,$01
+        EQUB    $A3,$1A,$48,$04,$4A,$48,$00,$4B
+        EQUB    $01,$D3,$11,$00,$50,$02,$05,$73
+        EQUB    $07,$00,$06,$09,$79,$1C,$0C,$20
+        EQUB    $48,$24,$6E,$01,$23,$26,$05,$DC
+        EQUB    $05,$01,$94,$0C,$82,$29,$17,$48
+        EQUB    $01,$42,$09,$17,$1E,$01,$69,$0B
+        EQUB    $09,$42,$44,$82,$35,$17,$02,$79
+        EQUB    $1C,$11,$07,$05,$8F,$07,$00,$94
+        EQUB    $0C,$05,$82,$04,$02,$01,$56,$0B
+        EQUB    $C2,$35,$01,$78,$01,$00,$14,$48
+        EQUB    $35,$1C,$09,$44,$42,$48,$01,$43
+        EQUB    $08,$B2,$07,$2A,$01,$83,$0B,$09
+        EQUB    $42,$44,$C2,$40,$04,$31,$04,$17
+        EQUB    $13,$01,$CB,$1D,$78,$28,$01,$09
+        EQUB    $05,$84,$06,$01,$B3,$1C,$20,$04
+        EQUB    $01,$A1,$1C,$C2,$40,$04,$48,$40
+        EQUB    $1C,$09,$57,$42,$48,$19,$43,$08
+        EQUB    $B5,$07,$2A,$01,$83,$0B,$09,$42
+        EQUB    $57,$C2,$40,$01,$30,$04,$01,$3F
+        EQUB    $79,$04,$56,$1E,$79,$01,$55,$1A
+        EQUB    $48,$81,$02,$82,$6A,$02,$48,$6A
+        EQUB    $02,$82,$24,$02,$48,$03,$02,$83
+        EQUB    $24,$02,$79,$17,$81,$28,$05,$7E
+        EQUB    $06,$79,$04,$56,$21,$79,$01,$81
+        EQUB    $1D,$82,$6A,$05,$48,$81,$02,$82
+        EQUB    $24,$02,$83,$24,$05,$31,$01,$17
+        EQUB    $0D,$05,$7C,$06,$20,$08,$31,$01
+        EQUB    $17,$04,$05,$7D,$06,$01,$A1,$1C
+        EQUB    $C2,$3E,$04,$78,$04,$00,$2E,$48
+        EQUB    $21,$43,$09,$58,$42,$48,$3E,$1C
+        EQUB    $08,$BB,$07,$2A,$01,$83,$0B,$09
+        EQUB    $42,$58,$31,$17,$04,$17,$79,$04
+        EQUB    $18,$13,$05,$90,$06,$82,$0B,$17
+        EQUB    $83,$0B,$05,$82,$3E,$05,$48,$1D
+        EQUB    $6E,$01,$23,$26,$48,$2D,$43,$09
+        EQUB    $5A,$42,$48,$38,$1C,$08,$B8,$07
+        EQUB    $2A,$01,$83,$0B,$09,$42,$5A,$48
+        EQUB    $2D,$43,$09,$5B,$42,$48,$39,$1C
+        EQUB    $08,$B8,$07,$2A,$01,$83,$0B,$09
+        EQUB    $42,$5B,$48,$2D,$43,$09,$5C,$42
+        EQUB    $48,$3A,$1C,$08,$B8,$07,$2A,$01
+        EQUB    $83,$0B,$09,$42,$5C,$7A,$17,$D2
+        EQUB    $1E,$7B,$17,$DA,$1A,$06,$02,$01
+        EQUB    $7B,$01,$0F,$13,$C2,$35,$01,$08
+        EQUB    $F1,$05,$2A,$78,$01,$00,$05,$08
+        EQUB    $F4,$05,$2A,$01,$3B,$02,$7A,$17
+        EQUB    $DC,$1B,$7A,$17,$DF,$09,$7A,$17
+        EQUB    $E2,$13,$7B,$17,$E7,$0F,$06,$02
+        EQUB    $01,$7B,$01,$0F,$08,$08,$F7,$05
+        EQUB    $2A,$01,$3B,$02,$79,$4A,$06,$6A
+        EQUB    $7A,$4B,$05,$66,$7B,$4B,$0F,$62
+        EQUB    $79,$17,$6F,$0F,$79,$4B,$05,$04
+        EQUB    $05,$75,$06,$79,$4B,$0F,$04,$05
+        EQUB    $76,$06,$79,$17,$70,$4C,$C3,$12
+        EQUB    $01,$79,$01,$05,$0D,$05,$7B,$06
+        EQUB    $08,$E8,$03,$04,$01,$94,$1F,$20
+        EQUB    $39,$78,$56,$01,$2F,$C2,$0A,$01
+        EQUB    $79,$01,$8C,$28,$C2,$03,$01,$79
+        EQUB    $01,$8C,$21,$05,$78,$06,$48,$64
+        EQUB    $04,$01,$89,$1F,$78,$28,$00,$0F
+        EQUB    $05,$79,$06,$48,$01,$56,$48,$19
+        EQUB    $6E,$01,$23,$26,$20,$09,$05,$7A
+        EQUB    $06,$20,$04,$05,$77,$06,$48,$14
+        EQUB    $4C,$06,$02,$01,$7B,$01,$A0,$38
+        EQUB    $C2,$23,$1E,$C3,$23,$1D,$31,$1E
+        EQUB    $17,$0C,$79,$1D,$00,$08,$08,$0E
+        EQUB    $07,$2A,$01,$32,$22,$79,$1E,$8C
+        EQUB    $0C,$78,$1D,$00,$08,$08,$0B,$07
+        EQUB    $2A,$01,$32,$22,$79,$1E,$7A,$10
+        EQUB    $79,$1D,$0E,$0C,$79,$17,$5B,$08
+        EQUB    $08,$08,$07,$2A,$01,$3D,$02,$00
+        EQUB    $53,$02,$78,$41,$00,$52,$78,$41
+        EQUB    $0A,$4E,$C2,$34,$01,$31,$01,$17
+        EQUB    $08,$78,$41,$01,$04,$48,$04,$41
+        EQUB    $08,$E1,$05,$01,$0A,$41,$01,$04
+        EQUB    $01,$82,$34,$17,$0A,$06,$41,$79
+        EQUB    $41,$05,$2B,$79,$17,$DF,$15,$05
+        EQUB    $E7,$05,$48,$6F,$01,$82,$34,$01
+        EQUB    $48,$0A,$01,$83,$34,$01,$48,$0A
+        EQUB    $41,$20,$13,$79,$17,$E6,$09,$05
+        EQUB    $E8,$05,$48,$01,$41,$20,$07,$05
+        EQUB    $E6,$05,$00,$06,$09,$45,$09,$00
+        EQUB    $8E,$17,$48,$01,$28,$79,$1C,$34
+        EQUB    $14,$79,$41,$00,$38,$78,$0A,$2A
+        EQUB    $34,$78,$0A,$2D,$30,$05,$E1,$05
+        EQUB    $48,$01,$41,$02,$79,$1C,$5F,$0E
+        EQUB    $C3,$8C,$01,$78,$01,$01,$07,$05
+        EQUB    $B3,$06,$00,$98,$1A,$79,$1C,$0C
+        EQUB    $14,$C2,$0C,$01,$79,$01,$33,$0D
+        EQUB    $C3,$8C,$01,$78,$01,$01,$06,$05
+        EQUB    $FA,$05,$20,$7C,$79,$1C,$1D,$1B
+        EQUB    $C2,$1D,$01,$79,$01,$34,$6A,$C3
+        EQUB    $8C,$01,$78,$01,$00,$08,$C2,$8C
+        EQUB    $01,$78,$01,$34,$5C,$05,$77,$04
+        EQUB    $20,$5E,$01,$A9,$21,$78,$04,$00
+        EQUB    $35,$78,$6C,$01,$50,$7B,$75,$02
+        EQUB    $53,$79,$1C,$06,$0D,$78,$56,$01
+        EQUB    $06,$05,$DC,$07,$20,$42,$05,$DD
+        EQUB    $07,$05,$27,$06,$01,$89,$1F,$78
+        EQUB    $28,$00,$35,$05,$28,$06,$79,$1C
+        EQUB    $23,$04,$05,$11,$07,$E2,$1C,$17
+        EQUB    $E3,$1C,$05,$20,$1C,$48,$6A,$1E
+        EQUB    $48,$1F,$1D,$01,$45,$08,$78,$28
+        EQUB    $00,$06,$05,$7F,$06,$20,$11,$79
+        EQUB    $1C,$0F,$06,$05,$B4,$06,$20,$08
+        EQUB    $48,$00,$28,$02,$05,$CD,$07,$48
+        EQUB    $01,$28,$02,$05,$07,$08,$48,$01
+        EQUB    $28,$02,$0A,$06,$49,$0A,$06,$75
+        EQUB    $0A,$06,$5F,$02,$01,$56,$0B,$78
+        EQUB    $73,$00,$04,$0A,$06,$73,$0A,$4C
+        EQUB    $46,$0A,$4C,$4D,$C2,$05,$01,$78
+        EQUB    $01,$23,$22,$0A,$4C,$65,$7A,$65
+        EQUB    $32,$1B,$78,$64,$01,$17,$09,$17
+        EQUB    $1E,$48,$00,$1D,$48,$23,$1C,$01
+        EQUB    $45,$08,$78,$28,$00,$07,$05,$1F
+        EQUB    $07,$48,$01,$64,$09,$49,$51,$09
+        EQUB    $4A,$52,$09,$4B,$53,$0A,$4C,$4B
+        EQUB    $7A,$4B,$64,$50,$48,$64,$01,$0B
+        EQUB    $01,$4B,$0A,$06,$4A,$7B,$4B,$63
+        EQUB    $F4,$C2,$04,$01,$79,$01,$8C,$08
+        EQUB    $7B,$4C,$0A,$04,$05,$24,$06,$79
+        EQUB    $4A,$09,$04,$05,$02,$08,$79,$4A
+        EQUB    $0A,$07,$05,$05,$08,$05,$37,$06
+        EQUB    $08,$36,$06,$2A,$78,$4A,$09,$09
+        EQUB    $08,$38,$06,$2A,$79,$4A,$01,$03
+        EQUB    $04,$2A,$7A,$4A,$0A,$0E,$48,$0A
+        EQUB    $01,$0B,$01,$4A,$01,$A3,$1A,$7B
+        EQUB    $4A,$09,$F4,$48,$01,$4C,$7A,$17
+        EQUB    $D2,$0A,$7B,$17,$EA,$06,$5B,$4D
+        EQUB    $32,$C8,$1E,$C3,$8C,$01,$79,$01
+        EQUB    $0C,$11,$C2,$8C,$01,$79,$01,$70
+        EQUB    $0A,$05,$1F,$06,$48,$01,$04,$01
+        EQUB    $94,$1F,$7A,$17,$11,$49,$7B,$17
+        EQUB    $57,$45,$78,$17,$B9,$41,$06,$02
+        EQUB    $01,$7B,$01,$3C,$29,$08,$32,$06
+        EQUB    $2A,$7A,$4A,$03,$11,$08,$2C,$06
+        EQUB    $2A,$78,$4A,$03,$09,$78,$4A,$08
+        EQUB    $05,$08,$2F,$06,$2A,$01,$3D,$02
+        EQUB    $C3,$27,$01,$79,$01,$05,$07,$05
+        EQUB    $0C,$08,$00,$06,$09,$06,$02,$01
+        EQUB    $7B,$01,$14,$0B,$01,$B3,$1C,$79
+        EQUB    $2A,$00,$04,$05,$3B,$07,$C3,$8C
+        EQUB    $01,$78,$01,$00,$08,$78,$0A,$2D
+        EQUB    $04,$01,$C5,$23,$79,$17,$C4,$24
+        EQUB    $C2,$09,$01,$79,$01,$00,$1D,$09
+        EQUB    $17,$1E,$48,$00,$1D,$48,$23,$1C
+        EQUB    $01,$45,$08,$78,$28,$00,$0D,$05
+        EQUB    $18,$07,$48,$1E,$6E,$01,$23,$26
+        EQUB    $82,$09,$17,$C2,$23,$01,$79,$01
+        EQUB    $AD,$01,$C2,$66,$01,$79,$01,$00
+        EQUB    $12,$79,$17,$A5,$0E,$7A,$46,$02
+        EQUB    $0A,$05,$EA,$07,$82,$22,$05,$82
+        EQUB    $66,$17,$79,$17,$A6,$0B,$7A,$46
+        EQUB    $02,$07,$05,$F0,$07,$00,$06,$09
+        EQUB    $79,$17,$B9,$11,$7A,$46,$04,$0D
+        EQUB    $05,$57,$07,$48,$50,$15,$48,$00
+        EQUB    $14,$00,$D3,$11,$7A,$17,$5A,$0E
+        EQUB    $7B,$17,$6B,$0A,$7B,$4A,$02,$06
+        EQUB    $05,$04,$08,$21,$76,$7A,$17,$AC
+        EQUB    $26,$7B,$17,$AD,$22,$C2,$23,$01
+        EQUB    $78,$01,$AE,$1B,$0A,$06,$74,$7A
+        EQUB    $74,$03,$14,$09,$05,$74,$05,$9F
+        EQUB    $07,$79,$17,$AD,$07,$05,$A0,$07
+        EQUB    $00,$C9,$25,$05,$A1,$07,$7A,$6A
+        EQUB    $02,$1F,$79,$17,$AD,$1B,$0A,$06
+        EQUB    $6A,$79,$6A,$03,$0B,$79,$6A,$04
+        EQUB    $10,$05,$9E,$07,$00,$06,$09,$05
+        EQUB    $9D,$07,$82,$23,$17,$83,$23,$05
+        EQUB    $7B,$4A,$02,$0B,$7A,$17,$52,$07
+        EQUB    $7B,$17,$86,$03,$21,$1D,$78,$6C
+        EQUB    $01,$06,$58,$4A,$02,$0B,$1E,$02
+        EQUB    $C2,$40,$01,$31,$01,$17,$F9,$01
+        EQUB    $68,$1D,$39,$04,$F4,$01,$F1,$05
+        EQUB    $83,$06,$3A,$73,$A0,$0F,$07,$05
+        EQUB    $56,$07,$00,$06,$09,$05,$3A,$07
+        EQUB    $48,$27,$1C,$48,$8C,$1E,$48,$1F
+        EQUB    $1D,$01,$45,$08,$78,$28,$00,$07
+        EQUB    $05,$0D,$08,$00,$06,$09,$5A,$4A
+        EQUB    $03,$20,$1E,$48,$00,$2A,$58,$6C
+        EQUB    $01,$67,$1D,$C3,$12,$01,$78,$01
+        EQUB    $05,$23,$C3,$15,$01,$78,$01,$05
+        EQUB    $1C,$82,$15,$05,$83,$15,$05,$48
+        EQUB    $8C,$01,$82,$12,$01,$48,$05,$01
+        EQUB    $83,$12,$01,$08,$46,$07,$2A,$48
+        EQUB    $5A,$04,$21,$2B,$21,$5A,$78,$2A
+        EQUB    $00,$0B,$21,$23,$39,$04,$F4,$01
+        EQUB    $04,$01,$39,$20,$3A,$4E,$50,$C3
+        EQUB    $26,$48,$32,$04,$08,$4B,$07,$2A
+        EQUB    $21,$0D,$48,$66,$15,$48,$00,$14
+        EQUB    $01,$C5,$11,$00,$50,$02,$05,$3C
+        EQUB    $07,$01,$94,$1F,$03,$04,$05,$3D
+        EQUB    $07,$04,$2A,$45,$09,$02,$01,$CB
+        EQUB    $1D,$78,$28,$01,$0A,$48,$32,$04
+        EQUB    $08,$4C,$07,$2A,$21,$E1,$7A,$5F
+        EQUB    $04,$0D,$48,$00,$5F,$48,$C8,$04
+        EQUB    $08,$48,$07,$2A,$21,$D1,$02,$48
+        EQUB    $25,$1C,$08,$45,$07,$2A,$08,$F4
+        EQUB    $01,$04,$C2,$25,$01,$79,$01,$8C
+        EQUB    $0F,$C3,$25,$01,$79,$01,$05,$3C
+        EQUB    $C3,$26,$01,$79,$01,$05,$35,$48
+        EQUB    $01,$1C,$A2,$1C,$01,$79,$01,$8C
+        EQUB    $2C,$A3,$1C,$01,$78,$01,$00,$25
+        EQUB    $08,$F4,$01,$04,$08,$45,$07,$2A
+        EQUB    $78,$1C,$13,$18,$78,$01,$05,$15
+        EQUB    $78,$1C,$21,$10,$78,$1C,$13,$0C
+        EQUB    $78,$1C,$07,$09,$48,$09,$04,$08
+        EQUB    $44,$07,$2A,$02,$0A,$06,$1C,$7A
+        EQUB    $1C,$31,$C8,$48,$00,$04,$48,$00
+        EQUB    $2A,$02,$48,$01,$28,$C3,$26,$01
+        EQUB    $78,$01,$05,$12,$C2,$25,$01,$79
+        EQUB    $01,$8C,$08,$C3,$25,$01,$78,$01
+        EQUB    $05,$04,$48,$00,$28,$02,$05,$83
+        EQUB    $04,$48,$0A,$4C,$02,$7A,$4A,$04
+        EQUB    $09,$7B,$4A,$08,$05,$05,$3B,$06
+        EQUB    $02,$C2,$8C,$01,$79,$01,$57,$06
+        EQUB    $05,$40,$06,$20,$09,$05,$41,$06
+        EQUB    $20,$04,$05,$3A,$06,$08,$17,$07
+        EQUB    $2A,$01,$38,$22,$7A,$17,$11,$1D
+        EQUB    $7B,$17,$57,$19,$05,$46,$06,$48
+        EQUB    $5A,$04,$08,$4D,$07,$2A,$01,$37
+        EQUB    $1D,$21,$0F,$48,$B9,$15,$48,$00
+        EQUB    $14,$00,$C5,$11,$21,$04,$00,$50
+        EQUB    $02,$21,$2D,$C2,$8C,$01,$79,$01
+        EQUB    $57,$0C,$05,$44,$06,$48,$18,$6E
+        EQUB    $01,$23,$26,$20,$04,$05,$45,$06
+        EQUB    $48,$01,$4B,$05,$03,$08,$0A,$09
+        EQUB    $4A,$7A,$4A,$0A,$0A,$48,$0A,$01
+        EQUB    $0B,$01,$4A,$01,$A3,$1A,$02,$06
+        EQUB    $02,$01,$7B,$01,$50,$18,$78,$55
+        EQUB    $01,$07,$08,$4D,$06,$2A,$20,$08
+        EQUB    $48,$00,$55,$08,$4A,$06,$2A,$01
+        EQUB    $3D,$02,$45,$09,$02,$48,$00,$2A
+        EQUB    $C2,$23,$01,$78,$01,$00,$05,$08
+        EQUB    $59,$06,$2A,$78,$67,$AC,$05,$08
+        EQUB    $58,$06,$2A,$78,$66,$01,$05,$08
+        EQUB    $57,$06,$2A,$78,$56,$01,$05,$08
+        EQUB    $56,$06,$2A,$C2,$3E,$01,$78,$01
+        EQUB    $00,$05,$08,$55,$06,$2A,$78,$68
+        EQUB    $01,$05,$08,$54,$06,$2A,$78,$2A
+        EQUB    $00,$B7,$04,$2A,$45,$09,$02,$05
+        EQUB    $04,$06,$48,$00,$41,$05,$05,$06
+        EQUB    $01,$7E,$20,$48,$79,$15,$48,$00
+        EQUB    $14,$01,$D3,$11,$00,$50,$02,$79
+        EQUB    $0A,$2A,$0B,$79,$0B,$06,$07,$48
+        EQUB    $2D,$0A,$48,$00,$0B,$79,$0A,$3D
+        EQUB    $08,$78,$0B,$00,$04,$48,$44,$0A
+        EQUB    $79,$0A,$20,$07,$48,$01,$0B,$48
+        EQUB    $44,$0A,$79,$0A,$21,$07,$48,$42
+        EQUB    $0B,$48,$44,$0A,$02,$48,$02,$20
+        EQUB    $78,$0A,$3D,$0F,$78,$0A,$44,$0B
+        EQUB    $48,$01,$20,$78,$0A,$3F,$04,$48
+        EQUB    $1F,$20,$02,$48,$01,$28,$79,$0A
+        EQUB    $0E,$21,$3A,$1C,$7D,$01,$1C,$3B
+        EQUB    $1C,$85,$01,$17,$C3,$8C,$01,$78
+        EQUB    $01,$00,$0C,$C2,$8C,$01,$79,$01
+        EQUB    $28,$05,$05,$FC,$05,$02,$05,$FB
+        EQUB    $05,$02,$79,$0A,$59,$0F,$3A,$1C
+        EQUB    $7C,$01,$0A,$3B,$1C,$84,$01,$05
+        EQUB    $05,$F8,$07,$02,$79,$0A,$31,$11
+        EQUB    $7A,$17,$D2,$09,$7B,$17,$DA,$05
+        EQUB    $05,$FA,$07,$02,$05,$96,$04,$02
+        EQUB    $79,$0A,$2B,$11,$7A,$17,$D2,$09
+        EQUB    $7B,$17,$DA,$05,$05,$F9,$07,$02
+        EQUB    $05,$95,$04,$02,$48,$00,$28,$02
+        EQUB    $03,$04,$05,$08,$06,$21,$2A,$78
+        EQUB    $28,$00,$22,$0B,$04,$4E,$02,$3A
+        EQUB    $4E,$50,$C3,$10,$05,$0B,$06,$48
+        EQUB    $00,$01,$0B,$4E,$01,$03,$01,$05
+        EQUB    $0C,$06,$02,$05,$09,$06,$03,$4E
+        EQUB    $05,$0A,$06,$02,$05,$0F,$06,$02
+        EQUB    $48,$00,$36,$01,$2F,$07,$78,$32
+        EQUB    $01,$F7,$48,$08,$2E,$01,$95,$06
+        EQUB    $38,$0F,$56,$0E,$12,$38,$0F,$57
+        EQUB    $0E,$11,$78,$0F,$01,$0D,$05,$88
+        EQUB    $04,$01,$1B,$07,$20,$DB,$48,$01
+        EQUB    $28,$02,$48,$00,$28,$02,$05,$0E
+        EQUB    $06,$78,$17,$79,$16,$48,$25,$6E
+        EQUB    $01,$23,$26,$08,$97,$05,$01,$0A
+        EQUB    $17,$01,$04,$01,$05,$05,$06,$00
+        EQUB    $50,$02,$21,$04,$00,$50,$02,$21
+        EQUB    $49,$48,$0C,$1C,$21,$2B,$48,$29
+        EQUB    $1C,$21,$26,$48,$28,$1C,$21,$21
+        EQUB    $48,$78,$1C,$21,$1C,$48,$34,$1C
+        EQUB    $21,$17,$48,$1D,$1C,$21,$12,$48
+        EQUB    $35,$1C,$21,$0D,$48,$00,$41,$48
+        EQUB    $D4,$15,$48,$00,$14,$00,$D3,$11
+        EQUB    $09,$1C,$04,$0A,$04,$04,$A1,$04
+        EQUB    $01,$E2,$1C,$01,$0A,$06,$04,$A1
+        EQUB    $04,$01,$01,$EE,$05,$E3,$1C,$01
+        EQUB    $02,$48,$8C,$1E,$48,$8B,$15,$48
+        EQUB    $1F,$14,$48,$00,$1C,$A2,$1C,$01
+        EQUB    $31,$01,$1E,$12,$A3,$1C,$02,$78
+        EQUB    $02,$00,$0B,$E2,$1C,$15,$78,$14
+        EQUB    $1F,$04,$E3,$1C,$14,$0A,$06,$1C
+        EQUB    $7A,$1C,$8D,$E2,$02,$48,$8C,$1E
+        EQUB    $48,$00,$15,$48,$00,$14,$21,$D3
+        EQUB    $48,$8B,$1E,$48,$8C,$15,$48,$1F
+        EQUB    $14,$20,$C8,$09,$0E,$29,$7A,$0E
+        EQUB    $0A,$1A,$79,$0C,$59,$05,$05,$20
+        EQUB    $06,$02,$59,$0C,$62,$7B,$0D,$05
+        EQUB    $E9,$07,$48,$A3,$15,$48,$00,$14
+        EQUB    $00,$C5,$11,$58,$17,$A9,$2A,$26
+        EQUB    $09,$0E,$4F,$05,$18,$06,$21,$05
+        EQUB    $05,$19,$06,$02,$08,$86,$01,$01
+        EQUB    $0A,$29,$01,$04,$01,$02,$48,$00
+        EQUB    $29,$48,$19,$01,$06,$02,$02,$3B
+        EQUB    $02,$50,$C3,$0D,$32,$02,$01,$09
+        EQUB    $0A,$06,$29,$0B,$01,$02,$20,$F0
+        EQUB    $7B,$29,$09,$E3,$02,$06,$02,$29
+        EQUB    $7B,$29,$50,$05,$48,$00,$29,$02
+        EQUB    $7B,$29,$A0,$05,$48,$01,$29,$02
+        EQUB    $48,$02,$29,$02,$59,$0C,$55,$17
+        EQUB    $0E,$05,$1A,$06,$21,$C1,$09,$29
+        EQUB    $03,$21,$B2,$45,$06,$21,$B8,$21
+        EQUB    $AC,$45,$09,$30,$03,$4F,$07,$30
+        EQUB    $29,$4F,$03,$20,$1C,$30,$03,$29
+        EQUB    $1E,$05,$1C,$06,$21,$A1,$48,$02
+        EQUB    $01,$0A,$29,$01,$7B,$01,$08,$F5
+        EQUB    $03,$01,$0A,$01,$4E,$05,$1D,$06
+        EQUB    $48,$01,$04,$00,$94,$1F,$05,$1B
+        EQUB    $06,$48,$14,$01,$20,$EB,$48,$01
+        EQUB    $28,$79,$1C,$04,$09,$21,$48,$05
+        EQUB    $23,$06,$01,$98,$1F,$79,$1C,$01
+        EQUB    $07,$48,$0E,$10,$00,$BD,$0F,$79
+        EQUB    $1C,$02,$07,$48,$15,$10,$00,$BD
+        EQUB    $0F,$79,$1C,$67,$0C,$78,$5E,$00
+        EQUB    $04,$01,$C5,$23,$48,$01,$28,$02
+        EQUB    $79,$1C,$5F,$0C,$78,$5D,$01,$08
+        EQUB    $79,$17,$B8,$04,$05,$B5,$06,$79
+        EQUB    $1C,$34,$08,$79,$41,$00,$04,$05
+        EQUB    $DD,$05,$48,$00,$28,$02,$05,$22
+        EQUB    $06,$03,$4A,$45,$02,$03,$4B,$02
+        EQUB    $48,$00,$1E,$48,$0E,$1D,$01,$45
+        EQUB    $08,$78,$28,$00,$79,$78,$0A,$2D
+        EQUB    $75,$09,$04,$1C,$48,$09,$04,$78
+        EQUB    $1C,$20,$6E,$78,$1C,$16,$6A,$78
+        EQUB    $1C,$22,$66,$78,$1C,$11,$62,$48
+        EQUB    $5A,$04,$78,$1C,$03,$5B,$78,$1C
+        EQUB    $06,$57,$08,$E8,$03,$04,$79,$1C
+        EQUB    $0A,$0E,$78,$6C,$00,$4B,$05,$CF
+        EQUB    $07,$48,$1B,$6E,$01,$23,$26,$08
+        EQUB    $2C,$01,$04,$78,$1C,$1A,$3A,$48
+        EQUB    $13,$04,$78,$1C,$17,$33,$78,$1C
+        EQUB    $19,$2F,$78,$1C,$18,$2B,$09,$49
+        EQUB    $01,$08,$E8,$03,$04,$48,$64,$02
+        EQUB    $0B,$02,$04,$0B,$06,$01,$3A,$01
+        EQUB    $00,$7D,$F6,$3B,$04,$00,$7D,$06
+        EQUB    $3B,$04,$F3,$01,$05,$08,$F4,$01
+        EQUB    $04,$78,$1C,$23,$04,$48,$00,$04
+        EQUB    $02,$01,$EE,$20,$0A,$29,$2A,$78
+        EQUB    $64,$01,$1D,$09,$17,$1E,$48,$00
+        EQUB    $1D,$48,$23,$1C,$01,$45,$08,$78
+        EQUB    $28,$00,$0D,$45,$05,$3A,$2A,$12
+        EQUB    $07,$04,$05,$12,$07,$04,$2A,$02
+        EQUB    $48,$00,$1C,$48,$00,$10,$48,$00
+        EQUB    $0A,$48,$08,$2E,$01,$98,$06,$78
+        EQUB    $0F,$00,$06,$09,$0F,$1C,$20,$F2
+        EQUB    $39,$1C,$5B,$0E,$54,$C6,$06,$15
+        EQUB    $48,$B4,$01,$0A,$01,$15,$48,$00
+        EQUB    $14,$C2,$5A,$01,$31,$01,$17,$0B
+        EQUB    $05,$A4,$06,$82,$5A,$05,$82,$57
+        EQUB    $17,$02,$C2,$57,$01,$31,$01,$17
+        EQUB    $30,$05,$A5,$06,$82,$57,$05,$82
+        EQUB    $5A,$17,$C3,$8C,$01,$78,$01,$00
+        EQUB    $1A,$C2,$8C,$01,$79,$01,$57,$13
+        EQUB    $05,$A7,$06,$48,$01,$66,$01,$7F
+        EQUB    $23,$48,$12,$6E,$01,$23,$26,$00
+        EQUB    $C5,$11,$05,$A6,$06,$00,$7F,$23
+        EQUB    $C2,$67,$01,$31,$01,$17,$19,$39
+        EQUB    $1C,$59,$0E,$08,$05,$B8,$06,$48
+        EQUB    $01,$5E,$02,$39,$1C,$5A,$0E,$08
+        EQUB    $05,$B8,$06,$48,$00,$5E,$02,$78
+        EQUB    $17,$C0,$05,$79,$17,$C6,$18,$39
+        EQUB    $1C,$59,$0E,$13,$01,$CB,$1D,$78
+        EQUB    $28,$00,$05,$05,$A8,$06,$02,$05
+        EQUB    $A9,$06,$48,$00,$75,$02,$79,$17
+        EQUB    $64,$05,$05,$4F,$07,$02,$79,$17
+        EQUB    $66,$0B,$18,$1C,$56,$0E,$FF,$16
+        EQUB    $05,$76,$07,$02,$39,$1C,$5C,$0E
+        EQUB    $25,$7A,$17,$3F,$21,$7B,$17,$4B
+        EQUB    $1D,$05,$9A,$06,$48,$00,$01,$E6
+        EQUB    $01,$05,$0A,$06,$01,$7A,$01,$06
+        EQUB    $F7,$48,$3F,$15,$48,$00,$14,$48
+        EQUB    $00,$18,$00,$C5,$11,$39,$1C,$5D
+        EQUB    $0E,$31,$7B,$17,$51,$2D,$7A,$17
+        EQUB    $11,$29,$05,$43,$0F,$48,$00,$01
+        EQUB    $48,$0E,$02,$A6,$02,$03,$E6,$01
+        EQUB    $03,$0A,$06,$02,$0A,$06,$01,$7A
+        EQUB    $01,$07,$F1,$48,$00,$18,$48,$3F
+        EQUB    $15,$48,$00,$14,$48,$14,$4C,$00
+        EQUB    $C5,$11,$05,$84,$04,$02,$48,$57
+        EQUB    $1E,$48,$1F,$1D,$48,$00,$14,$00
+        EQUB    $5B,$20,$79,$0C,$20,$1F,$C2,$0F
+        EQUB    $01,$78,$01,$00,$2C,$05,$B0,$06
+        EQUB    $82,$0F,$05,$82,$08,$17,$83,$08
+        EQUB    $05,$79,$17,$B8,$07,$05,$B1,$06
+        EQUB    $48,$01,$5D,$02,$79,$17,$B8,$0D
+        EQUB    $79,$0C,$5F,$09,$78,$5D,$01,$05
+        EQUB    $05,$B5,$06,$02,$05,$7C,$04,$02
+        EQUB    $05,$5D,$04,$02,$C2,$67,$01,$31
+        EQUB    $01,$17,$F9,$78,$5E,$00,$F5,$48
+        EQUB    $17,$6E,$01,$23,$26,$05,$C8,$06
+        EQUB    $06,$02,$01,$7B,$01,$A0,$68,$7B
+        EQUB    $01,$50,$30,$06,$02,$01,$7B,$01
+        EQUB    $3F,$09,$05,$C9,$06,$48,$2A,$10
+        EQUB    $20,$1E,$01,$EE,$20,$08,$BA,$06
+        EQUB    $01,$0A,$29,$01,$04,$01,$48,$1C
+        EQUB    $10,$78,$29,$00,$0B,$48,$23,$10
+        EQUB    $78,$29,$01,$04,$48,$31,$10,$00
+        EQUB    $BD,$0F,$06,$02,$01,$7B,$01,$80
+        EQUB    $27,$48,$00,$2A,$C2,$3E,$01,$79
+        EQUB    $01,$00,$05,$08,$BD,$06,$2A,$78
+        EQUB    $6D,$00,$0E,$08,$BE,$06,$2A,$3A
+        EQUB    $73,$D0,$07,$05,$08,$BF,$06,$2A
+        EQUB    $78,$2A,$00,$04,$04,$2A,$02,$08
+        EQUB    $C2,$06,$2A,$00,$3D,$02,$08,$CC
+        EQUB    $06,$04,$01,$CF,$20,$7B,$29,$03
+        EQUB    $FA,$0A,$04,$29,$04,$29,$48,$04
+        EQUB    $02,$0A,$02,$04,$04,$04,$0A,$06
+        EQUB    $04,$3A,$04,$E5,$06,$E5,$02,$48
+        EQUB    $00,$28,$A2,$1C,$01,$78,$01,$0B
+        EQUB    $11,$7B,$01,$C8,$10,$7B,$01,$C3
+        EQUB    $09,$78,$01,$00,$05,$79,$01,$64
+        EQUB    $04,$48,$01,$28,$02,$79,$17,$64
+        EQUB    $53,$E2,$0C,$05,$E3,$0C,$05,$05
+        EQUB    $50,$07,$79,$0C,$0B,$30,$05,$52
+        EQUB    $07,$48,$09,$1C,$21,$CA,$78,$28
+        EQUB    $00,$1A,$48,$02,$1C,$21,$C1,$78
+        EQUB    $28,$00,$11,$05,$53,$07,$08,$2C
+        EQUB    $01,$04,$0A,$04,$4E,$48,$20,$6E
+        EQUB    $00,$23,$26,$05,$54,$07,$08,$F4
+        EQUB    $01,$04,$00,$94,$1F,$79,$0C,$1A
+        EQUB    $0F,$79,$67,$AC,$0B,$05,$55,$07
+        EQUB    $48,$01,$60,$48,$01,$73,$02,$05
+        EQUB    $51,$07,$02,$05,$94,$04,$02,$58
+        EQUB    $6C,$01,$EC,$16,$C2,$07,$01,$78
+        EQUB    $01,$00,$05,$05,$8C,$07,$02,$05
+        EQUB    $82,$07,$01,$B9,$1F,$48,$01,$63
+        EQUB    $78,$28,$00,$06,$05,$AA,$07,$20
+        EQUB    $7A,$05,$83,$07,$01,$B9,$1F,$48
+        EQUB    $02,$63,$78,$28,$00,$06,$05,$AB
+        EQUB    $07,$20,$68,$7B,$4A,$05,$4D,$05
+        EQUB    $84,$07,$01,$B9,$1F,$78,$28,$00
+        EQUB    $43,$05,$85,$07,$01,$B9,$1F,$78
+        EQUB    $28,$00,$39,$05,$87,$07,$05,$88
+        EQUB    $07,$01,$B9,$1F,$48,$03,$63,$78
+        EQUB    $28,$01,$30,$05,$89,$07,$01,$B9
+        EQUB    $1F,$48,$04,$63,$78,$28,$01,$23
+        EQUB    $78,$56,$00,$18,$C7,$11,$01,$79
+        EQUB    $01,$00,$11,$05,$86,$07,$05,$8A
+        EQUB    $07,$01,$B9,$1F,$48,$05,$63,$78
+        EQUB    $28,$01,$08,$48,$00,$63,$05,$86
+        EQUB    $07,$02,$05,$8B,$07,$48,$47,$01
+        EQUB    $82,$07,$01,$48,$04,$01,$83,$07
+        EQUB    $01,$02,$48,$0A,$04,$0A,$04,$4E
+        EQUB    $48,$00,$5F,$08,$90,$01,$4C,$48
+        EQUB    $95,$15,$48,$00,$14,$00,$D3,$11
+        EQUB    $48,$01,$28,$C2,$13,$01,$79,$01
+        EQUB    $8C,$19,$C3,$13,$01,$79,$01,$05
+        EQUB    $12,$C2,$25,$01,$79,$01,$8C,$0B
+        EQUB    $C3,$25,$01,$79,$01,$05,$04,$48
+        EQUB    $00,$28,$02,$79,$17,$AC,$3A,$48
+        EQUB    $AD,$1E,$48,$00,$1D,$08,$81,$04
+        EQUB    $47,$01,$9D,$0C,$7B,$6A,$01,$22
+        EQUB    $05,$95,$07,$21,$C4,$78,$28,$01
+        EQUB    $1A,$78,$17,$AC,$07,$05,$9E,$07
+        EQUB    $00,$06,$09,$0A,$06,$6A,$79,$6A
+        EQUB    $01,$05,$05,$97,$07,$02,$05,$98
+        EQUB    $07,$02,$05,$96,$07,$00,$06,$09
+        EQUB    $59,$17,$A4,$93,$0A,$05,$F5,$07
+        EQUB    $48,$A5,$01,$E2,$0C,$01,$E3,$0C
+        EQUB    $05,$09,$0C,$71,$02,$05,$56,$07
+        EQUB    $00,$06,$09,$59,$0C,$1A,$17,$0E
+        EQUB    $05,$A3,$07,$09,$17,$67,$02,$78
+        EQUB    $6C,$01,$04,$45,$0E,$02,$05,$CE
+        EQUB    $07,$02,$E7,$6E,$06,$48,$01,$55
+        EQUB    $02,$10,$70,$29,$D7,$0F,$79,$29
+        EQUB    $09,$0F,$79,$6F,$0A,$0B,$48,$08
+        EQUB    $29,$79,$70,$08,$04,$48,$09,$29
+        EQUB    $05,$E4,$07,$32,$70,$29,$19,$45
+        EQUB    $6E,$09,$70,$01,$0B,$29,$01,$79
+        EQUB    $6F,$0A,$23,$79,$29,$00,$1F,$48
+        EQUB    $09,$02,$0A,$02,$01,$20,$17,$45
+        EQUB    $6D,$09,$29,$01,$0B,$70,$01,$79
+        EQUB    $6F,$0A,$0B,$79,$70,$00,$07,$48
+        EQUB    $09,$02,$0A,$02,$01,$45,$09,$0B
+        EQUB    $06,$01,$79,$01,$00,$F8,$05,$E6
+        EQUB    $07,$09,$29,$70,$02,$E2,$0E,$17
+        EQUB    $E3,$0E,$05,$02,$09,$0E,$15,$48
+        EQUB    $00,$14,$00,$D3,$11,$BD,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00,$00,$00,$00
+        EQUB    $00,$00,$00,$00,$00
+
+.L7800
+        RTS
+
+        CMP     #$E0
+        BCS     L7819
+
+        CMP     #$C0
+        BCS     L782C
+
+        CMP     #$A0
+        BCS     L7837
+
+        SEC
+        SBC     #$80
+        JSR     L0E5F
+
+        JSR     L0E9F
+
+        JMP     L0E21
+
+.L7819
+        SBC     #$E0
+        JSR     L0E5F
+
+        JSR     L0E52
+
+        JSR     L0E6C
+
+        JSR     L0B2B
+
+        LDY     #$00
+        STA     (L0032),Y
+        RTS
+
+.L782C
+        SBC     #$C0
+        JSR     L0E5F
+
+        JSR     L0E9F
+
+        JMP     L0E3F
+
+.L7837
+        SBC     #$A0
+        JSR     L0E5F
+
+        JSR     L0E52
+
+        JSR     L0E6C
+
+        JSR     L0B2B
+
+        LDY     #$00
+        LDA     (L0032),Y
+        STA     L0400,X
+        LDA     #$00
+        STA     L0401,X
+        RTS
+
+        JSR     L0B2B
+
+        STA     L04FE
+        LDA     L0401,X
+        STA     L04FF
+        RTS
+
+        ASL     A
+        TAX
+        LDA     L08D6,X
+        STA     L0032
+        LDA     L08D7,X
+        STA     L0033
+        RTS
+
+        LDA     L0032
+        CLC
+        ADC     L04FE
+        STA     L0032
+        LDA     L0033
+        ADC     L04FF
+        STA     L0033
+        RTS
+
+        STY     L0029
+        LDY     #$00
+        LDA     (L0027),Y
+        LDY     L0029
+        INC     L0027
+        BNE     L788A
+
+        INC     L0028
+.L788A
+        CMP     #$00
+        RTS
+
+        LDA     L09C5
+        BNE     L789F
+
+        JSR     L0E7C
+
+        STA     L04FE
+        JSR     L0E7C
+
+        STA     L04FF
+        RTS
+
+.L789F
+        JSR     L0E7C
+
+        STA     L04FE
+        LDA     #$00
+        STA     L04FF
+        RTS
+
+        JSR     L0E8D
+
+        JSR     L0B2B
+
+        LDA     L04FE
+        STA     L0400,X
+        LDA     L04FF
+        STA     L0401,X
+        RTS
+
+        LDA     #$FE
+        STA     L0030
+        LDA     #$04
+        STA     L0031
+        RTS
+
+        JSR     L0B2B
+
+        TXA
+        TAY
+        JSR     L0B2B
+
+        LDA     L0400,Y
+        STA     L0400,X
+        LDA     L0401,Y
+        STA     L0401,X
+        RTS
+
+        INC     L0018
+        BNE     L78E2
+
+        INC     L0019
+.L78E2
+        RTS
+
+        INC     L0014
+        BNE     L78E9
+
+        INC     L0015
+.L78E9
+        RTS
+
+        LDA     L0014
+        BNE     L78F0
+
+        DEC     L0015
+.L78F0
+        DEC     L0014
+        RTS
+
+        JSR     L0B2B
+
+        STA     L002E
+        JSR     L0B2B
+
+        STA     L002F
+        JSR     L0F0F
+
+        AND     #$70
+        LSR     A
+        LSR     A
+        LSR     A
+        LSR     A
+        JSR     L10A9
+
+        LDA     L09C7
+        JMP     L10A9
+
+        JSR     L0F8F
+
+        LDY     #$00
+        LDX     L002E
+        DEX
+        BEQ     L7928
+
+.L7919
+        LDA     (L0014),Y
+        JSR     L0EE3
+
+        JSR     L0EE3
+
+        CMP     #$00
+        BPL     L7919
+
+        DEX
+        BNE     L7919
+
+.L7928
+        LDA     (L0014),Y
+        AND     #$0F
+        CMP     L002F
+        BNE     L793D
+
+        LDA     (L0014),Y
+        PHA
+        JSR     L0EE3
+
+        LDA     (L0014),Y
+        STA     L09C7
+        PLA
+        RTS
+
+.L793D
+        LDA     (L0014),Y
+        BMI     L794A
+
+        JSR     L0EE3
+
+        JSR     L0EE3
+
+        JMP     L0F28
+
+.L794A
+        LDX     L002F
+        LDA     L08C4,X
+        STA     L002F
+        JSR     L0F8F
+
+        LDA     #$01
+        STA     L09C7
+.L7959
+        LDA     (L0014),Y
+        AND     #$10
+        BEQ     L7978
+
+        LDA     (L0014),Y
+        AND     #$0F
+        CMP     L002F
+        BNE     L7978
+
+        JSR     L0EE3
+
+        LDA     (L0014),Y
+        PHA
+        JSR     L0EEA
+
+        PLA
+        CMP     L002E
+        BNE     L7978
+
+        LDA     (L0014),Y
+        RTS
+
+.L7978
+        LDA     (L0014),Y
+        BPL     L797F
+
+        INC     L09C7
+.L797F
+        LDA     (L0014),Y
+        JSR     L0EE3
+
+        JSR     L0EE3
+
+        CMP     #$00
+        BNE     L7959
+
+        STA     L09C7
+        RTS
+
+        LDA     L08D4
+        STA     L0014
+        LDA     L08D5
+        STA     L0015
+        RTS
+
+        INC     L09C3
+        BNE     L79A2
+
+        INC     L09C4
+.L79A2
+        RTS
+
+        STY     L002E
+        STX     L002F
+        LDA     #$00
+        ORA     L002E
+        ORA     L002F
+        BEQ     L7A10
+
+        LDA     #$00
+        STA     L09C9
+        LDA     #$16
+        STA     L0025
+        LDA     #$10
+        STA     L0026
+        LDY     #$00
+        STY     L09CD
+.L79C1
+        LDY     L09CD
+        LDA     (L0025),Y
+        STA     L09C7
+        INY
+        LDA     (L0025),Y
+        STA     L09C8
+        INY
+        STY     L09CD
+        LDA     #$00
+        ORA     L09C7
+        ORA     L09C8
+        BEQ     L7A15
+
+        LDA     #$30
+        STA     L09CB
+        LDA     L002E
+        SEC
+        SBC     L09C7
+        TAX
+        LDA     L002F
+        SBC     L09C8
+        TAY
+        BCC     L7A00
+
+        INC     L09CB
+        LDA     #$01
+        STA     L09C9
+        STX     L002E
+        STY     L002F
+        JMP     L0FE2
+
+.L7A00
+        LDA     #$00
+        CMP     L09C9
+        BEQ     L79C1
+
+        LDA     L09CB
+        JSR     L1484
+
+        JMP     L0FC1
+
+.L7A10
+        LDA     #$30
+        JSR     L1484
+
+.L7A15
+        RTS
+
+.L7A16
+        EQUB    $10
+
+.L7A17
+        EQUB    $27,$E8,$03,$64,$00,$0A,$00,$01
+        EQUB    $00,$00,$00,$A5,$0B,$DE,$0B,$FF
+        EQUB    $0B,$A3,$0C,$AE,$0C,$BD,$0C,$0A
+        EQUB    $0C,$90,$15,$AA,$0E,$C6,$0E,$C3
+        EQUB    $0C,$DF,$0C,$1D,$0B,$1D,$0B,$FF
+        EQUB    $0D,$F2,$0E,$33,$0B,$43,$0B,$4B
+        EQUB    $0B,$55,$0B,$61,$10,$6A,$10,$7A
+        EQUB    $10,$CA,$19,$5D,$0B,$65,$0B,$6D
+        EQUB    $0B,$77,$0B,$98,$19,$1D,$0B,$1D
+        EQUB    $0B,$1D,$0B
+
+.L7A62
+        JSR     L0E7C
+
+        BEQ     L7A6A
+
+        JMP     L0E7C
+
+.L7A6A
+        RTS
+
+        JSR     L0E7C
+
+        BEQ     L7A71
+
+        RTS
+
+.L7A71
+        LDA     #$0C
+        STA     L10BE
+        LDA     #$02
+        JMP     L10B7
+
+        JSR     L0B2B
+
+        RTS
+
+.L7A7F
+        RTS
+
+        LDA     #$06
+        JSR     L108F
+
+        LDA     L08EC
+        BEQ     L7A7F
+
+        JMP     BeebDisStartAddr
+
+        LDA     #$05
+        PHA
+        LDX     #$00
+.L7A92
+        LDA     L10A5,X
+        STA     L08EC,X
+        INX
+        CPX     #$04
+        BNE     L7A92
+
+        LDY     #$08
+        LDX     #$EC
+        PLA
+        JMP     L1B00
+
+        BRK
+.L7AA6
+        EQUB    $04
+
+        BRK
+.L7AA8
+        EQUB    $08
+
+        PHA
+        JSR     L0B2B
+
+        PLA
+        STA     L0400,X
+        LDA     #$00
+        STA     L0401,X
+        RTS
+
+        LDY     #$10
+        LDX     #$BE
+        JMP     L1B00
+
+.L7ABE
+        EQUB    $00
+
+.L7ABF
+        LDA     L09B9
+        STA     L002C
+        LDA     L09BA
+        STA     L002D
+.L7AC9
+        RTS
+
+        JSR     L10BF
+
+.L7ACD
+        JSR     L130E
+
+        BCS     L7AC9
+
+        LDA     L04FF
+        ORA     L04FE
+        BEQ     L7B04
+
+        LDY     #$00
+        LDA     (L002C),Y
+        BMI     L7AE9
+
+        JSR     L12FD
+
+        JSR     L12B9
+
+        JMP     L10CD
+
+.L7AE9
+        AND     #$7F
+        STA     L002E
+        JSR     L131B
+
+        LDA     L04FE
+        ORA     L04FF
+        BEQ     L7AC9
+
+        JSR     L12B9
+
+        LDA     L002E
+        BEQ     L7ACD
+
+        DEC     L002E
+        JMP     L10F0
+
+.L7B04
+        LDY     #$00
+        LDA     (L002C),Y
+        BMI     L7AC9
+
+        JSR     L12CB
+
+        LDA     L002E
+        ORA     L002F
+        BEQ     L7AC9
+
+        LDY     #$00
+        LDA     (L002C),Y
+        BMI     L7B40
+
+        LDA     (L002C),Y
+        CLC
+        ROL     A
+        CLC
+        ADC     #$00
+        PHP
+        ADC     L1E0E
+        STA     L0029
+        LDA     #$1E
+        ADC     #$00
+        PLP
+        ADC     L1E0F
+        STA     L002A
+        LDA     (L0029),Y
+        STA     L09C8
+        JSR     L1869
+
+        LDA     (L0029),Y
+        STA     L09C7
+        JMP     L1150
+
+.L7B40
+        LDA     (L002C),Y
+        STA     L09C8
+        JSR     L131B
+
+        JSR     L116A
+
+        LDA     (L002C),Y
+        STA     L09C7
+        JSR     L131B
+
+        JSR     L116A
+
+        LDA     L09C8
+        CMP     #$8F
+        BNE     L7B64
+
+        LDA     L09C7
+        CMP     #$80
+        BEQ     L7B72
+
+.L7B64
+        JSR     L1173
+
+        JMP     L110D
+
+        LDA     L002E
+        BNE     L7B70
+
+        DEC     L002F
+.L7B70
+        DEC     L002E
+.L7B72
+        RTS
+
+        LDA     #$00
+        STA     L09A4
+        LDA     L09C8
+        LSR     A
+        LSR     A
+        LSR     A
+        LSR     A
+        AND     #$07
+        STA     L09A2
+        LDA     L09C8
+        AND     #$0F
+        CMP     #$0F
+        BCC     L7BB2
+
+        LDA     L09C7
+        BPL     L7BB2
+
+        LDA     L09A2
+        AND     #$02
+        BEQ     L7B9C
+
+        JSR     L145F
+
+.L7B9C
+        LDA     #$02
+        STA     L09A3
+        LDA     L09C7
+        JSR     L1484
+
+        LDA     L09A2
+        AND     #$01
+        BEQ     L7BB1
+
+        JSR     L145F
+
+.L7BB1
+        RTS
+
+.L7BB2
+        LDA     L09A3
+        CMP     #$01
+        BNE     L7BBC
+
+        JSR     L145F
+
+.L7BBC
+        LDA     #$01
+        STA     L09A3
+        LDA     L09C8
+        AND     #$0F
+        STA     L09C8
+        JSR     L1399
+
+        LDA     L04FF
+        ORA     L04FE
+        BEQ     L7C34
+
+        LDA     L0021
+        PHA
+        CLC
+        ADC     #$03
+        STA     L0021
+        LDA     L0022
+        PHA
+        ADC     #$00
+        STA     L0022
+        LDY     #$00
+        LDA     (L0021),Y
+        CMP     L09C8
+        BEQ     L7BF1
+
+        BCS     L7C2E
+
+        JMP     L1200
+
+.L7BF1
+        DEC     L0021
+        BNE     L7BF7
+
+        DEC     L0022
+.L7BF7
+        LDA     (L0021),Y
+        CMP     L09C7
+        BEQ     L7C00
+
+        BCS     L7C2E
+
+include "OSEMUL.ASM"
+
+.ENDOF
+
+.BeebDisEndAddr
+
+SAVE "WORM",AtmHeader,BeebDisEndAddr
+
