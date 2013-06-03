@@ -1,0 +1,9 @@
+load $1200 LORDSOF.BBC
+save LORDSOF.ASM.ORIG
+# hexdump
+byte $7326
+entry $7320
+string $746d
+entry $7477
+byte $7bac
+

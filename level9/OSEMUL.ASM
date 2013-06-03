@@ -1,3 +1,4 @@
+.LFFE3
 .OSWRCH
 	PHA
 IF  UpperCaseOnly
@@ -11,6 +12,7 @@ ENDIF
 	CLC
 	RTS
 
+.LFFE0
 .OSRDCH
 	JSR $FFE3
 	CMP #$1B
@@ -21,6 +23,7 @@ ENDIF
 	SEC
 	RTS
 	
+.LFFF1
 .READLINE
 	LDA #$00
 	JSR $CD0F
@@ -36,6 +39,7 @@ ENDIF
 	CLC
 	RTS
 
+.LFFDD
 .OSFILE
 	PHA
 	LDX     #$00
