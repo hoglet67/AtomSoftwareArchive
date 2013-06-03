@@ -1,0 +1,24 @@
+load $1900 REDMOON.BBC
+save REDMOON.ASM.ORIG
+# hexdump
+entry $6a00
+byte $6a03
+byte $72de
+entry $7322
+byte $733a
+byte $7361
+byte $7406
+byte $7556
+entry $7581
+string $7595
+string $759b
+entry $75a2
+byte $766c
+string $7680
+entry $7687
+byte $77c5
+entry $77c9
+byte $7bf5
+
+
+
