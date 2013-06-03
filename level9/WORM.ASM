@@ -1,4 +1,4 @@
-UpperCaseOnly = 0
+UpperCaseOnly = 1
 LineWidth = $20
 
 L0010   = $0010
@@ -63,8 +63,6 @@ L04FF   = $04FF
 L7C00   = $7C00
 L7C2E   = $7C2E
 L7C34   = $7C34
-LFFF4   = $FFF4
-LFFF7   = $FFF7
 
         org     $08C0 - 22
         
