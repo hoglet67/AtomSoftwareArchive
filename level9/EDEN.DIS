@@ -1,0 +1,7 @@
+load $0900 EDEN.BBC
+save EDEN.ASM.ORIG
+# hexdump
+entry $900
+string $92a
+
+

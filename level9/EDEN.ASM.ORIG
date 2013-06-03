@@ -1,0 +1,44 @@
+L0080   = $0080
+L0081   = $0081
+L0082   = $0082
+L0083   = $0083
+L7180   = $7180
+LFFF7   = $FFF7
+
+        org     $0900
+.BeebDisStartAddr
+        LDX     #$2A
+        LDY     #$09
+        JSR     LFFF7
+
+        LDA     #$00
+        STA     L0080
+        STA     L0082
+        LDA     #$11
+        STA     L0081
+        LDA     #$0E
+        STA     L0083
+        LDX     #$6F
+        LDY     #$00
+.L0919
+        LDA     (L0080),Y
+        STA     (L0082),Y
+        DEY
+        BNE     L0919
+
+        INC     L0081
+        INC     L0083
+        DEX
+        BNE     L0919
+
+        JMP     L7180
+
+.L092A
+        EQUS    "LOAD EDENOBJ 1100"
+
+.L093B
+        EQUB    $0D
+
+.BeebDisEndAddr
+SAVE "EDEN.ASM.bin",BeebDisStartAddr,BeebDisEndAddr
+

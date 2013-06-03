@@ -11,6 +11,16 @@ ENDIF
 	CLC
 	RTS
 
+.OSRDCH
+	JSR $FFE3
+	CMP #$1B
+	BEQ ESCAPE
+	CLC
+	RTS
+.ESCAPE
+	SEC
+	RTS
+	
 .READLINE
 	LDA #$00
 	JSR $CD0F
@@ -47,15 +57,15 @@ ENDIF
 	STA     L003A
 	LDA     #$FF
 	STA     L003B
-	STA     L003C
+	STA     L003B + 1
 	LDA     #$00
-	STA     L003C + 1
+	STA     L003B + 2
 	LDA     #$04
-	STA     L003C + 2
+	STA     L003B + 3
 	LDA     #$00
-	STA     L003C + 3
+	STA     L003B + 4
 	LDA     #$0B
-	STA     L003C + 4
+	STA     L003B + 5
 	LDX     #$37
 	LDY     #$00
 	PLA

@@ -4516,6 +4516,6 @@ include "OSEMUL.ASM"
 .ENDOF
 
 .BeebDisEndAddr
-SAVE "ADQUEST",BeebDisStartAddr,BeebDisEndAddr
 
+SAVE "ADQUEST",BeebDisStartAddr,BeebDisEndAddr
 
