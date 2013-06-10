@@ -1,0 +1,14 @@
+Middle Earth Trilogy:
+- Colossal Adventure (Working) $1100   $400 +$1FF
+- Adventure Quest (Working)    $1900   $400 +$1FF
+- Dungeon Adventure (Working)  $0e00   $400 +$1FF
+
+Silicon Dreams Trilogy:
+- Snowball (Working)           $1100   $400 +$2FF
+- Return to Eden (Working)     $0e00   $400 +$3FF
+- Worm in Paradise (Working)   $08c0   $400 +$400
+
+Time and Magik Trilogy:
+- Lords of Time (Working)      $1200   $400 +$1FF
+- Red Moon (Working)           $1900   $400 +$2FF
+- The Price of Magik (Working) $08c0   $400 +$400
