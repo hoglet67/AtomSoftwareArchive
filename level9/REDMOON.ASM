@@ -5578,8 +5578,6 @@ LFFFC   = $FFFC
 
 include "OSEMUL.ASM"
 
-.ENDOF
-
 .BeebDisEndAddr
 
 SAVE "REDMOON",AtmHeader,BeebDisEndAddr

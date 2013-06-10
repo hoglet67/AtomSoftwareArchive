@@ -56,22 +56,21 @@ L0088   = $0088
 L00FD   = $00FD
 L0202   = $0202
 L0203   = $0203
-LFFF4   = $FFF4
 LFFFC   = $FFFC
 
-        org     $11EA
-
-.BeebDisStartAddr
+        org     $1200 - 22
+        
+.AtmHeader
 
         EQUS    "LORDSOF"
 
-        org BeebDisStartAddr + 16
+        org AtmHeader + 16
 
-        EQUW	STARTOF
+        EQUW	BeebDisStartAddr
         EQUW    L7320	
-        EQUW	ENDOF - STARTOF
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
 
-.STARTOF
+.BeebDisStartAddr
 
         EQUB    $00,$00,$00,$00,$00,$00,$00,$00
         EQUB    $00,$00,$00,$00,$00,$00,$00,$00
@@ -4757,9 +4756,7 @@ LFFFC   = $FFFC
 
 include "OSEMUL.ASM"
 
-.ENDOF
-
 .BeebDisEndAddr
 
-SAVE "LORDSOF",BeebDisStartAddr,BeebDisEndAddr
+SAVE "LORDSOF",AtmHeader,BeebDisEndAddr
 

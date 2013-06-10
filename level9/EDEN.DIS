@@ -1,7 +1,18 @@
-load $0900 EDEN.BBC
+load $0e00 EDEN.BBC
 save EDEN.ASM.ORIG
 # hexdump
-entry $900
-string $92a
+byte $7184
+entry $71b0
+entry $7420
+byte $7a53
+byte $7ab0
+entry $7ab2
+byte $7ab3
+entry $7ab5
+byte $7ab6
+string $7b6b
+string $7b71
+entry $7b78
+byte $7b85
 
 

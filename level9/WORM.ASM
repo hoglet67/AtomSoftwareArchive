@@ -80,7 +80,7 @@ L7C34   = $7C34
         JMP     L0A09
 
 .L08C3
-        EQUB    $27
+        EQUB    LineWidth
 
 .L08C4
         EQUB    $00,$04,$06,$07,$01,$08,$02,$03
@@ -4488,6 +4488,18 @@ L7C34   = $7C34
         LDA     #$07
         JSR     L1CCF
 
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+;	NOP
+	
+
         JMP     BeebDisStartAddr
 
 .L1B39
@@ -4735,7 +4747,7 @@ L7C34   = $7C34
 
         LDA     #$0A
 .L1CD8
-        JMP     (L020E)
+        JMP    OSWRCH
 
 .L1CDB
         RTS
@@ -8511,8 +8523,6 @@ L7C34   = $7C34
         BCS     L7C2E
 
 include "OSEMUL.ASM"
-
-.ENDOF
 
 .BeebDisEndAddr
 

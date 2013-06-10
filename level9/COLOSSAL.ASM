@@ -57,24 +57,21 @@ L00FD   = $00FD
 L0202   = $0202
 L0203   = $0203
 L0400   = $0400
-LFFEE   = $FFEE
-LFFF4   = $FFF4
 LFFFC   = $FFFC
 
-	org     $10EA
-
-.BeebDisStartAddr
+        org     $1100 - 22
+        
+.AtmHeader
 
         EQUS    "COLOSSAL"
 
-        org BeebDisStartAddr + 16
+        org AtmHeader + 16
 
-        EQUW	STARTOF
+        EQUW	BeebDisStartAddr
         EQUW    L7320	
-        EQUW	ENDOF - STARTOF
-        
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
 
-.STARTOF
+.BeebDisStartAddr
 
         LDA     #$16
         JSR     LFFEE
@@ -3342,7 +3339,7 @@ LFFFC   = $FFFC
         BCC     L73CB
 
         LDA     #$0D
-        JSR     OSWRCH
+        JSR     LFFE3
 
         RTS
 
@@ -3356,7 +3353,7 @@ LFFFC   = $FFFC
 
         LDA     #$20
 .L73C8
-        JSR     OSWRCH
+        JSR     LFFE3
 
 .L73CB
         RTS
@@ -3426,7 +3423,7 @@ LFFFC   = $FFFC
         LDY     #$00
 .L7433
         LDX     #$37
-        JSR     OSFILE
+        JSR     LFFDD
 
         RTS
 
@@ -4611,46 +4608,46 @@ LFFFC   = $FFFC
         BEQ     L7ACD
 
         LDA     #$45
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$72
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$72
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$6F
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$72
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$0D
-        JSR     OSWRCH
+        JSR     LFFE3
 
         JMP     L7AF0
 
 .L7ACD
         LDA     #$45
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$73
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$63
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$61
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$70
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$65
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDA     #$0D
-        JSR     OSWRCH
+        JSR     LFFE3
 
 .L7AF0
         JMP     L7379
@@ -4668,7 +4665,7 @@ LFFFC   = $FFFC
         LDY     #$00
         LDX     #$37
         LDA     #$00
-        JSR     READLINE
+        JSR     LFFF1
 
         BCC     L7B1F
 
@@ -4676,7 +4673,7 @@ LFFFC   = $FFFC
         JSR     LFFF4
 
         LDA     #$0D
-        JSR     OSWRCH
+        JSR     LFFE3
 
         LDY     #$27
         JMP     L7AF3
@@ -4774,9 +4771,7 @@ LFFFC   = $FFFC
 
 include "OSEMUL.ASM"
 
-.ENDOF
-
 .BeebDisEndAddr
 
-SAVE "COLOSSAL",BeebDisStartAddr,BeebDisEndAddr
+SAVE "COLOSSAL",AtmHeader,BeebDisEndAddr
 

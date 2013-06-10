@@ -1,4 +1,4 @@
-UpperCaseOnly = 0
+UpperCaseOnly = 1
 LineWidth = $20
 
 L0037   = $0037
@@ -47,24 +47,22 @@ L0400   = $0400
 L0401   = $0401
 L0402   = $0402
 L0500   = $0500
-LFFF4   = $FFF4
 LFFFC   = $FFFC
 
-        org     $0DEA
-
-.BeebDisStartAddr
+        org     $e00 - 22
+        
+.AtmHeader
 
         EQUS    "EDEN"
 
-        org BeebDisStartAddr + 16
+        org AtmHeader + 16
 
-        EQUW	STARTOF
-        EQUW    L71B0
-        EQUW	ENDOF - STARTOF
+        EQUW	BeebDisStartAddr
+        EQUW    L71B0	
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
 
-.STARTOF
+.BeebDisStartAddr
 
-.L0E00
         EQUB    $A8
 
 .L0E01
@@ -3316,7 +3314,7 @@ LFFFC   = $FFFC
         LDX     #$00
         LDY     #$0E
 .L71BF
-        LDA     L0E00,X
+        LDA     BeebDisStartAddr,X
         CLC
         ADC     #$00
         STA     L7193,X
@@ -3333,7 +3331,7 @@ LFFFC   = $FFFC
         SEC
         SBC     #$80
         STA     L7194,X
-        LDA     L0E00,X
+        LDA     BeebDisStartAddr,X
         CLC
         ADC     #$80
         STA     L7193,X
@@ -3746,7 +3744,7 @@ LFFFC   = $FFFC
         SBC     #$00
         CLC
         ADC     L0064
-        CMP     #$27
+        CMP     #LineWidth
         BCC     L743B
 
         LDA     #$0D
@@ -4903,7 +4901,7 @@ LFFFC   = $FFFC
         JMP     L7AE6
 
 .L7AA6
-        JMP     OSWRCH
+        JMP     LFFE3
 
 .L7AA9
         JMP     L7B78
@@ -5014,7 +5012,7 @@ LFFFC   = $FFFC
         RTS
 
 .L7B35
-        JSR     OSRDCH
+        JSR     LFFE0
 
         BCC     L7B41
 
@@ -5077,7 +5075,7 @@ LFFFC   = $FFFC
 .L7B7E
         LDX     #$C0
         LDY     #$7A
-        JMP     OSFILE
+        JMP     LFFDD
 
 .L7B85
         EQUB    $0B
@@ -5102,8 +5100,6 @@ LFFFC   = $FFFC
 
 include "OSEMUL.ASM"
 
-.ENDOF
-
 .BeebDisEndAddr
 
-SAVE "EDEN",BeebDisStartAddr,BeebDisEndAddr
+SAVE "EDEN",AtmHeader,BeebDisEndAddr
