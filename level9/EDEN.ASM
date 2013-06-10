@@ -1,4 +1,4 @@
-UpperCaseOnly = 1
+UpperCaseOnly = 0
 LineWidth = $20
 
 L0037   = $0037

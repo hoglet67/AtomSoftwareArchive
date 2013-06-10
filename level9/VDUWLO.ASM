@@ -25,30 +25,19 @@ LFE71   = $FE71
 LFEB2   = $FEB2
 LFEFB   = $FEFB
 
-        org     $AEA
+        org     $800 - 22
+
+.AtmHeader
+
+        EQUS    "VDUWLO"
+
+        org AtmHeader + 16
+
+        EQUW	BeebDisStartAddr
+        EQUW    BeebDisStartAddr + $400	
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
+
 .BeebDisStartAddr
-        EQUB    $56
-        EQUB    $44
-        EQUB    $55
-        EQUB    $57
-        EQUB    $4C
-        EQUB    $4F
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $00
-        EQUB    $0B
-        EQUB    $00
-        EQUB    $0F
-        EQUB    $00
-        EQUB    $06
         EQUB    $FF
         EQUB    $FF
         EQUB    $FF
@@ -1178,7 +1167,7 @@ LFEFB   = $FEFB
         ROL     A
         ASL     L0097
         ROL     A
-        ADC		#$0B
+        ADC		#>BeebDisStartAddr
         STA     L0098
         TYA
         PHA
@@ -1456,5 +1445,5 @@ LFEFB   = $FEFB
         JMP     LFE5F
 
 .BeebDisEndAddr
-SAVE "VDUWLO",BeebDisStartAddr,BeebDisEndAddr
+SAVE "VDUWLO",AtmHeader,BeebDisEndAddr
 
