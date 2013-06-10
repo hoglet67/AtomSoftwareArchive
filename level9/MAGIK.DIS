@@ -1,0 +1,38 @@
+load $8c0 MAGIK.BBC
+save MAGIK.ASM.ORIG
+# hexdump
+
+
+
+
+#byte $1e42
+#byte $1e0d
+#byte $1e0e
+#byte $1e0f
+
+entry $8c0
+byte $8c3
+byte $cfc
+entry $1200
+byte $1af2
+entry $1b00
+byte $1b09
+byte $1bb8
+entry $1bc6
+byte $1dda
+entry $1ddb
+
+string $1d5d
+entry $1d62
+byte $1e00
+entry $7800
+byte $7a01
+entry $7a4d
+byte $7ae8
+entry $7aec
+byte $7b01
+entry $7b02
+
+
+
+

@@ -73,14 +73,14 @@ L7C34   = $7C34
         org AtmHeader + 16
 
         EQUW	BeebDisStartAddr
-        EQUW    L1B06	
+        EQUW    L1B00 + 6	
         EQUW	BeebDisEndAddr - BeebDisStartAddr
 
 .BeebDisStartAddr
         JMP     L0A09
 
 .L08C3
-        EQUB    LineWidth
+        EQUB    LineWidth - 1
 
 .L08C4
         EQUB    $00,$04,$06,$07,$01,$08,$02,$03
@@ -4425,7 +4425,6 @@ L7C34   = $7C34
 
         JMP     L1C45
 
-.L1B06
         JMP     L1B29
 
 .L1B09
