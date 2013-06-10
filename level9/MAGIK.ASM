@@ -60,7 +60,7 @@ L7C25   = $7C25
         
 .AtmHeader
 
-        EQUS    "WORM"
+        EQUS    "MAGIK"
 
         org AtmHeader + 16
 
