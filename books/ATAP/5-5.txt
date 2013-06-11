@@ -1,0 +1,5 @@
+   10 FOR M=12 TO 12*12 STEP 12
+   20   PRINT M
+   30 NEXT M
+   40 END
+

@@ -1,0 +1,11 @@
+
+    1 REM MEMORY TEST
+   10 INPUT"FROM"A,"  TO"B
+   20 DO ?12=0; R=!8
+   30 FOR N=A TO B STEP4;!N=RND; NEXT N
+   35 ?12=0; !8=R
+   40 FOR N=A TO B STEP4
+   50 IF !N<>RND PRINT'"FAIL AT "&N'
+   60 NEXT N
+   70 P." OK"; UNTIL 0
+

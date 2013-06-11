@@ -1,0 +1,9 @@
+   10 REM Square Root
+   20 INPUT S
+  100 Q=S/2
+  110 DO Q=(Q+S/Q)/2
+  115 IF Q>65535 THEN Q=65535
+  120 UNTIL (Q-1)*(Q-1)<S AND (Q+1)*(Q+1)>S
+  130 PRINT Q
+  140 END
+

@@ -1,0 +1,12 @@
+    1 REM CRC Signature
+   10 INPUT "PROM ADDRESS", P
+   20 C=0;Z=#FFFF;Y=#2D
+   30 FOR Q=0 TO #FFF
+   35 A=P?Q
+   40 FOR B=1 TO 8
+   60 C=C*2+A&1;A=A/2
+   70 IFC>Z C=C:Y;C=C&Z
+   80 NEXT B; NEXT Q
+  110 PRINT "SIGNATURE IS" &C'
+  120 END
+

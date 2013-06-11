@@ -1,0 +1,3 @@
+   10 REM 322 Hz
+   20 P=#B002
+   30 FOR Z=0 TO 10000000 STEP 4;?P=Z;N.

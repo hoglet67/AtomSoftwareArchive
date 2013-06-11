@@ -1,0 +1,105 @@
+   10 REM Bulls & Cows
+   20 DIM M(3),N(3),C(0),B(0),L(9)
+   23 DIM GG(10),RR(10)
+   25 DIM LL(10)
+   50 GOSUB z; REM Assemble code
+   60 GOSUB z; REM Pass Two
+ 1000 REM MASTERMIND *****
+ 1005 Y=1; Z=1
+ 1007 @=2
+ 1010 GOSUB c
+ 1015 G=!M ;REM MY NUMBER
+ 1020 GOSUB c; Q=!M
+ 1030 I=0
+ 1040 DO I=I+1
+ 1050 PRINT "(" I ")" '
+ 1100 IF Y GOSUB a
+ 1150 IF Z GOSUB b
+ 1350 UNTIL Y=0 AND Z=0
+ 1400 PRINT "END"; END
+ 1999***********************************
+ 2000 REM Find Possible Guess
+ 2010fGOSUB c; F=!M
+ 2160wLINK LL7
+ 2165 IF !M=F PRINT "YOU CHEATED"; END
+ 2170 X=1
+ 2180v!N=GG(X)
+ 2190 LINK LL2
+ 2200 IF !C&#FFF<>RR(X) THEN GOTO w
+ 2210 IF X<I THEN X=X+1; GOTO v
+ 2220 Q=!M; RETURN
+ 3999***********************************
+ 4000 REM Choose Random Number
+ 4005cJ=ABSRND
+ 4007 REM Unpack Number
+ 4010uFOR K=0 TO 3
+ 4020 M?K=J%10
+ 4030 J=J/10
+ 4040 NEXT
+ 4050 RETURN
+ 4999***********************************
+ 5000 REM Print Guess
+ 5010gFOR K=0 TO 3
+ 5020 P. $(H&15+#30)
+ 5030 H=H/256; NEXT
+ 5040 RETURN
+ 5999***********************************
+ 6000 REM Your Turn
+ 6040aPRINT "YOUR GUESS"
+ 6045 INPUT J
+ 6050 GOSUB u
+ 6060 !N=G
+ 6065 LINK LL2
+ 6070 P.?B" BULLS, " ?C" COWS"'
+ 6075 IF!C<>#400 RETURN
+ 6080 IF Z PRINT"...AND YOU WIN"'
+ 6083 IF Z:1 PRINT" ABOUT TIME TOO!"'
+ 6085 Y=0
+ 6090 RETURN
+ 6999***********************************
+ 7000 REM My Turn
+ 7090bPRINT " MY GUESS: "
+ 7100 H=Q; GOSUB g
+ 7110 PRINT '
+ 7120 INPUT "REPLY" V
+ 7140 RR(I)=(V/10)*256+V%10
+ 7150 GG(I)=Q
+ 7225 IF V<>40 GOSUB f; RETURN
+ 7230 IF Y PRINT"...SO I WIN!"'
+ 7235 Z=0
+ 7240 RETURN
+ 7999***********************************
+ 9000zREM Find Bulls/Cows
+ 9035 PRINT $#15 ;REM Turn off screen
+ 9045 DIM P(-1)
+ 9050[
+ 9055\ find bulls & cows for m:n
+ 9060:LL2 LDA @0; LDX @13 ZERO L,B,C
+ 9065:LL3 STA C,X; DEX; BPL LL3
+ 9100 LDY @3
+ 9105:LL0
+ 9120 LDA M,Y
+ 9130 CMP N,Y is bull?
+ 9140 BNE LL4 no bull
+ 9150 INC B count bull
+ 9160 BPL LL1 no cows
+ 9165:LL4
+ 9170 TAX  not a bull
+ 9180 INC L,X
+ 9190 BEQ LL6
+ 9200 BPL LL5 not a cow
+ 9210:LL6 INC C
+ 9220:LL5 LDX N,Y; DEC L,X
+ 9225 BMI LL1; INC C
+ 9260:LL1 DEY; BPL LL0 again
+ 9350 RTS
+ 9360\ increment M
+ 9370:LL7 SED; SEC; LDY @3
+ 9380:LL9 LDA M,Y; ADC @#90
+ 9390 BCS LL8; AND @#0F
+ 9400:LL8 STA M,Y; DEY
+ 9410 BPL LL9; RTS
+ 9500]
+ 9900 PRINT $#6 ;REM Turn Screen on
+ 9910 RETURN
+

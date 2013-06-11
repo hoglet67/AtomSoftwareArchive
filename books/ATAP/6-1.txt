@@ -1,0 +1,7 @@
+   10 A=10
+   20 GOSUB 100
+   30 A=20
+   40 GOSUB 100
+   50 END
+  100 PRINT A '
+  110 RETURN

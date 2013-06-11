@@ -1,0 +1,12 @@
+    1 REM Index Routine
+   10 DIM RR(3),T(25),F(0),P(-1)
+   20 R=#FFE3; $T="ABCDEFGH"
+   30[
+  160\Look up A in T
+  165:RR1 STX F; RTS
+  180:RR0 JSR R; LDX @LEN(T)-1
+  190:RR2 CMP T,X; BEQ RR1
+  210 DEX; BPL RR2; BMI RR0
+  220]
+  230 END
+

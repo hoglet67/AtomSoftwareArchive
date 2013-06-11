@@ -1,0 +1,30 @@
+   10 REM Block Move
+   20 DIM LL(2),P(100)
+   30 F=#80; L=#82; T=#84
+   40[:LL0 LDY @0
+   45:LL1 LDA (F),Y; STA (T),Y;]
+   50 J=T; GOSUB i
+   60 J=F; GOSUB i
+   70 K=L; GOSUB c
+   80[ BNE LL1; RTS;]
+   90
+  100 REM TRY IT OUT
+  110 REM F=first address
+  112 REM L=last address
+  114 REM T=address moved to (T<F)
+  120 !F=#500;!L=#800;!T=#400
+  130 LINK LL0
+  140 END
+ 8000
+ 8100 REM MACRO - INC J,J+1
+ 8105i[INC J; BNE P+4+(J>254)&1
+ 8110 INC J+1;]
+ 8120 RETURN
+ 8130
+ 8140 REM MACRO - CMP J,J+1 WITH K,K+1
+ 8145c[LDA J+1; CMP K+1
+ 8150 BNE P+6+(J>255)&1+(K>255)&1
+ 8160 LDA J; CMP K;]
+ 8170 RETURN
+
+

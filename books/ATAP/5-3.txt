@@ -1,0 +1,5 @@
+   10 FOR M=1 TO 12
+   20   PRINT M*12
+   30 NEXT M
+   40 END
+

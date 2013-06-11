@@ -1,0 +1,11 @@
+   10 DIM VV(10),T(-1)
+   20 FOR N=1 TO 10
+   30 INPUT $T
+   40 VV(N)=T
+   50 T=T+LEN(T)+1
+   60 NEXT N
+   70 INPUT "STRING NUMBER",N
+   80 PRINT $VV(N),'
+   90 GOTO 70
+
+

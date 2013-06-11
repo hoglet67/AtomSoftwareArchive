@@ -1,0 +1,4 @@
+   10 INPUT N
+   20 N=N+1
+   30 PRINT N
+   40 END

@@ -1,0 +1,5 @@
+   10 FOR N=1 TO 0
+   20   PRINT N
+   30 NEXT N
+   40 END
+

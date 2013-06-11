@@ -1,0 +1,6 @@
+   10 REM Random Coloured Lines
+   20 CLEAR 4
+   30 DO COLOUR RND
+   40 DRAW(ABSRND%128),(ABSRND%192)
+   50 UNTIL 0
+
