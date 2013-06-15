@@ -510,29 +510,29 @@ MMINER",present,RS Colour,,,
 RUN",Works,CEMENT,present,Non Comm,,,
 315,V3,NC,Non Comm,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,Non Comm,,,
 316,V3,NC,Non Comm,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,Non Comm,,,
-317,V4,L9,Level 9,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+317,V4,L9,Level 9,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
 *RUN COLOSSAL",Test,"VDUBLO
 COLOSSAL",present,Middle Earth,Yes,,
-318,V4,L9,Level 9,Adv Quest (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+318,V4,L9,Level 9,Adv Quest (32K),Adventure,"Mike, Nick and Pete Austin",L9/ADQUEST,2900,"*RUN VDUBLO
 *RUN ADQUEST",Test,"VDUBLO
 ADQUEST",present,Middle Earth,Yes,,
-319,V4,L9,Level 9,Dungeon Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+319,V4,L9,Level 9,Dungeon Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/DUNGEON,2900,"*RUN VDUBLO
 *RUN DUNGEON",Test,"VDUBLO
 DUNGEON",present,Middle Earth,Yes,,
-320,V4,L9,Level 9,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+320,V4,L9,Level 9,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9/SNOWBALL,2900,"*RUN VDUBLO
 *RUN SNOWBALL",Test,"VDUBLO
 SNOWBALL",present,Silicon Dreams,Yes,,
-321,V4,L9,Level 9,Return to Eden (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+321,V4,L9,Level 9,Return to Eden (32K),Adventure,"Mike, Nick and Pete Austin",L9/EDEN,2900,"*RUN VDUBLO
 *RUN EDEN",Test,"VDUBLO
 EDEN",present,Silicon Dreams,Yes,,
-322,V4,L9,Level 9,Worm in Paradise (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,*RUN WORM,Test,WORM,present,Silicon Dreams,Yes,,
-323,V4,L9,Level 9,Lords of Time (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+322,V4,L9,Level 9,Worm in Paradise (32K),Adventure,"Mike, Nick and Pete Austin",L9/WORM,2900,*RUN WORM,Test,WORM,present,Silicon Dreams,Yes,,
+323,V4,L9,Level 9,Lords of Time (32K),Adventure,"Mike, Nick and Pete Austin",L9/LORDSOF,2900,"*RUN VDUBLO
 *RUN LORDSOF",Test,"VDUBLO
 LORDSOF",present,Time and Magik,Yes,,
-324,V4,L9,Level 9,Red Moon (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+324,V4,L9,Level 9,Red Moon (32K),Adventure,"Mike, Nick and Pete Austin",L9/REDMOON,2900,"*RUN VDUBLO
 *RUN REDMOON",Test,"VDUBLO
 REDMOON",present,Time and Magik,Yes,,
-325,V4,L9,Level 9,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,*RUN MAGIK,Test,MAGIK,present,Time and Magik,Yes,,
+325,V4,L9,Level 9,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,Test,MAGIK,present,Time and Magik,Yes,,
 326,V4,YC,Your Computer,Acorn Kong,Game,???,YC,8200,"CH.""ACKONG""",Works,ACKONG,present,---Kees---,,,
 327,V4,TBOI,Interface,Amazing!,Game,R.Heins & R.Heard,TBOI,8200,"CH.""AMAZING""",Works,AMAZING,present,---Kees---,,,
 328,V4,NC,Non Comm,Artist,Utility,???,NC,8200,*RUN ARTIST,Works,ARTIST,present,---Kees---,,,
@@ -542,7 +542,7 @@ REDMOON",present,Time and Magik,Yes,,
 332,V4,NC,Non Comm,Space Battle (R),Game,???,NC/TB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,---Kees---,,,
 333,V4,NC,Non Comm,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,present,---Kees---,,,
 334,V4,NC,Non Comm,Beetle,Game,???,NC,8200,"CH.""BEETLE""",Works,BEETLE,present,---Kees---,,,
-335,V4,NC,Non Comm,Blitz,Game,???,NC,8200,"CH.""BLITZ""",Test,BLITZ,present,---Kees---,,,
+335,V4,NC,Non Comm,Blitz,Game,???,NC,8200,"CH.""BLITZ""",Works,BLITZ,present,---Kees---,,,
 336,V4,C&VG,C&VG,Blockbuster,Game,???,CVG,8200,*RUN BLOBUST,Works,BLOBUST,present,---Kees---,,,
 337,V4,TBOI,Interface,Bowling,Game,T.Hartnell,TBOI,8200,"CH.""BOWL1""",Works,BOWL1,present,---Kees---,,,
 338,V4,NC,Non Comm,Bowling (R),Game,F.Bitter,NC/TB,8200,"CH.""BOWL2""",Works,BOWL2,present,---Kees---,,,
@@ -583,7 +583,7 @@ REDMOON",present,Time and Magik,Yes,,
 373,V4,NC,Non Comm,Othello,Game,???,NC,8200,"?18=40
 CH.""OTHEL1""",Works,OTHEL1,present,---Kees---,,,
 374,V4,TBOI,Interface,Super Othello,Game,J.Ruston,TBOI,8200,"CH.""OTHEL2""",Works,OTHEL2,present,---Kees---,,,
-375,V4,ES,Electrocomp supplies,OXO,Game,???,ES,8200,"CH.""OXO""",Broken,OXO,present,---Kees---,,,
+375,V4,ES,Electrocomp sups,OXO,Game,???,ES,8200,"CH.""OXO""",Works,OXO,present,---Kees---,,,
 376,V4,NC,Non Comm,Hyperman,Game,???,NC,8200,"CH.""PACKMAN""",Test,PACKMAN,missing,---Kees---,,,
 377,V4,NC,Non Comm,Pacman,Game,???,NC,8200,"CH.""PACMAN""",Test,PACMAN,missing,---Kees---,,,
 378,V4,NC,Non Comm,Plakoto,Game,???,NC,8200,*RUN PLAKOTO,Works,PLAKOTO,present,---Kees---,,,
@@ -602,10 +602,10 @@ CH.""OTHEL1""",Works,OTHEL1,present,---Kees---,,,
 391,V4,NC,Non Comm,Saturn,Game,R.Knapen,NC,8200,"CH.""SATURN""",Test,SATURN,missing,---Kees---,,,
 392,V4,NC,Non Comm,Shelobs Army (R),Game,G.Hillebrand,NC,8200,*RUN SHELOBS,Test,SHELOBS,missing,---Kees---,,,
 393,V4,NC,Non Comm,Shuttle (R),Game,B.Bekooy,NC,8200,*RUN SHUTTLE,Test,SHUTTLE,missing,---Kees---,,,
-394,V4,ES,Electrocomp supplies,Ski Slope,Game,???,ES,8200,"CH.""SKI""",Works,SKI,present,---Kees---,,,
+394,V4,ES,Electrocomp sups,Ski Slope,Game,???,ES,8200,"CH.""SKI""",Works,SKI,present,---Kees---,,,
 395,V4,C&VG,C&VG,Ski-ing,Game,S.J.Harris,CVG,8200,"CH.""SKIING""",Works,SKIING,present,---Kees---,,,
-396,V4,NC,Non Comm,Skippy,Game,???,NC,8200,*RUN SKIPPY,Test,SKIPPY,present,---Kees---,,,
-397,V4,ES,Electrocomp supplies,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,---Kees---,,,
+396,V4,NC,Non Comm,Skippy,Game,???,NC,8200,*RUN SKIPPY,Works,SKIPPY,present,---Kees---,,,
+397,V4,ES,Electrocomp sups,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,---Kees---,,,
 398,V4,NC,Non Comm,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Test,SNOOPY,missing,---Kees---,,,
 399,V4,NC,Non Comm,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",Test,SPACZAB,missing,---Kees---,,,
 400,V4,MO,Magnus Olsson,Star Trek IV (R),Game,Magnus Olssen,MO,8200,*RUN STARTREK,Test,STARTREK,missing,---Kees---,,,
