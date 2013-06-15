@@ -391,6 +391,9 @@ public class GenerateMenuFiles extends GenerateBase {
 	}
 	
 	private String pad(String s, int width) {
+		if (s == null) {
+			s = "*NULL*";
+		}
 		if (s.length() > width) {
 			return s.substring(0, width);
 		} else {
