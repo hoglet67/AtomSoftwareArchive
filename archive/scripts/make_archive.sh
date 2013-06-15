@@ -89,11 +89,20 @@ package "atms/gamebase/229-DATA/*" "$ARCHIVE/$RS/CASQUEST"
 ##############################################################
 
 mkdir -p $ARCHIVE/$L9
-pushd $ARCHIVE/$L9
-../../../../BeebASM/beebasm/beebasm -i ../../../level9/COLOSSAL.ASM
-../../../../BeebASM/beebasm/beebasm -i ../../../level9/SNOWBALL.ASM
-../../../../BeebASM/beebasm/beebasm -i ../../../level9/VDUBLO.ASM
-../../../../BeebASM/beebasm/beebasm -i ../../../level9/VDUWLO.ASM
+pushd ../level9
+../../BeebASM/beebasm/beebasm -i $SRC VDUBLO.ASM
+../../BeebASM/beebasm/beebasm -i $SRC VDUWLO.ASM
+for SRC in `find *.ASM | grep -v OSEMUL | grep -v VDU`
+do
+DST=`basename $SRC .ASM`
+../../BeebASM/beebasm/beebasm -i $SRC
+# Each adventure has it's own subdirectory to keep the saved games seperate
+mkdir ../archive/$ARCHIVE/$L9/$DST
+mv $DST ../archive/$ARCHIVE/$L9/$DST
+# Copy VDU drivers into each subdirectory
+cp VDUBLO VDUWLO ../archive/$ARCHIVE/$L9/$DST
+done
+rm VDUBLO VDUWLO
 popd
 
 ##############################################################
@@ -372,6 +381,7 @@ package "atms/Acl1-24/TRAP" "$ARCHIVE/$AR"
 ##############################################################
 
 cp -a dave/* $ARCHIVE
+cp -a kees/* $ARCHIVE
 
 ##############################################################
 # Build the menu
