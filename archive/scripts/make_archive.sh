@@ -53,7 +53,7 @@ mkdir -p $ARCHIVE
 pushd ../books
 for SRC in `find . -name *.bas | cut -c3- | sort`
 do
-DST=../$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
+DST=../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
 java -jar ../java/atombasic/atombasic.jar $SRC $DST
 done
 popd
