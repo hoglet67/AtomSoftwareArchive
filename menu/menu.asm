@@ -113,15 +113,19 @@ include "renderer_header.asm"
 	LDA #12
 	JSR Oswrch
 
-	;100 *LOAD MNU/MENUDAT
+	;100 *LOAD MNU/MENUDAT1
 	JSR OscliString
-	EQUS "LOAD MNU/MENUDAT", Return
+	EQUS "LOAD MNU/MENUDAT1", Return
 
 	;110 D=!#CD&#FFFF	
 	LDA ExecAddr
 	STA MenuTablePtr
 	LDA ExecAddr + 1
 	STA MenuTablePtr + 1
+
+	;115 *LOAD MNU/MENUDAT2
+	JSR OscliString
+	EQUS "LOAD MNU/MENUDAT2", Return
 	
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F

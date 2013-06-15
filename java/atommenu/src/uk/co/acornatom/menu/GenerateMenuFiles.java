@@ -139,136 +139,141 @@ public class GenerateMenuFiles extends GenerateBase {
 
 		Collections.sort(atomTitles, new TitleOrderSort());
 		dumpTitles("TitleOrderSort", atomTitles);
-
-		
-		// ------------------------------------------------------------------------------------
-		// Set the locations for the tables
-		// ------------------------------------------------------------------------------------
-
-		// Place the main, publisher, genre and collection tables in the Atom's upper text space
-		int menuAddrBase = 0x8200;
-
-		// Allow space for pointers to 5 tables
-		int menuAddr = menuAddrBase + 10;
-
-		// Place the sort tables in the Atom's lower text space
-		// The size of these tables is predictable: 2x (number of titles + 2)
-		int sortAddrBase = (0x3B - (((atomTitles.size() + 2) * 8) / 256)) * 256;		
-
-		int sortAddr = sortAddrBase + 8;
-
 		// ------------------------------------------------------------------------------------
 		// Generate the data for the main table
+		//
+		// This resides in the upper text space
 		// ------------------------------------------------------------------------------------
 			
-		byte[] mainTable = createMainTable(menuAddr, atomTitles);
-		menuAddr += mainTable.length;
+		int titleTableAddr = 0x8200;
+		byte[] titleTable = createTitleTable(titleTableAddr, atomTitles);
 
 		// ------------------------------------------------------------------------------------
 		// Generate the data for the sort tables
 		//
-		// these reside in the Atom lower text space
+		// these reside right at the end in the Atom lower text space
 		//
 		// a side effect of generating these is that the publisher/genres/collections maps are
 		// updated with the address in the sort table of the first occurrence of the each
 		// publisher/genre/collection
 		// ------------------------------------------------------------------------------------
 
-		byte[] titleSortTable = createSortTable("Title Sort", sortAddr, atomTitles, new TitleOrderSort(), null);		
-		sortAddr += titleSortTable.length;
+		byte[] titleSortTable = createSortTable("Title Sort", atomTitles, new TitleOrderSort(), null);		
 		
 		List<AtomTitle> publisherSortList = new ArrayList<AtomTitle>(atomTitles);
-		byte[] publisherSortTable = createSortTable("Publisher Sort", sortAddr, publisherSortList, new PublisherOrderSort(), publishers);
-		sortAddr += publisherSortTable.length;
+		byte[] publisherSortTable = createSortTable("Publisher Sort", publisherSortList, new PublisherOrderSort(), publishers);
 		
 		List<AtomTitle> genreSortList = new ArrayList<AtomTitle>(atomTitles);
-		byte[] genreSortTable = createSortTable("Genre Sort", sortAddr, genreSortList, new GenreOrderSort(), genres);		
-		sortAddr += genreSortTable.length;
+		byte[] genreSortTable = createSortTable("Genre Sort", genreSortList, new GenreOrderSort(), genres);		
 
 		List<AtomTitle> collectionSortList = new ArrayList<AtomTitle>(atomTitles);
-		byte[] collectionSortTable = createSortTable("Collection Sort", sortAddr, collectionSortList, new CollectionOrderSort(), collections);
-		sortAddr += collectionSortTable.length;
+		byte[] collectionSortTable = createSortTable("Collection Sort", collectionSortList, new CollectionOrderSort(), collections);
+
+
 
 		// ------------------------------------------------------------------------------------
 		// Generate the Secondary Tables (Publisher, Genre, Collections)
 		//
 		// these reside in the Atom higher text space
 		// ------------------------------------------------------------------------------------
-
-		byte[] shortPublisherTable = createSecondaryTable("ShortPublisher", menuAddr, shortPublishers, null, null);
-		menuAddr += shortPublisherTable.length;
-
-		byte[] publisherTable = createSecondaryTable("Publisher", menuAddr, publishers, publisherSortList, new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getPublisher();
-			}
-		});
-		menuAddr += publisherTable.length;
-
-		byte[] genreTable = createSecondaryTable("Genre", menuAddr, genres, genreSortList, new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getGenre();
-			}
-		});		
-		menuAddr += genreTable.length;
 		
-		byte[] collectionsTable = createSecondaryTable("Collection", menuAddr, collections, collectionSortList, new IFieldSelector() {
-			@Override
-			public String getField(AtomTitle title) {
-				return title.getCollection();
-			}
-		});
-		menuAddr += collectionsTable.length;
+		// We want to place the other tables as high as possible in the lower text space
+		// Do a "two pass" assembly were on the second pass the addresss will be correct
+		
+		byte[] shortPublisherTable = null;
+		byte[] publisherTable = null;
+		byte[] collectionsTable = null;
+		byte[] genreTable = null;
 
+		int menuTableAddr = 0;		
+		int sortTableAddr = 0x3c00 - titleSortTable.length;
+
+		for (int pass = 0; pass < 2; pass++) {
+
+			int menuAddr = menuTableAddr + 10;
+			
+			shortPublisherTable = createSecondaryTable("ShortPublisher", menuAddr, shortPublishers, null, null);
+			menuAddr += shortPublisherTable.length;
+
+			publisherTable = createSecondaryTable("Publisher", menuAddr, publishers, publisherSortList, new IFieldSelector() {
+				@Override
+				public String getField(AtomTitle title) {
+					return title.getPublisher();
+				}
+			});
+			menuAddr += publisherTable.length;
+
+			genreTable = createSecondaryTable("Genre", menuAddr, genres, genreSortList, new IFieldSelector() {
+				@Override
+				public String getField(AtomTitle title) {
+					return title.getGenre();
+				}
+			});
+			menuAddr += genreTable.length;
+
+			collectionsTable = createSecondaryTable("Collection", menuAddr, collections, collectionSortList, new IFieldSelector() {
+				@Override
+				public String getField(AtomTitle title) {
+					return title.getCollection();
+				}
+			});
+			menuAddr += collectionsTable.length;
+
+			// At the end of pass, calculate the menu base address property
+			if (pass == 0) {
+				menuTableAddr = sortTableAddr;
+				menuTableAddr -= shortPublisherTable.length;
+				menuTableAddr -= publisherTable.length;
+				menuTableAddr -= genreTable.length;
+				menuTableAddr -= collectionsTable.length;
+				menuTableAddr -= 10; // two bytes for each table: title, short pub, pub, genre, collections
+			}
+		}	
+			
 		// ------------------------------------------------------------------------------------
 		// Sanity check the end addresses
 		// ------------------------------------------------------------------------------------
 
-		if (menuAddr > 0x9800) {
-			throw new RuntimeException("Menu data overflow");			
+		if (menuTableAddr < 0x3100) {
+			throw new RuntimeException("Lower Text Space is full");			
 		}
-
-		if (sortAddr > 0x3C00) {
-			throw new RuntimeException("Sort data overflow");			
-		}
-
-		if (sortAddr < 0x3B00) {
-			throw new RuntimeException("Sort data underflow");			
+		
+		if (titleTable.length > 0x1600) {
+			throw new RuntimeException("Upper Text Space is full");						
 		}
 
 		// ------------------------------------------------------------------------------------
 		// Write the tables as Atom Files
 		// ------------------------------------------------------------------------------------
 
-		writeTables(menuDir, "MENUDAT", menuAddrBase, new byte[][] { mainTable, shortPublisherTable, publisherTable, genreTable, collectionsTable});
-		writeTables(menuDir, "SORTDAT", sortAddrBase, new byte[][] { titleSortTable, publisherSortTable, genreSortTable, collectionSortTable});
-		
-		// ------------------------------------------------------------------------------------
-		// Write out the sort tables individually
-		// ------------------------------------------------------------------------------------
-		
-		sortAddrBase = (0x3B - (((atomTitles.size() + 2) * 2) / 256)) * 256;		
-		writeTable(menuDir, "SORTDAT0", sortAddrBase, titleSortTable);
-		writeTable(menuDir, "SORTDAT1", sortAddrBase, publisherSortTable);
-		writeTable(menuDir, "SORTDAT2", sortAddrBase, genreSortTable);
-		writeTable(menuDir, "SORTDAT3", sortAddrBase, collectionSortTable);
+		writeTables(menuDir, "MENUDAT1", menuTableAddr, new int[] { titleTableAddr , 0, 0, 0, 0 }, new byte[][] { null, shortPublisherTable, publisherTable, genreTable, collectionsTable});
+		writeTable(menuDir, "MENUDAT2", titleTableAddr, titleTable);
+		writeTable(menuDir, "SORTDAT0", sortTableAddr, titleSortTable);
+		writeTable(menuDir, "SORTDAT1", sortTableAddr, publisherSortTable);
+		writeTable(menuDir, "SORTDAT2", sortTableAddr, genreSortTable);
+		writeTable(menuDir, "SORTDAT3", sortTableAddr, collectionSortTable);
 		
 	}
 	
-	private void writeTables(File menuDir, String name, int loadAddr, byte[][] tables) throws IOException {
+	private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {
 		System.out.println("----------------------------------------");
 		System.out.println("Atom file: " + name);
 		System.out.println("----------------------------------------");
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		int addr =  loadAddr + 2 * tables.length;
-		for (byte[] table : tables) {
-			writeShort(bos, addr);
-			addr += table.length;
+		for (int i = 0; i < tables.length; i++) {
+			byte[] table = tables[i];
+			if (table == null) {
+				writeShort(bos, addrs[i]);
+			} else {
+				writeShort(bos, addr);
+				addr += table.length;
+			}
 		}
 		for (byte[] table : tables) {
-			bos.write(table);			
+			if (table != null) {
+				bos.write(table);
+			}
 		}
 		FileOutputStream fosSort = new FileOutputStream(new File(menuDir, name));
 		writeATMFile(fosSort, name, loadAddr, loadAddr, bos.toByteArray());
@@ -292,9 +297,9 @@ public class GenerateMenuFiles extends GenerateBase {
 		System.out.println("       length " + bos.size() + " bytes");
 	}
 	
-	private byte[] createMainTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
+	private byte[] createTitleTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
 		System.out.println("----------------------------------------");
-		System.out.println("Main Table");
+		System.out.println("Title Table");
 		System.out.println("----------------------------------------");
 		System.out.println("address " + Integer.toHexString(absoluteAddress));
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -363,11 +368,10 @@ public class GenerateMenuFiles extends GenerateBase {
 		return bos.toByteArray();
 	}
 
-	private byte[] createSortTable(String tableName, int absoluteAddress, List<AtomTitle> items, Comparator<AtomTitle> comparator, Map<String, Integer> map) throws IOException {
+	private byte[] createSortTable(String tableName, List<AtomTitle> items, Comparator<AtomTitle> comparator, Map<String, Integer> map) throws IOException {
 		System.out.println("----------------------------------------");
 		System.out.println("Sort Table: " + tableName);
 		System.out.println("----------------------------------------");
-		System.out.println("address " + Integer.toHexString(absoluteAddress));
 		// Sort items using the supplier comparator
 		Collections.sort(items, comparator);
 		// Build the data for the table
