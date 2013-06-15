@@ -45,6 +45,19 @@ HS=HS
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
 
+
+##############################################################
+# Books
+##############################################################
+
+pushd ../books
+for SRC in `find . -name *.bas | cut -c3- | sort`
+do
+DST=../$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
+java -jar ../java/atombasic/atombasic.jar $SRC $DST
+done
+popd
+
 ##############################################################
 # Other
 ##############################################################
@@ -90,8 +103,8 @@ package "atms/gamebase/229-DATA/*" "$ARCHIVE/$RS/CASQUEST"
 
 mkdir -p $ARCHIVE/$L9
 pushd ../level9
-../../BeebASM/beebasm/beebasm -i $SRC VDUBLO.ASM
-../../BeebASM/beebasm/beebasm -i $SRC VDUWLO.ASM
+../../BeebASM/beebasm/beebasm -i VDUBLO.ASM
+../../BeebASM/beebasm/beebasm -i VDUWLO.ASM
 for SRC in `find *.ASM | grep -v OSEMUL | grep -v VDU`
 do
 DST=`basename $SRC .ASM`

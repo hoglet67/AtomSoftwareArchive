@@ -159,7 +159,13 @@ public class Convert {
 				System.exit(1);
 			}
 			File dstFile = new File(args[1]);
+			
+			if (args[1].contains(File.separator)) {
+				File directory = dstFile.getParentFile();
+				directory.mkdirs();
+			}
 
+			System.out.println(dstFile);
 			int loadAddr = args.length > 2 ? Integer.parseInt(args[2], 16) : DEFAULT_LOADADDR;
 			int execAddr = args.length > 3 ? Integer.parseInt(args[3], 16) : DEFAULT_EXECADDR;
 			

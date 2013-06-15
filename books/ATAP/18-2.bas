@@ -1,11 +1,3 @@
-      ?18=#82
-      NEW
-   10 PRINT"TEXT AREA ONE"'
-   20 RETURN
-
-
-      ?18=#83
-      NEW
    10 REM CALL SUBROUTINE IN #82
    20 ?18=#82
    30 GOSUB 10
