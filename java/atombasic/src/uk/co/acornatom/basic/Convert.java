@@ -160,7 +160,7 @@ public class Convert {
 			}
 			File dstFile = new File(args[1]);
 			
-			if (args[1].contains(File.separator)) {
+			if (args[1].contains("/") || args[1].contains("\\")) {
 				File directory = dstFile.getParentFile();
 				directory.mkdirs();
 			}
