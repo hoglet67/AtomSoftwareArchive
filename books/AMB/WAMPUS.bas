@@ -1,4 +1,3 @@
-
 1 REM WAMPUS. BY T.MABBS
 5 P.$15
 10 P.$12"hunt the wampus"''"YOU ARE IN A NETWORK OF 20 CAVES"'
