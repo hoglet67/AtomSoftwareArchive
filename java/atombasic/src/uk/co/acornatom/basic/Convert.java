@@ -165,9 +165,10 @@ public class Convert {
 				directory.mkdirs();
 			}
 
-			System.out.println(dstFile);
 			int loadAddr = args.length > 2 ? Integer.parseInt(args[2], 16) : DEFAULT_LOADADDR;
 			int execAddr = args.length > 3 ? Integer.parseInt(args[3], 16) : DEFAULT_EXECADDR;
+
+			System.out.println(dstFile + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(execAddr));
 			
 			Convert c = new Convert();
 			c.convertToAtm(srcFile, dstFile, loadAddr, execAddr);
