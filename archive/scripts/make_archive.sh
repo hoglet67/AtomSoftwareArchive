@@ -56,6 +56,8 @@ do
 DST=../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
 java -jar ../java/atombasic/atombasic.jar $SRC $DST
 done
+# Special Case the SPL Compiler to load at 8200
+java -jar ../java/atombasic/atombasic.jar PPBA/COMPILER.bas  ../archive/$ARCHIVE/PPBA/COMPILER 8200
 popd
 
 ##############################################################

@@ -550,7 +550,7 @@ REDMOON",present,Time and Magik,Yes,,
 340,V4,C&VG,C&VG,Bug Battle,Game,???,CVG,8200,"CH.""BUGBATT""",Works,BUGBATT,present,---Kees---,,,
 341,V4,NC,Non Comm,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,---Kees---,,,
 342,V4,NC,Non Comm,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,---Kees---,,,
-343,V4,PPBA,Practical Programs,Car Maze,Game,???,PPBA,8200,*RUN CARMAZE,Test,CARMAZE,missing,---Kees---,,,
+343,V4,PPBA,Practical Programs,Car Maze,Game,???,PPBA,8200,*RUN CARMAZE,Test,CARMAZE,obsolete,---Kees---,,,
 344,V4,TBOI,Interface,Doomswatch Cave,Game,T.Hartnell,TBOI,8200,"CH.""CAVE""",Works,CAVE,present,---Kees---,,,
 345,V4,NC,Non Comm,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,---Kees---,,,
 346,V4,NC,Non Comm,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",Test,DESERT,missing,---Kees---,,,
@@ -681,3 +681,48 @@ CH.""OTHEL1""",Works,OTHEL1,present,---Kees---,,,
 470,V4,ATAP,Atomic Theory,Sine and Tangent,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-1""",Works,22-1,present,Atomic Theory,,,
 471,V4,ATAP,Atomic Theory,Cycloid Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-2""",Works,22-2,present,Atomic Theory,,,
 472,V4,ATAP,Atomic Theory,Saddle Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-3""",Works,22-3,present,Atomic Theory,,,
+473,V4,PPBA,Practical Programs,Silver-Dollar Game,Game,David Johnson Davies,PPBA,8200,"CH.""DOLLAR""",Works,DOLLAR,present,Practical Programs,,,
+474,V4,PPBA,Practical Programs,Car Maze,Game,David Johnson Davies,PPBA,8200,"CH.""CARMAZE""",Works,CARMAZE,present,Practical Programs,,,
+475,V4,PPBA,Practical Programs,Card Trick,Game,David Johnson Davies,PPBA,8200,"CH.""CARDTRIC""",Works,CARDTRIC,present,Practical Programs,,,
+476,V4,PPBA,Practical Programs,Patterns,Game,David Johnson Davies,PPBA,8200,"CH.""PATTERNS""",Works,PATTERNS,present,Practical Programs,,,
+477,V4,PPBA,Practical Programs,Contours,Graphics,David Johnson Davies,PPBA,8200,"CH.""CONTOURS""",Works,CONTOURS,present,Practical Programs,,,
+478,V4,PPBA,Practical Programs,Rotation,Graphics,David Johnson Davies,PPBA,8200,"CH.""ROTATION""",Works,ROTATION,present,Practical Programs,,,
+479,V4,PPBA,Practical Programs,Surface,Graphics,David Johnson Davies,PPBA,8200,"CH.""SURFACE""",Works,SURFACE,present,Practical Programs,,,
+480,V4,PPBA,Practical Programs,Anagrams,Utility,David Johnson Davies,PPBA,8200,"CH.""ANAGRAMS""",Works,ANAGRAMS,present,Practical Programs,,,
+481,V4,PPBA,Practical Programs,Buzz-Phrases,Utility,David Johnson Davies,PPBA,8200,"CH.""BUZZ""",Works,BUZZ,present,Practical Programs,,,
+482,V4,PPBA,Practical Programs,Limericks,Utility,David Johnson Davies,PPBA,8200,"CH.""LIMERICK""",Works,LIMERICK,present,Practical Programs,,,
+483,V4,PPBA,Practical Programs,Catalogue,Utility,David Johnson Davies,PPBA,8200,"CH.""CATALOG""",Works,CATALOG,present,Practical Programs,,,
+484,V4,PPBA,Practical Programs,Fractions,Utility,David Johnson Davies,PPBA,8200,"CH.""FRACTION""",Works,FRACTION,present,Practical Programs,,,
+485,V4,PPBA,Practical Programs,Polynomials,Utility,David Johnson Davies,PPBA,8200,"CH.""POLYNOMI""",Works,POLYNOMI,present,Practical Programs,,,
+486,V4,PPBA,Practical Programs,Calculator,Utility,David Johnson Davies,PPBA,8200,"CH.""CALCULAT""",Works,CALCULAT,present,Practical Programs,,,
+487,V4,PPBA,Practical Programs,Assignment,Language,David Johnson Davies,PPBA,8200,"CH.""ASSIGN""",Works,ASSIGN,present,Practical Programs,,,
+488,V4,PPBA,Practical Programs,SPL - Bubble Sort,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSORT
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLSORT
+COMPILER",present,Practical Programs,,,
+489,V4,PPBA,Practical Programs,SPL - Crawling Snake,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSNAKE
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLSNAKE
+COMPILER",present,Practical Programs,,,
+490,V4,PPBA,Practical Programs,SPL - Primes,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLPRIME
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLPRIME
+COMPILER",present,Practical Programs,,,
+491,V4,PPBA,Practical Programs,SPL - GCD,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLGCD
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLGCD
+COMPILER",present,Practical Programs,,,
+492,V4,PPBA,Practical Programs,SPL - Multiply,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMULT
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLMULT
+COMPILER",present,Practical Programs,,,
+493,V4,PPBA,Practical Programs,SPL - Mastermind,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMAST
+*LOAD COMPILER
+?18=130
+RUN",Works,"SPLMAST
+COMPILER",present,Practical Programs,,,
