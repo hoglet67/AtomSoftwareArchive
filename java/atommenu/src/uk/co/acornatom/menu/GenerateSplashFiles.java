@@ -132,11 +132,12 @@ public class GenerateSplashFiles extends GenerateBase {
 
 	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
 
-		// Create an empty black image
+		// Create an grey image
 		byte[] screen = new byte[0x1800];
-		for (int i = 0; i < screen.length; i++) {
-			screen[i] = 0;
-		}
+		int bw = 5;
+		fill(screen, 0, 0, 256, 192, 1);
+		fill(screen, bw, bw, 256 - bw * 2, 192 - bw * 2, 2);
+		fill(screen, bw + 1, bw + 1, 256 - (bw + 1) * 2, 192 - (bw + 1) * 2, 0);
 
 		// Load one of Phil Mainwaring's screens to we can leverage some bits
 		File file = new File("splash" + File.separator + "SCREEN1.ATM");
@@ -145,11 +146,12 @@ public class GenerateSplashFiles extends GenerateBase {
 		}
 		byte[] baseScreen = readATMFile(file);
 
-		// Copy the StarDot and Retro Software logos
-		copyAtomImage(baseScreen, screen, 0, 130, 256, 48, 0, 130);
-
 		// Copy the Acorn Logo
-		copyAtomImage(baseScreen, screen, 109, 54, 40, 54, 210, 4);
+		copyAtomImage(baseScreen, screen, 109, 54, 40, 54, 210, 8);
+
+		// Copy the StarDot and Retro Software logos
+		copyAtomImage(baseScreen, screen, 0, 130, 256, 48, 0, 120);
+
 
 		// Write the ACORN ATOM mmc software archive text
 		String font = "Comic Sans Ms";
@@ -159,9 +161,9 @@ public class GenerateSplashFiles extends GenerateBase {
 		Font fontS = new Font(font, Font.BOLD, 18);
 		g.setColor(Color.WHITE);
 		g.setFont(fontL);
-		g.drawString("ACORN ATOM", 8, 28);
+		g.drawString("ACORN ATOM", 10, 32);
 		g.setFont(fontS);
-		g.drawString("mmc software archive", 12, 44);
+		g.drawString("mmc software archive", 14, 48);
 		g.dispose();
 		for (int x = 0; x < 256; x++) {
 			for (int y = 0; y < 192; y++) {
@@ -174,43 +176,68 @@ public class GenerateSplashFiles extends GenerateBase {
 		}
 
 		// Write the menu items
-		int y = 51;
-		writeAtomString(screen, " PLEASE SELECT: ", 0, y, true);
-		y += 15;
-
+		int y = 52;
+		// writeAtomString(screen, "PLEASE SELECT:", 1, y, false);
+		y += 12;
+		
 		int i = 0;
 		for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
-			String line = " " + (char) ('A' + i) + ") ";
+			String line = (char) ('A' + i) + ".";
 			line += chunk.getKey();
-			line += " (" + chunk.getValue() + ")";
-			writeAtomString(screen, line, 0, y, false);
+			String count = "(" + chunk.getValue() + ")";
+			while (line.length() < 30 - count.length()) {
+				line += " ";
+			}
+			line += count;
+			writeAtomString(screen, line, 1, y, false);
 			y += 12;
 			i += 1;
 		}		
-		y += 4;
+		y += 3;
 
-		writeAtomString(screen, " PRESENTED IN ASSOCIATION WITH: ", 0, y, true);
+		// writeAtomString(screen, "PRESENTED IN ASSOCIATION WITH:", 1, y, false);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy ");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		String date = sdf.format(new Date()).toUpperCase();
-		String line = " RELEASE " + version.toUpperCase();
-		while (line.length() < 20) {
+		String line = "RELEASE " + version.toUpperCase();
+		while (line.length() < 19) {
 			line += " ";
 		}
 		line += date;
-		if (line.length() != 32) {
-			throw new RuntimeException("Expected footer to be 32 chars long: >>>" + line + "<<<");
+		if (line.length() != 30) {
+			throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
 		}
-		writeAtomString(screen, line, 0, 15 * 12, true);
-
-//		for (int i = 0; i < 32*192; i++) {
-//			screen[i] = (byte) (screen[i] ^ 255);
-//		}
 		
+		y = 192 - 20;
+				
+		writeAtomString(screen, line, 1, y, false);
+
+		// Invert the screen
+		for (i = 0; i < 32*192; i++) {
+			screen[i] = (byte) (screen[i] ^ 255);
+		}		
+	
 		// Save the file
 		String name = "SPLASH";
 		FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
 		writeATMFile(fosSplash, name, 0x8000, 0x8000, screen);
 		fosSplash.close();
 	}
+	
+	// Colour 0 = black
+	// Colour 1 = grey
+	// Colour 2 = white
+	private void fill(byte[] screen, int xx, int yy, int w, int h, int colour) {		
+		for (int x = xx; x < xx + w; x++) {
+			for (int y = yy; y < yy + h; y++) {
+				if ((colour == 0) || ((colour == 1) && ((x & 1) != (y & 1)))) {
+					screen[(x >> 3) + (y << 5)] &= 255 - (1 << (7 - x & 7));
+				} else {
+					screen[(x >> 3) + (y << 5)] |= 1 << (7 - x & 7);
+				}
+			}
+		}
+		
+	}
+
 }
