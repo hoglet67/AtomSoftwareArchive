@@ -25,6 +25,7 @@ public class GenerateAll {
 			List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
 			generators.add(new GenerateBootstrapFiles());
 			generators.add(new GenerateMenuFiles());
+			generators.add(new GenerateSplashFiles());
 			for (IFileGenerator generator : generators) {
 				generator.generateFiles(menuDir, bootLoaderBinary, items);
 			}
