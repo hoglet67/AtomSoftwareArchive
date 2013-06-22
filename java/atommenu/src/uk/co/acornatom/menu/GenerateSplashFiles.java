@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
 public class GenerateSplashFiles extends GenerateBase {
 
 	/* 6847 Font taken from Atomulator */
@@ -158,12 +160,13 @@ public class GenerateSplashFiles extends GenerateBase {
 		BufferedImage image = new BufferedImage(256, 192, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = (Graphics2D) image.getGraphics();
 		Font fontL = new Font(font, Font.BOLD, 34);
-		Font fontS = new Font(font, Font.BOLD, 16);
+		Font fontS = new Font(font, Font.BOLD, 20);
 		g.setColor(Color.WHITE);
 		g.setFont(fontL);
-		g.drawString("ACORN ATOM", 10, 32);
+		g.drawString("ACORN", 12, 32);
+		g.drawString("ATOM", 124, 32);
 		g.setFont(fontS);
-		g.drawString("mmc software archive", 10, 48);
+		g.drawString("software archive", 10, 50);
 		g.dispose();
 		for (int x = 0; x < 256; x++) {
 			for (int y = 0; y < 192; y++) {
@@ -222,6 +225,28 @@ public class GenerateSplashFiles extends GenerateBase {
 		FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
 		writeATMFile(fosSplash, name, 0x8000, 0x8000, screen);
 		fosSplash.close();
+		
+		// Save the file as a PNG
+		int s = 3;
+		int b = 32;
+		BufferedImage save = new BufferedImage(s * (256 + b + b), s * (192 + b + b), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = (Graphics2D)save.createGraphics();
+		g2.setColor(Color.GREEN);
+		g2.fillRect(0, 0, s * (256 + b + b), s * (192 + b + b));
+		g2.setColor(Color.BLACK);
+		g2.fillRect(s * b, s * b, s * 256, s * 192);
+		g2.setColor(Color.GREEN);
+		for (i = 0; i < screen.length; i++) {
+			for (int j = 0; j < 8; j++) {
+				int px = ((i & 31) << 3) + 7 - j;
+				int py = (i >> 5);
+				if (((screen[i] >> j) & 1) > 0) {
+					g2.fillRect(s * (b  + px), s * (b  + py), s, s);
+				}
+			}
+		}
+		g.dispose();
+		ImageIO.write(save, "PNG", new File("Splash.png"));
 	}
 	
 	// Colour 0 = black
