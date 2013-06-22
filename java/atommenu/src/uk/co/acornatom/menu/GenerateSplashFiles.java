@@ -154,16 +154,16 @@ public class GenerateSplashFiles extends GenerateBase {
 
 
 		// Write the ACORN ATOM mmc software archive text
-		String font = "Comic Sans Ms";
+		String font = "Courier New";
 		BufferedImage image = new BufferedImage(256, 192, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = (Graphics2D) image.getGraphics();
-		Font fontL = new Font(font, Font.BOLD, 28);
-		Font fontS = new Font(font, Font.BOLD, 18);
+		Font fontL = new Font(font, Font.BOLD, 34);
+		Font fontS = new Font(font, Font.BOLD, 16);
 		g.setColor(Color.WHITE);
 		g.setFont(fontL);
 		g.drawString("ACORN ATOM", 10, 32);
 		g.setFont(fontS);
-		g.drawString("mmc software archive", 14, 48);
+		g.drawString("mmc software archive", 10, 48);
 		g.dispose();
 		for (int x = 0; x < 256; x++) {
 			for (int y = 0; y < 192; y++) {

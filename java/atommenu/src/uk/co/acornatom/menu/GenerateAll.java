@@ -27,6 +27,9 @@ public class GenerateAll {
 			
 			Map<String, Integer> chunks = new TreeMap<String, Integer>();
 			for (SpreadsheetTitle item : items) {
+				if (!item.isPresent()) {
+					continue;
+				}
 				String chunk = item.getChunk();
 				Integer count = chunks.get(chunk);
 				if (count == null) {
