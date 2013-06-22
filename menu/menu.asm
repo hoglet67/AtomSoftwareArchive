@@ -88,24 +88,28 @@ include "renderer_header.asm"
 	JSR OscliString
 	EQUS "NOMON", Return
 
+.MenuSplash
+
 	; 20 CLEAR 4
 	LDY #4
 	JSR Clear
 
-	; 30 *LOAD MNU/SCREEN3
+	; 30 *LOAD SPLASH
 	JSR OscliString
-	EQUS "LOAD MNU/SCREEN3", Return
+	EQUS "LOAD MNUA/SPLASH", Return
 
-	; 40 *LOAD MNU/MENUMC
-	; Not Needed
-    ; 50 B=!#CD&#FFFF
 	
-	; 80 FOR I=1TO60;WAIT;N.	
-	LDX #60
-.SplashLoop
-	JSR WaitUntilVSync
-	DEX
-	BNE SplashLoop
+.MenuMain
+	JSR Osrdch
+	CMP #'A'
+	BCC MenuMain
+	CMP #'D' + 1
+	BCS MenuMain
+	
+	STA MenuDat1Chunk
+	STA MenuDat2Chunk
+	STA SortDatChunk
+	STA RunCommandMenuChunk
 
 	; 90 CLEAR 0
 	LDY #0
@@ -115,7 +119,10 @@ include "renderer_header.asm"
 
 	;100 *LOAD MNU/MENUDAT1
 	JSR OscliString
-	EQUS "LOAD MNU/MENUDAT1", Return
+	
+	EQUS "LOAD MNU"
+.MenuDat1Chunk
+	EQUS " /MENUDAT1", Return
 
 	;110 D=!#CD&#FFFF	
 	LDA ExecAddr
@@ -125,7 +132,9 @@ include "renderer_header.asm"
 
 	;115 *LOAD MNU/MENUDAT2
 	JSR OscliString
-	EQUS "LOAD MNU/MENUDAT2", Return
+	EQUS "LOAD MNU"
+.MenuDat2Chunk
+	EQUS " /MENUDAT2", Return
 	
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
@@ -494,7 +503,9 @@ include "renderer_header.asm"
 	JMP Oscli	
 	
 .RunCommand
-	EQUS "RUN MNU/", 0
+	EQUS "RUN MNU"
+.RunCommandMenuChunk
+	EQUS " /", 0
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Translated Basic Subroutines
@@ -507,10 +518,10 @@ include "renderer_header.asm"
 
 .LabelH
 
-	;900h*LOAD MNU/HELP 8000
+	;900h*LOAD HELP 8000
 
 	JSR OscliString
-	EQUS "LOAD MNU/HELP", Return
+	EQUS "LOAD HELP", Return
 
 	;895 LINK#FFE3;P.$12;R.
 
@@ -934,9 +945,14 @@ include "renderer_header.asm"
 	; 60 *LOAD MNU/SORTDAT
 	LDA SortType
 	ORA #'0'
-	STA LoadSortTable1 - 2
+	STA SortDatNum
 	JSR OscliString
-	EQUS "LOAD MNU/SORTDATx", Return
+
+	EQUS "LOAD MNU"
+.SortDatChunk
+	EQUS " /SORTDAT"
+.SortDatNum
+	EQUS " ", Return
 
 .LoadSortTable1	
 	; 70 C=!#CD&#FFFF

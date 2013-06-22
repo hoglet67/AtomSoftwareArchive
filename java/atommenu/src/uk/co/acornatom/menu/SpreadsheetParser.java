@@ -22,6 +22,7 @@ public class SpreadsheetParser {
 	private static final String DIRECTORY = "directory";
 	private static final String TITLE = "title";
 	private static final String INDEX = "index";
+	private static final String CHUNK = "chunk";
 
 	private File file;
 
@@ -45,6 +46,7 @@ public class SpreadsheetParser {
 
 			String[] headers = programs.remove(0);
 			int index_column = -1;
+			int chunk_column = -1;
 			int title_column = -1;
 			int status_column = -1;
 			int dir_column = -1;
@@ -57,6 +59,9 @@ public class SpreadsheetParser {
 			for (int i = 0; i < headers.length; i++) {
 				if (headers[i].toLowerCase().contains(INDEX)) {
 					index_column = i;
+				}
+				if (headers[i].toLowerCase().contains(CHUNK)) {
+					chunk_column = i;
 				}
 				if (headers[i].toLowerCase().contains(TITLE)) {
 					title_column = i;
@@ -91,6 +96,8 @@ public class SpreadsheetParser {
 				SpreadsheetTitle item = new SpreadsheetTitle();
 				String index = program[index_column].trim();
 				item.setIndex(Integer.parseInt(index));
+				String chunk = program[chunk_column].trim().toUpperCase();
+				item.setChunk(chunk);
 				String title = program[title_column].trim().toUpperCase();
 				item.setTitle(title);
 				String dir = program[dir_column].trim();

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public class GenerateSplashFiles extends GenerateBase {
 
@@ -83,6 +84,12 @@ public class GenerateSplashFiles extends GenerateBase {
 			0x00, 0x00, 0x3e, 0x00, 0x3e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 			0x00, 0x10, 0x08, 0x04, 0x02, 0x04, 0x08, 0x10, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x18, 0x24, 0x04, 0x08, 0x08, 0x00, 0x08, 0x00, 0x00, };
+	
+	private Set<String> chunks;
+	
+	public GenerateSplashFiles(Set<String> chunks) {
+		this.chunks = chunks;
+	}
 
 	private void writeAtomString(byte[] screen, String s, int x, int y, boolean inverse) {
 		int a = y * 32 + x;
@@ -166,14 +173,15 @@ public class GenerateSplashFiles extends GenerateBase {
 		int y = 51;
 		writeAtomString(screen, " PLEASE SELECT: ", 0, y, true);
 		y += 15;
-		writeAtomString(screen, " A) COMMERCIAL SOFTWARE", 0, y, false);
-		y += 12;
-		writeAtomString(screen, " B) NON COMMERCIAL SOFTWARE", 0, y, false);
-		y += 12;
-		writeAtomString(screen, " C) MAGAZINE LISTINGS", 0, y, false);
-		y += 12;
-		writeAtomString(screen, " D) BOOK LISTINGS", 0, y, false);
-		y += 16;
+
+		int chunkId = 'A';
+		for (String chunk : chunks) {		
+			writeAtomString(screen, " " + (char) chunkId + ") " + chunk, 0, y, false);
+			y += 12;
+			chunkId++;
+		}		
+		y += 4;
+
 		writeAtomString(screen, " PRESENTED IN ASSOCIATION WITH: ", 0, y, true);
 		writeAtomString(screen, " RELEASE V4         22/JUN/2013 ", 0, 15 * 12, true);
 

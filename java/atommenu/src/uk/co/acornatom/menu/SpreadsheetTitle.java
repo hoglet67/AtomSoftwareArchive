@@ -6,6 +6,7 @@ public class SpreadsheetTitle {
 	private static final String STATUS_UPDATED = "updated";
 	
 	private int index;
+	private String chunk;
 	private String title;
 	private String dir;
 	private String run;
@@ -21,6 +22,12 @@ public class SpreadsheetTitle {
 	}
 	public int getIndex() {
 		return index;
+	}
+	public void setChunk(String chunk) {
+		this.chunk = chunk;
+	}
+	public String getChunk() {
+		return chunk;
 	}
 	public void setTitle(String title) {
 		this.title = title;
