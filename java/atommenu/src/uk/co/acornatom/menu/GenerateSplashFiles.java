@@ -183,10 +183,8 @@ public class GenerateSplashFiles extends GenerateBase {
 		// writeAtomString(screen, "PLEASE SELECT:", 1, y, false);
 		y += 12;
 		
-		int i = 0;
 		for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
-			String line = (char) ('A' + i) + ".";
-			line += chunk.getKey();
+			String line = chunk.getKey();
 			String count = "(" + chunk.getValue() + ")";
 			while (line.length() < 30 - count.length()) {
 				line += " ";
@@ -194,7 +192,6 @@ public class GenerateSplashFiles extends GenerateBase {
 			line += count;
 			writeAtomString(screen, line, 1, y, false);
 			y += 12;
-			i += 1;
 		}		
 		y += 3;
 
@@ -216,7 +213,7 @@ public class GenerateSplashFiles extends GenerateBase {
 		writeAtomString(screen, line, 1, y, false);
 
 		// Invert the screen
-		for (i = 0; i < 32*192; i++) {
+		for (int i = 0; i < 32*192; i++) {
 			screen[i] = (byte) (screen[i] ^ 255);
 		}		
 	
@@ -236,7 +233,7 @@ public class GenerateSplashFiles extends GenerateBase {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(s * b, s * b, s * 256, s * 192);
 		g2.setColor(Color.GREEN);
-		for (i = 0; i < screen.length; i++) {
+		for (int i = 0; i < screen.length; i++) {
 			for (int j = 0; j < 8; j++) {
 				int px = ((i & 31) << 3) + 7 - j;
 				int py = (i >> 5);
