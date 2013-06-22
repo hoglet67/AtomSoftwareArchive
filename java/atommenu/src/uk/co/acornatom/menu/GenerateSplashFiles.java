@@ -3,7 +3,6 @@ package uk.co.acornatom.menu;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -85,8 +84,7 @@ public class GenerateSplashFiles extends GenerateBase {
 			0x00, 0x10, 0x08, 0x04, 0x02, 0x04, 0x08, 0x10, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x18, 0x24, 0x04, 0x08, 0x08, 0x00, 0x08, 0x00, 0x00, };
 
-	private void writeString(byte[] screen, String s, int x, int y,
-			boolean inverse) {
+	private void writeAtomString(byte[] screen, String s, int x, int y, boolean inverse) {
 		int a = y * 32 + x;
 		for (int i = 0; i < s.length(); i++) {
 			int c = s.charAt(i);
@@ -101,37 +99,58 @@ public class GenerateSplashFiles extends GenerateBase {
 				}
 				screen[a + i + j * 32] = (byte) b;
 			}
-
 		}
-
 	}
 
-	private void imageTest(byte[] screen) {
-		GraphicsEnvironment ge = GraphicsEnvironment
-				.getLocalGraphicsEnvironment();
-		Font[] fonts = ge.getAllFonts();
-		for (Font f : fonts) {
-			System.out.println(f.getFontName());
+	private void copyAtomImage(byte[] from, byte[] to, int fromx, int fromy, int w, int h, int tox, int toy) {
+		for (int x = 0; x < w; x++) {
+			for (int y = 0; y < h; y++) {
+				int ax = fromx + x;
+				int ay = fromy + y;
+				int a = (ax >> 3) + (ay << 5);
+				int p = from[a] & (1 << (7 - ax & 7));
+				if (p != 0) {
+					int bx = tox + x;
+					int by = toy + y;
+					int b = (bx >> 3) + (by << 5);
+					to[b] |= (1 << (7 - bx & 7));
+				}
+			}
+		}
+	}
+
+	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
+
+		// Create an empty black image
+		byte[] screen = new byte[0x1800];
+		for (int i = 0; i < screen.length; i++) {
+			screen[i] = 0;
 		}
 
-		BufferedImage image = new BufferedImage(256, 192,
-				BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) image.getGraphics();
-		Font fontL = new Font("Helvetica", Font.BOLD, 32);
-		Font fontM = new Font("Helvetica", Font.BOLD, 20);
-		Font fontS = new Font("Helvetica", Font.BOLD, 16);
+		// Load one of Phil Mainwaring's screens to we can leverage some bits
+		File file = new File("splash" + File.separator + "SCREEN1.ATM");
+		if (!file.exists()) {
+			throw new RuntimeException(file.getCanonicalPath() + " does not exist");
+		}
+		byte[] baseScreen = readATMFile(file);
 
+		// Copy the StarDot and Retro Software logos
+		copyAtomImage(baseScreen, screen, 0, 130, 256, 48, 0, 130);
+
+		// Copy the Acorn Logo
+		copyAtomImage(baseScreen, screen, 109, 54, 40, 54, 210, 4);
+
+		// Write the ACORN ATOM mmc software archive text
+		String font = "Comic Sans Ms";
+		BufferedImage image = new BufferedImage(256, 192, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) image.getGraphics();
+		Font fontL = new Font(font, Font.BOLD, 28);
+		Font fontS = new Font(font, Font.BOLD, 18);
 		g.setColor(Color.WHITE);
 		g.setFont(fontL);
-		g.drawString("ACORN ATOM", 24, 32);
-
+		g.drawString("ACORN ATOM", 8, 28);
 		g.setFont(fontS);
-		g.drawString("mmc software archive", 24, 44);
-
-		g.setFont(fontM);
-		g.drawString("StarDot.org.uk", 50, 152);
-		g.drawString("Retro Software", 50, 175);
-
+		g.drawString("mmc software archive", 12, 44);
 		g.dispose();
 		for (int x = 0; x < 256; x++) {
 			for (int y = 0; y < 192; y++) {
@@ -143,33 +162,28 @@ public class GenerateSplashFiles extends GenerateBase {
 			}
 		}
 
-	}
-
-	public void generateFiles(File menuDir, File bootLoaderBinary,
-			List<SpreadsheetTitle> items) throws IOException {
-		byte[] screen = new byte[0x1800];
-
-		imageTest(screen);
-
-		int y = 4 * 12;
-		writeString(screen, " PLEASE SELECT: ", 3, y, true);
-		y += 18;
-		writeString(screen, "A) COMMERCIAL SOFTWARE", 1, y, false);
+		// Write the menu items
+		int y = 51;
+		writeAtomString(screen, " PLEASE SELECT: ", 0, y, true);
+		y += 15;
+		writeAtomString(screen, " A) COMMERCIAL SOFTWARE", 0, y, false);
 		y += 12;
-		writeString(screen, "B) NON COMMERCIAL SOFTWARE", 1, y, false);
+		writeAtomString(screen, " B) NON COMMERCIAL SOFTWARE", 0, y, false);
 		y += 12;
-		writeString(screen, "C) MAGAZINE LISTINGS", 1, y, false);
+		writeAtomString(screen, " C) MAGAZINE LISTINGS", 0, y, false);
 		y += 12;
-		writeString(screen, "D) BOOK LISTINGS", 1, y, false);
-		y += 18;
-		writeString(screen, " PRESENTED IN ASSOCIATION WITH: ", 0, y, true);
+		writeAtomString(screen, " D) BOOK LISTINGS", 0, y, false);
+		y += 16;
+		writeAtomString(screen, " PRESENTED IN ASSOCIATION WITH: ", 0, y, true);
+		writeAtomString(screen, " RELEASE V4         22/JUN/2013 ", 0, 15 * 12, true);
 
-		writeString(screen, "   RELEASE V004 - 22/JUN/2013   ", 0, 15 * 12,
-				true);
-
-		String name = "SPLASH2";
-		FileOutputStream fosSplash = new FileOutputStream(new File(menuDir,
-				name));
+//		for (int i = 0; i < 32*192; i++) {
+//			screen[i] = (byte) (screen[i] ^ 255);
+//		}
+		
+		// Save the file
+		String name = "SPLASH";
+		FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
 		writeATMFile(fosSplash, name, 0x8000, 0x8000, screen);
 		fosSplash.close();
 	}
