@@ -2,6 +2,10 @@
 
 DIR=MNU
 
+VERSION=$*
+
+echo "Building with version $VERSION"
+
 # Delete the old MNU folders
 rm -rf $DIR.zip MENU $DIR[A-Z]
 
@@ -9,7 +13,7 @@ rm -rf $DIR.zip MENU $DIR[A-Z]
 ../../BeebASM/beebasm/beebasm -i boot.asm
 
 # Compile the menu data and boostrap files
-java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $DIR BOOT.bin
+java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $DIR BOOT.bin "$VERSION"
 
 # Add in help screens
 cp splash/HELP.ATM HELP
@@ -25,7 +29,7 @@ cp splash/HELP.ATM HELP
 cp -a MENU HELP $DIR[A-Z] ../../Atomulator/mmc
 
 # Zip everything up
-zip -qr $DIR.zip MENU $DIR[A-Z]
+zip -qr $DIR.zip MENU HELP $DIR[A-Z]
 
 # Copy to somewhere nice
 cp $DIR.zip $HOME

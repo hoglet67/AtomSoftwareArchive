@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class GenerateSplashFiles extends GenerateBase {
 
@@ -84,10 +86,12 @@ public class GenerateSplashFiles extends GenerateBase {
 			0x00, 0x00, 0x3e, 0x00, 0x3e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 			0x00, 0x10, 0x08, 0x04, 0x02, 0x04, 0x08, 0x10, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x18, 0x24, 0x04, 0x08, 0x08, 0x00, 0x08, 0x00, 0x00, };
+
+	private String version;
+	private Map<String, Integer> chunks;
 	
-	private Set<String> chunks;
-	
-	public GenerateSplashFiles(Set<String> chunks) {
+	public GenerateSplashFiles(String version, Map<String, Integer> chunks) {
+		this.version = version;
 		this.chunks = chunks;
 	}
 
@@ -174,16 +178,30 @@ public class GenerateSplashFiles extends GenerateBase {
 		writeAtomString(screen, " PLEASE SELECT: ", 0, y, true);
 		y += 15;
 
-		int chunkId = 'A';
-		for (String chunk : chunks) {		
-			writeAtomString(screen, " " + (char) chunkId + ") " + chunk, 0, y, false);
+		int i = 0;
+		for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
+			String line = " " + (char) ('A' + i) + ") ";
+			line += chunk.getKey();
+			line += " (" + chunk.getValue() + ")";
+			writeAtomString(screen, line, 0, y, false);
 			y += 12;
-			chunkId++;
+			i += 1;
 		}		
 		y += 4;
 
 		writeAtomString(screen, " PRESENTED IN ASSOCIATION WITH: ", 0, y, true);
-		writeAtomString(screen, " RELEASE V4         22/JUN/2013 ", 0, 15 * 12, true);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy ");
+		String date = sdf.format(new Date()).toUpperCase();
+		String line = " RELEASE " + version.toUpperCase();
+		while (line.length() < 20) {
+			line += " ";
+		}
+		line += date;
+		if (line.length() != 32) {
+			throw new RuntimeException("Expected footer to be 32 chars long: >>>" + line + "<<<");
+		}
+		writeAtomString(screen, line, 0, 15 * 12, true);
 
 //		for (int i = 0; i < 32*192; i++) {
 //			screen[i] = (byte) (screen[i] ^ 255);

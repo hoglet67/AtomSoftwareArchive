@@ -14,6 +14,17 @@ function package() {
 
 ARCHIVE=archive
 
+
+##############################################################
+# Build the menu
+##############################################################
+pushd ../menu
+./build.sh "$*"
+popd
+pushd $ARCHIVE
+unzip ../../menu/MNU.zip
+popd
+
 # Define top level directories
 # Nice and short for easy navigation
 
@@ -397,16 +408,6 @@ package "atms/Acl1-24/TRAP" "$ARCHIVE/$AR"
 
 cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
-
-##############################################################
-# Build the menu
-##############################################################
-pushd ../menu
-./build.sh
-popd
-pushd $ARCHIVE
-unzip ../../menu/MNU.zip
-popd
 
 ##############################################################
 # Zip up the archive
