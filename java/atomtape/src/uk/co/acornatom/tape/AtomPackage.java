@@ -26,13 +26,6 @@ public class AtomPackage {
 				dirName = dirName.substring(0, dirName.lastIndexOf('.'));
 				File dst = new File(dstDir, dirName);
 				base = new AtomDisk(src, dst);
-			} else if ((src.getName().toLowerCase().endsWith(".tap") || src.getName().toLowerCase().endsWith(".atm"))) {
-				// For TAP files, the name of the dest directory is derived from
-				// the name of the TAP file
-				String dirName = src.getName();
-				dirName = dirName.substring(0, dirName.lastIndexOf('.'));
-				File dst = new File(dstDir, dirName);
-				base = new AtomTape(src, dst);
 			} else if (src.getName().toLowerCase().endsWith(".inf")) {
 				// For INF files, the name of the dest directory is derived from
 				// directory the INF file is in
@@ -47,8 +40,18 @@ public class AtomPackage {
 				String dirName = src.getParentFile().getName();
 				File dst = new File(dstDir, dirName);
 				base = new AtomAtom1(src, dst);
+			} else {
+				// For TAP files, the name of the dest directory is derived from
+				// the name of the TAP file
+				String dirName = src.getName();
+				int lastDot = dirName.lastIndexOf('.');
+				if (lastDot > 0) {
+					dirName = dirName.substring(0, lastDot);
+				}
+				File dst = new File(dstDir, dirName);
+				base = new AtomTape(src, dst);
 			}
-
+			
 			if (base != null) {
 				System.out.println("####################################################");
 				System.out.println("# " + base);
