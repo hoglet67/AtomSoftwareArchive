@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Convert {
 
@@ -16,31 +18,16 @@ public class Convert {
 
 	private enum STATE {
 		SYNC0, SYNC1, SYNC2, SYNC3, FILENAME, BLOCKFLAG, BLOCKNUMLO, BLOCKNUMHI, DATALEN, EXECHI, EXECLO, LOADHI, LOADLO, DATA, CKSUM
-	};
+	}
 
+	private enum MODE {
+		SCAN, PROCESS
+	}
+	
 	File dstFile;
 	
 	
-	STATE state = STATE.SYNC0;
-	STATE oldState = state;
 
-	ByteArrayOutputStream data = new ByteArrayOutputStream();
-
-	int execaddr = 0;
-	int loadaddr = 0;
-	String fileName = null;
-
-	String blockFileName = null;
-	int blockflag = 0;
-	int blockloadaddr = 0;
-	int blockexecaddr = 0;
-	int blocklen = 0;
-	int blocknum = 0;
-	int blockcksum = 0;
-
-	int expectedBlockNum = 0;
-
-	boolean seenGoodBlock = false;
 
 	
 	public Convert(File dstFile) {
@@ -101,16 +88,49 @@ public class Convert {
 		fis.close();
 		byte bytes[] = bos.toByteArray();
 
-		process(bytes);
+		Map<String, Integer> fileBlockMap = new HashMap<String, Integer>();
+		
+		// Scan for filenames and numbers of blocks
+		process(MODE.SCAN, bytes, fileBlockMap);
+				
+		// Process
+		process(MODE.PROCESS, bytes, fileBlockMap);
 
 	}
 
 		
 
+	
+	
 
 	
-	private void process(byte[] bytes) throws IOException {
+	private void process(MODE mode, byte[] bytes, Map<String, Integer> fileBlockMap) throws IOException {
 
+		STATE state = STATE.SYNC0;
+		STATE oldState = state;
+
+		ByteArrayOutputStream data = new ByteArrayOutputStream();
+
+		int execaddr = 0;
+		int loadaddr = 0;
+		String fileName = null;
+
+		String blockFileName = null;
+		int blockflag = 0;
+		int blockloadaddr = 0;
+		int blockexecaddr = 0;
+		int blocklen = 0;
+		int blocknum = 0;
+		int blockcksum = 0;
+
+		int expectedBlockNum = 0;
+
+		boolean seenGoodBlock = false;
+		
+		if (mode == MODE.SCAN) {
+			fileBlockMap.clear();
+		}
+		
 		
 		for (int i = 0; i < bytes.length; i++) {
 
@@ -149,7 +169,7 @@ public class Convert {
 					// cope with case of sync marker truncated					
 					blockcksum += b;
 					blockFileName = blockFileName + (char) b;
-					System.out.println("    WARNING: Block Sync truncated to **");
+					log(mode, "    WARNING: Block Sync truncated to **");
 					
 					state = STATE.FILENAME;
 				}
@@ -162,7 +182,7 @@ public class Convert {
 					// cope with case of sync marker truncated					
 					blockcksum += b;
 					blockFileName = blockFileName + (char) b;
-					System.out.println("    WARNING: Block Sync truncated to ***");
+					log(mode, "    WARNING: Block Sync truncated to ***");
 
 					state = STATE.FILENAME;
 				}
@@ -174,7 +194,7 @@ public class Convert {
 				if (b == ASCII_CR) {
 					state = STATE.BLOCKFLAG;
 				} else if (blockFileName.length() > 13) {
-					System.out.println("    ERROR: Filename too long: " + blockFileName);
+					log(mode, "    ERROR: Filename too long: " + blockFileName);
 					state = STATE.SYNC0;
 				} else {
 					blockFileName = blockFileName + (char) b;
@@ -219,7 +239,7 @@ public class Convert {
 				blockcksum += b;
 				blockloadaddr += b;
 
-				System.out.println("### " + blockFileName + " " + toHex2(blockflag) + " " + toHex4(blocknum) + " "
+				log(mode, "### " + blockFileName + " " + toHex2(blockflag) + " " + toHex4(blocknum) + " "
 						+ toHex2(blocklen) + " " + toHex4(blockloadaddr) + " " + toHex4(blockexecaddr));
 
 				state = STATE.DATA;
@@ -234,10 +254,11 @@ public class Convert {
 				break;
 			case CKSUM:
 				
+				
 				boolean cksumGood = b == (blockcksum & 255);
 
 				if (!cksumGood) {
-					System.out.println("    ERROR: Bad Checksum; expected " + toHex2(blockcksum & 255) + " actual " + toHex2(b));
+					log(mode, "    ERROR: Bad Checksum; expected " + toHex2(blockcksum & 255) + " actual " + toHex2(b));
 					
 					// We might have lost sync, so back off a few bytes	
 					i -= 16;
@@ -245,7 +266,7 @@ public class Convert {
 				}
 
 				if (expectedBlockNum != blocknum) {
-					System.out.println("    ERROR: Expected block num: " + expectedBlockNum + "; actual block num: " + blocknum);
+					log(mode, "    ERROR: Expected block num: " + expectedBlockNum + "; actual block num: " + blocknum);
 					if (cksumGood) {
 						for (int j = 0; j < 256 * (blocknum - expectedBlockNum); j++) {
 							data.write(0);
@@ -256,12 +277,12 @@ public class Convert {
 
 				if (expectedBlockNum == 0) {
 					if ((blockflag & 0x60) != 0x40) {
-						System.out.println("    ERROR: Inconsistent block flag: " + toHex2(blockflag) + " for block "
+						log(mode, "    ERROR: Inconsistent block flag: " + toHex2(blockflag) + " for block "
 								+ expectedBlockNum);
 					}
 				} else {
 					if ((blockflag & 0x60) != 0x60) {
-						System.out.println("    ERROR: Inconsistent block flag: " + toHex2(blockflag) + " for block "
+						log(mode, "    ERROR: Inconsistent block flag: " + toHex2(blockflag) + " for block "
 								+ expectedBlockNum);
 					}
 				}
@@ -277,24 +298,58 @@ public class Convert {
 					
 				} else if (seenGoodBlock) {
 					if (loadaddr + blocknum * 256 != blockloadaddr) {
-						System.out.println("    ERROR: Expected load addr: " + toHex4(loadaddr + blocknum * 256)
+						log(mode, "    ERROR: Expected load addr: " + toHex4(loadaddr + blocknum * 256)
 								+ "; actual load addr: " + toHex4(blockloadaddr));
 					}
 					if (execaddr != blockexecaddr) {
-						System.out.println("    ERROR: Expected exec addr: " + toHex4(execaddr) + "; actual exec addr: "
+						log(mode, "    ERROR: Expected exec addr: " + toHex4(execaddr) + "; actual exec addr: "
 								+ toHex4(blockexecaddr));
 					}
 					if (!fileName.equals(blockFileName)) {
-						System.out.println("    ERROR: Expected filename: " + fileName + "; actual filename: " + blockFileName);
+						log(mode, "    ERROR: Expected filename: " + fileName + "; actual filename: " + blockFileName);
 					}
 				}
+				
+				if (mode == MODE.SCAN) {
+					if (cksumGood || fileBlockMap.containsKey(blockFileName)) {
+						fileBlockMap.put(blockFileName, expectedBlockNum);
+					}
 
-				if ((blockflag & 128) == 0) {
-					save();
-					reset();
+					// When scanning, we have to rely on the block flag to indicate the last block
+					if ((blockflag & 128) == 0) {
+						data = new ByteArrayOutputStream();
+						expectedBlockNum = 0;
+						seenGoodBlock = false;
+					} else {
+						expectedBlockNum++;
+						
+					}
 					
+				
 				} else {
-					expectedBlockNum++;
+					
+					
+					// When processing, we can do better 
+					
+					if (fileName != null && expectedBlockNum == fileBlockMap.get(fileName)) {
+
+						byte[] databytes = data.toByteArray();
+						log(mode, "");
+						log(mode, "    Writing " + fileName + " " + toHex4(loadaddr) + " +" + toHex4(databytes.length) + " " + toHex4(execaddr));
+						log(mode, "");
+						fileName = fileName.replace("/", "_");
+						// Flush the ATM FIle
+						FileOutputStream fos = new FileOutputStream(dstFile + "/" + fileName + ".ATM");
+						writeATMFile(fos, dstFile.getName(), loadaddr, execaddr, databytes);
+
+						data = new ByteArrayOutputStream();
+						expectedBlockNum = 0;
+						seenGoodBlock = false;
+
+					} else {
+						expectedBlockNum++;
+
+					}
 				}
 				state = STATE.SYNC0;
 				break;
@@ -305,25 +360,12 @@ public class Convert {
 		}
 	}
 	
-	private void save() throws IOException {
-		if (fileName != null) {
-			byte[] databytes = data.toByteArray();
-			System.out.println();
-			System.out.println("    Writing " + fileName + " " + toHex4(loadaddr) + " +" + toHex4(databytes.length) + " " + toHex4(execaddr));
-			System.out.println();
-			fileName = fileName.replace("/", "_");
-			// Flush the ATM FIle
-			FileOutputStream fos = new FileOutputStream(dstFile + "/" + fileName + ".ATM");
-			writeATMFile(fos, dstFile.getName(), loadaddr, execaddr, databytes);
+	private void log(MODE mode, String message) {
+		if (mode == MODE.PROCESS) {
+			System.out.println(message);
 		}
 	}
-
-	private void reset() {
-		data = new ByteArrayOutputStream();
-		expectedBlockNum = 0;
-		seenGoodBlock = false;
-	}
-	
+			
 	public static final void main(String[] args) {
 		try {
 			if (args.length != 2) {
