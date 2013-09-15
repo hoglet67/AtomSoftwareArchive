@@ -300,6 +300,7 @@ public class Convert {
 						}
 						numMissingBlocks += (blocknum - expectedBlockNum);
 						expectedBlockNum = blocknum;
+						seenBadBlock = true;
 					}
 				}
 
@@ -359,16 +360,21 @@ public class Convert {
 
 					// When processing, we can do better
 
-					if (fileName != null && expectedBlockNum == fileBlockMap.get(fileName)) {
+					if (fileName != null && fileBlockMap.containsKey(fileName) && expectedBlockNum == fileBlockMap.get(fileName)) {
+
+						fileName = fileName.replace("/", "_");
+						if (seenBadBlock) {
+							fileName = "e" + fileName;
+						}
 
 						byte[] databytes = data.toByteArray();
 						log(mode, "");
 						log(mode, "    Writing " + fileName + " " + toHex4(loadaddr) + " +" + toHex4(databytes.length) + " "
 								+ toHex4(execaddr));
 						log(mode, "");
-						fileName = fileName.replace("/", "_");
+
 						// Flush the ATM FIle
-						FileOutputStream fos = new FileOutputStream(dstFile + "/" + fileName + ".ATM");
+						FileOutputStream fos = new FileOutputStream(dstFile + "/" + fileName);
 						writeATMFile(fos, fileName, loadaddr, execaddr, databytes);
 	
 						if (!seenBadBlock) {
@@ -409,59 +415,71 @@ public class Convert {
 		}
 	}
 
-	public static Map<String, Integer> processWav(File dstDir, File srcFile) throws IOException {
+	public static Map<String, Integer> processSource(File dstDir, File srcFile) throws IOException {
 
 		System.out.println("============================================");
 		System.out.println("@@@ " + srcFile.getName());
 		System.out.println("============================================");
 
-		WavToBits wavToBits = new WavToBits(srcFile);
-		double bitLength = wavToBits.process();
-		System.out.println("@@@ bitLength = " + bitLength);
+		byte[] bytes;
+
+		if (srcFile.getName().toLowerCase().endsWith(".wav")) { 
 		
-		Map<String, Integer> fileBlockMap = new HashMap<String, Integer>();
-		
-		int best = -1;
-		int bestThreshold1 = 0;
-		int bestThreshold2 = 0;
-		for (int threshold = 175; threshold < 275; threshold += 1) {
-			Convert c = new Convert(dstDir);
+			WavToBits wavToBits = new WavToBits(srcFile);
+			double bitLength = wavToBits.process();
+			System.out.println("@@@ bitLength = " + bitLength);
 			
-			byte[] bytes = wavToBits.sampleBytes(0, threshold, bitLength);
-			Map<String, Integer>  stats = c.process(MODE.SCAN, bytes, fileBlockMap);
+			Map<String, Integer> fileBlockMap = new HashMap<String, Integer>();
 			
-			int numGoodBlocks = stats.get(NUM_GOOD_BLOCKS);
-			// System.out.println("@@@ Threshold = " + threshold + " numGoodBlocks = " + numGoodBlocks);
-			if (numGoodBlocks > best) {
-				best = numGoodBlocks;
-				bestThreshold1 = threshold;
-				bestThreshold2 = threshold;
-			} else if (numGoodBlocks == best) {
-				bestThreshold2 = threshold;
+			int best = -1;
+			int bestThreshold1 = 0;
+			int bestThreshold2 = 0;
+			for (int threshold = 175; threshold < 275; threshold += 1) {
+				Convert c = new Convert(dstDir);
+				
+				bytes = wavToBits.sampleBytes(0, threshold, bitLength);
+				Map<String, Integer>  stats = c.process(MODE.SCAN, bytes, fileBlockMap);
+				
+				int numGoodBlocks = stats.get(NUM_GOOD_BLOCKS);
+				// System.out.println("@@@ Threshold = " + threshold + " numGoodBlocks = " + numGoodBlocks);
+				if (numGoodBlocks > best) {
+					best = numGoodBlocks;
+					bestThreshold1 = threshold;
+					bestThreshold2 = threshold;
+				} else if (numGoodBlocks == best) {
+					bestThreshold2 = threshold;
+				}
 			}
+			int threshold = (bestThreshold1 + bestThreshold2) / 2;
+			System.out.println("@@@ Optimal sampling threshold range: " + bestThreshold1 + " to " + bestThreshold2 + "; using " + threshold);
+			Convert c = new Convert(dstDir);
+			bytes = wavToBits.sampleBytes(0, threshold, bitLength);
+			return c.convertToAtm(bytes);
+		} else if (srcFile.getName().toLowerCase().endsWith(".dat")) {
+
+			Convert c = new Convert(dstDir);
+			return c.convertToAtm(srcFile);
+
+		} else {
+			throw new RuntimeException("Unsupported file suffix: " + srcFile);
 		}
-		int threshold = (bestThreshold1 + bestThreshold2) / 2;
-		System.out.println("@@@ Optimal sampling threshold range: " + bestThreshold1 + " to " + bestThreshold2 + "; using " + threshold);
-		Convert c = new Convert(dstDir);
-		byte[] bytes = wavToBits.sampleBytes(0, threshold, bitLength);
-		return c.convertToAtm(bytes);
+		
 	}
 
 	public static final void main(String[] args) {
 		try {
 			if (args.length != 2) {
-				System.out.println("usage: java -jar atomwavtoatm.jar <Src Wav File or Diurectory> <Dst ATM Dir> ");
+				System.out.println("usage: java -jar atomwavtoatm.jar <Src Wav/Dat File or Diurectory> <Dst ATM Dir> ");
 				System.exit(1);
 			}
 			File src = new File(args[0]);
 			if (!src.exists()) {
-				System.out.println("Source Atom Dat File: " + src + " does not exist");
+				System.out.println("Source: " + src + " does not exist");
 				System.exit(1);
 			}
 
-			List<File> srcFiles = new ArrayList<File>()
-
-			;
+			List<File> srcFiles = new ArrayList<File>();
+			
 			File dstDir = new File(args[1]);
 			dstDir.mkdirs();
 
@@ -469,7 +487,7 @@ public class Convert {
 				for (String file : src.list(new FilenameFilter() {
 					@Override
 					public boolean accept(File dir, String name) {
-						return name.toLowerCase().endsWith(".wav");
+						return name.toLowerCase().endsWith(".wav") || name.toLowerCase().endsWith(".dat");
 					}
 				})) {
 					srcFiles.add(new File(src, file));
@@ -481,8 +499,11 @@ public class Convert {
 			Collections.sort(srcFiles);
 
 			Map<String, Integer> totalStats = null;
+			int i = 0;
 			for (File srcFile : srcFiles) {
-				Map<String, Integer>  stats = processWav(dstDir, srcFile);
+				File dir = new File(dstDir, "" + (i/10) + (i%10));
+				dir.mkdirs();
+				Map<String, Integer>  stats = processSource(dir, srcFile);
 				if (totalStats == null) {
 					totalStats = stats;
 				} else {
@@ -490,6 +511,7 @@ public class Convert {
 						totalStats.put(entry.getKey(), totalStats.get(entry.getKey()) + entry.getValue());
 					}
 				}
+				i++;
 			}
 
 			for (Map.Entry<String, Integer> entry : totalStats.entrySet()) {
