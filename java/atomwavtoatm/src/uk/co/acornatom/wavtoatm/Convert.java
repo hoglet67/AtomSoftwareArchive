@@ -38,6 +38,7 @@ public class Convert {
 
 	File dstFile;
 
+	
 	public Convert(File dstFile) {
 		this.dstFile = dstFile;
 	}
@@ -417,15 +418,22 @@ public class Convert {
 
 	public static Map<String, Integer> processSource(File dstDir, File srcFile) throws IOException {
 
+		int window1 = 8; // smooth wav by averaging over window1 samples
+		int window2 = 5; // smooth number of cycles in the next bit by averaging over bitlength / windows2 samples
+
 		System.out.println("============================================");
 		System.out.println("@@@ " + srcFile.getName());
 		System.out.println("============================================");
+		System.out.println("@@@ windows1 = " + window1);
+		System.out.println("@@@ windows2 = " + window2);
 
 		byte[] bytes;
 
 		if (srcFile.getName().toLowerCase().endsWith(".wav")) { 
 		
-			WavToBits wavToBits = new WavToBits(srcFile);
+			
+			WavToBits wavToBits = new WavToBits(srcFile, window1, window2);
+
 			double bitLength = wavToBits.process();
 			System.out.println("@@@ bitLength = " + bitLength);
 			
@@ -434,7 +442,15 @@ public class Convert {
 			int best = -1;
 			int bestThreshold1 = 0;
 			int bestThreshold2 = 0;
-			for (int threshold = 175; threshold < 275; threshold += 1) {
+			
+			int loThreshold = (int) (5 * bitLength / window2);  // 180 when window2=4
+			int hiThreshold = (int) (8 * bitLength / window2); // 288 when window2=4
+			int step = 4 / window2;
+			if (step < 1) {
+				step = 1;
+			}
+					
+			for (int threshold = loThreshold; threshold < hiThreshold; threshold += step) {
 				Convert c = new Convert(dstDir);
 				
 				bytes = wavToBits.sampleBytes(0, threshold, bitLength);
@@ -455,6 +471,8 @@ public class Convert {
 			Convert c = new Convert(dstDir);
 			bytes = wavToBits.sampleBytes(0, threshold, bitLength);
 			return c.convertToAtm(bytes);
+			
+			
 		} else if (srcFile.getName().toLowerCase().endsWith(".dat")) {
 
 			Convert c = new Convert(dstDir);

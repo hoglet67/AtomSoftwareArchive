@@ -11,8 +11,13 @@ public class WavToBits {
 
 	int[] samples;
 	
-	public WavToBits(File file) {
+	int window1;
+	int window2;
+
+	public WavToBits(File file, int window1, int window2) {
 		this.file = file;
+		this.window1 = window1;
+		this.window2 = window2;
 	}
 	
 	private void readWavIntoMemory() throws IOException {
@@ -239,7 +244,7 @@ public class WavToBits {
 		// dump_samples("Raw Samples", samples, start, num);
 
 		
-		sumOverWindow(8);
+		sumOverWindow(window1);
 		// dump_samples("Averaged Samples", samples, start, num);
 
 		// firLowPass();
@@ -258,7 +263,7 @@ public class WavToBits {
 		//dump_samples("Sign Changes In Next Bit", samples, start, num);
 		//dump_samples("Distribution 1", distribution(samples, 1), 0, Integer.MAX_VALUE);
 
-		sumOverWindow((int) (bitLength / 4 + 0.5));
+		sumOverWindow((int) (bitLength / window2 + 0.5));
 
 		//dump_samples("Sum Sign Changes In Next Bit", samples, start, num);
 		//dump_samples("Distribution 2", distribution(samples, 10), 0, Integer.MAX_VALUE);
