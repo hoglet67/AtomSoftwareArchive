@@ -66,7 +66,7 @@ public class WavToBits {
 		int[] periods = new int[max];
 		int last = 0;
 		for (int i = 0; i < max; i++) {
-			
+			periods[i] = 0;
 		}
 		for (int i = 0; i < samples.length; i++) {
 			if (samples[i] == 1) {
