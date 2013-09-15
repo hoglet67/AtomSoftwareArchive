@@ -183,15 +183,69 @@ public class WavToBits {
 	
 
 	
-	public double process() throws IOException {
-		readWavIntoMemory();
+	
+	/* Digital filter designed by mkfilter/mkshape/gencode   A.J. Fisher
+	   Command line: /www/usr/fisher/helpers/mkshape -c 8.1632653061e-02 5.0000000000e-01 49 -b 32 -l */
 
-		// int start = 0;
-		// int num = bitLength * 8 * 32 * 100 / 100;
+	public static final int NZEROS = 48;
+	public static final double GAIN = 6.148354331e+00;
 
-		sumOverWindow(8);
+
+	public static final double xcoeffs[] =
+	  { +0.0014238036, +0.0041723759, +0.0057208999, +0.0052471543,
+	    +0.0030231918, +0.0005984828, +0.0002603563, +0.0038301484,
+	    +0.0112339510, +0.0195500697, +0.0232207770, +0.0157618597,
+	    -0.0073046894, -0.0452109640, -0.0897075241, -0.1250676112,
+	    -0.1309608328, -0.0878430130, +0.0165169933, +0.1814231747,
+	    +0.3906075112, +0.6138704973, +0.8130303281, +0.9507802250,
+	    +0.9999999995, +0.9507802250, +0.8130303281, +0.6138704973,
+	    +0.3906075112, +0.1814231747, +0.0165169933, -0.0878430130,
+	    -0.1309608328, -0.1250676112, -0.0897075241, -0.0452109640,
+	    -0.0073046894, +0.0157618597, +0.0232207770, +0.0195500697,
+	    +0.0112339510, +0.0038301484, +0.0002603563, +0.0005984828,
+	    +0.0030231918, +0.0052471543, +0.0057208999, +0.0041723759,
+	    +0.0014238036,
+	  };
+
+	public void firLowPass() {
+		double[] xv = new double[NZEROS + 1];
+
+		double sum;
 		
-		//dump_samples("Raw Samples", samples, start, num);
+		for (int s = 0; s < samples.length; s++) {
+	        for (int i = 0; i < NZEROS; i++) {
+	        	xv[i] = xv[i+1];
+	        }
+	        xv[NZEROS] = samples[s] / GAIN;
+	        sum = 0.0;
+	        for (int i = 0; i <= NZEROS; i++) { 
+	        	sum += (xcoeffs[i] * xv[i]);
+	        }
+	        samples[s] = (int) (11 * sum);
+	      }
+	  }
+
+	
+	
+	
+	
+	public double process() throws IOException {
+
+		int start = (int) (31.2 * 44100);
+		int num = 147 * 8 * 32; // ~32 bits
+
+		
+		readWavIntoMemory();
+		// dump_samples("Raw Samples", samples, start, num);
+
+		
+		sumOverWindow(8);
+		// dump_samples("Averaged Samples", samples, start, num);
+
+		// firLowPass();
+
+		// dump_samples("Filtered Samples", samples, start, num);
+
 		differentiate();
 		//dump_samples("Differentiated Samples", samples, start, num);
 		negToPosSignChanges();

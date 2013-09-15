@@ -22,8 +22,11 @@ public class Convert {
 
 	public static final String NUM_GOOD_BLOCKS = "numGoodBlocks";
 	public static final String NUM_BAD_BLOCKS = "numBadBlocks";
-	public static final String NUM_MISSING_BLOCKS = "missingBlocks";
-	public static final String NUM_EXPECTED_BLOCKS = "expectedBlocks";
+	public static final String NUM_MISSING_BLOCKS = "numMissingBlocks";
+	public static final String NUM_EXPECTED_BLOCKS = "numExpectedBlocks";
+	public static final String NUM_GOOD_FILES = "numGoodFiles";
+	public static final String NUM_BAD_FILES = "numBadFiles";
+	public static final String NUM_EXPECTED_FILES = "numExpectedFiles";
 	
 	private enum STATE {
 		SYNC0, SYNC1, SYNC2, SYNC3, FILENAME, BLOCKFLAG, BLOCKNUMLO, BLOCKNUMHI, DATALEN, EXECHI, EXECLO, LOADHI, LOADLO, DATA, CKSUM
@@ -106,13 +109,14 @@ public class Convert {
 
 		int expectedBlocks = 0;
 		for (Map.Entry<String, Integer> entry : fileBlockMap.entrySet()) {
-			expectedBlocks += entry.getValue();
+			expectedBlocks += entry.getValue() + 1;
 		}
 
 		// Process
 		Map<String, Integer> stats = process(MODE.PROCESS, bytes, fileBlockMap);
 
 		stats.put(NUM_EXPECTED_BLOCKS, expectedBlocks);
+		stats.put(NUM_EXPECTED_FILES, fileBlockMap.size());
 		
 		return stats;
 	}
@@ -122,6 +126,8 @@ public class Convert {
 		int numGoodBlocks = 0;
 		int numBadBlocks = 0;
 		int numMissingBlocks = 0;
+		int numGoodFiles = 0;
+		int numBadFiles = 0;
 
 		STATE state = STATE.SYNC0;
 		STATE oldState = state;
@@ -143,6 +149,7 @@ public class Convert {
 		int expectedBlockNum = 0;
 
 		boolean seenGoodBlock = false;
+		boolean seenBadBlock = false;
 
 		if (mode == MODE.SCAN) {
 			fileBlockMap.clear();
@@ -305,6 +312,10 @@ public class Convert {
 						log(mode, "    ERROR: Inconsistent block flag: " + toHex2(blockflag) + " for block " + expectedBlockNum);
 					}
 				}
+				
+				if (!seenBadBlock && !cksumGood) {
+					seenBadBlock = true;
+				}
 
 				if (!seenGoodBlock && cksumGood) {
 
@@ -359,10 +370,17 @@ public class Convert {
 						// Flush the ATM FIle
 						FileOutputStream fos = new FileOutputStream(dstFile + "/" + fileName + ".ATM");
 						writeATMFile(fos, fileName, loadaddr, execaddr, databytes);
-
+	
+						if (!seenBadBlock) {
+							numGoodFiles++;
+						} else {
+							numBadFiles++;
+						}
+						
 						data = new ByteArrayOutputStream();
 						expectedBlockNum = 0;
 						seenGoodBlock = false;
+						seenBadBlock = false;
 
 					} else {
 						expectedBlockNum++;
@@ -380,6 +398,8 @@ public class Convert {
 		stats.put(NUM_GOOD_BLOCKS, numGoodBlocks);
 		stats.put(NUM_BAD_BLOCKS, numBadBlocks);
 		stats.put(NUM_MISSING_BLOCKS, numMissingBlocks);
+		stats.put(NUM_GOOD_FILES, numGoodFiles);
+		stats.put(NUM_BAD_FILES, numBadFiles);
 		return stats;
 	}
 
@@ -460,23 +480,21 @@ public class Convert {
 
 			Collections.sort(srcFiles);
 
-			int totalExpectedBlocks = 0;
-			int totalGoodBlocks = 0;
-			int totalBadBlocks = 0;
-			int totalMissingBlocks = 0;
+			Map<String, Integer> totalStats = null;
 			for (File srcFile : srcFiles) {
 				Map<String, Integer>  stats = processWav(dstDir, srcFile);
-				totalExpectedBlocks += stats.get(NUM_EXPECTED_BLOCKS);
-				totalGoodBlocks += stats.get(NUM_GOOD_BLOCKS);
-				totalBadBlocks += stats.get(NUM_BAD_BLOCKS);
-				totalMissingBlocks += stats.get(NUM_MISSING_BLOCKS);
+				if (totalStats == null) {
+					totalStats = stats;
+				} else {
+					for (Map.Entry<String, Integer> entry : stats.entrySet()) {
+						totalStats.put(entry.getKey(), totalStats.get(entry.getKey()) + entry.getValue());
+					}
+				}
 			}
-			
-			System.out.println("@@@ Total Expected Blocks " + totalExpectedBlocks);
-			System.out.println("@@@ Total Good Blocks " + totalGoodBlocks);
-			System.out.println("@@@ Total Bad Blocks " + totalBadBlocks);
-			System.out.println("@@@ Total Blocks " + (totalGoodBlocks + totalBadBlocks));
-			System.out.println("@@@ Total Missing Blocks " + totalMissingBlocks);
+
+			for (Map.Entry<String, Integer> entry : totalStats.entrySet()) {
+				System.out.println("@@@ " + entry.getKey() + " = " + entry.getValue());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
