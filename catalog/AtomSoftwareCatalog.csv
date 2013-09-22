@@ -799,7 +799,9 @@ RUN",Test,PONTOON,present,Wake up your Atom,,,
 570,V4,WUYA,Wake up your Atom,C.Book Listings,Fractions,Utility,,WUYA,8200,"CH.""FRACTION""",Test,FRACTION,present,Wake up your Atom,,,
 571,V5,NC,Non Comm,B.Non Commercial Software,Devil's Dungeon,Adventure,Jerry Lakin,NC,8200,"CH.""DUNGEON""",Works,DUNGEON,present,,,,
 572,V5,AT,Atomic S/W,A.Commercial Software,Dragon Writer,Business,,AT,8200,"CH.""DRAGON""",Works,DRAGON,present,,,,
-573,V5,ECCE,ECCE Prods,C.Book Listings,Alpha Beta Sort,Educational,,ECCE,8200,*LOAD ABSORT,Broken - need the book understand,ABSORT,present,Atomic Machine Code,,,
+573,V5,ECCE,ECCE Prods,C.Book Listings,Alpha Beta Sort,Educational,,ECCE,8200,"*LOAD ABSORT
+CH.""ABDEMO""",Works,"ABSORT
+ABDEMO",present,Atomic Machine Code,,,
 574,V5,ECCE,ECCE Prods,C.Book Listings,Auto Number,Educational,,ECCE,8200,*RUN AUTONUM,Works,AUTONUM,present,Atomic Machine Code,,,
 575,V5,ECCE,ECCE Prods,C.Book Listings,BRK & Page 0,Educational,,ECCE,8200,*LOAD BRKPAG0,Broken - need the book understand,BRKPAG0,present,Atomic Machine Code,,,
 576,V5,ECCE,ECCE Prods,C.Book Listings,*CAT Store,Educational,,ECCE,8200,"CH.""CATSTO""",Broken - need the book understand,CATSTO,present,Atomic Machine Code,,,
@@ -827,14 +829,10 @@ RUN",Works,CLOCK,present,Atomic Machine Code,,,
 RUN",Works,SEARCH,present,Atomic Machine Code,,,
 597,V5,ECCE,ECCE Prods,C.Book Listings,Transfer Test,Educational,,ECCE,8200,"CH.""TRANSF""",Works,TRANSF,present,Atomic Machine Code,,,
 598,V5,ECCE,ECCE Prods,C.Book Listings,Write Mode 4 (e),Educational,,ECCE,8200,*RUN WRTMODE4,Broken - corrupt,WRTMODE4,present,Atomic Machine Code,,,
-599,V5,NC,Non Comm,B.Non Commercial Software,BBC Lister,Utility,,HCAS,8200,"CH.""BBCLIST""","Works, but needs bbc prog as 8218",BBCLIST,present,Home Cassette,,,
-600,V5,PPBA,Non Comm,C.Book Listings,3D Surface (e),Graphics,,HCAS,8200,"CH.""3DSURF""",Broken - Corrupt and Duplicate (PPBA),3DSURF,duplicate,Home Cassette,,,
-601,V5,PP,Program Power,A.Commercial Software,Blitz (e),Game,,HCAS,8200,"CH.""BLITZ""",Broken - Currupt and Duplicate (PP),BLITZ,duplicate,Home Cassette,,,
-602,V5,C&VG,C&VG,D.Magazine Listings,Bug Battle (e),Game,,HCAS,8200,"CH.""BUGBAT""",Broken - Currupt and Duplicate (C&VG),BUGBAT,duplicate,Home Cassette,,,
-603,V5,ATAP,Atomic Theory,C.Book Listings,Clock (e),Utility,,HCAS,8200,"CH.""CLOCK""",Broken - Currupt and Duplicate (ATAP),CLOCK,duplicate,Home Cassette,,,
-604,V5,NC,Non Comm,B.Non Commercial Software,Error Messages,Utility,,HCAS,8200,"CH.""ERRDEMO""",Works,"ERRDEMO
+599,V5,NC,Non Comm,B.Non Commercial Software,BBC Lister,Utility,,NC,8200,"CH.""BBCLIST""","Works, but needs bbc prog as 8218",BBCLIST,present,,,,
+604,V5,YC,Your Computer,D.Magazine Listings,Easy Atom Codes,Utility,,YC,8200,"CH.""ERRDEMO""",Works,"ERRDEMO
 ERRPROG
-ERRTAB",present,Home Cassette,,,
+ERRTAB",present,,,,
 606,V5,PP,Prog Power,A.Commercial Software,Mode 4 VDU (2900),Utility,R.M.P. Hanson,PP,8200,*RUN VDU29,Works,VDU29,present,,,,
 607,V5,PP,Prog Power,A.Commercial Software,Mode 4 VDU (3400),Utility,R.M.P. Hanson,PP,8200,*RUN VDU34,Works,VDU34,present,,,,
 608,V5,PSI,Psion,A.Commercial Software,Screen Copy - EPS3B,Utility,,PSI,8200,*RUN EPS3B,Works - but need printer to test,EPS3B,present,,,,
