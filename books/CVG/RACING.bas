@@ -5,10 +5,10 @@
  4 F.B=0 TO 120;WAIT;N.;B=0
  5  DO B=B+1;P.$7"***FORMULA*one***";U.B=16
  6 F.B=1 TO 50;WAIT;N.;P.$12"          instructtions"' 
- 7 P." YOU ARE DRIVING A CAR ROUND A RACING TRACK."'
+ 7 P." YOU ARE DRIVING A CAR ROUND A  RACING TRACK."'
  8 P." THE OBJECT OF THE GAME IS TO"'"SURVIVE THE MOST "
- 9 P."NO. OF LAPS."'
-10 P."          'SHIFT' =LEFT"'"          'REPT.' =RIGHT"'''
+ 9 P."NO. OF LAPS."
+10 P.'"          'SHIFT' =LEFT"'"          'REPT.' =RIGHT"'''
 11 IN."COLOUR OF CAR:WHITE 1;BLACK:2"T
 12 IF T=1 R=2
 13 IF T=2 R=1
