@@ -95,6 +95,7 @@ package "atms/HARRY/*"   "$ARCHIVE/$RS/HARRY"
 package "atms/HYPERV/*"  "$ARCHIVE/$RS/HYPERV"
 package "atms/MINER/*"   "$ARCHIVE/$RS/MINER"
 package "atms/JUNGLE/*"  "$ARCHIVE/$RS/JUNGLE"
+package "atms/REPTON/*"  "$ARCHIVE/$RS/REPTON"
 
 package "atms/gamebase/229/*"  "$ARCHIVE/$RS/CASQUEST"
 package "atms/gamebase/229-DATA/*" "$ARCHIVE/$RS/CASQUEST"
