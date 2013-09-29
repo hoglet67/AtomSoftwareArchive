@@ -179,6 +179,15 @@ ENDIF
 	org load
 
 .L8000
+\ Atom/System Code Header
+\ =======================
+IF (target = target_system OR target = target_atom)
+ JSR LBFCF                     :\ Print inline text
+ EQUS "Acorn BASIC II":EQUB 13:EQUB 13
+ EQUS "(C)1982 Acorn":EQUB 13:EQUB 13
+ENDIF
+
+
 \ BBC Code Header
 \ ===============
 IF (target = target_bbc OR target = target_c64)
@@ -1627,6 +1636,7 @@ JSR L9857                 :\ Check end of statement
 LDA &18:STA &38           :\ Point &37/8 to PAGE
 LDA #&00:STA &37
 STA (&37),Y               :\ Remove end marker
+IF (target=target_atom):CLI:ENDIF
 JSR LBE6F                 :\ Check program and set TOP
 BNE L8AF3                 :\ Jump to clear heap and go to immediate mode
 
@@ -1744,8 +1754,14 @@ BNE L8B96                 :\ Otherwise, see if end of statement
 \ Embedded *command
 \ =================
 .L8B73
-JSR L986D                 :\ Update PtrA to current address
-LDX &0B:LDY &0C:JSR OS_CLI:\ Pass command at ptrA to OSCLI
+ JSR L986D                 :\ Update PtrA to current address
+ LDX &0B:LDY &0C
+
+IF (target=target_atom)
+JSR EMUL_OSCLI
+ELSE
+JSR OS_CLI:\ Pass command at ptrA to OSCLI
+ENDIF
 
 \ DATA, DEF, REM, ELSE
 \ ====================
@@ -3569,7 +3585,14 @@ BCC L9877:INC &0C
 .L9877
 LDY #&01:STY &0A
 .L987B
-BIT ESCFLG:BMI L9838      :\ If Escape set, jump to give error
+\ Atom TODO: Escape Handling not working
+IF (target = target_atom)
+    LDA &B001
+    AND #&20
+    BEQ L9838
+ELSE
+    BIT ESCFLG:BMI L9838      :\ If Escape set, jump to give error
+ENDIF
 .L987F
 RTS
 
@@ -9203,6 +9226,23 @@ IF (VALversion>=310)
  EQUS "3.10"
 ENDIF
 .LC000
+
+IF (target=target_atom)
+
+.EMUL_OSCLI
+ LDY #&01
+ LDX #&00
+ .EMUL_OSCLI1
+ LDA (&0B),Y:STA &0100,X      :\ Copy string onto stack
+ INY:INX:CMP #&0D:BNE EMUL_OSCLI1 :\ Atom OSCLI passed string at &100
+ JMP OS_CLI
+
+ENDIF
+
+
+
+
+
 
 .BeebDisEndAddr
 
