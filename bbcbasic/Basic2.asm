@@ -126,7 +126,7 @@ tknLOCAL=&EA
 tknMODE=&EB  
 tknON=&EE
 tknPRINT=&F1
-tknPROC=&F2 
+tknPROC=&F2
 tknREPEAT=&F5
 tknREPORT=&F6  
 tknSTOP=&FA
@@ -8965,7 +8965,13 @@ RTS
 .LBE62
 JSR LBEDD:TAY
 LDA #&FF:STY &3D
-LDX #&37:JSR OSFILE
+LDX #&37
+IF (target=target_atom)
+JSR EMUL_OSFILE
+ELSE
+JSR OSFILE
+ENDIF
+
 
 \ Scan program to check consistancy and find TOP
 \ ----------------------------------------------
@@ -9064,7 +9070,11 @@ IF (VALversion>=300)
  LDX &18:STX &42
 ENDIF
 TAY:LDX #&37
+IF (target=target_atom)
+JSR EMUL_OSFILE
+ELSE
 JSR OSFILE
+ENDIF
 JMP L8B9B
 
 \ LOAD string$
@@ -9207,24 +9217,99 @@ ENDIF
 IF (target=target_atom)
 
 .EMUL_OSCLI
-STX &b0
-STY &b1
+STX &a0
+STY &a1
 LDY #&00
 LDX #&00
 .EMUL_OSCLI1
-LDA (&b0),Y
+LDA (&a0),Y
 CMP #'*'
 BNE EMUL_OSCLI2
 INY
 BNE EMUL_OSCLI1
 .EMUL_OSCLI2
-LDA (&b0),Y
+LDA (&a0),Y
 STA &0100,X
 INX
 INY
 CMP #&0D
 BNE EMUL_OSCLI2
 JMP OS_CLI
+
+
+
+.EMUL_OSFILE
+	PHA
+	STX     $A0
+	STY     $A1
+
+;   Filename is at offset 0
+	LDY     #$00
+	LDA     ($A0),Y
+	STA     $A2
+	INY
+	LDA     ($A0),Y
+	STA     $A3
+	DEY
+.EMUL_OSFILE1
+	LDA     ($A2),Y
+	STA     $140,Y
+	INY
+	CMP	#$0D
+	BNE     EMUL_OSFILE1
+	LDA     #$40
+	STA     $A4
+	LDA     #$01
+	STA     $A5
+
+; 	Load Address is at offset $02 on the BBC
+
+	LDY     #$02
+	LDA     ($A0),Y
+	STA     $A6
+	INY
+	LDA     ($A0),Y
+	STA     $A7
+
+; 	Exec Address is at offset $06 on the BBC
+	LDY     #$06
+	LDA     ($A0),Y
+	STA     $A8
+	INY
+	LDA     ($A0),Y
+	STA     $A9
+
+; 	Start Address is at offset $0A on the BBC
+	LDY     #$0A
+	LDA     ($A0),Y
+	STA     $AA
+	INY
+	LDA     ($A0),Y
+	STA     $AB
+
+; 	End Address is at offset $0E on the BBC
+	LDY     #$0E
+	LDA     ($A0),Y
+	STA     $AC
+	INY
+	LDA     ($A0),Y
+	STA     $AD
+
+	LDX     #$A4
+	LDY     #$00
+	PLA
+	BEQ     EMUL_OSFILE2
+	SEC
+	JSR	OSLOAD
+	LDA 	#$01
+	RTS
+.EMUL_OSFILE2
+	SEC
+	JSR     OSSAVE
+	LDA 	#$01
+	RTS
+
+
 
 ENDIF
 
