@@ -41,10 +41,9 @@ IF (target = target_bbc)
 ENDIF
 :
 IF (target = target_atom)
-  load=&3F00
-   \ Code start address
-  ws=&2400     \ Offset from &400 to workspace
-  membot=&2800
+  load=&3F00   \ Code start address
+  ws=&0000     \ Offset from &400 to workspace
+  membot=&800
   memtop=load  \ Top of memory is start of code
   zp=&00       \ Zero page start address
   ZP00=&00:ZP01=&01 \ Tweek this later
