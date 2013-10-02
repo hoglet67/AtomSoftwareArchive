@@ -1,12 +1,39 @@
 \ > BBC_OS/S
 \ Source for Atom MOS interface for BBC BASIC
 
-CPU 1
 
 \ I/O Addresses
 \ -------------
 \ &7000 - 8255
 \ &7800 - 6522
+
+IO8255_0 = &7000
+IO8255_1 = IO8255_0 + 1
+IO8255_2 = IO8255_0 + 2
+IO8255_3 = IO8255_0 + 3
+
+IO6522_0 = &7800
+IO6522_1 = IO6522_0 + 1
+IO6522_2 = IO6522_0 + 2
+IO6522_3 = IO6522_0 + 3
+IO6522_4 = IO6522_0 + 4
+IO6522_5 = IO6522_0 + 5
+IO6522_6 = IO6522_0 + 6
+IO6522_7 = IO6522_0 + 7
+IO6522_8 = IO6522_0 + 8
+IO6522_9 = IO6522_0 + 9
+IO6522_A = IO6522_0 + 10
+IO6522_B = IO6522_0 + 11
+IO6522_C = IO6522_0 + 12
+IO6522_D = IO6522_0 + 13
+IO6522_E = IO6522_0 + 14
+IO6522_F = IO6522_0 + 15
+
+BBCBASIC = &8000
+
+MOSEXT = &C000
+
+SCREEN = &4000
 
 \ Memory Map
 \ ----------
@@ -97,7 +124,8 @@ BMI LF027       :\ F031= 30 F4       0t
 LDA #&7F        :\ F033= A9 7F       ).
 JSR OSWRCH      :\ F035= 20 EE FF     n.
 JMP LF030       :\ F038= 4C 30 F0    L0p
- 
+
+\ TODO: UNREACHABLE
 JMP LF027       :\ F03B= 4C 27 F0    L'p
  
 .LF03E
@@ -144,7 +172,7 @@ RTS             :\ F07E= 60          `
 
 
 \ OSWORD 2 - TIME=
-\ ================ 
+\ ================
 .LF07F
 STX &9E         :\ F07F= 86 9E       ..
 STY &9F         :\ F081= 84 9F       ..
@@ -191,11 +219,11 @@ INY             :\ F0B8= C8          H
 LDA (&9E),Y     :\ F0B9= B1 9E       1.
 STA &0318       :\ F0BB= 8D 18 03    ...
 LDA &0319       :\ F0BE= AD 19 03    -..
-STA &7808       :\ F0C1= 8D 08 78    ..x
+STA IO6522_8       :\ F0C1= 8D 08 78    ..x
 LDA &031A       :\ F0C4= AD 1A 03    -..
-STA &7809       :\ F0C7= 8D 09 78    ..x
+STA IO6522_9       :\ F0C7= 8D 09 78    ..x
 LDA #&A0        :\ F0CA= A9 A0       ) 
-STA &780E       :\ F0CC= 8D 0E 78    ..x
+STA IO6522_E       :\ F0CC= 8D 0E 78    ..x
 LDY &9F         :\ F0CF= A4 9F       $.
 RTS             :\ F0D1= 60          `
 
@@ -289,25 +317,25 @@ RTS
 \ Update Escape state by checking for Escape key pressed
 \ ------------------------------------------------------
 .LF17D
-LDA &7000:PHA
-AND #&F0:STA &7000
-LDA &7001:AND #&20:BEQ LF191
+LDA IO8255_0:PHA
+AND #&F0:STA IO8255_0
+LDA IO8255_1:AND #&20:BEQ LF191
 LDA #&00:BPL LF1A0            :\ Set 'No Escape'
 .LF191
-LDA #&20:STA &780E
+LDA #&20:STA IO6522_E
 LDA #&00:STA &0317:STA &0318  :\ ?Clear countdown timer?
 LDA #&FF                      :\ Set 'Escape pending'
 .LF1A0
-STA &FF:PLA:STA &7000:RTS
+STA &FF:PLA:STA IO8255_0:RTS
 
 
 \ 6522 INTERUPT
 \ =============
 .LF1A7
 AND #&40:BNE LF1C2           :\ Jump if not Timer1 interupt
-LDA &7002:EOR #&04:STA &7002 :\ Toggle a 8255 bit
-LDA &0319:STA &7808          :\ 
-LDA &031A:STA &7809          :\ 
+LDA IO8255_2:EOR #&04:STA IO8255_2 :\ Toggle a 8255 bit
+LDA &0319:STA IO6522_8          :\ 
+LDA &031A:STA IO6522_9          :\
 LDA &98:RTI                  :\ Restore A and return
 
 \ 6522 Timer2 Interupt
@@ -319,14 +347,14 @@ LDA &0317:BNE LF1D7:DEC &0318 :\
 .LF1D7
 DEC &0317:LDA &0317
 ORA &0318:BNE LF1E7
-LDA #&20:STA &780E            :\ Set 8255
+LDA #&20:STA IO6522_E            :\ Set 8255
 .LF1E7
 LDX #&00
 .LF1E9
 INC &0300,X:INX:CPX #&05:BEQ LF1F6
 LDA &02FF,X:BEQ LF1E9
 .LF1F6
-LDX &99:LDA &7804
+LDX &99:LDA IO6522_4
 LDA &98:RTI                   :\ Restore A and return
  
 .LF1FE
@@ -525,14 +553,14 @@ STA &0314       :\ F33A= 8D 14 03    ...
 LDA LF35B,Y     :\ F33D= B9 5B F3    9[s
 STA &0313       :\ F340= 8D 13 03    ...
 LDA LF365,Y     :\ F343= B9 65 F3    9es
-STA &7000       :\ F346= 8D 00 70    ..p
+STA IO8255_0       :\ F346= 8D 00 70    ..p
 RTS             :\ F349= 60          `
 
 .LF34A
 LDA #&40        :\ F34A= A9 40       )@
 .LF34C
-STA &4000,Y     :\ F34C= 99 00 40    ..@
-STA &4100,Y     :\ F34F= 99 00 41    ..A
+STA SCREEN,Y     :\ F34C= 99 00 40    ..@
+STA SCREEN+256,Y     :\ F34F= 99 00 41    ..A
 DEY             :\ F352= 88          .
 BNE LF34C       :\ F353= D0 F7       Pw
 BEQ LF335       :\ F355= F0 DE       p^
@@ -544,19 +572,18 @@ EQUB &4C
 EQUB &58
 
 .LF35B
-EQUB &6A           :\ F35B= 6A          j
-EQUB &C3        :\ F35C= C3          C
-EQUB &DC        :\ F35D= DC          \
-EQUB &F5
-EQUB &32
-
+EQUB <LF36A
+EQUB <LF3C3
+EQUB <LF3DC
+EQUB <LF3F5
+EQUB <LF432
 
 .LF360
-EQUB &F3        :\ F360= F3          s
-EQUB &F3        :\ F361= F3          s
-EQUB &F3        :\ F362= F3          s
-EQUB &F3        :\ F363= F3          s
-EQUB &F4        :\ F364= F4          t
+EQUB >LF36A
+EQUB >LF3C3
+EQUB >LF3DC
+EQUB >LF3F5
+EQUB >LF432
 
 .LF365
 EQUB &00
@@ -565,7 +592,7 @@ EQUB &70
 EQUB &B0
 EQUB &F0
 
-
+.LF36A
 LDA &BC         :\ F36A= A5 BC       %<
 ORA &BE         :\ F36C= 05 BE       .>
 BNE LF3C2       :\ F36E= D0 52       PR
@@ -627,6 +654,7 @@ STA (&C0),Y     :\ F3C0= 91 C0       .@
 .LF3C2
 RTS             :\ F3C2= 60          `
 
+.LF3C3
 LDA &BC         :\ F3C3= A5 BC       %<
 ORA &BE         :\ F3C5= 05 BE       .>
 BNE LF3C2       :\ F3C7= D0 F9       Py
@@ -642,7 +670,8 @@ SBC &BD         :\ F3D5= E5 BD       e=
 CMP #&40        :\ F3D7= C9 40       I@
 BCC LF40D       :\ F3D9= 90 32       .2
 RTS             :\ F3DB= 60          `
- 
+
+.LF3DC
 LDA &BC         :\ F3DC= A5 BC       %<
 ORA &BE         :\ F3DE= 05 BE       .>
 BNE LF3C2       :\ F3E0= D0 E0       P`
@@ -659,7 +688,8 @@ CMP #&60        :\ F3F0= C9 60       I`
 BCC LF40D       :\ F3F2= 90 19       ..
 .LF3F4
 RTS             :\ F3F4= 60          `
- 
+
+.LF3F5
 LDA &BC         :\ F3F5= A5 BC       %<
 ORA &BE         :\ F3F7= 05 BE       .>
 BNE LF3C2       :\ F3F9= D0 C7       PG
@@ -697,6 +727,7 @@ TAY             :\ F42B= A8          (
 LDA LF451,Y     :\ F42C= B9 51 F4    9Qt
 JMP LF3A8       :\ F42F= 4C A8 F3    L(s
 
+.LF432
 LDA &BC         :\ F432= A5 BC       %<
 ORA &BE         :\ F434= 05 BE       .>
 BNE LF3F4       :\ F436= D0 BC       P<
@@ -731,7 +762,7 @@ AND #&03        :\ F459= 29 03
 TAY             :\ F45B= A8          (
 LDA LF49D,Y     :\ F45C= B9 9D F4    9.t
 STA &0315       :\ F45F= 8D 15 03    ...
-LDA &7000       :\ F462= AD 00 70    -.p
+LDA IO8255_0       :\ F462= AD 00 70    -.p
 AND #&F0        :\ F465= 29 F0       )p
 CMP #&70        :\ F467= C9 70       Ip
 BNE LF477       :\ F469= D0 0C       P.
@@ -743,9 +774,9 @@ STA &4700,Y     :\ F471= 99 00 47    ..G
 DEY             :\ F474= 88          .
 BNE LF46E       :\ F475= D0 F7       Pw
 .LF477
-LDA &7000       :\ F477= AD 00 70    -.p
+LDA IO8255_0       :\ F477= AD 00 70    -.p
 AND #&DF        :\ F47A= 29 DF       )_
-STA &7000       :\ F47C= 8D 00 70    ..p
+STA IO8255_0       :\ F47C= 8D 00 70    ..p
 ROL A           :\ F47F= 2A          *
 ROL A           :\ F480= 2A          *
 ROL A           :\ F481= 2A          *
@@ -755,16 +786,20 @@ LDA LF491,Y     :\ F485= B9 91 F4    9.t
 STA &0313       :\ F488= 8D 13 03    ...
 LDA LF495,Y     :\ F48B= B9 95 F4    9.t
 STA &0314       :\ F48E= 8D 14 03    ...
+
+\ TODO: BAD STUFF HAPPENS HERE !!!
 .LF491
-LDA (&BF,X)     :\ F491= A1 BF       !?
-.LF493
-EQUB &D7        :\ F493= D7          W
-EQUB &06
+EQUB <LF4A1
+EQUB <LF4BF
+EQUB <LF4D7
+EQUB <LF506
+
 .LF495
-EQUB &F4         :\ F494= 06 F4       .t
-EQUB &F4        :\ F496= F4          t
-EQUB &F4        :\ F497= F4          t
-EQUB &F5
+EQUB >LF4A1
+EQUB >LF4BF
+EQUB >LF4D7
+EQUB >LF506
+
 .LF499
 EQUB &3F        :\ F498= F5 3F       u?
 EQUB &CF        :\ F49A= CF          O
@@ -774,6 +809,8 @@ EQUB &FC        :\ F49C= FC          |
 BRK             :\ F49D= 00          .
 EOR &AA,X       :\ F49E= 55 AA       U*
 EQUB &FF        :\ F4A0= FF          .
+
+.LF4A1
 LDA &BC         :\ F4A1= A5 BC       %<
 ORA &BE         :\ F4A3= 05 BE       .>
 BNE LF4EE       :\ F4A5= D0 47       PG
@@ -791,7 +828,8 @@ SBC &BD         :\ F4B8= E5 BD       e=
 CMP #&40        :\ F4BA= C9 40       I@
 BCC LF524       :\ F4BC= 90 66       .f
 RTS             :\ F4BE= 60          `
- 
+
+.LF4BF
 LDA &BC         :\ F4BF= A5 BC       %<
 ORA &BE         :\ F4C1= 05 BE       .>
 BNE LF4EE       :\ F4C3= D0 29       P)
@@ -806,7 +844,8 @@ SBC &BD         :\ F4D0= E5 BD       e=
 CMP #&40        :\ F4D2= C9 40       I@
 BCC LF51D       :\ F4D4= 90 47       .G
 RTS             :\ F4D6= 60          `
- 
+
+.LF4D7
 LDA &BC         :\ F4D7= A5 BC       %<
 ORA &BE         :\ F4D9= 05 BE       .>
 BNE LF4EE       :\ F4DB= D0 11       P.
@@ -822,13 +861,13 @@ CMP #&60        :\ F4EA= C9 60       I`
 BCC LF51D       :\ F4EC= 90 2F       ./
 .LF4EE
 RTS             :\ F4EE= 60          `
- 
+
 .LF4EF
 EOR #&FF        :\ F4EF= 49 FF       I.
 EOR (&C0),Y     :\ F4F1= 51 C0       Q@
 STA (&C0),Y     :\ F4F3= 91 C0       .@
 RTS             :\ F4F5= 60          `
- 
+
 .LF4F6
 TAX             :\ F4F6= AA          *
 AND (&C0),Y     :\ F4F7= 31 C0       1@
@@ -839,7 +878,8 @@ AND &0315       :\ F4FE= 2D 15 03    -..
 ORA (&C0),Y     :\ F501= 11 C0       .@
 STA (&C0),Y     :\ F503= 91 C0       .@
 RTS             :\ F505= 60          `
- 
+
+.LF506
 LDA &BC         :\ F506= A5 BC       %<
 ORA &BE         :\ F508= 05 BE       .>
 BNE LF4EE       :\ F50A= D0 E2       Pb
@@ -888,7 +928,7 @@ RTS             :\ F54E= 60          `
 
 \ OSWRCH HANDLER
 \ ==============
-.LF54F 
+.LF54F
 STY &A0:STX &9F:STA &9E   :\ Save registers
 LDX &0316:BEQ LF57F       :\ Jump if VDU queue empty
 STA &0305,X:DEX:STX &0316 :\ Store byte in VDU queue
@@ -1007,7 +1047,7 @@ BNE LF63F       :\ F64B= D0 F2       Pr
 INC &BC         :\ F64D= E6 BC       f<
 BNE LF63F       :\ F64F= D0 EE       Pn
 .LF651
-LDA &7000       :\ F651= AD 00 70    -.p
+LDA IO8255_0       :\ F651= AD 00 70    -.p
 AND #&F0        :\ F654= 29 F0       )p
 CMP #&F0        :\ F656= C9 F0       Ip
 BEQ LF666       :\ F658= F0 0C       p.
@@ -1033,7 +1073,7 @@ JSR LF6FA       :\ F67C= 20 FA F6     zv
 LDA #&FF        :\ F67F= A9 FF       ).
 STA &032C       :\ F681= 8D 2C 03    .,.
 .LF684
-LDA &7000       :\ F684= AD 00 70    -.p
+LDA IO8255_0       :\ F684= AD 00 70    -.p
 AND #&F0        :\ F687= 29 F0       )p
 CMP #&10        :\ F689= C9 10       I.
 BEQ LF695       :\ F68B= F0 08       p.
@@ -1074,7 +1114,7 @@ LSR &BE         :\ F6CD= 46 BE       F>
 ROR &BD         :\ F6CF= 66 BD       f=
 LSR &BE         :\ F6D1= 46 BE       F>
 ROR &BD         :\ F6D3= 66 BD       f=
-LDA &7000       :\ F6D5= AD 00 70    -.p
+LDA IO8255_0       :\ F6D5= AD 00 70    -.p
 AND #&F0        :\ F6D8= 29 F0       )p
 CMP #&A0        :\ F6DA= C9 A0       I 
 BCS LF6EA       :\ F6DC= B0 0C       0.
@@ -1168,7 +1208,7 @@ JSR LFAB8       :\ F76B= 20 B8 FA     8z
 .LF76E
 LDA &9E         :\ F76E= A5 9E       %.
 LDX &9F         :\ F770= A6 9F       &.
-LDY &A0         :\ F772= A4 A0       $ 
+LDY &A0         :\ F772= A4 A0       $
 RTS             :\ F774= 60          `
 
 
@@ -1193,10 +1233,10 @@ RTS             :\ F790= 60          `
 
 
 \ VDU 31,x,y - TAB
-\ ================ 
+\ ================
 .LF791
 LDX &0307       :\ F791= AE 07 03    ...
-CPX #&20        :\ F794= E0 20       ` 
+CPX #&20        :\ F794= E0 20       `
 BCS LF7B6       :\ F796= B0 1E       0.
 LDA &0306       :\ F798= AD 06 03    -..
 CMP #&10        :\ F79B= C9 10       I.
@@ -1217,10 +1257,8 @@ JSR LFD1D       :\ F7B3= 20 1D FD     .}
 .LF7B6
 JMP LF578       :\ F7B6= 4C 78 F5    Lxu
 
-.LF7B9 
-JSR &4F57       :\ F7B9= 20 57 4F     WO
-EOR (&4B)       :\ F7BC= 52 4B       RK
-EQUB &20:EQUB &2B :\ F7BE= 20 2B     +
+.LF7B9
+EQUS " WORK +"
 
 
 \ PRINT INLINE TEXT
@@ -1277,7 +1315,7 @@ INX             :\ F810= E8          h
 BNE LF82E       :\ F811= D0 1B       P.
 .LF813
 JMP LFA53       :\ F813= 4C 53 FA    LSz
- 
+
 .LF816
 INY             :\ F816= C8          H
 LDA &0100,Y     :\ F817= B9 00 01    9..
@@ -1467,7 +1505,8 @@ CLC             :\ F92A= 18          .
 ROR &DD         :\ F92B= 66 DD       f]
 PLP             :\ F92D= 28          (
 RTS             :\ F92E= 60          `
- 
+
+\ TODO: UNREACHABLE
 SEC             :\ F92F= 38          8
 ROR &DD         :\ F930= 66 DD       f]
 .LF932
@@ -1525,7 +1564,7 @@ JSR LFBB5       :\ F988= 20 B5 FB     5{
 PLP             :\ F98B= 28          (
 BEQ LF99E       :\ F98C= F0 10       p.
 LDA &DB         :\ F98E= A5 DB       %[
-AND #&20        :\ F990= 29 20       ) 
+AND #&20        :\ F990= 29 20       )
 ORA &EA         :\ F992= 05 EA       .j
 BNE LF979       :\ F994= D0 E3       Pc
 JSR LF969       :\ F996= 20 69 F9     iy
@@ -1586,6 +1625,8 @@ CMP &03,X       :\ F9EC= D5 03       U.
 .LF9EE
 RTS             :\ F9EE= 60          `
 
+\ TODO: UNREACHABLE
+
 DEX             :\ F9EF= CA          J
 JSR LFA4C       :\ F9F0= 20 4C FA     Lz
 STX &EA         :\ F9F3= 86 EA       .j
@@ -1610,7 +1651,7 @@ JSR LFB61       :\ FA07= 20 61 FB     a{
 BVS LFA0E       :\ FA0A= 70 02       p.
 PLP             :\ FA0C= 28          (
 RTS             :\ FA0D= 60          `
- 
+
 .LFA0E
 BEQ LFA1A       :\ FA0E= F0 0A       p.
 LDY #&00        :\ FA10= A0 00        .
@@ -1650,9 +1691,8 @@ CMP #&0D        :\ FA4F= C9 0D       I.
 BEQ LF9F5       :\ FA51= F0 A2       p"
 .LFA53
 BRK             :\ FA53= 00          .
-INC &5953,X     :\ FA54= FE 53 59    ~SY
-LSR &4154       :\ FA57= 4E 54 41    NTA
-CLI             :\ FA5A= 58          X
+EQUB &FE
+EQUS "SYNTAX"
 BRK             :\ FA5B= 00          .
 .LFA5C
 SEC             :\ FA5C= 38          8
@@ -1799,7 +1839,7 @@ LDA &DC         :\ FB46= A5 DC       %\
 JSR OSBPUT      :\ FB48= 20 D4 FF     T.
 LDX #&04        :\ FB4B= A2 04       ".
 .LFB4D
-STX &7002       :\ FB4D= 8E 02 70    ..p
+STX IO8255_2       :\ FB4D= 8E 02 70    ..p
 LDX #&78        :\ FB50= A2 78       "x
 BNE LFB56       :\ FB52= D0 02       P.
 .LFB54
@@ -1814,7 +1854,7 @@ RTS             :\ FB5C= 60          `
 LDX #&06        :\ FB5D= A2 06       ".
 BNE LFB56       :\ FB5F= D0 F5       Pu
 .LFB61
-BIT &7001       :\ FB61= 2C 01 70    ,.p
+BIT IO8255_1       :\ FB61= 2C 01 70    ,.p
 BPL LFB61       :\ FB64= 10 FB       .{
 BVC LFB61       :\ FB66= 50 F9       Py
 .LFB68
@@ -1823,7 +1863,7 @@ STA &C3         :\ FB6A= 85 C3       .C
 LDA #&10        :\ FB6C= A9 10       ).
 STA &C2         :\ FB6E= 85 C2       .B
 .LFB70
-BIT &7001       :\ FB70= 2C 01 70    ,.p
+BIT IO8255_1       :\ FB70= 2C 01 70    ,.p
 BPL LFB84       :\ FB73= 10 0F       ..
 BVC LFB84       :\ FB75= 50 0D       P.
 JSR LFC92       :\ FB77= 20 92 FC     .|
@@ -1835,7 +1875,7 @@ BNE LFB70       :\ FB82= D0 EC       Pl
 .LFB84
 BVS LFB87       :\ FB84= 70 01       p.
 RTS             :\ FB86= 60          `
- 
+
 .LFB87
 LDY #&04        :\ FB87= A0 04        .
 PHP             :\ FB89= 08          .
@@ -1897,7 +1937,7 @@ BPL LFBCB       :\ FBD2= 10 F7       .w
 LDA #&53        :\ FBD4= A9 53       )S
 STA &C4         :\ FBD6= 85 C4       .D
 LDX #&00        :\ FBD8= A2 00       ".
-LDY &7002       :\ FBDA= AC 02 70    ,.p
+LDY IO8255_2       :\ FBDA= AC 02 70    ,.p
 .LFBDD
 JSR LFCA2       :\ FBDD= 20 A2 FC     "|
 BEQ LFBE2       :\ FBE0= F0 00       p.
@@ -1941,7 +1981,7 @@ LDA #&06:BNE LFC15       :\ A=&06 for OPENIN/OPENOUT/CLOSE
 .LFC13
 LDA #&04                 :\ A=&04 for OPENUP
 .LFC15
-LDX #&07:STX &7002
+LDX #&07:STX IO8255_2
 BIT &EA:BNE LFC4B
 CMP #&05:BEQ LFC38:BCS LFC2D
 JSR LF7C0
@@ -1950,27 +1990,20 @@ BNE LFC42
 
 .LFC2D
 JSR LF7C0       :\ FC2D= 20 C0 F7     @w
-EOR (&45)       :\ FC30= 52 45       RE
-EQUB &43        :\ FC32= 43          C
-EQUB &4F        :\ FC33= 4F          O
-EOR (&44)       :\ FC34= 52 44       RD
+EQUS "RECORD"
 BNE LFC42       :\ FC36= D0 0A       P.
 .LFC38
 JSR LF7C0       :\ FC38= 20 C0 F7     @w
-EOR (&45)       :\ FC3B= 52 45       RE
-EQUB &57        :\ FC3D= 57          W
-EOR #&4E        :\ FC3E= 49 4E       IN
-EQUB &44        :\ FC40= 44          D
+EQUS "REWIND"
 NOP             :\ FC41= EA          j
 .LFC42
 JSR LF7C0       :\ FC42= 20 C0 F7     @w
-JSR &4154       :\ FC45= 20 54 41     TA
-BVC LFC8F       :\ FC48= 50 45       PE
+EQUS " TAPE"
 NOP             :\ FC4A= EA          j
 .LFC4B
 JSR OSRDCH      :\ FC4B= 20 E0 FF     `.
 JMP OSNEWL      :\ FC4E= 4C E7 FF    Lg.
- 
+
 
 \ OSBPUT HANDLER
 \ ==============
@@ -1989,7 +2022,7 @@ CLC             :\ FC64= 18          .
 .LFC65
 BCC LFC71       :\ FC65= 90 0A       ..
 LDX #&07        :\ FC67= A2 07       ".
-STX &7002       :\ FC69= 8E 02 70    ..p
+STX IO8255_2       :\ FC69= 8E 02 70    ..p
 JSR LFCAF       :\ FC6C= 20 AF FC     /|
 BMI LFC84       :\ FC6F= 30 13       0.
 .LFC71
@@ -1997,9 +2030,9 @@ LDY #&04        :\ FC71= A0 04        .
 .LFC73
 LDA #&04        :\ FC73= A9 04       ).
 .LFC75
-STA &7002       :\ FC75= 8D 02 70    ..p
+STA IO8255_2       :\ FC75= 8D 02 70    ..p
 JSR LFCAD       :\ FC78= 20 AD FC     -|
-INC &7002       :\ FC7B= EE 02 70    n.p
+INC IO8255_2       :\ FC7B= EE 02 70    n.p
 JSR LFCAD       :\ FC7E= 20 AD FC     -|
 DEY             :\ FC81= 88          .
 BNE LFC73       :\ FC82= D0 EF       Po
@@ -2017,7 +2050,7 @@ RTS             :\ FC91= 60          `
  
 .LFC92
 LDX #&00        :\ FC92= A2 00       ".
-LDY &7002       :\ FC94= AC 02 70    ,.p
+LDY IO8255_2       :\ FC94= AC 02 70    ,.p
 .LFC97
 INX             :\ FC97= E8          h
 BEQ LFCA1       :\ FC98= F0 07       p.
@@ -2029,7 +2062,7 @@ RTS             :\ FCA1= 60          `
  
 .LFCA2
 STY &C5         :\ FCA2= 84 C5       .E
-LDA &7002       :\ FCA4= AD 02 70    -.p
+LDA IO8255_2       :\ FCA4= AD 02 70    -.p
 TAY             :\ FCA7= A8          (
 EOR &C5         :\ FCA8= 45 C5       EE
 AND #&20        :\ FCAA= 29 20       ) 
@@ -2040,10 +2073,10 @@ LDX #&00        :\ FCAD= A2 00       ".
 .LFCAF
 LDA #&10        :\ FCAF= A9 10       ).
 .LFCB1
-BIT &7002       :\ FCB1= 2C 02 70    ,.p
+BIT IO8255_2       :\ FCB1= 2C 02 70    ,.p
 BEQ LFCB1       :\ FCB4= F0 FB       p{
 .LFCB6
-BIT &7002       :\ FCB6= 2C 02 70    ,.p
+BIT IO8255_2       :\ FCB6= 2C 02 70    ,.p
 BNE LFCB6       :\ FCB9= D0 FB       P{
 DEX             :\ FCBB= CA          J
 BPL LFCB1       :\ FCBC= 10 F3       .s
@@ -2069,7 +2102,7 @@ JMP LFE90       :\ FCDD= 4C 90 FE    L.~
 .LFCE0
 CLC             :\ FCE0= 18          .
 LDX #&00        :\ FCE1= A2 00       ".
-STX &7000       :\ FCE3= 8E 00 70    ..p
+STX IO8255_0       :\ FCE3= 8E 00 70    ..p
 .LFCE6
 LDX #&02        :\ FCE6= A2 02       ".
 .LFCE8
@@ -2084,7 +2117,7 @@ RTS             :\ FCEE= 60          `
 LDA #&05        :\ FCEF= A9 05       ).
 TAY             :\ FCF1= A8          (
 .LFCF2
-STA &7003       :\ FCF2= 8D 03 70    ..p
+STA IO8255_3       :\ FCF2= 8D 03 70    ..p
 .LFCF5
 DEX             :\ FCF5= CA          J
 BNE LFCF5       :\ FCF6= D0 FD       P}
@@ -2098,9 +2131,9 @@ RTS             :\ FCFD= 60          `
 \ =========== 
 .LFCFE
 PHA:JMP (&0200)     :\ Hand on to Atom NMIV
- 
+
 .LFD02
-CMP #&20        :\ FD02= C9 20       I 
+CMP #&20        :\ FD02= C9 20       I
 BCC LFD1D       :\ FD04= 90 17       ..
 ADC #&1F        :\ FD06= 69 1F       i.
 BMI LFD0C       :\ FD08= 30 02       0.
@@ -2108,10 +2141,12 @@ EOR #&60        :\ FD0A= 49 60       I`
 .LFD0C
 JSR LFE44       :\ FD0C= 20 44 FE     D~
 STA (&DE),Y     :\ FD0F= 91 DE       .^
+.LFD11
 INY             :\ FD11= C8          H
-CPY #&20        :\ FD12= C0 20       @ 
+CPY #&20        :\ FD12= C0 20       @
 BCC LFD1B       :\ FD14= 90 05       ..
 JSR LFDC5       :\ FD16= 20 C5 FD     E}
+.LFD19
 LDY #&00        :\ FD19= A0 00        .
 .LFD1B
 STY &E0         :\ FD1B= 84 E0       .`
@@ -2123,55 +2158,69 @@ EOR &E1         :\ FD23= 45 E1       Ea
 STA (&DE),Y     :\ FD25= 91 DE       .^
 PLA             :\ FD27= 68          h
 RTS             :\ FD28= 60          `
- 
+
+.LFD29
 JSR LFE0E       :\ FD29= 20 0E FE     .~
-LDA #&20        :\ FD2C= A9 20       ) 
+LDA #&20        :\ FD2C= A9 20       )
 JSR LFE44       :\ FD2E= 20 44 FE     D~
 STA (&DE),Y     :\ FD31= 91 DE       .^
 BPL LFD1B       :\ FD33= 10 E6       .f
+
+.LFD35
 JSR LFE0E       :\ FD35= 20 0E FE     .~
 JMP LFD1B       :\ FD38= 4C 1B FD    L.}
- 
+
+.LFD3B
 JSR LFDC5       :\ FD3B= 20 C5 FD     E}
 .LFD3E
 LDY &E0         :\ FD3E= A4 E0       $`
 BPL LFD1B       :\ FD40= 10 D9       .Y
+
+.LFD42
 LDY #&80        :\ FD42= A0 80        .
 STY &E1         :\ FD44= 84 E1       .a
 LDY #&00        :\ FD46= A0 00        .
-STY &7000       :\ FD48= 8C 00 70    ..p
-LDA #&20        :\ FD4B= A9 20       ) 
+STY IO8255_0       :\ FD48= 8C 00 70    ..p
+LDA #&20        :\ FD4B= A9 20       )
 .LFD4D
-STA &4000,Y     :\ FD4D= 99 00 40    ..@
-STA &4100,Y     :\ FD50= 99 00 41    ..A
+STA SCREEN,Y     :\ FD4D= 99 00 40    ..@
+STA SCREEN+256,Y     :\ FD50= 99 00 41    ..A
 INY             :\ FD53= C8          H
 BNE LFD4D       :\ FD54= D0 F7       Pw
+.LFD56
 LDA #&40        :\ FD56= A9 40       )@
 LDY #&00        :\ FD58= A0 00        .
 STA &DF         :\ FD5A= 85 DF       ._
 STY &DE         :\ FD5C= 84 DE       .^
 BEQ LFD1B       :\ FD5E= F0 BB       p;
+
+.LFD60
 JSR LFE13       :\ FD60= 20 13 FE     .~
 JMP LFD1B       :\ FD63= 4C 1B FD    L.}
 
+.LFD66
 CLC             :\ FD66= 18          .
 LDA #&10        :\ FD67= A9 10       ).
 STA &E6         :\ FD69= 85 E6       .f
+.LFD6B
 LDX #&08        :\ FD6B= A2 08       ".
 JSR LFCE8       :\ FD6D= 20 E8 FC     h|
 JMP LFD1D       :\ FD70= 4C 1D FD    L.}
- 
+
+.LFD73
 LDA &E7         :\ FD73= A5 E7       %g
 EOR #&60        :\ FD75= 49 60       I`
 STA &E7         :\ FD77= 85 E7       .g
 BCS LFD84       :\ FD79= B0 09       0.
+.LFD7B
 AND #&05        :\ FD7B= 29 05       ).
-ROL &7001       :\ FD7D= 2E 01 70    ..p
-ROL A           :\ FD80= 2A          *
+ROL IO8255_1       :\ FD7D= 2E 01 70    ..p
+ROL A           :\ FD80= 2A
 JSR LFCBF       :\ FD81= 20 BF FC     ?|
 .LFD84
 JMP LFE73       :\ FD84= 4C 73 FE    Ls~
- 
+
+.LFD87
 LDY &E0         :\ FD87= A4 E0       $`
 JSR LFE44       :\ FD89= 20 44 FE     D~
 LDA (&DE),Y     :\ FD8C= B1 DE       1^
@@ -2179,30 +2228,38 @@ EOR &E1         :\ FD8E= 45 E1       Ea
 BMI LFD94       :\ FD90= 30 02       0.
 EOR #&60        :\ FD92= 49 60       I`
 .LFD94
-SBC #&20        :\ FD94= E9 20       i 
+SBC #&20        :\ FD94= E9 20       i
 JMP LFDC2       :\ FD96= 4C C2 FD    LB}
- 
-LDA #&5F        :\ FD99= A9 5F       )_
-EOR #&20        :\ FD9B= 49 20       I 
+
+.LFD99
+LDA #&5F        :\ FD99= A9 5F       )
+.LFD9B
+EOR #&20        :\ FD9B= 49 20       I
 BNE LFDC2       :\ FD9D= D0 23       P#
+.LFD9F
 EOR &E7         :\ FD9F= 45 E7       Eg
 .LFDA1
-BIT &7001       :\ FDA1= 2C 01 70    ,.p
+BIT IO8255_1       :\ FDA1= 2C 01 70    ,.p
 BMI LFDA8       :\ FDA4= 30 02       0.
 EOR #&60        :\ FDA6= 49 60       I`
 .LFDA8
 JMP LFDB8       :\ FDA8= 4C B8 FD    L8}
- 
+
+.LFDAB
 ADC #&39        :\ FDAB= 69 39       i9
 BCC LFDA1       :\ FDAD= 90 F2       .r
+.LFDAF
 EOR #&10        :\ FDAF= 49 10       I.
-BIT &7001       :\ FDB1= 2C 01 70    ,.p
+.LFDB1
+BIT IO8255_1       :\ FDB1= 2C 01 70    ,.p
 BMI LFDB8       :\ FDB4= 30 02       0.
 EOR #&10        :\ FDB6= 49 10       I.
 .LFDB8
 CLC             :\ FDB8= 18          .
-ADC #&20        :\ FDB9= 69 20       i 
-BIT &7001       :\ FDBB= 2C 01 70    ,.p
+ADC #&20        :\ FDB9= 69 20       i
+
+.LFDBB
+BIT IO8255_1       :\ FDBB= 2C 01 70    ,.p
 BVS LFDC2       :\ FDBE= 70 02       p.
 AND #&1F        :\ FDC0= 29 1F       ).
 .LFDC2
@@ -2229,14 +2286,14 @@ STY &E6         :\ FDDF= 84 E6       .f
 LDY #&20        :\ FDE1= A0 20         
 JSR LFE3F       :\ FDE3= 20 3F FE     ?~
 .LFDE6
-LDA &4000,Y     :\ FDE6= B9 00 40    9.@
-STA &3FE0,Y     :\ FDE9= 99 E0 3F    .`?
+LDA SCREEN,Y     :\ FDE6= B9 00 40    9.@
+STA SCREEN-32,Y     :\ FDE9= 99 E0 3F    .`?
 INY             :\ FDEC= C8          H
 BNE LFDE6       :\ FDED= D0 F7       Pw
 JSR LFE44       :\ FDEF= 20 44 FE     D~
 .LFDF2
-LDA &4100,Y     :\ FDF2= B9 00 41    9.A
-STA &40E0,Y     :\ FDF5= 99 E0 40    .`@
+LDA SCREEN+256,Y     :\ FDF2= B9 00 41    9.A
+STA SCREEN+224,Y     :\ FDF5= 99 E0 40    .`@
 INY             :\ FDF8= C8          H
 BNE LFDF2       :\ FDF9= D0 F7       Pw
 LDY #&1F        :\ FDFB= A0 1F        .
@@ -2295,10 +2352,10 @@ PLP             :\ FE3D= 28          (
 RTS             :\ FE3E= 60          `
 
 .LFE3F
-BIT &7002       :\ FE3F= 2C 02 70    ,.p
+BIT IO8255_2       :\ FE3F= 2C 02 70    ,.p
 BPL LFE3F       :\ FE42= 10 FB       .{
 .LFE44
-BIT &7002       :\ FE44= 2C 02 70    ,.p
+BIT IO8255_2       :\ FE44= 2C 02 70    ,.p
 BMI LFE44       :\ FE47= 30 FB       0{
 RTS             :\ FE49= 60          `
  
@@ -2309,9 +2366,9 @@ LDA #&20        :\ FE4D= A9 20       )
 .LFE4F
 LDX #&0A        :\ FE4F= A2 0A       ".
 .LFE51
-BIT &7001       :\ FE51= 2C 01 70    ,.p
+BIT IO8255_1       :\ FE51= 2C 01 70    ,.p
 BEQ LFE5E       :\ FE54= F0 08       p.
-INC &7000       :\ FE56= EE 00 70    n.p
+INC IO8255_0       :\ FE56= EE 00 70    n.p
 DEY             :\ FE59= 88          .
 DEX             :\ FE5A= CA          J
 BNE LFE51       :\ FE5B= D0 F4       Pt
@@ -2319,9 +2376,9 @@ LSR A           :\ FE5D= 4A          J
 .LFE5E
 PHP             :\ FE5E= 08          .
 PHA             :\ FE5F= 48          H
-LDA &7000       :\ FE60= AD 00 70    -.p
+LDA IO8255_0       :\ FE60= AD 00 70    -.p
 AND #&F0        :\ FE63= 29 F0       )p
-STA &7000       :\ FE65= 8D 00 70    ..p
+STA IO8255_0       :\ FE65= 8D 00 70    ..p
 PLA             :\ FE68= 68          h
 PLP             :\ FE69= 28          (
 BNE LFE4F       :\ FE6A= D0 E3       Pc
@@ -2329,14 +2386,14 @@ RTS             :\ FE6C= 60          `
 
 
 \ OSRDCH HANDLER
-\ ============== 
+\ ==============
 .LFE6D
 PHP             :\ FE6D= 08          .
 CLD             :\ FE6E= D8          X
 STX &E4         :\ FE6F= 86 E4       .d
 STY &E5         :\ FE71= 84 E5       .e
 .LFE73
-BIT &7002       :\ FE73= 2C 02 70    ,.p
+BIT IO8255_2       :\ FE73= 2C 02 70    ,.p
 BVC LFE7D       :\ FE76= 50 05       P.
 JSR LFE4A       :\ FE78= 20 4A FE     J~
 BCC LFE73       :\ FE7B= 90 F6       .v
@@ -2354,7 +2411,7 @@ JSR LFE9E       :\ FE8D= 20 9E FE     .~
 .LFE90
 LDA LFEBC,X     :\ FE90= BD BC FE    =<~
 STA &E2         :\ FE93= 85 E2       .b
-LDA #&FD        :\ FE95= A9 FD       )}
+LDA #>LFD11        :\ FE95= A9 FD       )}
 STA &E3         :\ FE97= 85 E3       .c
 TYA             :\ FE99= 98          .
 JMP (&00E2)     :\ FE9A= 6C E2 00    lb.
@@ -2394,25 +2451,33 @@ EQUB &20
 EQUB &21
 EQUB &3B
 
+\ LOW BYTE OF A JUMP TABLE INTO FD00 FOR OSRDCH (HIGH BYTE FD)
 
 .LFEBC
-ORA &1135,X     :\ FEBC= 1D 35 11    .5.
-EQUB &3B        :\ FEBF= 3B          ;
-RTS             :\ FEC0= 60          `
-
-EQUB &42        :\ FEC1= 42          B
-ORA &6B66,Y     :\ FEC2= 19 66 6B    .fk
-LSR &29,X       :\ FEC5= 56 29       V)
-CLV             :\ FEC7= B8          8
-EQUB &AB        :\ FEC8= AB          +
-EQUB &73        :\ FEC9= 73          s
-EQUB &7B        :\ FECA= 7B          {
-EQUB &BB        :\ FECB= BB          ;
-EQUB &87        :\ FECC= 87          .
-STA &B1B8,Y     :\ FECD= 99 B8 B1    .81
-EQUB &AF        :\ FED0= AF          /
-LDA (&9F,X)     :\ FED1= A1 9F       !.
-EQUB &9B        :\ FED3= 9B          .
+EQUB <LFD1D
+EQUB <LFD35
+EQUB <LFD11
+EQUB <LFD3B
+EQUB <LFD60
+EQUB <LFD42
+EQUB <LFD19
+EQUB <LFD66
+EQUB <LFD6B
+EQUB <LFD56
+EQUB <LFD29
+EQUB <LFDB8
+EQUB <LFDAB
+EQUB <LFD73
+EQUB <LFD7B
+EQUB <LFDBB
+EQUB <LFD87
+EQUB <LFD99
+EQUB <LFDB8
+EQUB <LFDB1
+EQUB <LFDAF
+EQUB <LFDA1
+EQUB <LFD9F
+EQUB <LFD9B
 
 .LFED4
 PHA             :\ FED4= 48          H
@@ -2422,29 +2487,29 @@ CMP #&03        :\ FED9= C9 03       I.
 BEQ LFF11       :\ FEDB= F0 34       p4
 CMP &FE         :\ FEDD= C5 FE       E~
 BEQ LFF0F       :\ FEDF= F0 2E       p.
-LDA &780C       :\ FEE1= AD 0C 78    -.x
+LDA IO6522_C       :\ FEE1= AD 0C 78    -.x
 AND #&0E        :\ FEE4= 29 0E       ).
 BEQ LFF0F       :\ FEE6= F0 27       p'
 PLA             :\ FEE8= 68          h
 .LFEE9
-BIT &7801       :\ FEE9= 2C 01 78    ,.x
+BIT IO6522_1       :\ FEE9= 2C 01 78    ,.x
 BMI LFEE9       :\ FEEC= 30 FB       0{
-STA &7801       :\ FEEE= 8D 01 78    ..x
+STA IO6522_1       :\ FEEE= 8D 01 78    ..x
 PHA             :\ FEF1= 48          H
-LDA &780C       :\ FEF2= AD 0C 78    -.x
+LDA IO6522_C       :\ FEF2= AD 0C 78    -.x
 AND #&F0        :\ FEF5= 29 F0       )p
 ORA #&0C        :\ FEF7= 09 0C       ..
-STA &780C       :\ FEF9= 8D 0C 78    ..x
+STA IO6522_C       :\ FEF9= 8D 0C 78    ..x
 ORA #&02        :\ FEFC= 09 02       ..
 BNE LFF0C       :\ FEFE= D0 0C       P.
 .LFF00
 LDA #&7F        :\ FF00= A9 7F       ).
-STA &7803       :\ FF02= 8D 03 78    ..x
-LDA &780C       :\ FF05= AD 0C 78    -.x
+STA IO6522_3       :\ FF02= 8D 03 78    ..x
+LDA IO6522_C       :\ FF05= AD 0C 78    -.x
 AND #&F0        :\ FF08= 29 F0       )p
 ORA #&0E        :\ FF0A= 09 0E       ..
 .LFF0C
-STA &780C       :\ FF0C= 8D 0C 78    ..x
+STA IO6522_C       :\ FF0C= 8D 0C 78    ..x
 .LFF0F
 PLA             :\ FF0F= 68          h
 
@@ -2454,7 +2519,7 @@ PLA             :\ FF0F= 68          h
 RTS             :\ FF10= 60          `
 
 .LFF11
-LDA &780C       :\ FF11= AD 0C 78    -.x
+LDA IO6522_C       :\ FF11= AD 0C 78    -.x
 AND #&F0        :\ FF14= 29 F0       )p
 BCS LFF0C       :\ FF16= B0 F4       0t
 
@@ -2469,16 +2534,16 @@ DEX:BPL LFF1A:TXS         :\ Clear stack
 TXA:INX
 STX &EA:STX &E1:STX &E7   :\ Clear some locations
 LDA #&0A:STA &FE
-LDA #&8A:STA &7003        :\ Set up 8255
-LDA #&07:STA &7002
+LDA #&8A:STA IO8255_3        :\ Set up 8255
+LDA #&07:STA IO8255_2
 JSR LF7C0                 :\ Print inline text
 EQUB 6:EQUB 12:EQUB 15    :\ Enable VDU, clear screen
 EQUS "BBC BASIC"
 EQUB 10:EQUB 10:EQUB 13
-LDA #&0E:STA &7804        :\ Set up 6522
-LDA #&27:STA &7805        :\
-LDA #&40:STA &780B        :\
-LDA #&C0:STA &780E        :\
+LDA #&0E:STA IO6522_4        :\ Set up 6522
+LDA #&27:STA IO6522_5        :\
+LDA #&40:STA IO6522_B        :\
+LDA #&C0:STA IO6522_E        :\
 LDA #&00:LDX #&04         :\
 .LFF64
 STA &0300,X:DEX:BPL LFF64 :\ Set TIME to zero
@@ -2486,18 +2551,18 @@ STA &0316:STA &0317
 STA &FF                   :\ Clear Escape flag
 LDA #&0E:STA &FD
 LDA #&80:STA &FE          :\ Point last error to BASIC copyright message
-LDA &C000                 :\ Is extension ROM present?
+LDA MOSEXT                 :\ Is extension ROM present?
 CMP #&AA:BNE LFF85        :\ No, skip past
-JSR &C001:CLI             :\ Call extension ROM
+JSR MOSEXT+1:CLI             :\ Call extension ROM
 .LFF85
-JMP &8000                 :\ Enter BASIC at &8000
+JMP BBCBASIC                 :\ Enter BASIC at &8000
 
 \ DEFAULT VECTORS
 \ ===============
 .LFF88
              :\ &200 - NMIV, initialised by DOS
              :\ &202 - BRKV, initialised by BASIC
-EQUW &8000   :\ &204 - IRQ1V
+EQUW BBCBASIC   :\ &204 - IRQ1V
 EQUW LFF10   :\ &206 - IRQ2V
 EQUW LF775   :\ &208 - CLIV
 EQUW LF0D2   :\ &20A - BYTEV
@@ -2517,7 +2582,7 @@ EQUW LFC0B   :\ &21C - FINDV
 .LFFA2
 STA &98:PLA:PHA          :\ Get pushed flags from stack
 AND #&10:BNE LFFBA       :\ Jump if BRK occured
-LDA &780D:AND #&60       :\ Check 6522 Timer1/Timer2 interupt status
+LDA IO6522_D:AND #&60       :\ Check 6522 Timer1/Timer2 interupt status
 BEQ LFFB4:JMP LF1A7      :\ Jump to process 6522 interupt
 .LFFB4
 LDA &98:PHA:JMP (&0204)  :\ Unrecognised, pass on to IRQ1V
