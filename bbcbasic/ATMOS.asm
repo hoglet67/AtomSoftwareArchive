@@ -7,12 +7,12 @@
 \ &7000 - 8255
 \ &7800 - 6522
 
-IO8255_0 = &7000
+IO8255_0 = &B000
 IO8255_1 = IO8255_0 + 1
 IO8255_2 = IO8255_0 + 2
 IO8255_3 = IO8255_0 + 3
 
-IO6522_0 = &7800
+IO6522_0 = &B800
 IO6522_1 = IO6522_0 + 1
 IO6522_2 = IO6522_0 + 2
 IO6522_3 = IO6522_0 + 3
@@ -29,11 +29,11 @@ IO6522_D = IO6522_0 + 13
 IO6522_E = IO6522_0 + 14
 IO6522_F = IO6522_0 + 15
 
-BBCBASIC = &8000
+BBCBASIC = &4000
 
 MOSEXT = &C000
 
-SCREEN = &4000
+SCREEN = &8000
 
 \ Memory Map
 \ ----------
@@ -974,18 +974,18 @@ LDA &032A:STA &0306
 JMP LF5D1                 :\ Continue into MODE
 
 \ VDU command sequences checked for, must be single character
-\ ----------------------------------------------------------- 
+\ -----------------------------------------------------------
 .LF5BD
 LDY &A0:LDX &9F:LDA &9E   :\ Get registers back
 CMP #&61:BMI LF5CE        :\ Not a lower-case character
-CMP #&7B:BPL LF5CE        
+CMP #&7B:BPL LF5CE
 SEC:SBC #&20              :\ Force lower case to upper case
 .LF5CE
 JMP LFE2B       :\ F5CE= 4C 2B FE    L+~
 
 
 \ VDU 22,n - MODE
-\ =============== 
+\ ===============
 .LF5D1
 LDA &0306       :\ F5D1= AD 06 03    -..
 STA &B3         :\ F5D4= 85 B3       .3
@@ -2073,7 +2073,7 @@ TAY             :\ FCA7= A8          (
 EOR &C5         :\ FCA8= 45 C5       EE
 AND #&20        :\ FCAA= 29 20       ) 
 RTS             :\ FCAC= 60          `
- 
+
 .LFCAD
 LDX #&00        :\ FCAD= A2 00       ".
 .LFCAF
@@ -2194,7 +2194,7 @@ STA SCREEN+256,Y     :\ FD50= 99 00 41    ..A
 INY             :\ FD53= C8          H
 BNE LFD4D       :\ FD54= D0 F7       Pw
 .LFD56
-LDA #&40        :\ FD56= A9 40       )@
+LDA #>SCREEN        :\ FD56= A9 40       )@
 LDY #&00        :\ FD58= A0 00        .
 STA &DF         :\ FD5A= 85 DF       ._
 STY &DE         :\ FD5C= 84 DE       .^
