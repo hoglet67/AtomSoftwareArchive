@@ -104,7 +104,7 @@ JMP LF0E6                :\ Otherwise, generate error
 
 
 \ OSWORD 0 - READ INPUT LINE
-\ ========================== 
+\ ==========================
 .LF019
 STX &A2:STY &A3:LDY #&04
 .LF01F
@@ -222,7 +222,7 @@ LDA &0319       :\ F0BE= AD 19 03    -..
 STA IO6522_8       :\ F0C1= 8D 08 78    ..x
 LDA &031A       :\ F0C4= AD 1A 03    -..
 STA IO6522_9       :\ F0C7= 8D 09 78    ..x
-LDA #&A0        :\ F0CA= A9 A0       ) 
+LDA #&A0        :\ F0CA= A9 A0       )
 STA IO6522_E       :\ F0CC= 8D 0E 78    ..x
 LDY &9F         :\ F0CF= A4 9F       $.
 RTS             :\ F0D1= 60          `
@@ -237,7 +237,10 @@ CMP #&81:BEQ LF12B       :\ Jump with INKEY
 CMP #&7E:BEQ LF0F9       :\ Jump with Escape Acknowledge
 CMP #&82:BEQ LF0F8       :\ Jump with address high word
 .LF0E6
-BRK:EQUB 254:EQUS "NOT IMPLEMENTED":EQUB 0
+BRK
+EQUB &FE
+EQUS "NOT IMPLEMENTED"
+EQUB 0
 
 \ OSBYTE &82 - Read address high word
 \ ===================================
@@ -299,7 +302,7 @@ TAX             :\ F165= AA          *
 LDY #&00        :\ F166= A0 00        .
 CLC             :\ F168= 18          .
 RTS             :\ F169= 60          `
- 
+
 .LF16A
 LDY #&FF:SEC:RTS
  
@@ -396,7 +399,7 @@ BEQ LF240       :\ F23A= F0 04       p.
 JSR LF301       :\ F23C= 20 01 F3     .s
 .LF23F
 RTS             :\ F23F= 60          `
- 
+
 .LF240
 LDX #&02        :\ F240= A2 02       ".
 .LF242
@@ -801,13 +804,15 @@ EQUB >LF4D7
 EQUB >LF506
 
 .LF499
-EQUB &3F        :\ F498= F5 3F       u?
+EQUB &3F        :\ F499= 3F          ?
 EQUB &CF        :\ F49A= CF          O
 EQUB &F3        :\ F49B= F3          s
 EQUB &FC        :\ F49C= FC          |
+
 .LF49D
-BRK             :\ F49D= 00          .
-EOR &AA,X       :\ F49E= 55 AA       U*
+EQUB &00        :\ F49D= 00          .
+EQUB &55        :\ F49E= 55          U
+EQUB &AA        :\ F49E= AA          *
 EQUB &FF        :\ F4A0= FF          .
 
 .LF4A1
@@ -1286,7 +1291,7 @@ INX             :\ F7E6= E8          h
 LDA &FE,X       :\ F7E7= B5 FE       5~
 JSR LF7F1       :\ F7E9= 20 F1 F7     qw
 .LF7EC
-LDA #&20        :\ F7EC= A9 20       ) 
+LDA #&20        :\ F7EC= A9 20       )
 JMP OSWRCH      :\ F7EE= 4C EE FF    Ln.
  
 .LF7F1
@@ -1363,7 +1368,8 @@ RTS             :\ F85A= 60          `
 BRK             :\ F85B= 00          .
 EQUB &FE
 EQUS "NAME"
-BRK
+EQUB 0
+
 .LF862
 INY             :\ F862= C8          H
 .LF863
@@ -1475,8 +1481,7 @@ JMP (&00C9)     :\ F8F7= 6C C9 00    lI.
 BRK
 EQUB &FE
 EQUS "BAD COMMAND"
-BRK
-
+EQUB 0
 
 \ OSARGS HANDLER
 \ ==============
@@ -1606,7 +1611,7 @@ BEQ LF9DB       :\ F9D2= F0 07       p.
 BRK             :\ F9D4= 00          .
 EQUB &FE
 EQUS "SUM?"
-BRK
+EQUB 0
 
 .LF9DB
 ROL &DB         :\ F9DB= 26 DB       &[
@@ -1693,7 +1698,8 @@ BEQ LF9F5       :\ FA51= F0 A2       p"
 BRK             :\ FA53= 00          .
 EQUB &FE
 EQUS "SYNTAX"
-BRK             :\ FA5B= 00          .
+EQUB 0
+
 .LFA5C
 SEC             :\ FA5C= 38          8
 LDA &D1         :\ FA5D= A5 D1       %Q
@@ -2362,7 +2368,7 @@ RTS             :\ FE49= 60          `
 .LFE4A
 LDY #&3B        :\ FE4A= A0 3B        ;
 CLC             :\ FE4C= 18          .
-LDA #&20        :\ FE4D= A9 20       ) 
+LDA #&20        :\ FE4D= A9 20       )
 .LFE4F
 LDX #&0A        :\ FE4F= A2 0A       ".
 .LFE51
@@ -2436,7 +2442,6 @@ EQUB &0E
 EQUB &0F
 EQUB &1E
 EQUB &7F
-
 EQUB &00
 EQUB &01
 EQUB &05
