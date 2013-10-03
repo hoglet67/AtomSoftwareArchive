@@ -31,10 +31,10 @@ IF (target = target_hybrid)
   hasTitle=FALSE
   \
   \MOS Entry Points:
-  OS_CLI=&DFF7:OSBYTE=&DFF4:OSWORD=&DFF1:OSWRCH=&DFEE
-  OSWRCR=&DFEC:OSNEWL=&DFE7:OSASCI=&DFE3:OSRDCH=&DFE0
-  OSFILE=&DFDD:OSARGS=&DFDA:OSBGET=&DFD7:OSBPUT=&DFD4
-  OSGBPB=&DFD1:OSFIND=&DFCE:BRKV=&202:WRCHV=&020E
+  OS_CLI=&FFF7:OSBYTE=&FFF4:OSWORD=&FFF1:OSWRCH=&FFEE
+  OSWRCR=&FFEC:OSNEWL=&FFE7:OSASCI=&FFE3:OSRDCH=&FFE0
+  OSFILE=&FFDD:OSARGS=&FFDA:OSBGET=&FFD7:OSBPUT=&FFD4
+  OSGBPB=&FFD1:OSFIND=&FFCE:BRKV=&202:WRCHV=&020E
   \
   \Dummy variables for non-BBC code
   OSECHO=00000:OSLOAD=00000:OSSAVE=00000
@@ -156,7 +156,7 @@ tknSTOP=&FA
 tknLOMEM=&92
 tknHIMEM=&93
 
-IF (target=target_atom OR target=target_hybrid)
+IF (target=target_atom)
 
 	org load - 22
 .AtmHeader
@@ -9337,14 +9337,12 @@ JMP OS_CLI
 ENDIF
 
 
-
-
-
-
 .BeebDisEndAddr
 
-IF (target = target_atom OR target = target_hybrid)
+IF (target = target_atom)
 SAVE "ATBASIC2",AtmHeader,BeebDisEndAddr
+ELIF (target = target_hybrid)
+SAVE "basic4000.rom",&4000, &8000
 ELSE
 SAVE "BBCBASIC2",&8000, &c000
 ENDIF
