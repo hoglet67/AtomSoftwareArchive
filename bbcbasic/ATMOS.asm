@@ -7,12 +7,29 @@
 \ &7000 - 8255
 \ &7800 - 6522
 
+ORIGINAL=0
+
+IF ORIGINAL
+BBCBASICENTRY = &8000
+BBCBASICCOPYRIGHT = &800E
+MOSEXT = &C000
+SCREEN = &4000
+IO8255_0 = &7000
+IO6522_0 = &7800
+ELSE
+BBCBASICENTRY = &4023
+BBCBASICCOPYRIGHT = &400E
+MOSEXT = &C000
+SCREEN = &8000
 IO8255_0 = &B000
+IO6522_0 = &B800
+ENDIF
+
+
 IO8255_1 = IO8255_0 + 1
 IO8255_2 = IO8255_0 + 2
 IO8255_3 = IO8255_0 + 3
 
-IO6522_0 = &B800
 IO6522_1 = IO6522_0 + 1
 IO6522_2 = IO6522_0 + 2
 IO6522_3 = IO6522_0 + 3
@@ -29,11 +46,6 @@ IO6522_D = IO6522_0 + 13
 IO6522_E = IO6522_0 + 14
 IO6522_F = IO6522_0 + 15
 
-BBCBASIC = &4000
-
-MOSEXT = &C000
-
-SCREEN = &8000
 
 \ Memory Map
 \ ----------
@@ -451,7 +463,7 @@ CMP &0312       :\ F292= CD 12 03    M..
 BNE LF298       :\ F295= D0 01       P.
 .LF297
 RTS             :\ F297= 60          `
- 
+
 .LF298
 JSR LF2DE       :\ F298= 20 DE F2     ^r
 LDA &BA         :\ F29B= A5 BA       %:
@@ -2554,20 +2566,20 @@ LDA #&00:LDX #&04         :\
 STA &0300,X:DEX:BPL LFF64 :\ Set TIME to zero
 STA &0316:STA &0317
 STA &FF                   :\ Clear Escape flag
-LDA #<(BBCBASIC + &0e):STA &FD
-LDA #>(BBCBASIC + &0e):STA &FE          :\ Point last error to BASIC copyright message
+LDA #<(BBCBASICCOPYRIGHT):STA &FD
+LDA #>(BBCBASICCOPYRIGHT):STA &FE          :\ Point last error to BASIC copyright message
 LDA MOSEXT                 :\ Is extension ROM present?
 CMP #&AA:BNE LFF85        :\ No, skip past
 JSR MOSEXT+1:CLI             :\ Call extension ROM
 .LFF85
-JMP BBCBASIC+&23                 :\ Enter BASIC at &8000
+JMP BBCBASICENTRY                 :\ Enter BASIC at &8000
 
 \ DEFAULT VECTORS
 \ ===============
 .LFF88
              :\ &200 - NMIV, initialised by DOS
              :\ &202 - BRKV, initialised by BASIC
-EQUW LF1C1   :\ &204 - IRQ1V
+EQUW BBCBASICENTRY   :\ &204 - IRQ1V
 EQUW LFF10   :\ &206 - IRQ2V
 EQUW LF775   :\ &208 - CLIV
 EQUW LF0D2   :\ &20A - BYTEV
