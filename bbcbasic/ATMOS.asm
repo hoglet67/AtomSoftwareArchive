@@ -147,7 +147,7 @@ DEY             :\ F042= 88          .
 BMI LF027       :\ F043= 30 E2       0b
 JSR OSWRCH      :\ F045= 20 EE FF     n.
 JMP LF029       :\ F048= 4C 29 F0    L)p
- 
+
 .LF04B
 JSR OSWRCH      :\ F04B= 20 EE FF     n.
 CMP #&0D        :\ F04E= C9 0D       I.
@@ -322,7 +322,7 @@ LDY #&FF:SEC:RTS
 PHP:JMP LFE8A
  
 \ OSBYTE &7E - Escape Acknoweldge
-\ =============================== 
+\ ===============================
 .LF172
 LDA &FF:BPL LF17C       :\ No pending Escape, exit
 JSR LF17D:JMP LF172     :\ Update Escape state, loop until no Escape
@@ -529,9 +529,10 @@ BNE LF2F9       :\ F2FC= D0 FB       P{
 INC &BC,X       :\ F2FE= F6 BC       v<
 RTS             :\ F300= 60          `
 
+\ Call the plot subrouting for the current screen mode
 .LF301
 JMP (&0313)     :\ F301= 6C 13 03    l..
- 
+
 .LF304
 LDY #&00        :\ F304= A0 00        .
 LDA #&07        :\ F306= A9 07       ).
@@ -546,7 +547,7 @@ CMP #&05        :\ F316= C9 05       I.
 BMI LF31C       :\ F318= 30 02       0.
 LDA #&04        :\ F31A= A9 04       ).
 .LF31C
-LDX #&40        :\ F31C= A2 40       "@
+LDX #>SCREEN    :\ F31C= A2 40       "@
 STX &B5         :\ F31E= 86 B5       .5
 STY &B4         :\ F320= 84 B4       .4
 STA &B3         :\ F322= 85 B3       .3
@@ -581,10 +582,10 @@ BNE LF34C       :\ F353= D0 F7       Pw
 BEQ LF335       :\ F355= F0 DE       p^
 
 .LF357
-EQUB &44
-EQUB &46
-EQUB &4C
-EQUB &58
+EQUB (>SCREEN) + &04 \ mode 6 = clear 1
+EQUB (>SCREEN) + &06 \ mode 5 = clear 2
+EQUB (>SCREEN) + &0c \ mode 4 = clear 3
+EQUB (>SCREEN) + &18 \ mode 3..0 = clear 4
 
 .LF35B
 EQUB <LF36A
@@ -607,6 +608,7 @@ EQUB &70
 EQUB &B0
 EQUB &F0
 
+ \ mode 7 = clear 0
 .LF36A
 LDA &BC         :\ F36A= A5 BC       %<
 ORA &BE         :\ F36C= 05 BE       .>
@@ -637,7 +639,7 @@ ASL A           :\ F392= 0A          .
 ASL A           :\ F393= 0A          .
 ORA &C0         :\ F394= 05 C0       .@
 STA &C0         :\ F396= 85 C0       .@
-LDA #&40        :\ F398= A9 40       )@
+LDA #>SCREEN    :\ F398= A9 40       )@
 ADC #&00        :\ F39A= 69 00       i.
 STA &C1         :\ F39C= 85 C1       .A
 LDA &BB         :\ F39E= A5 BB       %;
@@ -669,7 +671,8 @@ STA (&C0),Y     :\ F3C0= 91 C0       .@
 .LF3C2
 RTS             :\ F3C2= 60          `
 
-.LF3C3
+\ mode 6 = clear 1
+ .LF3C3
 LDA &BC         :\ F3C3= A5 BC       %<
 ORA &BE         :\ F3C5= 05 BE       .>
 BNE LF3C2       :\ F3C7= D0 F9       Py
@@ -686,6 +689,7 @@ CMP #&40        :\ F3D7= C9 40       I@
 BCC LF40D       :\ F3D9= 90 32       .2
 RTS             :\ F3DB= 60          `
 
+ \ mode 5 = clear 2
 .LF3DC
 LDA &BC         :\ F3DC= A5 BC       %<
 ORA &BE         :\ F3DE= 05 BE       .>
@@ -704,6 +708,7 @@ BCC LF40D       :\ F3F2= 90 19       ..
 .LF3F4
 RTS             :\ F3F4= 60          `
 
+ \ mode 4 = clear 3
 .LF3F5
 LDA &BC         :\ F3F5= A5 BC       %<
 ORA &BE         :\ F3F7= 05 BE       .>
@@ -719,6 +724,7 @@ SEC             :\ F406= 38          8
 SBC &BD         :\ F407= E5 BD       e=
 CMP #&C0        :\ F409= C9 C0       I@
 BCS LF3C2       :\ F40B= B0 B5       05
+
 .LF40D
 LDY #&00        :\ F40D= A0 00        .
 STY &C1         :\ F40F= 84 C1       .A
@@ -734,7 +740,7 @@ ROL &C1         :\ F41B= 26 C1       &A
 ADC &C0         :\ F41D= 65 C0       e@
 STA &C0         :\ F41F= 85 C0       .@
 LDA &C1         :\ F421= A5 C1       %A
-ADC #&40        :\ F423= 69 40       i@
+ADC #>SCREEN    :\ F423= 69 40       i@
 STA &C1         :\ F425= 85 C1       .A
 LDA &BB         :\ F427= A5 BB       %;
 AND #&07        :\ F429= 29 07       ).
@@ -742,6 +748,7 @@ TAY             :\ F42B= A8          (
 LDA LF451,Y     :\ F42C= B9 51 F4    9Qt
 JMP LF3A8       :\ F42F= 4C A8 F3    L(s
 
+ \ mode 3..0 = clear 4
 .LF432
 LDA &BC         :\ F432= A5 BC       %<
 ORA &BE         :\ F434= 05 BE       .>
@@ -761,6 +768,7 @@ STY &C1         :\ F44A= 84 C1       .A
 ASL A           :\ F44C= 0A          .
 ROL &C1         :\ F44D= 26 C1       &A
 BPL LF411       :\ F44F= 10 C0       .@
+
 .LF451
 EQUB &80
 EQUB &40
@@ -771,6 +779,8 @@ EQUB &08
 EQUB &04
 EQUB &02
 EQUB &01
+
+\ ONLY CALLED FROM UNREACHABLE CODE
 
 .LF459
 AND #&03        :\ F459= 29 03
@@ -1011,7 +1021,7 @@ JSR OSWRCH      :\ F5E4= 20 EE FF     n.
 JSR LF578       :\ F5E7= 20 78 F5     xu
 LDA #&07        :\ F5EA= A9 07       ).
 RTS             :\ F5EC= 60          `
- 
+
 .LF5ED
 JSR LF578       :\ F5ED= 20 78 F5     xu
 PHA             :\ F5F0= 48          H
@@ -1026,11 +1036,13 @@ JSR OSWRCH      :\ F603= 20 EE FF     n.
 JSR OSWRCH      :\ F606= 20 EE FF     n.
 PLA             :\ F609= 68          h
 RTS             :\ F60A= 60          `
- 
+
+\ TODO UNREACHABLE
+
 LDA &0306       :\ F60B= AD 06 03    -..
 JSR LF459       :\ F60E= 20 59 F4     Yt
 JMP LF578       :\ F611= 4C 78 F5    Lxu
- 
+
 .LF614
 LDA &030A       :\ F614= AD 0A 03    -..
 CMP #&40        :\ F617= C9 40       I@
@@ -1068,7 +1080,7 @@ LDA IO8255_0       :\ F651= AD 00 70    -.p
 AND #&F0        :\ F654= 29 F0       )p
 CMP #&F0        :\ F656= C9 F0       Ip
 BEQ LF666       :\ F658= F0 0C       p.
-CMP #&20        :\ F65A= C9 20       I 
+CMP #&20        :\ F65A= C9 20       I
 BCS LF662       :\ F65C= B0 04       0.
 LSR &BC         :\ F65E= 46 BC       F<
 ROR &BB         :\ F660= 66 BB       f;
@@ -1108,7 +1120,7 @@ ROR &BD         :\ F6A1= 66 BD       f=
 LSR &BE         :\ F6A3= 46 BE       F>
 ROR &BD         :\ F6A5= 66 BD       f=
 JMP LF6E2       :\ F6A7= 4C E2 F6    Lbv
- 
+
 .LF6AA
 LDA &0307       :\ F6AA= AD 07 03    -..
 ASL A           :\ F6AD= 0A          .
@@ -1133,7 +1145,7 @@ LSR &BE         :\ F6D1= 46 BE       F>
 ROR &BD         :\ F6D3= 66 BD       f=
 LDA IO8255_0       :\ F6D5= AD 00 70    -.p
 AND #&F0        :\ F6D8= 29 F0       )p
-CMP #&A0        :\ F6DA= C9 A0       I 
+CMP #&A0        :\ F6DA= C9 A0       I
 BCS LF6EA       :\ F6DC= B0 0C       0.
 CMP #&00        :\ F6DE= C9 00       I.
 BNE LF6E6       :\ F6E0= D0 04       P.
@@ -1151,7 +1163,7 @@ JSR LF70C       :\ F6F1= 20 0C F7     .w
 .LF6F4
 JSR LF1FE       :\ F6F4= 20 FE F1     ~q
 JMP LF578       :\ F6F7= 4C 78 F5    Lxu
- 
+
 .LF6FA
 SEC             :\ F6FA= 38          8
 LDA #&00        :\ F6FB= A9 00       ).
@@ -1161,7 +1173,7 @@ LDA #&00        :\ F703= A9 00       ).
 SBC &0305,X     :\ F705= FD 05 03    }..
 STA &0305,X     :\ F708= 9D 05 03    ...
 RTS             :\ F70B= 60          `
- 
+
 .LF70C
 SEC             :\ F70C= 38          8
 LDA #&00        :\ F70D= A9 00       ).
@@ -1178,7 +1190,7 @@ RTS             :\ F719= 60          `
 .LF71A
 STA &9E         :\ F71A= 85 9E       ..
 STX &9F         :\ F71C= 86 9F       ..
-STY &A0         :\ F71E= 84 A0       . 
+STY &A0         :\ F71E= 84 A0       .
 LDX #&A9        :\ F720= A2 A9       ")
 LDY #&03        :\ F722= A0 03        .
 .LF724
@@ -1322,7 +1334,7 @@ ADC #&06        :\ F800= 69 06       i.
 .LF802
 ADC #&30        :\ F802= 69 30       i0
 JMP OSWRCH      :\ F804= 4C EE FF    Ln.
- 
+
 .LF807
 JSR LF863       :\ F807= 20 63 F8     cx
 LDX #&00        :\ F80A= A2 00       ".
@@ -1989,7 +2001,7 @@ LDA &D5         :\ FC06= A5 D5       %U
 STA &CC         :\ FC08= 85 CC       .L
 .LFC0A
 RTS             :\ FC0A= 60          `
- 
+
 
 \ DEFAULT OSFIND HANDLER
 \ ======================
@@ -2286,7 +2298,7 @@ JMP LFE39       :\ FDC2= 4C 39 FE    L9~
 .LFDC5
 LDA &DE         :\ FDC5= A5 DE       %^
 LDY &DF         :\ FDC7= A4 DF       $_
-CPY #&41        :\ FDC9= C0 41       @A
+CPY #(>SCREEN)+1:\ FDC9= C0 41       @A
 BCC LFE05       :\ FDCB= 90 38       .8
 CMP #&E0        :\ FDCD= C9 E0       I`
 BCC LFE05       :\ FDCF= 90 34       .4
@@ -2315,21 +2327,21 @@ STA SCREEN+224,Y     :\ FDF5= 99 E0 40    .`@
 INY             :\ FDF8= C8          H
 BNE LFDF2       :\ FDF9= D0 F7       Pw
 LDY #&1F        :\ FDFB= A0 1F        .
-LDA #&20        :\ FDFD= A9 20       ) 
+LDA #&20        :\ FDFD= A9 20       )
 .LFDFF
 STA (&DE),Y     :\ FDFF= 91 DE       .^
 DEY             :\ FE01= 88          .
 BPL LFDFF       :\ FE02= 10 FB       .{
 RTS             :\ FE04= 60          `
- 
+
 .LFE05
-ADC #&20        :\ FE05= 69 20       i 
+ADC #&20        :\ FE05= 69 20       i
 STA &DE         :\ FE07= 85 DE       .^
 BNE LFE0D       :\ FE09= D0 02       P.
 INC &DF         :\ FE0B= E6 DF       f_
 .LFE0D
 RTS             :\ FE0D= 60          `
- 
+
 .LFE0E
 DEY             :\ FE0E= 88          .
 BPL LFE2A       :\ FE0F= 10 19       ..
@@ -2338,7 +2350,7 @@ LDY #&1F        :\ FE11= A0 1F        .
 LDA &DE         :\ FE13= A5 DE       %^
 BNE LFE22       :\ FE15= D0 0B       P.
 LDX &DF         :\ FE17= A6 DF       &_
-CPX #&40        :\ FE19= E0 40       `@
+CPX #>SCREEN    :\ FE19= E0 40       `@
 BNE LFE22       :\ FE1B= D0 05       P.
 PLA             :\ FE1D= 68          h
 PLA             :\ FE1E= 68          h
