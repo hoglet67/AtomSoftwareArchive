@@ -13,10 +13,33 @@ target_bbc=1
 target_atom=2
 target_system=3
 target_c64=4
+target_hybrid=5
 
-target=target_atom
+target=target_hybrid
 
 VALversion=200
+
+IF (target = target_hybrid)
+  load=&4000   \ Code start address
+  ws=&0000     \ Offset from &400 to workspace
+  membot=0     \ Use OSBYTE to find bottom of memory
+  memtop=0     \ Use OSBYTE to find top of memory
+  zp=&00       \ Zero page start address
+  ZP00=&00:ZP01=&01 \ Tweek this later
+  FAULT =&FD   \ Pointer to error block
+  ESCFLG=&FF   \ Escape pending flag
+  hasTitle=FALSE
+  \
+  \MOS Entry Points:
+  OS_CLI=&DFF7:OSBYTE=&DFF4:OSWORD=&DFF1:OSWRCH=&DFEE
+  OSWRCR=&DFEC:OSNEWL=&DFE7:OSASCI=&DFE3:OSRDCH=&DFE0
+  OSFILE=&DFDD:OSARGS=&DFDA:OSBGET=&DFD7:OSBPUT=&DFD4
+  OSGBPB=&DFD1:OSFIND=&DFCE:BRKV=&202:WRCHV=&020E
+  \
+  \Dummy variables for non-BBC code
+  OSECHO=00000:OSLOAD=00000:OSSAVE=00000
+  OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
+ENDIF
 
 IF (target = target_bbc)
   load=&8000   \ Code start address
@@ -40,6 +63,7 @@ IF (target = target_bbc)
   OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
 ENDIF
 :
+
 IF (target = target_atom)
   load=&3F00   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
@@ -93,46 +117,46 @@ ENDIF
 
 \
 \ BASIC token values
-tknAND=&80  
-tknDIV=&81   
-tknEOR=&82     
+tknAND=&80
+tknDIV=&81
+tknEOR=&82
 tknMOD=&83
 tknOR=&84
-tknERROR=&85 
-tknLINE=&86    
+tknERROR=&85
+tknLINE=&86
 tknOFF=&87
-tknSTEP=&88 
-tknSPC=&89   
-tknTAB=&8A     
+tknSTEP=&88
+tknSPC=&89
+tknTAB=&8A
 tknELSE=&8B
-tknTHEN=&8C 
-tknERL=&9E   
-tknEXT=&A2     
+tknTHEN=&8C
+tknERL=&9E
+tknEXT=&A2
 tknFN=&A4
-tknTO=&B8   
-tknAUTO=&C6  
+tknTO=&B8
+tknAUTO=&C6
 tknRENUMBER=&CC
 tknPTRc=&CF
 tknDATA=&DC
-tknDEF=&DD   
-tknDIM=&DE     
+tknDEF=&DD
+tknDIM=&DE
 tknEND=&E0
-tknFOR=&E3  
-tknGOSUB=&E4 
-tknGOTO=&E5    
+tknFOR=&E3
+tknGOSUB=&E4
+tknGOTO=&E5
 tknIF=&E7
 tknLOCAL=&EA
-tknMODE=&EB  
+tknMODE=&EB
 tknON=&EE
 tknPRINT=&F1
 tknPROC=&F2
 tknREPEAT=&F5
-tknREPORT=&F6  
+tknREPORT=&F6
 tknSTOP=&FA
 tknLOMEM=&92
 tknHIMEM=&93
 
-IF (target == target_atom)
+IF (target=target_atom OR target=target_hybrid)
 
 	org load - 22
 .AtmHeader
@@ -161,7 +185,7 @@ ENDIF
 
 \ BBC Code Header
 \ ===============
-IF (target = target_bbc OR target = target_c64)
+IF (target = target_bbc OR target = target_hybrid OR target = target_c64)
 CMP #&01:BEQ L8023:RTS        \ LANGUAGE ENTRY
 NOP
 EQUB &60                      \ ROM type=Lang+Tube+6502 BASIC
@@ -6963,7 +6987,7 @@ IF (VALversion>=300)
  \ =====================
  .XAEF7
  LDA &1E:BCC XAED3         \ Get COUNT, jump to return 8-bit integer
- 
+
  \ =LOMEM - Start of BASIC heap
  \ ============================
  .XAEFC
@@ -7766,7 +7790,7 @@ LDA &16:STA &0B           \ Point program point to ERROR program
 LDA &17:STA &0C
 JSR LBD3A                 \ Clear DATA and stack
 TAX:STX &0A
-LDA #&DA:JSR OSBYTE       \ Clear VDU queue
+LDA #&7E:JSR OSBYTE       \ Clear VDU queue TODO DMB CHANGED THIS
 LDA #&7E:JSR OSBYTE       \ Acknowlege any Escape state
 LDX #&FF:STX &28:TXS      \ Clear system stack
 JMP L8BA3                 \ Jump to execution loop
@@ -9319,7 +9343,7 @@ ENDIF
 
 .BeebDisEndAddr
 
-IF (target = target_atom)
+IF (target = target_atom OR target = target_hybrid)
 SAVE "ATBASIC2",AtmHeader,BeebDisEndAddr
 ELSE
 SAVE "BBCBASIC2",&8000, &c000

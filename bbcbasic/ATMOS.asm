@@ -127,7 +127,7 @@ JMP LF030       :\ F038= 4C 30 F0    L0p
 
 \ TODO: UNREACHABLE
 JMP LF027       :\ F03B= 4C 27 F0    L'p
- 
+
 .LF03E
 CMP #&7F        :\ F03E= C9 7F       I.
 BNE LF04B       :\ F040= D0 09       P.
@@ -202,7 +202,7 @@ RTS             :\ F0A0= 60          `
 
 
 \ OSWORD 7 - SOUND
-\ ================ 
+\ ================
 .LF0A1
 STX &9E         :\ F0A1= 86 9E       ..
 STY &9F         :\ F0A3= 84 9F       ..
@@ -337,7 +337,7 @@ STA &FF:PLA:STA IO8255_0:RTS
 .LF1A7
 AND #&40:BNE LF1C2           :\ Jump if not Timer1 interupt
 LDA IO8255_2:EOR #&04:STA IO8255_2 :\ Toggle a 8255 bit
-LDA &0319:STA IO6522_8          :\ 
+LDA &0319:STA IO6522_8          :\
 LDA &031A:STA IO6522_9          :\
 LDA &98:RTI                  :\ Restore A and return
 
@@ -359,7 +359,7 @@ LDA &02FF,X:BEQ LF1E9
 .LF1F6
 LDX &99:LDA IO6522_4
 LDA &98:RTI                   :\ Restore A and return
- 
+
 .LF1FE
 LDX #&03        :\ F1FE= A2 03       ".
 .LF200
@@ -510,7 +510,7 @@ DEC &BC,X       :\ F2F5= D6 BC       V<
 DEC &BB,X       :\ F2F7= D6 BB       V;
 .LF2F9
 RTS             :\ F2F9= 60          `
- 
+
 .LF2FA
 INC &BB,X       :\ F2FA= F6 BB       v;
 BNE LF2F9       :\ F2FC= D0 FB       P{
@@ -2554,20 +2554,20 @@ LDA #&00:LDX #&04         :\
 STA &0300,X:DEX:BPL LFF64 :\ Set TIME to zero
 STA &0316:STA &0317
 STA &FF                   :\ Clear Escape flag
-LDA #&0E:STA &FD
-LDA #&80:STA &FE          :\ Point last error to BASIC copyright message
+LDA #<(BBCBASIC + &0e):STA &FD
+LDA #>(BBCBASIC + &0e):STA &FE          :\ Point last error to BASIC copyright message
 LDA MOSEXT                 :\ Is extension ROM present?
 CMP #&AA:BNE LFF85        :\ No, skip past
 JSR MOSEXT+1:CLI             :\ Call extension ROM
 .LFF85
-JMP BBCBASIC                 :\ Enter BASIC at &8000
+JMP BBCBASIC+&23                 :\ Enter BASIC at &8000
 
 \ DEFAULT VECTORS
 \ ===============
 .LFF88
              :\ &200 - NMIV, initialised by DOS
              :\ &202 - BRKV, initialised by BASIC
-EQUW BBCBASIC   :\ &204 - IRQ1V
+EQUW LF1C1   :\ &204 - IRQ1V
 EQUW LFF10   :\ &206 - IRQ2V
 EQUW LF775   :\ &208 - CLIV
 EQUW LF0D2   :\ &20A - BYTEV
