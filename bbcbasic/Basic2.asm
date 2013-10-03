@@ -156,7 +156,7 @@ tknSTOP=&FA
 tknLOMEM=&92
 tknHIMEM=&93
 
-IF (target=target_atom)
+IF (target=target_atom OR target=target_hybrid)
 
 	org load - 22
 .AtmHeader
@@ -9342,7 +9342,7 @@ ENDIF
 IF (target = target_atom)
 SAVE "ATBASIC2",AtmHeader,BeebDisEndAddr
 ELIF (target = target_hybrid)
-SAVE "basic4000.rom",&4000, &8000
+SAVE "ATBASIC2", &3FEA, &8000
 ELSE
 SAVE "BBCBASIC2",&8000, &c000
 ENDIF
