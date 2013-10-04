@@ -126,36 +126,57 @@ L0320   = $0320
 L032A   = $032A
 L032B   = $032B
 L032C   = $032C
-L1EA9   = $1EA9
-L3FE0   = $3FE0
-L4000   = $4000
-L40E0   = $40E0
-L4100   = $4100
-L6000   = $6000
-L6001   = $6001
-L6004   = $6004
-L6FFA   = $6FFA
-L6FFC   = $6FFC
-L6FFE   = $6FFE
-L7000   = $7000
-L7001   = $7001
-L7002   = $7002
-L7003   = $7003
-L7801   = $7801
-L7803   = $7803
-L7804   = $7804
-L7805   = $7805
-L780B   = $780B
-L780C   = $780C
-L780D   = $780D
-L780E   = $780E
-L8000   = $8000
-L8015   = $8015
-LC000   = $C000
-LC001   = $C001
+
+
+
+ORIGINAL=1
+
+IF ORIGINAL
+BBCBASICENTRY = &8000
+BBCBASICCOPYRIGHT = &8015
+MOSEXT1 = &C000
+MOSEXT2 = &6000
+SCREEN = &4000
+IO8255_0 = &7000
+IO6522_0 = &7800
+ELSE
+BBCBASICENTRY = &4000
+BBCBASICCOPYRIGHT = &4015
+MOSEXT1 = &C000
+MOSEXT2 = &6000
+SCREEN = &8000
+IO8255_0 = &B000
+IO6522_0 = &B800
+ENDIF
+
+
+IO8255_1 = IO8255_0 + 1
+IO8255_2 = IO8255_0 + 2
+IO8255_3 = IO8255_0 + 3
+
+IO6522_1 = IO6522_0 + 1
+IO6522_2 = IO6522_0 + 2
+IO6522_3 = IO6522_0 + 3
+IO6522_4 = IO6522_0 + 4
+IO6522_5 = IO6522_0 + 5
+IO6522_6 = IO6522_0 + 6
+IO6522_7 = IO6522_0 + 7
+IO6522_8 = IO6522_0 + 8
+IO6522_9 = IO6522_0 + 9
+IO6522_A = IO6522_0 + 10
+IO6522_B = IO6522_0 + 11
+IO6522_C = IO6522_0 + 12
+IO6522_D = IO6522_0 + 13
+IO6522_E = IO6522_0 + 14
+IO6522_F = IO6522_0 + 15
+
+
+
 
         org     $F000
 .BeebDisStartAddr
+
+.LF000
         CMP     #$00
         BEQ     LF019
 
@@ -316,12 +337,12 @@ LC001   = $C001
 
 .LF0C3
         PHA
-        LDA     L6000
+        LDA     MOSEXT2
         CMP     #$BE
         BNE     LF0CF
 
         PLA
-        JMP     (L6FFC)
+        JMP     (MOSEXT2 + &FFC)
 
 .LF0CF
         JMP     LF53A
@@ -350,15 +371,9 @@ LC001   = $C001
 
 .LF0EE
         BRK
-.LF0EF
         EQUB    $FF
-
-.LF0F0
         EQUS    "Not implemented"
-
-.LF0FF
         EQUB    $00
-
 .LF100
         RTS
 
@@ -459,11 +474,11 @@ LC001   = $C001
         RTS
 
 .LF17D
-        LDA     L7000
+        LDA     IO8255_0
         PHA
         AND     #$F0
-        STA     L7000
-        LDA     L7001
+        STA     IO8255_0
+        LDA     IO8255_1
         AND     #$20
         BEQ     LF191
 
@@ -475,7 +490,7 @@ LC001   = $C001
 .LF193
         STA     L00FF
         PLA
-        STA     L7000
+        STA     IO8255_0
         RTS
 
 .LF19A
@@ -494,7 +509,7 @@ LC001   = $C001
 
 .LF1AE
         LDX     L00A1
-        LDA     L7804
+        LDA     IO6522_4
         LDA     L00FC
         RTI
 
@@ -504,9 +519,9 @@ LC001   = $C001
         TXA
         BNE     LF1B6
 
-        LDA     L7002
+        LDA     IO8255_2
         EOR     #$04
-        STA     L7002
+        STA     IO8255_2
         DEC     L0317
         BEQ     LF1CB
 
@@ -754,12 +769,12 @@ LC001   = $C001
 
         LDA     #$04
 .LF31C
-        LDX     #$40
+        LDX     #>SCREEN
         STX     L00B5
         STY     L00B4
         STA     L00B3
         TAX
-        LDA     LF356,X
+        LDA     LF357 - 1,X
         TAX
         TYA
 .LF32A
@@ -778,35 +793,46 @@ LC001   = $C001
         LDA     LF35B,Y
         STA     L0313
         LDA     LF365,Y
-        STA     L7000
+        STA     IO8255_0
         RTS
 
 .LF34A
         LDA     #$40
 .LF34C
-        STA     L4000,Y
-        STA     L4100,Y
+        STA     SCREEN,Y
+        STA     SCREEN+256,Y
         DEY
         BNE     LF34C
 
 .LF355
         BEQ     LF337
 
-        LF356   = LF355+1
 .LF357
-        EQUB    $44
-
-.LF358
-        EQUB    $46,$4C,$58
+        EQUB (>SCREEN) + &04 \ mode 6 = clear 1
+        EQUB (>SCREEN) + &06 \ mode 5 = clear 2
+        EQUB (>SCREEN) + &0c \ mode 4 = clear 3
+        EQUB (>SCREEN) + &18 \ mode 3..0 = clear 4
 
 .LF35B
-        EQUB    $6A,$C3,$DC,$F5,$32
+        EQUB <LF36A
+        EQUB <LF3C3
+        EQUB <LF3DC
+        EQUB <LF3F5
+        EQUB <LF432
 
 .LF360
-        EQUB    $F3,$F3,$F3,$F3,$F4
+        EQUB >LF36A
+        EQUB >LF3C3
+        EQUB >LF3DC
+        EQUB >LF3F5
+        EQUB >LF432
 
 .LF365
-        EQUB    $00,$30,$70,$B0,$F0
+        EQUB &00
+        EQUB &30
+        EQUB &70
+        EQUB &B0
+        EQUB &F0
 
 .LF36A
         LDA     L00BC
@@ -842,7 +868,7 @@ LC001   = $C001
         ASL     A
         ORA     L00C0
         STA     L00C0
-        LDA     #$40
+        LDA     #>SCREEN
         ADC     #$00
         STA     L00C1
         LDA     L00BB
@@ -876,6 +902,7 @@ LC001   = $C001
 .LF3C2
         RTS
 
+.LF3C3
         LDA     L00BC
         ORA     L00BE
         BNE     LF3C2
@@ -895,6 +922,7 @@ LC001   = $C001
 
         RTS
 
+.LF3DC
         LDA     L00BC
         ORA     L00BE
         BNE     LF3C2
@@ -915,6 +943,7 @@ LC001   = $C001
 .LF3F4
         RTS
 
+.LF3F5
         LDA     L00BC
         ORA     L00BE
         BNE     LF3C2
@@ -947,7 +976,7 @@ LC001   = $C001
         ADC     L00C0
         STA     L00C0
         LDA     L00C1
-        ADC     #$40
+        ADC     #>SCREEN
         STA     L00C1
         LDA     L00BB
         AND     #$07
@@ -955,6 +984,7 @@ LC001   = $C001
         LDA     LF451,Y
         JMP     LF3A8
 
+.LF432
         LDA     L00BC
         ORA     L00BE
         BNE     LF3F4
@@ -989,7 +1019,7 @@ LC001   = $C001
         JSR     LFFD4
 
         LDX     #$04
-        STX     L7002
+        STX     IO8255_2
 .LF461
         RTS
 
@@ -1023,7 +1053,7 @@ LC001   = $C001
 
 .LF483
         PHA
-        LDA     L6000
+        LDA     MOSEXT2
         CMP     #$BE
         BEQ     LF48F
 
@@ -1032,10 +1062,10 @@ LC001   = $C001
 
 .LF48F
         PLA
-        JMP     (L6FFE)
+        JMP     (MOSEXT2 + &FFE)
 
 .LF493
-        LDA     L8015
+        LDA     BBCBASICCOPYRIGHT
         CMP     #$31
         BEQ     LF4B2
 
@@ -1043,21 +1073,12 @@ LC001   = $C001
         BEQ     LF4B2
 
         JSR     LF7C0
-
-.LF4A1
         EQUB    $06
-
-.LF4A2
         EQUB    $0C
-
-.LF4A3
         EQUS    "Language?"
-
-.LF4AC
         EQUB    $0D,$0A
-
-.LF4AE
         NOP
+
 .LF4AF
         JMP     LF4AF
 
@@ -1074,7 +1095,7 @@ LC001   = $C001
         EQUS    "BBC Basic Issue "
 
 .LF4C8
-        LDA     L8015
+        LDA     BBCBASICCOPYRIGHT
         JSR     LFFEE
 
         JSR     LF7C0
@@ -1092,11 +1113,11 @@ LC001   = $C001
         EQUB    $0D,$0A
 
 .LF4E2
-        LDA     L6000
+        LDA     MOSEXT2
         CMP     #$BE
         BNE     LF4EC
 
-        JSR     L6004
+        JSR     MOSEXT2 + 4
 
 .LF4EC
         JSR     LFFE7
@@ -1105,7 +1126,7 @@ LC001   = $C001
 
         LDA     #$01
         CLI
-        JMP     L8000
+        JMP     BBCBASICENTRY
 
 .LF4F8
         BIT     L00DB
@@ -1134,7 +1155,7 @@ LC001   = $C001
         EQUB    $FF
 
 .LF50D
-        LDA     L6000
+        LDA     MOSEXT2
         CMP     #$BE
         BEQ     LF517
 
@@ -1151,9 +1172,12 @@ LC001   = $C001
 
 .LF526
         LDA     #$0D
-.LF528
-        BIT     L1EA9
-        LF529   = LF528+1
+        
+\ TODO: UNDERSTAND THIS
+
+        EQUB    $2C
+.LF529
+        LDA     #$1E
         JSR     LFFEE
 
         AND     #$0B
@@ -1303,76 +1327,29 @@ LC001   = $C001
 
         BRK
 .LF5E9
-        EQUS    "C"
-
-.LF5EA
-        EQUS    "AT"
-
-.LF5EC
-        EQUB    $FA
-
-.LF5ED
-        EQUB    $00
-
-.LF5EE
+        EQUS    "CAT"
+        EQUB    >LFA00
+        EQUB    <LFA00
         EQUS    "LOAD"
-
-.LF5F2
-        EQUB    $F9
-
-.LF5F3
-        EQUB    $32
-
-.LF5F4
+        EQUB    >LF932
+        EQUB    <LF932
         EQUS    "SAVE"
-
-.LF5F8
-        EQUB    $FA
-
-.LF5F9
-        EQUB    $91
-
-.LF5FA
+        EQUB    >LFA91
+        EQUB    <LFA91
         EQUS    "RUN"
-
-.LF5FD
-        EQUB    $F9
-
-.LF5FE
-        EQUB    $F6
-
-.LF5FF
+        EQUB    >LF9F6
+        EQUB    <LF9F6
         EQUS    "MON"
-
-.LF602
-        EQUB    $F9
-
-.LF603
-        EQUB    $F0
-
-.LF604
+        EQUB    >LF9F0
+        EQUB    <LF9F0
         EQUS    "NOMON"
-
-.LF609
-        EQUB    $F9
-
-.LF60A
-        EQUB    $EF
-
-.LF60B
+        EQUB    >LF9EF
+        EQUB    <LF9EF
         EQUS    "FLOAD"
-
-.LF610
-        EQUB    $F9
-
-.LF611
-        EQUB    $2F
-
-.LF612
-        EQUB    $F8
-
-.LF613
-        EQUB    $B6
+        EQUB    >LF92F
+        EQUB    <LF92F
+        EQUB    >LF8B6
+        EQUB    <LF8B6
 
 .LF614
         LDA     L030A
@@ -1414,7 +1391,7 @@ LC001   = $C001
         BNE     LF63F
 
 .LF651
-        LDA     L7000
+        LDA     IO8255_0
         AND     #$F0
         CMP     #$F0
         BEQ     LF666
@@ -1446,7 +1423,7 @@ LC001   = $C001
         LDA     #$FF
         STA     L032C
 .LF684
-        LDA     L7000
+        LDA     IO8255_0
         AND     #$F0
         CMP     #$10
         BEQ     LF695
@@ -1490,7 +1467,7 @@ LC001   = $C001
         ROR     L00BD
         LSR     L00BE
         ROR     L00BD
-        LDA     L7000
+        LDA     IO8255_0
         AND     #$F0
         CMP     #$A0
         BCS     LF6EA
@@ -1860,14 +1837,15 @@ LC001   = $C001
         PLA
         RTS
 
-        LDA     L6000
+.LF8B6
+        LDA     MOSEXT2
         CMP     #$BE
         BEQ     LF8C0
 
         JMP     LF8FA
 
 .LF8C0
-        JMP     (L6FFA)
+        JMP     (MOSEXT2 + &FFA)
 
 .LF8C3
         LDX     #$FF
@@ -1905,7 +1883,7 @@ LC001   = $C001
 
 .LF8ED
         STA     L00CA
-        LDA     LF5EA,X
+        LDA     LF5E9 + 1,X
         STA     L00C9
         CLC
         LDX     #$00
@@ -1955,6 +1933,7 @@ LC001   = $C001
         PLP
         RTS
 
+.LF92F
         SEC
         ROR     L00DD
 .LF932
@@ -2117,13 +2096,16 @@ LC001   = $C001
 .LF9EE
         RTS
 
+.LF9EF
         DEX
+.LF9F0
         JSR     LFA4C
 
         STX     L00EA
 .LF9F5
         RTS
 
+.LF9F6
         JSR     LF932
 
         BIT     L00DD
@@ -2131,6 +2113,7 @@ LC001   = $C001
 
         JMP     (L00D6)
 
+.LFA00
         PHP
         JSR     LFF84
 
@@ -2185,6 +2168,8 @@ LC001   = $C001
         BEQ     LFA53
 
         RTS
+
+\ TODO UNREACHABLE
 
         LDX     #$CB
         JSR     LFA3B
@@ -2251,6 +2236,7 @@ LC001   = $C001
         PLP
         RTS
 
+ .LFA91
         JSR     LF807
 
         LDX     #$CB
@@ -2387,9 +2373,11 @@ LC001   = $C001
         LDA     L00DC
         JMP     LF459
 
+\ TODO UNREACHABLE
+
         LDX     #$04
 .LFB4D
-        STX     L7002
+        STX     IO8255_2
         LDX     #$3C
         BNE     LFB56
 
@@ -2407,7 +2395,7 @@ LC001   = $C001
         BNE     LFB56
 
 .LFB61
-        BIT     L7001
+        BIT     IO8255_1
         BPL     LFB61
 
         BVC     LFB61
@@ -2418,7 +2406,7 @@ LC001   = $C001
         LDA     #$10
         STA     L00C2
 .LFB70
-        BIT     L7001
+        BIT     IO8255_1
         BPL     LFB84
 
         BVC     LFB84
@@ -2508,7 +2496,7 @@ LC001   = $C001
         LDA     #$14
         STA     L00C4
         LDX     #$00
-        LDY     L7002
+        LDY     IO8255_2
 .LFBDD
         JSR     LFCA2
 
@@ -2560,7 +2548,7 @@ LC001   = $C001
         LDA     #$04
 .LFC15
         LDX     #$07
-        STX     L7002
+        STX     IO8255_2
         BIT     L00EA
         BNE     LFC4B
 
@@ -2625,7 +2613,7 @@ LC001   = $C001
         BCC     LFC73
 
         LDX     #$07
-        STX     L7002
+        STX     IO8255_2
         LDX     #$01
         JSR     LFCAF
 
@@ -2633,10 +2621,10 @@ LC001   = $C001
 
 .LFC73
         LDA     #$04
-        STA     L7002
+        STA     IO8255_2
         JSR     LFCAD
 
-        INC     L7002
+        INC     IO8255_2
         JSR     LFCAD
 
         NOP
@@ -2656,7 +2644,7 @@ LC001   = $C001
 
 .LFC92
         LDX     #$00
-        LDY     L7002
+        LDY     IO8255_2
 .LFC97
         INX
         BEQ     LFCA1
@@ -2671,7 +2659,7 @@ LC001   = $C001
 
 .LFCA2
         STY     L00C5
-        LDA     L7002
+        LDA     IO8255_2
         TAY
         EOR     L00C5
         AND     #$20
@@ -2682,11 +2670,11 @@ LC001   = $C001
 .LFCAF
         LDA     #$10
 .LFCB1
-        BIT     L7002
+        BIT     IO8255_2
         BEQ     LFCB1
 
 .LFCB6
-        BIT     L7002
+        BIT     IO8255_2
         BNE     LFCB6
 
         DEX
@@ -2722,7 +2710,7 @@ LC001   = $C001
 .LFCE0
         CLC
         LDX     #$00
-        STX     L7000
+        STX     IO8255_0
 .LFCE6
         LDX     #$02
 .LFCE8
@@ -2739,7 +2727,7 @@ LC001   = $C001
         LDA     #$05
         TAY
 .LFCF4
-        STA     L7003
+        STA     IO8255_3
 .LFCF7
         DEX
         BNE     LFCF7
@@ -2764,12 +2752,14 @@ LC001   = $C001
         JSR     LFE44
 
         STA     (L00DE),Y
+.LFD11
         INY
         CPY     #$20
         BCC     LFD1B
 
         JSR     LFDC5
 
+.LFD19
         LDY     #$00
 .LFD1B
         STY     L00E0
@@ -2783,6 +2773,7 @@ LC001   = $C001
         PLA
         RTS
 
+.LFD29
         JSR     LFE0E
 
         LDA     #$20
@@ -2791,58 +2782,69 @@ LC001   = $C001
         STA     (L00DE),Y
         BPL     LFD1B
 
+.LFD35
         JSR     LFE0E
 
         JMP     LFD1B
 
+.LFD3B
         JSR     LFDC5
 
 .LFD3E
         LDY     L00E0
         BPL     LFD1B
 
+.LFD42
         LDY     #$80
         STY     L00E1
         LDY     #$00
-        STY     L7000
+        STY     IO8255_0
         LDA     #$20
 .LFD4D
-        STA     L4000,Y
-        STA     L4100,Y
+        STA     SCREEN,Y
+        STA     SCREEN+256,Y
         INY
         BNE     LFD4D
 
-        LDA     #$40
+.LFD56
+        LDA     #>SCREEN
         LDY     #$00
         STA     L00DF
         JMP     LF5E0
 
         NOP
+.LFD60
         JSR     LFE13
 
         JMP     LFD1B
 
+.LFD66
         CLC
         LDA     #$10
         STA     L00E6
+
+.LFD6B
         LDX     #$08
         JSR     LFCE8
 
         JMP     LFD1D
 
+.LFD73
         LDA     L00E7
         EOR     #$60
         STA     L00E7
         BCS     LFD84
 
+.LFD7B
         AND     #$05
-        ROL     L7001
+        ROL     IO8255_1
         ROL     A
         JSR     LFCBF
 
 .LFD84
         JMP     LFE73
 
+.LFD87
         LDY     L00E0
         JSR     LFE44
 
@@ -2855,31 +2857,38 @@ LC001   = $C001
         SBC     #$20
         JMP     LFDC2
 
+.LFD99
         LDA     #$5F
+.LFD9B
         EOR     #$20
         BNE     LFDC2
 
+.LFD9F
         EOR     L00E7
 .LFDA1
-        BIT     L7001
+        BIT     IO8255_1
         BMI     LFDA8
 
         EOR     #$60
 .LFDA8
         JMP     LFDB8
 
+.LFDAB
         ADC     #$39
         BCC     LFDA1
 
+.LFDAF
         EOR     #$10
-        BIT     L7001
+.LFDB1
+        BIT     IO8255_1
         BMI     LFDB8
 
         EOR     #$10
 .LFDB8
         CLC
         ADC     #$20
-        BIT     L7001
+.LFDBB
+        BIT     IO8255_1
         BVS     LFDC2
 
         AND     #$1F
@@ -2904,7 +2913,7 @@ LC001   = $C001
 .LFDD5
         LDA     L00DE
         LDY     L00DF
-        CPY     #$41
+        CPY     #(>SCREEN)+1
         BCC     LFE05
 
         CMP     #$E0
@@ -2914,16 +2923,16 @@ LC001   = $C001
         JSR     LFE3F
 
 .LFDE6
-        LDA     L4000,Y
-        STA     L3FE0,Y
+        LDA     SCREEN,Y
+        STA     SCREEN-32,Y
         INY
         BNE     LFDE6
 
         JSR     LFE44
 
 .LFDF2
-        LDA     L4100,Y
-        STA     L40E0,Y
+        LDA     SCREEN+256,Y
+        STA     SCREEN+224,Y
         INY
         BNE     LFDF2
 
@@ -2955,7 +2964,7 @@ LC001   = $C001
         BNE     LFE22
 
         LDX     L00DF
-        CPX     #$40
+        CPX     #>SCREEN
         BNE     LFE22
 
         PLA
@@ -2989,11 +2998,11 @@ LC001   = $C001
         RTS
 
 .LFE3F
-        BIT     L7002
+        BIT     IO8255_2
         BPL     LFE3F
 
 .LFE44
-        BIT     L7002
+        BIT     IO8255_2
         BMI     LFE44
 
         RTS
@@ -3005,10 +3014,10 @@ LC001   = $C001
 .LFE4F
         LDX     #$0A
 .LFE51
-        BIT     L7001
+        BIT     IO8255_1
         BEQ     LFE5E
 
-        INC     L7000
+        INC     IO8255_0
         DEY
         DEX
         BNE     LFE51
@@ -3017,9 +3026,9 @@ LC001   = $C001
 .LFE5E
         PHP
         PHA
-        LDA     L7000
+        LDA     IO8255_0
         AND     #$F0
-        STA     L7000
+        STA     IO8255_0
         PLA
         PLP
         BNE     LFE4F
@@ -3032,7 +3041,7 @@ LC001   = $C001
         STX     L00E4
         STY     L00E5
 .LFE73
-        BIT     L7002
+        BIT     IO8255_2
         BVC     LFE7D
 
         JSR     LFE4A
@@ -3059,7 +3068,7 @@ LC001   = $C001
 .LFE90
         LDA     LFEBC,X
         STA     L00E2
-        LDA     #$FD
+        LDA     #>LFD1B
         STA     L00E3
         TYA
         JMP     (L00E2)
@@ -3081,9 +3090,30 @@ LC001   = $C001
         EQUB    $0F,$10,$11,$1C,$20,$21,$3B
 
 .LFEBC
-        EQUB    $1D,$35,$11,$3B,$60,$42,$19,$66
-        EQUB    $6B,$56,$29,$B8,$AB,$73,$7B,$BB
-        EQUB    $87,$99,$B8,$B1,$AF,$A1,$9F,$9B
+        EQUB <LFD1D
+        EQUB <LFD35
+        EQUB <LFD11
+        EQUB <LFD3B
+        EQUB <LFD60
+        EQUB <LFD42
+        EQUB <LFD19
+        EQUB <LFD66
+        EQUB <LFD6B
+        EQUB <LFD56
+        EQUB <LFD29
+        EQUB <LFDB8
+        EQUB <LFDAB
+        EQUB <LFD73
+        EQUB <LFD7B
+        EQUB <LFDBB
+        EQUB <LFD87
+        EQUB <LFD99
+        EQUB <LFDB8
+        EQUB <LFDB1
+        EQUB <LFDAF
+        EQUB <LFDA1
+        EQUB <LFD9F
+        EQUB <LFD9B
 
 .LFED4
         PHA
@@ -3096,38 +3126,38 @@ LC001   = $C001
         CMP     L00FB
         BEQ     LFF0F
 
-        LDA     L780C
+        LDA     IO6522_C
         AND     #$0E
         BEQ     LFF0F
 
         PLA
 .LFEE9
-        BIT     L7801
+        BIT     IO6522_1
         BMI     LFEE9
 
-        STA     L7801
+        STA     IO6522_1
         PHA
-        LDA     L780C
+        LDA     IO6522_C
         AND     #$F0
         ORA     #$0C
-        STA     L780C
+        STA     IO6522_C
         ORA     #$02
         BNE     LFF0C
 
 .LFF00
         LDA     #$7F
-        STA     L7803
-        LDA     L780C
+        STA     IO6522_3
+        LDA     IO6522_C
         AND     #$F0
         ORA     #$0E
 .LFF0C
-        STA     L780C
+        STA     IO6522_C
 .LFF0F
         PLA
         RTS
 
 .LFF11
-        LDA     L780C
+        LDA     IO6522_C
         AND     #$F0
         BCS     LFF0C
 
@@ -3150,38 +3180,38 @@ LC001   = $C001
         LDA     #$0A
         STA     L00FB
         LDA     #$8A
-        STA     L7003
+        STA     IO8255_3
         LDA     #$07
-        STA     L7002
+        STA     IO8255_2
         LDA     #$20
         STA     L00EB
         LDA     #$0E
-        STA     L7804
+        STA     IO6522_4
         LDA     #$27
-        STA     L7805
+        STA     IO6522_5
         LDA     #$40
-        STA     L780B
+        STA     IO6522_B
         LDA     #$C0
-        STA     L780E
+        STA     IO6522_E
         LDA     #$0E
         STA     L00FD
         LDA     #$80
         STA     L00FE
-        LDA     L6000
+        LDA     MOSEXT2
         CMP     #$BE
         BNE     LFF6A
 
-        JSR     L6001
+        JSR     MOSEXT2 + 1
 
 .LFF6A
         JMP     LF493
 
 .LFF6D
-        LDA     LC000
+        LDA     MOSEXT1
         CMP     #$AA
         BNE     LFF77
 
-        JSR     LC001
+        JSR     MOSEXT1+1
 
 .LFF77
         RTS
@@ -3211,7 +3241,7 @@ LC001   = $C001
         EQUW    LF0EE
         EQUW    LF76C
         EQUW    LF0D2
-        EQUW    BeebDisStartAddr
+        EQUW    LF000
         EQUW    LF54F
         EQUW    LFE6D
         EQUW    LF71A
@@ -3244,7 +3274,7 @@ LC001   = $C001
         JMP     (L0202)
 
 .LFFBE
-        LDA     L780D
+        LDA     IO6522_D
         AND     #$40
         BEQ     LFFC8
 
@@ -3253,11 +3283,7 @@ LC001   = $C001
 .LFFC8
         JMP     (L0206)
 
-.LFFCB
-        EQUB    $00
-
-.LFFCC
-        EQUB    $00,$00
+        EQUB    $00,$00,$00
 
 .LFFCE
         JMP     (L021C)
@@ -3301,264 +3327,4 @@ LC001   = $C001
         EQUW    LFFA2
 
 .BeebDisEndAddr
-SAVE "BBCMOS3.ASM.bin",BeebDisStartAddr,BeebDisEndAddr
-
-
-; F000 C9 00 F0 15 C9 01 F0 0B C9 02 F0 73 C9 07 F0 06 -----------s----
-; F010 4C EE F0 4C 90 F0 4C A1 F0 86 A2 84 A3 A0 04 B1 L--L--L---------
-; F020 A2 99 A4 00 88 10 F8 C8 10 07 A9 07 88 C8 20 EE -------------- -
-; F030 FF 20 E0 FF C9 7F D0 07 C0 00 F0 F5 88 B0 EF C9 - --------------
-; F040 15 D0 0D 98 F0 EB A9 7F 20 EE FF 88 D0 FA F0 E1 -------- -------
-; F050 C9 1B F0 21 91 A4 C9 0D F0 14 C4 A6 B0 CC C5 A7 ---!------------
-; F060 90 06 C5 A8 F0 C7 90 C5 C9 20 90 C2 B0 C3 20 E7 --------- ---- -
-; F070 FF A2 00 18 60 A2 FF 86 FF 60 A9 83 4C F4 FF 86 ----`----`--L---
-; F080 9E 84 9F A0 04 B1 9E 99 00 03 88 10 F8 A4 9F 60 ---------------`
-; F090 86 9E 84 9F A0 04 B9 00 03 91 9E 88 10 F8 A4 9F ----------------
-; F0A0 60 86 9E 84 9F A0 07 B1 9E 8D 18 03 88 B1 9E 8D `---------------
-; F0B0 17 03 88 88 B1 9E 8D 19 03 A8 08 78 20 B6 F1 28 -----------x --(
-; F0C0 A4 9F 60 48 AD 00 60 C9 BE D0 04 68 6C FC 6F 4C --`H--`----hl-oL
-; F0D0 3A F5 C9 7E F0 2B C9 81 F0 51 C9 82 F0 22 C9 83 :--~-+---Q---"--
-; F0E0 F0 22 C9 84 F0 21 C9 86 F0 D9 C9 DA F0 12 00 FF -"---!----------
-; F0F0 4E 6F 74 20 69 6D 70 6C 65 6D 65 6E 74 65 64 00 Not implemented-
-; F100 60 4C 72 F1 4C D7 F1 48 20 7A F0 84 9F A9 00 AA `Lr-L--H z------
-; F110 A8 B1 9E 49 FF 91 9E D1 9E D0 0C 49 FF 91 9E E6 ---I-------I----
-; F120 9F A5 9F C9 40 90 EA A4 9F 68 60 8E 1B 03 8C 1C ----@----h`-----
-; F130 03 A2 00 8E 1F 03 8E 1E 03 8E 1D 03 A0 04 18 BD ----------------
-; F140 00 03 7D 1B 03 9D 20 03 E8 88 10 F3 20 4A FE 90 --}--- ----- J--
-; F150 11 A2 04 BD 20 03 DD 00 03 30 0F D0 EF CA 10 F3 ---- ----0------
-; F160 30 08 20 6E F1 AA A0 00 18 60 A0 FF 38 60 08 4C 0- n-----`--8`-L
-; F170 8A FE A5 FF 10 06 20 7D F1 4C 72 F1 60 AD 00 70 ------ }-Lr-`--p
-; F180 48 29 F0 8D 00 70 AD 01 70 29 20 F0 04 A9 00 F0 H)---p--p) -----
-; F190 02 A9 FF 85 FF 68 8D 00 70 60 86 A1 20 7D F1 A2 -----h--p`-- }--
-; F1A0 00 FE 00 03 E8 E0 05 F0 05 BD FF 02 F0 F3 A6 A1 ----------------
-; F1B0 AD 04 78 A5 FC 40 AA CA 8A D0 FB AD 02 70 49 04 --x--@-------pI-
-; F1C0 8D 02 70 CE 17 03 F0 03 98 D0 EB AD 18 03 F0 06 --p-------------
-; F1D0 CE 18 03 98 D0 E0 60 48 A9 00 A8 AA 85 9E A9 08 ------`H--------
-; F1E0 85 9F B1 9E 49 FF 91 9E D1 9E F0 0A E6 9F E6 9F ----I-----------
-; F1F0 E6 9F E6 9F D0 EC 49 FF 91 9E A4 9F 68 60 A2 03 ------I-----h`--
-; F200 BD 0F 03 95 B3 CA 10 F8 AD 0E 03 29 04 D0 13 A2 -----------)----
-; F210 02 18 B5 BB 75 B3 95 BB B5 BC 75 B4 95 BC CA CA ----u-----u-----
-; F220 10 EF A2 03 B5 BB 9D 0F 03 CA 10 F8 AD 0E 03 29 ---------------)
-; F230 03 F0 0C 85 BF AD 0E 03 29 08 F0 04 20 01 F3 60 --------)--- --`
-; F240 A2 02 38 B5 BB F5 B3 B4 B3 94 BB 95 B3 B4 B4 B5 --8-------------
-; F250 BC F5 B4 94 BC 95 B4 95 B7 10 0D A9 00 38 F5 B3 -------------8--
-; F260 95 B3 A9 00 F5 B4 95 B4 CA CA 10 D6 A5 B5 C5 B3 ----------------
-; F270 A5 B6 E5 B4 90 2F A9 00 E5 B5 85 B8 A9 00 E5 B6 -----/----------
-; F280 38 6A 85 BA 66 B8 20 01 F3 A5 BD CD 11 03 D0 08 8j--f- ---------
-; F290 A5 BE CD 12 03 D0 01 60 20 DE F2 A5 BA 30 E7 20 -------` ----0- 
-; F2A0 CD F2 4C 86 F2 A5 B4 4A 85 BA A5 B3 6A 85 B8 20 --L----J----j-- 
-; F2B0 01 F3 A5 BB CD 0F 03 D0 07 A5 BC CD 10 03 F0 D7 ----------------
-; F2C0 20 CD F2 A5 BA 10 E8 20 DE F2 4C AF F2 38 A5 B8  ------ --L--8--
-; F2D0 E5 B5 85 B8 A5 BA E5 B6 85 BA A2 00 F0 0F 18 A5 ----------------
-; F2E0 B8 65 B3 85 B8 A5 BA 65 B4 85 BA A2 02 B5 B7 10 -e-----e--------
-; F2F0 09 B5 BB D0 02 D6 BC D6 BB 60 F6 BB D0 FB F6 BC ---------`------
-; F300 60 6C 13 03 A0 00 A9 07 25 B3 85 B3 8D 2A 03 A9 `l------%----*--
-; F310 07 38 E5 B3 F0 34 C9 05 30 02 A9 04 A2 40 86 B5 -8---4--0----@--
-; F320 84 B4 85 B3 AA BD 56 F3 AA 98 91 B4 88 D0 FB E6 ------V---------
-; F330 B5 E4 B5 D0 F5 A4 B3 B9 60 F3 8D 14 03 B9 5B F3 --------`-----[-
-; F340 8D 13 03 B9 65 F3 8D 00 70 60 A9 40 99 00 40 99 ----e---p`-@--@-
-; F350 00 41 88 D0 F7 F0 E0 44 46 4C 58 6A C3 DC F5 32 -A-----DFLXj---2
-; F360 F3 F3 F3 F3 F4 00 30 70 B0 F0 A5 BC 05 BE D0 52 ------0p-------R
-; F370 A5 BB C9 40 B0 4C 4A 85 C0 A9 2F 38 E5 BD C9 30 ---@-LJ---/8---0
-; F380 B0 40 A2 FF 38 E8 E9 03 B0 FB 69 03 85 C2 8A 0A -@--8-----i-----
-; F390 0A 0A 0A 0A 05 C0 85 C0 A9 40 69 00 85 C1 A5 BB ---------@i-----
-; F3A0 4A A5 C2 2A A8 B9 53 F4 A0 00 A6 BF CA F0 0F CA J--*--S---------
-; F3B0 F0 07 49 FF 31 C0 91 C0 60 51 C0 91 C0 60 11 C0 --I-1---`Q---`--
-; F3C0 91 C0 60 A5 BC 05 BE D0 F9 A5 BB 30 F5 4A 4A 4A --`--------0-JJJ
-; F3D0 85 C0 A9 3F 38 E5 BD C9 40 90 32 60 A5 BC 05 BE ---?8---@-2`----
-; F3E0 D0 E0 A5 BB 30 DC 4A 4A 4A 85 C0 A9 5F 38 E5 BD ----0-JJJ---_8--
-; F3F0 C9 60 90 19 60 A5 BC 05 BE D0 C7 A5 BB 30 C3 4A -`--`--------0-J
-; F400 4A 4A 85 C0 A9 BF 38 E5 BD C9 C0 B0 B5 A0 00 84 JJ----8---------
-; F410 C1 0A 26 C1 0A 26 C1 0A 26 C1 0A 26 C1 65 C0 85 --&--&--&--&-e--
-; F420 C0 A5 C1 69 40 85 C1 A5 BB 29 07 A8 B9 51 F4 4C ---i@----)---Q-L
-; F430 A8 F3 A5 BC 05 BE D0 BC A5 BB 4A 4A 4A 85 C0 A9 ----------JJJ---
-; F440 BF 38 E5 BD C9 C0 B0 AC A0 00 84 C1 0A 26 C1 10 -8-----------&--
-; F450 C0 80 40 20 10 08 04 02 01 20 D4 FF A2 04 8E 02 --@ ----- ------
-; F460 70 60 20 B5 FB A5 D9 4C 6F F4 20 4D FB A5 D0 24 p` ----Lo- M---$
-; F470 EA 30 EE 48 20 C0 F7 08 08 08 EA 68 4C E9 F7 48 -0-H ------hL--H
-; F480 6C 00 02 48 AD 00 60 C9 BE F0 04 68 4C 2B FE 68 l--H--`----hL+-h
-; F490 6C FE 6F AD 15 80 C9 31 F0 18 C9 32 F0 14 20 C0 l-o----1---2-- -
-; F4A0 F7 06 0C 4C 61 6E 67 75 61 67 65 3F 0D 0A EA 4C ---Language?---L
-; F4B0 AF F4 20 C0 F7 06 0C 0F 42 42 43 20 42 61 73 69 -- -----BBC Basi
-; F4C0 63 20 49 73 73 75 65 20 AD 15 80 20 EE FF 20 C0 c Issue --- -- -
-; F4D0 F7 0D 0A 0A 4D 4F 53 20 52 4F 4D 20 56 33 2E 30 ----MOS ROM V3.0
-; F4E0 0D 0A AD 00 60 C9 BE D0 03 20 04 60 20 E7 FF 20 ----`---- -` -- 
-; F4F0 6D FF A9 01 58 4C 00 80 24 DB 50 0D 24 EA 30 06 m---XL--$-P-$-0-
-; F500 20 C0 F7 08 3C EA 4C BE F9 4C C9 F9 FF AD 00 60  ---<-L--L-----`
-; F510 C9 BE F0 03 4C 91 F7 AC 06 03 20 29 F5 AC 07 03 ----L----- )----
-; F520 20 26 F5 4C 7D F5 A9 0D 2C A9 1E 20 EE FF 29 0B  &-L}---,-- --)-
-; F530 88 30 05 20 EE FF 10 F8 60 00 46 DF 08 26 DF A5 -0- ----`-F--&--
-; F540 DE 28 6A 4A 4A 4A 4A A8 A5 E0 29 7F AA 68 60 84 -(jJJJJ---)--h`-
-; F550 A0 86 9F 85 9E AE 16 03 F0 2A 9D 05 03 CA 8E 16 ---------*------
-; F560 03 D0 1A AD 05 03 C9 16 F0 46 C9 19 F0 06 C9 1F ---------F------
-; F570 F0 9B D0 09 4C 14 F6 8E 16 03 8D 05 03 A4 A0 A6 ----L-----------
-; F580 9F A5 9E 60 A2 01 C9 16 F0 ED E8 C9 1F F0 E8 A2 ---`------------
-; F590 05 C9 19 F0 E2 C9 10 F0 11 20 7D F5 C9 61 30 07 --------- }--a0-
-; F5A0 C9 7B 10 03 38 E5 EB 4C 83 F4 AD 2A 03 8D 06 03 -{--8--L---*----
-; F5B0 20 7D F5 48 98 48 8A 48 AD 06 03 48 A0 06 B9 D3  }-H-H-H---H----
-; F5C0 F5 20 EE FF 88 10 F7 68 85 B3 20 04 F3 68 AA 68 - -----h-- --h-h
-; F5D0 A8 68 60 00 00 00 00 04 19 1E 20 AB F8 4C 9E FE -h`------- --L--
-; F5E0 84 DE 20 AB F8 4C 1B FD 00 43 41 54 FA 00 4C 4F -- --L---CAT--LO
-; F5F0 41 44 F9 32 53 41 56 45 FA 91 52 55 4E F9 F6 4D AD-2SAVE--RUN--M
-; F600 4F 4E F9 F0 4E 4F 4D 4F 4E F9 EF 46 4C 4F 41 44 ON--NOMON--FLOAD
-; F610 F9 2F F8 B6 AD 0A 03 C9 40 90 02 E9 38 29 1F 8D -/------@---8)--
-; F620 0E 03 A9 00 8D 2B 03 AD 08 03 10 0A A2 03 20 FA -----+-------- -
-; F630 F6 A9 FF 8D 2B 03 A9 00 85 BB 85 BC AD 09 03 38 ----+----------8
-; F640 E9 05 B0 05 CE 08 03 30 08 E6 BB D0 F2 E6 BC D0 -------0--------
-; F650 EE AD 00 70 29 F0 C9 F0 F0 0C C9 20 B0 04 46 BC ---p)------ --F-
-; F660 66 BB 46 BC 66 BB AD 2B 03 10 05 A2 08 20 0C F7 f-F-f--+----- --
-; F670 A9 00 8D 2C 03 AD 06 03 10 0A A2 01 20 FA F6 A9 ---,-------- ---
-; F680 FF 8D 2C 03 AD 00 70 29 F0 C9 10 F0 08 C9 30 F0 --,---p)------0-
-; F690 04 C9 50 D0 15 AD 07 03 85 BD AD 06 03 85 BE 46 --P------------F
-; F6A0 BE 66 BD 46 BE 66 BD 4C E2 F6 AD 07 03 0A 85 BD -f-F-f-L--------
-; F6B0 AD 06 03 2A 85 BE 18 A5 BD 6D 07 03 85 BD A5 BE ---*-----m------
-; F6C0 6D 06 03 85 BE 46 BE 66 BD 46 BE 66 BD 46 BE 66 m----F-f-F-f-F-f
-; F6D0 BD 46 BE 66 BD AD 00 70 29 F0 C9 A0 B0 0C C9 00 -F-f---p)-------
-; F6E0 D0 04 46 BE 66 BD 46 BE 66 BD AD 2C 03 10 05 A2 --F-f-F-f--,----
-; F6F0 0A 20 0C F7 20 FE F1 4C 7D F5 38 A9 00 FD 06 03 - -- --L}-8-----
-; F700 9D 06 03 A9 00 FD 05 03 9D 05 03 60 38 A9 00 F5 -----------`8---
-; F710 B3 95 B3 A9 00 F5 B4 95 B4 60 85 9E 86 9F 84 A0 ---------`------
-; F720 A2 A9 A0 03 B1 9F 99 A9 00 88 10 F8 A0 06 A5 9E ----------------
-; F730 F0 10 A9 00 85 AD B1 9F D0 02 C6 AD 20 45 F9 4C ------------ E-L
-; F740 64 F7 B1 9F 85 AD C8 B1 9F 85 AE A0 0A B1 9F 85 d---------------
-; F750 AF C8 B1 9F 85 B0 A0 0E B1 9F 85 B1 C8 B1 9F 85 ----------------
-; F760 B2 20 B8 FA A5 9E A6 9F A4 A0 60 FF 85 C6 86 C7 - --------`-----
-; F770 84 C8 A0 00 A2 FF B1 C7 C9 2A D0 01 C8 E8 B1 C7 ---------*------
-; F780 9D 00 01 C9 0D D0 F5 20 C3 F8 A4 C8 A6 C7 A5 C6 ------- --------
-; F790 60 AE 07 03 E0 20 B0 1E AD 06 03 C9 10 B0 17 A4 `---- ----------
-; F7A0 E0 20 1D FD 86 E0 46 DF 0A 0A 0A 0A 0A 85 DE 26 - ----F--------&
-; F7B0 DF A4 E0 20 1D FD 4C 7D F5 C9 00 F0 D3 4C 0B FC --- --L}-----L--
-; F7C0 68 85 E8 68 85 E9 A0 00 E6 E8 D0 02 E6 E9 B1 E8 h--h------------
-; F7D0 30 06 20 EE FF 4C C6 F7 6C E8 00 A2 D4 20 E0 F7 0- --L--l---- --
-; F7E0 B5 01 20 F1 F7 E8 E8 B5 FE 20 F1 F7 A9 20 4C EE -- ------ --- L-
-; F7F0 FF 48 4A 4A 4A 4A 20 FA F7 68 29 0F C9 0A 90 02 -HJJJJ --h)-----
-; F800 69 06 69 30 4C EE FF 20 63 F8 A2 00 C9 22 F0 06 i-i0L-- c----"--
-; F810 E8 D0 1B 4C 53 FA C8 B9 00 01 C9 0D F0 F5 9D 40 ---LS----------@
-; F820 01 E8 C9 22 D0 F0 C8 B9 00 01 C9 22 F0 E8 A9 0D ---"-------"----
-; F830 9D 3F 01 A9 40 85 C9 A9 01 85 CA A2 C9 60 A0 00 -?--@--------`--
-; F840 B5 00 99 C9 00 E8 C8 C0 0A 90 F5 A0 FF A9 0D C8 ----------------
-; F850 C0 0E B0 07 D1 C9 D0 F7 C0 00 60 00 DD 4E 61 6D ----------`--Nam
-; F860 65 00 C8 B9 00 01 C9 20 F0 F8 60 C9 30 90 0F C9 e------ --`-0---
-; F870 3A 90 08 E9 07 90 07 C9 40 B0 02 29 0F 60 38 60 :-------@--)-`8`
-; F880 A9 00 95 00 95 01 95 02 20 63 F8 B9 00 01 20 6B -------- c---- k
-; F890 F8 B0 15 0A 0A 0A 0A 94 02 A0 04 0A 36 00 36 01 ------------6-6-
-; F8A0 88 D0 F8 B4 02 C8 D0 E3 B5 02 60 48 A5 E6 30 04 ----------`H--0-
-; F8B0 A9 10 85 E6 68 60 AD 00 60 C9 BE F0 03 4C FA F8 ----h`--`----L--
-; F8C0 6C FA 6F A2 FF D8 A0 00 84 DD 20 63 F8 88 C8 E8 l-o------- c----
-; F8D0 BD E9 F5 30 18 D9 00 01 F0 F4 CA E8 BD E9 F5 10 ---0------------
-; F8E0 FA E8 B9 00 01 C9 2E D0 DD C8 CA B0 E3 85 CA BD ------.---------
-; F8F0 EA F5 85 C9 18 A2 00 6C C9 00 00 FE 42 61 64 20 -------l----Bad 
-; F900 63 6F 6D 6D 61 6E 64 00 00 20 61 FB 50 EC F0 F9 command-- a-P---
-; F910 20 FE FB A0 00 20 D7 FF 91 CB E6 CB D0 02 E6 CC  ---- ----------
-; F920 A2 D4 20 DE F9 D0 EE 38 66 DD 18 66 DD 28 60 38 -- ----8f--f-(`8
-; F930 66 DD 20 07 F8 A2 CB 20 80 F8 F0 04 A9 FF 85 CD f- ---- --------
-; F940 20 4C FA A2 C9 08 78 20 3E F8 08 20 13 FC 28 F0  L----x >-- --(-
-; F950 B8 A9 00 85 D0 85 D1 20 79 F9 90 CC E6 D0 E6 CC ------- y-------
-; F960 D0 F5 18 90 C3 20 EE FF C8 B9 ED 00 C9 0D D0 F5 ----- ----------
-; F970 C8 20 EC F7 C0 0E 90 F8 60 A9 00 85 DC 20 61 FB - ------`---- a-
-; F980 50 8A D0 F5 20 9C FB 08 20 62 F4 28 F0 10 A5 DB P--- --- b-(----
-; F990 29 20 05 EA D0 E3 20 69 F9 20 E7 FF D0 DB A2 02 ) ---- i- ------
-; F9A0 A5 DD 30 13 B5 CF D5 D8 B0 08 A9 05 20 15 FC 20 --0--------- -- 
-; F9B0 13 FC D0 C5 CA D0 ED 20 FE FB 4C F8 F4 EA 88 C8 ------- --L-----
-; F9C0 20 D7 FF 91 CB C4 D8 D0 F6 A5 DC 85 CE 20 D7 FF  ------------ --
-; F9D0 C5 CE F0 07 00 D8 53 75 6D 3F 00 26 DB 60 F6 00 ------Sum?-&-`--
-; F9E0 D0 02 F6 01 B5 00 D5 02 D0 04 B5 01 D5 03 60 CA --------------`-
-; F9F0 20 4C FA 86 EA 60 20 32 F9 24 DD 70 4C 6C D6 00  L---` 2-$-pLl--
-; FA00 08 20 84 FF 20 13 FC 20 61 FB 70 02 28 60 F0 0A - -- -- a-p-(`--
-; FA10 A0 00 20 70 F9 20 DB F7 D0 19 20 9C FB 20 B5 FB -- p- ---- -- --
-; FA20 20 69 F9 20 DB F7 26 DB 10 09 E8 20 E0 F7 B5 FD  i- --&---- ----
-; FA30 20 F1 F7 20 E7 FF D0 CF 4C E7 FF 20 80 F8 F0 13  -- ----L-- ----
-; FA40 60 A2 CB 20 3B FA 20 4C FA 6C CB 00 20 63 F8 C9 `-- ;- L-l-- c--
-; FA50 0D F0 A2 00 DC 53 79 6E 74 61 78 00 38 A5 D1 E5 -----Syntax-8---
-; FA60 CF 48 A5 D2 E5 D0 A8 68 18 65 CB 85 CD 98 65 CC -H-----h-e----e-
-; FA70 85 CE A0 04 B9 CA 00 20 D4 FF 88 D0 F7 B1 CF 20 ------- ------- 
-; FA80 D4 FF E6 CF D0 02 E6 D0 A2 CB 20 DE F9 D0 EE 28 ---------- ----(
-; FA90 60 20 07 F8 A2 CB 20 3B FA A2 D1 20 3B FA A2 CD ` ---- ;--- ;---
-; FAA0 20 80 F8 08 A5 CB A6 CC 28 D0 04 85 CD 86 CE 85  -------(-------
-; FAB0 CF 86 D0 20 4C FA A2 C9 08 78 20 3E F8 08 A9 06 --- L----x >----
-; FAC0 20 15 FC A2 07 20 4D FB 28 F0 91 A2 04 B5 CE 95  ---- M-(-------
-; FAD0 D2 CA D0 F9 86 D0 86 D1 A5 D5 D0 02 C6 D6 C6 D5 ----------------
-; FAE0 18 66 D2 38 A2 FF A5 D5 E5 D3 85 CF A5 D6 E5 D4 -f-8------------
-; FAF0 08 66 D2 28 90 06 18 F0 03 86 CF 38 66 D2 E8 20 -f-(-------8f-- 
-; FB00 0E FB E6 D0 E6 D4 E6 CC 26 D2 B0 D5 28 60 A2 07 --------&---(`--
-; FB10 20 6A F4 86 DC A0 04 A9 2A 20 D4 FF 88 D0 F8 B1  j------* ------
-; FB20 C9 20 D4 FF C8 C9 0D D0 F6 A0 08 B9 CA 00 20 D4 - ------------ -
-; FB30 FF 88 D0 F7 20 5D FB 24 D2 50 0B 88 C8 B1 D3 20 ---- ]-$-P----- 
-; FB40 D4 FF C4 CF D0 F6 A5 DC 4C 59 F4 A2 04 8E 02 70 --------LY-----p
-; FB50 A2 3C D0 02 A2 1E 20 3F FE CA D0 FA 60 A2 06 D0 -<---- ?----`---
-; FB60 F5 2C 01 70 10 FB 50 F9 A0 00 85 C3 A9 10 85 C2 -,-p--P---------
-; FB70 2C 01 70 10 0F 50 0D 20 92 FC B0 EC C6 C3 D0 F0 ,-p--P- --------
-; FB80 C6 C2 D0 EC 70 01 60 A0 04 08 20 B7 FB 28 A0 04 ----p-`--- --(--
-; FB90 A9 2A D9 D3 00 D0 03 88 D0 F8 60 C8 20 D7 FF 99 -*--------`- ---
-; FBA0 ED 00 C9 0D D0 F5 A0 FF C8 B1 C9 D9 ED 00 D0 EA ----------------
-; FBB0 C9 0D D0 F4 60 A0 08 20 D7 FF 99 D3 00 88 D0 F7 ----`-- --------
-; FBC0 60 86 EC 84 C3 08 78 A9 7E 85 C0 20 92 FC 90 F7 `-----x-~-- ----
-; FBD0 E6 C0 10 F7 A9 14 85 C4 A2 00 AC 02 70 20 A2 FC ------------p --
-; FBE0 F0 00 F0 01 E8 C6 C4 D0 F4 E0 03 66 C0 90 E5 A5 -----------f----
-; FBF0 C0 28 A4 C3 A6 EC 48 18 65 DC 85 DC 68 60 A5 CD -(----H-e---h`--
-; FC00 30 08 A5 D4 85 CB A5 D5 85 CC 60 C9 80 D0 04 A9 0---------`-----
-; FC10 06 D0 02 A9 04 A2 07 8E 02 70 24 EA D0 2D C9 05 ---------p$-----
-; FC20 F0 16 B0 09 20 C0 F7 50 6C 61 79 D0 15 20 C0 F7 ---- --Play-- --
-; FC30 52 65 63 6F 72 64 D0 0A 20 C0 F7 52 65 77 69 6E Record-- --Rewin
-; FC40 64 EA 20 C0 F7 20 74 61 70 65 EA 20 E0 FF 4C E7 d- -- tape- --L-
-; FC50 FF 86 EC 84 C3 08 78 48 20 F6 FB 85 C0 20 AD FC ------xH ---- --
-; FC60 A9 0A 85 C1 18 90 0C A2 07 8E 02 70 A2 01 20 AF -----------p-- -
-; FC70 FC 30 11 A9 04 8D 02 70 20 AD FC EE 02 70 20 AD -0-----p ----p -
-; FC80 FC EA EA EA 38 66 C0 C6 C1 D0 DA A4 C3 A6 EC 68 ----8f---------h
-; FC90 28 60 A2 00 AC 02 70 E8 F0 07 20 A2 FC F0 F8 E0 (`----p--- -----
-; FCA0 08 60 84 C5 AD 02 70 A8 45 C5 29 20 60 A2 00 A9 -`----p-E-) `---
-; FCB0 10 2C 02 70 F0 FB 2C 02 70 D0 FB CA 10 F3 60 C9 -,-p--,-p-----`-
-; FCC0 06 F0 1D C9 15 F0 1F A4 E0 30 23 C9 1B F0 11 C9 ---------0#-----
-; FCD0 07 F0 1C 20 1D FD A2 0A 20 9E FE D0 25 4C 90 FE --- ---- ---%L--
-; FCE0 18 A2 00 8E 00 70 A2 02 08 16 DE 28 76 DE 60 08 -----p-----(v-`-
-; FCF0 78 A9 05 A8 8D 03 70 CA D0 FD 49 01 C8 10 F5 28 x-----p---I----(
-; FD00 60 EA C9 20 90 17 69 1F 30 02 49 60 20 44 FE 91 `-- --i-0-I` D--
-; FD10 DE C8 C0 20 90 05 20 C5 FD A0 00 84 E0 48 20 44 --- -- ------H D
-; FD20 FE B1 DE 45 E1 91 DE 68 60 20 0E FE A9 20 20 44 ---E---h` ---  D
-; FD30 FE 91 DE 10 E6 20 0E FE 4C 1B FD 20 C5 FD A4 E0 ----- --L-- ----
-; FD40 10 D9 A0 80 84 E1 A0 00 8C 00 70 A9 20 99 00 40 ----------p- --@
-; FD50 99 00 41 C8 D0 F7 A9 40 A0 00 85 DF 4C E0 F5 EA --A----@----L---
-; FD60 20 13 FE 4C 1B FD 18 A9 10 85 E6 A2 08 20 E8 FC  --L--------- --
-; FD70 4C 1D FD A5 E7 49 60 85 E7 B0 09 29 05 2E 01 70 L----I`----)-.-p
-; FD80 2A 20 BF FC 4C 73 FE A4 E0 20 44 FE B1 DE 45 E1 * --Ls--- D---E-
-; FD90 30 02 49 60 E9 20 4C C2 FD A9 5F 49 20 D0 23 45 0-I`- L---_I -#E
-; FDA0 E7 2C 01 70 30 02 49 60 4C B8 FD 69 39 90 F2 49 -,-p0-I`L--i9--I
-; FDB0 10 2C 01 70 30 02 49 10 18 69 20 2C 01 70 70 02 -,-p0-I--i ,-pp-
-; FDC0 29 1F 4C 39 FE A4 E6 30 0C 88 D0 07 20 4A FE B0 )-L9---0---- J--
-; FDD0 FB A0 0F 84 E6 A5 DE A4 DF C0 41 90 28 C9 E0 90 ----------A-(---
-; FDE0 24 A0 20 20 3F FE B9 00 40 99 E0 3F C8 D0 F7 20 $-  ?---@--?--- 
-; FDF0 44 FE B9 00 41 99 E0 40 C8 D0 F7 A0 1F A9 20 91 D---A--@------ -
-; FE00 DE 88 10 FB 60 69 20 85 DE D0 02 E6 DF 60 88 10 ----`i ------`--
-; FE10 19 A0 1F A5 DE D0 0B A6 DF E0 40 D0 05 68 68 4C ----------@--hhL
-; FE20 3E FD E9 20 85 DE B0 02 C6 DF 60 20 D4 FE 08 48 >-- ------` ---H
-; FE30 D8 84 E5 86 E4 20 BF FC 68 A6 E4 A4 E5 28 60 2C ----- --h----(`,
-; FE40 02 70 10 FB 2C 02 70 30 FB 60 A0 3B 18 A9 20 A2 -p--,-p0-`-;-- -
-; FE50 0A 2C 01 70 F0 08 EE 00 70 88 CA D0 F4 4A 08 48 -,-p----p----J-H
-; FE60 AD 00 70 29 F0 8D 00 70 68 28 D0 E3 60 08 D8 86 --p)---ph(--`---
-; FE70 E4 84 E5 2C 02 70 50 05 20 4A FE 90 F6 20 79 FF ---,-pP- J--- y-
-; FE80 20 4A FE B0 FB 20 4A FE B0 F6 98 A2 17 20 DA F5  J--- J------ --
-; FE90 BD BC FE 85 E2 A9 FD 85 E3 98 6C E2 00 CA DD A4 ----------l-----
-; FEA0 FE 90 FA 60 00 08 09 0A 0B 0C 0D 0E 0F 1E 7F 00 ---`------------
-; FEB0 01 05 06 08 0E 0F 10 11 1C 20 21 3B 1D 35 11 3B --------- !;-5-;
-; FEC0 60 42 19 66 6B 56 29 B8 AB 73 7B BB 87 99 B8 B1 `B-fkV)--s{-----
-; FED0 AF A1 9F 9B 48 C9 02 F0 27 C9 03 F0 34 C5 FB F0 ----H---'---4---
-; FEE0 2E AD 0C 78 29 0E F0 27 68 2C 01 78 30 FB 8D 01 .--x)--'h,-x0---
-; FEF0 78 48 AD 0C 78 29 F0 09 0C 8D 0C 78 09 02 D0 0C xH--x)-----x----
-; FF00 A9 7F 8D 03 78 AD 0C 78 29 F0 09 0E 8D 0C 78 68 ----x--x)-----xh
-; FF10 60 AD 0C 78 29 F0 B0 F4 A2 19 BD 88 FF 9D 04 02 `--x)-----------
-; FF20 A9 00 9D 00 03 CA 10 F2 85 EA 85 E7 85 FF 9A 20 --------------- 
-; FF30 7B FF A9 0A 85 FB A9 8A 8D 03 70 A9 07 8D 02 70 {---------p----p
-; FF40 A9 20 85 EB A9 0E 8D 04 78 A9 27 8D 05 78 A9 40 - ------x-'--x-@
-; FF50 8D 0B 78 A9 C0 8D 0E 78 A9 0E 85 FD A9 80 85 FE --x----x--------
-; FF60 AD 00 60 C9 BE D0 03 20 01 60 4C 93 F4 AD 00 C0 --`---- -`L-----
-; FF70 C9 AA D0 03 20 01 C0 60 71 A2 64 A0 C7 88 D0 FD ---- --`q-d-----
-; FF80 CA D0 F8 60 78 4C 4C FA BE FF EE F0 6C F7 D2 F0 ---`xLL-----l---
-; FF90 00 F0 4F F5 6D FE 1A F7 EE F0 C1 FB 51 FC EE F0 --O-m-------Q---
-; FFA0 B9 F7 85 FC 68 48 29 10 D0 03 6C 04 02 28 58 D8 ----hH)---l--(X-
-; FFB0 68 38 E9 01 85 FD 68 E9 00 85 FE 6C 02 02 AD 0D h8----h----l----
-; FFC0 78 29 40 F0 03 4C 9A F1 6C 06 02 00 00 00 6C 1C x)@--L--l-----l-
-; FFD0 02 6C 1A 02 6C 18 02 6C 16 02 6C 14 02 6C 12 02 -l--l--l--l--l--
-; FFE0 6C 10 02 C9 0D D0 07 A9 0A 20 EE FF A9 0D 6C 0E l-------- ----l-
-; FFF0 02 6C 0C 02 6C 0A 02 6C 08 02 7F F4 18 FF A2 FF -l--l--l--------
-; 10000 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 UUUUUUUUUUUUUUUU
-
+SAVE "BBCMOS3",BeebDisStartAddr,BeebDisEndAddr
