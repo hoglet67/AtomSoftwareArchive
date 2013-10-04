@@ -127,7 +127,15 @@ L032A   = $032A
 L032B   = $032B
 L032C   = $032C
 
-
+\ ORIGINAL MOS EXTENSION ROM FORMAT
+\
+\ $C000        = $BE
+\ $C001 MERES  = Jump to initialisation routine MOS-EXT
+\ $C004 MEMES  = MOS Extension Messages
+\ ..
+\ $CFFA MEMCLI = Extra *-interpreter
+\ $CFFC MEVPOS = POS + VPOS for MOS-EXT VDU
+\ $CFFE MEWRCH = MOS Extension Write Character routine
 
 ORIGINAL=0
 
