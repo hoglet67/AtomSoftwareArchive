@@ -129,21 +129,21 @@ L032C   = $032C
 
 
 
-ORIGINAL=1
+ORIGINAL=0
 
 IF ORIGINAL
 BBCBASICENTRY = &8000
 BBCBASICCOPYRIGHT = &8015
-MOSEXT1 = &C000
-MOSEXT2 = &6000
+MOSEXT1 = &6000
+MOSEXT2 = &C000
 SCREEN = &4000
 IO8255_0 = &7000
 IO6522_0 = &7800
 ELSE
 BBCBASICENTRY = &4000
 BBCBASICCOPYRIGHT = &4015
-MOSEXT1 = &C000
-MOSEXT2 = &6000
+MOSEXT1 = &A000
+MOSEXT2 = &C000
 SCREEN = &8000
 IO8255_0 = &B000
 IO6522_0 = &B800
@@ -337,12 +337,12 @@ IO6522_F = IO6522_0 + 15
 
 .LF0C3
         PHA
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BNE     LF0CF
 
         PLA
-        JMP     (MOSEXT2 + &FFC)
+        JMP     (MOSEXT1 + &FFC)
 
 .LF0CF
         JMP     LF53A
@@ -834,6 +834,7 @@ IO6522_F = IO6522_0 + 15
         EQUB &B0
         EQUB &F0
 
+ \ mode 7 = clear 0
 .LF36A
         LDA     L00BC
         ORA     L00BE
@@ -876,7 +877,7 @@ IO6522_F = IO6522_0 + 15
         LDA     L00C2
         ROL     A
         TAY
-        LDA     LF453,Y
+        LDA     LF451 + 2,Y
 .LF3A8
         LDY     #$00
         LDX     L00BF
@@ -1007,13 +1008,7 @@ IO6522_F = IO6522_0 + 15
         BPL     LF411
 
 .LF451
-        EQUB    $80
-
-.LF452
-        EQUB    $40
-
-.LF453
-        EQUB    $20,$10,$08,$04,$02,$01
+        EQUB    $80, $40, $20,$10,$08,$04,$02,$01
 
 .LF459
         JSR     LFFD4
@@ -1053,7 +1048,7 @@ IO6522_F = IO6522_0 + 15
 
 .LF483
         PHA
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BEQ     LF48F
 
@@ -1062,7 +1057,7 @@ IO6522_F = IO6522_0 + 15
 
 .LF48F
         PLA
-        JMP     (MOSEXT2 + &FFE)
+        JMP     (MOSEXT1 + &FFE)
 
 .LF493
         LDA     BBCBASICCOPYRIGHT
@@ -1113,11 +1108,11 @@ IO6522_F = IO6522_0 + 15
         EQUB    $0D,$0A
 
 .LF4E2
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BNE     LF4EC
 
-        JSR     MOSEXT2 + 4
+        JSR     MOSEXT1 + 4
 
 .LF4EC
         JSR     LFFE7
@@ -1155,7 +1150,7 @@ IO6522_F = IO6522_0 + 15
         EQUB    $FF
 
 .LF50D
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BEQ     LF517
 
@@ -1838,14 +1833,14 @@ IO6522_F = IO6522_0 + 15
         RTS
 
 .LF8B6
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BEQ     LF8C0
 
         JMP     LF8FA
 
 .LF8C0
-        JMP     (MOSEXT2 + &FFA)
+        JMP     (MOSEXT1 + &FFA)
 
 .LF8C3
         LDX     #$FF
@@ -3197,21 +3192,21 @@ IO6522_F = IO6522_0 + 15
         STA     L00FD
         LDA     #$80
         STA     L00FE
-        LDA     MOSEXT2
+        LDA     MOSEXT1
         CMP     #$BE
         BNE     LFF6A
 
-        JSR     MOSEXT2 + 1
+        JSR     MOSEXT1 + 1
 
 .LFF6A
         JMP     LF493
 
 .LFF6D
-        LDA     MOSEXT1
+        LDA     MOSEXT2
         CMP     #$AA
         BNE     LFF77
 
-        JSR     MOSEXT1+1
+        JSR     MOSEXT2+1
 
 .LFF77
         RTS
