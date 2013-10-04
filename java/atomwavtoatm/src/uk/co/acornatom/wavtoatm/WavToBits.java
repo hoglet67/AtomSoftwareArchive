@@ -118,7 +118,7 @@ public class WavToBits {
 			if ((getSample(id - 1) > threshold) && (getSample(id) <= threshold)) {
 //				System.out.println("Found start at " + (i - start));
 				// Skip 1.5 bits
-				id += bitLength * 3 / 2;
+				id += bitLength * 31 / 20;
 				
 //				// Sample the start bit
 //				if (getSample(i] > threshold) {
@@ -134,7 +134,7 @@ public class WavToBits {
 				for (int j = 0; j < 8; j++) {
 //					System.out.println("Samping bit " + j + " at " + (i - start));
 
-					if (getSample(id) > threshold) {
+					if (getSample(id) > 6 * bitLength / window2) {
 						b += 1 << j;
 					}
 					id += bitLength;
