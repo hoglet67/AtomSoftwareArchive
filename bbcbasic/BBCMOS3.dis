@@ -1,0 +1,79 @@
+load $f000 BBCMos3
+save BBCMOS3.ASM.ORIG
+hexdump
+entry $f53a
+entry $f000
+byte $f0ef
+string $f0f0
+entry $f100
+byte $f357
+entry $f36a
+byte $f451
+entry $f459
+byte $f4a1
+string $f4a3
+entry $f4ae
+byte $f4b5
+string $f4b8
+entry $f4c8
+byte $f4d1
+string $f4d4
+entry $f4e2
+byte $f503
+byte $f504
+entry $f505
+byte $f50c
+entry $f50d
+byte $f5d3
+entry $f5da
+string $f5e9
+byte $f5ec
+string $f5ee
+byte $f5f2
+string $f5f4
+byte $f5f8
+string $f5fa
+byte $f5fd
+string $f5ff
+byte $f602
+string $f604
+byte $f609
+string $f60b
+byte $f610
+byte $f612
+entry $f614
+byte $f76b
+entry $f76c
+byte $f85c
+string $f85d
+entry $f862
+byte $f8fb
+string $f8fc
+entry $f909
+byte $f9d5
+string $f9d6
+entry $f9db
+byte $fa54
+string $fa55
+entry $fa5c
+string $fc27
+entry $fc2b
+string $fc30
+entry $fc36
+string $fc3b
+entry $fc41
+string $fc45
+entry $fc4a
+byte $fea4
+entry $fed4
+byte $ff78
+entry $ff79
+wordentry $ff88 13
+entry $ffa2
+byte $ffcb
+entry $ffce
+wordentry $fffa 3
+
+
+
+
