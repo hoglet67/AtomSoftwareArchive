@@ -141,15 +141,18 @@ L032C   = $032C
 type_original = 1
 
 \ This will compile for a native ATOM, located at &F000, basic in RAM at &4000
-type_f000 = 2
+type_f000_4000 = 2
+
+\ This will compile for a native ATOM, located at &F000, basic in RAM at &a000
+type_f000_a000 = 3
 
 \ This will compile for a native ATOM, located at &7000, basic in ROM at &C000
-type_7000 = 3
+type_7000_c000 = 4
 
 \ This will compile for a native ATOM, located at &0800, basic in ROM at &C000
-type_0800 = 3
+type_0800_c000 = 5
 
-type = type_7000
+type = type_f000_a000
 
 IF (type = type_original)
     INCLUDE_ATM_HEADER = 0
@@ -162,7 +165,7 @@ IF (type = type_original)
     IO6522_0 = &7800
     RAM_BOT = &0800
     RAM_TOP = SCREEN
-ELIF (type = type_f000)
+ELIF (type = type_f000_4000)
     INCLUDE_ATM_HEADER = 0
     LOAD = &F000
     BBCBASICENTRY = &4000
@@ -173,7 +176,18 @@ ELIF (type = type_f000)
     IO6522_0 = &B800
     RAM_BOT = &0800
     RAM_TOP = BBCBASICENTRY
-ELIF (type = type_7000)
+ELIF (type = type_f000_a000)
+    INCLUDE_ATM_HEADER = 0
+    LOAD = &F000
+    BBCBASICENTRY = &a000
+    MOSEXT1 = &6000
+    MOSEXT2 = &7000
+    SCREEN = &8000
+    IO8255_0 = &B000
+    IO6522_0 = &B800
+    RAM_BOT = &0B00
+    RAM_TOP = SCREEN
+ELIF (type = type_7000_c000)
     INCLUDE_ATM_HEADER = 1
     LOAD = &7000
     BBCBASICENTRY = &C000

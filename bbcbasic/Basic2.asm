@@ -15,20 +15,41 @@ target_system=3
 target_c64=4
 target_hybrid=5
 target_c000=6
+target_split=7
 
-target=target_c000
-
-\ If mosbase is none zero, then we will squeeze in 6502 vectors at the top of the build
-mosbase = &7000
-
-\ Shame these are hard coded
-mos_nmi_address = mosbase + &047F
-mos_rst_address = mosbase + &0F18
-mos_irq_address = mosbase + &0FA2
+target=target_split
 
 VALversion=200
 
+IF (target = target_split)
+  incAtmHeader=1
+  incAtomLangHeader=0
+  incBeebLangHeader=1
+  load=&a000   \ Code start address
+  ws=&0000     \ Offset from &400 to workspace
+  membot=0     \ Use OSBYTE to find bottom of memory
+  memtop=0     \ Use OSBYTE to find top of memory
+  zp=&00       \ Zero page start address
+  ZP00=&00:ZP01=&01 \ Tweek this later
+  FAULT =&FD   \ Pointer to error block
+  ESCFLG=&FF   \ Escape pending flag
+  hasTitle=FALSE
+  \
+  \MOS Entry Points:
+  OS_CLI=&FFF7:OSBYTE=&FFF4:OSWORD=&FFF1:OSWRCH=&FFEE
+  OSWRCR=&FFEC:OSNEWL=&FFE7:OSASCI=&FFE3:OSRDCH=&FFE0
+  OSFILE=&FFDD:OSARGS=&FFDA:OSBGET=&FFD7:OSBPUT=&FFD4
+  OSGBPB=&FFD1:OSFIND=&FFCE:BRKV=&202:WRCHV=&020E
+  \
+  \Dummy variables for non-BBC code
+  OSECHO=00000:OSLOAD=00000:OSSAVE=00000
+  OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
+ENDIF
+
 IF (target = target_hybrid)
+  incAtmHeader=1
+  incAtomLangHeader=0
+  incBeebLangHeader=1
   load=&4000   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=0     \ Use OSBYTE to find bottom of memory
@@ -51,6 +72,9 @@ IF (target = target_hybrid)
 ENDIF
 
 IF (target = target_bbc)
+  incAtmHeader=0
+  incAtomLangHeader=0
+  incBeebLangHeader=1
   load=&8000   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=0     \ Use OSBYTE to find bottom of memory
@@ -73,6 +97,9 @@ IF (target = target_bbc)
 ENDIF
 
 IF (target = target_c000)
+  incAtmHeader=0
+  incAtomLangHeader=0
+  incBeebLangHeader=1
   load=&c000   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=0     \ Use OSBYTE to find bottom of memory
@@ -93,11 +120,11 @@ IF (target = target_c000)
   OSECHO=00000:OSLOAD=00000:OSSAVE=00000
   OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
 ENDIF
-:
-
-
 
 IF (target = target_atom)
+  incAtmHeader=1
+  incAtomLangHeader=1
+  incBeebLangHeader=0
   load=&3F00   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=&800
@@ -117,11 +144,12 @@ IF (target = target_atom)
   \
   \Dummy variables for non-Atom code
   OSBYTE=&FF37:OSWORD=&FF37:OSFILE=&FF37:OSARGS=&FF37
-
-
 ENDIF
-:
+
 IF (target = target_c64)
+  incAtmHeader=0
+  incAtomLangHeader=0
+  incBeebLangHeader=1
   load=&B400            \ Code start address
   ws=&800-&400          \ Offset from &400 to workspace
   ws=0
@@ -167,7 +195,9 @@ tknERL=&9E
 tknEXT=&A2
 tknFN=&A4
 tknTO=&B8
+IF (target != target_split)
 tknAUTO=&C6
+ENDIF
 tknRENUMBER=&CC
 tknPTRc=&CF
 tknDATA=&DC
@@ -189,7 +219,7 @@ tknSTOP=&FA
 tknLOMEM=&92
 tknHIMEM=&93
 
-IF (target=target_atom OR target=target_hybrid)
+IF (incAtmHeader)
 
 	org load - 22
 .AtmHeader
@@ -198,8 +228,8 @@ IF (target=target_atom OR target=target_hybrid)
         EQUW	BeebDisStartAddr
         EQUW    BeebDisStartAddr
         EQUW	BeebDisEndAddr - BeebDisStartAddr
-
 ENDIF
+
 
 
 .BeebDisStartAddr
@@ -209,7 +239,7 @@ ENDIF
 .L8000
 \ Atom/System Code Header
 \ =======================
-IF (target = target_system OR target = target_atom)
+IF (incAtomLangHeader)
  JSR LBFCF                     \ Print inline text
  EQUS "ACORN BASIC II":EQUB 13:EQUB 13
  EQUS "(C)1982 ACORN":EQUB 13:EQUB 13
@@ -218,7 +248,7 @@ ENDIF
 
 \ BBC Code Header
 \ ===============
-IF (target = target_bbc OR target = target_c000 OR target = target_hybrid OR target = target_c64)
+IF (incBeebLangHeader)
 CMP #&01:BEQ L8023:RTS        \ LANGUAGE ENTRY
 NOP
 EQUB &60                      \ ROM type=Lang+Tube+6502 BASIC
@@ -281,7 +311,9 @@ EQUS "ADVAL"   :EQUB &96:EQUB &00 \ 00000000
 EQUS "ASC"     :EQUB &97:EQUB &00 \ 00000000
 EQUS "ASN"     :EQUB &98:EQUB &00 \ 00000000
 EQUS "ATN"     :EQUB &99:EQUB &00 \ 00000000
+IF (target != target_split)
 EQUS "AUTO"    :EQUB &C6:EQUB &10 \ 00010000
+ENDIF
 EQUS "BGET"    :EQUB &9A:EQUB &01 \ 00000001
 EQUS "BPUT"    :EQUB &D5:EQUB &03 \ 00000011
 IF (VALversion<>300)
@@ -493,7 +525,11 @@ EQUB LAFEE AND &FF \ &C2 - RIGHT$(
 EQUB LB094 AND &FF \ &C3 - STR$(
 EQUB LB0C2 AND &FF \ &C4 - STRING$(
 EQUB LACB8 AND &FF \ &C5 - EOF
+IF (target != target_split)
 EQUB L90AC AND &FF \ &C6 - AUTO
+ELSE
+EQUB 0
+ENDIF
 EQUB L8F31 AND &FF \ &C7 - DELETE
 EQUB LBF24 AND &FF \ &C8 - LOAD
 EQUB LB59C AND &FF \ &C9 - LIST
@@ -647,7 +683,11 @@ EQUB LAFEE DIV 256 \ &C2 - RIGHT$(
 EQUB LB094 DIV 256 \ &C3 - STR$(
 EQUB LB0C2 DIV 256 \ &C4 - STRING$(
 EQUB LACB8 DIV 256 \ &C5 - EOF
+IF (target != target_split)
 EQUB L90AC DIV 256 \ &C6 - AUTO
+ELSE
+EQUB 0
+ENDIF
 EQUB L8F31 DIV 256 \ &C7 - DELETE
 EQUB LBF24 DIV 256 \ &C8 - LOAD
 EQUB LB59C DIV 256 \ &C9 - LIST
@@ -2441,7 +2481,15 @@ BRK:EQUB 0:EQUS tknRENUMBER," space"  \ Terminated by following BRK
 .L8FDF
 BRK:EQUB 0:EQUS "Silly":BRK
 
+IF (target=target_split)
 .L8FE7
+JMP LXXX1
+ORG $c000
+.LXXX1
+ELSE
+.L8FE7
+ENDIF
+
 JSR L8F9A
 .L8FEA
 LDY #&00
@@ -2557,6 +2605,8 @@ CLC
 .L90AB
 RTS
 
+if (target != target_split)
+
 \ AUTO [numeric [, numeric ]]
 \ ===========================
 .L90AC
@@ -2583,6 +2633,8 @@ INC &2B
 BPL L90B5
 .L90D9
 JMP L8AF3
+
+ENDIF
 
 .L90DC
 JMP L9218
@@ -7059,7 +7111,7 @@ IF (VALversion<300)
  \ =================
  .LAEC0
  LDA #&00:LDY &18:JMP LAEEA
- 
+
  .LAEC7
  JMP LAE43
  
@@ -7110,7 +7162,7 @@ IF (VALversion<300)
  \ ============================
  .LAEFC
  LDA ZP00:LDY ZP01:JMP LAEEA \ Get LOMEM to AY, jump to return as integer
- 
+
  \ =HIMEM - Top of BASIC memory
  \ ============================
  .LAF03
@@ -7881,20 +7933,10 @@ JSR L92DA
 PLA:TAX
 DEX:BNE LB477
 JSR L9852
-
-\ This makes some space for the 6502 vectors at the top
-\ Savingg 22 bytes, only 6 really needed
-
-IF (mosbase > 0)
-\ Last thing in L9852 was BIT/BMI Escape test, so BPL will always jump
-BPL LXXXX
-ELSE
 LDA &2A
 STA &44
 LDX #&0C
 LDY #&08
-ENDIF
-
 .LB48F
 PLA
 STA &37,X
@@ -9281,13 +9323,6 @@ IF (VALversion>=310)
  EQUS "3.10"
 ENDIF
 
-IF (mosbase > 0)
-ORG (load + &3FFA)
-EQUW mos_nmi_address
-EQUW mos_rst_address
-EQUW mos_irq_address
-ENDIF
-
 .LC000
 
 
@@ -9409,12 +9444,12 @@ ELIF (target = target_hybrid)
 SAVE "ATBASIC2", &3FEA, &8000
 ELIF (target = target_bbc)
 SAVE "BBCBASIC2",&8000, &c000
-ELSE
+ELIF (target = target_c000)
 SAVE "BBCBASIC2",&c000, &10000
+ELSE
+SAVE "axr1.rom",  &a000, &b000
 SAVE "abasic.rom",&c000, &d000
 SAVE "afloat.rom",&d000, &e000
 SAVE "dosrom.rom",&e000, &f000
-SAVE "akernel.rom",&f000, &10000
-
 ENDIF
 
