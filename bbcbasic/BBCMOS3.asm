@@ -137,28 +137,69 @@ L032C   = $032C
 \ $CFFC MEVPOS = POS + VPOS for MOS-EXT VDU
 \ $CFFE MEWRCH = MOS Extension Write Character routine
 
-ORIGINAL=0
+\ This will compile Roland Boers' original rom for the BBC Conversion Card
+type_original = 1
 
-IF ORIGINAL
-BBCBASICENTRY = &8000
-BBCBASICCOPYRIGHT = &800E
-BBCBASICVERSION = &8015
-MOSEXT1 = &6000
-MOSEXT2 = &C000
-SCREEN = &4000
-IO8255_0 = &7000
-IO6522_0 = &7800
+\ This will compile for a native ATOM, located at &F000, basic in RAM at &4000
+type_f000 = 2
+
+\ This will compile for a native ATOM, located at &7000, basic in ROM at &C000
+type_7000 = 3
+
+\ This will compile for a native ATOM, located at &0800, basic in ROM at &C000
+type_0800 = 3
+
+type = type_7000
+
+IF (type = type_original)
+    INCLUDE_ATM_HEADER = 0
+    LOAD = &F000
+    BBCBASICENTRY = &8000
+    MOSEXT1 = &6000
+    MOSEXT2 = &C000
+    SCREEN = &4000
+    IO8255_0 = &7000
+    IO6522_0 = &7800
+    RAM_BOT = &0800
+    RAM_TOP = SCREEN
+ELIF (type = type_f000)
+    INCLUDE_ATM_HEADER = 0
+    LOAD = &F000
+    BBCBASICENTRY = &4000
+    MOSEXT1 = &A000
+    MOSEXT2 = &C000
+    SCREEN = &8000
+    IO8255_0 = &B000
+    IO6522_0 = &B800
+    RAM_BOT = &0800
+    RAM_TOP = BBCBASICENTRY
+ELIF (type = type_7000)
+    INCLUDE_ATM_HEADER = 1
+    LOAD = &7000
+    BBCBASICENTRY = &C000
+    MOSEXT1 = &6000
+    MOSEXT2 = &A000
+    SCREEN = &8000
+    IO8255_0 = &B000
+    IO6522_0 = &B800
+    RAM_BOT = &0800
+    RAM_TOP = LOAD
 ELSE
-BBCBASICENTRY = &4000
-BBCBASICCOPYRIGHT = &400E
-BBCBASICVERSION = &4015
-MOSEXT1 = &A000
-MOSEXT2 = &C000
-SCREEN = &8000
-IO8255_0 = &B000
-IO6522_0 = &B800
+    INCLUDE_ATM_HEADER = 1
+    LOAD = &0800
+    BBCBASICENTRY = &C000
+    MOSEXT1 = &6000
+    MOSEXT2 = &A000
+    SCREEN = &8000
+    IO8255_0 = &B000
+    IO6522_0 = &B800
+    RAM_BOT = &1800
+    RAM_TOP = SCREEN
 ENDIF
 
+\ these are correct for BBC Basic
+BBCBASICCOPYRIGHT = BBCBASICENTRY + &0E
+BBCBASICVERSION = BBCBASICENTRY + &15
 
 IO8255_1 = IO8255_0 + 1
 IO8255_2 = IO8255_0 + 2
@@ -181,9 +222,19 @@ IO6522_E = IO6522_0 + 14
 IO6522_F = IO6522_0 + 15
 
 
+ IF (INCLUDE_ATM_HEADER)
 
+	org LOAD - 22
+.AtmHeader
+        EQUS    "ATMOS3"
+        org AtmHeader + 16
+        EQUW	BeebDisStartAddr
+        EQUW    BeebDisStartAddr
+        EQUW	BeebDisEndAddr - BeebDisStartAddr
 
-        org     $F000
+ENDIF
+        org     LOAD
+
 .BeebDisStartAddr
 
 .LF000
@@ -412,7 +463,7 @@ IO6522_F = IO6522_0 + 15
         STA     (L009E),Y
         INC     L009F
         LDA     L009F
-        CMP     #$40
+        CMP     #>RAM_TOP
         BCC     LF111
 
 .LF127
@@ -555,7 +606,7 @@ IO6522_F = IO6522_0 + 15
         TAY
         TAX
         STA     L009E
-        LDA     #$08
+        LDA     #>RAM_BOT
         STA     L009F
 .LF1E2
         LDA     (L009E),Y
@@ -3332,4 +3383,9 @@ IO6522_F = IO6522_0 + 15
         EQUW    LFFA2
 
 .BeebDisEndAddr
-SAVE "BBCMOS3",BeebDisStartAddr,BeebDisEndAddr
+
+IF (INCLUDE_ATM_HEADER)
+    SAVE "BBCMOS3",AtmHeader,BeebDisEndAddr
+ELSE
+    SAVE "BBCMOS3",BeebDisStartAddr,BeebDisEndAddr
+ENDIF

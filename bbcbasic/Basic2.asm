@@ -14,8 +14,17 @@ target_atom=2
 target_system=3
 target_c64=4
 target_hybrid=5
+target_c000=6
 
-target=target_hybrid
+target=target_c000
+
+\ If mosbase is none zero, then we will squeeze in 6502 vectors at the top of the build
+mosbase = &7000
+
+\ Shame these are hard coded
+mos_nmi_address = mosbase + &047F
+mos_rst_address = mosbase + &0F18
+mos_irq_address = mosbase + &0FA2
 
 VALversion=200
 
@@ -62,7 +71,31 @@ IF (target = target_bbc)
   OSECHO=00000:OSLOAD=00000:OSSAVE=00000
   OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
 ENDIF
+
+IF (target = target_c000)
+  load=&c000   \ Code start address
+  ws=&0000     \ Offset from &400 to workspace
+  membot=0     \ Use OSBYTE to find bottom of memory
+  memtop=0     \ Use OSBYTE to find top of memory
+  zp=&00       \ Zero page start address
+  ZP00=&00:ZP01=&01 \ Tweek this later
+  FAULT =&FD   \ Pointer to error block
+  ESCFLG=&FF   \ Escape pending flag
+  hasTitle=FALSE
+  \
+  \MOS Entry Points:
+  OS_CLI=&7FF7:OSBYTE=&7FF4:OSWORD=&7FF1:OSWRCH=&7FEE
+  OSWRCR=&7FEC:OSNEWL=&7FE7:OSASCI=&7FE3:OSRDCH=&7FE0
+  OSFILE=&7FDD:OSARGS=&7FDA:OSBGET=&7FD7:OSBPUT=&7FD4
+  OSGBPB=&7FD1:OSFIND=&7FCE:BRKV=&202:WRCHV=&020E
+  \
+  \Dummy variables for non-BBC code
+  OSECHO=00000:OSLOAD=00000:OSSAVE=00000
+  OSRDAR=00000:OSSTAR=00000:OSSHUT=00000
+ENDIF
 :
+
+
 
 IF (target = target_atom)
   load=&3F00   \ Code start address
@@ -185,7 +218,7 @@ ENDIF
 
 \ BBC Code Header
 \ ===============
-IF (target = target_bbc OR target = target_hybrid OR target = target_c64)
+IF (target = target_bbc OR target = target_c000 OR target = target_hybrid OR target = target_c64)
 CMP #&01:BEQ L8023:RTS        \ LANGUAGE ENTRY
 NOP
 EQUB &60                      \ ROM type=Lang+Tube+6502 BASIC
@@ -560,7 +593,7 @@ ENDIF
 IF (VALversion>=300)
  EQUB XAEF7 DIV 256 \ &9C - COUNT
  EQUB LABC2 DIV 256 \ &9D - DEG
- EQUB XAF9F DIV 256 \ &9E - ERL  
+ EQUB XAF9F DIV 256 \ &9E - ERL
  EQUB XAFA6 DIV 256 \ &9F - ERR  
 ENDIF
 EQUB LABE9 DIV 256 \ &A0 - EVAL
@@ -7848,10 +7881,20 @@ JSR L92DA
 PLA:TAX
 DEX:BNE LB477
 JSR L9852
+
+\ This makes some space for the 6502 vectors at the top
+\ Savingg 22 bytes, only 6 really needed
+
+IF (mosbase > 0)
+\ Last thing in L9852 was BIT/BMI Escape test, so BPL will always jump
+BPL LXXXX
+ELSE
 LDA &2A
 STA &44
 LDX #&0C
 LDY #&08
+ENDIF
+
 .LB48F
 PLA
 STA &37,X
@@ -7861,6 +7904,8 @@ TYA
 LDX #&37
 LDY #&00
 JSR OSWORD
+
+.LXXXX
 JMP L8B9B
 
 \ WIDTH numeric
@@ -9235,7 +9280,26 @@ ENDIF
 IF (VALversion>=310)
  EQUS "3.10"
 ENDIF
+
+IF (mosbase > 0)
+ORG (load + &3FFA)
+EQUW mos_nmi_address
+EQUW mos_rst_address
+EQUW mos_irq_address
+ENDIF
+
 .LC000
+
+
+
+
+
+
+
+
+
+
+
 
 IF (target=target_atom)
 
@@ -9343,7 +9407,14 @@ IF (target = target_atom)
 SAVE "ATBASIC2",AtmHeader,BeebDisEndAddr
 ELIF (target = target_hybrid)
 SAVE "ATBASIC2", &3FEA, &8000
-ELSE
+ELIF (target = target_bbc)
 SAVE "BBCBASIC2",&8000, &c000
+ELSE
+SAVE "BBCBASIC2",&c000, &10000
+SAVE "abasic.rom",&c000, &d000
+SAVE "afloat.rom",&d000, &e000
+SAVE "dosrom.rom",&e000, &f000
+SAVE "akernel.rom",&f000, &10000
+
 ENDIF
 
