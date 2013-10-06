@@ -19,6 +19,14 @@ target_split=7
 
 target=target_split
 
+\ For all Atom Targets we fold the case of messages, as the Atom doesn't do a great job with lower case
+
+IF (target = target_bbc)
+foldCase = 0
+ELSE
+foldCase = 1
+ENDIF
+
 VALversion=200
 
 IF (target = target_split)
@@ -254,7 +262,11 @@ EQUB L800E-L8000              \ Offset to copyright string
 EQUB (2*VALversion/100)-3     \ ROM version number, 2=&01, 3=&03
 EQUS "BASIC"                  \ ROM title
 .L800E
+IF (foldCase)
+EQUB 0:EQUS "(C)1982 ACORN" \ ROM copyright string
+ELSE
 EQUB 0:EQUS "(C)1982 Acorn" \ ROM copyright string
+ENDIF
 EQUB 10:EQUB 13:EQUB 0
 EQUD load                     \ Second processor transfer address
 ENDIF
@@ -1104,7 +1116,11 @@ LDA &28
 IF (VALversion<300) :LSR A:ENDIF
 IF (VALversion>=300):AND #&02:ENDIF
 BEQ L86A5               \ If OPT.b0=0, ignore error
+IF (foldCase)
+BRK:EQUB 1:EQUS "OUT OF RANGE":BRK
+ELSE
 BRK:EQUB 1:EQUS "Out of range":BRK
+ENDIF
 
 .L86A5
 TAY
@@ -1134,7 +1150,11 @@ JSR L8821
 .L86C8
 LDA &2B:BEQ L86A8
 .L86CC
+IF (foldCase)
+BRK:EQUB &02:EQUS "BYTE":BRK
+ELSE
 BRK:EQUB &02:EQUS "Byte":BRK
+ENDIF
 
 .L86D3
 CPX #&36:BNE L873F
@@ -1157,7 +1177,11 @@ CMP #'X':BNE L870D
 JSR L8A97
 CMP #')':BEQ L86C8
 .L870D
+IF (foldCase)
+BRK:EQUB &03:EQUS "INDEX":BRK
+ELSE
 BRK:EQUB &03:EQUS "Index":BRK
+ENDIF
 
 .L8715
 DEC &0A
@@ -1676,7 +1700,11 @@ RTS
 
 IF (VALversion<300)
  .L8AA2
+IF (foldCase)
+ BRK:EQUB 5:EQUS "MISSING ,":BRK
+ELSE
  BRK:EQUB 5:EQUS "Missing ,":BRK
+ENDIF
 ENDIF
 
 .L8AAE
@@ -1687,7 +1715,11 @@ ENDIF
 IF (VALversion>=300)
  BEQ L8AA1
  .X8AC8
+IF (foldCase)
+ BRK:EQUB 5:EQUS "MISSING ,":BRK
+ELSE
  BRK:EQUB 5:EQUS "Missing ,":BRK
+ENDIF
 ENDIF
 
 
@@ -1802,7 +1834,11 @@ LDA &01FF:CMP #tknFN:BNE L8B59\ If pushed token<>'FN', give error
 JSR L9B1D                     \ Evaluate expression
 JMP L984C                     \ Check for end of statement and return to pop from function
 .L8B59
+IF (foldCase)
+BRK:EQUB 7:EQUS "NO ",tknFN:BRK
+ELSE
 BRK:EQUB 7:EQUS "No ",tknFN:BRK
+ENDIF
 
 \ Check for =, *, [ commands
 \ ==========================
@@ -1907,7 +1943,11 @@ JMP L8B9B
 JMP L982A
 
 .L8C0E
+IF (foldCase)
+BRK:EQUB 6:EQUS "TYPE MISMATCH":BRK
+ELSE
 BRK:EQUB 6:EQUS "Type mismatch":BRK
+ENDIF
 
 .L8C1E
 JSR LBDEA
@@ -2006,7 +2046,11 @@ STA (&2A),Y
 RTS
 
 .L8CB7
+IF (foldCase)
+BRK:EQUB 0:EQUS "NO ROOM":BRK
+ELSE
 BRK:EQUB 0:EQUS "No room":BRK
+ENDIF
 
 .L8CC1
 LDA &39
@@ -2291,7 +2335,11 @@ SEC
 RTS
 
 .L8E98
+IF (foldCase)
+BRK:EQUB 9:EQUS "MISSING ",'"':BRK
+ELSE
 BRK:EQUB 9:EQUS "Missing ",'"':BRK
+ENDIF
 
 .L8EA4
 JSR LB558
@@ -2471,9 +2519,17 @@ BCS L8FD6
 JSR L909F
 BCC L8FB1
 .L8FD6
+IF (foldCase)
+BRK:EQUB 0:EQUS tknRENUMBER," SPACE"  \ Terminated by following BRK
+ELSE
 BRK:EQUB 0:EQUS tknRENUMBER," space"  \ Terminated by following BRK
+ENDIF
 .L8FDF
+IF (foldCase)
+BRK:EQUB 0:EQUS "SILLY":BRK
+ELSE
 BRK:EQUB 0:EQUS "Silly":BRK
+ENDIF
 
 IF (target = target_split)
 .L8FE7
@@ -2590,7 +2646,11 @@ BCS L9043
 IF (VALversion>=300):BMI L90D9:ENDIF
 .L9082
 JSR LBFCF        \ Print inline text
+IF (foldCase)
+EQUS "FAILED AT "
+ELSE
 EQUS "Failed at "
+ENDIF
 INY
 LDA (&0B),Y
 STA &2B
@@ -2678,7 +2738,11 @@ JSR L8827
 JMP L920B
 
 .L9127
+IF (foldCase)
+BRK:EQUB 10:EQUS "BAD ",tknDIM:BRK
+ELSE
 BRK:EQUB 10:EQUS "Bad ",tknDIM:BRK
+ENDIF
 
 \ DIM numvar [numeric] [(arraydef)]
 \ =================================
@@ -2818,7 +2882,11 @@ JMP L8B96
 JMP L912F
 
 .L9218
+IF (foldCase)
+BRK:EQUB 11:EQUS tknDIM," SPACE":BRK
+ELSE
 BRK:EQUB 11:EQUS tknDIM," space":BRK
+ENDIF
 
 .L9222
 INC &2A:BNE L9230
@@ -3023,11 +3091,23 @@ TSX:CPX #&FC:BCS L9365      \ If stack empty, jump to give error
 LDA &01FF:CMP #&F2:BNE L9365\ If pushed token<>'PROC', give error
 JMP L9857                   \ Check for end of statement and return to pop from subroutine
 .L9365
+IF (foldCase)
+BRK:EQUB 13:EQUS "NO ",tknPROC       \ Terminated by following BRK
+ELSE
 BRK:EQUB 13:EQUS "No ",tknPROC       \ Terminated by following BRK
+ENDIF
 .L936B
+IF (foldCase)
+BRK:EQUB 12:EQUS "NOT ",tknLOCAL     \ Terminated by following BRK
+ELSE
 BRK:EQUB 12:EQUS "Not ",tknLOCAL     \ Terminated by following BRK
+ENDIF
 .L9372
+IF (foldCase)
+BRK:EQUB &19:EQUS "BAD ",tknMODE:BRK
+ELSE
 BRK:EQUB &19:EQUS "Bad ",tknMODE:BRK
+ENDIF
 
 \ GCOL numeric, numeric
 \ =====================
@@ -3330,7 +3410,11 @@ SEC
 RTS
 
 .L95BF
+IF (foldCase)
+BRK:EQUB 8:EQUS "$ RANGE":BRK
+ELSE
 BRK:EQUB 8:EQUS "$ range":BRK
+ENDIF
 .L95C9
 LDA &0B:STA &19
 LDA &0C:STA &1A
@@ -3470,7 +3554,11 @@ SEC
 RTS
 
 .L96D7
+IF (foldCase)
+BRK:EQUB 14:EQUS "ARRAY":BRK
+ELSE
 BRK:EQUB 14:EQUS "Array":BRK
+ENDIF
 
 .L96DF
 JSR L9469
@@ -3581,7 +3669,11 @@ INY
 RTS
 
 .L97D1
+IF (foldCase)
+BRK:EQUB 15:EQUS "SUBSCRIPT":BRK
+ELSE
 BRK:EQUB 15:EQUS "Subscript":BRK
+ENDIF
 .L97DD
 INC &0A
 .L97DF
@@ -3625,11 +3717,23 @@ LDA (&19),Y
 CMP #&20:BEQ L9813
 CMP #&3D:BEQ L9849
 .L9821
+IF (foldCase)
+BRK:EQUB 4:EQUS "MISTAKE"       \ Terminated by following BRK
+ELSE
 BRK:EQUB 4:EQUS "Mistake"       \ Terminated by following BRK
+ENDIF
 .L982A
+IF (foldCase)
+BRK:EQUB 16:EQUS "SYNTAX ERROR" \ Terminated by following BRK
+ELSE
 BRK:EQUB 16:EQUS "Syntax error" \ Terminated by following BRK
+ENDIF
 .L9838
+IF (foldCase)
+BRK:EQUB 17:EQUS "ESCAPE":BRK
+ELSE
 BRK:EQUB 17:EQUS "Escape":BRK
+ENDIF
 
 .L9841
 JSR L8A8C
@@ -3878,7 +3982,11 @@ LDY #&02
 RTS
 
 .L99A7
+IF (foldCase)
+BRK:EQUB &12:EQUS "DIVISION BY ZERO"
+ELSE
 BRK:EQUB &12:EQUS "Division by zero"
+ENDIF
 
 \ High byte of multiples of ten
 .L99B9
@@ -4205,7 +4313,11 @@ INC &1B:JSR L9A9D         \ Step past '=', evaluate next and compare
 BCS L9BB4:BCC L9BB5       \ Jump to return TRUE if >=, FALSE if <
 
 .L9C03
+IF (foldCase)
+BRK:EQUB &13:EQUS "STRING TOO LONG":BRK
+ELSE
 BRK:EQUB &13:EQUS "String too long":BRK
+ENDIF
 
 \ String addition
 \ ---------------
@@ -5674,7 +5786,11 @@ JSR LA2A4        \ A666= 20 A4 A2     $"
 JMP LA67C        \ A669= 4C 7C A6    L|&
 
 .LA66C
+IF (foldCase)
+BRK:EQUB &14:EQUS "TOO BIG":BRK
+ELSE
 BRK:EQUB &14:EQUS "Too big":BRK
+ENDIF
 .LA676
 LDA &34          \ A676= A5 34       %4
 ORA #&01         \ A678= 09 01       ..
@@ -5815,7 +5931,11 @@ LDA &43:STA &31
 JMP LA659
 
 .LA7A9
+IF (foldCase)
+BRK:EQUB &15:EQUS "-VE ROOT":BRK
+ELSE
 BRK:EQUB &15:EQUS "-ve root":BRK
+ENDIF
 
 \ =SQR numeric
 \ ============
@@ -5873,7 +5993,11 @@ JSR LA1DA        \ A801= 20 DA A1     Z!
 BEQ LA808        \ A804= F0 02       p.
 BPL LA814        \ A806= 10 0C       ..
 .LA808
+IF (foldCase)
+BRK:EQUB &16:EQUS "LOG RANGE":BRK
+ELSE
 BRK:EQUB &16:EQUS "Log range":BRK
+ENDIF
 .LA814
 JSR LA453        \ A814= 20 53 A4     S$
 LDY #&80         \ A817= A0 80        .
@@ -6176,7 +6300,11 @@ JMP LA500        \ AA32= 4C 00 A5    L.%
 JMP LA3B2        \ AA35= 4C B2 A3    L2#
 
 .LAA38
+IF (foldCase)
+BRK:EQUB &17:EQUS "ACCURACY LOST":BRK
+ELSE
 BRK:EQUB &17:EQUS "Accuracy lost":BRK
+ENDIF
 .LAA48
 LDA #LAA59 AND 255         \ AA48= A9 59       )Y
 BNE LAA4E                  \ AA4A= D0 02       P.
@@ -6261,7 +6389,11 @@ LDA #&FF         \ AAA9= A9 FF       ).
 RTS              \ AAAB= 60          `
 
 .LAAAC
+IF (foldCase)
+BRK:EQUB &18:EQUS "EXP RANGE":BRK
+ELSE
 BRK:EQUB &18:EQUS "Exp range":BRK
+ENDIF
 .LAAB8
 JSR LA486        \ AAB8= 20 86 A4     .$
 JSR LAADA        \ AABB= 20 DA AA     Z*
@@ -6968,13 +7100,25 @@ IF (VALversion<300) :JMP LAEEA:ENDIF  \ Jump to return 16-bit integer
 IF (VALversion>=300):JMP XAED5:ENDIF  \ Jump to return 16-bit integer
 
 .LAE43
+IF (foldCase)
+BRK:EQUB &1A:EQUS "NO SUCH VARIABLE"
+ELSE
 BRK:EQUB &1A:EQUS "No such variable"
+ENDIF
 .LAE54
 BRK
 IF (VALversion>=300)
+IF (foldCase)
+ EQUB &1B:EQUS "MISSING )"
+ELSE
  EQUB &1B:EQUS "Missing )"
+ENDIF
  .LAE55
+IF (foldCase)
+ BRK:EQUB &1C:EQUS "BAD HEX":BRK
+ELSE
  BRK:EQUB &1C:EQUS "Bad HEX":BRK
+ENDIF
 ENDIF
 
 .LAE56
@@ -6987,7 +7131,11 @@ TAY:RTS
 
 IF (VALversion<300)
  .LAE61
+IF (foldCase)
  BRK:EQUB &1B:EQUS "Missing )":BRK
+ELSE
+ BRK:EQUB &1B:EQUS "Missing )":BRK
+ENDIF
 ENDIF
 .LAE6D
 IF (VALversion<300)
@@ -7100,7 +7248,11 @@ ENDIF
 
 IF (VALversion<300)
  .LAEAA
+IF (foldCase)
+ BRK:EQUB &1C:EQUS "BAD HEX":BRK
+ELSE
  BRK:EQUB &1C:EQUS "Bad HEX":BRK
+ENDIF
 ENDIF
 
 \ =TIME - Read system TIME
@@ -7506,7 +7658,11 @@ JMP L9C03
 .LB0FE
 PLA:STA &0C
 PLA:STA &0B
+IF (foldCase)
+BRK:EQUB &1D:EQUS "NO SUCH ",tknFN,"/",tknPROC:BRK
+ELSE
 BRK:EQUB &1D:EQUS "No such ",tknFN,"/",tknPROC:BRK
+ENDIF
 
 \ Look through program for FN/PROC
 \ --------------------------------
@@ -7559,7 +7715,11 @@ JSR L9539
 JMP LB1F4
 
 .LB18A
+IF (foldCase)
+BRK:EQUB &1E:EQUS "BAD CALL":BRK
+ELSE
 BRK:EQUB &1E:EQUS "Bad call":BRK
+ENDIF
 
 \ =FNname [parameters]
 \ ====================
@@ -7681,7 +7841,11 @@ CPX &4D:BEQ LB2CA
 LDX #&FB:TXS
 PLA:STA &0C
 PLA:STA &0B
+IF (foldCase)
+BRK:EQUB &1F:EQUS "ARGUMENTS":BRK
+ELSE
 BRK:EQUB &1F:EQUS "Arguments":BRK
+ENDIF
 
 .LB2CA
 JSR LBDEA
@@ -7889,14 +8053,22 @@ JMP L8BA3                 \ Jump to execution loop
 \ REPORT IF ERL PRINT " at line ";ERL END ELSE PRINT END
 .LB433
 EQUB tknREPORT:EQUS ":":EQUB tknIF:EQUB tknERL
+IF (foldCase)
+EQUB tknPRINT:EQUS '"'," AT LINE ",'"',";"
+ELSE
 EQUB tknPRINT:EQUS '"'," at line ",'"',";"
+ENDIF
 EQUB tknERL:EQUS ":":EQUB tknEND
 EQUB tknELSE:EQUB tknPRINT:EQUS ":"
 EQUB tknEND:EQUB 13
 
 IF (target=target_atom)
  .LD428
+IF (foldCase)
+ BRK:EQUB &FF:EQUS "EXTERNAL ERROR":BRK
+ELSE
  BRK:EQUB &FF:EQUS "External Error":BRK
+ENDIF
 ENDIF
 
 \ SOUND numeric, numeric, numeric, numeric
@@ -8198,7 +8370,11 @@ DEC &3C
 JSR LB50E
 INY:BNE LB639
 .LB68E
+IF (foldCase)
+BRK:EQUB &20:EQUS "NO ",tknFOR:BRK
+ELSE
 BRK:EQUB &20:EQUS "No ",tknFOR:BRK
+ENDIF
 
 \ NEXT [variable [,...]]
 \ ======================
@@ -8220,7 +8396,11 @@ LDA &2C:CMP ws+&04F3,X:BEQ LB6D7
 .LB6BE
 TXA:SEC:SBC #&0F:TAX:STX &26
 BNE LB6A9
+IF (foldCase)
+BRK:EQUB &21:EQUS "CAN'T MATCH ",tknFOR:BRK
+ELSE
 BRK:EQUB &21:EQUS "Can't Match ",tknFOR:BRK
+ENDIF
 
 .LB6D7
 LDA ws+&04F1,X:STA &2A
@@ -8289,11 +8469,23 @@ BCS LB751
 JMP L8B96
 
 .LB7A4
+IF (foldCase)
+BRK:EQUB &22:EQUS tknFOR," VARIABLE"
+ELSE
 BRK:EQUB &22:EQUS tknFOR," variable"
+ENDIF
 .LB7B0
+IF (foldCase)
+BRK:EQUB &23:EQUS "TOO MANY ",tknFOR,"s"
+ELSE
 BRK:EQUB &23:EQUS "Too many ",tknFOR,"s"
+ENDIF
 .LB7BD
+IF (foldCase)
+BRK:EQUB &24:EQUS "NO ",tknTO:BRK
+ELSE
 BRK:EQUB &24:EQUS "No ",tknTO:BRK
+ENDIF
 
 \ FOR numvar = numeric TO numeric [STEP numeric]
 \ ==============================================
@@ -8379,9 +8571,17 @@ LDA &0C:STA ws+&05E6,Y
 INC &25:BCC LB8D2
 
 .LB8A2
+IF (foldCase)
+BRK:EQUB &25:EQUS "TOO MANY ",tknGOSUB,"s"
+ELSE
 BRK:EQUB &25:EQUS "Too many ",tknGOSUB,"s"
+ENDIF
 .LB8AF
+IF (foldCase)
+BRK:EQUB &26:EQUS "NO ",tknGOSUB:BRK
+ELSE
 BRK:EQUB &26:EQUS "No ",tknGOSUB:BRK
+ENDIF
 
 \ RETURN
 \ ======
@@ -8426,7 +8626,11 @@ LDA &0C:STA &17
 JMP L8B7D                  \ Skip past end of line
 
 .LB90A
+IF (foldCase)
+BRK:EQUB &27:EQUS tknON," SYNTAX":BRK
+ELSE
 BRK:EQUB &27:EQUS tknON," syntax":BRK
+ENDIF
 
 \ ON [ERROR] [numeric]
 \ ====================
@@ -8482,7 +8686,11 @@ PLA                        \ Drop GOTO/GOSUB token
 LDA (&0B),Y:INY            \ Get character from line
 CMP #tknELSE:BEQ LB995     \ Found ELSE, jump to use it
 CMP #&0D:BNE LB980         \ Loop until end of line
+IF (foldCase)
+BRK:EQUB &28:EQUS tknON," RANGE":BRK
+ELSE
 BRK:EQUB &28:EQUS tknON," range":BRK
+ENDIF
 
 .LB995
 STY &0A:JMP L98E3          \ Store line index and jump to GOSUB
@@ -8497,7 +8705,11 @@ LDA &2B:AND #&7F:STA &2B   \ Line number high byte
 JSR L9970:BCS LB9B5:RTS    \ Look for line, error if not found
 
 .LB9B5
+IF (foldCase)
+BRK:EQUB &29:EQUS "NO SUCH LINE":BRK
+ELSE
 BRK:EQUB &29:EQUS "No such line":BRK
+ENDIF
 
 .LB9C4
 JMP L8C0E
@@ -8725,9 +8937,17 @@ TXA:CLC:ADC &19
 STA &19:BCC LBB7A
 INC &1A:BCS LBB7A
 .LBB9C
+IF (foldCase)
+BRK:EQUB &2A:EQUS "OUT OF ",tknDATA
+ELSE
 BRK:EQUB &2A:EQUS "Out of ",tknDATA
+ENDIF
 .LBBA6
+IF (foldCase)
+BRK:EQUB &2B:EQUS "NO ",tknREPEAT:BRK
+ELSE
 BRK:EQUB &2B:EQUS "No ",tknREPEAT:BRK
+ENDIF
 
 .LBBAD
 INY
@@ -8752,7 +8972,11 @@ LDA ws+&05B7,X
 JMP LB8DD
 
 .LBBD6
+IF (foldCase)
+BRK:EQUB &2C:EQUS "TOO MANY ",tknREPEAT,"s":BRK
+ELSE
 BRK:EQUB &2C:EQUS "Too many ",tknREPEAT,"s":BRK
+ENDIF
 
 \ REPEAT
 \ ======
@@ -8892,7 +9116,11 @@ LDA &07:SBC &13
 BCS LBCD6
 JSR LBE6F
 JSR LBD20
+IF (foldCase)
+BRK:EQUB 0:EQUS tknLINE," SPACE":BRK
+ELSE
 BRK:EQUB 0:EQUS tknLINE," space":BRK
+ENDIF
 
 .LBCD6
 LDA (&39),Y:STA (&37),Y
@@ -9118,7 +9346,11 @@ LDY #&01:RTS              \ Return Y=1, NE
 \ -----------------------------------------------
 .LBE9E
 JSR LBFCF                 \ Print inline text
+IF (foldCase)
+EQUB 13:EQUS "BAD PROGRAM":EQUB 13
+ELSE
 EQUB 13:EQUS "Bad program":EQUB 13
+ENDIF
 NOP
 JMP L8AF6                 \ Jump to immediate mode
 
@@ -9289,7 +9521,11 @@ LDY &2A:TYA:RTS           \ Get low byte and return
 
 IF (VALversion<300)
 .LBFC3
+IF (foldCase)
+ BRK:EQUB &2D:EQUS "MISSING #":BRK
+ELSE
  BRK:EQUB &2D:EQUS "Missing #":BRK
+ENDIF
 ENDIF
 
 \ Print inline text
@@ -9316,15 +9552,27 @@ JMP L8B9B                 \ Jump to main execution loop
 
 IF (VALversion>=300)
 .LBFF4
+IF (foldCase)
  BRK:EQUB &2D:EQUS "Missing #":BRK
+ELSE
+ BRK:EQUB &2D:EQUS "MISSING #":BRK
+ENDIF
 ENDIF
 
 IF (VALversion<300)
   IF (target = target_split)
     \ Squeeze another couple of bytes here....
+IF (foldCase)
+    BRK:EQUS "ROG":BRK
+ELSE
     BRK:EQUS "Rog":BRK
+ENDIF
   ELSE
+IF (foldCase)
+    BRK:EQUS "ROGER":BRK
+ELSE
     BRK:EQUS "Roger":BRK
+ENDIF
   ENDIF
 ENDIF
 
