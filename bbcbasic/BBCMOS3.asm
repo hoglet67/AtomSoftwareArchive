@@ -155,6 +155,7 @@ type_0800_c000 = 5
 type = type_f000_a000
 
 IF (type = type_original)
+    FOLDCASE = 0
     INCLUDE_ATM_HEADER = 0
     LOAD = &F000
     BBCBASICENTRY = &8000
@@ -166,6 +167,7 @@ IF (type = type_original)
     RAM_BOT = &0800
     RAM_TOP = SCREEN
 ELIF (type = type_f000_4000)
+    FOLDCASE = 1
     INCLUDE_ATM_HEADER = 0
     LOAD = &F000
     BBCBASICENTRY = &4000
@@ -177,6 +179,7 @@ ELIF (type = type_f000_4000)
     RAM_BOT = &0800
     RAM_TOP = BBCBASICENTRY
 ELIF (type = type_f000_a000)
+    FOLDCASE = 1
     INCLUDE_ATM_HEADER = 0
     LOAD = &F000
     BBCBASICENTRY = &a000
@@ -188,6 +191,7 @@ ELIF (type = type_f000_a000)
     RAM_BOT = &0800
     RAM_TOP = SCREEN
 ELIF (type = type_7000_c000)
+    FOLDCASE = 1
     INCLUDE_ATM_HEADER = 1
     LOAD = &7000
     BBCBASICENTRY = &C000
@@ -199,6 +203,7 @@ ELIF (type = type_7000_c000)
     RAM_BOT = &0800
     RAM_TOP = LOAD
 ELSE
+    FOLDCASE = 1
     INCLUDE_ATM_HEADER = 1
     LOAD = &0800
     BBCBASICENTRY = &C000
@@ -236,17 +241,18 @@ IO6522_E = IO6522_0 + 14
 IO6522_F = IO6522_0 + 15
 
 
- IF (INCLUDE_ATM_HEADER)
+IF (INCLUDE_ATM_HEADER)
 
 	org LOAD - 22
 .AtmHeader
-        EQUS    "ATMOS3"
+        EQUS    "BBCMOS3"
         org AtmHeader + 16
         EQUW	BeebDisStartAddr
         EQUW    BeebDisStartAddr
         EQUW	BeebDisEndAddr - BeebDisStartAddr
 
 ENDIF
+
         org     LOAD
 
 .BeebDisStartAddr
@@ -447,7 +453,11 @@ ENDIF
 .LF0EE
         BRK
         EQUB    $FF
+IF (FOLDCASE)
+        EQUS    "NOT IMPLEMENTED"
+ELSE
         EQUS    "Not implemented"
+ENDIF
         EQUB    $00
 .LF100
         RTS
@@ -1145,7 +1155,11 @@ ENDIF
         JSR     LF7C0
         EQUB    $06
         EQUB    $0C
+IF (FOLDCASE)
+        EQUS    "LANGUAGE?"
+ELSE
         EQUS    "Language?"
+ENDIF
         EQUB    $0D,$0A
         NOP
 
@@ -1172,7 +1186,7 @@ ELSE
         EQUS    "ATOM MOS V3.0 HOGLET"
         EQUB    $0D
         EQUB    $0A,$0A
-        EQUS    "Basic "
+        EQUS    "BASIC "
         LDA     BBCBASICVERSION
         JSR     LFFEE
         JSR     LF7C0
@@ -1821,13 +1835,12 @@ ENDIF
 
 .LF85B
         BRK
-.LF85C
         EQUB    $DD
-
-.LF85D
+IF (FOLDCASE)
+        EQUS    "NAME"
+ELSE
         EQUS    "Name"
-
-.LF861
+ENDIF
         EQUB    $00
 
 .LF862
@@ -1960,13 +1973,12 @@ ENDIF
 
 .LF8FA
         BRK
-.LF8FB
         EQUB    $FE
-
-.LF8FC
+IF (FOLDCASE)
+        EQUS    "BAD COMMAND"
+ELSE
         EQUS    "Bad command"
-
-.LF907
+ENDIF
         EQUB    $00,$00
 
 .LF909
@@ -2137,16 +2149,14 @@ ENDIF
         BEQ     LF9DB
 
         BRK
-.LF9D5
         EQUB    $D8
-
-.LF9D6
+IF (FOLDCASE)
+        EQUS    "SUM?"
+ELSE
         EQUS    "Sum?"
-
-.LF9DA
+ENDIF
         EQUB    $00
 
-.LF9DB
         ROL     L00DB
         RTS
 
@@ -2256,13 +2266,12 @@ ENDIF
 
 .LFA53
         BRK
-.LFA54
         EQUB    $DC
-
-.LFA55
+IF (FOLDCASE)
+        EQUS    "SYNTAX"
+ELSE
         EQUS    "Syntax"
-
-.LFA5B
+ENDIF
         EQUB    $00
 
 .LFA5C
@@ -2629,7 +2638,11 @@ ENDIF
         JSR     LF7C0
 
 .LFC27
+IF (FOLDCASE)
+        EQUS    "PLAY"
+ELSE
         EQUS    "Play"
+ENDIF
 
 .LFC2B
         BNE     LFC42
@@ -2638,7 +2651,11 @@ ENDIF
         JSR     LF7C0
 
 .LFC30
+IF (FOLDCASE)
+        EQUS    "RECORD"
+ELSE
         EQUS    "Record"
+ENDIF
 
 .LFC36
         BNE     LFC42
@@ -2647,7 +2664,11 @@ ENDIF
         JSR     LF7C0
 
 .LFC3B
+IF (FOLDCASE)
+        EQUS    "REWIND"
+ELSE
         EQUS    "Rewind"
+ENDIF
 
 .LFC41
         NOP
@@ -2655,7 +2676,11 @@ ENDIF
         JSR     LF7C0
 
 .LFC45
+IF (FOLDCASE)
+        EQUS    " TAPE"
+ELSE
         EQUS    " tape"
+ENDIF
 
 .LFC4A
         NOP
