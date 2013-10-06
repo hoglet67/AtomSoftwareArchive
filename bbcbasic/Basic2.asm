@@ -9439,17 +9439,17 @@ ENDIF
 .BeebDisEndAddr
 
 IF (target = target_atom)
-SAVE "ATBASIC2",AtmHeader,BeebDisEndAddr
+SAVE "roms/ATBASIC2",AtmHeader,BeebDisEndAddr
 ELIF (target = target_hybrid)
-SAVE "ATBASIC2", &3FEA, &8000
+SAVE "roms/ATBASIC2", &3FEA, &8000
 ELIF (target = target_bbc)
-SAVE "BBCBASIC2",&8000, &c000
+SAVE "roms/BBCBASIC2",&8000, &c000
 ELIF (target = target_c000)
-SAVE "BBCBASIC2",&c000, &10000
+SAVE "roms/BBCBASIC2",&c000, &10000
 ELSE
-SAVE "axr1.rom",  &a000, &b000
-SAVE "abasic.rom",&c000, &d000
-SAVE "afloat.rom",&d000, &e000
-SAVE "dosrom.rom",&e000, &f000
+SAVE "roms/axr1.rom",  &a000, &b000
+SAVE "roms/abasic.rom",&c000, &d000
+SAVE "roms/afloat.rom",&d000, &e000
+SAVE "roms/dosrom.rom",&e000, &f000
 ENDIF
 

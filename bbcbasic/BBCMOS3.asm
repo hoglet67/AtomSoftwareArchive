@@ -185,7 +185,7 @@ ELIF (type = type_f000_a000)
     SCREEN = &8000
     IO8255_0 = &B000
     IO6522_0 = &B800
-    RAM_BOT = &0B00
+    RAM_BOT = &0800
     RAM_TOP = SCREEN
 ELIF (type = type_7000_c000)
     INCLUDE_ATM_HEADER = 1
@@ -3399,7 +3399,7 @@ ENDIF
 .BeebDisEndAddr
 
 IF (INCLUDE_ATM_HEADER)
-    SAVE "BBCMOS3",AtmHeader,BeebDisEndAddr
+    SAVE "roms/BBCMOS3",AtmHeader,BeebDisEndAddr
 ELSE
-    SAVE "BBCMOS3",BeebDisStartAddr,BeebDisEndAddr
+    SAVE "roms/BBCMOS3",BeebDisStartAddr,BeebDisEndAddr
 ENDIF
