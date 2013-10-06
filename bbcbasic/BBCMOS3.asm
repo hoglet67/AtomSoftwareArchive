@@ -1155,32 +1155,31 @@ ENDIF
 .LF4B2
         JSR     LF7C0
 
-.LF4B5
+IF (type = type_original)
         EQUB    $06
-
-.LF4B6
         EQUB    $0C,$0F
-
-.LF4B8
         EQUS    "BBC Basic Issue "
-
-.LF4C8
         LDA     BBCBASICVERSION
         JSR     LFFEE
-
         JSR     LF7C0
-
-.LF4D1
         EQUB    $0D
-
-.LF4D2
         EQUB    $0A,$0A
-
-.LF4D4
         EQUS    "MOS ROM V3.0"
-
-.LF4E0
         EQUB    $0D,$0A
+ELSE
+        EQUB    $06
+        EQUB    $0C,$0F
+        EQUS    "ATOM MOS V3.0 HOGLET"
+        EQUB    $0D
+        EQUB    $0A,$0A
+        EQUS    "Basic "
+        LDA     BBCBASICVERSION
+        JSR     LFFEE
+        JSR     LF7C0
+        EQUB    $0D,$0A
+        NOP
+        NOP
+ENDIF
 
 .LF4E2
         LDA     MOSEXT1
@@ -1242,7 +1241,7 @@ ENDIF
 
 .LF526
         LDA     #$0D
-        
+
 \ TODO: UNDERSTAND THIS
 
         EQUB    $2C

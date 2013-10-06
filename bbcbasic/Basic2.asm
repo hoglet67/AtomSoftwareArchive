@@ -195,9 +195,7 @@ tknERL=&9E
 tknEXT=&A2
 tknFN=&A4
 tknTO=&B8
-IF (target != target_split)
 tknAUTO=&C6
-ENDIF
 tknRENUMBER=&CC
 tknPTRc=&CF
 tknDATA=&DC
@@ -311,9 +309,7 @@ EQUS "ADVAL"   :EQUB &96:EQUB &00 \ 00000000
 EQUS "ASC"     :EQUB &97:EQUB &00 \ 00000000
 EQUS "ASN"     :EQUB &98:EQUB &00 \ 00000000
 EQUS "ATN"     :EQUB &99:EQUB &00 \ 00000000
-IF (target != target_split)
 EQUS "AUTO"    :EQUB &C6:EQUB &10 \ 00010000
-ENDIF
 EQUS "BGET"    :EQUB &9A:EQUB &01 \ 00000001
 EQUS "BPUT"    :EQUB &D5:EQUB &03 \ 00000011
 IF (VALversion<>300)
@@ -525,11 +521,7 @@ EQUB LAFEE AND &FF \ &C2 - RIGHT$(
 EQUB LB094 AND &FF \ &C3 - STR$(
 EQUB LB0C2 AND &FF \ &C4 - STRING$(
 EQUB LACB8 AND &FF \ &C5 - EOF
-IF (target != target_split)
 EQUB L90AC AND &FF \ &C6 - AUTO
-ELSE
-EQUB 0
-ENDIF
 EQUB L8F31 AND &FF \ &C7 - DELETE
 EQUB LBF24 AND &FF \ &C8 - LOAD
 EQUB LB59C AND &FF \ &C9 - LIST
@@ -683,11 +675,7 @@ EQUB LAFEE DIV 256 \ &C2 - RIGHT$(
 EQUB LB094 DIV 256 \ &C3 - STR$(
 EQUB LB0C2 DIV 256 \ &C4 - STRING$(
 EQUB LACB8 DIV 256 \ &C5 - EOF
-IF (target != target_split)
 EQUB L90AC DIV 256 \ &C6 - AUTO
-ELSE
-EQUB 0
-ENDIF
 EQUB L8F31 DIV 256 \ &C7 - DELETE
 EQUB LBF24 DIV 256 \ &C8 - LOAD
 EQUB LB59C DIV 256 \ &C9 - LIST
@@ -1615,13 +1603,19 @@ BCC L8A48
 LDA (&37),Y
 JSR L8926
 BCS L89D0
+
 .L8A48
+\ Carry Clear on both paths to this point, and none of the below instructions set it
 TXA
 BIT &3D
 BVC L8A54
 LDX &3B
 BNE L8A54
+IF (target != target_split)
+\ We need to save one byte for the overhead we added when splitting basic at the 4K boundary
+\ this CLC is unnecessary as carry will always be clear at this point
 CLC
+ENDIF
 ADC #&40
 .L8A54
 DEY
@@ -2481,9 +2475,21 @@ BRK:EQUB 0:EQUS tknRENUMBER," space"  \ Terminated by following BRK
 .L8FDF
 BRK:EQUB 0:EQUS "Silly":BRK
 
-IF (target=target_split)
+IF (target = target_split)
 .L8FE7
 JMP LXXX1
+
+\ PROCname [(parameters)]
+\ =======================
+.L9304
+LDA &0B:STA &19           \ PtrB=PtrA=>after 'PROC' token
+LDA &0C:STA &1A
+LDA &0A:STA &1B
+LDA #&F2:JSR LB197        \ Call PROC/FN dispatcher
+                          \ Will return here after ENDPROC
+JSR L9852                 \ Check for end of statement
+JMP L8B9B                 \ Return to execution loop
+
 ORG $c000
 .LXXX1
 ELSE
@@ -2605,8 +2611,6 @@ CLC
 .L90AB
 RTS
 
-if (target != target_split)
-
 \ AUTO [numeric [, numeric ]]
 \ ===========================
 .L90AC
@@ -2633,8 +2637,6 @@ INC &2B
 BPL L90B5
 .L90D9
 JMP L8AF3
-
-ENDIF
 
 .L90DC
 JMP L9218
@@ -2968,6 +2970,7 @@ BEQ L92F7                 \ String, jump to 'Type mismatch'
 BMI L92EA                 \ Real, return
 JMP LA2BE                 \ Integer, jump to convert to real
 
+IF (target != target_split)
 \ PROCname [(parameters)]
 \ =======================
 .L9304
@@ -2978,6 +2981,7 @@ LDA #&F2:JSR LB197        \ Call PROC/FN dispatcher
                           \ Will return here after ENDPROC
 JSR L9852                 \ Check for end of statement
 JMP L8B9B                 \ Return to execution loop
+ENDIF
 
 \ Make string zero length
 \ -----------------------
@@ -9316,7 +9320,12 @@ IF (VALversion>=300)
 ENDIF
 
 IF (VALversion<300)
- BRK:EQUS "Roger":BRK
+  IF (target = target_split)
+    \ Squeeze another couple of bytes here....
+    BRK:EQUS "Rog":BRK
+  ELSE
+    BRK:EQUS "Roger":BRK
+  ENDIF
 ENDIF
 
 IF (VALversion>=310)
