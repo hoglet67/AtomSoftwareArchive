@@ -3252,7 +3252,7 @@ ENDIF
         STA     IO8255_3
         LDA     #$07
         STA     IO8255_2
-        LDA     #$20
+        LDA     #$00
         STA     L00EB
         LDA     #$0E
         STA     IO6522_4
