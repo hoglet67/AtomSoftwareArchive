@@ -26,7 +26,7 @@ INTERGAL",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/s
 16,V1,AS,Acornsoft,A.Commercial Software,Sphinx Adv (32K),Adventure,,AS/ADVENT,8200,*RUN SPHINX,Works,"SPHINX
 SPHINX1
 SPHINX2
-SPHINXH",present,Atom Adventures,Yes,No,
+SPHINXIN",present,Atom Adventures,Yes,No,
 17,V1,AS,Acornsoft,A.Commercial Software,AtomCalc,Business,,AS/ATOMCALC,8200,*RUN ATOMCALC,Works,ATOMCALC,present,,,Yes,http://members.casema.nl/hhaydn/manual/calc/calc.htm
 18,V1,AS,Acornsoft,A.Commercial Software,ADDUP,Business,,AS/BUSINESS,8200,"CH.""ADDUP""",Works,ADDUP,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
 19,V1,AS,Acornsoft,A.Commercial Software,LABEL,Business,,AS/BUSINESS,8200,"CH.""LABEL""",Works,LABEL,present,Atom Business,,No,http://silicon-heaven.com/atom/manual/bussin.html
@@ -60,7 +60,6 @@ EDITOR6
 EDITOR7
 DEMO
 DEMO1
-DEMO2
 DEMO3
 DEMO4
 DEMO5
@@ -284,7 +283,7 @@ STDAT",present,,,,
 191,,PP,Prog Power,A.Commercial Software,Breakaway,Game,R.M.P. Hanson,PP,,,,,missing,,,,
 192,V2,PP,Prog Power,A.Commercial Software,Chess,Game,D. Thompson,PP,8200,"CH.""CHESSPP""",Works,"CHESSPP
 TEXT
-2.12",present,,,,
+1.12",present,,,,
 193,V1,PP,Prog Power,A.Commercial Software,Constellation,Simulation,R.M.P. Hanson,PP,8200,"CH.""CONSTELL""",Works,CONSTELL,present,,,,
 194,V1,PP,Prog Power,A.Commercial Software,Cowboy Shoot-Out,Game,S. Vout,PP,8200,"CH.""SHOOTOUT""",Works,SHOOTOUT,present,,,,
 195,,PP,Prog Power,A.Commercial Software,Dambusters,Game,G. Douglass,PP,,,,,missing,,,,
@@ -340,7 +339,7 @@ OTHINST",present,,,,
 237,V1,TD,Timedata,A.Commercial Software,Cupball,Game,,TD,8200,"CH.""CUPBALL""",Works,CUPBALL,present,,,,
 238,V1,TD,Timedata,A.Commercial Software,Hammurabi,Game,,TD,8200,"CH.""HAMMUR""",Works,HAMMUR,present,,,,
 239,V1,TD,Timedata,A.Commercial Software,Hexpawn,Game,,TD,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,,,,
-240,V1,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",,LETTERS,missing,,,,
+240,,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",,LETTERS,missing,,,,
 241,V1,TD,Timedata,A.Commercial Software,Othello,Game,,TD,8200,"CH.""OTHELLO""",Works,OTHELLO,present,,,,
 242,V1,TD,Timedata,A.Commercial Software,Pinball,Game,,TD,8200,"CH.""PINBALL""",Works,PINBALL,present,,,,
 243,V1,TD,Timedata,A.Commercial Software,Scramble,Game,,TD,8200,"CH.""SCRAMB""",Works,SCRAMB,present,,,,
@@ -393,7 +392,7 @@ RUNME
 SCORE",obsolete,,Yes,,
 268,V3,RS,Retro S/W,A.Commercial Software,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
 LOADER",present,RS Colour,Yes,,
-269,V2,RS,Retro S/W,A.Commercial Software,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPERV
+269,V2,RS,Retro S/W,A.Commercial Software,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
@@ -486,13 +485,13 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",present,RS Colour,Yes,,
-307,V3,RS,Retro S/W,A.Commercial Software,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPERV
+307,V3,RS,Retro S/W,A.Commercial Software,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
 MHYPER",present,RS Mono,,,
-308,V3,RS,Retro S/W,A.Commercial Software,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPERV
+308,V3,RS,Retro S/W,A.Commercial Software,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
@@ -555,22 +554,22 @@ REDMOON",present,Time and Magik,Yes,,
 341,V4,NC,Non Comm,B.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,,,,
 342,V4,NC,Non Comm,B.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
 345,V4,NC,Non Comm,B.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
-346,V4,NC,Non Comm,B.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,missing,,,,
+346,,NC,Non Comm,B.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,missing,,,,
 347,V4,GA,Getting Acquainted,A.Commercial Software,Dodgem,Game,???,GA,8200,"CH.""DODGEM2""",Works,DODGEM2,present,,,,
 349,V4,NC,Non Comm,B.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
-350,V4,NC,Non Comm,B.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,missing,,,,
+350,,NC,Non Comm,B.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,missing,,,,
 351,V4,NC,Non Comm,B.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
 352,V4,NC,Non Comm,B.Non Commercial Software,Golf,Game,???,NC,8200,"CH.""GOLF""",Works,GOLF,present,,,,
 353,V4,CS,Computersmith,A.Commercial Software,Golf,Game,???,CS,8200,"CH.""GOLF-CS""",Works,GOLF-CS,present,,,,
-354,V4,NC,Non Comm,B.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,missing,,,,
+354,,NC,Non Comm,B.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,missing,,,,
 356,V4,YC,Your Computer,D.Magazine Listings,Hawk,Game,???,YC,8200,"CH.""HAWK""",Works,HAWK,present,,,,
-357,V4,NC,Non Comm,B.Non Commercial Software,Highway (R),Game,R.Leurs,NC,8200,"CH.""HIGHWAY""",,HIGHWAY,missing,,,,
+357,,NC,Non Comm,B.Non Commercial Software,Highway (R),Game,R.Leurs,NC,8200,"CH.""HIGHWAY""",,HIGHWAY,missing,,,,
 359,V4,NC,Non Comm,B.Non Commercial Software,Huncher (R),Game,S.Myngheer,NC/TB,8200,"CH.""HUNCHER""",Works,HUNCHER,present,,,,
-361,V4,NC,Non Comm,B.Non Commercial Software,Intra Terrestrial (R),Game,J.Biel,NC,8200,"CH.""INTRA""",,INTRA,missing,,,,
-362,V4,NC,Non Comm,B.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,missing,,,,
-363,V4,MO,Magnus Olsson,B.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Test,KATAKOMB,present,,,,
+361,,NC,Non Comm,B.Non Commercial Software,Intra Terrestrial (R),Game,J.Biel,NC,8200,"CH.""INTRA""",,INTRA,missing,,,,
+362,,NC,Non Comm,B.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,missing,,,,
+363,V4,MO,Magnus Olsson,B.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Works,KATAKOMB,present,,,,
 364,V4,NC,Non Comm,B.Non Commercial Software,Snakes & Ladders,Game,???,NC,8200,*RUN LADDERS,Broken,LADDERS,duplicate,,,,
-365,V4,HBSC,Hobbyscoop,D.Magazine Listings,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",,LANDING,missing,,,,
+365,,HBSC,Hobbyscoop,D.Magazine Listings,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",,LANDING,missing,,,,
 366,V4,NC,Non Comm,B.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
 367,V4,NC,Non Comm,B.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
 368,V4,MO,Magnus Olsson,B.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Broken,MASKEN,present,,,,
@@ -845,5 +844,7 @@ ERRTAB",present,,,,
 *RUN PS2A
 ",Works,"PROG
 PS2A",present,,,,
-615,V5,RS,Retro S/W,A.Commercial Software,Repton,Game,,RS/REPTON,8200,*RUN REPTON,Works,,present,RS Colour,,,
-616,V5,NC,Non Comm,B.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Test,ADVLDG,present,,,,
+615,V5,RS,Retro S/W,A.Commercial Software,Repton,Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
+REPSCR
+REPTON",present,RS Colour,,,
+616,V5,NC,Non Comm,B.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
