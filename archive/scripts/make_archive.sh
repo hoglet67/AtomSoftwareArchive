@@ -406,9 +406,6 @@ cp -a kees/* $ARCHIVE
 pushd ../menu
 ./build.sh "$*"
 popd
-pushd $ARCHIVE
-unzip ../../menu/MNU.zip
-popd
 
 ##############################################################
 # Zip up the archive

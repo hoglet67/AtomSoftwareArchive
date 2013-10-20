@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,12 @@ public class GenerateMenuFiles extends GenerateBase {
 	int maxShortPublisherLen;
 	int maxPublisherLen;
 	int maxCollectionLen;
-
+	File menuDir;
+	
+	public GenerateMenuFiles(File menuDir) {
+		this.menuDir = menuDir;
+	}
+	
 	private void dumpIndexes(String type, Map<String, Integer> map) {
 		System.out.println("==========================================================");
 		System.out.println(type);
@@ -48,7 +52,7 @@ public class GenerateMenuFiles extends GenerateBase {
 		}
 	}
 
-	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
+	public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
 		// ------------------------------------------------------------------------------------
 		// Process the spreadsheet items to generate IDs for Publishers, Genres and Collections

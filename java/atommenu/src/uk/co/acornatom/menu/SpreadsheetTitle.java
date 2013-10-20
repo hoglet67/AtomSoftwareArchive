@@ -1,5 +1,7 @@
 package uk.co.acornatom.menu;
 
+import java.util.List;
+
 public class SpreadsheetTitle {
 
 	private static final String STATUS_PRESENT = "present";
@@ -16,6 +18,7 @@ public class SpreadsheetTitle {
 	private String shortPublisher;
 	private String collection;
 	private String genre;
+	private List<String> filenames;
 	
 	public void setIndex(int index) {
 		this.index = index;
@@ -95,5 +98,12 @@ public class SpreadsheetTitle {
 	public String getShortPublisher() {
 		return shortPublisher;
 	}
+
+	public List<String> getFilenames() {
+		return filenames;
+	}
 	
+	public void setFilenames(List<String> filenames) {
+		this.filenames = filenames;
+	}	
 }

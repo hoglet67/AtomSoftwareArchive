@@ -14,8 +14,18 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	public static final int CMD_RETURN = 2;
 	public static final int CMD_PAGE = 3;
 	public static final int CMD_DIRECT = 4;
+		
+	private File menuDir;
+	private File bootLoaderBinary;
+	private boolean sddos;
 	
-
+	
+	public GenerateBootstrapFiles(File menuDir, File bootLoaderBinary, boolean sddos) {
+		this.menuDir = menuDir;
+		this.bootLoaderBinary = bootLoaderBinary;
+		this.sddos = sddos;
+	}
+	
 	private void generateMachineCodeBootstrap(File menuDir, File bootLoaderBinary, int index, String directory, String run, String boot)
 			throws IOException {
 
@@ -29,8 +39,10 @@ public class GenerateBootstrapFiles extends GenerateBase {
 		    bos.write(b);
 		}
 		fis.close();
-		bos.write(("CWD " + directory).getBytes());
-		bos.write((byte) 13);
+		if (!sddos) {
+			bos.write(("CWD " + directory).getBytes());
+			bos.write((byte) 13);
+		}
 		String[] cmds = run.split("\n");
 		for (int i = 0; i < cmds.length; i++) {
 			String cmd = cmds[i].trim();
@@ -38,7 +50,8 @@ public class GenerateBootstrapFiles extends GenerateBase {
 			if (cmd.equals("RUN")) {
 				bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
 			} else if (cmd.startsWith("CH.")) {
-				bos.write(("LOAD " + cmd.split("\"")[1]).getBytes());
+				String filename = trunc(cmd.split("\"")[1]);
+				bos.write(("LOAD " + filename).getBytes());
 				bos.write((byte) 13);
 				bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
 			} else if (cmd.startsWith("?18=")) {
@@ -46,6 +59,11 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				bos.write(CMD_PAGE);
 				bos.write(page);
 			} else if (cmd.startsWith("*LOAD") || cmd.startsWith("*RUN")) {
+				String[] parts = cmd.split(" ");
+				if (parts.length != 2) {
+					throw new RuntimeException("Expected two parts: " + cmd);
+				}
+				cmd = parts[0] + " " + trunc(parts[1]);
 				if (i == cmds.length - 1) {
 					bos.write((byte) CMD_DIRECT);
 					bos.write(cmd.getBytes());
@@ -66,7 +84,15 @@ public class GenerateBootstrapFiles extends GenerateBase {
 
 	}
 
-	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
+	private String trunc(String filename) {
+		if (sddos && filename.length() > 7) {
+			return filename.substring(0, 7);
+		} else {
+			return filename;
+		}
+	}
+	
+	public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 		for (SpreadsheetTitle item : items) {
 			if (item.isPresent()) {
 				generateMachineCodeBootstrap(menuDir, bootLoaderBinary, item.getIndex(), item.getDir(), item.getRun(), item.getBoot());

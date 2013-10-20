@@ -16,9 +16,13 @@ include "renderer_header.asm"
 	FilterType   = $7a	
 	FilterString = $7b
 	AutoRepeat   = $7d 
-	
+
+IF (sddos = 1)
+	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
+ELSE	
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
-	
+ENDIF
+
 	RowReturnBuf = $021c 
 
 	AutoRepeat1  = -$200
@@ -96,8 +100,11 @@ include "renderer_header.asm"
 
 	; 30 *LOAD SPLASH
 	JSR OscliString
+IF (sddos = 1)
+	EQUS "LOAD ASPLASH", Return
+ELSE
 	EQUS "LOAD MNUA/SPLASH", Return
-
+ENDIF
 	
 .MenuMain
 	JSR Osrdch
@@ -109,7 +116,10 @@ include "renderer_header.asm"
 	STA MenuDat1Chunk
 	STA MenuDat2Chunk
 	STA SortDatChunk
+	
+IF (sddos = 0)
 	STA RunCommandMenuChunk
+ENDIF
 
 	; 90 CLEAR 0
 	LDY #0
@@ -120,9 +130,15 @@ include "renderer_header.asm"
 	;100 *LOAD MNU/MENUDAT1
 	JSR OscliString
 	
+IF (sddos = 1)	
+	EQUS "LOAD "
+.MenuDat1Chunk
+	EQUS " MENU1", Return
+ELSE
 	EQUS "LOAD MNU"
 .MenuDat1Chunk
 	EQUS " /MENUDAT1", Return
+ENDIF
 
 	;110 D=!#CD&#FFFF	
 	LDA ExecAddr
@@ -132,9 +148,16 @@ include "renderer_header.asm"
 
 	;115 *LOAD MNU/MENUDAT2
 	JSR OscliString
+	
+if (sddos = 1)	
+	EQUS "LOAD "
+.MenuDat2Chunk
+	EQUS " MENU2", Return
+ELSE	
 	EQUS "LOAD MNU"
 .MenuDat2Chunk
 	EQUS " /MENUDAT2", Return
+ENDIF
 	
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
@@ -500,12 +523,30 @@ include "renderer_header.asm"
 	; 880 END
 	LDA #12
 	JSR Oswrch
-	JMP Oscli	
+
+	JSR Oscli	
 	
+
+if (sddos = 1)
+
+	JSR OscliString
+	EQUS "DRIVE 1", Return
+
+	JSR OscliString
+	EQUS "RUN MENU", Return
+
+.RunCommand
+	EQUS "DIN 1,",0
+
+ELSE 
+
 .RunCommand
 	EQUS "RUN MNU"
 .RunCommandMenuChunk
 	EQUS " /", 0
+		
+ENDIF	
+	
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Translated Basic Subroutines
@@ -948,9 +989,15 @@ include "renderer_header.asm"
 	STA SortDatNum
 	JSR OscliString
 
+IF (sddos = 1)
+	EQUS "LOAD "
+.SortDatChunk
+	EQUS " SORT"
+ELSE
 	EQUS "LOAD MNU"
 .SortDatChunk
 	EQUS " /SORTDAT"
+ENDIF
 .SortDatNum
 	EQUS " ", Return
 
@@ -967,5 +1014,3 @@ include "renderer_body.asm"
 
 .ENDOF
 
-
-SAVE "MENU",STARTOFHEADER, ENDOF

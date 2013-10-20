@@ -40,59 +40,68 @@
 	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
     ; Zero Page Locations
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	; SDDOS uses $80-$9F as workspace, so we need to relocate this
+	; Shouldn't be any side effect of borrowing Basic's Integer Workspace
+		
+IF (sddos = 1)
+	ZeroBase = $20
+ELSE
+	ZeroBase = $80
+ENDIF
 
 	; (Immutable) This should point to the first row in the sort index
-	Sort             = $80
+	Sort             = ZeroBase + $00
 
 	; (Immutable) This should point to the index of the row to search for (starting at 0) 
-    StartRow         = $82 
+    StartRow         = ZeroBase + $02 
 
     ; (Immutable) The Address to store the found rows, so that the basic program can access them
-    RowRet           = $84
+    RowRet           = ZeroBase + $04
 
 	; (Immutable) The annotation to show: 0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count
-    Annotation       = $86
+    Annotation       = ZeroBase + $06
 
     ; (Immutable) The filter key: 1 = Genre, 2 = Publisher, 3 = Collection
-    Filter           = $87
+    Filter           = ZeroBase + $07
 
 	; (Immutable) The filter value
-    FilterVal        = $88
+    FilterVal        = ZeroBase + $08
 
 	; Search mode value
 	; Bits 0..1 : 0 = Enable search filtering, 1,2,3 = Disable search filtering
 	; Bit 7 : 0 =  Hight Matches, 1 = Don't Highlight Matches
-    SearchMode       = $89
+    SearchMode       = ZeroBase + $09
     
     ; (Immutable) Current Page
-    Page             = $8a
+    Page             = ZeroBase + $0a
     
     ; (Immutable) Current Page
-    MenuTablePtr     = $8b
+    MenuTablePtr     = ZeroBase + $0b
 
 	; The value used to return InKey
-	Key              = $8f
+	Key              = ZeroBase + $0f
 
 	; The row address to highlight
-	Row              = $8f
+	Row              = ZeroBase + $0f
 
 	; These are working values
-	Title            = $90
-	AnnotationPtr    = $92
-	AnnotationString = $94
-	Screen           = $96
-	Tmp              = $98
-	TmpX             = $98    
-	TmpY             = $99
-	RowCount         = $9A
+	Title            = ZeroBase + $10
+	AnnotationPtr    = ZeroBase + $12
+	AnnotationString = ZeroBase + $14
+	Screen           = ZeroBase + $16
+	Tmp              = ZeroBase + $18
+	TmpX             = ZeroBase + $18    
+	TmpY             = ZeroBase + $19
+	RowCount         = ZeroBase + $1A
 	
 	; For the Decimal Output routines
-	BinBuffer        = $9B
-	BcdBuffer        = $9D
-	SuppressFlag     = $9F
+	BinBuffer        = ZeroBase + $1B
+	BcdBuffer        = ZeroBase + $1D
+	SuppressFlag     = ZeroBase + $1F
 	
 	; Copies of some of the input params so they are not modified
-	CurrentRow       = $A0
-	CurrentSort      = $A2
+	CurrentRow       = ZeroBase + $20
+	CurrentSort      = ZeroBase + $22
 	

@@ -91,8 +91,10 @@ public class GenerateSplashFiles extends GenerateBase {
 
 	private String version;
 	private Map<String, Integer> chunks;
+	private File menuDir;
 	
-	public GenerateSplashFiles(String version, Map<String, Integer> chunks) {
+	public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chunks) {
+		this.menuDir = menuDir;
 		this.version = version;
 		this.chunks = chunks;
 	}
@@ -132,7 +134,7 @@ public class GenerateSplashFiles extends GenerateBase {
 		}
 	}
 
-	public void generateFiles(File menuDir, File bootLoaderBinary, List<SpreadsheetTitle> items) throws IOException {
+	public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
 		// Create an grey image
 		byte[] screen = new byte[0x1800];
@@ -146,7 +148,7 @@ public class GenerateSplashFiles extends GenerateBase {
 		if (!file.exists()) {
 			throw new RuntimeException(file.getCanonicalPath() + " does not exist");
 		}
-		byte[] baseScreen = readATMFile(file);
+		byte[] baseScreen = new ATMFile(file).getData();
 
 		// Copy the Acorn Logo
 		copyAtomImage(baseScreen, screen, 109, 54, 40, 54, 210, 8);

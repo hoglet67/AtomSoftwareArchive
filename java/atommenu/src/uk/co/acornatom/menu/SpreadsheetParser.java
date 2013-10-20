@@ -23,6 +23,7 @@ public class SpreadsheetParser {
 	private static final String TITLE = "title";
 	private static final String INDEX = "index";
 	private static final String CHUNK = "chunk";
+	private static final String FILENAMES = "filenames";
 
 	private File file;
 
@@ -56,6 +57,7 @@ public class SpreadsheetParser {
 			int shortpub_column = -1;
 			int collection_column = -1;
 			int genre_column = -1;
+			int filenames_column = -1;
 			for (int i = 0; i < headers.length; i++) {
 				if (headers[i].toLowerCase().contains(INDEX)) {
 					index_column = i;
@@ -90,6 +92,9 @@ public class SpreadsheetParser {
 				if (headers[i].toLowerCase().contains(GENRE)) {
 					genre_column = i;
 				}
+				if (headers[i].toLowerCase().contains(FILENAMES)) {
+					filenames_column = i;
+				}
 			}
 
 			for (String[] program : programs) {
@@ -116,6 +121,12 @@ public class SpreadsheetParser {
 				item.setCollection(collection);
 				String genre = program[genre_column].trim().toUpperCase();
 				item.setGenre(genre);
+				String[] filenames = program[filenames_column].trim().toUpperCase().split("\n");				
+				List<String> filesnamesList = new ArrayList<String>();
+				for (String filename : filenames) {
+					filesnamesList.add(filename.trim());
+				}
+				item.setFilenames(filesnamesList);
 				items.add(item);
 				accumulateStats(item);
 			}
