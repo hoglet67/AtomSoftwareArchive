@@ -848,3 +848,6 @@ PS2A",present,,,,
 REPSCR
 REPTON",present,RS Colour,,,
 616,V5,NC,Non Comm,B.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
+616,V6,NC,Non Comm,B.Non Commercial Software,HubPlay,Music,,SID,8200,*RUN HUBPLAY,Test,HUBPLAY,present,,,,
+617,V6,NC,Non Comm,B.Non Commercial Software,Reptune,Music,,SID,8200,*RUN REPTUNE,Test,REPTUNE,present,,,,
+618,V6,NC,Non Comm,B.Non Commercial Software,SidTest,Music,,SID,8200,"CH.""SIDTEST""",Test,SIDTEST,present,,,,
