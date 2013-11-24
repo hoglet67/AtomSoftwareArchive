@@ -851,7 +851,22 @@ REPTON",present,RS Colour,,,
 616,V6,NC,Non Comm,B.Non Commercial Software,HubPlay,Music,,SID,8200,*RUN HUBPLAY,Test,HUBPLAY,present,SID,,,
 617,V6,NC,Non Comm,B.Non Commercial Software,Reptune,Music,,SID,8200,*RUN REPTUNE,Test,REPTUNE,present,SID,,,
 618,V6,NC,Non Comm,B.Non Commercial Software,SidTest,Music,,SID,8200,"CH.""SIDTEST""",Test,SIDTEST,present,SID,,,
-619,V6,NC,Non Comm,B.Non Commercial Software,AtomSID (32K),Music,,SID,2900,*RUN SIDMENU,Test,"AXELF
+619,V6,NC,Non Comm,B.Non Commercial Software,AtomSID (#DBC0) (32K),Music,,SID/ATOMSID,2900,*RUN SIDMENU,Test,"AXELF
+BLADERU
+BLUESBR
+CHARIOT
+GHOST
+GREATES
+JUNGLEB
+LIONKIN
+SIDMENU
+MIDNIGH
+ROCKY
+TERMINA
+TITANIC
+TOPGUN
+WIZARDO",present,SID,Yes,,
+620,V6,NC,Non Comm,B.Non Commercial Software,AtomSID (#9DC0) (32K),Music,,SID/DAVESID,2900,*RUN SIDMENU,Test,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
