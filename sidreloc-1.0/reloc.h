@@ -32,10 +32,11 @@ struct progbyte {
 	struct constraintlist	*constr;
 };
 
-#define PBF_DONT_RELOC	0x01
-#define PBF_RELOC	0x02
-#define PBF_USED_IN_ZP	0x04
-#define PBF_USED_IN_MSB	0x08
+#define PBF_DONT_RELOC	 0x01
+#define PBF_RELOC	 0x02
+#define PBF_USED_IN_ZP	 0x04
+#define PBF_USED_IN_MSB	 0x08
+#define PBF_USED_FOR_SID 0x10
 
 enum {
 	RET_SUCCESS,
@@ -68,6 +69,7 @@ extern struct progbyte *progbytes;
 extern int progsize;
 
 extern uint16_t reloc_start, reloc_end;
+extern uint16_t sid_source, sid_dest;
 extern int add_constraints;
 extern int verbose;
 extern int do_zp_reloc;

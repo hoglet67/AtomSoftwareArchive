@@ -67,6 +67,8 @@ int force = 0;
 
 uint16_t reloc_start;
 uint16_t reloc_end;
+uint16_t sid_source = 0xd400;
+uint16_t sid_dest   = 0xd400;
 
 static int exitbits;
 static int nmi_reported;
@@ -193,7 +195,7 @@ static void verify_sidstate(value_t *oldmem, value_t *newmem, int frame, int *n_
 	int badp[3] = {0, 0, 0}, badpw[3] = {0, 0, 0};
 
 	for(i = 0; i < 29; i++) {
-		if(oldmem[0xd400 + i].value != newmem[0xd400 + i].value) {
+		if(oldmem[sid_source + i].value != newmem[sid_dest + i].value) {
 			if(i < 21 && (i % 7) < 2) {
 				badp[i / 7] = 1;
 			} else if(i < 21 && (i % 7) < 4) {
@@ -205,10 +207,10 @@ static void verify_sidstate(value_t *oldmem, value_t *newmem, int frame, int *n_
 				} else {
 					fprintf(stderr, "After the init routine, ");
 				}
-				fprintf(stderr, "$d4%02x should be $%02x, but the relocated code has written $%02x.\n",
-					i,
-					oldmem[0xd400 + i].value,
-					newmem[0xd400 + i].value);
+				fprintf(stderr, "$%02x%02x should be $%02x, but the relocated code has written $%02x.\n",
+					sid_dest>>8,i,
+					oldmem[sid_source + i].value,
+					newmem[sid_dest + i].value);
 				if(!force) exit(RET_VERIFY | exitbits);
 			}
 		}
@@ -272,6 +274,8 @@ static void usage() {
 	printf("            --init-cycles  1000000     Max number of clock cycles for init routine.\n");
 	printf("            --play-cycles  20000       Max number of clock cycles for playroutine.\n");
 	printf("            --nmi-cycles   1000        Max number of clock cycles for NMI routine.\n");
+	printf("            --sid-source-address d400  Address of SID in input tune.\n");
+        printf("            --sid-dest-address   d400  Address of SID in output tune.\n");
 	printf("\n");
 	printf("  -h        --help                     Display this information.\n");
 	printf("  -V        --version                  Display brief version information and credits.\n");
@@ -311,7 +315,9 @@ enum {
 	OPT_NMI_CALLS,
 	OPT_INIT_CYCLES,
 	OPT_PLAY_CYCLES,
-	OPT_NMI_CYCLES
+	OPT_NMI_CYCLES,
+	OPT_SID_SOURCE,
+	OPT_SID_DEST
 };
 
 int main(int argc, char **argv) {
@@ -319,7 +325,7 @@ int main(int argc, char **argv) {
 	int filesize;
 	int i, j, k, errcode, opt;
 	struct sidheader head;
-	uint16_t reloc_offset;
+	uint16_t reloc_offset, sid_offset;
 	uint8_t page_used[256];
 	int n_check = 0, n_badpitch = 0, n_badpw = 0;
 	int perc_badpitch, perc_badpw;
@@ -340,6 +346,8 @@ int main(int argc, char **argv) {
 		{"play-cycles", 1, 0, OPT_PLAY_CYCLES},
 		{"nmi-cycles", 1, 0, OPT_NMI_CYCLES},
 		{"nmi-calls", 1, 0, OPT_NMI_CALLS},
+		{"sid-source-address", 1, 0, OPT_SID_SOURCE},
+		{"sid-dest-address", 1, 0, OPT_SID_DEST},
 		{"help", 0, 0, 'h'},
 		{"version", 0, 0, 'V'},
 		{0, 0, 0, 0}
@@ -348,7 +356,8 @@ int main(int argc, char **argv) {
 	char *outputname;
 	int first_zp = 0x80, last_zp = 0xff;
 	int given_reloc_start = -1, given_reloc_end = -1;
-	int dest_page = 0x10;
+	int given_sid_source = -1, given_sid_dest = -1;
+        int dest_page = 0x10;
 	int tolerance = 2;
 	int strictpw = 0;
 
@@ -445,6 +454,20 @@ int main(int argc, char **argv) {
 					errx(RET_PARAM, "Invalid cycle limit for the NMI routine.");
 				}
 				break;
+		        case OPT_SID_SOURCE:
+			        if (!(1 == sscanf(optarg, "%x", &given_sid_source)
+				&& given_sid_source >= 0x0100
+                                && given_sid_source <= 0xffe0)) {
+				  errx(RET_PARAM, "Invalid SID source address.");
+			        }
+			        break;
+      		        case OPT_SID_DEST:
+			        if (!(1 == sscanf(optarg, "%x", &given_sid_dest)
+				&& given_sid_dest   >= 0x0100
+                                && given_sid_dest   <= 0xffe0)) {
+			                errx(RET_PARAM, "Invalid SID destination address.");
+			        }
+			        break;
 		}
 	} while(opt >= 0);
 
@@ -491,7 +514,16 @@ int main(int argc, char **argv) {
 		}
 	}
 
+	/* FIXME: add more checking */
+	if (given_sid_source >= 0) {
+	       sid_source = given_sid_source;
+	}
+	if (given_sid_dest  >= 0) {
+	      sid_dest   = given_sid_dest;
+        }
+
 	reloc_offset = (dest_page << 8) - reloc_start;
+	sid_offset   = sid_dest - sid_source;
 
 	fprintf(stderr, "Relocating from $%04x-$%04x to $%04x-$%04x\n",
 		reloc_start,
@@ -525,12 +557,12 @@ int main(int argc, char **argv) {
 
 	/* Report bad memory accesses, possibly remove some zero-page addresses from the constraints. */
 
-	oobchunk = ooblast = 0xd400;
+	oobchunk = ooblast = sid_source;
 	for(i = 0; i < 65536; i++) {
 		if(i >= head.loadaddr && i < head.loadaddr + head.loadsize) {
 			/* Inside tune, ok */
-		} else if(i >= 0xd400 && i <= 0xd41f) {
-			/* SID register area, ok */
+		} else if(i >= sid_source && i <= sid_source+0x1f) {
+			/* SID register area */
 		} else if(i >= 2 && i < 0x100) {
 			if(oldcore.read[i] && !oldcore.written[i]) {
 				if(!quiet) {
@@ -651,7 +683,13 @@ int main(int argc, char **argv) {
 	for(i = 0; i < progsize; i++) {
 		struct progbyte *pb = &progbytes[i + 2];
 		if(pb->flags & PBF_RELOC) {
-			if(pb->flags & PBF_USED_IN_MSB) {
+		        if(pb->flags & PBF_USED_FOR_SID) {
+                                if(pb->flags & PBF_USED_IN_MSB) {
+				        newdata[head.dataoffset + i] += sid_offset >> 8;
+				} else {
+				        newdata[head.dataoffset + i] += sid_offset & 255;
+				}
+			} else if(pb->flags & PBF_USED_IN_MSB) {
 				newdata[head.dataoffset + i] += reloc_offset >> 8;
 			} else {
 				for(j = 2; j < 256; j++) {

@@ -410,6 +410,10 @@ static void progbyte_for_msb(uint16_t offset) {
 	progbytes[offset].flags |= PBF_USED_IN_MSB;
 }
 
+static void progbyte_for_sid(uint16_t offset) {
+        progbytes[offset].flags |= PBF_USED_FOR_SID;
+}
+
 void prealloc_cons_cells() {
 	int i;
 
@@ -632,7 +636,7 @@ void reloc_alike(value_t v1, value_t v2) {
 		}
 	}
 }
-
+\
 void used_for_zp_addr(struct source *src1, struct source *src2, uint8_t zpaddr) {
 	struct source *s, *list;
 
@@ -648,6 +652,16 @@ void used_for_zp_addr(struct source *src1, struct source *src2, uint8_t zpaddr) 
 	}
 }
 
+void used_for_sid(struct source *lsb1, struct source *lsb2, struct source *msb) {
+        struct source *s;
+
+        if(add_constraints) {
+                 for(s=lsb1; s; s = s->next) progbyte_for_sid(s->offset);
+                 for(s=lsb2; s; s = s->next) progbyte_for_sid(s->offset);
+                 for(s=msb ; s; s = s->next) progbyte_for_sid(s->offset);
+        }
+}
+
 void check_reloc_range(uint16_t addr, struct source *lsb1, struct source *lsb2, struct source *msb) {
 	if(add_constraints) {
 		struct source *s;
@@ -659,6 +673,13 @@ void check_reloc_range(uint16_t addr, struct source *lsb1, struct source *lsb2, 
 			dont_reloc(lsb1);
 			if(lsb2) dont_reloc(lsb2);
 			reloc_exactly_one(msb, 0);
+		} else if(addr >= sid_source && addr <= sid_source+0x1f) {
+		        if (sid_source!=sid_dest) {
+		                used_for_sid(lsb1, lsb2, msb);
+				reloc_exactly_one(lsb1,0);
+				if(lsb2) dont_reloc(lsb2);
+				reloc_exactly_one(msb,0);
+			}
 		} else if(addr < 0x100) {
 			dont_reloc(msb);
 			used_for_zp_addr(lsb1, lsb2, addr);
@@ -680,6 +701,7 @@ void init_progbytes(uint16_t loadaddr, uint16_t loadsize) {
 
 void reloc_map(struct core *oldcore, uint16_t reloc_offs) {
 	int n_reloc = 0, n_zp = 0, n_dont = 0, n_unused = 0, n_unknown = 0;
+	int n_relocsid = 0, n_relocsidl = 0;
 	int i;
 	int addr;
 	uint16_t org;
@@ -695,7 +717,15 @@ void reloc_map(struct core *oldcore, uint16_t reloc_offs) {
 		} else {
 			i = addr - progbyte_org;
 			if(progbytes[i].flags & PBF_RELOC) {
-				if(progbytes[i].flags & PBF_USED_IN_MSB) {
+			        if(progbytes[i].flags & PBF_USED_FOR_SID) {
+				        if (progbytes[i].flags & PBF_USED_IN_MSB) {
+					  fprintf(stderr,"S");
+                                          n_relocsid++;
+					} else {
+                                          fprintf(stderr,"s");
+                                          n_relocsidl++;
+					}
+				} else if(progbytes[i].flags & PBF_USED_IN_MSB) {
 					fprintf(stderr, "R");
 					n_reloc++;
 				} else if(progbytes[i].flags & PBF_USED_IN_ZP) {
@@ -718,6 +748,10 @@ void reloc_map(struct core *oldcore, uint16_t reloc_offs) {
 	}
 	fprintf(stderr, "\n");
 	fprintf(stderr, "MSB relocations       (R): %d\n", n_reloc);
+	if (sid_source != sid_dest) {
+	        fprintf(stderr, "SID MSB relocations   (S): %d\n", n_relocsid);
+	        fprintf(stderr, "SID LSB relocations   (s); %d\n", n_relocsidl);
+	}
 	fprintf(stderr, "Zero-page relocations (Z): %d\n", n_zp);
 	fprintf(stderr, "Static bytes          (=): %d\n", n_dont);
 	fprintf(stderr, "Status undetermined   (?): %d\n", n_unknown);
