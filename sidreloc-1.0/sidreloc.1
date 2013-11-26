@@ -1,0 +1,193 @@
+.TH sidreloc 1 2012-05-18
+.SH NAME
+sidreloc \- Change the load address of a SID tune.
+.SH SYNOPSIS
+.B sidreloc
+[ \fIOPTIONS\fR ] \fIinput.sid\fR \fIoutput.sid\fR
+.SH DESCRIPTION
+
+Sidreloc is a tool for relocating SID tunes any number of whole pages.
+It can also relocate all zero-page variables used by the tune.
+
+.SH OPTIONS
+
+.SS Relocation
+
+.TP
+\fB\-p\fR, \fB\-\-page\fR
+First memory page (in hex) to be occupied by the relocated SID.
+Default value: 10
+
+.TP
+\fB\-z\fR, \fB\-\-zp\-reloc\fR
+Range of free zero-page addresses that the relocated SID can use.
+The tool determines which zero-page addresses are used by the playroutine,
+and packs them towards the beginning of the specified range.
+Default value: 80\-ff
+
+.TP
+\fB\-k\fR, \fB\-\-no\-zp\-reloc\fR
+Keep all zero-page addresses as they appear in the original SID.
+Default value: off
+
+.TP
+\fB\-r\fR, \fB\-\-reloc\fR
+Range of pages to relocate, e.g. "50\-5f" for a 4 kB SID originally
+located at $5000.
+Must include the entire loading range of the SID.
+Default value: Determined from the input file.
+
+.SS Verification
+
+.TP
+\fB\-t\fR, \fB\-\-tolerance\fR
+Tolerance (in percent) for wrong pitches.
+Default value: 2
+
+.TP
+\fB\-s\fR, \fB\-\-strict\fR
+Verify pulse widths.
+Default value: off
+
+.TP
+\fB\-f\fR, \fB\-\-force\fR
+Write output file even if verification fails.
+The verification step is still performed, and warning messages are
+printed.
+Default value: off
+
+.SS Emulation
+
+.TP
+\fB\-\-frames\fR
+Number of times to call the playroutine of each subtune.
+The default corresponds to approximately 33 minutes of a PAL tune, which
+should be enough to cover most tunes.
+Default value: 100000
+
+.TP
+\fB\-\-nmi-calls\fR
+Number of times to call the NMI routine (if installed by the SID) per frame.
+The CIA2 timer setting is ignored.
+Default value: 200
+
+.TP
+\fB\-\-init-cycles\fR
+Max number of clock cycles for the initialisation routine.
+Default value: 1000000
+
+.TP
+\fB\-\-play-cycles\fR
+Max number of clock cycles for the playroutine.
+Default value: 20000
+
+.TP
+\fB\-\-nmi-cycles\fR
+Max number of clock cycles for the NMI routine.
+Default value: 1000
+
+.SS Other
+
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Output some statistics and a nice map of all the relocations.
+
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Don't print warnings about write operations to memory outside the
+loading range (and the SID registers).
+
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Display a brief summary of the program options and exit.
+
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Display version information (and credits) and exit.
+
+.SH EXIT STATUS
+
+The exit status of sidreloc can be used to determine the reason for failure
+according to the following table.
+
+.TP
+0
+Relocation successful.
+
+.TP
+1
+Not a valid SID file header.
+
+.TP
+2
+Bad SID file: RSID requirements not fulfilled.
+
+.TP
+3
+MUS files not supported.
+
+.TP
+4
+BASIC tunes not supported.
+
+.TP
+5
+PSID extensions not supported.
+
+.TP
+6
+Bad command line parameters.
+
+.TP
+7
+Input/output error.
+
+.TP
+8
+Relocation failed: No solution found.
+
+.TP
+9
+Relocation failed: Zero-page full.
+
+.TP
+10
+Verification failed.
+
+.TP
+11
+Could not determine playroutine address.
+
+.TP
+12
+Invalid relocation range.
+
+.TP
+13
+Max number of clock cycles exhausted.
+
+.PP
+
+The following constants are added to the exit status to provide extra
+information. Hence, an exit status of 32, 64 or 96 also indicates a successful
+relocation, but with warnings.
+
+.TP
+32
+SID tune writes to memory outside the loading range (and the SID registers).
+
+.TP
+64
+Some mismatching pitches or pulse widths were detected.
+
+.SH EXAMPLE
+
+The following command line can be used to relocate Zoids by Rob Hubbard from its original
+load address of $1000 to the address $4200, and move the zero-page variables
+from $fb\-$fe to $c0\-$c3:
+
+.PP
+sidreloc \-p 42 \-z c0\-ff Zoids.sid Zoids\-4200.sid
+.SH SEE ALSO
+
+Learn more at http://www.linusakesson.net/software/sidreloc/
