@@ -1,6 +1,7 @@
 Index,Updated,ShortPub,Publisher,Chunk,Title,Genre,Author (if known),Directory,Boot Address,To Run,Notes,Filenames,Status,Collection,32K RAM,FP ROM,Documentation Link
 1,V1,A&F,A&F S/W,A.Commercial Software,Cylon Attack,Game,,AF,8200,"CH.""CYLONATT""",Works,CYLONATT,present,,,,
-2,V2,A&F,A&F S/W,A.Commercial Software,Death Satellite,Adventure,,AF,8200,"CH.""CYLONATT""",Works,"ADV1P
+2,V2,A&F,A&F S/W,A.Commercial Software,Death Satellite,Adventure,,AF,8200,"*LOAD ADV1P
+*RUN ADV1D",Works,"ADV1P
 ADV1D",present,,,,
 3,V1,A&F,A&F S/W,A.Commercial Software,Early Warning,Game,,AF,8200,"CH.""EARLYWAR""",Works,EARLYWAR,present,,,,
 4,V1,A&F,A&F S/W,A.Commercial Software,Painter (32K),Game,,AF,8200,*RUN PAINTER,Works,PAINTER,present,,Yes*,,
