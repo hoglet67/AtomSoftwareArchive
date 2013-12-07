@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+n=1
+
+for i in \
+"http://stardot.org.uk/forums/download/file.php?id=1166" \
+"http://stardot.org.uk/forums/download/file.php?id=1301" \
+"http://stardot.org.uk/forums/download/file.php?id=1356" \
+"http://stardot.org.uk/forums/download/file.php?id=1401" \
+"http://stardot.org.uk/forums/download/file.php?id=1443" \
+"http://stardot.org.uk/forums/download/file.php?id=1597" \
+"http://stardot.org.uk/forums/download/file.php?id=1855" \
+"http://stardot.org.uk/forums/download/file.php?id=2844" \
+"http://stardot.org.uk/forums/download/file.php?id=3157" \
+"http://stardot.org.uk/forums/download/file.php?id=4166" \
+"http://stardot.org.uk/forums/download/file.php?id=5391" \
+"http://stardot.org.uk/forums/download/file.php?id=6242"
+
+do
+ # Grab the zipped SSD from StartDot
+ wget -O tmp.zip $i
+ file=`unzip -ql tmp.zip | head -3 | tail -1 | awk '{print $4}'`
+ unzip tmp.zip $file
+ mv *.ssd tmp.ssd
+
+ # Extract the fines
+ rm -rf BeebSID$n
+ perl mmb_utils/getfile.pl tmp.ssd  BeebSID$n
+
+ # Work out the menu program from !BOOR
+ sidmenu=`strings BeebSID$n/\!BOOT | grep -v BASIC | sed -e "s/RUN //" | tr -d '*'`
+
+ # Convert to AtomSID
+
+ rm -rf AtomSID$n
+ java -jar ../java/atomsid/atomsid.jar BeebSID$n/$sidmenu ../sid/SIDMENU AtomSID$n
+
+ rm -f tmp.ssd tmp.zip
+ n=$(( $n + 1 ))
+done

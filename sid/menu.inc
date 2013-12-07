@@ -12,14 +12,15 @@
 .scr_ptr	EQUS 0		; Temp menu screen pointer
 .old_irq	EQUS 0,0	; Store old IRQ vec
 
-scr_adr		= $90		; Pointer
-load_param	= $92		; File load pointers
-cursor		= $c0
+load_param	= $90		; File load pointers
+
+scr_adr		= $a0		; Pointer
+max_files       = $a2           ; Max Files
+cursor		= $a3
 
 x_min		= 1		; x-pos menu
 y_min		= 5		; y-pos menu
 scr_max		= 8 		; 8 lines in menu
-max_files	= 14		; nr of music files
 
 key_up		= $3a		; Z
 key_down	= $21		; A
@@ -46,10 +47,26 @@ oscli		= $fff7
 	sta highlight
 	sta cursor
 
+
+				; Determine the number of titles at run time
+	tay
+.numfiles
+	lda  txt_ptr + 1,y
+	beq  numfilesend
+	iny
+	iny
+	bne numfiles
+.numfilesend
+	tya
+	lsr a
+	sta max_files
+
+
 	jsr scr_layout		; Display screen layout
 
 .main_loop
 	 jsr print_menu		; Display menu
+
 
 .update
 	  lda cursor		; Display slider at $C0/2
@@ -65,8 +82,10 @@ oscli		= $fff7
 
 	   jsr $fb8a		; Wait 0,1 sec
 
-	   lda highlight
-	   cmp #max_files-1	; Check last filename
+	   lda max_files
+	   sec
+	   sbc #1
+	   cmp highlight       	; Check last filename
 	   beq chk_up
 
 	   sec
@@ -219,7 +238,7 @@ oscli		= $fff7
 	lda line_ptr
 	adc scr_ptr
 
-	cmp #max_files		; If >=maxfiles, print empty line
+	cmp max_files		; If >=maxfiles, print empty line
 	bcc chk_invert
 
 	lda #<empty_line	; Set empty line pointer
