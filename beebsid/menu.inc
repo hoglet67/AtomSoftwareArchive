@@ -10,6 +10,7 @@
 .y_tmp		EQUS 0		; Temp y-storage
 .x_tmp		EQUS 0		; Temp x-storeage
 .scr_ptr	EQUS 0		; Temp menu screen pointer
+.old_nomon      EQUS 0          ; Store old NOMON flag (#ea)
 .old_irq	EQUS 0,0	; Store old IRQ vec
 
 load_param	= $90		; File load pointers
@@ -42,7 +43,9 @@ oscli		= $fff7
 	lda $205
 	sta old_irq+1
 
-	lda #255		; Disable the MON flag
+	lda $ea			; Save the old NOMON flag
+	sta old_nomon
+	lda #255		; Disable the NOMON flag
 	sta $ea
 
 	lda #0			; Init vars
@@ -139,6 +142,9 @@ oscli		= $fff7
 .end_prog
 	jsr restore_irq		; Restore IRQ vec
 	jsr resetSID		; Reset SID sound
+
+	lda old_nomon		; Restore the NOMON flag
+	sta $ea
 
 	lda #12			; Clear screen
 	jmp $fff4
