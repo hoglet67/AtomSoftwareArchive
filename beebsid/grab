@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Compile the SID Menu
+../../BeebASM/beebasm/beebasm -i menu.asm
 
 n=1
 
@@ -34,8 +36,10 @@ do
  # Convert to AtomSID
 
  rm -rf AtomSID$n
- java -jar ../java/atomsid/atomsid.jar BeebSID$n/$sidmenu ../sid/SIDMENU AtomSID$n
+ java -jar ../java/atomsid/atomsid.jar BeebSID$n/$sidmenu SIDMENU AtmSID$n
 
  rm -f tmp.ssd tmp.zip
  n=$(( $n + 1 ))
 done
+
+zip -qr ~/AtmSID.zip AtmSID*

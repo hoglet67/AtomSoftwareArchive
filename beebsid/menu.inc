@@ -42,11 +42,13 @@ oscli		= $fff7
 	lda $205
 	sta old_irq+1
 
+	lda #255		; Disable the MON flag
+	sta $ea
+
 	lda #0			; Init vars
 	sta line_ptr
 	sta highlight
 	sta cursor
-
 
 				; Determine the number of titles at run time
 	tay
@@ -460,9 +462,11 @@ irqtime	= 20000
 	lda #0			; Init SID player
 	tax
 	tay
+
 .init_ptr
 	jsr prt_end		; SID init 
 
+	jsr save_zero_sid
 	cli
 	rts
 
@@ -494,7 +498,7 @@ irqtime	= 20000
 	inc cursor		; Increment slider pointer
 	lda cursor
 	cmp #51
-	bne play_ptr
+	bne play_swap
 
 	lda #0
 	sta cursor
@@ -502,34 +506,38 @@ irqtime	= 20000
 	inc timer+4		; Update timer
 	lda timer+4
 	cmp #':'
-	bne play_ptr
+	bne play_swap
 	lda #'0'
 	sta timer+4
 
 	inc timer+3
 	lda timer+3
 	cmp #'6'
-	bne play_ptr
+	bne play_swap
 	lda #'0'
 	sta timer+3
 
 	inc timer+1
 	lda timer+1
 	cmp #':'
-	bne play_ptr
+	bne play_swap
 	lda #'0'
 	sta timer+1
 
 	inc timer+0
 	lda timer+0
 	cmp #'6'
-	bne play_ptr
+	bne play_swap
 	lda #'0'
 	sta timer+0
+
+.play_swap
+	jsr swap_zero_atom_to_sid
 
 .play_ptr
 	jsr prt_end		; SID IRQ entry
 
+	jsr swap_zero_sid_to_atom
 	pla
 	tay
 	pla
@@ -554,6 +562,46 @@ SID	= $bdc0
       bpl L30B5
       rts
 
+;--------------------------------------------------
+;SAVE_ZERO_PAGE
+;
+; Save the Zero Page memory block
+;--------------------------------------------------
+
+
+.save_zero_sid
+        ldx #$80
+
+.save_zero_sid1
+	lda $00,x
+	sta zero_sid,x
+	inx
+	bne save_zero_sid1
+	rts
+
+.swap_zero_atom_to_sid
+        ldx #$80
+
+.swap_zero_atom_to_sid1
+	lda $00,x
+	sta zero_atom,x
+	lda zero_sid,x
+	sta $00,x
+	inx
+	bne swap_zero_atom_to_sid1
+	rts
+
+.swap_zero_sid_to_atom
+        ldx #$80
+
+.swap_zero_sid_to_atom1
+	lda $00,x
+	sta zero_sid,x
+	lda zero_atom,x
+	sta $00,x
+	inx
+	bne swap_zero_sid_to_atom1
+	rts
 
 ;------------------------------------------------
 ; Screen layout
@@ -637,8 +685,14 @@ SID	= $bdc0
 	 EQUS $bd,$90,$8c,$81,$99,$a0,$85,$93
 	 EQUS $83,$bd,$91,$95,$89,$94,$a0,$a0
 
-.txt_ptr
 
+.zero_sid
+	skip 256
+
+.zero_atom
+	skip 256
+
+.txt_ptr
 
 ; 
 ; 	EQUW line1,line2,line3,line4
