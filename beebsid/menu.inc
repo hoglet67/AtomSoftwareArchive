@@ -1,4 +1,4 @@
-	jmp main
+jmp main
 
 ;--------------------------------------------
 ; VARIABLES
@@ -29,6 +29,8 @@ key_action	= $0		; Space
 key_esc		= $3b		; ESC
 
 oscli		= $fff7
+
+sid_reg         = $9700
 
 ;--------------------------------------------
 ; MAIN
@@ -544,6 +546,9 @@ irqtime	= 20000
 	jsr prt_end		; SID IRQ entry
 
 	jsr swap_zero_sid_to_atom
+
+	jsr update_vu
+
 	pla
 	tay
 	pla
@@ -608,6 +613,58 @@ SID	= $bdc0
 	inx
 	bne swap_zero_sid_to_atom1
 	rts
+
+;----------------------------------------
+; update_vu
+;
+; Update vu_values and plot vu_meters
+;----------------------------------------
+
+.update_vu
+	tya		; Save regs
+	pha
+	txa
+	pha
+
+	ldx #2		; Update vu_val according to gatebit
+.chk_loop
+	ldy vu_ptr,x	; Check gatebit
+	lda sid_reg,y
+	and #1
+	beq vu_decay
+	lda #9		; Gatebit=1 -> max value 
+	sta vu_val,x
+	jmp end_vu
+.vu_decay
+	dec vu_val,x	; Gatebit=0 -> decrement value
+	bpl end_vu
+	inc vu_val,x
+.end_vu
+	ldy vu_val,x	; Draw vu_meters
+	lda col1,y
+	sta $807b,x
+	lda col2,y
+	sta $805b,x
+	lda col3,y
+	sta $803b,x
+.no_vu
+	dex
+	bpl chk_loop
+.end_chk
+	pla		; Restore regs
+	tax
+	pla
+	tay
+	rts
+
+.vu_val
+	EQUS 0,0,0
+.vu_ptr
+	EQUS 0,7,14
+
+.col1	EQUS 192,193,197,213,213,213,213,213,213,213
+.col2	EQUS 192,192,192,192,193,197,213,213,213,213
+.col3	EQUS 192,192,192,192,192,192,192,193,197,213
 
 ;------------------------------------------------
 ; Screen layout

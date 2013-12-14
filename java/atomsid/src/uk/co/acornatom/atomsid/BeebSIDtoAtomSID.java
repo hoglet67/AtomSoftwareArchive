@@ -15,6 +15,19 @@ import java.util.List;
 
 public class BeebSIDtoAtomSID {
 
+	private static final byte[] vu = {
+		(byte) 0x8c, (byte) 0xc4, (byte) 0xbd, (byte) 0x8c, (byte) 0x00, (byte) 0x97, (byte) 0x60, (byte) 0x8c,
+		(byte) 0xcb, (byte) 0xbd, (byte) 0x8c, (byte) 0x07, (byte) 0x97, (byte) 0x60, (byte) 0x8c, (byte) 0xd2,
+		(byte) 0xbd, (byte) 0x8c, (byte) 0x0e, (byte) 0x97, (byte) 0x60, (byte) 0x8d, (byte) 0xc4, (byte) 0xbd,
+		(byte) 0x8d, (byte) 0x00, (byte) 0x97, (byte) 0x60, (byte) 0x8d, (byte) 0xcb, (byte) 0xbd, (byte) 0x8d,
+		(byte) 0x07, (byte) 0x97, (byte) 0x60, (byte) 0x8d, (byte) 0xd2, (byte) 0xbd, (byte) 0x8d, (byte) 0x0e,
+		(byte) 0x97, (byte) 0x60, (byte) 0x8e, (byte) 0xc4, (byte) 0xbd, (byte) 0x8e, (byte) 0x00, (byte) 0x97,	
+		(byte) 0x60, (byte) 0x8e, (byte) 0xcb, (byte) 0xbd, (byte) 0x8e, (byte) 0x07, (byte) 0x97, (byte) 0x60,
+		(byte) 0x8e, (byte) 0xd2, (byte) 0xbd, (byte) 0x8e, (byte) 0x0e, (byte) 0x97, (byte) 0x60, (byte) 0x99,
+		(byte) 0xc4, (byte) 0xbd, (byte) 0x99, (byte) 0x00, (byte) 0x97, (byte) 0x60, (byte) 0x9d, (byte) 0xc4,
+		(byte) 0xbd, (byte) 0x9d, (byte) 0x00, (byte) 0x97, (byte) 0x60
+	};    
+
 	private static final int MENU_ADDR = 0x8200;
 
 	private static final String SID_MENU_NAME = "SIDMENU";
@@ -231,6 +244,28 @@ public class BeebSIDtoAtomSID {
 			}
 		}
 
+		int addr = loadAddr + sid.length;
+
+		// Append the vu code
+		byte[] sidVu = new byte[sid.length + vu.length];
+		System.arraycopy(sid, 0, sidVu, 0, sid.length);
+		System.arraycopy(vu, 0, sidVu, sid.length, vu.length);
+		sid = sidVu;
+
+		// Patch in VU Meter
+		checkAndReplace(sid, 0x8c, sidBase + 0x04, addr + 0x00);
+		checkAndReplace(sid, 0x8c, sidBase + 0x0b, addr + 0x07);
+		checkAndReplace(sid, 0x8c, sidBase + 0x12, addr + 0x0e);
+		checkAndReplace(sid, 0x8d, sidBase + 0x04, addr + 0x15);
+		checkAndReplace(sid, 0x8d, sidBase + 0x0b, addr + 0x1c);
+		checkAndReplace(sid, 0x8d, sidBase + 0x12, addr + 0x23);
+		checkAndReplace(sid, 0x8e, sidBase + 0x04, addr + 0x2a);
+		checkAndReplace(sid, 0x8e, sidBase + 0x0b, addr + 0x31);
+		checkAndReplace(sid, 0x8e, sidBase + 0x12, addr + 0x38);
+		checkAndReplace(sid, 0x99, sidBase + 0x04, addr + 0x3f);
+		checkAndReplace(sid, 0x9d, sidBase + 0x04, addr + 0x46);
+
+
 		if (mode == Mode.FROM_ATOMSID) {
 			FileOutputStream fos = new FileOutputStream(dstFile);
 			fos.write(sid, 0, sid.length);
@@ -243,6 +278,16 @@ public class BeebSIDtoAtomSID {
 		
 		
 		return ret;
+	}
+
+	private void checkAndReplace(byte[] sid, int opcode, int regAddr, int subAddr) {
+		for (int i = 0; i < sid.length - 2 - vu.length; i++) {
+		    if (sid[i] == (byte) opcode && sid[i + 1] == (byte) (regAddr & 0xff) && sid[i + 2] == (byte)((regAddr >> 8) & 0xff)) {
+				sid[i] = (byte) 0x20;
+				sid[i + 1] = (byte) (subAddr & 0xff);
+				sid[i + 2] = (byte) ((subAddr >> 8) & 0xff);
+			}
+		}
 	}
 	
 	private byte[] makeSidHeader(int loadAddr, int initAddr, int playAddr, int numSongs, int startSong) {
