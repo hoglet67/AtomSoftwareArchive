@@ -629,18 +629,31 @@ SID	= $bdc0
             EQUS $4C,$4C,$4C,$4C,$4C,$4C,$4C,$4C
             EQUS $4C,$4C,$4C,$4C,$4C,$4C,$4C,$4C
             EQUS $4C,$4C,$4C,$4C,$4C,$4C,$4C,$4D
-            EQUS $6A,$D5,$FA,$F2,$FF,$D5,$F3,$F1
-            EQUS $F7,$D5,$F1,$F2,$F5,$D5,$F1,$F1
-            EQUS $F5,$40,$5F,$7C,$68,$7F,$55,$7E
+
+;            EQUS $6A,$D5,$FA,$F2,$FF,$D5,$F3,$F1
+;            EQUS $F7,$D5,$F1,$F2,$F5,$D5,$F1,$F1
+;            EQUS $F5,$40,$5F,$7C,$68,$7F,$55,$7E
+            EQUS $6A,$D5,$F1,$F2,$FF,$D5,$F1,$F3
+            EQUS $F7,$D5,$F1,$F3,$F7,$D5,$F1,$F2
+            EQUS $FF,$40,$5F,$7C,$68,$7F,$55,$7E
             EQUS $7D,$4A,$40,$40,$40,$40,$40,$55
-            EQUS $6A,$D5,$E0,$E3,$F5,$D5,$FF,$D0
-            EQUS $FF,$D5,$D5,$FF,$D5,$D5,$D5,$D5
-            EQUS $D5,$40,$7C,$4D,$4A,$7F,$55,$6A
+
+;            EQUS $6A,$D5,$E0,$E3,$F5,$D5,$FF,$D0
+;            EQUS $FF,$D5,$D5,$FF,$D5,$D5,$D5,$D5
+;            EQUS $D5,$40,$7C,$4D,$4A,$7F,$55,$6A
+            EQUS $6A,$D5,$D0,$E3,$F5,$D5,$D0,$F3
+            EQUS $F7,$D5,$D0,$F3,$F7,$D5,$D0,$E3
+            EQUS $F5,$40,$7C,$4D,$4A,$7F,$55,$6A
             EQUS $55,$6A,$40,$40,$40,$40,$40,$55
-            EQUS $6A,$D5,$C3,$FF,$D7,$D5,$FF,$C3
-            EQUS $FF,$D5,$D3,$F3,$D7,$D5,$D7,$D7
+
+;            EQUS $6A,$D5,$C3,$FF,$D7,$D5,$FF,$C3
+;            EQUS $FF,$D5,$D3,$F3,$D7,$D5,$D7,$D7
+;            EQUS $D7,$40,$4F,$5F,$68,$7F,$55,$6F
+            EQUS $6A,$D5,$C3,$F3,$D7,$D5,$C3,$F3
+            EQUS $F7,$D5,$C3,$F3,$F7,$D5,$C3,$F3
             EQUS $D7,$40,$4F,$5F,$68,$7F,$55,$6F
             EQUS $5F,$68,$40,$40,$40,$40,$40,$55
+
             EQUS $6E,$4C,$4C,$4C,$4C,$4C,$4C,$4C
             EQUS $4C,$4C,$4C,$4C,$4C,$4C,$4C,$4C
             EQUS $4C,$4C,$4C,$4C,$4C,$4C,$4C,$4C
