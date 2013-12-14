@@ -130,7 +130,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 
 		filePtr += 8;
 		if (filePtr > 255) {
-			throw new RuntimeException("Too many files");
+			throw new RuntimeException("Too many files in title: " + atmFile.getTitle());
 		}
 
 		String filename = atmFile.getTitle();
@@ -160,7 +160,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		int lengthInSecs = (atmFile.getLength() + 255) / SEC_SIZE;
 
 		if (sectorNum + lengthInSecs >= NUM_SECS) {
-			throw new RuntimeException("Disk full");
+			throw new RuntimeException("Disk full is title: " + atmFile.getTitle());
 		}
 		System.arraycopy(atmFile.getData(), 0, image, sectorNum * SEC_SIZE, atmFile.getLength());
 		sectorNum += lengthInSecs;
@@ -197,30 +197,33 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		
 
 		for (SpreadsheetTitle item : items) {
-			if (item.isPresent()) {
-				System.out.println(item.getTitle());
-				byte[] image = createBlankDiskImage(item.getTitle());
-
-				File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)), "" + item.getIndex());
-				ATMFile bootAtmFile = new ATMFile(bootfile);
-				bootAtmFile.setTitle("MENU");
-				addFile(image, bootAtmFile);
-				
-				for (String filename : item.getFilenames()) {
-					System.out.println("    >" + filename + "<");
-					File file = new File(new File(archiveDir, item.getDir()), filename);
-					ATMFile atmFile = new ATMFile(file);
-					// Some of the ATM files still contain the original long tape titles
-					if (filename.length() > 7) {
-						filename = filename.substring(0, 7);
+			try {
+				if (item.isPresent()) {
+					System.out.println(item.getTitle());
+					byte[] image = createBlankDiskImage(item.getTitle());
+	
+					File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)), "" + item.getIndex());
+					ATMFile bootAtmFile = new ATMFile(bootfile);
+					bootAtmFile.setTitle("MENU");
+					addFile(image, bootAtmFile);
+					
+					for (String filename : item.getFilenames()) {
+						System.out.println("    >" + filename + "<");
+						File file = new File(new File(archiveDir, item.getDir()), filename);
+						ATMFile atmFile = new ATMFile(file);
+						// Some of the ATM files still contain the original long tape titles
+						if (filename.length() > 7) {
+							filename = filename.substring(0, 7);
+						}
+						atmFile.setTitle(filename);
+						addFile(image, atmFile);
 					}
-					atmFile.setTitle(filename);
-					addFile(image, atmFile);
+					System.out.println("Writing disk " + item.getIndex());
+					writeImage(new File("disks/" + item.getIndex()), image);
+					addDisk(image, item.getIndex());				
 				}
-				System.out.println("Writing disk " + item.getIndex());
-				writeImage(new File("disks/" + item.getIndex()), image);
-				addDisk(image, item.getIndex());
-				
+			} catch (Exception e) {
+				System.out.println("Problem SDDOS files for title " + item.getTitle());
 			}
 		}
 	}

@@ -27,19 +27,19 @@ do
  mv *.ssd tmp.ssd
 
  # Extract the fines
- rm -rf BeebSID$n
- perl mmb_utils/getfile.pl tmp.ssd  BeebSID$n
+ rm -rf BEEBSID$n
+ perl mmb_utils/getfile.pl tmp.ssd  BEEBSID$n
 
  # Work out the menu program from !BOOR
- sidmenu=`strings BeebSID$n/\!BOOT | grep -v BASIC | sed -e "s/RUN //" | tr -d '*'`
+ sidmenu=`strings BEEBSID$n/\!BOOT | grep -v BASIC | sed -e "s/RUN //" | tr -d '*'`
 
  # Convert to AtomSID
 
- rm -rf AtomSID$n
- java -jar ../java/atomsid/atomsid.jar BeebSID$n/$sidmenu SIDMENU AtmSID$n
+ rm -rf ATMSID$n
+ java -jar ../java/atomsid/atomsid.jar BEEBSID$n/$sidmenu SIDMENU ATMSID$n 2800
 
  rm -f tmp.ssd tmp.zip
  n=$(( $n + 1 ))
 done
 
-zip -qr ~/AtmSID.zip AtmSID*
+zip -qr ~/ATMSID.zip ATMSID*

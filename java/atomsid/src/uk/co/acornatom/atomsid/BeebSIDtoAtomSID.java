@@ -1,12 +1,15 @@
 package uk.co.acornatom.atomsid;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +55,9 @@ public class BeebSIDtoAtomSID {
 	}
 
 	private byte[] readFile(File file) throws IOException {
+		if (!file.exists()) {
+			throw new IOException("Could not read " + file);
+		}
 		ByteArrayOutputStream ous = null;
 		InputStream ios = null;
 		try {
@@ -78,8 +84,10 @@ public class BeebSIDtoAtomSID {
 		return ous.toByteArray();
 	}
 
-	private void relocate(File srcFile, File dstFile, Mode mode, int sidBase, int loadAddr, int execAddr) throws IOException {
+	private int relocate(File srcFile, File dstFile, Mode mode, int sidBase, int loadAddr, int initAddr, int playAddr, int relocateAddr) throws IOException {
 
+		int ret = 0;
+		
 		byte[] orig = readFile(srcFile);
 		byte[] sid = null;
 
@@ -122,8 +130,6 @@ public class BeebSIDtoAtomSID {
 
 			oldSidBase = 0xbdc0;
 
-			// TODO Read Inf File
-
 		} else if (mode == Mode.FROM_BEEBSID) {
 
 			sid = orig;
@@ -134,13 +140,78 @@ public class BeebSIDtoAtomSID {
 			throw new RuntimeException("Unimplemented mode: " + mode);
 		}
 
+		if (relocateAddr != 0) { 
+			// Write out a valid SID file, with header
+			File oldSidFile = File.createTempFile("old", "sid");
+			File newSidFile = File.createTempFile("new", "sid");
+			byte[] sidHeader = makeSidHeader(loadAddr, initAddr, playAddr, 1, 1);
+			FileOutputStream fos = new FileOutputStream(oldSidFile);
+			fos.write(sidHeader, 0, sidHeader.length);
+			fos.write(sid, 0, sid.length);
+			fos.close();	
+			
+			String command = "./sidreloc -t 10 --no-zp-reloc --sid-source-address fc20 --sid-dest-addr fc20 -p " + Integer.toHexString(relocateAddr >> 8) + " " +
+				oldSidFile.getAbsolutePath() + " " +
+				newSidFile.getAbsolutePath();
+			System.out.println(command);
+			Process p = Runtime.getRuntime().exec(command);
+			ret = -1;
+			try {
+				ret = p.waitFor();
+			} catch (InterruptedException e) {
+			}
+
+			System.out.println("Return code = " + ret);
+	
+			// Mask out the warning bits...
+			ret = ret & 31;
+			
+            String line;
+
+            BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            while((line = error.readLine()) != null){
+                System.out.println(line);
+            }
+            error.close();
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while((line=input.readLine()) != null){
+                System.out.println(line);
+            }
+
+            input.close();
+
+            OutputStream outputStream = p.getOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+            printStream.println();
+            printStream.flush();
+            printStream.close();;
+			
+            if (ret == 0) {
+				// Read the new SID File
+				byte[] newSid = readFile(newSidFile);
+				
+				System.out.println(newSid.length);
+				
+				// Copy back, removing the header
+				System.arraycopy(newSid, 0x76, sid, 0, sid.length);
+
+				initAddr += (relocateAddr - loadAddr);
+				playAddr += (relocateAddr - loadAddr);
+				loadAddr = relocateAddr;
+            }
+		}
+		
+		
+		
+		
 		System.out.println("Old SID base = " + Integer.toHexString(oldSidBase));
 		System.out.println("New SID base = " + Integer.toHexString(sidBase));
 
 		int oldSidBaseLo = oldSidBase & 0xff;
 		int oldSidBaseHi = (oldSidBase >> 8) & 0xff;
 
-		// Relocate
+		// Move SID Registers
 		for (int i = 0; i < sid.length - 2; i++) {
 			if ((sid[i] == (byte) 0x8c) || // STY Absolute
 					(sid[i] == (byte) 0x8d) || // STA Absolute
@@ -166,12 +237,48 @@ public class BeebSIDtoAtomSID {
 			fos.close();
 		} else {
 			FileOutputStream fos = new FileOutputStream(dstFile);
-			writeATMFile(fos, dstFile.getName(), loadAddr, execAddr, sid);
+			writeATMFile(fos, dstFile.getName(), loadAddr, initAddr, sid);
 			fos.close();
 		}
+		
+		
+		return ret;
+	}
+	
+	private byte[] makeSidHeader(int loadAddr, int initAddr, int playAddr, int numSongs, int startSong) {
+		
+		byte[] sidHeader = new byte[0x76];
+		for (int i = 0; i < sidHeader.length; i++) {
+			sidHeader[i] = 0;
+		}
+		// Magic Number
+		sidHeader[0] = 'P';
+		sidHeader[1] = 'S';
+		sidHeader[2] = 'I';
+		sidHeader[3] = 'D';
+		// Version
+		sidHeader[5] = 1;
+		// Data Offset
+		sidHeader[7] = 0x76;
+		// Load Addr
+		sidHeader[8] = (byte) ((loadAddr >> 8) & 0xff);
+		sidHeader[9] = (byte) (loadAddr & 0xff);
+		// Init Addr
+		sidHeader[10] = (byte) ((initAddr >> 8) & 0xff);
+		sidHeader[11] = (byte) (initAddr & 0xff);
+		// Play Addr
+		sidHeader[12] = (byte) ((playAddr >> 8) & 0xff);
+		sidHeader[13] = (byte) (playAddr & 0xff);
+		// Number of Songs
+		sidHeader[14] = (byte) ((numSongs >> 8) & 0xff);
+		sidHeader[15] = (byte) (numSongs & 0xff);
+		// Number of Songs
+		sidHeader[16] = (byte) ((startSong >> 8) & 0xff);
+		sidHeader[17] = (byte) (startSong & 0xff);
+		return sidHeader;
 	}
 
-	public void beebSIDtoAtomSID(File beebSIDMenuFile, File atomSIDMenuFile, File atomSidDir) throws IOException {
+	public void beebSIDtoAtomSID(File beebSIDMenuFile, File atomSIDMenuFile, File atomSidDir, int relocateAddrBase) throws IOException {
 
 		System.out.println("### " + atomSidDir.getName());
 
@@ -225,10 +332,12 @@ public class BeebSIDtoAtomSID {
 
 				int offset = songs.get(i);
 
+				// Read the init, play and load addresses from the BeebSid Menu
 				int initAddr = (beebSIDMenu[offset + 0] & 0xff) + ((beebSIDMenu[offset + 1] & 0xff) << 8);
 				int playAddr = (beebSIDMenu[offset + 2] & 0xff) + ((beebSIDMenu[offset + 3] & 0xff) << 8);
 				int loadAddr = (beebSIDMenu[offset + 9] & 0xff) + ((beebSIDMenu[offset + 10] & 0xff) << 8);
 
+				// Read the filename from the BeebSid Menu
 				int j = offset + 16;
 				String fileName = "";
 				while (beebSIDMenu[j] != (byte) ' ' && beebSIDMenu[j] != (byte) 13) {
@@ -240,6 +349,26 @@ public class BeebSIDtoAtomSID {
 				}
 				j++;
 
+				// Read and Relocate the Beeb SID File
+				File srcSidFile = new File(beebSidDir, fileName);
+				File dstSidFile = new File(atomSidDir, fileName);
+
+				// Important to only try to relocate by an exact number of pages
+				int relocateAddr = 0;
+				if (relocateAddrBase != 0) {
+					relocateAddr = relocateAddrBase + (loadAddr & 0xff);
+				}
+				
+				// Do the relocation
+				int ret = relocate(srcSidFile, dstSidFile, Mode.FROM_BEEBSID, 0xbdc0, loadAddr, initAddr, playAddr, relocateAddr);
+
+				// If relocation was successful, update the addresses
+				if (relocateAddrBase != 0 && ret == 0) {
+					initAddr += (relocateAddr - loadAddr);
+					playAddr += (relocateAddr - loadAddr);
+					loadAddr = relocateAddr;
+				}
+				
 				String title;
 				if (earlySid || (j >= songs.get(i + 1))) {
 					title = fileName;
@@ -262,15 +391,13 @@ public class BeebSIDtoAtomSID {
 				}
 				title = title.toUpperCase();
 
-				System.out.println("### " + title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(initAddr) + " "
-						+ Integer.toHexString(playAddr) + " " + fileName);
-
 				// Write the title, padded to 30 char
 				byte[] titleBytes = title.getBytes();
 				System.arraycopy(titleBytes, 0, atomSIDMenu, line, titleBytes.length);
 				line += titleBytes.length;
 				// Write a null terminator for the title
 				atomSIDMenu[line++] = 0;
+				
 
 				// Write the load, init, play
 				atomSIDMenu[line++] = (byte) (loadAddr & 0xff);
@@ -285,10 +412,11 @@ public class BeebSIDtoAtomSID {
 				System.arraycopy(fileNameBytes, 0, atomSIDMenu, line, fileNameBytes.length);
 				line += fileNameBytes.length;
 
-				// Read the Beeb SID File
-				File srcSidFile = new File(beebSidDir, fileName);
-				File dstSidFile = new File(atomSidDir, fileName);
-				relocate(srcSidFile, dstSidFile, Mode.FROM_BEEBSID, 0xbdc0, loadAddr, initAddr);
+				System.out.println("### " + title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(initAddr) + " "
+						+ Integer.toHexString(playAddr) + " " + fileName);
+
+
+
 			}
 		}
 
@@ -305,8 +433,8 @@ public class BeebSIDtoAtomSID {
 
 	public static final void main(String[] args) {
 		try {
-			if (args.length != 3) {
-				System.err.println("usage: java -jar atomsid.jar <BeebSIDMenu> <AtomSIDMenuBase> <Output Dir>");
+			if (args.length != 3 && args.length != 4) {
+				System.err.println("usage: java -jar atomsid.jar <BeebSIDMenu> <AtomSIDMenuBase> <Output Dir> [ <relocateAddr> ]");
 				System.exit(1);
 			}
 			File beebSIDMenuFile = new File(args[0]);
@@ -332,8 +460,12 @@ public class BeebSIDtoAtomSID {
 			File dir = new File(args[2]);
 			dir.mkdirs();
 
+			int relocateAddrBase = 0;
+			if (args.length == 4) {
+				relocateAddrBase = Integer.parseInt(args[3], 16);
+			}
 			BeebSIDtoAtomSID c = new BeebSIDtoAtomSID();
-			c.beebSIDtoAtomSID(beebSIDMenuFile, atomSIDMenuFile, dir);
+			c.beebSIDtoAtomSID(beebSIDMenuFile, atomSIDMenuFile, dir, relocateAddrBase);
 
 		} catch (IOException e) {
 			e.printStackTrace();

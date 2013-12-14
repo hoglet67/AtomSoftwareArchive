@@ -42,9 +42,17 @@ OTHER=OTHER
 # Hopesoft
 HS=HS
 
+SID=SID
+
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
 
+##############################################################
+# Atom SID Disks (ported from BeebSID)
+##############################################################
+
+mkdir -p $ARCHIVE/$SID
+cp -a ../beebsid/ATMSID* $ARCHIVE/$SID
 
 ##############################################################
 # Books

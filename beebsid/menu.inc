@@ -13,11 +13,11 @@
 .old_nomon      EQUS 0          ; Store old NOMON flag (#ea)
 .old_irq	EQUS 0,0	; Store old IRQ vec
 
-load_param	= $90		; File load pointers
+load_param	= $80		; File load pointers
 
-scr_adr		= $a0		; Pointer
-max_files       = $a2           ; Max Files
-cursor		= $a3
+scr_adr		= $90		; Pointer
+max_files       = $92           ; Max Files
+cursor		= $93
 
 x_min		= 1		; x-pos menu
 y_min		= 5		; y-pos menu
