@@ -15,9 +15,15 @@ jmp main
 
 load_param	= $80		; File load pointers
 
+workspace       = $90		; Start of the zero page workspace used by the menu
+workspace_size  = $07		; Size of the zero page workspace used by the menu
+
 scr_adr		= $90		; Pointer
 max_files       = $92           ; Max Files
 cursor		= $93
+row_lb		= $94
+row_hb		= $95
+linepos		= $96
 
 x_min		= 1		; x-pos menu
 y_min		= 5		; y-pos menu
@@ -49,6 +55,8 @@ sid_reg         = $9700
 	sta old_nomon
 	lda #255		; Disable the NOMON flag
 	sta $ea
+
+	jsr save_zero		; Save the zero page, in case a SID messes stuff up
 
 	lda #0			; Init vars
 	sta line_ptr
@@ -145,6 +153,8 @@ sid_reg         = $9700
 	jsr restore_irq		; Restore IRQ vec
 	jsr resetSID		; Reset SID sound
 
+	jsr restore_zero	; Restore the original page zero
+
 	lda old_nomon		; Restore the NOMON flag
 	sta $ea
 
@@ -206,7 +216,11 @@ sid_reg         = $9700
 	cmp #$0d
 	bne init_loop
 
+	jsr restore_zero
+
 	jsr oscli
+
+	jsr save_zero
 
 .init_wait
 	ldx #60
@@ -350,10 +364,6 @@ sid_reg         = $9700
 ;
 ; Cursor to pos X,Y
 ;--------------------------------------------
-
-row_lb		= $de
-row_hb		= $df
-linepos		= $e0
 
 .goto_xy
 	sty row_hb		; set row address
@@ -581,38 +591,63 @@ SID	= $bdc0
 
 
 .save_zero_sid
-        ldx #$80
+        ldx #(workspace_size - 1)
 
 .save_zero_sid1
-	lda $00,x
-	sta zero_sid,x
-	inx
-	bne save_zero_sid1
+	lda workspace,x
+	sta tmp_sid,x
+	dex
+	bpl save_zero_sid1
 	rts
+
 
 .swap_zero_atom_to_sid
-        ldx #$80
+        ldx #(workspace_size - 1)
 
 .swap_zero_atom_to_sid1
-	lda $00,x
-	sta zero_atom,x
-	lda zero_sid,x
-	sta $00,x
-	inx
-	bne swap_zero_atom_to_sid1
+	lda workspace,x
+	sta tmp_atom,x
+	lda tmp_sid,x
+	sta workspace,x
+	dex
+	bpl swap_zero_atom_to_sid1
 	rts
+
 
 .swap_zero_sid_to_atom
-        ldx #$80
+        ldx #(workspace_size - 1)
 
 .swap_zero_sid_to_atom1
-	lda $00,x
-	sta zero_sid,x
-	lda zero_atom,x
-	sta $00,x
-	inx
-	bne swap_zero_sid_to_atom1
+	lda workspace,x
+	sta tmp_sid,x
+	lda tmp_atom,x
+	sta workspace,x
+	dex
+	bpl swap_zero_sid_to_atom1
 	rts
+
+
+.save_zero
+        ldx #$00
+
+.save_zero1
+	lda $00,x
+	sta tmp_zero,x
+	inx
+	bne save_zero1
+	rts
+
+.restore_zero
+        ldx #$00
+
+.restore_zero1
+	lda $00,x
+	sta tmp_zero,x
+	inx
+	bne restore_zero1
+	rts
+
+
 
 ;----------------------------------------
 ; update_vu
@@ -762,11 +797,14 @@ SID	= $bdc0
 	 EQUS $83,$bd,$91,$95,$89,$94,$a0,$a0
 
 
-.zero_sid
+.tmp_zero
 	skip 256
 
-.zero_atom
-	skip 256
+.tmp_sid
+	skip workspace_size
+
+.tmp_atom
+	skip workspace_size
 
 .txt_ptr
 
