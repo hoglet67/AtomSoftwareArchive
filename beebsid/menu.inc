@@ -16,7 +16,7 @@ jmp main
 load_param	= $80		; File load pointers
 
 workspace       = $90		; Start of the zero page workspace used by the menu
-workspace_size  = $07		; Size of the zero page workspace used by the menu
+workspace_size  = $08		; Size of the zero page workspace used by the menu PLUS ONE as #FF saved in the last location
 
 scr_adr		= $90		; Pointer
 max_files       = $92           ; Max Files
@@ -593,6 +593,10 @@ SID	= $bdc0
 .save_zero_sid
         ldx #(workspace_size - 1)
 
+	lda $ff
+	sta tmp_sid,x
+	dex
+
 .save_zero_sid1
 	lda workspace,x
 	sta tmp_sid,x
@@ -603,6 +607,12 @@ SID	= $bdc0
 
 .swap_zero_atom_to_sid
         ldx #(workspace_size - 1)
+
+	lda $ff
+	sta tmp_atom,x
+	lda tmp_sid,x
+	sta $ff
+	dex
 
 .swap_zero_atom_to_sid1
 	lda workspace,x
@@ -616,6 +626,12 @@ SID	= $bdc0
 
 .swap_zero_sid_to_atom
         ldx #(workspace_size - 1)
+
+	lda $ff
+	sta tmp_sid,x
+	lda tmp_atom,x
+	sta $ff
+	dex
 
 .swap_zero_sid_to_atom1
 	lda workspace,x
