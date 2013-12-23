@@ -14,34 +14,45 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	public static final int CMD_RETURN = 2;
 	public static final int CMD_PAGE = 3;
 	public static final int CMD_DIRECT = 4;
+	public static final int CMD_PRINT = 5;
 		
 	private File menuDir;
 	private File bootLoaderBinary;
+	private File romBootLoaderBinary;
 	private boolean sddos;
 	
 	
-	public GenerateBootstrapFiles(File menuDir, File bootLoaderBinary, boolean sddos) {
+	public GenerateBootstrapFiles(File menuDir, File bootLoaderBinary, File romBootLoaderBinary, boolean sddos) {
 		this.menuDir = menuDir;
 		this.bootLoaderBinary = bootLoaderBinary;
+		this.romBootLoaderBinary = romBootLoaderBinary;
 		this.sddos = sddos;
 	}
 	
-	private void generateMachineCodeBootstrap(File menuDir, File bootLoaderBinary, int index, String directory, String run, String boot)
+	private void generateMachineCodeBootstrap(int index, String directory, String run, String boot, boolean rom)
 			throws IOException {
 
 		int loadAddr = Integer.parseInt(boot, 16);
 		int execAddr = loadAddr;
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		FileInputStream fis = new FileInputStream(bootLoaderBinary);
+		FileInputStream fis = new FileInputStream(rom ? romBootLoaderBinary : bootLoaderBinary);
 		int b;
 		while((b = fis.read()) != -1) {
 		    bos.write(b);
 		}
 		fis.close();
 		if (!sddos) {
-			bos.write(("CWD " + directory).getBytes());
-			bos.write((byte) 13);
+			// Break long directory paths into separate CWD commands to avoid hitting the 13 char limit to *CWD
+			if (directory.length() > 13) {
+				for (String d : directory.split("/")) {
+					bos.write(("CWD " + d).getBytes());
+					bos.write((byte) 13);								
+				}
+			} else {
+				bos.write(("CWD " + directory).getBytes());
+				bos.write((byte) 13);			
+			}
 		}
 		String[] cmds = run.split("\n");
 		for (int i = 0; i < cmds.length; i++) {
@@ -58,6 +69,11 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				int page = Integer.parseInt(cmd.split("=")[1]);
 				bos.write(CMD_PAGE);
 				bos.write(page);
+			} else if (cmd.startsWith("PRINT ")) {
+				cmd = cmd.substring(6) + "\n\r";
+				bos.write((byte) CMD_PRINT);
+				bos.write(cmd.getBytes());
+				bos.write((byte) 0);
 			} else if (cmd.startsWith("*LOAD") || cmd.startsWith("*RUN")) {
 				String[] parts = cmd.split(" ");
 				if (parts.length != 2) {
@@ -95,7 +111,8 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 		for (SpreadsheetTitle item : items) {
 			if (item.isPresent()) {
-				generateMachineCodeBootstrap(menuDir, bootLoaderBinary, item.getIndex(), item.getDir(), item.getRun(), item.getBoot());
+				boolean rom = item.getChunk().contains("ROM");
+				generateMachineCodeBootstrap(item.getIndex(), item.getDir(), item.getRun(), item.getBoot(), rom);
 			}
 		}
 	}

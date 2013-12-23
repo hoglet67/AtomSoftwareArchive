@@ -48,6 +48,19 @@ rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
 
 ##############################################################
+# ROMs
+##############################################################
+
+
+mkdir -p $ARCHIVE/ROMS
+pushd ../roms
+for i in `find -type f`
+do
+java -jar ../java/makeatm/makeatm.jar $i ../archive/$ARCHIVE/ROMS/$i A000 C2B2
+done
+popd
+
+##############################################################
 # Atom SID Disks (ported from BeebSID)
 ##############################################################
 

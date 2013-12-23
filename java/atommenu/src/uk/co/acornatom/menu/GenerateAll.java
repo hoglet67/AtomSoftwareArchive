@@ -11,9 +11,9 @@ public class GenerateAll {
 
 	public static final void main(String[] args) {
 		try {
-			if (args.length != 4) {
+			if (args.length != 5) {
 				System.err
-						.println("usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Boot Loader Binary> <Version>");
+						.println("usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Boot Loader Binary>  <ROM Boot Loader Binary> <Version>");
 				System.exit(1);
 			}
 
@@ -23,7 +23,8 @@ public class GenerateAll {
 			File catalogCSV = new File(args[0]);
 			File archiveDir = new File(args[1]);
 			File bootLoaderBinary = new File(args[2]);
-			String version = args[3];
+			File romBootLoaderBinary = new File(args[3]);
+			String version = args[4];
 
 			if (!catalogCSV.exists() || !catalogCSV.isFile()) {
 				System.err.println("CatalogCSV: " + catalogCSV + " does not exist");
@@ -37,6 +38,11 @@ public class GenerateAll {
 
 			if (!bootLoaderBinary.exists() || !bootLoaderBinary.isFile()) {
 				System.err.println("Boot Loader Binary: " + bootLoaderBinary + " does not exist");
+				System.exit(1);
+			}
+
+			if (!romBootLoaderBinary.exists() || !romBootLoaderBinary.isFile()) {
+				System.err.println("ROM Boot Loader Binary: " +romBootLoaderBinary + " does not exist");
 				System.exit(1);
 			}
 
@@ -80,7 +86,7 @@ public class GenerateAll {
 						}
 					}
 					List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
-					generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, sddos));
+					generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, sddos));
 					generators.add(new GenerateMenuFiles(menuDir));
 					generators.add(new GenerateSplashFiles(menuDir, version, chunks));
 					for (IFileGenerator generator : generators) {

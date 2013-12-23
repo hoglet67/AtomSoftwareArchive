@@ -18,6 +18,9 @@ rm -rf $ARCHIVE/$DIR[A-Z]
 # Compile the Boot Loader
 ../../BeebASM/beebasm/beebasm -i boot.asm
 
+# Compile the ROM Boot Loader
+../../BeebASM/beebasm/beebasm -i bootrom.asm
+
 # Add in help screens
 cp splash/HELP.ATM $ARCHIVE/HELP
 
@@ -34,7 +37,7 @@ mv MENUSD $ARCHIVE
 #mv HELPGEN $DIR
 
 # Compile the menu data and boostrap files
-java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE BOOT.bin "$VERSION"
+java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE BOOT.bin BOOTROM.bin "$VERSION"
 
 # Also copy to Atomulator
 cp -a $ARCHIVE/MENU $ARCHIVE/HELP $ARCHIVE/$DIR[A-Z] ../../Atomulator/mmc
