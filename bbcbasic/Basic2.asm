@@ -17,7 +17,7 @@ target_hybrid=5
 target_c000=6
 target_split=7
 
-target=target_split
+target=target_atom
 
 \ For all Atom Targets we fold the case of messages, as the Atom doesn't do a great job with lower case
 
@@ -133,7 +133,7 @@ IF (target = target_atom)
   incAtmHeader=1
   incAtomLangHeader=1
   incBeebLangHeader=0
-  load=&3F00   \ Code start address
+  load=&3A00   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=&800
   memtop=load  \ Top of memory is start of code
@@ -144,11 +144,11 @@ IF (target = target_atom)
   hasTitle=FALSE
   \
   \MOS Entry Points:
-  OS_CLI=&FFF7:OSWRCH=&FFF4:OSWRCR=&FFF2:OSNEWL=&FFED
-  OSASCI=&FFE9:OSECHO=&FFE6:OSRDCH=&FFE3:OSLOAD=&FFE0
+  OS_CLI=&FFF7:OSRDCH=&FFE3:OSLOAD=&FFE0
   OSSAVE=&FFDD:OSRDAR=&FFDA:OSSTAR=&FFD7:OSBGET=&FFD4
   OSBPUT=&FFD1:OSFIND=&FFCE:OSSHUT=&FFCB
-  BRKV=&202:WRCHV=&0208
+  BRKV=&202:WRCHV=0
+
   \
   \Dummy variables for non-Atom code
   OSBYTE=&FF37:OSWORD=&FF37:OSFILE=&FF37:OSARGS=&FF37
@@ -246,6 +246,7 @@ ENDIF
 \ Atom/System Code Header
 \ =======================
 IF (incAtomLangHeader)
+ JSR AtomInit
  JSR LBFCF                     \ Print inline text
  EQUS "ACORN BASIC II":EQUB 13:EQUB 13
  EQUS "(C)1982 ACORN":EQUB 13:EQUB 13
@@ -9594,7 +9595,7 @@ ENDIF
 
 
 IF (target=target_atom)
-
+	
 .EMUL_OSCLI
 STX &a0
 STY &a1
@@ -9689,6 +9690,19 @@ JMP OS_CLI
 	RTS
 
 
+.OSECHO
+	JSR OSRDCH
+.OSASCI
+	CMP #$D
+	BNE OSWRCH
+.OSNEWL
+	LDA #$A
+	JSR OSWRCH
+.OSWRCR
+	LDA #$D
+
+	
+include	"BBCOSWRCH.asm"
 
 ENDIF
 
