@@ -133,14 +133,14 @@ IF (target = target_atom)
   incAtmHeader=1
   incAtomLangHeader=1
   incBeebLangHeader=0
-  load=&3A00   \ Code start address
+  load=&3800   \ Code start address
   ws=&0000     \ Offset from &400 to workspace
   membot=&800
   memtop=load  \ Top of memory is start of code
   zp=&00       \ Zero page start address
   ZP00=&00:ZP01=&01 \ Tweek this later
-  FAULT =&4F   \ Pointer to error block
-  ESCFLG=&E21  \ Escape pending flag
+  FAULT =&FD   \ Pointer to error block
+  ESCFLG=&FC  \ Escape pending flag
   hasTitle=FALSE
   \
   \MOS Entry Points:
@@ -151,7 +151,7 @@ IF (target = target_atom)
 
   \
   \Dummy variables for non-Atom code
-  OSBYTE=&FF37:OSWORD=&FF37:OSFILE=&FF37:OSARGS=&FF37
+  OSFILE=&FF37:OSARGS=&FF37
 ENDIF
 
 IF (target = target_c64)
@@ -248,8 +248,10 @@ ENDIF
 IF (incAtomLangHeader)
  JSR AtomInit
  JSR LBFCF                     \ Print inline text
- EQUS "ACORN BASIC II":EQUB 13:EQUB 13
- EQUS "(C)1982 ACORN":EQUB 13:EQUB 13
+EQUS "ACORN BASIC II":EQUB 13:EQUB 13
+EQUB 0:EQUS "(C)1982 ACORN" \ ROM copyright string
+EQUB 10:EQUB 13:EQUB 0
+	
 ENDIF
 
 

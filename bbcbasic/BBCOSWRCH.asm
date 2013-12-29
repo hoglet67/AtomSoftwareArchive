@@ -2,7 +2,14 @@
 L009E   = $009E
 L009F   = $009F
 L00A0   = $00A0
-
+L00A1   = $00A1
+L00A2   = $00A2
+L00A3   = $00A3
+L00A4   = $00A4
+L00A6   = $00A6
+L00A7   = $00A7
+L00A8   = $00A8
+	
 L00B3   = $0083
 L00B4   = $0084
 L00B5   = $0085
@@ -25,6 +32,14 @@ L00E0   = $00E0
 
 L00EB   = $00EB
 
+L00FD   = $00FD
+L00FE   = $00FE
+
+L00FF   = $00FC
+
+IRQVEC  = $0204
+	
+L02FF   = $02FF
 L0300   = $0300
 L0305   = $0305
 L0306   = $0306
@@ -40,7 +55,16 @@ L0312   = $0312
 L0313   = $0313
 L0314   = $0314
 L0316   = $0316
-
+L0317   = $0317
+L0318   = $0318
+L0319   = $0319
+L031B   = $031B
+L031C   = $031C
+L031D   = $031D
+L031E   = $031E
+L031F   = $031F
+L0320   = $0320
+	
 L032A   = $032A
 L032B   = $032B
 L032C   = $032C
@@ -55,14 +79,47 @@ L032C   = $032C
 \ $CFFC MEVPOS = POS + VPOS for MOS-EXT VDU
 \ $CFFE MEWRCH = MOS Extension Write Character routine
 
-FOLDCASE = 1
-MOSEXT1 = &6000
-SCREEN = &8000
-IO8255_0 = &B000
+BBCBASICENTRY = &3800
 
+FOLDCASE = 1
+MOSEXT1  = &6000
+SCREEN   = &8000
+IO8255_0 = &B000
+IO6522_0 = &B800
+RAM_BOT  = &0800
+RAM_TOP  = BBCBASICENTRY
+BBCBASICCOPYRIGHT = BBCBASICENTRY + &16
+
+IO8255_1 = IO8255_0 + 1
+IO8255_2 = IO8255_0 + 2
+IO8255_3 = IO8255_0 + 3
+
+IO6522_1 = IO6522_0 + 1
+IO6522_2 = IO6522_0 + 2
+IO6522_3 = IO6522_0 + 3
+IO6522_4 = IO6522_0 + 4
+IO6522_5 = IO6522_0 + 5
+IO6522_6 = IO6522_0 + 6
+IO6522_7 = IO6522_0 + 7
+IO6522_8 = IO6522_0 + 8
+IO6522_9 = IO6522_0 + 9
+IO6522_A = IO6522_0 + 10
+IO6522_B = IO6522_0 + 11
+IO6522_C = IO6522_0 + 12
+IO6522_D = IO6522_0 + 13
+IO6522_E = IO6522_0 + 14
+IO6522_F = IO6522_0 + 15
+
+
+	
 .OSWRCH
     JMP LF54F
-
+.OSBYTE
+    JMP LF0D2
+.OSWORD
+    JMP LF000
+	
+	
 .AtomInit
  LDX #$19
  LDA #$00
@@ -70,14 +127,459 @@ IO8255_0 = &B000
  STA L0300,X
  DEX
  BPL AtomInit1
- RTS
-
-
-LFE2B = $fe52
-LFFEE = OSWRCH
-LFD1D = $fd44
+	
+        LDA     #<BBCBASICCOPYRIGHT
+        STA     L00FD
+        LDA     #>BBCBASICCOPYRIGHT
+        STA     L00FE
 
 	
+        LDA     #$8A
+        STA     IO8255_3
+        LDA     #$07
+        STA     IO8255_2
+        LDA     #$00
+        STA     L00EB
+
+	
+        LDA     #$0E
+        STA     IO6522_4
+        LDA     #$27
+        STA     IO6522_5
+        LDA     #$40
+        STA     IO6522_B
+        LDA     #$C0
+        STA     IO6522_E
+
+        SEI
+        LDA 	#<TIMERIRQ
+        STA 	IRQVEC
+        LDA 	#>TIMERIRQ
+        STA 	IRQVEC+1
+        CLI
+
+	RTS
+	
+.TIMERIRQ
+	
+        LDA     IO6522_D
+        AND     #$40
+        BEQ     LFFC8
+
+        JMP     LF19A
+
+.LFFC8
+	PLA
+	RTI
+	
+
+LFD1D = $fd44
+LFE2B = $fe52
+LFE4A = $fe71
+LFE8A = $feb1
+
+LFFE0 = OSRDCH
+LFFE7 = OSNEWL
+LFFEE = OSWRCH
+LFFF4 = OSWORD
+
+	
+.LF000
+        CMP     #$00
+        BEQ     LF019
+
+        CMP     #$01
+        BEQ     LF013
+
+        CMP     #$02
+        BEQ     LF07F
+
+        CMP     #$07
+        BEQ     LF016
+
+        JMP     LF0EE
+
+.LF013
+        JMP     LF090
+
+.LF016
+        JMP     LF0A1
+
+.LF019
+        STX     L00A2
+        STY     L00A3
+        LDY     #$04
+.LF01F
+        LDA     (L00A2),Y
+        STA     L00A4,Y
+        DEY
+        BPL     LF01F
+
+        INY
+        BPL     LF031
+
+.LF02A
+        LDA     #$07
+        DEY
+.LF02D
+        INY
+.LF02E
+        JSR     LFFEE
+
+.LF031
+        JSR     LFFE0
+
+        CMP     #$7F
+        BNE     LF03F
+
+        CPY     #$00
+        BEQ     LF031
+
+        DEY
+        BCS     LF02E
+
+.LF03F
+        CMP     #$15
+        BNE     LF050
+
+        TYA
+        BEQ     LF031
+
+        LDA     #$7F
+.LF048
+        JSR     LFFEE
+
+        DEY
+        BNE     LF048
+
+        BEQ     LF031
+
+.LF050
+        CMP     #$1B
+        BEQ     LF075
+
+        STA     (L00A4),Y
+        CMP     #$0D
+        BEQ     LF06E
+
+        CPY     L00A6
+        BCS     LF02A
+
+        CMP     L00A7
+        BCC     LF068
+
+        CMP     L00A8
+        BEQ     LF02D
+
+        BCC     LF02D
+
+.LF068
+        CMP     #$20
+        BCC     LF02E
+
+        BCS     LF031
+
+.LF06E
+        JSR     LFFE7
+
+        LDX     #$00
+        CLC
+        RTS
+
+.LF075
+        LDX     #$FF
+        STX     L00FF
+        RTS
+
+.LF07A
+        LDA     #$83
+        JMP     LFFF4
+
+.LF07F
+        STX     L009E
+        STY     L009F
+        LDY     #$04
+.LF085
+        LDA     (L009E),Y
+        STA     L0300,Y
+        DEY
+        BPL     LF085
+
+        LDY     L009F
+        RTS
+
+.LF090
+        STX     L009E
+        STY     L009F
+        LDY     #$04
+.LF096
+        LDA     L0300,Y
+        STA     (L009E),Y
+        DEY
+        BPL     LF096
+
+        LDY     L009F
+        RTS
+
+.LF0A1
+        STX     L009E
+        STY     L009F
+        LDY     #$07
+        LDA     (L009E),Y
+        STA     L0318
+        DEY
+        LDA     (L009E),Y
+        STA     L0317
+        DEY
+        DEY
+        LDA     (L009E),Y
+        STA     L0319
+        TAY
+        PHP
+        SEI
+        JSR     LF1B6
+
+        PLP
+        LDY     L009F
+        RTS
+
+.LF0C3
+        PHA
+        LDA     MOSEXT1
+        CMP     #$BE
+        BNE     LF0CF
+
+        PLA
+        JMP     (MOSEXT1 + &FFC)
+
+.LF0CF
+        JMP     LF53A
+
+.LF0D2
+        CMP     #$7E
+        BEQ     LF101
+
+        CMP     #$81
+        BEQ     LF12B
+
+        CMP     #$82
+        BEQ     LF100
+
+        CMP     #$83
+        BEQ     LF104
+
+        CMP     #$84
+        BEQ     LF107
+
+        CMP     #$86
+        BEQ     LF0C3
+
+        CMP     #$DA
+        BEQ     LF100
+
+.LF0EE
+        BRK
+        EQUB    $FF
+IF (FOLDCASE)
+        EQUS    "NOT IMPLEMENTED"
+ELSE
+        EQUS    "Not implemented"
+ENDIF
+        EQUB    $00
+.LF100
+        RTS
+
+.LF101
+        JMP     LF172
+
+.LF104
+        JMP     LF1D7
+
+.LF107
+        PHA
+        JSR     LF07A
+
+        STY     L009F
+        LDA     #$00
+        TAX
+        TAY
+.LF111
+        LDA     (L009E),Y
+        EOR     #$FF
+        STA     (L009E),Y
+        CMP     (L009E),Y
+        BNE     LF127
+
+        EOR     #$FF
+        STA     (L009E),Y
+        INC     L009F
+        LDA     L009F
+        CMP     #>RAM_TOP
+        BCC     LF111
+
+.LF127
+        LDY     L009F
+        PLA
+        RTS
+
+.LF12B
+        STX     L031B
+        STY     L031C
+        LDX     #$00
+        STX     L031F
+        STX     L031E
+        STX     L031D
+        LDY     #$04
+        CLC
+.LF13F
+        LDA     L0300,X
+        ADC     L031B,X
+        STA     L0320,X
+        INX
+        DEY
+        BPL     LF13F
+
+.LF14C
+        JSR     LFE4A
+
+        BCC     LF162
+
+        LDX     #$04
+.LF153
+        LDA     L0320,X
+        CMP     L0300,X
+        BMI     LF16A
+
+        BNE     LF14C
+
+        DEX
+        BPL     LF153
+
+        BMI     LF16A
+
+.LF162
+        JSR     LF16E
+
+        TAX
+        LDY     #$00
+        CLC
+        RTS
+
+.LF16A
+        LDY     #$FF
+        SEC
+        RTS
+
+.LF16E
+        PHP
+        JMP     LFE8A
+
+.LF172
+        LDA     L00FF
+        BPL     LF17C
+
+        JSR     LF17D
+
+        JMP     LF172
+
+.LF17C
+        RTS
+
+.LF17D
+        LDA     IO8255_0
+        PHA
+        AND     #$F0
+        STA     IO8255_0
+        LDA     IO8255_1
+        AND     #$20
+        BEQ     LF191
+
+        LDA     #$00
+        BEQ     LF193
+
+.LF191
+        LDA     #$FF
+.LF193
+        STA     L00FF
+        PLA
+        STA     IO8255_0
+        RTS
+
+.LF19A
+        STX     L00A1
+        JSR     LF17D
+
+        LDX     #$00
+.LF1A1
+        INC     L0300,X
+        INX
+        CPX     #$05
+        BEQ     LF1AE
+
+        LDA     L02FF,X
+        BEQ     LF1A1
+
+.LF1AE
+        LDX     L00A1
+        LDA     IO6522_4
+;;        LDA     L00FC
+	PLA
+        RTI
+
+.LF1B6
+        TAX
+        DEX
+        TXA
+        BNE     LF1B6
+
+        LDA     IO8255_2
+        EOR     #$04
+        STA     IO8255_2
+        DEC     L0317
+        BEQ     LF1CB
+
+        TYA
+        BNE     LF1B6
+
+.LF1CB
+        LDA     L0318
+        BEQ     LF1D6
+
+        DEC     L0318
+        TYA
+        BNE     LF1B6
+
+.LF1D6
+        RTS
+
+.LF1D7
+        PHA
+        LDA     #$00
+        TAY
+        TAX
+        STA     L009E
+        LDA     #>RAM_BOT
+        STA     L009F
+.LF1E2
+        LDA     (L009E),Y
+        EOR     #$FF
+        STA     (L009E),Y
+        CMP     (L009E),Y
+        BEQ     LF1F6
+
+        INC     L009F
+        INC     L009F
+        INC     L009F
+        INC     L009F
+        BNE     LF1E2
+
+.LF1F6
+        EOR     #$FF
+        STA     (L009E),Y
+        LDY     L009F
+        PLA
+        RTS
+
 .LF1FE
         LDX     #$03
 .LF200
@@ -572,6 +1074,24 @@ LFD1D = $fd44
 .LF538
         RTS
 
+.LF53A
+        LSR     L00DF
+        PHP
+        ROL     L00DF
+        LDA     L00DE
+        PLP
+        ROR     A
+        LSR     A
+        LSR     A
+        LSR     A
+        LSR     A
+        TAY
+        LDA     L00E0
+        AND     #$7F
+        TAX
+        PLA
+        RTS
+	
 .LF54F
         STY     L00A0
         STX     L009F
