@@ -48,9 +48,18 @@ rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
 
 ##############################################################
-# ROMs
+# BBC Basic
 ##############################################################
 
+mkdir -p $ARCHIVE/BBC
+pushd ../bbcbasic
+../../BeebASM/beebasm/beebasm -i Basic2.asm
+cp roms/ATBASIC2 ../archive/$ARCHIVE/BBC
+popd
+
+##############################################################
+# ROMs
+##############################################################
 
 mkdir -p $ARCHIVE/ROMS
 pushd ../roms
