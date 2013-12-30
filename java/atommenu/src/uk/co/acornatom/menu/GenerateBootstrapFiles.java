@@ -15,6 +15,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	public static final int CMD_PAGE = 3;
 	public static final int CMD_DIRECT = 4;
 	public static final int CMD_PRINT = 5;
+	public static final int CMD_ROMCOPY = 6;
 		
 	private File menuDir;
 	private File bootLoaderBinary;
@@ -76,11 +77,11 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				bos.write((byte) 0);
 			} else if (cmd.startsWith("*LOAD") || cmd.startsWith("*RUN")) {
 				String[] parts = cmd.split(" ");
-				if (parts.length != 2) {
-					throw new RuntimeException("Expected two parts: " + cmd);
-				}
 				cmd = parts[0] + " " + trunc(parts[1]);
-				if (i == cmds.length - 1) {
+				for (int j = 2; j < parts.length; j++) {
+				    cmd += " " + parts[j];
+				}
+				if (!rom && i == cmds.length - 1) {
 					bos.write((byte) CMD_DIRECT);
 					bos.write(cmd.getBytes());
 					bos.write((byte) 13);
@@ -92,6 +93,12 @@ public class GenerateBootstrapFiles extends GenerateBase {
 			} else {
 				throw new RuntimeException("Illegal command " + cmd + " in title " + index);
 			}
+		}
+
+		// For the ROM Boot Loader, make sure we execute the ROMCOPY command
+		// Currently this is hard coded to copy 4K from 8800 to A000
+		if (rom) {
+		    bos.write((byte) CMD_ROMCOPY);
 		}
 
 		FileOutputStream fos = new FileOutputStream(new File(menuDir, "" + index));
