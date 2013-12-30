@@ -174,7 +174,7 @@ IO6522_F = IO6522_0 + 15
 	
 
 LFD1D = $fd44
-LFE2B = $fe52
+LFE2B = $fff4
 LFE4A = $fe71
 LFE8A = $feb1
 
