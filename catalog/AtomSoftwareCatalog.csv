@@ -1220,3 +1220,7 @@ PRINT FOR COMMANDS: MDBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 6D90 8800","Broken - commands work, but crash/corrupt",6D90,present,ROMs,,,
 667,V6,AS,Acornsoft,A.Commercial Software,BBC Basic II,Language,,BBC,8200,*RUN ATBASIC2,Test,ATBASIC2,present,,Yes,,
+668,V6,NC,Non Comm,D.ROMs,Atomic Windows BDXX,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
+PRINT FOR VERSION: AW
+PRINT FOR HELP: SEE MANUAL
+*LOAD B962 8800",Works,B962,present,ROMs,,,
