@@ -867,10 +867,10 @@ TERMINA
 TITANIC
 TOPGUN
 WIZARDO",present,SID,Yes,,
-620,V6,NC,Non Comm,B.Non Commercial Software,HubPlay (#9FE0),Music,,SID/DAVESID,8200,*RUN HUBPLAY,Test,HUBPLAY,present,SID,,,
-621,V6,NC,Non Comm,B.Non Commercial Software,Reptune (#9FE0),Music,,SID/DAVESID,8200,*RUN REPTUNE,Test,REPTUNE,present,SID,,,
-622,V6,NC,Non Comm,B.Non Commercial Software,SidTest (#9FE0),Music,,SID/DAVESID,8200,"CH.""SIDTEST""",Test,SIDTEST,present,SID,,,
-623,V6,NC,Non Comm,B.Non Commercial Software,AtomSID (#9FE0) (32K),Music,,SID/DAVESID,2900,*RUN SIDMENU,Test,"AXELF
+620,V6,NC,Non Comm,B.Non Commercial Software,HubPlay (#9FC0),Music,,SID/DAVESID,8200,*RUN HUBPLAY,Test,HUBPLAY,present,SID,,,
+621,V6,NC,Non Comm,B.Non Commercial Software,Reptune (#9FC0),Music,,SID/DAVESID,8200,*RUN REPTUNE,Test,REPTUNE,present,SID,,,
+622,V6,NC,Non Comm,B.Non Commercial Software,SidTest (#9FC0),Music,,SID/DAVESID,8200,"CH.""SIDTEST""",Test,SIDTEST,present,SID,,,
+623,V6,NC,Non Comm,B.Non Commercial Software,AtomSID (#9FC0) (32K),Music,,SID/DAVESID,2900,*RUN SIDMENU,Test,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
@@ -1224,3 +1224,5 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7D81 8800",Works,7D81,present,ROMs,,,
+669,V6,NC,Non Comm,B.Non Commercial Software,HW Scroll Demo 1,Graphics,David Banks,NC/HWSCROLL,8200,"CH.""SCROLL1""",Test,SCROLL1,present,,,,
+670,V6,NC,Non Comm,B.Non Commercial Software,HW Scroll Demo 2,Graphics,David Banks,NC/HWSCROLL,8200,"CH.""SCROLL2""",Test,SCROLL2,present,,,,
