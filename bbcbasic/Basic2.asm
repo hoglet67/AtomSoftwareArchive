@@ -139,7 +139,7 @@ IF (target = target_atom)
   memtop=load  \ Top of memory is start of code
   zp=&00       \ Zero page start address
   ZP00=&00:ZP01=&01 \ Tweek this later
-  FAULT =&FD   \ Pointer to error block
+  FAULT=&FA   \ Pointer to error block
   ESCFLG=&FC  \ Escape pending flag
   hasTitle=FALSE
   \

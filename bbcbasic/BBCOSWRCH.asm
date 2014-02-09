@@ -32,8 +32,8 @@ L00E0   = $00E0
 
 L00EB   = $00EB
 
-L00FD   = $00FD
-L00FE   = $00FE
+L00FD   = $00FA
+L00FE   = $00FB
 
 L00FF   = $00FC
 
