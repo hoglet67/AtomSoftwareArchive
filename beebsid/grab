@@ -17,7 +17,8 @@ for i in \
 "http://stardot.org.uk/forums/download/file.php?id=3157" \
 "http://stardot.org.uk/forums/download/file.php?id=4166" \
 "http://stardot.org.uk/forums/download/file.php?id=5391" \
-"http://stardot.org.uk/forums/download/file.php?id=6242"
+"http://stardot.org.uk/forums/download/file.php?id=6242" \
+"http://stardot.org.uk/forums/download/file.php?id=9282"
 
 do
  # Grab the zipped SSD from StartDot
