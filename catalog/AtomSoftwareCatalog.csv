@@ -1245,3 +1245,13 @@ PRINT FOR HELP: SEE MANUAL
 670,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Test,SCROLL1,present,GODIL,,,
 671,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Test,SCROLL2,present,GODIL,,,
 672,V6,NC,Non Comm,B.Non Commercial Software,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Test,DEMO,present,GODIL,,,
+673,V6,NC,Non Comm,B.Non Commercial Software,Bombs,Game,,NC,8200,"CH.""BOMBS""",Test,BOMBS,present,,,,
+674,V6,NC,Non Comm,B.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Test,DESERT,present,,,,
+675,V6,NC,Non Comm,B.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Test,DUCK,present,,,,
+676,V6,NC,Non Comm,B.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Test,JET,present,,,,
+677,V6,C&VG,C&VG,C.Books/Magazines,Monster,Game,,CVG,8200,"CH.""MONSTER""",Test,MONSTER,present,,,,
+678,V6,C&VG,C&VG,C.Books/Magazines,Spider,Game,,CVG,8200,"CH.""SPIDER""",Test,SPIDER,present,,,,
+679,V6,RS,Retro S/W,A.Commercial Software,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Test,"JOE
+JOECODE
+PANEL1
+SCRE",present,RS Mono,Yes,,
