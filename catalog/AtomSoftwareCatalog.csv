@@ -1141,7 +1141,7 @@ PRINT FOR HELP: SEE MANUAL
 PRINT TO RUN: CALC
 PRINT FOR HELP: SEE MANUAL
 *LOAD B1C5 8800",Works,B1C5,present,ROMs,,,
-640,V6,AS,Acornsoft,D.ROMs,Atom Demo,Graphics,,ROMS/ACORN/DEMO,8200,"PRINT TO RUN: CALC
+640,V6,AS,Acornsoft,D.ROMs,Atom Demo,Graphics,,ROMS/ACORN/DEMO,8200,"PRINT TO RUN: RUN
 ?18=160
 *LOAD BANNER
 *LOAD 49F5 8800",Works,"BANNER
@@ -1238,7 +1238,7 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR COMMANDS: MDBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 6D90 8800","Broken - commands work, but crash/corrupt",6D90,present,ROMs,,,
-668,V6,AS,Acornsoft,A.Commercial Software,BBC Basic II,Language,,BBC,8200,*RUN ATBASIC2,Test,ATBASIC2,present,,Yes,,
+668,V6,AS,Acornsoft,A.Commercial Software,BBC Basic II (32K),Language,,BBC,8200,*RUN ATBASIC2,Works,ATBASIC2,present,,Yes,,
 669,V6,NC,Non Comm,D.ROMs,Atomic Windows 1.2 BD,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
@@ -1246,16 +1246,16 @@ PRINT FOR HELP: SEE MANUAL
 670,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Test,SCROLL1,present,GODIL,,,
 671,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Test,SCROLL2,present,GODIL,,,
 672,V6,NC,Non Comm,B.Non Commercial Software,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Test,DEMO,present,GODIL,,,
-673,V6,NC,Non Comm,B.Non Commercial Software,Bombs,Game,,NC,8200,"CH.""BOMBS""",Test,BOMBS,present,,,,
-674,V6,NC,Non Comm,B.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Test,DESERT,present,,,,
-675,V6,NC,Non Comm,B.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Test,DUCK,present,,,,
-676,V6,NC,Non Comm,B.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Test,JET,present,,,,
-677,V6,C&VG,C&VG,C.Books/Magazines,Monster,Game,,CVG,8200,"CH.""MONSTER""",Test,MONSTER,present,,,,
-678,V6,C&VG,C&VG,C.Books/Magazines,Spider,Game,,CVG,8200,"CH.""SPIDER""",Test,SPIDER,present,,,,
-679,V6,RS,Retro S/W,A.Commercial Software,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Test,"JOE
+673,V6,NC,Non Comm,B.Non Commercial Software,Bombs,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
+674,V6,NC,Non Comm,B.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
+675,V6,NC,Non Comm,B.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
+676,V6,NC,Non Comm,B.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
+677,V6,C&VG,C&VG,C.Books/Magazines,Monster,Game,,CVG,8200,"CH.""MONSTER""",Works,MONSTER,present,,,,
+678,V6,C&VG,C&VG,C.Books/Magazines,Spiderman,Game,,CVG,8200,"CH.""SPIDER""",Works,SPIDER,present,,,,
+679,V6,RS,Retro S/W,A.Commercial Software,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
-680,V6,NC,Non Comm,B.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Test,3-2-1,present,,,,
-681,V6,NC,Non Comm,B.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Test,X-WING,present,,,,
-682,V6,NC,Non Comm,B.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Test,ROBOTNIM,present,,,,
+680,V6,NC,Non Comm,B.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,,,,
+681,V6,NC,Non Comm,B.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,,,,
+682,V6,NC,Non Comm,B.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,,,,
