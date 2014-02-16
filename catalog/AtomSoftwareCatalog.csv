@@ -1259,6 +1259,7 @@ SCRE",present,RS Mono,Yes,,
 680,V6,NC,Non Comm,B.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,,,,
 681,V6,NC,Non Comm,B.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,,,,
 682,V6,NC,Non Comm,B.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,,,,
-683,V6,NC,Non Comm,B.Non Commercial Software,Quest,Adventure,,OTHER,8200,"CH.""QUEST""",Test,"QUEST
+683,V6,NC,Non Comm,B.Non Commercial Software,Quest,Adventure,,OTHER,2800,"*LOAD QUESTDA
+CH.""QUEST""",Test,"QUEST
 QUESTDA",present,,,,
-684,V6,ECD,ECD,A.Commercial Software,Moon Lander,Game,,OTHER,8200,"CH.""MOONLAN""",Test,MOONLAN,present,,,,
+684,V6,ECD,ECD,A.Commercial Software,Moonlander,Game,,OTHER,8200,"CH.""MOONLAN""",Test,MOONLAN,present,,,,
