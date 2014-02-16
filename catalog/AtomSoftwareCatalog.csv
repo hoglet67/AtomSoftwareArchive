@@ -511,12 +511,12 @@ EDITOR
 LOADER
 MMINER",present,RS Colour,,,
 311,V3,A&F,A&F S/W,A.Commercial Software,Minefield,Game,,AF,8200,"CH.""MINEFIEL""",Works,MINEFIEL,present,,,,
-312,V3,NC,Non Comm,B.Non Commercial Software,Bell Hop,Game,ML & JMF,OTHER,8200,*RUN BELLHOP,Works,BELLHOP,present,Non Comm,,,
-313,V3,NC,Non Comm,B.Non Commercial Software,Boxes,Game,,OTHER,8200,"CH.""BOXES""",Works,BOXES,present,Non Comm,,,
+312,V3,NC,Non Comm,B.Non Commercial Software,Bell Hop,Game,ML & JMF,OTHER,8200,*RUN BELLHOP,Works,BELLHOP,present,,,,
+313,V3,NC,Non Comm,B.Non Commercial Software,Boxes,Game,,OTHER,8200,"CH.""BOXES""",Works,BOXES,present,,,,
 314,V3,NC,Non Comm,B.Non Commercial Software,Cement,Game,RK,OTHER,8200,"*LOAD CEMENT
-RUN",Works,CEMENT,present,Non Comm,,,
-315,V3,NC,Non Comm,B.Non Commercial Software,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,Non Comm,,,
-316,V3,NC,Non Comm,B.Non Commercial Software,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,Non Comm,,,
+RUN",Works,CEMENT,present,,,,
+315,V3,NC,Non Comm,B.Non Commercial Software,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,,,,
+316,V3,NC,Non Comm,B.Non Commercial Software,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,,,,
 317,V4,L9,Level 9,A.Commercial Software,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
 *RUN COLOSSAL",Works,"VDUBLO
 COLOSSAL",present,Middle Earth,Yes,,
@@ -1246,7 +1246,7 @@ PRINT FOR HELP: SEE MANUAL
 670,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Test,SCROLL1,present,GODIL,,,
 671,V6,NC,Non Comm,B.Non Commercial Software,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Test,SCROLL2,present,GODIL,,,
 672,V6,NC,Non Comm,B.Non Commercial Software,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Test,DEMO,present,GODIL,,,
-673,V6,NC,Non Comm,B.Non Commercial Software,Bombs,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
+673,V6,NC,Non Comm,B.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
 674,V6,NC,Non Comm,B.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 675,V6,NC,Non Comm,B.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
 676,V6,NC,Non Comm,B.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
@@ -1259,3 +1259,6 @@ SCRE",present,RS Mono,Yes,,
 680,V6,NC,Non Comm,B.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,,,,
 681,V6,NC,Non Comm,B.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,,,,
 682,V6,NC,Non Comm,B.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,,,,
+683,V6,NC,Non Comm,B.Non Commercial Software,Quest,Adventure,,OTHER,8200,"CH.""QUEST""",Test,"QUEST
+QUESTDA",present,,,,
+684,V6,ECD,ECD,A.Commercial Software,Moon Lander,Game,,OTHER,8200,"CH.""MOONLAN""",Test,MOONLAN,present,,,,
