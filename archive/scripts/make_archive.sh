@@ -95,6 +95,9 @@ popd
 ##############################################################
 
 mkdir -p $ARCHIVE/$OTHER
+cp atms/games1/QUEST $ARCHIVE/$OTHER
+cp atms/games1/QUESTDA $ARCHIVE/$OTHER
+cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
 
 ##############################################################
 # Magnus Olsson
