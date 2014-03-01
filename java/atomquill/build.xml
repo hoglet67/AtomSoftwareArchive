@@ -1,0 +1,5 @@
+<project default="jar" name="">
+	<property name="jar.name" value="atomquill.jar"/>
+	<property name="jar.mainclass" value="uk.co.acornatom.quill.AtomQuill"/>
+    <import file="../ant/build.xml"/>
+</project>
