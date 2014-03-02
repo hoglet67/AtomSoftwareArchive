@@ -48,18 +48,25 @@ L006F   = $006F
 L00FD   = $00FD
 L00FE   = $00FE
 L00FF   = $00FF
+
 L0202   = $0202
 L0203   = $0203
 L020E   = $0208
 L020F   = $0209
-L0400   = $0400
-L0500   = $0500
-L0501   = $0501
-L0502   = $0502
-L0504   = $0504
-L053F   = $053F
+
+OBJLOC  = $0400
+
+FLAGS   = $0500
+FLAG00  = FLAGS + $00
+FLAG01  = FLAGS + $01
+FLAG02  = FLAGS + $02
+FLAG04  = FLAGS + $04
+FLAG3F  = FLAGS + $3F
+
 L057B   = $057B
+
 L0580   = $0580
+
 L05F0   = $05F0
 L05F1   = $05F1
 L05F2   = $05F2
@@ -68,7 +75,9 @@ L05F4   = $05F4
 L05F5   = $05F5
 L05F6   = $05F6
 L05F7   = $05F7
+
 L0600   = $0600
+
 L08C0   = $08C0
 L08C1   = $08C1
 L08C2   = $08C2
@@ -84,7 +93,7 @@ L17D4   = $17D4
 L1904   = $1904
 L1914   = $1914
 
-RESETV  = $FFFC 
+RESETV  = $FFFC
 
 ; The address of the database
 L3500 = $3500
@@ -108,7 +117,7 @@ L3515 = L3500 + 21
 
 UpperCaseOnly=1
 
-Width=$28
+Width=$20
 
         org     $2800 - 22
 
@@ -210,7 +219,7 @@ include "OSEMUL.ASM"
         EQUB    $04,$01 ; *FX 4,1    ... disable cursor editing
         EQUB    $E1,$A5 ; *FX 225    ... write function key status
         EQUB    $E2,$9B ; *FX 226    ... write function key shift status 
-        EQUB    $E3,$8C ; *FX 227    ... write function key ctrl status 
+        EQUB    $E3,$8C ; *FX 227    ... write function key ctrl status
         EQUB    $E4,$00 ; *FX 228    ... write function key ctrl+shift status 
         EQUB    $F7,$4C ; *FX 247,248,49 ... write BREAK intercept code
         EQUB    $F8,<L299C
@@ -711,14 +720,14 @@ include "OSEMUL.ASM"
         JSR     OSBYTE
 
         LDA     #$01
-        LDX     #<L0500
-        LDY     #>L0500
+        LDX     #<FLAGS
+        LDY     #>FLAGS
 
 	; OSWORD A=1 Read System Clock
 	; 5 byte clock written to location pointed to by X and Y (10ms t
         JSR     OSWORD
 
-        LDA     L0504
+        LDA     FLAG04
         STA     L0019
 .L2C6C
         LDA     L3508
@@ -729,17 +738,17 @@ include "OSEMUL.ASM"
         ADC     #$00
         STA     L0051
         LDY     #$00
-        STY     L0501
+        STY     FLAG01
 .L2C81
         LDA     (L0050),Y
-        STA     L0400,Y
+        STA     OBJLOC,Y
         CMP     #$FD
         BCC     L2C91
 
         CMP     #$FF
         BEQ     L2C91
 
-        INC     L0501
+        INC     FLAG01
 .L2C91
         INY
         CPY     L3514
@@ -749,28 +758,38 @@ include "OSEMUL.ASM"
 
         LDY     #$00
         LDA     #$FF
-        STA     L0500,Y
+        STA     FLAGS,Y
         INY
         INY
 .L2CA2
         LDA     #$00
-        STA     L0500,Y
+        STA     FLAGS,Y
         INY
         CPY     #$40
         BNE     L2CA2
 
+        ; =============================
+        ; START OF ACTIONS/CONDITIONS
+        ; =============================
+
+        ; =============================
+        ; Action 01 DESC
+        ;
+        ; This action jumps out of the Event/Status table
+        ; and describes the present location.
+        ; =============================
 .L2CAC
         LDA     #$20
         STA     L2AFB + 1
         LDA     L3513
-        CMP     L0502
+        CMP     FLAG02
         BCC     L2C6C
 
         LDA     #$0C
         JSR     OSWRCH
 
         LDA     #$FF
-        STA     L053F
+        STA     FLAG3F
         LDA     L001D
         BEQ     L2CD6
 
@@ -784,8 +803,8 @@ include "OSEMUL.ASM"
         JSR     OSWRCH
 
 .L2CD6
-        LDA     L0400
-        CMP     L0502
+        LDA     OBJLOC
+        CMP     FLAG02
         BEQ     L2CF5
 
         CMP     #$FE
@@ -794,7 +813,7 @@ include "OSEMUL.ASM"
         CMP     #$FD
         BEQ     L2CF5
 
-        LDA     L0500
+        LDA     FLAGS
         CMP     #$00
         BNE     L2CF5
 
@@ -804,7 +823,7 @@ include "OSEMUL.ASM"
         JMP     L2D41
 
 .L2CF5
-        LDA     L0502
+        LDA     FLAG02
         STA     L003E
         LDA     L3504
         STA     L0050
@@ -821,8 +840,8 @@ include "OSEMUL.ASM"
         STA     L0030
 .L2D13
         LDX     L0030
-        LDA     L0400,X
-        CMP     L0502
+        LDA     OBJLOC,X
+        CMP     FLAG02
         BNE     L2D33
 
         LDA     L0037
@@ -920,7 +939,7 @@ include "OSEMUL.ASM"
         CPX     #$40
         BCS     L2DBE
 
-        LDA     L0500,X
+        LDA     FLAGS,X
         JSR     L2A87
 
         INC     L0049
@@ -1018,7 +1037,7 @@ include "OSEMUL.ASM"
         JMP     L2D41
 
 .L2E2F
-        LDA     L0502
+        LDA     FLAG02
         STA     L003E
         LDA     L350A
         STA     L0050
@@ -1040,7 +1059,7 @@ include "OSEMUL.ASM"
         BNE     L2E47
 
         LDA     (L0050),Y
-        STA     L0502
+        STA     FLAG02
         JMP     L2CAC
 
 .L2E5B
@@ -1191,12 +1210,21 @@ include "OSEMUL.ASM"
         STA     L0053
         JMP     L2E7F
 
+        ; =============================
+        ; Action 03 DONE
+        ;
+        ; This action causes the execution of the Event/Status
+        ; tables to be suspended and the program to leave the
+        ; table. i.e. no entries after this command will be
+        ; executed within this table.
+        ; =============================
 .L2F49
         LDA     L0030
         CMP     #$02
         BNE     L2F52
 
         JMP     L2D48
+
 
 .L2F52
         JMP     L2E26
@@ -1308,18 +1336,42 @@ include "OSEMUL.ASM"
 
         JMP     OSNEWL
 
+        ; =============================
+        ; Condit 0f ATGT?
+        ; Condit 35 GT
+        ; =============================
 .L2FFB
         LDA     #$04
         JMP     L300B
 
+        ; =============================
+        ; Condit 10 ATLT?
+        ; Condit 36 LT?
+        ; =============================
 .L3000
         LDA     #$01
         JMP     L300B
 
+        ; =============================
+        ; Condit 11 NOTAT
+        ; Condit 15 NOTWORN?
+        ; Condit 17 NOTCARR
+        ; Condit 19 DESTROYED?
+        ; Condit 23 NOTZERO
+        ; Condit 33 NOTEQ?
+        ; =============================
 .L3005
         LDA     #$02
         STA     L001A
 
+        ; =============================
+        ; Condit 12 AT
+        ; Condit 16 WORN?
+        ; Condit 18 CARRIED
+        ; Condit 1a CREATED?
+        ; Condit 34 EQ?
+        ; Condit 24 ZERO
+        ; =============================
 .L3009
         LDA     #$02
 .L300B
@@ -1350,6 +1402,14 @@ include "OSEMUL.ASM"
 .L302C
         JMP     L2F39
 
+        ; =============================
+        ; Action 00 INV
+        ;
+        ; Message 0 is printed ("I have with me:-").
+        ; If no objects are carried or worn then message 2 is printed ("Nothing").
+        ; If an object is carried or worn then its description is printed.
+        ; If an object is worn then message 1 ("Worn") is printed after the object description.
+        ; =============================
 .L302F
         LDX     #$00
         TXA
@@ -1357,7 +1417,7 @@ include "OSEMUL.ASM"
         JSR     L2FD2
 
 .L3036
-        LDA     L0400,X
+        LDA     OBJLOC,X
         CMP     #$FD
         BNE     L3047
 
@@ -1400,6 +1460,16 @@ include "OSEMUL.ASM"
 .L306B
         JMP     L2EC3
 
+        ; =============================
+        ; Action 0e END
+        ;
+        ; This action prints message 17
+        ;  ("END OF GAME. Do you want to try again?")
+        ; and waits for	a keypress. If any key other than 
+        ; the second character of message 19 ("N") is pressed
+        ; then a jump is made to initialise.
+        ; Otherwise a jump is made to the Editor (if it is present).
+        ; =============================
 .L306E
         LDX     #$11
         JSR     L2FB5
@@ -1434,6 +1504,11 @@ include "OSEMUL.ASM"
 .L3099
         JMP     L0E07
 
+        ; =============================
+        ; Action 04 OK
+        ;
+        ; This action prints message 8 ("OK") and performs action DONE.
+        ; =============================
 .L309C
         LDX     #$08
         JSR     L2FD2
@@ -1442,6 +1517,14 @@ include "OSEMUL.ASM"
         STA     L0044
         JMP     L2F49
 
+        ; =============================
+        ; Action 0a SAVE
+        ;
+        ; This action prints message 18 ("Filename?"),
+        ; under which the game will be saved. It will
+	; then save the game as a file on tape or disc,
+        ; and then perform action DESC.
+        ; =============================
 .L30A8
         LDY     #$00
 .L30AA
@@ -1477,6 +1560,14 @@ include "OSEMUL.ASM"
 
         JMP     L2CAC
 
+        ; =============================
+        ; Action 0b LOAD
+        ;
+        ; This action prints message 18 ("Filename?")
+        ; and loads the saved game from tape or disc.
+        ; It also performs action DESC once the game is
+        ; loaded.
+        ; =============================
 .L30DE
         LDY     #$00
 .L30E0
@@ -1512,6 +1603,33 @@ include "OSEMUL.ASM"
 
         JMP     L2CAC
 
+        ; =============================
+        ; Action 06 AUTOG
+        ;
+	; The object word relation table is searched
+        ; for an entry which matches W2. If no match is
+	; found then message 5 ("I can't do that") is
+        ; printed and DONE is performed. If a match is
+	; found then the object is passed to the GET routine.
+	;
+        ; Action 07 AUTOD
+        ;
+        ; This action behaves like the AUTOG command, but
+        ; passes the object to the DROP routine if found.
+        ;
+        ; Action 08 AUTOW
+        ;
+	; If the value in W2 is < 200 then message 5
+        ; ("I can't do that") is printed and action DONE is
+	; performed, otherwise it behaves like the AUTOG
+        ;  command, but passes the object to the
+	; WEAR routine.
+        ;
+        ; Action 09 AUTOR
+	; This action behaves like the AUTOW command, but
+        ; passes the object to the DROP routine if found.
+        ;
+        ; =============================
 .L3114
         LDY     #$00
         LDX     L0058
@@ -1529,7 +1647,7 @@ include "OSEMUL.ASM"
         BNE     L3153
 
         STY     L0035
-        LDA     L0400,Y
+        LDA     OBJLOC,Y
         STA     L0038
         CPX     #$06
         BNE     L313C
@@ -1570,22 +1688,38 @@ include "OSEMUL.ASM"
 
         JMP     L309C
 
+        ; =============================
+        ; Action 0c QUIT
+        ;
+        ; This action prints message 7 ("Are you sure?")
+        ; and waits for a keypress. If any key other
+	; than the first character of message 19 ("Y")
+        ; is pressed then action DONE is performed.
+        ; =============================
 .L3164
         LDX     #$07
         JSR     L2FB5
 
         JSR     L2F70
-
+        ; returns Y=1 for Yes
         CPY     #$01
         BEQ     L3177
 
+        ; N entered, do the DONE action
         LDA     #$FF
         STA     L0044
         JMP     L2F49
 
 .L3177
+        ; Y entered continue
         JMP     L2EC3
 
+        ; =============================
+        ; Action 05 KEY
+        ;
+        ; This action prints message 6 ("Press any key")
+        ; and waits for a key.
+        ; =============================
 .L317A
         LDX     #$06
         JSR     L2FD2
@@ -1594,24 +1728,30 @@ include "OSEMUL.ASM"
 
         JMP     L2EC3
 
+        ; =============================
+        ; Action 0d CLS
+        ; =============================
 .L3185
         LDA     #$0C
         JSR     OSWRCH
 
         JMP     L2EC3
 
+        ; =============================
+        ; Action 02 DROPALL
+        ; =============================
 .L318D
         LDX     #$00
 .L318F
-        LDA     L0400,X
+        LDA     OBJLOC,X
         CMP     #$FD
         BCC     L31A0
 
         CMP     #$FF
         BEQ     L31A0
 
-        LDA     L0502
-        STA     L0400,X
+        LDA     FLAG02
+        STA     OBJLOC,X
 .L31A0
         INX
         CPX     L3514
@@ -1620,9 +1760,12 @@ include "OSEMUL.ASM"
         BEQ     L318F
 
         LDA     #$00
-        STA     L0501
+        STA     FLAG01
         JMP     L2EC3
 
+        ; =============================
+        ; Action 1e CHANCE
+        ; =============================
 .L31B0
         LDA     L0019
         CLC
@@ -1648,6 +1791,9 @@ include "OSEMUL.ASM"
         STA     L0039
         JMP     L2FFB
 
+        ; =============================
+        ; Action 25 PAUSE
+        ; =============================
 .L31D3
         LDA     L0038
         CMP     #$00
@@ -1672,25 +1818,37 @@ include "OSEMUL.ASM"
 .L31ED
         JMP     L2EC3
 
+        ; =============================
+        ; Action 26 GOTO
+        ; =============================
 .L31F0
         LDA     L0038
-        STA     L0502
+        STA     FLAG02
         JMP     L2EC3
 
+        ; =============================
+        ; Action 1d MESSAGE
+        ; =============================
 .L31F8
         LDX     L0038
         JSR     L2FD2
 
         JMP     L2EC3
 
+        ; =============================
+        ; Action 27 MES
+        ; =============================
 .L3200
         LDX     L0038
         JSR     L2FB5
 
         JMP     L2EC3
 
+        ; =============================
+        ; Action 1f GET
+        ; =============================
 .L3208
-        LDA     L0501
+        LDA     FLAG01
         CMP     L3515
         BNE     L321C
 
@@ -1704,7 +1862,7 @@ include "OSEMUL.ASM"
 
 .L321C
         LDA     L0038
-        CMP     L0502
+        CMP     FLAG02
         BEQ     L3235
 
         CMP     #$FD
@@ -1721,18 +1879,21 @@ include "OSEMUL.ASM"
         JMP     L3212
 
 .L3235
-        LDA     L0501
+        LDA     FLAG01
         CMP     #$FF
         BEQ     L323F
 
-        INC     L0501
+        INC     FLAG01
 .L323F
         LDA     #$FD
 .L3241
         LDY     L0035
-        STA     L0400,Y
+        STA     OBJLOC,Y
         JMP     L2EC3
 
+        ; =============================
+        ; Action 20 DROP
+        ; =============================
 .L3249
         LDA     L0038
         CMP     #$FD
@@ -1745,18 +1906,21 @@ include "OSEMUL.ASM"
         JMP     L3212
 
 .L3258
-        LDA     L0501
+        LDA     FLAG01
         BEQ     L3260
 
-        DEC     L0501
+        DEC     FLAG01
 .L3260
-        LDA     L0502
+        LDA     FLAG02
         JMP     L3241
 
 .L3266
         LDX     #$05
         JMP     L3212
 
+        ; =============================
+        ; Action 21 WEAR?
+        ; =============================
 .L326B
         LDA     L0038
         CMP     #$FD
@@ -1776,6 +1940,9 @@ include "OSEMUL.ASM"
         LDA     #$FE
         JMP     L3241
 
+        ; =============================
+        ; Action 22 REMOVE?
+        ; =============================
 .L3284
         LDA     L0038
         CMP     #$FE
@@ -1784,8 +1951,11 @@ include "OSEMUL.ASM"
         LDX     #$0D
         JMP     L3212
 
+        ; =============================
+        ; Action 1b CREATE
+        ; =============================
 .L328F
-        LDA     L0502
+        LDA     FLAG02
 .L3292
         PHA
         LDA     L0038
@@ -1795,27 +1965,42 @@ include "OSEMUL.ASM"
         CMP     #$FD
         BCC     L32A5
 
-        LDA     L0501
+        LDA     FLAG01
         BEQ     L32A5
 
-        DEC     L0501
+        DEC     FLAG01
 .L32A5
         PLA
         JMP     L3241
 
+        ; =============================
+        ; Action 1c DESTROY
+        ; =============================
 .L32A9
         LDA     #$FF
         JMP     L3292
 
+        ; =============================
+        ; Action 32 PLACE?
+        ; =============================
 .L32AE
         LDA     L0039
         JMP     L3292
 
+        ; =============================
+        ; Action 28 SET?
+        ; Action 29 CLEAR
+        ; Action 2e LET?
+        ; =============================
 .L32B3
         LDA     L0039
         LDX     L0035
-        STA     L0500,X
+        STA     FLAGS,X
         JMP     L2EC3
+
+        ; =============================
+        ; Action 2a PRINT
+        ; =============================
 
 .L32BD
         LDA     L0035
@@ -1837,33 +2022,45 @@ include "OSEMUL.ASM"
 
         JMP     L2EC3
 
+        ; =============================
+        ; Action 2c PLUS
+        ; Action 2f ADD
+        ; =============================
 .L32DB
         LDX     L0035
         LDA     L0038
         CLC
         ADC     L0039
-        STA     L0500,X
+        STA     FLAGS,X
         BCC     L32FD
 
         CPX     #$30
         BCS     L32F3
 
         LDA     #$FF
-        STA     L0500,X
+        STA     FLAGS,X
         JMP     L2EC3
 
 .L32F3
-        LDA     L0501,X
+        LDA     FLAG01,X
         CMP     #$FF
         BEQ     L32FD
 
-        INC     L0501,X
+        INC     FLAG01,X
 .L32FD
         JMP     L2EC3
+
+        ; =============================
+        ; Condit 14 ABSENT
+        ; =============================
 
 .L3300
         LDA     #$FF
         JMP     L3307
+
+        ; =============================
+        ; Condit 13 PRESENT
+        ; =============================
 
 .L3305
         LDA     #$00
@@ -1876,7 +2073,7 @@ include "OSEMUL.ASM"
         CMP     #$FE
         BEQ     L3324
 
-        CMP     L0502
+        CMP     FLAG02
         BEQ     L3324
 
         LDA     #$FF
@@ -1893,37 +2090,49 @@ include "OSEMUL.ASM"
         LDA     #$00
         JMP     L331A
 
+        ; =============================
+        ; Action 2d MINUS
+        ; Action 30 SUB
+        ; =============================
 .L3329
         LDX     L0035
         LDA     L0038
         SEC
         SBC     L0039
-        STA     L0500,X
+        STA     FLAGS,X
         BCS     L3349
 
         CPX     #$30
         BCS     L3341
 
         LDA     #$00
-        STA     L0500,X
+        STA     FLAGS,X
         JMP     L2EC3
 
 .L3341
-        LDA     L0501,X
+        LDA     FLAG01,X
         BEQ     L3349
 
-        DEC     L0501,X
+        DEC     FLAG01,X
 .L3349
         JMP     L2EC3
+
+        ; =============================
+        ; Action 31 SWAP
+        ; =============================
 
 .L334C
         LDX     L0035
         LDA     L0039
-        STA     L0400,X
+        STA     OBJLOC,X
         LDX     L0036
         LDA     L0038
-        STA     L0400,X
+        STA     OBJLOC,X
         JMP     L2EC3
+
+        ; =============================
+        ; Action 2b STAR
+        ; =============================
 
 .L335D
         LDA     #$00
@@ -1944,6 +2153,10 @@ include "OSEMUL.ASM"
 .L3378
         JMP     L2EC3
 
+        ; =============================
+        ; Action 37 JSR
+        ; =============================
+
 .L337B
         JSR     L3381
 
@@ -1951,6 +2164,10 @@ include "OSEMUL.ASM"
 
 .L3381
         JMP     (L0038)
+
+        ; =============================
+        ; Action 37 SOUND
+        ; =============================
 
 .L3384
         LDA     #$00
@@ -1980,6 +2197,10 @@ include "OSEMUL.ASM"
 
         JMP     L2EC3
 
+        ; =============================
+        ; END OF ACTIONS
+        ; =============================
+
 .L33B4
         CMP     #$00
         BEQ     L33E9
@@ -1995,7 +2216,7 @@ include "OSEMUL.ASM"
 .L33C1
         STA     L006C
         STX     L006B
-        LDA     L0400,X
+        LDA     OBJLOC,X
         TAX
         LDA     #$04
         RTS
@@ -2009,7 +2230,7 @@ include "OSEMUL.ASM"
         STA     L006B
         LDA     #$05
         STA     L006C
-        LDA     L0500,X
+        LDA     FLAGS,X
         TAX
         PLA
         RTS
@@ -2018,7 +2239,7 @@ include "OSEMUL.ASM"
         CMP     #$06
         BNE     L33E6
 
-        LDX     L0502
+        LDX     FLAG02
         RTS
 
 .L33E6
@@ -2030,63 +2251,63 @@ include "OSEMUL.ASM"
 
 .L33EB
 
-        EQUW    L302F
-        EQUW    L2CAC
-        EQUW    L318D
-        EQUW    L2F49
-        EQUW    L309C
-        EQUW    L317A
-        EQUW    L3114
-        EQUW    L3114
-        EQUW    L3114
-        EQUW    L3114
-        EQUW    L30A8
-        EQUW    L30DE
-        EQUW    L3164
-        EQUW    L3185
-        EQUW    L306E
-        EQUW    L2FFB
-        EQUW    L3000
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L3305
-        EQUW    L3300
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L328F
-        EQUW    L32A9
-        EQUW    L31F8
-        EQUW    L31B0
-        EQUW    L3208
-        EQUW    L3249
-        EQUW    L326B
-        EQUW    L3284
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L31D3
-        EQUW    L31F0
-        EQUW    L3200
-        EQUW    L32B3
-        EQUW    L32B3
-        EQUW    L32BD
-        EQUW    L335D
-        EQUW    L32DB
-        EQUW    L3329
-        EQUW    L32B3
-        EQUW    L32DB
-        EQUW    L3329
-        EQUW    L334C
-        EQUW    L32AE
-        EQUW    L3005
-        EQUW    L3009
-        EQUW    L2FFB
-        EQUW    L3000
-        EQUW    L337B
-        EQUW    L3384
+        EQUW    L302F  ; Action 00 INV
+        EQUW    L2CAC  ; Action 01 DESC
+        EQUW    L318D  ; Action 02 DROPALL
+        EQUW    L2F49  ; Action 03 DONE
+        EQUW    L309C  ; Action 04 OK
+        EQUW    L317A  ; Action 05 KEY
+        EQUW    L3114  ; Action 06 AUTOG
+        EQUW    L3114  ; Action 07 AUTOD
+        EQUW    L3114  ; Action 08 AUTOW
+        EQUW    L3114  ; Action 09 AUTOR
+        EQUW    L30A8  ; Action 0a SAVE
+        EQUW    L30DE  ; Action 0b LOAD
+        EQUW    L3164  ; Action 0c QUIT
+        EQUW    L3185  ; Action 0d CLS
+        EQUW    L306E  ; Action 0e END
+        EQUW    L2FFB  ; Condit 0f ATGT?
+        EQUW    L3000  ; Condit 10 ATLT?
+        EQUW    L3005  ; Condit 11 NOTAT
+        EQUW    L3009  ; Condit 12 AT
+        EQUW    L3305  ; Condit 13 PRESENT
+        EQUW    L3300  ; Condit 14 ABSENT
+        EQUW    L3005  ; Condit 15 NOTWORN?
+        EQUW    L3009  ; Condit 16 WORN?
+        EQUW    L3005  ; Condit 17 NOTCARR
+        EQUW    L3009  ; Condit 18 CARRIED
+        EQUW    L3005  ; Condit 19 CREATED?
+        EQUW    L3009  ; Condit 1a DESTROYED?
+        EQUW    L328F  ; Action 1b CREATE
+        EQUW    L32A9  ; Action 1c DESTROY
+        EQUW    L31F8  ; Action 1d MESSAGE
+        EQUW    L31B0  ; Action 1e CHANCE?
+        EQUW    L3208  ; Action 1f GET
+        EQUW    L3249  ; Action 20 DROP
+        EQUW    L326B  ; Action 21 WEAR?
+        EQUW    L3284  ; Action 22 REMOVE?
+        EQUW    L3005  ; Condit 23 NOTZERO
+        EQUW    L3009  ; Condit 24 ZERO
+        EQUW    L31D3  ; Action 25 PAUSE
+        EQUW    L31F0  ; Action 26 GOTO
+        EQUW    L3200  ; Action 27 MES
+        EQUW    L32B3  ; Action 28 SET?
+        EQUW    L32B3  ; Action 29 CLEAR
+        EQUW    L32BD  ; Action 2a PRINT
+        EQUW    L335D  ; Action 2b STAR
+        EQUW    L32DB  ; Action 2c PLUS
+        EQUW    L3329  ; Action 2d MINUS
+        EQUW    L32B3  ; Action 2e LET?
+        EQUW    L32DB  ; Action 2f ADD
+        EQUW    L3329  ; Action 30 SUB
+        EQUW    L334C  ; Action 31 SWAP?
+        EQUW    L32AE  ; Action 32 PLACE?
+        EQUW    L3005  ; Condit 33 NOTEQ?
+        EQUW    L3009  ; Condit 34 EQ?
+        EQUW    L2FFB  ; Condit 35 GT
+        EQUW    L3000  ; Condit 36 LT?
+        EQUW    L337B  ; Action 37 JSR
+        EQUW    L3384  ; Action 38 SOUND
 
 .L345D
         EQUB    $00,$00,$00,$00,$00,$00,$00,$00
@@ -2105,7 +2326,7 @@ include "OSEMUL.ASM"
         EQUB    $1f, $0a, $02
         EQUS    "By Neil Fleming-Smith", $0d, $0d, $0d
         EQUB    $00
-       
+
         RTS
 
         EQUB    $00,$00,$00,$00,$00,$00,$00,$00
