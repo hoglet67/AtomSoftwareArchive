@@ -50,6 +50,7 @@ ENDIF
 ; A=7 SOUND
 
 .LFFF1
+.OSWORD
         CMP #$00
         BEQ READLINE
         CMP #$01
@@ -84,7 +85,6 @@ ENDIF
         RTS
 
 
-; A=01 User Osbyte Call Read/Write location 281
 ; A=04 Enable/Disable Cursor Editing
 ; A=0C Set keyboard auto repeat rate
 ; A=0F Flush selected buffer type
@@ -123,3 +123,27 @@ ENDIF
        JMP $FFF7
 
 
+.MyRDCH
+	LDA #$00
+	STA $B000
+	JSR $FE94
+	CMP #$1B
+	BNE NotEscape
+	LDA #$20
+.NotEscape
+	PHA
+	LDA #$0A
+	STA $B000
+	PLA
+	RTS
+
+.InitOsEmul
+	LDA #<MyRDCH
+	STA $0208
+	LDA #>MyRDCH
+	STA $0209
+	LDA #$0A
+	STA $B000
+	RTS
+
+	
