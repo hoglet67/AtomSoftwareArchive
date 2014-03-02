@@ -124,7 +124,8 @@ ENDIF
 
 
 .MyRDCH
-	LDA #$00
+	LDA $B000
+        AND #$F0
 	STA $B000
 	JSR $FE94
 	CMP #$1B
@@ -132,18 +133,18 @@ ENDIF
 	LDA #$20
 .NotEscape
 	PHA
-	LDA #$0A
+	LDA $B000
+        AND #$F0
+	ORA #$0A
 	STA $B000
 	PLA
 	RTS
 
 .InitOsEmul
 	LDA #<MyRDCH
-	STA $0208
+	STA $020A
 	LDA #>MyRDCH
-	STA $0209
-	LDA #$0A
-	STA $B000
-	RTS
+	STA $020B
+	JMP NotEscape
 
-	
+

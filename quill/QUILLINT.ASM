@@ -106,9 +106,9 @@ L3513 = L3500 + 19
 L3514 = L3500 + 20
 L3515 = L3500 + 21
 
-UpperCaseOnly=0
+UpperCaseOnly=1
 
-Width=$20
+Width=$28
 
         org     $2800 - 22
 
@@ -208,7 +208,7 @@ include "OSEMUL.ASM"
 
         EQUB    $DB,$00 ; *FX 219,0  ... tab key returns character $00
         EQUB    $04,$01 ; *FX 4,1    ... disable cursor editing
-        EQUB    $E1,$A5 ; *FX 225    ... write function key status 
+        EQUB    $E1,$A5 ; *FX 225    ... write function key status
         EQUB    $E2,$9B ; *FX 226    ... write function key shift status 
         EQUB    $E3,$8C ; *FX 227    ... write function key ctrl status 
         EQUB    $E4,$00 ; *FX 228    ... write function key ctrl+shift status 
