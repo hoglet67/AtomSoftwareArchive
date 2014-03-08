@@ -1288,37 +1288,37 @@ QUESTDA",present,,,,
 688,,PS,Pro Software,A.Commercial Software,Air Strike,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 689,,PS,Pro Software,A.Commercial Software,Chase,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 690,,PS,Pro Software,A.Commercial Software,Road Race,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
-691,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL,2900,"*LOAD PINE32
-*RUN QLUC32",Test,"PINE32
+691,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
+*RUN QLUC32",Test,"DB32
 QLUC32",present,Quill,Yes,,
-692,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL,2900,"*RUN VDU2440
-*LOAD PINE40
+692,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
+*LOAD DB40
 *RUN QLLC40",Test,"VDU2440
-PINE40
+DB40
 QLLC40",present,Quill,Yes,,
-693,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL,2900,"*LOAD HEX32
-*RUN QLUC32",Test,"HEX32
+693,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
+*RUN QLUC32",Test,"DB32
 QLUC32",present,Quill,Yes,,
-694,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL,2900,"*RUN VDU2440
-*LOAD HEX40
+694,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
+*LOAD DB40
 *RUN QLLC40",Test,"VDU2440
-HEX40
+DB40
 QLLC40",present,Quill,Yes,,
-695,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL,2900,"*LOAD SRCH132
-*RUN QLUC32",Test,"SRCH132
+695,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
+*RUN QLUC32",Test,"DB32
 QLUC32",present,Quill,Yes,,
-696,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL,2900,"*RUN VDU2440
-*LOAD SRCH140
+696,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
+*LOAD DB40
 *RUN QLLC40",Test,"VDU2440
-SRCH140
+DB40
 QLLC40",present,Quill,Yes,,
-697,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL,2900,"*LOAD SRCH232
-*RUN QLUC32",Test,"SRCH232
+697,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
+*RUN QLUC32",Test,"DB32
 QLUC32",present,Quill,Yes,,
-698,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL,2900,"*RUN VDU2440
-*LOAD SRCH240
+698,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
+*LOAD DB40
 *RUN QLLC40",Test,"VDU2440
-SRCH240
+DB40
 QLLC40",present,Quill,Yes,,
 699,V7,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Test,"INVAS
