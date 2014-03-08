@@ -1262,9 +1262,9 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7D81 8800",Works,7D81,present,ROMs,,,
-670,V6,NC,Non Comm,C.Non Commercial Software,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Works,SCROLL1,present,GODIL,,,
-671,V6,NC,Non Comm,C.Non Commercial Software,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Works,SCROLL2,present,GODIL,,,
-672,V6,NC,Non Comm,C.Non Commercial Software,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
+670,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Works,SCROLL1,present,GODIL,,,
+671,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Works,SCROLL2,present,GODIL,,,
+672,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
 673,V6,NC,Non Comm,C.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
 674,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 675,V6,NC,Non Comm,C.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
@@ -1323,3 +1323,4 @@ QLLC40",present,Quill,Yes,,
 699,V7,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Test,"INVAS
 INVASINS",present,,,,
+700,V7,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Test,OSWRCH80,present,GODIL,,,
