@@ -23,7 +23,9 @@ public class GenerateSplashFiles extends GenerateBase {
 		SOFTVDU, MC6847, MC6847T1
 	};
 
-	private static final Font font = Font.MC6847;
+	private static final Font font = Font.SOFTVDU;
+
+	private static final boolean forceUpper = true;
 
 	int fontdata6847t1[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08,
 			0x08, 0x08, 0x08, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -218,6 +220,9 @@ public class GenerateSplashFiles extends GenerateBase {
 		int a = y * 32 + x;
 		for (int i = 0; i < s.length(); i++) {
 			int c = s.charAt(i);
+			if (forceUpper) {
+			    c = Character.toUpperCase(c);
+			}
 			if ((font == Font.MC6847 && c > 96) || (font == Font.MC6847T1)) {
 				c = c - 32;
 			}
