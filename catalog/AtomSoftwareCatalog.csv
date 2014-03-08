@@ -203,7 +203,7 @@ REACTIN",present,2K Programs 1,,,
 133,V7,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Works,"TORP
 TORPIN",present,2K Programs 1,,,
 134,V7,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,2900,"?18=130
-CH.""CAL""",Test,"CAL
+CH.""CAL""",Works,"CAL
 CALIN",present,2K Programs 2,,,
 135,V7,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Works,"LIFE1
 LIFE2
@@ -211,10 +211,10 @@ LIFE2
 LIFEIN1
 LIFEIN2",present,2K Programs 2,,,
 136,V7,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,2900,"?18=130
-CH.""OANDX""",Test,"OANDX
+CH.""OANDX""",Works,"OANDX
 OANDXIN",present,2K Programs 2,,,
 137,V7,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,2900,"?18=130
-CH.""TUNE""",Test,"TUNE
+CH.""TUNE""",Works,"TUNE
 TUNEIN1
 TUNEIN2",present,2K Programs 2,,,
 138,,BB,Bug Byte,A.Commercial Software,Atom Invasion,Game,,BB,,,,,missing,2K Programs 3,,,
@@ -346,7 +346,7 @@ OTHINST",present,,,,
 222,V1,PP,Prog Power,A.Commercial Software,Snake,Game,T.Madden,PP,8200,"CH.""SNAKES""",Works,SNAKES,present,,,,
 223,V1,PP,Prog Power,A.Commercial Software,Space Fighter,Game,R.M.P. Hanson,PP,8200,"CH.""FIGHTER""",Works,FIGHTER,present,,,,
 224,,PP,Prog Power,A.Commercial Software,Space Storm,Game,R. Howells,PP,,,,,missing,,,,
-225,,PP,Prog Power,A.Commercial Software,Star Trek,Game,R.M.P. Hanson,PP,,,Test,,arcadian,,,,
+225,,PP,Prog Power,A.Commercial Software,Star Trek,Game,R.M.P. Hanson,PP,,,,,arcadian,,,,
 226,V1,PP,Prog Power,A.Commercial Software,Stock Car,Game,,PP,8200,"CH.""STOCKCAR""",Works,STOCKCAR,present,,,,
 227,,PP,Prog Power,A.Commercial Software,Stockbroker,Game,S.S. Harding,PP,,,,,missing,,,,
 228,,PP,Prog Power,A.Commercial Software,Super Racetrack,Game,S. Draper,PP,,,,,missing,,,,
@@ -361,7 +361,7 @@ OTHINST",present,,,,
 237,V1,TD,Timedata,A.Commercial Software,Cupball,Game,,TD,8200,"CH.""CUPBALL""",Works,CUPBALL,present,,,,
 238,V1,TD,Timedata,A.Commercial Software,Hammurabi,Game,,TD,8200,"CH.""HAMMUR""",Works,HAMMUR,present,,,,
 239,V1,TD,Timedata,A.Commercial Software,Hexpawn,Game,,TD,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,,,,
-240,,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",,LETTERS,missing,,,,
+240,V7,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",Test,LETTERS,present,,,,
 241,V1,TD,Timedata,A.Commercial Software,Othello,Game,,TD,8200,"CH.""OTHELLO""",Works,OTHELLO,present,,,,
 242,V1,TD,Timedata,A.Commercial Software,Pinball,Game,,TD,8200,"CH.""PINBALL""",Works,PINBALL,present,,,,
 243,V1,TD,Timedata,A.Commercial Software,Scramble,Game,,TD,8200,"CH.""SCRAMB""",Works,SCRAMB,present,,,,
@@ -1326,4 +1326,4 @@ QLLC40",present,Quill,Yes,,
 699,V7,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Works,"INVAS
 INVASINS",present,,,,
-700,V7,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Test,OSWRCH80,present,GODIL,,,
+700,V7,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
