@@ -194,28 +194,28 @@ SENTD",present,Atom Word Tutor,,No,
 127,V5,AT,Atomic S/W,A.Commercial Software,Space Adventure,Adventure,,AT,8200,"CH.""SPACE""",Works,SPACE,present,,,,
 128,,AT,Atomic S/W,A.Commercial Software,Word Processor,Business,,AT,,,,,missing,,,,
 129,V1,BB,Bug Byte,A.Commercial Software,747,Game,,BB,8200,"CH.""747""",Works,747,present,,,Yes,
-130,V7,BB,Bug Byte,A.Commercial Software,2K Programs 1 - Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Test,"HANGMAN
+130,V7,BB,Bug Byte,A.Commercial Software,Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Test,"HANGMAN
 HANGIN",present,2K Programs 1,,,
-131,V7,BB,Bug Byte,A.Commercial Software,2K Programs 1 - Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Test,"MLAND
+131,V7,BB,Bug Byte,A.Commercial Software,Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Test,"MLAND
 MLANDIN",present,2K Programs 1,,,
-132,V7,BB,Bug Byte,A.Commercial Software,2K Programs 1 - Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Test,"REACT
+132,V7,BB,Bug Byte,A.Commercial Software,Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Test,"REACT
 REACTIN",present,2K Programs 1,,,
-133,V7,BB,Bug Byte,A.Commercial Software,2K Programs 1 - Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Test,"TORP
+133,V7,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Test,"TORP
 TORPIN",present,2K Programs 1,,,
-134,V7,BB,Bug Byte,A.Commercial Software,2K Programs 2 - Calendar,Game,,BB/2KPRGS2,8200,"CH.""CAL""",Test,"CAL
+134,V7,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,8200,"CH.""CAL""",Test,"CAL
 CALIN",present,2K Programs 2,,,
-135,V7,BB,Bug Byte,A.Commercial Software,2K Programs 2 - Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Test,"LIFE1
+135,V7,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Test,"LIFE1
 LIFE2
 LIFE2
 LIFEIN1
 LIFEIN2",present,2K Programs 2,,,
-136,V7,BB,Bug Byte,A.Commercial Software,2K Programs 2 - O's and X's,Game,,BB/2KPRGS2,8200,"CH.""OANDX""",Test,"OANDX
+136,V7,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,8200,"CH.""OANDX""",Test,"OANDX
 OANDXIN",present,2K Programs 2,,,
-137,V7,BB,Bug Byte,A.Commercial Software,2K Programs 2 - Tunes,Game,,BB/2KPRGS2,8200,"CH.""TUNE""",Test,"TUNE
+137,V7,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,8200,"CH.""TUNE""",Test,"TUNE
 TUNEIN1
 TUNEIN2",present,2K Programs 2,,,
-138,,BB,Bug Byte,A.Commercial Software,2K Programs 3 - Atom Invasion,Game,,BB,,,,,missing,2K Programs 3,,,
-139,,BB,Bug Byte,A.Commercial Software,2K Programs 3 - Mini Breakout,Game,,BB,,,,,missing,2K Programs 3,,,
+138,,BB,Bug Byte,A.Commercial Software,Atom Invasion,Game,,BB,,,,,missing,2K Programs 3,,,
+139,,BB,Bug Byte,A.Commercial Software,Mini Breakout,Game,,BB,,,,,missing,2K Programs 3,,,
 140,V5,BB,Bug Byte,A.Commercial Software,Alien Destroy,Game,,BB,8200,"CH.""ALIEN""",Works,ALIEN,present,,,,
 141,V2,BB,Bug Byte,A.Commercial Software,Atom Breakout,Game,,BB,8200,"CH.""BKOUT""",Works,"BKOUT
 BKOUTINS",present,,,,
