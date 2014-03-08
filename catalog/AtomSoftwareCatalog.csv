@@ -194,24 +194,27 @@ SENTD",present,Atom Word Tutor,,No,
 127,V5,AT,Atomic S/W,A.Commercial Software,Space Adventure,Adventure,,AT,8200,"CH.""SPACE""",Works,SPACE,present,,,,
 128,,AT,Atomic S/W,A.Commercial Software,Word Processor,Business,,AT,,,,,missing,,,,
 129,V1,BB,Bug Byte,A.Commercial Software,747,Game,,BB,8200,"CH.""747""",Works,747,present,,,Yes,
-130,V7,BB,Bug Byte,A.Commercial Software,Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Test,"HANGMAN
+130,V7,BB,Bug Byte,A.Commercial Software,Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Works,"HANGMAN
 HANGIN",present,2K Programs 1,,,
-131,V7,BB,Bug Byte,A.Commercial Software,Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Test,"MLAND
+131,V7,BB,Bug Byte,A.Commercial Software,Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Works,"MLAND
 MLANDIN",present,2K Programs 1,,,
-132,V7,BB,Bug Byte,A.Commercial Software,Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Test,"REACT
+132,V7,BB,Bug Byte,A.Commercial Software,Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Works,"REACT
 REACTIN",present,2K Programs 1,,,
-133,V7,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Test,"TORP
+133,V7,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Works,"TORP
 TORPIN",present,2K Programs 1,,,
-134,V7,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,8200,"CH.""CAL""",Test,"CAL
+134,V7,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,2900,"?18=130
+CH.""CAL""",Test,"CAL
 CALIN",present,2K Programs 2,,,
-135,V7,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Test,"LIFE1
+135,V7,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Works,"LIFE1
 LIFE2
 LIFE2
 LIFEIN1
 LIFEIN2",present,2K Programs 2,,,
-136,V7,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,8200,"CH.""OANDX""",Test,"OANDX
+136,V7,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,2900,"?18=130
+CH.""OANDX""",Test,"OANDX
 OANDXIN",present,2K Programs 2,,,
-137,V7,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,8200,"CH.""TUNE""",Test,"TUNE
+137,V7,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,2900,"?18=130
+CH.""TUNE""",Test,"TUNE
 TUNEIN1
 TUNEIN2",present,2K Programs 2,,,
 138,,BB,Bug Byte,A.Commercial Software,Atom Invasion,Game,,BB,,,,,missing,2K Programs 3,,,
@@ -251,7 +254,7 @@ RUN",Works,PONTOON,present,,,,
 160,,BB,Bug Byte,A.Commercial Software,Simon,Game,,BB,,,,,missing,,,,
 161,,BB,Bug Byte,A.Commercial Software,Squares,Game,,BB,,,,,missing,,,,
 162,V7,BB,Bug Byte,A.Commercial Software,Star Trek,Game,,BB/STARTRK,8200,"*LOAD DATA
-CH.""STAR""",Test,"STAR
+CH.""STAR""",Works,"STAR
 DATA
 STARIN",present,,,Yes,
 163,,BB,Bug Byte,A.Commercial Software,Statistics,Game,,BB,,,,,missing,,,,
@@ -262,7 +265,7 @@ STARIN",present,,,Yes,
 *RUN A1",Works,"ADV
 A1",present,,,,
 168,V2,HS,Hopesoft,A.Commercial Software,Atom Man (32K),Game,,HS,8200,*RUN AMAN,Works,AMAN,present,,Yes*,,
-169,V7,HS,Hopesoft,A.Commercial Software,Chaser,Game,,HS,8200,"CH.""CHASER""",Test,CHASER,present,,,,
+169,V7,HS,Hopesoft,A.Commercial Software,Chaser,Game,,HS,8200,"CH.""CHASER""",Works,CHASER,present,,,,
 170,,HS,Hopesoft,A.Commercial Software,Disassembler,Utility,,HS,,,,,missing,,,,
 171,V5,HS,Hopesoft,A.Commercial Software,PS3A Pirate Island,Adventure,,HS,8200,*RUN PIA,Works,"PIA
 PIB",present,,,,
@@ -278,7 +281,7 @@ SOURCE",present,,,,
 DATA",present,,,,
 177,V1,MM,Micro Mania,A.Commercial Software,Puckman,Game,,MM,8200,"CH.""PUCKMAN""",Works,PUCKMAN,present,,,,
 178,V1,PP,Prog Power,A.Commercial Software,3D Asteroids,Game,J. Millar,PP,8200,"CH.""3DASTERO""",Works,3DASTERO,present,,,,
-179,V7,PP,Prog Power,A.Commercial Software,3D OXO,Game,R.M.P. Hanson,PP,8200,"CH.""3DOXO""",Test,"3DOXO
+179,V7,PP,Prog Power,A.Commercial Software,3D OXO,Game,R.M.P. Hanson,PP,8200,"CH.""3DOXO""",Works,"3DOXO
 3DOXOIN",present,,,,
 180,V1,PP,Prog Power,A.Commercial Software,Adventure,Adventure,J. Spilsbury,PP,0300,"*LOAD ADVCODE 
 *LOAD ADVDATA
@@ -315,7 +318,7 @@ DATA",present,,,,
 RUN",Works,"ROME1
 ROME2",present,,,,
 201,V7,PP,Prog Power,A.Commercial Software,Galaxian War,Game,T.M.Millar,PP,8200,"?18=40
-CH.""GALAX""",Test,"GALAX
+CH.""GALAX""",Works,"GALAX
 GALAXIN",present,,,,
 202,,PP,Prog Power,A.Commercial Software,Hi-Stats,Game,J. Spilsbury,PP,,,,,missing,,,,
 203,V1,PP,Prog Power,A.Commercial Software,Hyperfire,Game,C. Thompson,PP,8200,"CH.""HYPERFI""",Works,HYPERFI,present,,,,
@@ -343,7 +346,7 @@ OTHINST",present,,,,
 222,V1,PP,Prog Power,A.Commercial Software,Snake,Game,T.Madden,PP,8200,"CH.""SNAKES""",Works,SNAKES,present,,,,
 223,V1,PP,Prog Power,A.Commercial Software,Space Fighter,Game,R.M.P. Hanson,PP,8200,"CH.""FIGHTER""",Works,FIGHTER,present,,,,
 224,,PP,Prog Power,A.Commercial Software,Space Storm,Game,R. Howells,PP,,,,,missing,,,,
-225,V7,PP,Prog Power,A.Commercial Software,Star Trek,Game,R.M.P. Hanson,PP,,,Test,,arcadian,,,,
+225,,PP,Prog Power,A.Commercial Software,Star Trek,Game,R.M.P. Hanson,PP,,,Test,,arcadian,,,,
 226,V1,PP,Prog Power,A.Commercial Software,Stock Car,Game,,PP,8200,"CH.""STOCKCAR""",Works,STOCKCAR,present,,,,
 227,,PP,Prog Power,A.Commercial Software,Stockbroker,Game,S.S. Harding,PP,,,,,missing,,,,
 228,,PP,Prog Power,A.Commercial Software,Super Racetrack,Game,S. Draper,PP,,,,,missing,,,,
@@ -367,7 +370,7 @@ OTHINST",present,,,,
 246,V5,A&F,A&F S/W,A.Commercial Software,Robot Nim,Game,,AF,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,,,,
 247,,MM,Micro Mania,A.Commercial Software,The Protector,Game,,MM,,,A renamed version of Defender,,duplicate,,,,
 248,V2,PP,Prog Power,A.Commercial Software,Cesil Interpreter,Language,,PP,8200,"CH.""CESIL""",Works,CESIL,present,,,,
-249,V7,PS,Pro Software,A.Commercial Software,Space Invaders,Game,,PS,8200,"CH.""INVAD""",Test,"INVAD
+249,V7,PS,Pro Software,A.Commercial Software,Space Invaders,Game,,PS,8200,"CH.""INVAD""",Works,"INVAD
 INVADIN",present,,,,
 250,V5,PS,Pro Software,A.Commercial Software,Eliza,Simulation,,PS,8200,"CH.""ELIZA""",Works,"ELIZA
 EL-INSTR",present,,,,
@@ -1271,7 +1274,7 @@ PRINT FOR HELP: SEE MANUAL
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
 677,V6,C&VG,C&VG,D.Books/Magazines,Monster,Game,,CVG,8200,"CH.""MONSTER""",Works,MONSTER,present,,,,
 678,V6,C&VG,C&VG,D.Books/Magazines,Spiderman,Game,,CVG,8200,"CH.""SPIDER""",Works,SPIDER,present,,,,
-679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Test,"JOE
+679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
@@ -1289,38 +1292,38 @@ QUESTDA",present,,,,
 689,,PS,Pro Software,A.Commercial Software,Chase,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 690,,PS,Pro Software,A.Commercial Software,Road Race,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 691,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
-*RUN QLUC32",Test,"DB32
+*RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
 692,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test,"VDU2440
+*RUN QLLC40",Test - line width broken,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
 693,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
-*RUN QLUC32",Test,"DB32
+*RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
 694,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test,"VDU2440
+*RUN QLLC40",Test - line width broken,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
 695,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
-*RUN QLUC32",Test,"DB32
+*RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
 696,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test,"VDU2440
+*RUN QLLC40",Test - line width broken,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
 697,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
-*RUN QLUC32",Test,"DB32
+*RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
 698,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test,"VDU2440
+*RUN QLLC40",Test - line width broken,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
 699,V7,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
-CH.""INVAS""",Test,"INVAS
+CH.""INVAS""",Works,"INVAS
 INVASINS",present,,,,
 700,V7,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Test,OSWRCH80,present,GODIL,,,
