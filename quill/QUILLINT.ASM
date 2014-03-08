@@ -115,24 +115,14 @@ L3513 = L3500 + 19
 L3514 = L3500 + 20
 L3515 = L3500 + 21
 
-UpperCaseOnly=1
+        org STARTOFHEADER + 16
 
-Width=$20
-
-        org     $2800 - 22
-
-.AtmHeader
-
-        EQUS    "QUILL"
-
-        org AtmHeader + 16
-
-        EQUW	BeebDisStartAddr
-        EQUW    BeebDisStartAddr
-        EQUW	BeebDisEndAddr - BeebDisStartAddr
+        EQUW	STARTOF
+        EQUW    STARTOF
+        EQUW	ENDOF - STARTOF
 
 
-.BeebDisStartAddr
+.STARTOF
 
 	JSR     InitOsEmul
         JMP     Start
@@ -2339,6 +2329,5 @@ include "OSEMUL.ASM"
 .L34FF
         EQUB    $00
 
-.BeebDisEndAddr
-SAVE "QUILLINT",AtmHeader,BeebDisEndAddr
+.ENDOF
 

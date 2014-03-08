@@ -1,7 +1,6 @@
 package uk.co.acornatom.menu;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +14,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class GenerateSplashFiles extends GenerateBase {
+	
+	private static final String SPASH_TEMPLATE = "splash" + File.separator + "newsplash.bmp";
 
 	/* 6847 Font taken from Atomulator */
 
@@ -116,75 +117,17 @@ public class GenerateSplashFiles extends GenerateBase {
 			}
 		}
 	}
-
-	private void copyAtomImage(byte[] from, byte[] to, int fromx, int fromy, int w, int h, int tox, int toy) {
-		for (int x = 0; x < w; x++) {
-			for (int y = 0; y < h; y++) {
-				int ax = fromx + x;
-				int ay = fromy + y;
-				int a = (ax >> 3) + (ay << 5);
-				int p = from[a] & (1 << (7 - ax & 7));
-				if (p != 0) {
-					int bx = tox + x;
-					int by = toy + y;
-					int b = (bx >> 3) + (by << 5);
-					to[b] |= (1 << (7 - bx & 7));
-				}
-			}
-		}
-	}
-
 	public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
 		// Create an grey image
 		byte[] screen = new byte[0x1800];
-		int bw = 5;
-		fill(screen, 0, 0, 256, 192, 1);
-		fill(screen, bw, bw, 256 - bw * 2, 192 - bw * 2, 2);
-		fill(screen, bw + 1, bw + 1, 256 - (bw + 1) * 2, 192 - (bw + 1) * 2, 0);
+		fill(screen, 0, 0, 256, 192, 0);
 
-		// Load one of Phil Mainwaring's screens to we can leverage some bits
-		File file = new File("splash" + File.separator + "SCREEN1.ATM");
-		if (!file.exists()) {
-			throw new RuntimeException(file.getCanonicalPath() + " does not exist");
-		}
-		byte[] baseScreen = new ATMFile(file).getData();
+		// Start with the template
+		readSplashTemplate(SPASH_TEMPLATE, screen);
 
-		// Copy the Acorn Logo
-		copyAtomImage(baseScreen, screen, 109, 54, 40, 54, 210, 8);
-
-		// Copy the StarDot and Retro Software logos
-		copyAtomImage(baseScreen, screen, 0, 130, 256, 48, 0, 120);
-
-
-		// Write the ACORN ATOM mmc software archive text
-		String font = "Courier New";
-		BufferedImage image = new BufferedImage(256, 192, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) image.getGraphics();
-		Font fontL = new Font(font, Font.BOLD, 34);
-		Font fontS = new Font(font, Font.BOLD, 20);
-		g.setColor(Color.WHITE);
-		g.setFont(fontL);
-		g.drawString("ACORN", 12, 32);
-		g.drawString("ATOM", 124, 32);
-		g.setFont(fontS);
-		g.drawString("software archive", 10, 50);
-		g.dispose();
-		for (int x = 0; x < 256; x++) {
-			for (int y = 0; y < 192; y++) {
-				int pixel = image.getRGB(x, y);
-				if (pixel != 0) {
-					int b = 1 << (7 - (x & 7));
-					screen[(x >> 3) + (y << 5)] |= b;
-				}
-			}
-		}
-
-		// Write the menu items
-		int y = 52;
-		// writeAtomString(screen, "PLEASE SELECT:", 1, y, false);
-		y += 12;
-		
+		// Overlay the menu items
+		int y = 60;
 		for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
 			String line = chunk.getKey();
 			String count = "(" + chunk.getValue() + ")";
@@ -192,13 +135,11 @@ public class GenerateSplashFiles extends GenerateBase {
 				line += " ";
 			}
 			line += count;
-			writeAtomString(screen, line, 1, y, false);
+			writeAtomString(screen, line, 1, y, true);
 			y += 12;
 		}		
-		y += 3;
 
-		// writeAtomString(screen, "PRESENTED IN ASSOCIATION WITH:", 1, y, false);
-
+		// Overlay the status line
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		String date = sdf.format(new Date()).toUpperCase();
 		String line = "RELEASE " + version.toUpperCase();
@@ -209,16 +150,9 @@ public class GenerateSplashFiles extends GenerateBase {
 		if (line.length() != 30) {
 			throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
 		}
-		
 		y = 192 - 20;
-				
-		writeAtomString(screen, line, 1, y, false);
+		writeAtomString(screen, line, 1, y, true);
 
-		// Invert the screen
-		for (int i = 0; i < 32*192; i++) {
-			screen[i] = (byte) (screen[i] ^ 255);
-		}		
-	
 		// Save the file
 		String name = "SPLASH";
 		FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
@@ -244,7 +178,6 @@ public class GenerateSplashFiles extends GenerateBase {
 				}
 			}
 		}
-		g.dispose();
 		ImageIO.write(save, "PNG", new File("Splash.png"));
 	}
 	
@@ -260,8 +193,30 @@ public class GenerateSplashFiles extends GenerateBase {
 					screen[(x >> 3) + (y << 5)] |= 1 << (7 - x & 7);
 				}
 			}
-		}
-		
+		}	
 	}
+	
+	private static void readSplashTemplate(String template, byte[] screen) throws IOException {
+		// Load the template
+		File file = new File(template);
+		if (!file.exists()) {
+			throw new RuntimeException(file.getCanonicalPath() + " does not exist");
+		}
+		BufferedImage image = ImageIO.read(file);
+		for (int x = 0; x < 256; x++) {
+			for (int y = 0; y < 192; y++) {
+				int pixel = image.getRGB(x, y) & 0xffffff;
+				if (pixel != 0) {
+					int b = 1 << (7 - (x & 7));
+					screen[(x >> 3) + (y << 5)] |= b;
+				}
+			}
+		}
+	}
+	
+	public static final void main(String[] args) throws IOException {
+		readSplashTemplate("../../menu/" + SPASH_TEMPLATE, new byte[256*192]);
+	}
+	
 
 }

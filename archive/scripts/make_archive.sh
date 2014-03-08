@@ -41,8 +41,10 @@ MO=MO
 OTHER=OTHER
 # Hopesoft
 HS=HS
-
+# Sid
 SID=SID
+# QUILL
+QUILL=QUILL
 
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
@@ -152,6 +154,32 @@ mv $DST ../archive/$ARCHIVE/$L9/$DST
 cp VDUBLO VDUWLO ../archive/$ARCHIVE/$L9/$DST
 done
 rm VDUBLO VDUWLO
+popd
+
+##############################################################
+# QUILL
+##############################################################
+
+mkdir -p $ARCHIVE/$QUILL
+pushd ../quill
+# Compile the Quill interpreter
+../../BeebASM/beebasm/beebasm -i QLUC32.ASM
+../../BeebASM/beebasm/beebasm -i QLLC32.ASM
+../../BeebASM/beebasm/beebasm -i QLUC40.ASM
+../../BeebASM/beebasm/beebasm -i QLLC40.ASM
+for SRC in `find [a-zA-Z]* -type d`
+do
+DST=`basename $SRC`
+# Compile the quill adventure, justifying for both screen widths
+mkdir ../archive/$ARCHIVE/$QUILL/$DST
+java -jar ../java/atomquill/atomquill.jar $DST/DB ../archive/$ARCHIVE/$QUILL/$DST/DB32 32
+java -jar ../java/atomquill/atomquill.jar $DST/DB ../archive/$ARCHIVE/$QUILL/$DST/DB40 40
+# Copy Quill Interprter to each subdirectory
+cp QLUC32 QLLC32 QLUC40 QLLC40 ../archive/$ARCHIVE/$QUILL/$DST
+# Copy VDU2440 to each subdirectory
+cp VDU2440 ../archive/$ARCHIVE/$QUILL/$DST
+done
+rm QLUC32 QLLC32 QLUC40 QLLC40 
 popd
 
 ##############################################################

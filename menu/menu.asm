@@ -110,7 +110,7 @@ ENDIF
 	JSR Osrdch
 	CMP #'A'
 	BCC MenuMain
-	CMP #'D' + 1
+	CMP #'F' + 1
 	BCS MenuMain
 	
 	STA MenuDat1Chunk

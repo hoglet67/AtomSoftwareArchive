@@ -1,0 +1,12 @@
+Width = 40
+UpperCaseOnly=1
+
+        org     $2800 - 22
+
+.STARTOFHEADER
+
+	EQUS	"QLUC40"
+
+include "QUILLINT.ASM"
+
+SAVE "QLUC40",STARTOFHEADER, ENDOF

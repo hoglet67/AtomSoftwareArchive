@@ -9,6 +9,8 @@ import java.util.TreeMap;
 
 public class GenerateAll {
 
+	private static final String ALL_TITLES = "ALL TITLES (32K)";
+	
 	public static final void main(String[] args) {
 		try {
 			if (args.length != 5) {
@@ -53,41 +55,52 @@ public class GenerateAll {
 			SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
 			List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
-			Map<String, Integer> chunks = new TreeMap<String, Integer>();
-			for (SpreadsheetTitle item : items) {
-				if (!item.isPresent()) {
-					continue;
-				}
-				String chunk = item.getChunk();
-				Integer count = chunks.get(chunk);
-				if (count == null) {
-					count = 0;
-				}
-				chunks.put(chunk, count + 1);
-			}
-
-			for (int pass = 0; pass < 2; pass++) {
+			// Temporarily disabled sddos until we figure out how to avoid SDDOS overflow
+			// Each menu chapter will be a seperate disk
+			
+			for (int pass = 1; pass < 2; pass++) {
 
 				boolean sddos = (pass == 0);
 				
 				System.out.println("Generating " + (sddos ? "SDDOS" : "ATOMMC") + "menu files version " + version);
 
+				Map<String, Integer> chunks = new TreeMap<String, Integer>();
+				int total = 0;
+				for (SpreadsheetTitle item : items) {
+					if (!item.isPresent()) {
+						continue;
+					}
+					String chunk = item.getChunk();
+					Integer count = chunks.get(chunk);
+					if (count == null) {
+						count = 0;
+					}
+					chunks.put(chunk, count + 1);
+					total++;
+				}
+				
 				char chunkId = 'A';
+				String chunkAll = (char) (chunkId + chunks.size()) + "." + ALL_TITLES;
+				chunks.put(chunkAll, total);
+				
 
 				for (String chunk : chunks.keySet()) {
+					
+					// true if this is the last chunk containing all titles
+					boolean allChunk = chunk.equals(chunkAll);
 
 					File menuDir = new File(archiveDir, menuBase + chunkId);
 					menuDir.mkdirs();
 
 					List<SpreadsheetTitle> chunkItems = new ArrayList<SpreadsheetTitle>();
 					for (SpreadsheetTitle item : items) {
-						if (item.getChunk().equals(chunk)) {
+						if (item.getChunk().equals(chunk) | allChunk) {
 							chunkItems.add(item);
 						}
 					}
 					List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
 					generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, sddos));
-					generators.add(new GenerateMenuFiles(menuDir));
+					generators.add(new GenerateMenuFiles(menuDir, allChunk));
 					generators.add(new GenerateSplashFiles(menuDir, version, chunks));
 					for (IFileGenerator generator : generators) {
 						generator.generateFiles(chunkItems);

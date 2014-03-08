@@ -28,9 +28,11 @@ public class GenerateMenuFiles extends GenerateBase {
 	int maxPublisherLen;
 	int maxCollectionLen;
 	File menuDir;
+	boolean allChunk;
 	
-	public GenerateMenuFiles(File menuDir) {
+	public GenerateMenuFiles(File menuDir, boolean allChunk) {
 		this.menuDir = menuDir;
+		this.allChunk = allChunk;
 	}
 	
 	private void dumpIndexes(String type, Map<String, Integer> map) {
@@ -148,8 +150,26 @@ public class GenerateMenuFiles extends GenerateBase {
 		//
 		// This resides in the upper text space
 		// ------------------------------------------------------------------------------------
-			
-		int titleTableAddr = 0x8200;
+		
+		int endOfLowerText;
+		int lengthOfLowerText;
+		int startOfUpperText;
+		int lengthOfUpperText;
+		
+		if (allChunk) {
+			lengthOfLowerText = 0x1F00;
+			endOfLowerText = 0x5000;
+			startOfUpperText = 0x5000;
+			lengthOfUpperText = 0x3000;
+		} else {
+			lengthOfLowerText = 0x0B00;
+			endOfLowerText = 0x3c00;
+			startOfUpperText = 0x8200;
+			lengthOfUpperText = 0x1600;
+		}
+
+		int titleTableAddr = startOfUpperText;
+
 		byte[] titleTable = createTitleTable(titleTableAddr, atomTitles);
 
 		// ------------------------------------------------------------------------------------
@@ -174,7 +194,6 @@ public class GenerateMenuFiles extends GenerateBase {
 		byte[] collectionSortTable = createSortTable("Collection Sort", collectionSortList, new CollectionOrderSort(), collections);
 
 
-
 		// ------------------------------------------------------------------------------------
 		// Generate the Secondary Tables (Publisher, Genre, Collections)
 		//
@@ -190,7 +209,7 @@ public class GenerateMenuFiles extends GenerateBase {
 		byte[] genreTable = null;
 
 		int menuTableAddr = 0;		
-		int sortTableAddr = 0x3c00 - titleSortTable.length;
+		int sortTableAddr = endOfLowerText - titleSortTable.length;
 
 		for (int pass = 0; pass < 2; pass++) {
 
@@ -238,11 +257,11 @@ public class GenerateMenuFiles extends GenerateBase {
 		// Sanity check the end addresses
 		// ------------------------------------------------------------------------------------
 
-		if (menuTableAddr < 0x3100) {
+		if (menuTableAddr < endOfLowerText - lengthOfLowerText) {
 			throw new RuntimeException("Lower Text Space is full");			
 		}
-		
-		if (titleTable.length > 0x1600) {
+
+		if (titleTable.length > lengthOfUpperText) {
 			throw new RuntimeException("Upper Text Space is full");						
 		}
 
