@@ -210,7 +210,7 @@ public class AtomQuill {
 			
 			String uncompressed1 = uncompress(src, offset + 1, len - 1, oldWidth);
 			
-			String reJustified = justify(uncompressed1, newWidth);
+			String reJustified = justify(uncompressed1, newWidth, type.equals("Message") && i == 49);
 			byte[] compressedBytes = compress(reJustified);
 			
 			// Sanity Check
@@ -280,6 +280,7 @@ public class AtomQuill {
 	}
 
 	private String removeLineBreaks(String s) {
+		s = s.replace("\n\n\n", "###");
 		s = s.replace("\n\n", "##");
 		s = s.replace("\n", " ");
 		String f = "                    ";
@@ -287,8 +288,10 @@ public class AtomQuill {
 			String p = f.substring(0, i);
 			s = s.replace(p, " ");
 		}
+		//System.out.println("x1: " + s);
 		s = s.replace("#", "\n");
-		s = s.trim();
+		//System.out.println("x2: " + s);
+		//s = s.trim();
 		return s;
 	}
 	
@@ -344,7 +347,10 @@ public class AtomQuill {
 		return sb.toString();
 	}
 
-	private String justify(String s, int width) {
+	private String justify(String s, int width, boolean debug) {
+		if (debug) {
+			System.out.println(s);
+		}
 		StringBuffer sb = new StringBuffer();
 		int i = 0;
 		boolean insertNewline = false;
@@ -366,7 +372,9 @@ public class AtomQuill {
 				}
 			}
 			i += para.length() + 1;
-
+		}
+		if (debug) {
+			System.out.println(sb.toString());
 		}
 		return sb.toString();
 	}
