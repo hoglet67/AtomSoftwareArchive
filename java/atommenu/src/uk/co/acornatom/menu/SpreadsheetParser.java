@@ -101,7 +101,7 @@ public class SpreadsheetParser {
 				SpreadsheetTitle item = new SpreadsheetTitle();
 				String index = program[index_column].trim();
 				item.setIndex(Integer.parseInt(index));
-				String chunk = program[chunk_column].trim().toUpperCase();
+				String chunk = program[chunk_column].trim();
 				item.setChunk(chunk);
 				String title = program[title_column].trim().toUpperCase();
 				item.setTitle(title);

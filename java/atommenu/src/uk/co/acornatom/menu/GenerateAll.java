@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class GenerateAll {
 
-	private static final String ALL_TITLES = "ALL TITLES (32K)";
+	private static final String ALL_TITLES = "All Titles (32K)";
 	
 	public static final void main(String[] args) {
 		try {
