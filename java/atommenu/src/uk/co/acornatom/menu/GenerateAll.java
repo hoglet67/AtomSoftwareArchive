@@ -58,7 +58,7 @@ public class GenerateAll {
 			// Temporarily disabled sddos until we figure out how to avoid SDDOS overflow
 			// Each menu chapter will be a seperate disk
 			
-			for (int pass = 1; pass < 2; pass++) {
+			for (int pass = 0; pass < 2; pass++) {
 
 				boolean sddos = (pass == 0);
 				

@@ -1,4 +1,4 @@
-	Base = $2800
+Base = $2800
 
 include "renderer_header.asm"
 
@@ -101,7 +101,7 @@ ENDIF
 	; 30 *LOAD SPLASH
 	JSR OscliString
 IF (sddos = 1)
-	EQUS "LOAD ASPLASH", Return
+	EQUS "LOAD SPLASH", Return
 ELSE
 	EQUS "LOAD MNUA/SPLASH", Return
 ENDIF
@@ -112,15 +112,23 @@ ENDIF
 	BCC MenuMain
 	CMP #'F' + 1
 	BCS MenuMain
-	
+
+IF (sddos = 1)
+	ADC #<(1016 - 'A')
+	STA BinBuffer
+	LDA #>(1016 - 'A')
+	STA BinBuffer + 1
+	LDA #'1'
+	JSR LoadDisk
+	JSR OscliString
+	EQUS "DRIVE 1", Return
+ELSE
 	STA MenuDat1Chunk
 	STA MenuDat2Chunk
 	STA SortDatChunk
-	
-IF (sddos = 0)
 	STA RunCommandMenuChunk
 ENDIF
-
+		
 	; 90 CLEAR 0
 	LDY #0
 	JSR Clear
@@ -131,9 +139,7 @@ ENDIF
 	JSR OscliString
 	
 IF (sddos = 1)	
-	EQUS "LOAD "
-.MenuDat1Chunk
-	EQUS " MENU1", Return
+	EQUS "LOAD MENU1", Return
 ELSE
 	EQUS "LOAD MNU"
 .MenuDat1Chunk
@@ -150,9 +156,7 @@ ENDIF
 	JSR OscliString
 	
 if (sddos = 1)	
-	EQUS "LOAD "
-.MenuDat2Chunk
-	EQUS " MENU2", Return
+	EQUS "LOAD MENU2", Return
 ELSE	
 	EQUS "LOAD MNU"
 .MenuDat2Chunk
@@ -504,40 +508,47 @@ ENDIF
 	; 860 ?P=48+K%10;P?1=13;P?2=13
 
 	; CountString and OscliBuffer are the same ($100)
-		
-	LDX #0
-.BootProgram1
-	LDA RunCommand, X
-	BEQ BootProgram2
-	STA OscliBuffer, X
-	INX
-	BNE BootProgram1
-.BootProgram2
-	JSR WriteDecimal
-	LDA #Return
-	STA OscliBuffer, X
-	INX
-	STA OscliBuffer, X
 	
 	; 870 P.$12;LINK #FFF7
 	; 880 END
 	LDA #12
 	JSR Oswrch
 
-	JSR Oscli	
-	
-
-if (sddos = 1)
+IF (sddos = 1)
+	LDA #'2'
+	JSR LoadDisk
 
 	JSR OscliString
-	EQUS "DRIVE 1", Return
+	EQUS "DRIVE 2", Return
 
 	JSR OscliString
 	EQUS "RUN MENU", Return
+		
+.LoadDisk
+	STA RunCommand + 4
+ENDIF
+		
+.RunCommand0
+	LDX #0
+.RunCommand1
+	LDA RunCommand, X
+	BEQ RunCommand2
+	STA OscliBuffer, X
+	INX
+	BNE RunCommand1
+.RunCommand2
+	JSR WriteDecimal
+	LDA #Return
+	STA OscliBuffer, X
+	INX
+	STA OscliBuffer, X
+	JMP Oscli
+	
+if (sddos = 1)
 
 .RunCommand
-	EQUS "DIN 1,",0
-
+	EQUS "DIN  ,",0
+		
 ELSE 
 
 .RunCommand
@@ -546,7 +557,7 @@ ELSE
 	EQUS " /", 0
 		
 ENDIF	
-	
+
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Translated Basic Subroutines
@@ -990,9 +1001,7 @@ ENDIF
 	JSR OscliString
 
 IF (sddos = 1)
-	EQUS "LOAD "
-.SortDatChunk
-	EQUS " SORT"
+	EQUS "LOAD SORT"
 ELSE
 	EQUS "LOAD MNU"
 .SortDatChunk

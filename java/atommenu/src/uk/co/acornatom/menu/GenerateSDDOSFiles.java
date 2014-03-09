@@ -169,27 +169,39 @@ public class GenerateSDDOSFiles extends GenerateBase {
 	}
 	
 	// Original AtomMMC Names
-	public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3", "SPLASH" };
+	public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3" };
 	
 	// Shorter SDDOS names
-	public static String[] SDDOS_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3", "SPLASH" };
+	public static String[] SDDOS_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3" };
 	
 	public void createMenuDisk() throws IOException {
+	    //Disk 0 is just the menu disk
 		byte[] image = createBlankDiskImage("MENU");
 		ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
 		ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
+		ATMFile splashFile = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH"));
 		menuFile.setTitle("MENU");
 		addFile(image, menuFile);
 		addFile(image, helpFile);
-		for (char chunk = 'A'; chunk < 'A' + numChunks; chunk++) {
-			for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
-				ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunk), ATOMMC_MENU_FILES[i]));
-				atmFile.setTitle(chunk + SDDOS_MENU_FILES[i]);
-				addFile(image, atmFile);
- 	 		}
- 		}
+		addFile(image, splashFile);
 		writeImage(new File("disks/0"), image);
 		addDisk(image, 0);
+		// Disk 1016-1023 are the chapters
+		if (numChunks > 8) {
+			throw new RuntimeException("Too many menu chunks");
+		}
+		for (int chunk = 0; chunk < numChunks; chunk++) {
+			char chunkLetter = (char) ('A' + chunk);
+			byte[] chunkImage = createBlankDiskImage("MENU" + chunkLetter);
+			for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
+				ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
+				atmFile.setTitle(SDDOS_MENU_FILES[i]);
+				addFile(chunkImage, atmFile);
+ 	 		}
+			int num = 1016 + chunk;
+			writeImage(new File("disks/" + num), chunkImage);
+			addDisk(chunkImage, 0);
+ 		}
 	}
 
 	public void generateFiles(List<SpreadsheetTitle> items)
