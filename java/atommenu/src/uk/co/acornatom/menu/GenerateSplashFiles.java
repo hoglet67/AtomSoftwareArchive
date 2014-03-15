@@ -275,7 +275,7 @@ public class GenerateSplashFiles extends GenerateBase {
 		if (line.length() != 30) {
 			throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
 		}
-		y = 192 - 20;
+		y = 192 - 18;
 		writeAtomString(screen, line, 1, y, true);
 
 		// Save the file

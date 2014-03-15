@@ -6,110 +6,186 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WavToBits {
-
-	File file;
-
-	int[] samples;
 	
-	int window1;
-	int window2;
+	private static final int FREQUENCY = 2400;
+	private static final int BAUD = 700;
+	
+	public enum Mode {
+		OLD,
+		NEW,
+        SIMPLE 
+	}
 
-	public WavToBits(File file, int window1, int window2) {
+	private File file;
+
+	private int[] origSamples;
+
+	private int[] samples;
+
+	private int window1;
+	private int window2;
+	
+	private int sampleRate;
+	private int numChannels;
+	private int numFrames;
+	
+	public WavToBits(File file, int window1, int window2) throws IOException {
 		this.file = file;
 		this.window1 = window1;
 		this.window2 = window2;
+		this.origSamples = readWavIntoMemory();
 	}
 	
-	private void readWavIntoMemory() throws IOException {
-		
+	public int getNumChannels() {
+		return numChannels;
+	}
+	
+	public double process(int channel, Mode mode, boolean bothEdges) throws IOException {
+		System.out.println("Processing channel " + channel + " mode " + mode);
+		int[] samples = extractChannel(origSamples, channel);
+		if (mode == Mode.OLD) {
+			samples = sumOverWindow(samples, window1);
+			samples = differentiate(samples);
+		} else {
+			int[] baseLine = lowPassFilter(samples, sampleRate, BAUD);
+			samples = compare(samples, baseLine);
+		}
+		if (bothEdges) {
+			samples = anySignChanges(samples);
+		} else {
+			samples = negToPosSignChanges(samples);			
+		}
+		double bitLength = calculateBitLength(samples, bothEdges);
+		samples = sumOverWindow(samples, (int) (bitLength + 0.5));
+		samples = sumOverWindow(samples, (int) (bitLength / window2 + 0.5));
+		this.samples = samples;	
+		return bitLength;
+	}
+
+	
+	
+	private int[] readWavIntoMemory() throws IOException {
 		
 		// Open the wav file specified as the first argument
 		WavFile wavFile = WavFile.openWavFile(file);
 
 		// Display information about the wav file
-		// wavFile.display();
-
-		
-		
+		wavFile.display();
+	
 		// Get the number of audio channels in the wav file
-		int numChannels = wavFile.getNumChannels();
-		int numFrames = (int) wavFile.getNumFrames();
+		numChannels = wavFile.getNumChannels();
+		numFrames = (int) wavFile.getNumFrames();
+		sampleRate = (int) wavFile.getSampleRate();
+
+		System.out.println("Num Channels = " + numChannels);
+		System.out.println("Num Frames = " + numChannels);
+		System.out.println("Sample Rate = " + sampleRate);
+		System.out.println("Duration = " + numFrames / sampleRate + " secs");
 		
-		// Create a buffer of 100 frames
-		samples = new int[numFrames * numChannels];
+		// Create a buffer to hold all of the samples
+		int[] samples = new int[numFrames * numChannels];
 
 		int framesRead = wavFile.readFrames(samples, numFrames);
-
-		// System.out.println("Read " + framesRead + " frames");
+		
+		if (framesRead != numFrames) {
+			System.out.println("Unexpected number of frames read: expected=" + numFrames + "; actual=" + framesRead);			
+		}
 
 		// Close the wavFile
 		wavFile.close();
-		
-		
-	}
 
-	public void differentiate() {
-		for (int i = 1; i < samples.length; i++) {
-			samples[i - 1] = samples[i] - samples[i - 1];
-		}
-	}
-
-	public void negToPosSignChanges() {
-		for (int i = 1; i < samples.length; i++) {
-			samples[i - 1] = samples[i - 1] <0 && samples[i] >= 0 ? 1 : 0;
-		}
-	}
-
-	public double calculateBitLength() {
-		// At 44100, 2400Hz is ~18 samples
-		int max = 32;
-		int[] periods = new int[max];
-		int last = 0;
-		for (int i = 0; i < max; i++) {
-			periods[i] = 0;
-		}
-		for (int i = 0; i < samples.length; i++) {
-			if (samples[i] == 1) {
-				int period = i - last;
-				last = i;
-				periods[period < max - 1 ? period : max - 1]++;
-			}
-		}
-		
-		double  period = (double) (17 * periods[17] + 18 * periods[18] + 19 * periods[19]) * 8 /
-				(double) (periods[17] + periods[18] + periods[19]);
-
-		return period;
+		return samples;
 	}
 	
-	public void sumOverWindow(int window) {
+	private int[] extractChannel(int[] samples, int channel) {
+		int numFrames = samples.length / numChannels;
+		int[] newSamples = new int[numFrames];
+		int j = channel;
+		for (int i = 0; i < numFrames; i++) {
+			newSamples[i] = samples[j];
+			j += numChannels;
+		}
+
+		return newSamples;
+	}
+	
+	private int[] sumOverWindow(int[] samples, int window) {
+		int[] newSamples = new int[samples.length];
 		int sum = 0;
 		for (int i = 0; i < samples.length; i++) {
 			if (i < window) {
 				sum += samples[i];
 			} else {
 				sum += samples[i] - samples[i - window];
-				samples[i - window] = sum;
 			}
+			newSamples[i] = sum;
 		}
+		return newSamples;
 	}
 
+	private int[] differentiate(int[] samples) {
+		int[] newSamples = new int[samples.length];
+		for (int i = 1; i < samples.length; i++) {
+			newSamples[i - 1] = samples[i] - samples[i - 1];
+		}
+		return newSamples;
+	}
 	
+	private int[] compare(int[] samples, int[] baseline) {
+		int[] newSamples = new int[samples.length];
+		for (int i = 0; i < samples.length; i++) {
+			newSamples[i] = samples[i] > baseline[i] ? 1000 : -1000;
+		}
+		return newSamples;
+	}
+
+	private int[] negToPosSignChanges(int[] samples) {
+		int[] newSamples = new int[samples.length];
+		for (int i = 1; i < samples.length; i++) {
+			newSamples[i - 1] = samples[i - 1] <0 && samples[i] >= 0 ? 1 : 0;
+		}
+		return newSamples;
+	}
 	
-	public int[] distribution(int[] samples, int bucketSize) {
-		int max= 100;
-		int[] dist = new int[max];
+	private int[] anySignChanges(int[] samples) {
+		int[] newSamples = new int[samples.length];
+		for (int i = 1; i < samples.length; i++) {
+			newSamples[i - 1] = (samples[i - 1] < 0 && samples[i] >= 0) ||  (samples[i - 1] >= 0 && samples[i] < 0) ? 1 : 0;
+		}
+		return newSamples;
+	}
+
+	private double calculateBitLength(int[] samples, boolean bothEdges) {
+		// At 44100, 2400Hz is ~18 samples
+		int n = (int) (((double) sampleRate / (double) FREQUENCY) + 0.5);
+		int max = n * 2;
+		int[] periods = new int[max];
+		int last1 = 0;
+		int last2 = 0;
 		for (int i = 0; i < max; i++) {
-			dist[i] = 0;
+			periods[i] = 0;
 		}
 		for (int i = 0; i < samples.length; i++) {
-			dist[(samples[i] < max - 1 ? samples[i] : max - 1) / bucketSize]++;
+			if (samples[i] == 1) {
+				int period = i - (bothEdges ? last2 : last1);
+				last2 = last1;
+				last1 = i;
+				periods[period < max - 1 ? period : max - 1]++;
+			}
 		}
-		return dist;
+		
+		double  period = (double) ((n - 1) * periods[n - 1] + n * periods[n] + (n + 1) * periods[n + 1]) * 8 /
+				(double) (periods[n - 1] + periods[n] + periods[n + 1]);
+
+		return period;
 	}
 
-	public byte[] sampleBytes(int start, int threshold, double bitLength) {
+	
+
+
+	public byte[] sampleBytes(int start, int threshold, double bitLength, boolean bothEdges) {
 		
+		int bitThreshold = bothEdges ? 12 : 6;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		
 		double id = start + 1;
@@ -134,7 +210,7 @@ public class WavToBits {
 				for (int j = 0; j < 8; j++) {
 //					System.out.println("Samping bit " + j + " at " + (i - start));
 
-					if (getSample(id) > 6 * bitLength / window2) {
+					if (getSample(id) > bitThreshold * bitLength / window2) {
 						b += 1 << j;
 					}
 					id += bitLength;
@@ -166,7 +242,94 @@ public class WavToBits {
 	
 	
 	
-	public void dump_samples(String title, int[] samples, int start, int num) {
+	void getLPCoefficientsButterworth2Pole(double samplerate, double cutoff, double[] ax, double[] by)
+	{
+	    double sqrt2 = Math.sqrt(2.0);
+
+	    double QcRaw  = (2 * Math.PI * cutoff) / samplerate; // Find cutoff frequency in [0..PI]
+	    double QcWarp = Math.tan(QcRaw); // Warp cutoff frequency
+
+	    double gain = 1.0 / (1.0 + sqrt2 / QcWarp + 2.0 / (QcWarp * QcWarp));
+	    by[2] = (1.0 - sqrt2 / QcWarp + 2.0 / (QcWarp * QcWarp)) * gain;
+	    by[1] = (2.0 - 2.0 * 2.0 / ( QcWarp * QcWarp)) * gain;
+	    by[0] = 1;
+	    ax[0] = 1 * gain;
+	    ax[1] = 2 * gain;
+	    ax[2] = 1 * gain;
+	}
+	
+	void calcFilter(double samplerate, double cutoff, int type, double[] ax, double[] by) {
+		double fudge;
+		IIRFilter iir = new IIRFilter();
+		iir.setPrototype(IIRFilter.BUTTERWORTH);
+		iir.setFilterType(IIRFilter.LP);
+		if (type == IIRFilter.LP) {
+			iir.setFreq1(0);
+			iir.setFreq2((float) cutoff);
+			fudge = 2.0;
+		} else {
+			iir.setFreq1(0);
+			iir.setFreq2((float) cutoff);
+			fudge = -2.0;
+		}
+		iir.setOrder(2);
+		iir.setRate((float) samplerate);
+		iir.design();
+		iir.setFreqPoints(1000);
+		iir.filterGain();
+		for (int i = 0; i <= 2; i++) {
+			ax[i] = iir.getACoeff(i) * fudge;
+			by[i] = iir.getBCoeff(i);
+		}		
+	}
+
+	private int[] lowPassFilter(int[] samples, double samplerate, double cutoff) {
+		return filter(samples, samplerate, cutoff, IIRFilter.LP);
+	}
+
+	private int[] highPassFilter(int[] samples, double samplerate, double cutoff) {
+		return filter(samples, samplerate, cutoff, IIRFilter.HP);
+	}
+
+	private int[] filter(int[] samples, double samplerate, double cutoff,  int type) {
+		int[] newSamples = new int[samples.length];
+		double[] xv = new double[3];
+		double[] yv = new double[3];
+		double[] ax = new double[3];
+		double[] by = new double[3];
+
+		if (type == IIRFilter.LP) {
+			getLPCoefficientsButterworth2Pole(samplerate, cutoff, ax, by);
+		} else {
+			calcFilter(samplerate, cutoff, type, ax, by);			
+		}
+		
+		dumpCoeffs(ax, by);
+
+		for (int i = 0; i < samples.length; i++) {
+			xv[2] = xv[1];
+			xv[1] = xv[0];
+			xv[0] = samples[i];
+			yv[2] = yv[1];
+			yv[1] = yv[0];
+
+			yv[0] = (ax[0] * xv[0] + ax[1] * xv[1] + ax[2] * xv[2] - by[1] * yv[0] - by[2] * yv[1]);
+
+			newSamples[i] = (int) (yv[0] + 0.5);
+		}
+		return newSamples;
+	}
+	
+	private void dumpCoeffs(double[] ax, double[] by) {
+		for (int i = 0; i < ax.length; i++) {
+			System.out.println("ax[" + i + "] = " + ax[i]);
+		}
+		for (int i = 0; i < by.length; i++) {
+			System.out.println("by[" + i + "] = " + by[i]);
+		}
+	}
+	
+	private void dump_samples(String title, int[] samples, int start, int num) {
 		System.out.println("====================================");
 		System.out.println(title);
 		System.out.println("====================================");
@@ -175,9 +338,7 @@ public class WavToBits {
 		}
 	}
 	
-	
-	
-	public void xgraph_samples(String file, String title, int[] samples, int start, int num) throws IOException {
+	private void xgraph_samples(String file, String title, int[] samples, int start, int num) throws IOException {
 		PrintWriter pw = new PrintWriter(new File(file));
 		pw.println("\" " + title);
 		for (int i = start; i < start + num && i < samples.length; i++ ) {
@@ -186,90 +347,91 @@ public class WavToBits {
 		pw.close();
 	}
 	
+	private int[] distribution(int[] samples, int bucketSize) {
+		int max= 100;
+		int[] dist = new int[max];
+		for (int i = 0; i < max; i++) {
+			dist[i] = 0;
+		}
+		for (int i = 0; i < samples.length; i++) {
+			dist[(samples[i] < max - 1 ? samples[i] : max - 1) / bucketSize]++;
+		}
+		return dist;
+	}
 
-	
-	
-	/* Digital filter designed by mkfilter/mkshape/gencode   A.J. Fisher
-	   Command line: /www/usr/fisher/helpers/mkshape -c 8.1632653061e-02 5.0000000000e-01 49 -b 32 -l */
-
-	public static final int NZEROS = 48;
-	public static final double GAIN = 6.148354331e+00;
 
 
-	public static final double xcoeffs[] =
-	  { +0.0014238036, +0.0041723759, +0.0057208999, +0.0052471543,
-	    +0.0030231918, +0.0005984828, +0.0002603563, +0.0038301484,
-	    +0.0112339510, +0.0195500697, +0.0232207770, +0.0157618597,
-	    -0.0073046894, -0.0452109640, -0.0897075241, -0.1250676112,
-	    -0.1309608328, -0.0878430130, +0.0165169933, +0.1814231747,
-	    +0.3906075112, +0.6138704973, +0.8130303281, +0.9507802250,
-	    +0.9999999995, +0.9507802250, +0.8130303281, +0.6138704973,
-	    +0.3906075112, +0.1814231747, +0.0165169933, -0.0878430130,
-	    -0.1309608328, -0.1250676112, -0.0897075241, -0.0452109640,
-	    -0.0073046894, +0.0157618597, +0.0232207770, +0.0195500697,
-	    +0.0112339510, +0.0038301484, +0.0002603563, +0.0005984828,
-	    +0.0030231918, +0.0052471543, +0.0057208999, +0.0041723759,
-	    +0.0014238036,
-	  };
-
-	public void firLowPass() {
-		double[] xv = new double[NZEROS + 1];
-
-		double sum;
-		
-		for (int s = 0; s < samples.length; s++) {
-	        for (int i = 0; i < NZEROS; i++) {
-	        	xv[i] = xv[i+1];
-	        }
-	        xv[NZEROS] = samples[s] / GAIN;
-	        sum = 0.0;
-	        for (int i = 0; i <= NZEROS; i++) { 
-	        	sum += (xcoeffs[i] * xv[i]);
-	        }
-	        samples[s] = (int) (11 * sum);
-	      }
-	  }
-
-	
-	
-	
-	
-	public double process() throws IOException {
-
-		int start = (int) (31.2 * 44100);
-		int num = 147 * 8 * 32; // ~32 bits
-
-		
-		readWavIntoMemory();
-		// dump_samples("Raw Samples", samples, start, num);
-
-		
-		sumOverWindow(window1);
-		// dump_samples("Averaged Samples", samples, start, num);
-
-		// firLowPass();
-
-		// dump_samples("Filtered Samples", samples, start, num);
-
-		differentiate();
-		//dump_samples("Differentiated Samples", samples, start, num);
-		negToPosSignChanges();
-
-		double bitLength = calculateBitLength();
-		
-		//dump_samples("Neg to PosSign Changes", samples, start, num);
-
-		sumOverWindow((int) (bitLength + 0.5));
-		//dump_samples("Sign Changes In Next Bit", samples, start, num);
-		//dump_samples("Distribution 1", distribution(samples, 1), 0, Integer.MAX_VALUE);
-
-		sumOverWindow((int) (bitLength / window2 + 0.5));
-
-		//dump_samples("Sum Sign Changes In Next Bit", samples, start, num);
-		//dump_samples("Distribution 2", distribution(samples, 10), 0, Integer.MAX_VALUE);
-		// xgraph_samples("test.xgr", "Averaged", samples, start, num);
-		
+	public double processNew(int channel) throws IOException {
+		// System.out.println("Processing channel " + channel);
+		int[] samples = extractChannel(origSamples, channel);
+		int[] baseLine = lowPassFilter(samples, sampleRate, BAUD);
+		samples = compare(samples, baseLine);
+		samples = anySignChanges(samples);
+		double bitLength = calculateBitLength(samples, true);
+		this.samples = samples;
 		return bitLength;
 	}
+
+
+	public byte[] sampleNew(int countThresh) throws IOException {
+
+		double cswmul = (double) 4000000 / (double) sampleRate;
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		
+		int last = 0;
+		int header = 0;
+		boolean cinbyte = false;
+
+		int byt = 0;
+		int bitsleft = 0;
+		int c = 0;
+		int count = 0;
+ 
+		for (int i = 0; i < samples.length; i++) {
+			if (samples[i] == 1) {
+				int d = (int) (((double) (i - last)) * cswmul + 0.5);
+				if (header < 1000) {
+					if (d > 1200) {
+						header = 0;
+					} else {
+						header++;
+					}
+				} else if (!cinbyte) {
+					if (d > 1200) { /*0*/
+						cinbyte = true;
+						bitsleft = 10;
+						byt = 0;
+						c = 1;
+						count = d;
+					}
+				} else {
+					c++;
+					count += d;
+					if (count >= countThresh) {
+						count = 0;
+						if (c >= 12) {
+							byt = (byt >> 1) | 0x80;
+						} else {
+							byt >>= 1;
+						}
+						bitsleft--;
+						if (bitsleft == 1) {
+							bos.write(byt);
+						}
+						if (bitsleft == 0) {
+							cinbyte = false;
+						}
+						c = 0;
+					}
+				}
+				last = i;
+
+			} // if
+		} // for
+
+		return bos.toByteArray();
+	}
+
 
 }

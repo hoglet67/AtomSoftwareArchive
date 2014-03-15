@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.acornatom.wavtoatm.WavToBits.Mode;
+
 public class Convert {
 
 	public static boolean DEBUG = false;
@@ -416,8 +418,10 @@ public class Convert {
 		}
 	}
 
-	public static Map<String, Integer> processSource(File dstDir, File srcFile) throws IOException {
+	public static Map<String, Integer> processSource(File dstDir, File srcFile, Mode mode, int channel) throws IOException {
 
+		boolean bothEdges = mode == Mode.NEW;
+		
 		int window1 = 8; // smooth wav by averaging over window1 samples
 		int window2 = 5; // smooth number of cycles in the next bit by averaging over bitlength / windows2 samples
 
@@ -430,11 +434,67 @@ public class Convert {
 		byte[] bytes;
 
 		if (srcFile.getName().toLowerCase().endsWith(".wav")) { 
+
+			if (mode == Mode.SIMPLE) {
+
+				return doItSimple(dstDir, srcFile, mode, channel, window1, window2, bothEdges);
+			} else {
+				return doIt(dstDir, srcFile, mode, channel, window1, window2, bothEdges);
+			} 
+		} else if (srcFile.getName().toLowerCase().endsWith(".dat")) {
+
+			Convert c = new Convert(dstDir);
+			return c.convertToAtm(srcFile);
+
+		} else {
+			throw new RuntimeException("Unsupported file suffix: " + srcFile);
+		}
 		
-			
+	}
+
+	private static Map<String, Integer>  doItSimple(File dstDir, File srcFile, Mode mode, int channel, int window1, int window2, boolean bothEdges) throws IOException {
+		byte[] bytes;
 			WavToBits wavToBits = new WavToBits(srcFile, window1, window2);
 
-			double bitLength = wavToBits.process();
+			double bitLength = wavToBits.processNew(channel);
+			System.out.println("@@@ bitLength = " + bitLength);
+			
+			Map<String, Integer> fileBlockMap = new HashMap<String, Integer>();
+			
+			int best = -1;
+			int bestThreshold1 = 0;
+			int bestThreshold2 = 0;
+
+			for (int threshold = 12000; threshold < 13500; threshold += 50) {
+
+				Convert c = new Convert(dstDir);				
+				bytes = wavToBits.sampleNew(threshold);
+				Map<String, Integer>  stats = c.process(MODE.SCAN, bytes, fileBlockMap);
+				
+				int numGoodBlocks = stats.get(NUM_GOOD_BLOCKS);
+				int numBadBlocks = stats.get(NUM_BAD_BLOCKS);
+				System.out.println("@@@ Threshold = " + threshold + "\t numGoodBlocks = " + numGoodBlocks + "\t numBadBlocks =" + numBadBlocks);
+				if (numGoodBlocks > best) {
+					best = numGoodBlocks;
+					bestThreshold1 = threshold;
+					bestThreshold2 = threshold;
+				} else if (numGoodBlocks == best) {
+					bestThreshold2 = threshold;
+				}
+			}
+			int threshold = (bestThreshold1 + bestThreshold2) / 2;
+			System.out.println("@@@ Optimal sampling threshold range: " + bestThreshold1 + " to " + bestThreshold2 + "; using " + threshold);
+ 			Convert c = new Convert(dstDir);
+			bytes = wavToBits.sampleNew(threshold);
+			return c.convertToAtm(bytes);
+	}
+
+
+	private static Map<String, Integer>  doIt(File dstDir, File srcFile, Mode mode, int channel, int window1, int window2, boolean bothEdges) throws IOException {
+		byte[] bytes;
+			WavToBits wavToBits = new WavToBits(srcFile, window1, window2);
+
+			double bitLength = wavToBits.process(channel, mode, bothEdges);
 			System.out.println("@@@ bitLength = " + bitLength);
 			
 			Map<String, Integer> fileBlockMap = new HashMap<String, Integer>();
@@ -445,15 +505,22 @@ public class Convert {
 			
 			int loThreshold = (int) (5 * bitLength / window2);  // 180 when window2=4
 			int hiThreshold = (int) (8 * bitLength / window2); // 288 when window2=4
+			
 			int step = 4 / window2;
 			if (step < 1) {
 				step = 1;
 			}
-					
+
+			if (bothEdges) {
+				loThreshold *= 2;
+				hiThreshold *= 2;
+				step *= 2;
+			}
+
 			for (int threshold = loThreshold; threshold < hiThreshold; threshold += step) {
 				Convert c = new Convert(dstDir);
 				
-				bytes = wavToBits.sampleBytes(0, threshold, bitLength);
+				bytes = wavToBits.sampleBytes(0, threshold, bitLength, bothEdges);
 				Map<String, Integer>  stats = c.process(MODE.SCAN, bytes, fileBlockMap);
 				
 				int numGoodBlocks = stats.get(NUM_GOOD_BLOCKS);
@@ -468,26 +535,16 @@ public class Convert {
 			}
 			int threshold = (bestThreshold1 + bestThreshold2) / 2;
 			System.out.println("@@@ Optimal sampling threshold range: " + bestThreshold1 + " to " + bestThreshold2 + "; using " + threshold);
-			Convert c = new Convert(dstDir);
-			bytes = wavToBits.sampleBytes(0, threshold, bitLength);
+ 			Convert c = new Convert(dstDir);
+			bytes = wavToBits.sampleBytes(0, threshold, bitLength, bothEdges);
 			return c.convertToAtm(bytes);
-			
-			
-		} else if (srcFile.getName().toLowerCase().endsWith(".dat")) {
-
-			Convert c = new Convert(dstDir);
-			return c.convertToAtm(srcFile);
-
-		} else {
-			throw new RuntimeException("Unsupported file suffix: " + srcFile);
-		}
-		
 	}
+
 
 	public static final void main(String[] args) {
 		try {
-			if (args.length != 2) {
-				System.out.println("usage: java -jar atomwavtoatm.jar <Src Wav/Dat File or Diurectory> <Dst ATM Dir> ");
+			if (args.length < 2 || args.length > 4) {
+				System.out.println("usage: java -jar atomwavtoatm.jar <Src Wav/Dat File or Diurectory> <Dst ATM Dir> [channel] [OLD | NEW]");
 				System.exit(1);
 			}
 			File src = new File(args[0]);
@@ -515,13 +572,27 @@ public class Convert {
 			}
 
 			Collections.sort(srcFiles);
-
+			
+			int channel;
+			if (args.length > 2) {
+				channel = Integer.valueOf(args[2]);
+			} else {
+				channel = 0;
+			}
+			
+			Mode mode;
+			if (args.length > 3) {
+				mode = Mode.valueOf(args[3].toUpperCase());
+			} else {
+				mode = Mode.NEW;
+			}
+			
 			Map<String, Integer> totalStats = null;
 			int i = 0;
 			for (File srcFile : srcFiles) {
 				File dir = new File(dstDir, "" + (i/10) + (i%10));
 				dir.mkdirs();
-				Map<String, Integer>  stats = processSource(dir, srcFile);
+				Map<String, Integer>  stats = processSource(dir, srcFile, mode, channel);
 				if (totalStats == null) {
 					totalStats = stats;
 				} else {
