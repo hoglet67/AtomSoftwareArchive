@@ -2,7 +2,7 @@ package uk.co.acornatom.wavtoatm;
 
 //IIRFilter.java
 
-class IIRFilter {
+public class IIRFilter {
 
 	// IIR filter design code based on a Pascal program
 	// listed in "Digital Signal Processing with Computer Applications"
@@ -24,7 +24,7 @@ class IIRFilter {
 	private double[] aCoeff;
 	private double[] bCoeff;
 
-	public void IIRFilter() {
+	public IIRFilter() {
 		// initial (default) settings
 		prototype = BUTTERWORTH;
 		filterType = LP;

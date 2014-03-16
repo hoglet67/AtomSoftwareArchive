@@ -1,4 +1,4 @@
-package uk.co.acornatom.wavtoatm;
+package uk.co.acornatom.wavtoatm.old;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.co.acornatom.wavtoatm.WavToBits.Mode;
+import uk.co.acornatom.wavtoatm.old.WavToBits.Mode;
 
 public class Convert {
 
@@ -430,8 +430,6 @@ public class Convert {
 		System.out.println("============================================");
 		System.out.println("@@@ windows1 = " + window1);
 		System.out.println("@@@ windows2 = " + window2);
-
-		byte[] bytes;
 
 		if (srcFile.getName().toLowerCase().endsWith(".wav")) { 
 

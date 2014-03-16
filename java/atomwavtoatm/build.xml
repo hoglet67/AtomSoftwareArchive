@@ -1,6 +1,6 @@
 <project default="jar" name="">
 	<property name="jar.name" value="atomwavtoatm.jar"/>
-	<property name="jar.mainclass" value="uk.co.acornatom.wavtoatm.Convert"/>
+	<property name="jar.mainclass" value="uk.co.acornatom.wavtoatm.Optimizer"/>
     <import file="../ant/build.xml"/>
 </project>
 

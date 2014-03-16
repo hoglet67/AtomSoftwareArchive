@@ -1,9 +1,12 @@
-package uk.co.acornatom.wavtoatm;
+package uk.co.acornatom.wavtoatm.old;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import uk.co.acornatom.wavtoatm.IIRFilter;
+import uk.co.acornatom.wavtoatm.WavFile;
 
 public class WavToBits {
 	
