@@ -112,6 +112,10 @@ mkdir -p $ARCHIVE/$MO
 # cp atms/gamebase/048/048 $ARCHIVE/$MO
 # cp atms/gamebase/233/ATOMIAAK "$ARCHIVE/$MO/ATOMIA AK.DAT"
 
+# Star Trek
+cp atms/gamebase/157/157 $ARCHIVE/$MO
+cp atms/gamebase/157S/157S $ARCHIVE/$MO
+
 # Dragon
 cp atms/gamebase/171/171 $ARCHIVE/$MO
 cp atms/gamebase/171B/171B $ARCHIVE/$MO
