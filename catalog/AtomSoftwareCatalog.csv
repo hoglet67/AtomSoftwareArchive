@@ -625,7 +625,9 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
 398,,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",,SNOOPY,missing,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,missing,,,,
-400,,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,8200,*RUN STARTREK,,STARTREK,present,,,,
+400,V7,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,8200,"*LOAD 157
+*RUN 157S",Test,"157
+157S",present,,,,
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
 403,V4,NC,Non Comm,C.Non Commercial Software,Stunt Man,Game,C.Szpojarowicz,NC,8200,"CH.""STUNT""",Works,STUNT,present,,,,
 404,,NC,Non Comm,C.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
@@ -1300,7 +1302,7 @@ QLUC32",present,Quill,Yes,,
 DB40
 QLLC40",present,Quill,Yes,,
 693,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
-*RUN QLUC32",Works,"DB32
+*RUN QLUC32",Test,"DB32
 QLUC32",present,Quill,Yes,,
 694,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
 *LOAD DB40
