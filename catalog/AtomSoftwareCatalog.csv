@@ -625,7 +625,7 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
 398,,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",,SNOOPY,missing,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,missing,,,,
-400,V7,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,8200,"*LOAD 157
+400,V7,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
 *RUN 157S",Test,"157
 157S",present,,,,
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
