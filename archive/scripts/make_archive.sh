@@ -393,7 +393,7 @@ package "atms/Leendert/SWARM" "$ARCHIVE/$PP"
 package "atms/Leendert/WARLORDS" "$ARCHIVE/$PP"
 
 cp atms/gamebase/095/095 $ARCHIVE/$PP/BUSINESS
-cp atms/gamebase/178/178 $ARCHIVE/$PP/MURDER
+# cp atms/gamebase/178/178 $ARCHIVE/$PP/MURDER
 
 package "atms/Acl1-13/ATOMSTO" "$ARCHIVE/$PP"
 package "atms/Acl2-04/STDAT" "$ARCHIVE/$PP"
