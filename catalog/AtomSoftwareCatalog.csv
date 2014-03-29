@@ -194,26 +194,26 @@ SENTD",present,Atom Word Tutor,,No,
 127,V5,AT,Atomic S/W,A.Commercial Software,Space Adventure,Adventure,,AT,8200,"CH.""SPACE""",Works,SPACE,present,,,,
 128,,AT,Atomic S/W,A.Commercial Software,Word Processor,Business,,AT,,,,,missing,,,,
 129,V1,BB,Bug Byte,A.Commercial Software,747,Game,,BB,8200,"CH.""747""",Works,747,present,,,Yes,
-130,V7,BB,Bug Byte,A.Commercial Software,Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Works,"HANGMAN
+130,V7B1,BB,Bug Byte,A.Commercial Software,Hangman,Game,,BB/2KPRGS1,8200,"CH.""HANGMAN""",Works,"HANGMAN
 HANGIN",present,2K Programs 1,,,
-131,V7,BB,Bug Byte,A.Commercial Software,Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Works,"MLAND
+131,V7B1,BB,Bug Byte,A.Commercial Software,Moon Landing,Game,,BB/2KPRGS1,8200,"CH.""MLAND""",Works,"MLAND
 MLANDIN",present,2K Programs 1,,,
-132,V7,BB,Bug Byte,A.Commercial Software,Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Works,"REACT
+132,V7B1,BB,Bug Byte,A.Commercial Software,Reaction Test,Game,,BB/2KPRGS1,8200,"CH.""REACT""",Works,"REACT
 REACTIN",present,2K Programs 1,,,
-133,V7,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Works,"TORP
+133,V7B1,BB,Bug Byte,A.Commercial Software,Torpedo,Game,,BB/2KPRGS1,8200,"CH.""TORP""",Works,"TORP
 TORPIN",present,2K Programs 1,,,
-134,V7,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,2900,"?18=130
+134,V7B1,BB,Bug Byte,A.Commercial Software,Calendar,Game,,BB/2KPRGS2,2900,"?18=130
 CH.""CAL""",Works,"CAL
 CALIN",present,2K Programs 2,,,
-135,V7,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Works,"LIFE1
+135,V7B1,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Works,"LIFE1
 LIFE2
 LIFE2
 LIFEIN1
 LIFEIN2",present,2K Programs 2,,,
-136,V7,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,2900,"?18=130
+136,V7B1,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,2900,"?18=130
 CH.""OANDX""",Works,"OANDX
 OANDXIN",present,2K Programs 2,,,
-137,V7,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,2900,"?18=130
+137,V7B1,BB,Bug Byte,A.Commercial Software,Tunes,Game,,BB/2KPRGS2,2900,"?18=130
 CH.""TUNE""",Works,"TUNE
 TUNEIN1
 TUNEIN2",present,2K Programs 2,,,
@@ -253,7 +253,7 @@ RUN",Works,PONTOON,present,,,,
 159,V1,BB,Bug Byte,A.Commercial Software,Rhino,Game,,BB,8200,"CH.""RHINO""",Works,RHINO,present,,,Yes,
 160,,BB,Bug Byte,A.Commercial Software,Simon,Game,,BB,,,,,missing,,,,
 161,,BB,Bug Byte,A.Commercial Software,Squares,Game,,BB,,,,,missing,,,,
-162,V7,BB,Bug Byte,A.Commercial Software,Star Trek,Game,,BB/STARTRK,8200,"*LOAD DATA
+162,V7B1,BB,Bug Byte,A.Commercial Software,Star Trek,Game,,BB/STARTRK,8200,"*LOAD DATA
 CH.""STAR""",Works,"STAR
 DATA
 STARIN",present,,,Yes,
@@ -265,7 +265,7 @@ STARIN",present,,,Yes,
 *RUN A1",Works,"ADV
 A1",present,,,,
 168,V2,HS,Hopesoft,A.Commercial Software,Atom Man (32K),Game,,HS,8200,*RUN AMAN,Works,AMAN,present,,Yes*,,
-169,V7,HS,Hopesoft,A.Commercial Software,Chaser,Game,,HS,8200,"CH.""CHASER""",Works,CHASER,present,,,,
+169,V7B1,HS,Hopesoft,A.Commercial Software,Chaser,Game,,HS,8200,"CH.""CHASER""",Works,CHASER,present,,,,
 170,,HS,Hopesoft,A.Commercial Software,Disassembler,Utility,,HS,,,,,missing,,,,
 171,V5,HS,Hopesoft,A.Commercial Software,PS3A Pirate Island,Adventure,,HS,8200,*RUN PIA,Works,"PIA
 PIB",present,,,,
@@ -281,7 +281,7 @@ SOURCE",present,,,,
 DATA",present,,,,
 177,V1,MM,Micro Mania,A.Commercial Software,Puckman,Game,,MM,8200,"CH.""PUCKMAN""",Works,PUCKMAN,present,,,,
 178,V1,PP,Prog Power,A.Commercial Software,3D Asteroids,Game,J. Millar,PP,8200,"CH.""3DASTERO""",Works,3DASTERO,present,,,,
-179,V7,PP,Prog Power,A.Commercial Software,3D OXO,Game,R.M.P. Hanson,PP,8200,"CH.""3DOXO""",Works,"3DOXO
+179,V7B1,PP,Prog Power,A.Commercial Software,3D OXO,Game,R.M.P. Hanson,PP,8200,"CH.""3DOXO""",Works,"3DOXO
 3DOXOIN",present,,,,
 180,V1,PP,Prog Power,A.Commercial Software,Adventure,Adventure,J. Spilsbury,PP,0300,"*LOAD ADVCODE 
 *LOAD ADVDATA
@@ -317,7 +317,7 @@ DATA",present,,,,
 *LOAD ROME2
 RUN",Works,"ROME1
 ROME2",present,,,,
-201,V7,PP,Prog Power,A.Commercial Software,Galaxian War,Game,T.M.Millar,PP,8200,"?18=40
+201,V7B1,PP,Prog Power,A.Commercial Software,Galaxian War,Game,T.M.Millar,PP,8200,"?18=40
 CH.""GALAX""",Works,"GALAX
 GALAXIN",present,,,,
 202,,PP,Prog Power,A.Commercial Software,Hi-Stats,Game,J. Spilsbury,PP,,,,,missing,,,,
@@ -333,8 +333,7 @@ GALAXIN",present,,,,
 CH.""VDUAS""",Works,VDUAS,present,,,,
 212,V1,PP,Prog Power,A.Commercial Software,Moon Patrol,Game,,PP,8200,*RUN MOONPATR,Works,MOONPATR,present,,,,
 213,V3,PP,Prog Power,A.Commercial Software,Munchyman,Game,D. Wood,PP,8200,"CH.""MUNCHY""",Works,MUNCHY,present,,,,
-214,V1,PP,Prog Power,A.Commercial Software,Murder at the Manor,Game,,PP,8200,"*LOAD MURDER
-RUN",Works,MURDER,present,,,,
+214,V7B2,CS,Computersmith,A.Commercial Software,Detective,Game,,CS,8200,"CH.""DETECT""",Test,DETECT,present,,,,
 215,V2,PP,Prog Power,A.Commercial Software,Music Box,Music,R.M.P. Hanson,PP,8200,"CH.""MUBOX""",Works,MUBOX,present,,,,
 216,,PP,Prog Power,A.Commercial Software,Ravine,Game,S. Draper,PP,,,,,missing,,,,
 217,V3,PP,Prog Power,A.Commercial Software,Reversi (Othello) ,Game,D. Thompson,PP,8200,"?18=40
@@ -361,7 +360,7 @@ OTHINST",present,,,,
 237,V1,TD,Timedata,A.Commercial Software,Cupball,Game,,TD,8200,"CH.""CUPBALL""",Works,CUPBALL,present,,,,
 238,V1,TD,Timedata,A.Commercial Software,Hammurabi,Game,,TD,8200,"CH.""HAMMUR""",Works,HAMMUR,present,,,,
 239,V1,TD,Timedata,A.Commercial Software,Hexpawn,Game,,TD,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,,,,
-240,V7,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",Test,LETTERS,present,,,,
+240,V7B1,TD,Timedata,A.Commercial Software,Letters,Game,,TD,8200,"CH.""LETTERS""",Works,LETTERS,present,,,,
 241,V1,TD,Timedata,A.Commercial Software,Othello,Game,,TD,8200,"CH.""OTHELLO""",Works,OTHELLO,present,,,,
 242,V1,TD,Timedata,A.Commercial Software,Pinball,Game,,TD,8200,"CH.""PINBALL""",Works,PINBALL,present,,,,
 243,V1,TD,Timedata,A.Commercial Software,Scramble,Game,,TD,8200,"CH.""SCRAMB""",Works,SCRAMB,present,,,,
@@ -370,7 +369,7 @@ OTHINST",present,,,,
 246,V5,A&F,A&F S/W,A.Commercial Software,Robot Nim,Game,,AF,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,,,,
 247,,MM,Micro Mania,A.Commercial Software,The Protector,Game,,MM,,,A renamed version of Defender,,duplicate,,,,
 248,V2,PP,Prog Power,A.Commercial Software,Cesil Interpreter,Language,,PP,8200,"CH.""CESIL""",Works,CESIL,present,,,,
-249,V7,PS,Pro Software,A.Commercial Software,Space Invaders,Game,,PS,8200,"CH.""INVAD""",Works,"INVAD
+249,V7B1,PS,Pro Software,A.Commercial Software,Space Invaders,Game,,PS,8200,"CH.""INVAD""",Works,"INVAD
 INVADIN",present,,,,
 250,V5,PS,Pro Software,A.Commercial Software,Eliza,Simulation,,PS,8200,"CH.""ELIZA""",Works,"ELIZA
 EL-INSTR",present,,,,
@@ -595,7 +594,7 @@ REDMOON",present,Time and Magik,Yes,,
 365,,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",,LANDING,missing,Magazines,,,
 366,V4,NC,Non Comm,C.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
 367,V4,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
-368,V4,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Broken,MASKEN,present,,,,
+368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Test,MASKEN,present,,,,
 369,V4,NC,Non Comm,C.Non Commercial Software,Moonlander,Game,???,NC,8200,"CH.""MLANDER""",Works,MLANDER,present,,,,
 370,V4,NC,Non Comm,C.Non Commercial Software,Navigator (R),Game,R.Leurs,NC,8200,*RUN NAVIGAT,Works,NAVIGAT,present,,,,
 371,V4,NC,Non Comm,C.Non Commercial Software,Nightmare Park,Game,S.M.Probyn,NC,8200,"CH.""NIGHTM""",Works,NIGHTM,present,,,,
@@ -625,8 +624,8 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
 398,,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",,SNOOPY,missing,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,missing,,,,
-400,V7,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
-*RUN 157S",Test,"157
+400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
+*RUN 157S",Works,"157
 157S",present,,,,
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
 403,V4,NC,Non Comm,C.Non Commercial Software,Stunt Man,Game,C.Szpojarowicz,NC,8200,"CH.""STUNT""",Works,STUNT,present,,,,
@@ -834,8 +833,8 @@ RUN",Works,CLOCK,present,Atomic Machine Code,,,
 578,V5,ECCE,ECCE Prods,D.Books/Magazines,Delete Lines,Educational,,ECCE,8200,"CH.""DELLINE""",Works,DELLINE,present,Atomic Machine Code,,,
 579,V5,ECCE,ECCE Prods,D.Books/Magazines,Design Letters,Educational,,ECCE,8200,"CH.""DESLET""",Works,DESLET,present,Atomic Machine Code,,,
 580,V5,ECCE,ECCE Prods,D.Books/Magazines,Direct Hex,Educational,,ECCE,8200,"CH.""DIRHEX""",Works,DIRHEX,present,Atomic Machine Code,,,
-581,V5,ECCE,ECCE Prods,D.Books/Magazines,Screen Chase (e),Educational,,ECCE,8200,"CH.""CHASE""","Broken - corrupt - needs OLD, then Error 72",CHASE,present,Atomic Machine Code,,,
-582,V5,ECCE,ECCE Prods,D.Books/Magazines,Pontoon (e),Educational,,ECCE,8200,"CH.""PONTOON""","Broken - corrupt - needs OLD, then Error 78",PONTOON,present,Atomic Machine Code,,,
+581,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Screen Chase,Educational,,ECCE,8200,"CH.""CHASE""",Test,CHASE,present,Atomic Machine Code,,,
+582,V5,ECCE,ECCE Prods,D.Books/Magazines,Pontoon (R - WorkPack),Educational,,ECCE,8200,"CH.""PONTOON""",Test,PONTOON,present,Atomic Machine Code,,,
 583,V5,ECCE,ECCE Prods,D.Books/Magazines,Pools (e),Educational,,ECCE,8200,"CH.""POOLS""","Broken - corrupt - needs OLD, the corrupt at 690",POOLS,present,Atomic Machine Code,,,
 584,V5,ECCE,ECCE Prods,D.Books/Magazines,Find End of Text,Educational,,ECCE,8200,"CH.""FINDEND""",Works,FINDEND,present,Atomic Machine Code,,,
 585,V5,ECCE,ECCE Prods,D.Books/Magazines,Flashing Lines,Educational,,ECCE,8200,"CH.""FLASH""",Works,FLASH,present,Atomic Machine Code,,,
@@ -1276,7 +1275,7 @@ PRINT FOR HELP: SEE MANUAL
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
 677,V6,C&VG,C&VG,D.Books/Magazines,Monster,Game,,CVG,8200,"CH.""MONSTER""",Works,MONSTER,present,,,,
 678,V6,C&VG,C&VG,D.Books/Magazines,Spiderman,Game,,CVG,8200,"CH.""SPIDER""",Works,SPIDER,present,,,,
-679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
+679,V7B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
@@ -1293,39 +1292,53 @@ QUESTDA",present,,,,
 688,,PS,Pro Software,A.Commercial Software,Air Strike,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 689,,PS,Pro Software,A.Commercial Software,Chase,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 690,,PS,Pro Software,A.Commercial Software,Road Race,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
-691,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
+691,V7B2,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-692,V7,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
+692,V7B2,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test - line width broken,"VDU2440
+*RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-693,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
-*RUN QLUC32",Test,"DB32
-QLUC32",present,Quill,Yes,,
-694,V7,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
-*LOAD DB40
-*RUN QLLC40",Test - line width broken,"VDU2440
-DB40
-QLLC40",present,Quill,Yes,,
-695,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
+693,V7B1,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-696,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
+694,V7B2,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test - line width broken,"VDU2440
+*RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-697,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
+695,V7B1,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-698,V7,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
+696,V7B2,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
 *LOAD DB40
-*RUN QLLC40",Test - line width broken,"VDU2440
+*RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-699,V7,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
+697,V7B1,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
+*RUN QLUC32",Works,"DB32
+QLUC32",present,Quill,Yes,,
+698,V7B2,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
+*LOAD DB40
+*RUN QLLC40",Works,"VDU2440
+DB40
+QLLC40",present,Quill,Yes,,
+699,V7B1,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Works,"INVAS
 INVASINS",present,,,,
-700,V7,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
+700,V7B1,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
+701,V7B2,,,,Plane and Tank Battle,,,,,,,,,,,,
+702,V7B2,,,,Kraftwerk,,,,,,,,,,,,
+703,V7B2,,,,Mandelbrot,,,,,,,,,,,,
+704,,AF,A&F S/W,A.Commercial Software,Atomic Cube,,,,,,,,missing,,,,
+705,,AF,A&F S/W,A.Commercial Software,Escape,,,,,,,,missing,,,,
+706,,BB,Bug Byte,A.Commercial Software,Dodgems,,,,,,,,missing,,,,
+707,,BB,Bug Byte,A.Commercial Software,Snake,,,,,,,,missing,,,,
+708,,BB,Bug Byte,A.Commercial Software,1-Key Basic,,,,,,,,missing,,,,
+709,,BB,Bug Byte,A.Commercial Software,Stock Market,,,,,,,,missing,,,,
+710,,AF,A&F S/W,A.Commercial Software,Missile Command,,,,,,,,missing,,,,
+711,,AF,A&F S/W,A.Commercial Software,Polaris,,,,,,,,missing,,,,
+712,,AF,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
+713,,CS,Computersmith,A.Commercial Software,Financial Year,Game,, , ,,,,missing,,,,
+714,,CS,Computersmith,A.Commercial Software,Stock Market,Game,, , ,,,,missing,,,,
