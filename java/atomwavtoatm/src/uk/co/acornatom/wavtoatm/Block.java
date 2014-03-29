@@ -1,8 +1,11 @@
 package uk.co.acornatom.wavtoatm;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class Block {
+
+	public static final int BLOCK_NUM_MAX = 0x1f;
 
 	public enum Field {
 		FLAG,
@@ -98,10 +101,24 @@ public class Block {
 				+ " " + toHex4(execAddr) + " " + toHex2(checksum) + " " + checkSumValid;
 	}
 
-	public static String cleanFilename(String s) {
+	public static String cleanFilenames(Collection<String> fileNames) {
+		boolean first = true;
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < s.length(); i++) {
-			int c = s.charAt(i);
+		sb.append('[');
+		for (String fileName : fileNames) {
+			if (!first) {
+				sb.append(", ");
+			}
+			sb.append(cleanFilename(fileName));
+			first = false;
+		}
+		sb.append(']');
+		return sb.toString();
+	}
+	public static String cleanFilename(String fileName) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < fileName.length(); i++) {
+			int c = fileName.charAt(i);
 			if (c < 32 || c > 126) {
 				sb.append('?');
 			} else {
@@ -139,6 +156,16 @@ public class Block {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	public boolean isFileNameValid() {
+		for (int i = 0; i < fileName.length(); i++) {
+			if (fileName.charAt(i) >= 127) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 	public int getFlag() {
 		return flag;
@@ -206,7 +233,7 @@ public class Block {
 	
 	public void updateChecksumValid() {
 		if (bytes.length != len) {
-			System.out.println("    " + cleanFilename(fileName) + " " + toHex4(num) + " invalid number of bytes: expected " + len + " actual " + bytes.length);
+			System.out.println("@@@ " + cleanFilename(fileName) + " " + toHex4(num) + " invalid number of bytes: expected " + len + " actual " + bytes.length);
 			checkSumValid = false;
 		} else {
 			int csum = 0xa8; // Sum of ****
@@ -228,7 +255,7 @@ public class Block {
 			csum &= 0xff;
 			checkSumValid = checksum == csum;
 			if (!checkSumValid) {
-				System.out.println("    " + cleanFilename(fileName) + " " + toHex4(num) + " checksum mis-match: old cksum = " + toHex2(checksum) + "; new checksum = " + toHex2(csum));}
+				System.out.println("@@@ " + cleanFilename(fileName) + " " + toHex4(num) + " checksum mis-match: old cksum = " + toHex2(checksum) + "; new checksum = " + toHex2(csum));}
 			
 		}
 	}

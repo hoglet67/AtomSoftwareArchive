@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +38,10 @@ public class Optimizer {
 		numFrames = (int) wavFile.getNumFrames();
 		sampleRate = (int) wavFile.getSampleRate();
 
-		System.out.println("Num Channels = " + numChannels);
-		System.out.println("Num Frames = " + numChannels);
-		System.out.println("Sample Rate = " + sampleRate);
-		System.out.println("Duration = " + numFrames / sampleRate + " secs");
+		System.out.println("@@@ Num Channels = " + numChannels);
+		System.out.println("@@@ Num Frames = " + numChannels);
+		System.out.println("@@@ Sample Rate = " + sampleRate);
+		System.out.println("@@@ Duration = " + numFrames / sampleRate + " secs");
 
 		// Create a buffer to hold all of the samples
 		int[] samples = new int[numFrames * numChannels];
@@ -50,7 +49,7 @@ public class Optimizer {
 		int framesRead = wavFile.readFrames(samples, numFrames);
 
 		if (framesRead != numFrames) {
-			System.out.println("Unexpected number of frames read: expected=" + numFrames + "; actual=" + framesRead);
+			System.out.println("@@@ Unexpected number of frames read: expected=" + numFrames + "; actual=" + framesRead);
 		}
 
 		// Close the wavFile
@@ -320,19 +319,19 @@ public class Optimizer {
 		return true;
 	}
 
-	private void dumpMap(String name, Map<String, Map<Integer, Set<Block>>> fileMap) {
-		System.out.println(name);
-		for (String fileName : fileMap.keySet()) {
-			System.out.println("    " + Block.cleanFilename(fileName));
-			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
-			for (Map.Entry<Integer, Set<Block>> entry : blockMap.entrySet()) {
-				System.out.println("        " + entry.getKey());
-				for (Block block : entry.getValue()) {
-					System.out.println("            " + block);
-				}			
-			}
-		}
-	}
+//	private void dumpMap(String name, Map<String, Map<Integer, Set<Block>>> fileMap) {
+//		System.out.println(name);
+//		for (String fileName : fileMap.keySet()) {
+//			System.out.println("    " + Block.cleanFilename(fileName));
+//			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
+//			for (Map.Entry<Integer, Set<Block>> entry : blockMap.entrySet()) {
+//				System.out.println("        " + entry.getKey());
+//				for (Block block : entry.getValue()) {
+//					System.out.println("            " + block);
+//				}			
+//			}
+//		}
+//	}
 		
 	private Map<String, List<Block>> outputMap(
 			Map<String, Map<Integer, Set<Block>>> fileMap,
@@ -341,27 +340,35 @@ public class Optimizer {
 		
 		Map<String, List<Block>> results = new TreeMap<String, List<Block>>();
 		for (String fileName : fileMap.keySet()) {
-			System.out.println(fileName);
+			System.out.println(unixFileName(fileName));
 			List<Block> blockList = new ArrayList<Block>();
 			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 			int blockNum = 0;
-			for (Map.Entry<Integer, Set<Block>> entry : blockMap.entrySet()) {
-				Block block;
-				if (entry.getKey() != blockNum) {
-					for (;blockNum < entry.getKey(); blockNum++) {
-						block = findBestBlock(fileName, blockNum, fileMapAllGood, fileMapAllBad);
-						blockList.add(block);
-					}
+			Block block = null;
+			while (blockNum <= Block.BLOCK_NUM_MAX && (block == null || block.getFlag() >= 128)) {
+				Set<Block> blocks = blockMap.get(blockNum);
+				if (blocks != null) {
+					block = findBestBlock(fileName, blockNum, blocks);
+				} else {
+					block = findBestBlock(fileName, blockNum, fileMapAllGood, fileMapAllBad);
 				}
-				block = findBestBlock(fileName, blockNum, entry.getValue());
 				blockList.add(block);
 				blockNum++;
 			}
+			// Prune any missing blocks from the end
+			for (blockNum = blockList.size() - 1; blockNum >= 0; blockNum--) {
+				block = blockList.get(blockNum);
+				if (block == null) {
+					blockList.remove(blockNum);
+				} else {
+					break;
+				}
+			}
 			results.put(fileName, blockList);
 			for (blockNum = 0; blockNum < blockList.size(); blockNum++) {
-				Block block = blockList.get(blockNum);
+				block = blockList.get(blockNum);
 				if (block == null) {
-					System.out.println("   " + fileName + " " + Block.toHex4(blockNum) + " missing");
+					System.out.println("   " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " missing");
 				} else {
 					System.out.println("   " + block);
 				}
@@ -399,7 +406,7 @@ public class Optimizer {
 			block.updateChecksumValid();
 			return block;
 		} else if (blocks.size() == 0) {
-			System.out.println("@@@ " + fileName + " " + Block.toHex4(blockNum) + " is missing");
+			System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " is missing");
 			return null;
 		} else {
 			for (Block block : blocks) {
@@ -408,7 +415,7 @@ public class Optimizer {
 				}
 			}
 
-			System.out.println("@@@ " + fileName + " " + Block.toHex4(blockNum) + " has " + blocks.size()
+			System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " has " + blocks.size()
 					+ " instances, recovering data");
 			Block block = new Block();
 			block.setFileName(fileName);
@@ -596,11 +603,11 @@ public class Optimizer {
 
 			// Update the expected filenames from the good blocks
 			for (Block block : blocks) {
-				if (block.isCheckSumValid()) {
+				if (block.isCheckSumValid() && block.isFileNameValid()) {
 					expectedFilenames.add(block.getFileName());
 				}
 			}
-			System.out.println("@@@ expected: " + expectedFilenames);
+			System.out.println("@@@ expected: " + Block.cleanFilenames(expectedFilenames));
 
 			if (isComplete(expectedFilenames, fileMapLast)) {
 				mergeFileMaps(fileMapLast, fileMapRecent);

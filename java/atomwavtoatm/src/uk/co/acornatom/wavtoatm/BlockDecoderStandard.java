@@ -10,8 +10,6 @@ public class BlockDecoderStandard extends BlockDecoderBase {
 	private static final int ASCII_STAR = '*';
 	private static final int ASCII_CR = 13;
 	
-	private static final int BLOCK_NUM_MASK = 0x1f;
-
 	private enum STATE {
 		SYNC0, SYNC1, SYNC2, SYNC3, FILENAME, BLOCKFLAG, BLOCKNUMLO, BLOCKNUMHI, DATALEN, EXECHI, EXECLO, LOADHI, LOADLO, DATA, CKSUM
 	}
@@ -183,13 +181,14 @@ public class BlockDecoderStandard extends BlockDecoderBase {
 				block.setExecAddr(execAddr);
 				block.setChecksum(b);
 				block.setChecksumValid(cksumGood);
-				block.setNum(num & BLOCK_NUM_MASK);
 				block.setLen(len + 1);
 				block.setFileName(filename);
 				block.setBytes(data.toByteArray());
-				
-				// If the block number was greater than the mask, then recalculate the checksum.
-				if (num > BLOCK_NUM_MASK) {
+
+				if (num <= Block.BLOCK_NUM_MAX) {
+					block.setNum(num);
+				} else {
+					block.setNum(Block.BLOCK_NUM_MAX);
 					block.updateChecksumValid();
 				}
 				
