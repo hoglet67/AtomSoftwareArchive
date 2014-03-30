@@ -161,7 +161,27 @@ public class Optimizer {
 			int numBlocks = 0;
 			int numMissingBlocks = 0;
 			for (String fileName : results.keySet()) {
+				
+				
+				String  unixFileName = unixFileName(fileName);
+				File dstFile = new File(dstTape, unixFileName);
+				int i = 1;
+				while (dstFile.exists()) {
+					dstFile = new File(dstTape, unixFileName + i);
+					i++;
+				}
+				System.out.println(dstFile.getName());
+
 				List<Block> blockList = results.get(fileName);
+				for (int blockNum = 0; blockNum < blockList.size(); blockNum++) {
+					Block block = blockList.get(blockNum);
+					if (block == null) {
+						System.out.println("   " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " missing");
+					} else {
+						System.out.println("   " + block);
+					}
+				}
+
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	
 				// Calculate the addresses
@@ -185,19 +205,12 @@ public class Optimizer {
 						bos.write(block.getBytes());
 					} else {
 						numMissingBlocks++;
-						for (int i = 0; i < 255; i++) {
+						for (i = 0; i < 255; i++) {
 							bos.write((byte) 0);
 						}
 					}
 				}
 
-				String  unixFileName = unixFileName(fileName);
-				File dstFile = new File(dstTape, unixFileName);
-				int i = 1;
-				while (dstFile.exists()) {
-					dstFile = new File(dstTape, unixFileName + i);
-					i++;
-				}
 				FileOutputStream fos = new FileOutputStream(dstFile);
 				writeATMFile(fos, fileName, loadAddr, execAddr, bos.toByteArray());
 				fos.close();
@@ -221,7 +234,7 @@ public class Optimizer {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < s.length(); i++) {
 			Character c = s.charAt(i);
-			if (Character.isLetterOrDigit(c)) {
+			if (c > 32 && c < 127 && Character.isLetterOrDigit(c)) {
 				sb.append(c);
 			}
 		}
@@ -340,7 +353,6 @@ public class Optimizer {
 		
 		Map<String, List<Block>> results = new TreeMap<String, List<Block>>();
 		for (String fileName : fileMap.keySet()) {
-			System.out.println(unixFileName(fileName));
 			List<Block> blockList = new ArrayList<Block>();
 			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 			int blockNum = 0;
@@ -365,14 +377,6 @@ public class Optimizer {
 				}
 			}
 			results.put(fileName, blockList);
-			for (blockNum = 0; blockNum < blockList.size(); blockNum++) {
-				block = blockList.get(blockNum);
-				if (block == null) {
-					System.out.println("   " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " missing");
-				} else {
-					System.out.println("   " + block);
-				}
-			}
 		}
 		return results;
 	}
@@ -435,7 +439,7 @@ public class Optimizer {
 				bytes[i] = (byte) getField(null, i, blocks);
 			}
 			block.updateChecksumValid();
-			System.out.println("@@@ " + fileName + " " + Block.toHex4(blockNum) + " recovery was "
+			System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " recovery was "
 					+ (block.isCheckSumValid() ? "successful" : "unsuccessful"));
 			return block;
 		}
