@@ -1,0 +1,278 @@
+    1 REM ** WHITE BARROWS *********************** COPYRIGHT ASP SOFTWARE - 1982
+    5 CLS:POKE 618,2:PAPER 3:INK 0:FORI=0 TO 3:POKE 48036+I,32:NEXT I
+   10 PRINT:PRINT "       ";
+   15 PRINT CHR$(4);CHR$(27);"J THE WHITE BARROWS"
+   20 PRINT CHR$(4)
+   30 N=42:AT=3:D$=CHR$(10):U$=CHR$(11)+CHR$(11)+CHR$(11)
+   35 DIM AA(N),BB(4):GOSUB 12000
+   40 GOSUB 10000
+   50 GOSUB 9000
+   60 GOSUB 8000
+   70 FOR X=1 TO 10
+   80 GOSUB 7000
+   90 NEXT X
+  100 FOR I=1 TO 3
+  110 X=10:GOSUB 7000
+  120 NEXT I
+  130 X=11:GOSUB 7000
+  140 X=0:GOSUB 7000:Y=RM
+  150 GOSUB 7000:C=RM
+  160 M=500:L=0
+  170 W=0:K=0:GOSUB 6000
+  180 PRINT D$;"CREATE WALL, MOVE, VIEW OR SEE PLAN ?"
+  185 PRINT "_            _     _       _":GOSUB 500
+  190 Q$=KEY$:IF Q$="" THEN 190
+  200 IF Q$="V" THEN GOSUB 5000:GOTO 240
+  210 IF Q$="C" THEN GOSUB 4000:GOTO 240
+  220 IF Q$="M" THEN GOSUB 3000:GOTO 240
+  225 IF Q$="S" THEN GOSUB 12500:GOTO 240 
+  230 GOTO 190
+  240 IF AA(Y)=0 OR K=1 OR AA(Y)=10 OR AA(Y)=11 OR W=1 THEN 280
+  250 PRINT D$;D$;"The ";:Z=Y:GOSUB 2000 
+  260 PRINT D$;"wakes up...and suddenly ATTACKS !":PRINT 
+  270 GOTO 390
+  280 IF M>0 THEN 320 ELSE PRINT D$;"You have used up all your magic..."
+  290 PRINT D$;D$;"Your staff is now useless and"
+  300 PRINT D$;"...the evil force ATTACKS !" 
+  310 GOTO 390
+  320 IF W=0 THEN 170
+  330 PRINT "Congratulations you have defeated"
+  340 PRINT D$;"the evil Sorcerer !"
+  350 PRINT D$;D$;"Would you like to trap"
+  360 PRINT D$;"another Sorcerer ?":GOSUB 500
+  365 Q$=KEY$:IF Q$="" THEN 365
+  370 IF Q$="Y" THEN CLS:GOTO 60
+  380 IF Q$="N" THEN 999 ELSE GOTO 365
+  390 PRINT D$;D$;"Oh dear you appear to be dead"
+  400 PRINT D$;"Would you like to be REINCARNATED ?":GOSUB 500
+  410 Q$=KEY$:IF Q$="" THEN 410
+  420 IF Q$<>"Y" THEN CLS:GOTO 999
+  430 PRINT D$;"With the same Sorcerer ?":GOSUB 500
+  435 Q$=KEY$:IF Q$="" THEN 435
+  440 IF Q$<>"Y" THEN CLS:GOTO 60
+  450 X=0:GOSUB 7000:Y=RM
+  460 CLS:GOTO 160
+  500 FOR I=1 TO 5:C$=KEY$:NEXT I
+  510 RETURN
+  600 T$=""
+  610 FOR I=1 TO 3:C$=KEY$:NEXT I
+  620 Q$=KEY$:IF Q$="" THEN 620
+  630 IF T$<>"" AND ASC(Q$)=13 THEN PRINT:RETURN
+  640 IF ASC(Q$)<48 OR ASC(Q$)>57 THEN 610
+  650 PRINT Q$;
+  660 T$=T$+Q$:IF LEN(T$)>4 THEN RETURN
+  670 GOTO 610
+  999 CLS:POKE 618,3:END
+ 1000 M=M-R:IF M<1 THEN GOSUB 11000:RETURN
+ 1010 PRINT D$;"You have used ";R;" units."
+ 1020 PRINT "You have ";M;" units remaining.":PRINT
+ 1030 RETURN
+ 2000 ON AA(Z) GOTO 2010,2020,2030,2040,2050,2060,2070,2080,2090,2100,2110
+ 2010 PRINT "Red Dragon":S=30:RETURN
+ 2020 PRINT "Green Dragon":S=25:RETURN
+ 2030 PRINT "Yellow Dragon":S=20:RETURN
+ 2040 PRINT "Platinum Serpent":S=28:RETURN
+ 2050 PRINT "Gold Serpent":S=23:RETURN
+ 2060 PRINT "Silver Serpent":S=18:RETURN
+ 2070 PRINT "Dwarf with a sabre":S=24:RETURN
+ 2080 PRINT "Dwarf with a sword":S=19:RETURN
+ 2090 PRINT "Dwarf with a knife":S=14:RETURN
+ 2100 PRINT "Friendly Gnome":RETURN    
+ 2110 PRINT "Magic Spot":RETURN
+ 3000 PRINT D$;"Which chamber to move to ? ";:GOSUB 600
+ 3002 P=VAL(T$)
+ 3005 GOSUB 11000
+ 3010 F=1:PRINT
+ 3020 FOR I=0 TO 3
+ 3030 IF BB(I)=P THEN F=0
+ 3040 NEXT I
+ 3050 IF P=0 OR F=1 THEN GOSUB 6000:GOTO 3000
+ 3060 IF C<>P THEN 3160
+ 3070 W=1:GOSUB 3470:IF F=0 THEN 3080
+ 3075 W=0:X=0:GOSUB 7000:C=RM:GOTO 3060
+ 3080 FOR I=0 TO 3
+ 3090 T=ASC(MID$(A$,C*4-3+I,1))-48
+ 3100 IF T=0 OR T=Y OR AA(T)=10 OR T=L OR T=P THEN 3120
+ 3110 C=T:W=0:GOSUB 3470:IF F=1 THEN I=5
+ 3120 NEXT I
+ 3130 IF F=1 THEN 3075
+ 3140 IF W=1 THEN RETURN
+ 3150 PRINT D$;"The Sorcerer has run off !":PRINT:GOTO 3180 
+ 3160 IF F=1 THEN PRINT D$;"The Sorcerer trod on the Magic Spot !":PRINT
+ 3180 Y=P:IF AA(P)=0 THEN RETURN
+ 3190 IF AA(P)<>11 THEN 3230
+ 3200 PRINT "You just trod on the Magic Spot..."
+ 3210 PRINT:PRINT
+ 3220 X=0:GOSUB 7000:Y=RM:RETURN
+ 3230 IF AA(P)<>10 THEN 3300
+ 3240 R=INT(RND(1)*20)+20
+ 3250 PRINT "The Gnome will tell you where the"
+ 3260 PRINT D$;"Sorcerer is for ";R;" gold coins..."
+ 3265 PRINT D$;"Agreed ?";:GOSUB 500 
+ 3270 Q$=KEY$:IF Q$="" THEN 3270
+ 3280 IF Q$<>"Y" THEN PRINT:RETURN 
+ 3290 PRINT:PRINT "The Sorcerer is in chamber ";C:GOTO 3450  
+ 3300 K=0:Z=Y:PRINT "A ";:GOSUB 2000:PRINT D$;"...is about to ATTACK !"
+ 3310 PRINT D$;D$;"You have three choices :":PRINT
+ 3320 PRINT "1 - Stun it"
+ 3330 PRINT "2 - Transport it"
+ 3340 PRINT "3 - Destroy it"
+ 3350 PRINT D$;D$;"What is your choice ? ";:GOSUB 500  
+ 3355 P$=KEY$:IF P$="" THEN 3355
+ 3360 P=VAL(P$):IF P<1 OR P>3 THEN PRINT U$:GOTO 3350
+ 3365 PRINT " ";P
+ 3370 PRINT D$;CHR$(14);:PRINT "Amount of Magic ? ";:GOSUB 600
+ 3375 R=VAL(T$)
+ 3380 IF R<=0 OR R>M THEN PRINT U$:GOTO 3370
+ 3390 CLS:PRINT D$;"The ";:GOSUB 2000:PRINT D$;"...is ";:B=0
+ 3400 IF P=1 AND R>S+(RND(1)*S/3) THEN PRINT "STUNNED !":K=1
+ 3410 IF P<>2 OR R<S+(RND(1)*S) THEN 3430
+ 3420 PRINT "TRANSPORTED !":X=AA(Y):AA(Y)=0:GOSUB 7000
+ 3430 IF P=3 AND R>S*4+(RND(1)*S) THEN PRINT "DESTROYED !":AA(Y)=0
+ 3440 IF K=0 AND AA(Y)<>0 THEN PRINT "only dazed !":B=INT(RND(1)*8+1) 
+ 3450 GOSUB 1000:IF B>2 AND M>0 THEN 3310
+ 3460 RETURN
+ 3470 F=0
+ 3480 FOR J=1 TO 3
+ 3490 T=ASC(MID$(A$,C*4-3+J,1))-48
+ 3500 IF AA(T)=11 THEN F=1
+ 3510 NEXT J
+ 3520 RETURN
+ 4000 PRINT D$;"Which chamber do you wish to create"
+ 4005 PRINT D$;:PRINT "the Magic Wall in ? ";:GOSUB 600
+ 4010 L=VAL(T$)
+ 4015 GOSUB 11000
+ 4020 PRINT
+ 4030 IF L<1 OR L>N THEN GOSUB 6000:GOTO 4000
+ 4040 IF AA(L)<>0 THEN 4080
+ 4050 PRINT "The Magic Wall now exists in"
+ 4060 PRINT D$;"chamber ";L
+ 4070 GOTO 4110
+ 4080 PRINT "zzaaapppp ! Chamber ";L;"already":L=0 
+ 4090 PRINT "contains magic, the wall has"
+ 4100 PRINT "failed !"
+ 4110 PRINT
+ 4120 R=INT(RND(1)*21+20)
+ 4130 GOSUB 1000
+ 4140 RETURN
+ 5000 PRINT D$;CHR$(14);:PRINT "Chamber you wish to view ? ";:GOSUB 600
+ 5005 P=VAL(T$)
+ 5010 IF P<1 OR P>N THEN GOSUB 7000:PRINT U$:GOTO 5000 
+ 5015 PRINT
+ 5020 F=0
+ 5030 FOR I=0 TO 3
+ 5040 IF P=BB(I) THEN F=1
+ 5050 NEXT I
+ 5060 IF P=0 OR F=0 THEN CLS:PRINT D$;"You may only VIEW adjacent chambers !"
+ 5062 IF P=0 OR F=0 THEN GOSUB 6000:GOTO 5000
+ 5065 GOSUB 11000
+ 5070 IF P=C THEN PRINT D$;"You have found the Sorcerer !" 
+ 5080 IF AA(P)=0 AND P=C THEN 5130
+ 5090 IF AA(P)=0 THEN PRINT D$;"The chamber is empty !":GOTO 5130  
+ 5100 PRINT D$;"There is a "; 
+ 5110 Z=P:GOSUB 2000
+ 5120 PRINT D$;"...in chamber ";P
+ 5130 R=INT(RND(1)*21)+10
+ 5140 GOSUB 1000
+ 5150 RETURN
+ 6000 F=0
+ 6010 FOR I=0 TO 3
+ 6020 BB(I)=ASC(MID$(A$,Y*4-3+I,1))-48
+ 6030 F=F+AA(BB(I)):IF BB(I)=C THEN F=F-1000
+ 6040 NEXT I
+ 6050 IF F=0 THEN 6170
+ 6060 PRINT D$;"BEWARE ........":PRINT  
+ 6070 IF F<0 THEN PRINT "The Chalice is near !"
+ 6080 FOR I=0 TO 3
+ 6090 T=0:T=AA(BB(I))
+ 6110 IF T>0 AND T<4 THEN PRINT "I can hear a Dragon !"
+ 6120 IF T>3 AND T<7 THEN PRINT "I can hear a Serpent hissing !"
+ 6130 IF T>6 AND T<11 THEN PRINT "I can hear Money rattling !"
+ 6140 IF T=11 THEN PRINT "I can feel Magic very close !" 
+ 6150 NEXT I
+ 6160 PRINT 
+ 6170 PRINT D$;"You are currently in chamber ";Y
+ 6175 PRINT D$;"Tunnels lead to "; 
+ 6180 FOR I=0 TO 3
+ 6190 IF BB(I)>0 THEN PRINT BB(I);",";
+ 6200 NEXT I
+ 6210 PRINT CHR$(8);" "
+ 6230 RETURN
+ 7000 RM=INT(RND(1)*42+1):IF AA(RM)>0 OR RM=L THEN 7000
+ 7010 AA(RM)=X
+ 7020 RETURN
+ 8000 FOR I=0 TO 42
+ 8010 AA(I)=0
+ 8020 NEXT I
+ 8030 RETURN
+ 9000 A$="23401567189:1;<=2>?@2ABC2DEF3GHI3JKL3MNO4PQR4STU"
+ 9010 A$=A$+"4VWX5@X05Y005>A06@C06Y006AD07CF07Y007DG08FI08Y00"
+ 9020 A$=A$+"8GJ09IK09JL09KM0:LO0:Z00:MP0;OR0;Z00;PS0<RU0<Z00"
+ 9030 A$=A$+"<SV0=UX0=Z00=>V0?BEHNQTW"
+ 9040 RETURN 
+10000 PRINT D$;D$;"Your task is to trap an evil Sorcerer" 
+10010 PRINT D$;"and return the Magic Chalice."
+10020 PRINT D$;"You have been given a Magic Staff"
+10030 PRINT D$;"that holds 500 units of magic."
+10040 PRINT D$;"Use it to overcome the hazards in the"
+10050 PRINT D$;".........   White Barrows  ........."
+10060 PRINT D$;D$;D$;"        Hit any key to begin":GOSUB 500 
+10070 Q$=KEY$:IF Q$="" THEN 10070
+10080 CLS
+10090 RETURN 
+11000 WAIT 150
+11010 CLS
+11020 RETURN
+12000 A=46080:RESTORE
+12010 FOR I=48 TO 57
+12020 FOR J=0 TO 7 
+12030 READ D 
+12040 POKE A+8*I+J,63-D
+12050 NEXT J
+12060 NEXT I
+12100 FOR I=90 TO 95
+12110 FOR J=0 TO 7  
+12120 READ D  
+12130 POKE A+8*I+J,D 
+12140 NEXT J 
+12150 NEXT I
+12200 RETURN
+12500 CLS:PRINT:PRINT "      Z___________1___________["
+12510 PRINT "      ^           ^           ^"
+12520 PRINT "      ^           ^           ^"
+12530 PRINT "  Z___2___[   Z___3___[   Z___4___["
+12540 PRINT "  ^   ^   ^   ^   ^   ^   ^   ^   ^"
+12550 PRINT "  ^   ^   ^   ^   ^   ^   ^   ^   ^"
+12560 PRINT " Z5[ Z6[ Z7[ Z8[ Z9[ Z10 Z11 Z12 Z13"
+12570 PRINT " ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^"
+12580 PRINT " ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^"
+12590 PRINT " ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^"
+12600 PRINT "14^16^^19^^22^^25^^28^^31^^34^^37^^40"
+12610 PRINT "^\^]^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+12620 PRINT "^ ^ 17^^20^^23^^26^^29^^32^^35^^38^^^"
+12630 PRINT "^ ^  \^] \^] \^] ^^^ \^] \^] \^] \^]^"
+12640 PRINT "^ ^   ^   ^   ^  \27  ^   ^   ^   ^ ^"
+12650 PRINT "^ 15  18  21  24      30  33  36  39^"
+12660 PRINT "^ ^    \[Z]   ^       ^    \[Z]   ^ ^"
+12670 PRINT "^ \_____41____]       \_____42____] ^"
+12680 PRINT "\___________________________________]"
+12690 PRINT:PRINT "     You are in chamber number ";Y
+12700 PRINT:PRINT "       Hit any key to continue"
+12710 GET Q$
+12720 CLS:RETURN
+13000 DATA 0,30,18,18,18,18,30,0
+13010 DATA 0,4,12,4,4,4,14,0
+13020 DATA 0,12,18,2,4,8,30,0
+13030 DATA 0,30,2,14,2,2,30,0
+13040 DATA 0,16,16,16,20,30,4,0
+13050 DATA 0,30,16,30,2,2,30,0
+13060 DATA 0,30,16,30,18,18,30,0
+13070 DATA 0,30,2,4,8,16,16,0
+13080 DATA 0,30,18,30,18,18,30,0
+13090 DATA 0,30,18,30,2,2,30,0
+13100 DATA 0,0,0,15,15,12,12,12
+13110 DATA 0,0,0,60,60,12,12,12 
+13120 DATA 12,12,12,15,15,0,0,0
+13130 DATA 12,12,12,60,60,0,0,0 
+13140 DATA 12,12,12,12,12,12,12,12
+13150 DATA 0,0,0,63,63,0,0,0
