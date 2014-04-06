@@ -108,6 +108,8 @@ public class Optimizer {
 			// So if decoding of left is successful it's OK to skip right
 			boolean perfect = false;
 
+			Set<FileSelector> expectedFilenames = new HashSet<FileSelector>();
+
 			for (int channel = 0; channel < numChannels; channel++) {
 
 				System.out.println("@@@ " + srcFile.getName() + " channel " + channel);
@@ -134,7 +136,8 @@ public class Optimizer {
 					byteDecoder.initialize(samples);
 					// fileMapLast will contain the best attempt by this decoder
 					Map<FileSelector, Map<Integer, Set<Block>>> fileMapLast = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
-					perfect = optimizeParam(byteDecoder, blockDecoder, fileMapLast, fileMapAllGood,	fileMapAllBad);
+					perfect = optimizeParam(byteDecoder, blockDecoder, expectedFilenames, fileMapLast, fileMapAllGood,
+							fileMapAllBad);
 					// dumpMap("fileMapLast", fileMapLast);
 					// dumpMap("fileMapRecent", fileMapRecent);
 					mergeFileMaps(fileMapLast, fileMapRecent);
@@ -154,7 +157,7 @@ public class Optimizer {
 			// dumpMap("fileMapRecent", fileMapRecent);
 			// dumpMap("fileMapAllGood", fileMapAllGood);
 			// dumpMap("fileMapAllBad", fileMapAllBad);
-			Map<FileSelector, List<Block>> results = outputMap(fileMapRecent, fileMapAllGood, fileMapAllBad);
+			Map<FileSelector, List<Block>> results = outputMap(expectedFilenames, fileMapRecent, fileMapAllGood, fileMapAllBad);
 			int numGoodBlocks = 0;
 			int numBadBlocks = 0;
 			int numBlocks = 0;
@@ -215,7 +218,8 @@ public class Optimizer {
 				fos.close();
 			}
 
-			System.out.println("@@@ wav stats\t" + numGoodBlocks + "\t" + numBadBlocks + "\t" + numBlocks + "\t" + numMissingBlocks	+ " " + srcFile.getName());
+			System.out.println("@@@ wav stats\t" + numGoodBlocks + "\t" + numBadBlocks + "\t" + numBlocks + "\t" + numMissingBlocks
+					+ " " + srcFile.getName());
 
 			totalGoodBlocks += numGoodBlocks;
 			totalBadBlocks += numBadBlocks;
@@ -224,7 +228,8 @@ public class Optimizer {
 
 		}
 
-		System.out.println("@@@ total stats\t" + totalGoodBlocks + "\t" + totalBadBlocks + "\t" + totalBlocks + "\t" + totalMissingBlocks);
+		System.out.println("@@@ total stats\t" + totalGoodBlocks + "\t" + totalBadBlocks + "\t" + totalBlocks + "\t"
+				+ totalMissingBlocks);
 
 	}
 
@@ -345,17 +350,23 @@ public class Optimizer {
 	// }
 	// }
 
-	private Map<FileSelector, List<Block>> outputMap(Map<FileSelector, Map<Integer, Set<Block>>> fileMap, Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,
+	private Map<FileSelector, List<Block>> outputMap(Set<FileSelector> expectedFilenames,
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMap, Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
 
 		Map<FileSelector, List<Block>> results = new TreeMap<FileSelector, List<Block>>();
-		for (FileSelector fileName : fileMap.keySet()) {
+		for (FileSelector fileName : expectedFilenames) {
 			List<Block> blockList = new ArrayList<Block>();
 			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 			int blockNum = 0;
 			Block block = null;
 			while (blockNum <= Block.BLOCK_NUM_MAX && (block == null || block.getFlag() >= 128)) {
-				Set<Block> blocks = blockMap.get(blockNum);
+				Set<Block> blocks = null;
+				if (blockMap != null) {
+					blocks = blockMap.get(blockNum);
+				} else {
+					System.out.println("@@@ decode missing block map for " + fileName);
+				}
 				if (blocks != null) {
 					block = findBestBlock(fileName, blockNum, blocks);
 				} else {
@@ -510,6 +521,7 @@ public class Optimizer {
 	}
 
 	public boolean optimizeParam(ByteDecoder byteDecoder, BlockDecoder blockDecoder,
+			Set<FileSelector> expectedFilenames,
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent,
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,			
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
@@ -543,9 +555,7 @@ public class Optimizer {
 		
 		boolean loDone = false;
 		boolean hiDone = false;
-
-		Set<FileSelector> expectedFilenames = new HashSet<FileSelector>();
-
+			
 		for (int i = 1; i <= numPoints + 1; i++) {
 
 			if (loDone && hiDone) {
@@ -606,14 +616,9 @@ public class Optimizer {
 			updateMap(fileMapLast, null, blocks);
 
 			// Update the expected filenames from the good blocks
-			for (Block block : blocks) {
-				if (block.isCheckSumValid() && block.isFileNameValid()) {
-					expectedFilenames.add(block.getSelector());
-				}
-			}
-			System.out.println("@@@ expected: " + Block.cleanFilenames(expectedFilenames));
+			addToExpectedFilenames(blocks, expectedFilenames);
 
-			if (isComplete(expectedFilenames, fileMapLast)) {
+			if (isComplete(expectedFilenames, fileMapLast) && numBadBlocks == 0) {
 				mergeFileMaps(fileMapLast, fileMapRecent);
 				System.out.println("@@@ Perfect decode at : " + threshold + " numGoodBlocks = " + numGoodBlocks + "; numBadBlocks = " + numBadBlocks + "; total = " + numBlocks);
 				for (Block block : blocks) {
@@ -646,6 +651,52 @@ public class Optimizer {
 
 		return false;
 
+	}
+	
+	private void addToExpectedFilenames(List<Block> blocks, Set<FileSelector> expectedFilenames) {
+		Map<FileSelector, Integer> goodFilenameCounts = new HashMap<FileSelector, Integer>();
+		Map<FileSelector, Integer> badFilenameCounts = new HashMap<FileSelector, Integer>();
+		Set<FileSelector> goodFileNames = new HashSet<FileSelector>();
+
+		for (Block block : blocks) {
+			if (block.isFileNameValid() && block.getNum() < Block.BLOCK_NUM_MAX) {
+				FileSelector fileName = block.getSelector();
+				goodFileNames.add(fileName);
+				Map<FileSelector, Integer> filenameCounts = block.isCheckSumValid() ? goodFilenameCounts : badFilenameCounts;
+				Integer count = filenameCounts.get(fileName);
+				if (count == null) {
+					count = 0;
+				}
+				count++;
+				filenameCounts.put(fileName, count);
+			}
+		}
+		
+		for (Block block : blocks) {
+			FileSelector fileName = block.getSelector();
+			if (expectedFilenames.contains(fileName)) {
+				continue;
+			}
+			Integer goodCount = goodFilenameCounts.get(fileName);
+			if (goodCount == null) {
+				goodCount = 0;
+			}
+			Integer badCount = badFilenameCounts.get(fileName);
+			if (badCount == null) {
+				badCount = 0;
+			}
+			boolean add = false;
+			if (goodCount > 1) {
+				add = true;
+			} else if (goodCount == 1 && badCount <= 2 && block.getNum() <= 2 && block.getFlag() < 128) {
+				add = true;
+			}
+			if (add) {
+				System.out.println("@@@ adding to expected: " + block + " (good=" + goodCount + "; bad=" + badCount + ")");
+				System.out.println("@@@ expected now: " + Block.cleanFilenames(expectedFilenames));
+				expectedFilenames.add(fileName);
+			}
+		}
 	}
 
 	private int getNumGoodBlock(List<Block> blocks) {
