@@ -26,24 +26,25 @@ public class Optimizer {
 	public Optimizer() {
 	}
 
-	private int[] readWavIntoMemory(File file) throws IOException {
+	private int[] readWavIntoMemory(File file, boolean log) throws IOException {
 
 		// Open the wav file specified as the first argument
 		WavFile wavFile = WavFile.openWavFile(file);
-
-		// Display information about the wav file
-		wavFile.display();
 
 		// Get the number of audio channels in the wav file
 		numChannels = wavFile.getNumChannels();
 		numFrames = (int) wavFile.getNumFrames();
 		sampleRate = (int) wavFile.getSampleRate();
 
-		System.out.println("@@@ Num Channels = " + numChannels);
-		System.out.println("@@@ Num Frames = " + numChannels);
-		System.out.println("@@@ Sample Rate = " + sampleRate);
-		System.out.println("@@@ Duration = " + numFrames / sampleRate + " secs");
-
+		// Display information about the wav file
+		if (log) {
+			wavFile.display();
+			System.out.println("@@@ Num Channels = " + numChannels);
+			System.out.println("@@@ Num Frames = " + numFrames);
+			System.out.println("@@@ Sample Rate = " + sampleRate);
+			System.out.println("@@@ Duration = " + numFrames / sampleRate + " secs");
+		}
+		
 		// Create a buffer to hold all of the samples
 		int[] samples = new int[numFrames * numChannels];
 
@@ -74,6 +75,21 @@ public class Optimizer {
 		}
 	}
 
+	private int[] mergeChannels(int[] samples, int numChannels) {
+		if (numChannels == 1) {
+			return samples;
+		} else {
+			int numFrames = samples.length / numChannels;
+			int[] newSamples = new int[numFrames];
+			int j = 0;
+			for (int i = 0; i < numFrames; i++) {
+				newSamples[i] = (samples[j] + samples[j + 1]) / 2;
+				j += numChannels;
+			}
+			return newSamples;
+		}
+	}
+	
 	public void process(List<File> srcFiles, File dstDir) throws IOException {
 
 		int totalGoodBlocks = 0;
@@ -98,7 +114,7 @@ public class Optimizer {
 			File dstTape = new File(dstDir, "" + dirName);
 			dstTape.mkdirs();
 
-			int[] samples = readWavIntoMemory(srcFile);
+			int[] samples = readWavIntoMemory(srcFile, true);
 
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
@@ -110,11 +126,18 @@ public class Optimizer {
 
 			Set<FileSelector> expectedFilenames = new HashSet<FileSelector>();
 
-			for (int channel = 0; channel < numChannels; channel++) {
+			for (int channel = 0 ; channel <= numChannels; channel++) {
 
 				System.out.println("@@@ " + srcFile.getName() + " channel " + channel);
 
-				samples = extractChannel(samples, channel, numChannels);
+				// Inefficient to read the wav multiple times, but saves memory
+				// TODO: Refactor to use short[] instead of int[]
+				samples = readWavIntoMemory(srcFile, false);
+				if (numChannels == 1 || channel < numChannels ) {
+					samples = extractChannel(samples, channel, numChannels);
+				} else {
+					samples = mergeChannels(samples, numChannels);
+				}
 
 				WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, window2, sampleRate, frequency,
 						bothEdges);
@@ -124,6 +147,7 @@ public class Optimizer {
 						bothEdges);
 
 				List<ByteDecoder> byteDecoders = new ArrayList<ByteDecoder>();
+//				byteDecoders.add(new ByteDecoderKees());
 				byteDecoders.add(new ByteDecoderAtomulator(lowPass700Squarer));
 				byteDecoders.add(new ByteDecoderOld(lowPass700Squarer, window2));
 				byteDecoders.add(new ByteDecoderAtomulator(diffSquarer));
@@ -541,7 +565,7 @@ public class Optimizer {
 		List<Block> blocks;
 		
 		int mid = (hiThreshold + loThreshold) / 2;
-		int numPoints = (hiThreshold - loThreshold) / step;
+		int numPoints = step == 0 ? 0 : (hiThreshold - loThreshold) / step;
 	
 		// Example:
 		// 500 to 1000 step 5
@@ -601,7 +625,7 @@ public class Optimizer {
 				bestThreshold2 = threshold;
 			} else if (numGoodBlocks == best) {
 				if (threshold < bestThreshold1) {
-					bestThreshold2 = threshold;
+					bestThreshold1 = threshold;
 				}
 				if (threshold > bestThreshold2) {
 					bestThreshold2 = threshold;
@@ -618,7 +642,7 @@ public class Optimizer {
 			// Update the expected filenames from the good blocks
 			addToExpectedFilenames(blocks, expectedFilenames);
 
-			if (isComplete(expectedFilenames, fileMapLast) && numBadBlocks == 0) {
+			if (isComplete(expectedFilenames, fileMapLast)) {
 				mergeFileMaps(fileMapLast, fileMapRecent);
 				System.out.println("@@@ Perfect decode at : " + threshold + " numGoodBlocks = " + numGoodBlocks + "; numBadBlocks = " + numBadBlocks + "; total = " + numBlocks);
 				for (Block block : blocks) {
@@ -642,7 +666,7 @@ public class Optimizer {
 		//	System.out.println("### " + block);
 		//}
 
-		System.out.println("@@@ Partial decode at : " + threshold + " numGoodBlocks = " + numGoodBlocks + "; numBadBlocks = " + numBadBlocks + "; total = " + numBlocks);;
+		System.out.println("@@@ Partial decode at : [" + bestThreshold1 + "," + bestThreshold2 + "] using " + threshold + " numGoodBlocks = " + numGoodBlocks + "; numBadBlocks = " + numBadBlocks + "; total = " + numBlocks);;
 
 		updateMap(fileMapRecent, null, blocks);
 		for (Block block : blocks) {
