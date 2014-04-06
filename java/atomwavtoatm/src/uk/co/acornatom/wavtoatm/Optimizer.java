@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class Optimizer {
 	}
 
 	public void process(List<File> srcFiles, File dstDir) throws IOException {
-		
+
 		int totalGoodBlocks = 0;
 		int totalBadBlocks = 0;
 		int totalMissingBlocks = 0;
@@ -89,10 +90,8 @@ public class Optimizer {
 
 		BlockDecoder blockDecoder = new BlockDecoderStandard();
 
-		int tape = 100;
-		
 		for (File srcFile : srcFiles) {
-			
+
 			String dirName = srcFile.getName().toUpperCase();
 			dirName = dirName.replace(".WAV", "");
 			dirName = dirName.replace("_", "");
@@ -101,9 +100,9 @@ public class Optimizer {
 
 			int[] samples = readWavIntoMemory(srcFile);
 
-			Map<String, Map<Integer, Set<Block>>> fileMapRecent = new TreeMap<String, Map<Integer, Set<Block>>>();
-			Map<String, Map<Integer, Set<Block>>> fileMapAllGood = new TreeMap<String, Map<Integer, Set<Block>>>();
-			Map<String, Map<Integer, Set<Block>>> fileMapAllBad = new TreeMap<String, Map<Integer, Set<Block>>>();
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
 
 			// Assumes that left and right are carrying the same signal
 			// So if decoding of left is successful it's OK to skip right
@@ -111,7 +110,7 @@ public class Optimizer {
 
 			for (int channel = 0; channel < numChannels; channel++) {
 
-				System.out.println("@@@ " + tape + " " + srcFile.getName() + " channel " + channel);
+				System.out.println("@@@ " + srcFile.getName() + " channel " + channel);
 
 				samples = extractChannel(samples, channel, numChannels);
 
@@ -134,13 +133,13 @@ public class Optimizer {
 					System.out.println("@@@ Decoding with " + byteDecoder);
 					byteDecoder.initialize(samples);
 					// fileMapLast will contain the best attempt by this decoder
-					Map<String, Map<Integer, Set<Block>>> fileMapLast = new TreeMap<String, Map<Integer, Set<Block>>>();
-					perfect = optimizeParam(byteDecoder, blockDecoder, fileMapLast, fileMapAllGood, fileMapAllBad);
-//					dumpMap("fileMapLast", fileMapLast);
-//					dumpMap("fileMapRecent", fileMapRecent);
+					Map<FileSelector, Map<Integer, Set<Block>>> fileMapLast = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
+					perfect = optimizeParam(byteDecoder, blockDecoder, fileMapLast, fileMapAllGood,	fileMapAllBad);
+					// dumpMap("fileMapLast", fileMapLast);
+					// dumpMap("fileMapRecent", fileMapRecent);
 					mergeFileMaps(fileMapLast, fileMapRecent);
-//					dumpMap("fileMapLast", fileMapLast);
-//					dumpMap("fileMapRecent", fileMapRecent);
+					// dumpMap("fileMapLast", fileMapLast);
+					// dumpMap("fileMapRecent", fileMapRecent);
 					// Important to allow memory to be garbage collected
 					byteDecoder.close();
 					if (perfect) {
@@ -150,20 +149,19 @@ public class Optimizer {
 				if (perfect) {
 					break;
 				}
-				
+
 			}
-//			dumpMap("fileMapRecent", fileMapRecent);
-//			dumpMap("fileMapAllGood", fileMapAllGood);
-//			dumpMap("fileMapAllBad", fileMapAllBad);
-			Map<String, List<Block>> results = outputMap(fileMapRecent, fileMapAllGood, fileMapAllBad);
+			// dumpMap("fileMapRecent", fileMapRecent);
+			// dumpMap("fileMapAllGood", fileMapAllGood);
+			// dumpMap("fileMapAllBad", fileMapAllBad);
+			Map<FileSelector, List<Block>> results = outputMap(fileMapRecent, fileMapAllGood, fileMapAllBad);
 			int numGoodBlocks = 0;
 			int numBadBlocks = 0;
 			int numBlocks = 0;
 			int numMissingBlocks = 0;
-			for (String fileName : results.keySet()) {
-				
-				
-				String  unixFileName = unixFileName(fileName);
+			for (FileSelector fileName : results.keySet()) {
+
+				String unixFileName = unixFileName(fileName.getFileName());
 				File dstFile = new File(dstTape, unixFileName);
 				int i = 1;
 				while (dstFile.exists()) {
@@ -176,14 +174,15 @@ public class Optimizer {
 				for (int blockNum = 0; blockNum < blockList.size(); blockNum++) {
 					Block block = blockList.get(blockNum);
 					if (block == null) {
-						System.out.println("   " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " missing");
+						System.out.println("   " + Block.cleanFilename(fileName.getFileName()) + " " + Block.toHex4(blockNum)
+								+ " missing");
 					} else {
 						System.out.println("   " + block);
 					}
 				}
 
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	
+
 				// Calculate the addresses
 				int loadAddr = -1;
 				int execAddr = -1;
@@ -212,24 +211,23 @@ public class Optimizer {
 				}
 
 				FileOutputStream fos = new FileOutputStream(dstFile);
-				writeATMFile(fos, fileName, loadAddr, execAddr, bos.toByteArray());
+				writeATMFile(fos, fileName.getFileName(), loadAddr, execAddr, bos.toByteArray());
 				fos.close();
 			}
 
-			System.out.println("@@@ wav stats\t" + numGoodBlocks + "\t" + numBadBlocks + "\t" + numBlocks + "\t" + numMissingBlocks + " " + srcFile.getName());
-			
+			System.out.println("@@@ wav stats\t" + numGoodBlocks + "\t" + numBadBlocks + "\t" + numBlocks + "\t" + numMissingBlocks	+ " " + srcFile.getName());
+
 			totalGoodBlocks += numGoodBlocks;
 			totalBadBlocks += numBadBlocks;
 			totalBlocks += numBlocks;
 			totalMissingBlocks += numMissingBlocks;
-			
-			tape++;
-		}		
+
+		}
 
 		System.out.println("@@@ total stats\t" + totalGoodBlocks + "\t" + totalBadBlocks + "\t" + totalBlocks + "\t" + totalMissingBlocks);
 
 	}
-	
+
 	private String unixFileName(String s) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < s.length(); i++) {
@@ -244,8 +242,7 @@ public class Optimizer {
 		}
 		return s.toUpperCase();
 	}
-	
-	
+
 	protected void writeATMFile(OutputStream out, String title, int loadAddr, int execAddr, byte[] data) throws IOException {
 		writeString(out, title);
 		for (int i = 0; i < 16 - title.length(); i++) {
@@ -256,7 +253,7 @@ public class Optimizer {
 		writeShort(out, data.length);
 		out.write(data);
 	}
-	
+
 	private void writeString(OutputStream out, String value) throws IOException {
 		out.write(value.getBytes());
 	}
@@ -267,9 +264,10 @@ public class Optimizer {
 		buffer[1] = (byte) ((value >> 8) & 0xff);
 		out.write(buffer);
 	}
-	
-	private void mergeFileMaps(Map<String, Map<Integer, Set<Block>>> fromFileMap, Map<String, Map<Integer, Set<Block>>> toFileMap) {
-		for (String fileName : fromFileMap.keySet()) {
+
+	private void mergeFileMaps(Map<FileSelector, Map<Integer, Set<Block>>> fromFileMap,
+			Map<FileSelector, Map<Integer, Set<Block>>> toFileMap) {
+		for (FileSelector fileName : fromFileMap.keySet()) {
 			Map<Integer, Set<Block>> fromBlockMap = fromFileMap.get(fileName);
 			Map<Integer, Set<Block>> toBlockMap = toFileMap.get(fileName);
 			if (toBlockMap == null) {
@@ -277,9 +275,9 @@ public class Optimizer {
 				toFileMap.put(fileName, toBlockMap);
 			}
 			mergeBlockMaps(fromBlockMap, toBlockMap);
-		}		
+		}
 	}
-	
+
 	private void mergeBlockMaps(Map<Integer, Set<Block>> fromBlockMap, Map<Integer, Set<Block>> toBlockMap) {
 		for (int blockNum : fromBlockMap.keySet()) {
 			Set<Block> fromSet = fromBlockMap.get(blockNum);
@@ -293,12 +291,12 @@ public class Optimizer {
 			}
 		}
 	}
-	
-	private boolean isComplete(Set<String> fileNames, Map<String, Map<Integer, Set<Block>>> fileMap) {
+
+	private boolean isComplete(Set<FileSelector> fileNames, Map<FileSelector, Map<Integer, Set<Block>>> fileMap) {
 		if (fileNames == null || fileNames.size() == 0 || fileMap == null || fileMap.size() == 0) {
 			return false;
 		}
-		for (String fileName : fileNames) {
+		for (FileSelector fileName : fileNames) {
 			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 			if (blockMap == null) {
 				return false;
@@ -332,27 +330,26 @@ public class Optimizer {
 		return true;
 	}
 
-//	private void dumpMap(String name, Map<String, Map<Integer, Set<Block>>> fileMap) {
-//		System.out.println(name);
-//		for (String fileName : fileMap.keySet()) {
-//			System.out.println("    " + Block.cleanFilename(fileName));
-//			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
-//			for (Map.Entry<Integer, Set<Block>> entry : blockMap.entrySet()) {
-//				System.out.println("        " + entry.getKey());
-//				for (Block block : entry.getValue()) {
-//					System.out.println("            " + block);
-//				}			
-//			}
-//		}
-//	}
-		
-	private Map<String, List<Block>> outputMap(
-			Map<String, Map<Integer, Set<Block>>> fileMap,
-			Map<String, Map<Integer, Set<Block>>> fileMapAllGood,
-			Map<String, Map<Integer, Set<Block>>> fileMapAllBad) {
-		
-		Map<String, List<Block>> results = new TreeMap<String, List<Block>>();
-		for (String fileName : fileMap.keySet()) {
+	// private void dumpMap(String name, Map<String, Map<Integer, Set<Block>>>
+	// fileMap) {
+	// System.out.println(name);
+	// for (String fileName : fileMap.keySet()) {
+	// System.out.println("    " + Block.cleanFilename(fileName));
+	// Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
+	// for (Map.Entry<Integer, Set<Block>> entry : blockMap.entrySet()) {
+	// System.out.println("        " + entry.getKey());
+	// for (Block block : entry.getValue()) {
+	// System.out.println("            " + block);
+	// }
+	// }
+	// }
+	// }
+
+	private Map<FileSelector, List<Block>> outputMap(Map<FileSelector, Map<Integer, Set<Block>>> fileMap, Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
+
+		Map<FileSelector, List<Block>> results = new TreeMap<FileSelector, List<Block>>();
+		for (FileSelector fileName : fileMap.keySet()) {
 			List<Block> blockList = new ArrayList<Block>();
 			Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 			int blockNum = 0;
@@ -380,10 +377,9 @@ public class Optimizer {
 		}
 		return results;
 	}
-	
-	private Block findBestBlock(String fileName, int blockNum,
-			Map<String, Map<Integer, Set<Block>>> fileMapAllGood,
-			Map<String, Map<Integer, Set<Block>>> fileMapAllBad) {
+
+	private Block findBestBlock(FileSelector fileName, int blockNum, Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
 		Block block = findBestBlock(fileName, blockNum, fileMapAllGood);
 		if (block == null) {
 			block = findBestBlock(fileName, blockNum, fileMapAllBad);
@@ -391,8 +387,7 @@ public class Optimizer {
 		return block;
 	}
 
-	private Block findBestBlock(String fileName, int blockNum,
-			Map<String, Map<Integer, Set<Block>>> fileMap) {
+	private Block findBestBlock(FileSelector fileName, int blockNum, Map<FileSelector, Map<Integer, Set<Block>>> fileMap) {
 		Map<Integer, Set<Block>> blockMap = fileMap.get(fileName);
 		if (blockMap == null) {
 			return null;
@@ -404,7 +399,8 @@ public class Optimizer {
 		return findBestBlock(fileName, blockNum, blocks);
 	}
 
-	private Block findBestBlock(String fileName, int blockNum, Set<Block> blocks) {
+	private Block findBestBlock(FileSelector blockSelector, int blockNum, Set<Block> blocks) {
+		String fileName = blockSelector.getFileName();
 		if (blocks.size() == 1) {
 			Block block = blocks.iterator().next();
 			block.updateChecksumValid();
@@ -444,7 +440,7 @@ public class Optimizer {
 			return block;
 		}
 	}
-	
+
 	private int getField(Field field, int index, Set<Block> blocks) {
 		Map<Integer, Integer> stats = new TreeMap<Integer, Integer>();
 		for (Block block : blocks) {
@@ -452,7 +448,7 @@ public class Optimizer {
 			if (field != null) {
 				val = block.getField(field);
 			} else {
-				if (index < block.getBytes().length) { 
+				if (index < block.getBytes().length) {
 					val = 0xff & block.getBytes()[index];
 				}
 			}
@@ -467,37 +463,41 @@ public class Optimizer {
 		int bestVal = -1;
 		int bestCount = -1;
 		for (Map.Entry<Integer, Integer> entry : stats.entrySet()) {
-//			if (field != null) {
-//				System.out.println("    " + field + " " + Block.toHex4(entry.getKey()) + " occurred " + entry.getValue() + " times");
-//			} else {
-//				System.out.println("    data[" + index + "] " + Block.toHex2(entry.getKey()) + " occurred " + entry.getValue() + " times");				
-//			}
+			// if (field != null) {
+			// System.out.println("    " + field + " " +
+			// Block.toHex4(entry.getKey()) + " occurred " + entry.getValue() +
+			// " times");
+			// } else {
+			// System.out.println("    data[" + index + "] " +
+			// Block.toHex2(entry.getKey()) + " occurred " + entry.getValue() +
+			// " times");
+			// }
 			if (entry.getValue() > bestCount) {
 				bestCount = entry.getValue();
 				bestVal = entry.getKey();
 			}
 		}
-//		if (field != null) {
-//			System.out.println("    " + field + " best value " + Block.toHex4(bestVal));
-//		} else {
-//			System.out.println("    data[" + index + "] best value " + Block.toHex4(bestVal));			
-//		}
+		// if (field != null) {
+		// System.out.println("    " + field + " best value " +
+		// Block.toHex4(bestVal));
+		// } else {
+		// System.out.println("    data[" + index + "] best value " +
+		// Block.toHex4(bestVal));
+		// }
 		return bestVal;
 	}
 
-
-	
-	private void updateMap(Map<String, Map<Integer, Set<Block>>> fileMapGood, Map<String, Map<Integer, Set<Block>>> fileMapBad,
-			List<Block> blocks) {
+	private void updateMap(Map<FileSelector, Map<Integer, Set<Block>>> fileMapGood,
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapBad, List<Block> blocks) {
 		for (Block block : blocks) {
-			Map<String, Map<Integer, Set<Block>>> fileMap = block.isCheckSumValid() ? fileMapGood : fileMapBad;
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMap = block.isCheckSumValid() ? fileMapGood : fileMapBad;
 			if (fileMap == null) {
 				continue;
 			}
-			Map<Integer, Set<Block>> blockMap = fileMap.get(block.getFileName());
+			Map<Integer, Set<Block>> blockMap = fileMap.get(block.getSelector());
 			if (blockMap == null) {
 				blockMap = new TreeMap<Integer, Set<Block>>();
-				fileMap.put(block.getFileName(), blockMap);
+				fileMap.put(block.getSelector(), blockMap);
 			}
 
 			Set<Block> goodSet = blockMap.get(block.getNum());
@@ -510,9 +510,9 @@ public class Optimizer {
 	}
 
 	public boolean optimizeParam(ByteDecoder byteDecoder, BlockDecoder blockDecoder,
-			Map<String, Map<Integer, Set<Block>>> fileMapRecent,
-			Map<String, Map<Integer, Set<Block>>> fileMapAllGood,			
-			Map<String, Map<Integer, Set<Block>>> fileMapAllBad) {
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent,
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,			
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
 
 
 		int best = -1;
@@ -544,8 +544,8 @@ public class Optimizer {
 		boolean loDone = false;
 		boolean hiDone = false;
 
-		Set<String> expectedFilenames = new HashSet<String>();
-			
+		Set<FileSelector> expectedFilenames = new HashSet<FileSelector>();
+
 		for (int i = 1; i <= numPoints + 1; i++) {
 
 			if (loDone && hiDone) {
@@ -602,13 +602,13 @@ public class Optimizer {
 			updateMap(fileMapAllGood, fileMapAllBad, blocks);
 
 			// If we get a perfect last set of blocks, then exit
-			Map<String, Map<Integer, Set<Block>>> fileMapLast = new TreeMap<String, Map<Integer,Set<Block>>>();
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapLast = new TreeMap<FileSelector, Map<Integer,Set<Block>>>();
 			updateMap(fileMapLast, null, blocks);
 
 			// Update the expected filenames from the good blocks
 			for (Block block : blocks) {
 				if (block.isCheckSumValid() && block.isFileNameValid()) {
-					expectedFilenames.add(block.getFileName());
+					expectedFilenames.add(block.getSelector());
 				}
 			}
 			System.out.println("@@@ expected: " + Block.cleanFilenames(expectedFilenames));

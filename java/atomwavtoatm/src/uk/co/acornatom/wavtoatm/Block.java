@@ -101,20 +101,21 @@ public class Block {
 				+ " " + toHex4(execAddr) + " " + toHex2(checksum) + " " + checkSumValid;
 	}
 
-	public static String cleanFilenames(Collection<String> fileNames) {
+	public static String cleanFilenames(Collection<FileSelector> fileNames) {
 		boolean first = true;
 		StringBuffer sb = new StringBuffer();
 		sb.append('[');
-		for (String fileName : fileNames) {
+		for (FileSelector fileName : fileNames) {
 			if (!first) {
 				sb.append(", ");
 			}
-			sb.append(cleanFilename(fileName));
+			sb.append(fileName.toString());
 			first = false;
 		}
 		sb.append(']');
 		return sb.toString();
 	}
+	
 	public static String cleanFilename(String fileName) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < fileName.length(); i++) {
@@ -159,7 +160,7 @@ public class Block {
 	
 	public boolean isFileNameValid() {
 		for (int i = 0; i < fileName.length(); i++) {
-			if (fileName.charAt(i) >= 127) {
+			if (fileName.charAt(i) > 126) {
 				return false;
 			}
 		}
@@ -258,6 +259,10 @@ public class Block {
 				System.out.println("@@@ " + cleanFilename(fileName) + " " + toHex4(num) + " checksum mis-match: old cksum = " + toHex2(checksum) + "; new checksum = " + toHex2(csum));}
 			
 		}
+	}
+	
+	public FileSelector getSelector() {
+		return new FileSelector(this);
 	}
 	
 
