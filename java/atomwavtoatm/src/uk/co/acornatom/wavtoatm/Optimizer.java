@@ -26,7 +26,7 @@ public class Optimizer {
 	public Optimizer() {
 	}
 
-	private int[] readWavIntoMemory(File file, boolean log) throws IOException {
+	private short[] readWavIntoMemory(File file, boolean log) throws IOException {
 
 		// Open the wav file specified as the first argument
 		WavFile wavFile = WavFile.openWavFile(file);
@@ -46,7 +46,7 @@ public class Optimizer {
 		}
 		
 		// Create a buffer to hold all of the samples
-		int[] samples = new int[numFrames * numChannels];
+		short[] samples = new short[numFrames * numChannels];
 
 		int framesRead = wavFile.readFrames(samples, numFrames);
 
@@ -60,10 +60,7 @@ public class Optimizer {
 		return samples;
 	}
 
-	private int[] extractChannel(int[] samples, int channel, int numChannels) {
-		if (numChannels == 1) {
-			return samples;
-		} else {
+	private int[] extractChannel(short[] samples, int channel, int numChannels) {
 			int numFrames = samples.length / numChannels;
 			int[] newSamples = new int[numFrames];
 			int j = channel;
@@ -72,14 +69,9 @@ public class Optimizer {
 				j += numChannels;
 			}
 			return newSamples;
-		}
 	}
 
-	private int[] mergeChannels(int[] samples, int numChannels) {
-		if (numChannels == 1) {
-			return samples;
-		} else {
-			int numFrames = samples.length / numChannels;
+	private int[] mergeChannels(short[] samples, int numChannels) {
 			int[] newSamples = new int[numFrames];
 			int j = 0;
 			for (int i = 0; i < numFrames; i++) {
@@ -87,7 +79,6 @@ public class Optimizer {
 				j += numChannels;
 			}
 			return newSamples;
-		}
 	}
 	
 	public void process(List<File> srcFiles, File dstDir) throws IOException {
@@ -114,7 +105,7 @@ public class Optimizer {
 			File dstTape = new File(dstDir, "" + dirName);
 			dstTape.mkdirs();
 
-			int[] samples = readWavIntoMemory(srcFile, true);
+			short[] origSamples = readWavIntoMemory(srcFile, true);
 
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood = new TreeMap<FileSelector, Map<Integer, Set<Block>>>();
@@ -126,18 +117,21 @@ public class Optimizer {
 
 			Set<FileSelector> expectedFilenames = new HashSet<FileSelector>();
 
-			for (int channel = 0 ; channel <= numChannels; channel++) {
+			// for mono we just decode that channel
+			// for stereo we decode L, R and (L+R)/2
+			for (int channel = 0 ; channel <= (numChannels > 1 ? 2 : 0); channel++) {
 
 				System.out.println("@@@ " + srcFile.getName() + " channel " + channel);
 
 				// Inefficient to read the wav multiple times, but saves memory
-				// TODO: Refactor to use short[] instead of int[]
-				samples = readWavIntoMemory(srcFile, false);
-				if (numChannels == 1 || channel < numChannels ) {
-					samples = extractChannel(samples, channel, numChannels);
+				origSamples = readWavIntoMemory(srcFile, false);
+				int[] samples;
+				if (channel < numChannels ) {
+					samples = extractChannel(origSamples, channel, numChannels);
 				} else {
-					samples = mergeChannels(samples, numChannels);
+					samples = mergeChannels(origSamples, numChannels);
 				}
+				origSamples = null;
 
 				WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, window2, sampleRate, frequency,
 						bothEdges);

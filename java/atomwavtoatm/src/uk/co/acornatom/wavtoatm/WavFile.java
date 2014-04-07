@@ -375,12 +375,12 @@ public class WavFile
 
 	// Integer
 	// -------
-	public int readFrames(int[] sampleBuffer, int numFramesToRead) throws IOException, WavFileException
+	public int readFrames(short[] sampleBuffer, int numFramesToRead) throws IOException, WavFileException
 	{
 		return readFrames(sampleBuffer, 0, numFramesToRead);
 	}
 
-	public int readFrames(int[] sampleBuffer, int offset, int numFramesToRead) throws IOException, WavFileException
+	public int readFrames(short[] sampleBuffer, int offset, int numFramesToRead) throws IOException, WavFileException
 	{
 		if (ioState != IOState.READING) throw new IOException("Cannot read from WavFile instance");
 
@@ -390,7 +390,7 @@ public class WavFile
 
 			for (int c=0 ; c<numChannels ; c++)
 			{
-				sampleBuffer[offset] = (int) readSample();
+				sampleBuffer[offset] = (short) readSample();
 				offset ++;
 			}
 
@@ -400,12 +400,12 @@ public class WavFile
 		return numFramesToRead;
 	}
 
-	public int readFrames(int[][] sampleBuffer, int numFramesToRead) throws IOException, WavFileException
+	public int readFrames(short[][] sampleBuffer, int numFramesToRead) throws IOException, WavFileException
 	{
 		return readFrames(sampleBuffer, 0, numFramesToRead);
 	}
 
-	public int readFrames(int[][] sampleBuffer, int offset, int numFramesToRead) throws IOException, WavFileException
+	public int readFrames(short[][] sampleBuffer, int offset, int numFramesToRead) throws IOException, WavFileException
 	{
 		if (ioState != IOState.READING) throw new IOException("Cannot read from WavFile instance");
 
@@ -413,7 +413,7 @@ public class WavFile
 		{
 			if (frameCounter == numFrames) return f;
 
-			for (int c=0 ; c<numChannels ; c++) sampleBuffer[c][offset] = (int) readSample();
+			for (int c=0 ; c<numChannels ; c++) sampleBuffer[c][offset] = (short) readSample();
 
 			offset ++;
 			frameCounter ++;
@@ -422,12 +422,12 @@ public class WavFile
 		return numFramesToRead;
 	}
 
-	public int writeFrames(int[] sampleBuffer, int numFramesToWrite) throws IOException, WavFileException
+	public int writeFrames(short[] sampleBuffer, int numFramesToWrite) throws IOException, WavFileException
 	{
 		return writeFrames(sampleBuffer, 0, numFramesToWrite);
 	}
 
-	public int writeFrames(int[] sampleBuffer, int offset, int numFramesToWrite) throws IOException, WavFileException
+	public int writeFrames(short[] sampleBuffer, int offset, int numFramesToWrite) throws IOException, WavFileException
 	{
 		if (ioState != IOState.WRITING) throw new IOException("Cannot write to WavFile instance");
 
@@ -447,12 +447,12 @@ public class WavFile
 		return numFramesToWrite;
 	}
 
-	public int writeFrames(int[][] sampleBuffer, int numFramesToWrite) throws IOException, WavFileException
+	public int writeFrames(short[][] sampleBuffer, int numFramesToWrite) throws IOException, WavFileException
 	{
 		return writeFrames(sampleBuffer, 0, numFramesToWrite);
 	}
 
-	public int writeFrames(int[][] sampleBuffer, int offset, int numFramesToWrite) throws IOException, WavFileException
+	public int writeFrames(short[][] sampleBuffer, int offset, int numFramesToWrite) throws IOException, WavFileException
 	{
 		if (ioState != IOState.WRITING) throw new IOException("Cannot write to WavFile instance");
 
