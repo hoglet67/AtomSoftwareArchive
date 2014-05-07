@@ -200,7 +200,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
  	 		}
 			int num = 1016 + chunk;
 			writeImage(new File("disks/" + num), chunkImage);
-			addDisk(chunkImage, 0);
+			addDisk(chunkImage, num);
  		}
 	}
 
@@ -236,6 +236,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 				}
 			} catch (Exception e) {
 				System.out.println("Problem SDDOS files for title " + item.getTitle());
+				e.printStackTrace();
 			}
 		}
 	}
