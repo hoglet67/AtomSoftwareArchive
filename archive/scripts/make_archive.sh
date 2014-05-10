@@ -45,6 +45,8 @@ HS=HS
 SID=SID
 # QUILL
 QUILL=QUILL
+# ASP Software
+ASP=ASP
 
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
@@ -77,6 +79,13 @@ popd
 
 mkdir -p $ARCHIVE/$SID
 cp -a ../beebsid/ATMSID* $ARCHIVE/$SID
+
+##############################################################
+# White Barrows
+##############################################################
+
+mkdir -p $ARCHIVE/$ASP
+java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$ASP/WHITEBA
 
 ##############################################################
 # Books
