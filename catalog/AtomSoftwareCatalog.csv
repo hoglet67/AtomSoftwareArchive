@@ -1317,10 +1317,10 @@ CH.""INVAS""",Test+L602,"INVAS
 INVASIN",present,,,,
 700,V7B1,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
 701,V7B2,ASP,ASP S/W,A.Commercial Software,The White Barrows,Adventure,,ASP,8200,"CH.""WHITEBA""",Test,WHITEBA,present,,,,
-702,V7B2,SID/KRFTWRK,Non Comm,B.Modern Creations/Ports,Kraftwerk (SID) (32k),Music,Phil Mainwaring,NC,8200,"CH.""KRFTWRK""",Test,"KRFTWRK
+702,V7B2,NC,Non Comm,B.Modern Creations/Ports,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""KRFTWRK""",Test,"KRFTWRK
 CMPWRLD
 SID50HZ",present,Mainwaring,,,
-703,V7B2,NC/MSAA,Non Comm,B.Modern Creations/Ports,Mandelbrot,Graphics,Phil Mainwaring,NC,8200,"CH.""MSDISP""",Test,"MSC3A
+703,V7B2,NC,Non Comm,B.Modern Creations/Ports,Mandelbrot,Graphics,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""",Test,"MSC3A
 MSC3AD
 MSC3AL
 MSC3ALD
