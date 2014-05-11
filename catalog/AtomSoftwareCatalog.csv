@@ -783,7 +783,7 @@ COMPILER",present,Practical Programs,,,
 532,V4,TBOI,Interface,D.Books/Magazines,Artist,Graphics,Ken North,TBOI,8200,"CH.""ARTIST""",Works,ARTIST,present,Interface,,,
 533,V5,C&VG,C&VG,D.Books/Magazines,Dodgems,Game,John Dyson,CVG,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Magazines,,,
 534,V4,C&VG,C&VG,D.Books/Magazines,Breakout,Game,Tim Jackson,CVG,8200,"CH.""BREAKOU""",Works,BREAKOU,present,Magazines,,,
-535,V7B2,C&VG,C&VG,D.Books/Magazines,Life,Game,Tim Jackson,CVG,8200,"*LOAD LIFE 8200
+535,V7B2,C&VG,C&VG,D.Books/Magazines,Life,Game,Tim Jackson,CVG,2900,"*LOAD LIFE 8200
 ?18=130
 RUN",Test,LIFE,present,Magazines,,,
 536,V5,C&VG,C&VG,D.Books/Magazines,Alien Hunt,Game,John Kirk,CVG,8200,"CH.""ALIEN""",Works,ALIEN,present,Magazines,,,
