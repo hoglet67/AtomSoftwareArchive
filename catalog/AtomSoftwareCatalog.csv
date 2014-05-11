@@ -783,7 +783,8 @@ COMPILER",present,Practical Programs,,,
 532,V4,TBOI,Interface,D.Books/Magazines,Artist,Graphics,Ken North,TBOI,8200,"CH.""ARTIST""",Works,ARTIST,present,Interface,,,
 533,V5,C&VG,C&VG,D.Books/Magazines,Dodgems,Game,John Dyson,CVG,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Magazines,,,
 534,V4,C&VG,C&VG,D.Books/Magazines,Breakout,Game,Tim Jackson,CVG,8200,"CH.""BREAKOU""",Works,BREAKOU,present,Magazines,,,
-535,,C&VG,C&VG,D.Books/Magazines,Life,Game,Tim Jackson,CVG,8200,,Issue 3 Page 55,,missing,Magazines,,,
+535,V7B2,C&VG,C&VG,D.Books/Magazines,Life,Game,Tim Jackson,CVG,8200,"?18=130
+CH.""LIFE""",Test,LIFE,present,Magazines,,,
 536,V5,C&VG,C&VG,D.Books/Magazines,Alien Hunt,Game,John Kirk,CVG,8200,"CH.""ALIEN""",Works,ALIEN,present,Magazines,,,
 537,V7B2,C&VG,C&VG,D.Books/Magazines,Entomb,Game,Murray Allen,CVG,8200,"CH.""ENTOMB""",Works,ENTOMB,present,Magazines,,,
 538,V7B2,C&VG,C&VG,D.Books/Magazines,Moon Lander,Game,S Draper,CVG,8200,"CH.""MOONLAN""",Works,MOONLAN,present,Magazines,,,
@@ -794,8 +795,8 @@ COMPILER",present,Practical Programs,,,
 543,V4,C&VG,C&VG,D.Books/Magazines,Starwar,Game,J. C. Flower,CVG,8200,"CH.""STARWAR""",Works,STARWAR,present,Magazines,,,
 544,,C&VG,C&VG,D.Books/Magazines,Mining Colony,Game,Robert Campbell,CVG,8200,,Issue 12 Page 41,,missing,Magazines,,,
 545,,C&VG,C&VG,D.Books/Magazines,Monster,Game,Marcus Jakobsson,CVG,8200,,,,duplicate,Magazines,,,
-546,,C&VG,C&VG,D.Books/Magazines,Bullion Snatch,Game,Stephen Mayfroidt,CVG,8200,,Issue 15 Page 45,,missing,Magazines,,,
-547,,C&VG,C&VG,D.Books/Magazines,Rhino,Game,R. M. Andrews,CVG,8200,,Issue 16 Page 68,,missing,Magazines,,,
+546,V7B2,C&VG,C&VG,D.Books/Magazines,Bullion Snatch,Game,Stephen Mayfroidt,CVG,8200,"CH.""BULLION""",Test,BULLION,present,Magazines,,,
+547,V7B2,C&VG,C&VG,D.Books/Magazines,Rhino,Game,R. M. Andrews,CVG,8200,"CH.""RHINO""",Test,RHINO,present,Magazines,,,
 548,V5,C&VG,C&VG,D.Books/Magazines,Formula One,Game,Chris Johnson,CVG,8200,"CH.""RACING""",Works,RACING,present,Magazines,,,
 549,,C&VG,C&VG,D.Books/Magazines,Grow,Game,Marcus Jacobsson,CVG,8200,,Issue 21 Page 79,,missing,Magazines,,,
 550,V4,C&VG,C&VG,D.Books/Magazines,Duck Shoot,Game,Tim Jackson,CVG,8200,"CH.""DUCK""",Works,DUCK,present,Magazines,,,
@@ -835,7 +836,7 @@ RUN",Works,CLOCK,present,Atomic Machine Code,,,
 580,V5,ECCE,ECCE Prods,D.Books/Magazines,Direct Hex,Educational,,ECCE,8200,"CH.""DIRHEX""",Works,DIRHEX,present,Atomic Machine Code,,,
 581,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Screen Chase,Educational,,ECCE,8200,"CH.""CHASE""",Works,CHASE,present,Atomic Machine Code,,,
 582,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Pontoon (R),Educational,,ECCE,8200,"CH.""PONTOON""",Works - but needs WorkPack at A000,PONTOON,present,Atomic Machine Code,,,
-583,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Pools,Educational,,ECCE,8200,"CH.""POOLS""",Test,"POOLS
+583,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Pools,Educational,,ECCE,8200,"CH.""POOLS""",Works,"POOLS
 POOLS1
 POOLS2",present,Atomic Machine Code,,,
 584,V5,ECCE,ECCE Prods,D.Books/Magazines,Find End of Text,Educational,,ECCE,8200,"CH.""FINDEND""",Works,FINDEND,present,Atomic Machine Code,,,
@@ -1317,7 +1318,7 @@ CH.""INVAS""",Test+L602,"INVAS
 INVASIN",present,,,,
 700,V7B1,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
 701,V7B2,ASP,ASP S/W,A.Commercial Software,The White Barrows,Adventure,,ASP,8200,"CH.""WHITEBA""",Works,WHITEBA,present,,,,
-702,V7B2,NC,Non Comm,B.Modern Creations/Ports,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Test,"KRFTWRK
+702,V7B2,NC,Non Comm,B.Modern Creations/Ports,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Works,"KRFTWRK
 CMPWRLD
 SID50HZ
 LOADER",present,Mainwaring,,,
@@ -1367,7 +1368,7 @@ MSDISP",present,Mainwaring,,,
 733,V7B2,NC,Non Comm,C.Non Commercial Software,Camel,Game,,TAPES/023A,8200,"CH.""CAMEL""",Works,CAMEL,present,Arcadian Tapes,,,
 734,V7B2,NC,Non Comm,C.Non Commercial Software,Depth Charge,Game,,TAPES/023A,8200,"CH.""DEPTHCH""",Works,DEPTHCH,present,Arcadian Tapes,,,
 735,V7B2,NC,Non Comm,C.Non Commercial Software,Fighter,Game,,TAPES/023A,8200,"CH.""FIGHTER""",Works,FIGHTER,present,Arcadian Tapes,,,
-736,V7B2,NC,Non Comm,C.Non Commercial Software,Spirograph,Graphics,,TAPES/030A,8200,"CH.""SPIROGR""",Test,SPIROGR,present,Arcadian Tapes,,,
+736,V7B2,NC,Non Comm,C.Non Commercial Software,Spirograph,Graphics,,TAPES/030A,8200,"CH.""SPIROGR""",Works,SPIROGR,present,Arcadian Tapes,,,
 737,V7B2,NC,Non Comm,C.Non Commercial Software,War Fish,Game,,TAPES/034A,8200,"CH.""WARFISH""",Works,WARFISH,present,Arcadian Tapes,,,
 738,V7B2,NC,Non Comm,C.Non Commercial Software,Car Maze,Game,,NC,8200,"CH.""CARMAZE""",Works,CARMAZE,present,,,,
 739,V7B2,NC,Non Comm,C.Non Commercial Software,Plane and Tank Battle,Game,,NC,8200,"CH.""TANKBAT""",Works,TANKBAT,present,,,,
