@@ -628,7 +628,7 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 *RUN 157S",Works,"157
 157S",present,,,,
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
-403,V7B2,YC,Your Computer,C.Non Commercial Software,Stunt Man,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Test,STUNT,present,,,,
+403,V7B2,YC,Your Computer,D.Books/Magazines,Stunt Man,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Test,STUNT,present,,,,
 404,,NC,Non Comm,C.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
 405,,MO,Magnus Olsson,C.Non Commercial Software,Super Zombie,Game,Magnus Olssen,MO,8200,*RUN SUPERZMB,,SUPERZMB,missing,,,,
 406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,*RUN TEACUPS,Works,TEACUPS,present,,,,
@@ -1270,7 +1270,7 @@ SCRE",present,RS Mono,Yes,,
 680,V6,NC,Non Comm,C.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,Mainwaring,,,
 681,V6,NC,Non Comm,C.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,Mainwaring,,,
 682,V6,NC,Non Comm,C.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,Mainwaring,,,
-683,V7B2,YC,Your Computer,C.Non Commercial Software,Quest,Adventure,,YC,2800,"*LOAD QUESTDA
+683,V7B2,YC,Your Computer,D.Books/Magazines,Quest,Adventure,,YC,2800,"*LOAD QUESTDA
 CH.""QUEST""",Test,"QUEST
 QUESTDA",present,,,,
 684,V6,ECD,ECD,A.Commercial Software,Moonlander,Game,,OTHER,8200,"CH.""MOONLAN""",Works,MOONLAN,present,,,,
