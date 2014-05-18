@@ -1379,3 +1379,4 @@ MSDISP",present,Mainwaring,,,
 745,V7B3,YC,Your Computer,D.Books/Magazines,Rally Racer,Game,,YC,8200,"CH.""RALLY""",Works,RALLY,present,Magazines,,,
 746,V7B3,NC,Non Comm,E.ROMs,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",Test,46E8,present,ROMs,,,
+747,V7B3,AU,Acorn User,D.Books/Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Test,SCRDUMP,present,Magazines,,,
