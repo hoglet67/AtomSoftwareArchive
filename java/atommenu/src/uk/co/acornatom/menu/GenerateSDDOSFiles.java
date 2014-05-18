@@ -182,7 +182,6 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		ATMFile splashFile = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH"));
 		menuFile.setTitle("MENU");
 		addFile(image, menuFile);
-		addFile(image, helpFile);
 		addFile(image, splashFile);
 		writeImage(new File("disks/0"), image);
 		addDisk(image, 0);
@@ -198,6 +197,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 				atmFile.setTitle(SDDOS_MENU_FILES[i]);
 				addFile(chunkImage, atmFile);
  	 		}
+			addFile(chunkImage, helpFile);
 			int num = 1016 + chunk;
 			writeImage(new File("disks/" + num), chunkImage);
 			addDisk(chunkImage, num);
