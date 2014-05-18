@@ -13,6 +13,7 @@ function package() {
 }
 
 ARCHIVE=archive
+ARCHIVE_SDDOS=archive_img
 
 # Define top level directories
 # Nice and short for easy navigation
@@ -488,6 +489,9 @@ find . -type f | sort | zip -@ ../$ARCHIVE.zip
 popd
 mv $ARCHIVE.zip ~
 
+rm -f ~/$ARCHIVE_SDDOS.zip
+zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
+ 
 ##############################################################
 # Deploy to Atomulator for testing
 ##############################################################
