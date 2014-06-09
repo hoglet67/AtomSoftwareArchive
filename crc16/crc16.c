@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 #define poly 0x002d
 
@@ -27,7 +28,7 @@ int crc16(char *addr, int num, int crc)
 }
 
 
-#define MAXBUF 8192
+#define MAXBUF (256*1024)
 
 void main(int argc, char **argv)
 {
