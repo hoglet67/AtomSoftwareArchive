@@ -18,8 +18,8 @@ for i in \
 "http://stardot.org.uk/forums/download/file.php?id=4166" \
 "http://stardot.org.uk/forums/download/file.php?id=5391" \
 "http://stardot.org.uk/forums/download/file.php?id=6242" \
-"http://stardot.org.uk/forums/download/file.php?id=9282"
-
+"http://stardot.org.uk/forums/download/file.php?id=9282" \
+"http://stardot.org.uk/forums/download/file.php?id=12049"
 do
  # Grab the zipped SSD from StartDot
  wget -O tmp.zip $i
@@ -37,7 +37,7 @@ do
  # Convert to AtomSID
 
  rm -rf ATMSID$n
- java -jar ../java/atomsid/atomsid.jar BEEBSID$n/$sidmenu SIDMENU ATMSID$n 2800
+ java -jar ../java/atomsid/atomsid.jar BEEBSID$n/$sidmenu SIDMENU blacklist.txt ATMSID$n 2800
 
  rm -f tmp.ssd tmp.zip
  n=$(( $n + 1 ))

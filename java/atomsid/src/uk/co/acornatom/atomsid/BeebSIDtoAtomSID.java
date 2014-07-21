@@ -10,8 +10,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BeebSIDtoAtomSID {
 
@@ -323,8 +326,19 @@ public class BeebSIDtoAtomSID {
 		return sidHeader;
 	}
 
-	public void beebSIDtoAtomSID(File beebSIDMenuFile, File atomSIDMenuFile, File atomSidDir, int relocateAddrBase) throws IOException {
+	public void beebSIDtoAtomSID(File beebSIDMenuFile, File atomSIDMenuFile, File blacklistFile, File atomSidDir, int relocateAddrBase) throws IOException {
 
+		// Parse the blacklist file
+		Set<String> blackList = new HashSet<String>();
+		InputStream fis = new FileInputStream(blacklistFile);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+		String item;
+		while ((item = br.readLine()) != null) {
+			blackList.add(item.trim());
+		}
+		br.close();
+		
+		
 		System.out.println("### " + atomSidDir.getName());
 
 		byte[] beebSIDMenu = readFile(beebSIDMenuFile);
@@ -382,6 +396,9 @@ public class BeebSIDtoAtomSID {
 				int playAddr = (beebSIDMenu[offset + 2] & 0xff) + ((beebSIDMenu[offset + 3] & 0xff) << 8);
 				int loadAddr = (beebSIDMenu[offset + 9] & 0xff) + ((beebSIDMenu[offset + 10] & 0xff) << 8);
 
+				System.out.println("initAddr = " + Integer.toHexString(initAddr));
+				System.out.println("playAddr = " + Integer.toHexString(playAddr));
+				System.out.println("loadAddr = " + Integer.toHexString(loadAddr));
 				// Read the filename from the BeebSid Menu
 				int j = offset + 16;
 				String fileName = "";
@@ -400,7 +417,11 @@ public class BeebSIDtoAtomSID {
 
 				// Important to only try to relocate by an exact number of pages
 				int relocateAddr = 0;
-				if (relocateAddrBase != 0) {
+				if (blackList.contains(srcSidFile.toString())) {
+					System.out.println("Skipping  sidreloc on " + srcSidFile + " because file was blacklisted");					
+				} else if (relocateAddrBase == 0) {
+					System.out.println("Skipping  sidreloc on " + srcSidFile + " because relocAddr was 0");
+				} else {
 					relocateAddr = relocateAddrBase + (loadAddr & 0xff);
 				}
 				
@@ -408,7 +429,7 @@ public class BeebSIDtoAtomSID {
 				int ret = relocate(srcSidFile, dstSidFile, Mode.FROM_BEEBSID, 0xbdc0, loadAddr, initAddr, playAddr, relocateAddr);
 
 				// If relocation was successful, update the addresses
-				if (relocateAddrBase != 0 && ret == 0) {
+				if (relocateAddr != 0 && ret == 0) {
 					initAddr += (relocateAddr - loadAddr);
 					playAddr += (relocateAddr - loadAddr);
 					loadAddr = relocateAddr;
@@ -478,8 +499,8 @@ public class BeebSIDtoAtomSID {
 
 	public static final void main(String[] args) {
 		try {
-			if (args.length != 3 && args.length != 4) {
-				System.err.println("usage: java -jar atomsid.jar <BeebSIDMenu> <AtomSIDMenuBase> <Output Dir> [ <relocateAddr> ]");
+			if (args.length != 4 && args.length != 5) {
+				System.err.println("usage: java -jar atomsid.jar <BeebSIDMenu> <AtomSIDMenuBase> <BlackList File> <Output Dir> [ <relocateAddr> ]");
 				System.exit(1);
 			}
 			File beebSIDMenuFile = new File(args[0]);
@@ -502,15 +523,21 @@ public class BeebSIDtoAtomSID {
 				System.exit(1);
 			}
 
-			File dir = new File(args[2]);
+			File blacklist = new File(args[2]);
+			if (!blacklist.exists()) {
+				System.err.println("File: " + blacklist + " does not exist");
+				System.exit(1);
+			}
+
+			File dir = new File(args[3]);
 			dir.mkdirs();
 
 			int relocateAddrBase = 0;
-			if (args.length == 4) {
-				relocateAddrBase = Integer.parseInt(args[3], 16);
+			if (args.length == 5) {
+				relocateAddrBase = Integer.parseInt(args[4], 16);
 			}
 			BeebSIDtoAtomSID c = new BeebSIDtoAtomSID();
-			c.beebSIDtoAtomSID(beebSIDMenuFile, atomSIDMenuFile, dir, relocateAddrBase);
+			c.beebSIDtoAtomSID(beebSIDMenuFile, atomSIDMenuFile, blacklist, dir, relocateAddrBase);
 
 		} catch (IOException e) {
 			e.printStackTrace();
