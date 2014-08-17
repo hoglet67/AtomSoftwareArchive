@@ -865,9 +865,9 @@ ERRTAB",present,Magazines,,,
 608,V5,PSI,Psion,A.Commercial Software,Screen Copy - EPS3B,Utility,,PSI,8200,*RUN EPS3B,Works - but need printer to test,EPS3B,present,,,,
 609,V5,PSI,Psion,A.Commercial Software,Screen Copy - EPS28,Utility,,PSI,8200,*RUN EPS28,Works - but need printer to test,EPS28,present,,,,
 610,V5,PSI,Psion,A.Commercial Software,Screen Copy - EPSCOPY,Utility,,PSI,8200,"CH.""EPSCOPY""",Works,EPSCOPY,present,,,,
-611,V5,PSI,Psion,A.Commercial Software,Screen Copy - GP3B,Utility,,PSI,8200,*RUN GPS3B,Works - but need printer to test,GP3B,present,,,,
-612,V5,PSI,Psion,A.Commercial Software,Screen Copy - GP28,Utility,,PSI,8200,*RUN GPS28,Works - but need printer to test,GP28,present,,,,
-613,V5,PSI,Psion,A.Commercial Software,Screen Copy - GPCOPY,Utility,,PSI,8200,"CH.""GPSCOPY""",Works,GPCOPY,present,,,,
+611,V5,PSI,Psion,A.Commercial Software,Screen Copy - GP3B,Utility,,PSI,8200,*RUN GP3B,Works - but need printer to test,GP3B,present,,,,
+612,V5,PSI,Psion,A.Commercial Software,Screen Copy - GP28,Utility,,PSI,8200,*RUN GP28,Works - but need printer to test,GP28,present,,,,
+613,V5,PSI,Psion,A.Commercial Software,Screen Copy - GPCOPY,Utility,,PSI,8200,"CH.""GPCOPY""",Works,GPCOPY,present,,,,
 614,V5,HS,Hopesoft,A.Commercial Software,PS2A Sample Adventure,Language,,HS,8200,"*LOAD PROG
 *RUN PS2A
 ",Works,"PROG
@@ -1263,7 +1263,7 @@ PRINT FOR HELP: SEE MANUAL
 674,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 675,V6,NC,Non Comm,C.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
-679,V7B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
+679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Test,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
@@ -1280,10 +1280,10 @@ QUESTDA",present,Magazines,,,
 688,,PS,Pro Software,A.Commercial Software,Air Strike,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 689,,PS,Pro Software,A.Commercial Software,Chase,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 690,,PS,Pro Software,A.Commercial Software,Road Race,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
-691,V7B2,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
+691,V7B3,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-692,V7B2,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
+692,V7B3,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40",Works,"VDU2440
 DB40
@@ -1380,3 +1380,36 @@ MSDISP",present,Mainwaring,,,
 746,V7B3,NC,Non Comm,E.ROMs,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",Test,46E8,present,ROMs,,,
 747,V7B3,AU,Acorn User,D.Books/Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Test,SCRDUMP,present,Magazines,,,
+748,V7,NC,Non Comm,C.Non Commercial Software,Heads or Tails,Game,Bob Mockford,BM,8200,"CH.""25COINS""",Test,25COINS,present,Mockford,,,
+749,V7,NC,Non Comm,C.Non Commercial Software,Anagram,Game,Bob Mockford,BM,8200,"CH.""ARGANAM""",Test,ARGANAM,present,Mockford,,,
+750,V7,NC,Non Comm,C.Non Commercial Software,Battleships,Game,Bob Mockford,BM,8200,"CH.""BATTLE""",Test,BATTLE,present,Mockford,,,
+751,V7,NC,Non Comm,C.Non Commercial Software,The Box Game,Game,Bob Mockford,BM,8200,"CH.""BOXGAME""",Test,BOXGAME,present,Mockford,,,
+752,V7,NC,Non Comm,C.Non Commercial Software,UK Day Finder,Utility,Bob Mockford,BM,8200,"CH.""DAYDATE""",Test,DAYDATE,present,Mockford,,,
+753,V7,NC,Non Comm,C.Non Commercial Software,Digitz,Game,Bob Mockford,BM,8200,"CH.""DIGITZ""",Test,DIGITZ,present,Mockford,,,
+754,V7,NC,Non Comm,C.Non Commercial Software,Egyptian Arithmetic,Utility,Bob Mockford,BM,8200,"CH.""EMATHS""",Test,EMATHS,present,Mockford,,,
+755,V7,NC,Non Comm,C.Non Commercial Software,Decimal and Hexadecimal Conversion,Utility,Bob Mockford,BM,8200,"CH.""HEXDEC""",Test,HEXDEC,present,Mockford,,,
+756,V7,NC,Non Comm,C.Non Commercial Software,Higher or Lower,Game,Bob Mockford,BM,8200,"CH.""HILO""",Test,HILO,present,Mockford,,,
+757,V7,NC,Non Comm,C.Non Commercial Software,Any Month Calendar,Utility,Bob Mockford,BM,8200,"CH.""MONTHS""",Test,MONTHS,present,Mockford,,,
+758,V7,NC,Non Comm,C.Non Commercial Software,Random Numbers,Utility,Bob Mockford,BM,8200,"CH.""RND2099""",Test,RND2099,present,Mockford,,,
+759,V7,NC,Non Comm,C.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Test,ROMAN,present,Mockford,,,
+760,V7,NC,Non Comm,C.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Test,ROSCPA,present,Mockford,,,
+761,V7,NC,Non Comm,C.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Test,SUBHUNT,present,Mockford,,,
+762,V7,NC,Non Comm,B.Modern Creations/Ports,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Test,"01THELA
+02ILLFI
+03THEMO
+04GOLDE
+05THELI
+06HOUSE
+06ONLYY
+07DADAD
+07DONTG
+07FAMEA
+08COMEO
+09EYEOF
+11MADWO
+12OURHO
+SIDMENU",present,SID,Yes,,
+763,V7,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Test,FLAPPY,present,,,,
+764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Test,FROGGER,present,,,,
+765,V7,NC,Non Comm,E.ROMs,FPGA Utils,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
+*LOAD D2DB 8800",Test,D2DB,present,,,,
