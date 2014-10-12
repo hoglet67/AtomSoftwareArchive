@@ -1409,10 +1409,10 @@ MSDISP",present,Mainwaring,,,
 11MADWO
 12OURHO
 SIDMENU",present,SID,Yes,,
-763,V7,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,,,
+763,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,,,
 764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V7,NC,Non Comm,E.ROMs,FPGA Utils,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D2DB 8800",Works,D2DB,present,,,,
 766,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 Dormann Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN DORMANN,Test,DORMANN,present,,Yes,,
 767,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Test,BCDTEST,present,,,,
-768,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN FLAPPY,Test,FLAPPY,present,,,,
+768,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Test,FLAPPY,present,,,,
