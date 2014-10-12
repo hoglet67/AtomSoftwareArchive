@@ -293,7 +293,7 @@ DATA",present,,,,
 182,,PP,Prog Power,A.Commercial Software,Alien Maze,Game,A. Stevens,PP,,,,,missing,,,,
 183,,PP,Prog Power,A.Commercial Software,Anteater,Game,R. Jewsbury,PP,,,,,missing,,,,
 184,V3,PP,Prog Power,A.Commercial Software,Astrafire,Game,R. Howells,PP,8200,"CH.""ASTFIRE""",Works,ASTFIRE,present,,,,
-185,,PP,Prog Power,A.Commercial Software,Astro Warrior,Game,,PP,,,,,missing,,,,
+185,,PP,Prog Power,A.Commercial Software,Astro Warrior,Game,,PP,,,,,arcadian,,,,
 186,V1,PP,Prog Power,A.Commercial Software,Astrobirds,Game,J.M. Dyson,PP,8200,"CH.""ASTROBI""",Works,ASTROBI,present,,,,
 187,V1,PP,Prog Power,A.Commercial Software,Atom Business Game,Game,G.R. Davies,PP,8200,"CH.""BUSINESS""",Works,BUSINESS,present,,,,
 188,V7B2,PP,Prog Power,A.Commercial Software,Atomstore,Business,A. Reece,PP,8200,*RUN ATOMSTO,Works,"ATOMSTO
@@ -487,7 +487,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",present,RS Colour,Yes,,
-305,V3,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
+305,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
 CGALA
 CGALSCR
 FONT
@@ -497,7 +497,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",present,RS Mono,Yes,,
-306,V3,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
+306,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
 CGALA
 CGALSCR
 FONT
@@ -1263,7 +1263,7 @@ PRINT FOR HELP: SEE MANUAL
 674,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 675,V6,NC,Non Comm,C.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
-679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Test,"JOE
+679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
@@ -1380,21 +1380,21 @@ MSDISP",present,Mainwaring,,,
 746,V7B3,NC,Non Comm,E.ROMs,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",Test,46E8,present,ROMs,,,
 747,V7B3,AU,Acorn User,D.Books/Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Test,SCRDUMP,present,Magazines,,,
-748,V7,NC,Non Comm,C.Non Commercial Software,Heads or Tails,Game,Bob Mockford,BM,8200,"CH.""25COINS""",Test,25COINS,present,Mockford,,,
-749,V7,NC,Non Comm,C.Non Commercial Software,Anagram,Game,Bob Mockford,BM,8200,"CH.""ARGANAM""",Test,ARGANAM,present,Mockford,,,
-750,V7,NC,Non Comm,C.Non Commercial Software,Battleships,Game,Bob Mockford,BM,8200,"CH.""BATTLE""",Test,BATTLE,present,Mockford,,,
-751,V7,NC,Non Comm,C.Non Commercial Software,The Box Game,Game,Bob Mockford,BM,8200,"CH.""BOXGAME""",Test,BOXGAME,present,Mockford,,,
-752,V7,NC,Non Comm,C.Non Commercial Software,UK Day Finder,Utility,Bob Mockford,BM,8200,"CH.""DAYDATE""",Test,DAYDATE,present,Mockford,,,
-753,V7,NC,Non Comm,C.Non Commercial Software,Digitz,Game,Bob Mockford,BM,8200,"CH.""DIGITZ""",Test,DIGITZ,present,Mockford,,,
-754,V7,NC,Non Comm,C.Non Commercial Software,Egyptian Arithmetic,Utility,Bob Mockford,BM,8200,"CH.""EMATHS""",Test,EMATHS,present,Mockford,,,
-755,V7,NC,Non Comm,C.Non Commercial Software,Decimal and Hexadecimal Conversion,Utility,Bob Mockford,BM,8200,"CH.""HEXDEC""",Test,HEXDEC,present,Mockford,,,
-756,V7,NC,Non Comm,C.Non Commercial Software,Higher or Lower,Game,Bob Mockford,BM,8200,"CH.""HILO""",Test,HILO,present,Mockford,,,
-757,V7,NC,Non Comm,C.Non Commercial Software,Any Month Calendar,Utility,Bob Mockford,BM,8200,"CH.""MONTHS""",Test,MONTHS,present,Mockford,,,
-758,V7,NC,Non Comm,C.Non Commercial Software,Random Numbers,Utility,Bob Mockford,BM,8200,"CH.""RND2099""",Test,RND2099,present,Mockford,,,
-759,V7,NC,Non Comm,C.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Test,ROMAN,present,Mockford,,,
-760,V7,NC,Non Comm,C.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Test,ROSCPA,present,Mockford,,,
-761,V7,NC,Non Comm,C.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Test,SUBHUNT,present,Mockford,,,
-762,V7,NC,Non Comm,B.Modern Creations/Ports,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Test,"01THELA
+748,V7,NC,Non Comm,C.Non Commercial Software,Heads or Tails,Game,Bob Mockford,BM,8200,"CH.""25COINS""",Works,25COINS,present,Mockford,,,
+749,V7,NC,Non Comm,C.Non Commercial Software,Anagram,Game,Bob Mockford,BM,8200,"CH.""ARGANAM""",Works,ARGANAM,present,Mockford,,,
+750,V7,NC,Non Comm,C.Non Commercial Software,Battleships,Game,Bob Mockford,BM,8200,"CH.""BATTLE""",Works,BATTLE,present,Mockford,,,
+751,V7,NC,Non Comm,C.Non Commercial Software,The Box Game,Game,Bob Mockford,BM,8200,"CH.""BOXGAME""",Works,BOXGAME,present,Mockford,,,
+752,V7,NC,Non Comm,C.Non Commercial Software,UK Day Finder,Utility,Bob Mockford,BM,8200,"CH.""DAYDATE""",Works,DAYDATE,present,Mockford,,,
+753,V7,NC,Non Comm,C.Non Commercial Software,Digitz,Game,Bob Mockford,BM,8200,"CH.""DIGITZ""",Works,DIGITZ,present,Mockford,,,
+754,V7,NC,Non Comm,C.Non Commercial Software,Egyptian Arithmetic,Utility,Bob Mockford,BM,8200,"CH.""EMATHS""",Works,EMATHS,present,Mockford,,,
+755,V7,NC,Non Comm,C.Non Commercial Software,Decimal and Hexadecimal Conversion,Utility,Bob Mockford,BM,8200,"CH.""HEXDEC""",Works,HEXDEC,present,Mockford,,,
+756,V7,NC,Non Comm,C.Non Commercial Software,Higher or Lower,Game,Bob Mockford,BM,8200,"CH.""HILO""",Works,HILO,present,Mockford,,,
+757,V7,NC,Non Comm,C.Non Commercial Software,Any Month Calendar,Utility,Bob Mockford,BM,8200,"CH.""MONTHS""",Works,MONTHS,present,Mockford,,,
+758,V7,NC,Non Comm,C.Non Commercial Software,Random Numbers,Utility,Bob Mockford,BM,8200,"CH.""RND2099""",Works,RND2099,present,Mockford,,,
+759,V7,NC,Non Comm,C.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Works,ROMAN,present,Mockford,,,
+760,V7,NC,Non Comm,C.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Works,ROSCPA,present,Mockford,,,
+761,V7,NC,Non Comm,C.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Mockford,,,
+762,V7,NC,Non Comm,B.Modern Creations/Ports,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Works,"01THELA
 02ILLFI
 03THEMO
 04GOLDE
@@ -1409,7 +1409,10 @@ MSDISP",present,Mainwaring,,,
 11MADWO
 12OURHO
 SIDMENU",present,SID,Yes,,
-763,V7,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Test,FLAPPY,present,,,,
-764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Test,FROGGER,present,,,,
+763,V7,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,,,
+764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V7,NC,Non Comm,E.ROMs,FPGA Utils,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
-*LOAD D2DB 8800",Test,D2DB,present,,,,
+*LOAD D2DB 8800",Works,D2DB,present,,,,
+766,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 Dormann Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN DORMANN,Test,DORMANN,present,,Yes,,
+767,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Test,BCDTEST,present,,,,
+768,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Atomic Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN FLAPPY,Test,FLAPPY,present,,,,
