@@ -21,6 +21,8 @@
 ; a 65C02 than a 6502 or 65816)
 ;
 
+CPU 1
+
 TARGET_ATOM = 0
 TARGET_BEEB = 1
 	
@@ -45,7 +47,8 @@ VF    = $8D
 ZF    = $8E
 N2H   = $8F
 TMP   = $91
-
+AVEC  = $93
+SVEC  = $95	
 
 if (TARGET = TARGET_ATOM)
 
@@ -75,6 +78,39 @@ ENDIF
 	
 	
 .TEST
+	LDA #0
+	INC A
+	CMP #1
+	BCC NMOS
+
+.CMOS
+	JSR STROUT
+	EQUS "DETECTED CMOS 65C02...", 10, 13
+	NOP
+	LDA #<A65C02
+	STA AVEC
+	LDA #>A65C02
+	STA AVEC + 1
+	LDA #<S65C02
+	STA SVEC
+	LDA #>S65C02
+	STA SVEC + 1
+	JMP TEST1
+
+.NMOS
+	JSR STROUT
+	EQUS "DETECTED NMOS 6502...", 10, 13
+	NOP	
+	LDA #<A6502
+	STA AVEC
+	LDA #>A6502
+	STA AVEC + 1
+	LDA #<S6502
+	STA SVEC
+	LDA #>S6502
+	STA SVEC + 1
+
+.TEST1	
 	JSR STROUT
 	EQUS "TESTING ADC...", 10, 13
 	NOP
@@ -98,7 +134,7 @@ ENDIF
         AND #$F0  ; [4] see text
         STA N1H
         JSR ADD
-        JSR A6502
+        JSR ADDVEC
         JSR COMPARE
         BNE DONE
         INC N1    ; [5] see text
@@ -131,7 +167,7 @@ ENDIF
         AND #$F0  ; [4] see text
         STA N1H
         JSR SUB
-        JSR S6502
+        JSR SUBVEC
         JSR COMPARE
         BNE DONE
         INC N1    ; [5] see text
@@ -154,17 +190,17 @@ ENDIF
 .FAIL	TYA
 	PHA
 	JSR STROUT
-	EQUS "FAILED", 10, 13, "N1 = "
+	EQUS "INPUTS:", 10, 13, "     ACC = "
  	NOP
 	LDA N1
 	JSR HEXOUT
 	JSR STROUT
-	EQUS 10, 13, "N2 = "
+	EQUS 10, 13, " OPERAND = "
  	NOP
 	LDA N2
 	JSR HEXOUT
 	JSR STROUT
-	EQUS 10, 13, "CARRY = "
+	EQUS 10, 13, "CARRY IN = "
 	NOP
 	PLA
 	JSR HEXOUT
@@ -418,6 +454,13 @@ ENDIF
 	LDA #1
 .C5	RTS
 
+
+.ADDVEC
+	JMP (AVEC)
+
+.SUBVEC
+	JMP (SVEC)
+	
 ; These routines store the predicted values for ADC and SBC for the 6502,
 ; 65C02, and 65816 in AR, CF, NF, VF, and ZF
 
