@@ -132,7 +132,17 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		if (filePtr > 255) {
 			throw new RuntimeException("Too many files in title: " + atmFile.getTitle());
 		}
+		image[0x105] = (byte) filePtr;
 
+		// Move all the files down to make room
+		for (int i = filePtr + 7; i >= 16; i--) {
+			image[i] = image[i - 8];
+			image[i + 0x100] = image[i + 0x100 - 8];
+		}
+		
+		// Always the new file in the first position
+		filePtr = 8;
+		
 		String filename = atmFile.getTitle();
 		if (filename.length() > 7) {
 			throw new RuntimeException("Filename too long: " + filename);
@@ -165,7 +175,6 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		System.arraycopy(atmFile.getData(), 0, image, sectorNum * SEC_SIZE, atmFile.getLength());
 		sectorNum += lengthInSecs;
 
-		image[0x105] = (byte) filePtr;
 	}
 	
 	// Original AtomMMC Names
