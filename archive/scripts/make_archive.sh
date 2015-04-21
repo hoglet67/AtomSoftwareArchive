@@ -368,16 +368,13 @@ package "atms/spellen3/PINBALL" "$ARCHIVE/$TD"
 package "atms/Leendert/SPACEWAR" "$ARCHIVE/$TD"
 package "atms/Leendert/DRIVE" "$ARCHIVE/$TD"
 
- 
+
 ##############################################################
 # Program Power
 ##############################################################
 
 package "atms/Acl1-15/ADV*" "$ARCHIVE/$PP"
 package "atms/Leendert/3DASTERO" "$ARCHIVE/$PP"
-package "atms/games7/AIRATTA" "$ARCHIVE/$PP"
-package "atms/games7/AIRDATA" "$ARCHIVE/$PP"
-mv $ARCHIVE/$PP/AIRDATA $ARCHIVE/$PP/DATA
 package "atms/games8/ASTROBI" "$ARCHIVE/$PP"
 package "atms/atomix_tape_7/AWARI" "$ARCHIVE/$PP"
 #package "atms/program_power__chess/*" "$ARCHIVE/$PP/Chess"
@@ -471,7 +468,7 @@ package "atms/Acl1-24/TRAP" "$ARCHIVE/$AR"
 
 cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
-
+cp -a roland/* $ARCHIVE
 
 ##############################################################
 # Build the menu
@@ -491,7 +488,7 @@ mv $ARCHIVE.zip ~
 
 rm -f ~/$ARCHIVE_SDDOS.zip
 zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
- 
+
 ##############################################################
 # Deploy to Atomulator for testing
 ##############################################################

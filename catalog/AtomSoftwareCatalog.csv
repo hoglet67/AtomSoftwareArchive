@@ -257,7 +257,7 @@ RUN",Works,PONTOON,present,,,,
 CH.""STAR""",Works,"STAR
 DATA
 STARIN",present,,,Yes,
-164,,BB,Bug Byte,A.Commercial Software,Typist,Educational,,BB,,,,,missing,,,,
+164,V8B1,BB,Bug Byte,A.Commercial Software,Typist,Educational,,BB,8200,"CH.""TYPIST""",Test,TYPIST,present,,,,
 165,V1,BB,Bug Byte,A.Commercial Software,UFO Bomber,Game,,BB,8200,"CH.""UFO""",Works,UFO,present,,,,
 166,V1,BB,Bug Byte,A.Commercial Software,Wiggle,Game,,BB,8200,"CH.""WIGGEL""",Works,WIGGEL,present,,, ,
 167,V5,HS,Hopesoft,A.Commercial Software,PS1A Atom Adventure,Adventure,,HS,8200,"*LOAD ADV
@@ -286,7 +286,7 @@ DATA",present,,,,
 *LOAD ADVDATA
 RUN",Works,"ADVCODE
 ADVDATA",present,,,,
-181,V1,PP,Prog Power,A.Commercial Software,Air Attack,Game,J. Dyson,PP,8200,"*LOAD AIRATTA
+181,V8B1,PP,Prog Power,A.Commercial Software,Air Attack,Game,J. Dyson,PP,8200,"*LOAD AIRATTA
 RUN",Works,"AIRATTA
 DATA",present,,,,
 182,,PP,Prog Power,A.Commercial Software,Alien Maze,Game,A. Stevens,PP,,,,,missing,,,,
@@ -425,7 +425,7 @@ DAT1
 EDITOR
 LOADER
 MMINER",obsolete,,,,
-271,V3,RS,Retro S/W,B.Modern Creations/Ports,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
+271,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
 JUNGLE
 MUSIC
 RUNME",present,RS Colour,Yes,,
@@ -575,22 +575,22 @@ REDMOON",present,Time and Magik,Yes,,
 341,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,,,,
 342,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
 345,V4,NC,Non Comm,C.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
-346,,NC,Non Comm,C.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,missing,,,,
+346,,NC,Non Comm,C.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,duplicate,,,,
 347,V4,GA,Getting Acquainted,A.Commercial Software,Dodgem,Game,???,GA,8200,"CH.""DODGEM2""",Works,DODGEM2,present,,,,
 349,V4,NC,Non Comm,C.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
-350,,NC,Non Comm,C.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,missing,,,,
+350,,NC,Non Comm,C.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,duplicate,,,,
 351,V4,NC,Non Comm,C.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
 352,V4,NC,Non Comm,C.Non Commercial Software,Golf,Game,???,NC,8200,"CH.""GOLF""",Works,GOLF,present,,,,
 353,V4,CS,Computersmith,A.Commercial Software,Golf,Game,???,CS,8200,"CH.""GOLF-CS""",Works,GOLF-CS,present,,,,
-354,,NC,Non Comm,C.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,missing,,,,
+354,,NC,Non Comm,C.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,duplicate,,,,
 356,V4,YC,Your Computer,D.Books/Magazines,The Hawk,Game,???,YC,8200,"CH.""HAWK""",Test,HAWK,present,Magazines,,,
 357,,NC,Non Comm,C.Non Commercial Software,Highway (R),Game,R.Leurs,NC,8200,"CH.""HIGHWAY""",,HIGHWAY,missing,,,,
 359,V4,NC,Non Comm,C.Non Commercial Software,Huncher (R),Game,S.Myngheer,NC/TB,8200,"CH.""HUNCHER""",Works,HUNCHER,present,,,,
 361,,NC,Non Comm,C.Non Commercial Software,Intra Terrestrial (R),Game,J.Biel,NC,8200,"CH.""INTRA""",,INTRA,missing,,,,
-362,,NC,Non Comm,C.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,missing,,,,
+362,,NC,Non Comm,C.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,duplicate,,,,
 363,V4,MO,Magnus Olsson,C.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Works,KATAKOMB,present,,,,
 364,V4,NC,Non Comm,C.Non Commercial Software,Snakes & Ladders,Game,???,NC,8200,*RUN LADDERS,Broken,LADDERS,duplicate,,,,
-365,,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",,LANDING,missing,Magazines,,,
+365,V8B1,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",Test,LANDING,present,Magazines,,,
 366,V4,NC,Non Comm,C.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
 367,V4,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
 368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Works,MASKEN,present,,,,
@@ -610,18 +610,18 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 383,V4,NC,Non Comm,C.Non Commercial Software,Prinses (R),Game,G.T.H.,NC,8200,"CH.""PRINSES""",Works,PRINSES,present,,,,
 384,V4,NC,Non Comm,C.Non Commercial Software,Puzzel (R),Game,Frans,NC/TB,8200,"CH.""PUZZEL""",Works,PUZZEL,present,,,,
 385,V4,NC,Non Comm,C.Non Commercial Software,Race,Game,A.Clarke,NC,8200,"CH.""RACE""",Works,RACE,present,,,,
-386,,NC,Non Comm,C.Non Commercial Software,Formula One,Game,JVK,NC,8200,"CH.""RACING""",,RACING,missing,,,,
+386,,NC,Non Comm,C.Non Commercial Software,Formula One,Game,JVK,NC,8200,"CH.""RACING""",,RACING,duplicate,,,,
 387,V4,NC,Non Comm,C.Non Commercial Software,Race Rups,Game,???,NC,8200,"CH.""RACRUPS""",Works,RACRUPS,present,,,,
-389,,NC,Non Comm,C.Non Commercial Software,Reversi,Game,L.Bijnagte,NC,8200,*RUN REVERS3,,REVERS3,missing,,,,
+389,V8B1,NC,Non Comm,C.Non Commercial Software,Reversi (R),Game,L.Bijnagte,NC,8200,*RUN REVERS3,Test,REVERS3,present,,,,
 390,V4,NC,Non Comm,C.Non Commercial Software,Rhinoceros,Game,J.R.Marks,NC,8200,"CH.""RHINOS2""",Works,RHINOS2,present,,,,
 391,,NC,Non Comm,C.Non Commercial Software,Saturn,Game,R.Knapen,NC,8200,"CH.""SATURN""",,SATURN,missing,,,,
 392,,NC,Non Comm,C.Non Commercial Software,Shelobs Army (R),Game,G.Hillebrand,NC,8200,*RUN SHELOBS,,SHELOBS,missing,,,,
-393,,NC,Non Comm,C.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,*RUN SHUTTLE,,SHUTTLE,missing,,,,
+393,V8B1,NC,Non Comm,C.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,"CH.""SHUTTLE""",Test,SHUTTLE,present,,,,
 394,V4,ES,Electrocomp sups,A.Commercial Software,Ski Slope,Game,???,ES,8200,"CH.""SKI""",Works,SKI,present,,,,
 395,V4,C&VG,C&VG,D.Books/Magazines,Ski-ing,Game,S.  J. Harris,CVG,8200,"CH.""SKIING""",Works,SKIING,present,Magazines,,,
 396,V4,NC,Non Comm,C.Non Commercial Software,Skippy,Game,???,NC,8200,*RUN SKIPPY,Works,SKIPPY,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
-398,,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",,SNOOPY,missing,,,,
+398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Test,SNOOPY,present,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,missing,,,,
 400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
 *RUN 157S",Works,"157
@@ -637,7 +637,7 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 410,V4,NC,Non Comm,C.Non Commercial Software,Woodland,Game,G.J.Noorland,NC,8200,"CH.""WOODLND""",Works,WOODLND,present,,,,
 411,V4,CS,Computersmith,A.Commercial Software,Word Gram,Game,???,CS,8200,"CH.""WRDGRAM""",Works,WRDGRAM,present,,,,
 413,,NC,Non Comm,C.Non Commercial Software,ZEESLA1,Game,,NC,8200,"CH.""ZEESLA1""",,ZEESLA1,missing,,,,
-414,,NC,Non Comm,C.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",,ZEESLAG,missing,,,,
+414,V8B1,NC,Non Comm,C.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",Test,ZEESLAG,present,,,,
 415,,PPBA,Practical Programs,D.Books/Magazines,Card Trick,Game,???,PPBA,8200,,Works,,duplicate,,,,
 416,V4,AMB,Atom Magic Book,D.Books/Magazines,Breakout,Game,Mike Lord,AMB,8200,"CH.""BROUT""",Works,BROUT,present,Atom Magic Book,,,
 417,V4,AMB,Atom Magic Book,D.Books/Magazines,3D Maze,Game,Mike Lord,AMB,8200,"CH.""3DMAZE""",Works,3DMAZE,present,Atom Magic Book,,,
@@ -871,7 +871,7 @@ ERRTAB",present,Magazines,,,
 *RUN PS2A
 ",Works,"PROG
 PS2A",present,,,,
-615,V5,RS,Retro S/W,B.Modern Creations/Ports,Repton,Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
+615,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Repton,Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
 REPSCR
 REPTON",present,RS Colour,,,
 616,V6,NC,Non Comm,B.Modern Creations/Ports,HubPlay (#BDC0),Music,,SID/ATOMSID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
@@ -1262,7 +1262,7 @@ PRINT FOR HELP: SEE MANUAL
 674,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 675,V6,NC,Non Comm,C.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
-679,V7,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
+679,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,RS Mono,Yes,,
@@ -1419,3 +1419,33 @@ SIDMENU",present,SID,Yes,,
 770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Test,STATS2,present,,,,
 771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Test,STATS3,present,,,,
 772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 4,Utility,,BB,8200,"CH.""STATS4""",Test,STATS4,present,,,,
+773,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 1,Game,,NC/GOKKAST1,8200,"CH.""GOKKAST""",Test,"CONTROL
+GOKKAST
+HO-LA
+HO-NU
+MACH-T
+PICTURE
+PUNTEN
+SCHERM
+VDU",present,,,,
+774,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Test,"2BASC28
+2BASC65
+2BASC98
+2BONS68
+2CONTRL
+2MACH58
+2POWER
+2PUNTEN
+2SCHM80
+GKKST2
+VDU",present,,,,
+775,V8B1,NC,Non Comm,C.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Test,"2440VDU
+CONTROL
+DRAAI
+FRUITMA
+OMKEER
+PUNTEN
+SCHERM
+SYMBOOL",present,,,,
+776,V8B1,NC,Non Comm,C.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Test,CHARON,present,,,,
+777,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Test,SPEBOAT,present,,,,
