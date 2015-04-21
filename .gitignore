@@ -29,6 +29,9 @@ java/atombasic/bin/
 java/makeatm/makeatm.jar
 java/makeatm/bin/
 
+java/asciiart/asciiart.jar
+java/asciiart/bin/
+
 
 beebsid/ATMSID*/
 beebsid/BEEBSID*/
