@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -27,6 +29,8 @@ public class SpreadsheetParser {
 
 	private File file;
 
+	private Set<String> filesPaths = new HashSet<String>();
+	
 	private int numTitles = 0;
 	private int titleTotalChars = 0;
 	private Map<String, Integer> countsByPublisher = new TreeMap<String, Integer>();
@@ -124,7 +128,15 @@ public class SpreadsheetParser {
 				String[] filenames = program[filenames_column].trim().toUpperCase().split("\n");				
 				List<String> filesnamesList = new ArrayList<String>();
 				for (String filename : filenames) {
-					filesnamesList.add(filename.trim());
+					filename = filename.trim();
+					filesnamesList.add(filename);
+					if (item.isPresent()) {
+						String path = dir + "/" + filename;
+						if (!filesPaths.add(path)) {
+							System.out.println("WARNING: " + path + " already in archive");
+						}
+					}
+
 				}
 				item.setFilenames(filesnamesList);
 				items.add(item);
