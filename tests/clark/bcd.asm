@@ -341,7 +341,12 @@ ENDIF
 ;   Z flag = 1 (BEQ branch) if same
 ;   Z flag = 0 (BNE branch) if different
 ;
-.COMPARE LDA DA
+.COMPARE
+; Preserve Y, as it represents the carry in
+	TYA
+	PHA
+
+	LDA DA
         CMP AR
         BEQ C1
 
@@ -358,6 +363,10 @@ ENDIF
 	JSR STROUT
 	EQUS 10,13
 	NOP
+
+.COMPFAIL
+	PLA
+	TAY
 	LDA #1
 	RTS
 
@@ -381,8 +390,7 @@ ENDIF
 	JSR STROUT
 	EQUS 10,13
 	NOP
-	LDA #1
-	RTS
+	JMP COMPFAIL
 
 
 .C2     LDA DNVZC ; [8] see text
@@ -405,8 +413,7 @@ ENDIF
 	JSR STROUT
 	EQUS 10,13
 	NOP
-	LDA #1
-	RTS
+	JMP COMPFAIL
 
 .C3     LDA DNVZC
         EOR ZF    ; mask off Z flag
@@ -428,13 +435,12 @@ ENDIF
 	JSR STROUT
 	EQUS 10,13
 	NOP
-	LDA #1
-	RTS
+	JMP COMPFAIL
 
 .C4     LDA DNVZC
         EOR CF
         AND #1    ; mask off C flag
-	BEQ C5
+	BEQ COMPPASS
 
 	JSR STROUT
 	EQUS "C FAILED", 10, 13, "EXPECTED: "
@@ -451,9 +457,13 @@ ENDIF
 	JSR STROUT
 	EQUS 10,13
 	NOP
-	LDA #1
-.C5	RTS
+	JMP COMPFAIL
 
+.COMPPASS
+	PLA
+	TAY
+	LDA #0
+	RTS
 
 .ADDVEC
 	JMP (AVEC)
