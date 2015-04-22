@@ -257,7 +257,7 @@ RUN",Works,PONTOON,present,,,,
 CH.""STAR""",Works,"STAR
 DATA
 STARIN",present,,,Yes,
-164,V8B1,BB,Bug Byte,A.Commercial Software,Typist,Educational,,BB,8200,"CH.""TYPIST""",Test,TYPIST,present,,,,
+164,V8B1,BB,Bug Byte,A.Commercial Software,Typist,Educational,,BB,8200,"CH.""TYPIST""",Works,TYPIST,present,,,,
 165,V1,BB,Bug Byte,A.Commercial Software,UFO Bomber,Game,,BB,8200,"CH.""UFO""",Works,UFO,present,,,,
 166,V1,BB,Bug Byte,A.Commercial Software,Wiggle,Game,,BB,8200,"CH.""WIGGEL""",Works,WIGGEL,present,,, ,
 167,V5,HS,Hopesoft,A.Commercial Software,PS1A Atom Adventure,Adventure,,HS,8200,"*LOAD ADV
@@ -288,11 +288,11 @@ RUN",Works,"ADVCODE
 ADVDATA",present,,,,
 181,V8B1,PP,Prog Power,A.Commercial Software,Air Attack,Game,J. Dyson,PP,8200,"*LOAD AIRATTA
 RUN",Works,"AIRATTA
-DATA",present,,,,
+AIRDATA",present,,,,
 182,,PP,Prog Power,A.Commercial Software,Alien Maze,Game,A. Stevens,PP,,,,,missing,,,,
 183,,PP,Prog Power,A.Commercial Software,Anteater,Game,R. Jewsbury,PP,,,,,missing,,,,
 184,V3,PP,Prog Power,A.Commercial Software,Astrafire,Game,R. Howells,PP,8200,"CH.""ASTFIRE""",Works,ASTFIRE,present,,,,
-185,V8B1,PP,Prog Power,A.Commercial Software,Astro Warrior,Game,D.Dini,PP,8200,"CH.""ASTROWA""",Test,ASTROWA,present,,,,
+185,V8B1,PP,Prog Power,A.Commercial Software,Astro Warrior,Game,D.Dini,PP,8200,"CH.""ASTROWA""",Works,ASTROWA,present,,,,
 186,V1,PP,Prog Power,A.Commercial Software,Astrobirds,Game,J.M. Dyson,PP,8200,"CH.""ASTROBI""",Works,ASTROBI,present,,,,
 187,V1,PP,Prog Power,A.Commercial Software,Atom Business Game,Game,G.R. Davies,PP,8200,"CH.""BUSINESS""",Works,BUSINESS,present,,,,
 188,V7B2,PP,Prog Power,A.Commercial Software,Atomstore,Business,A. Reece,PP,8200,*RUN ATOMSTO,Works,"ATOMSTO
@@ -590,7 +590,7 @@ REDMOON",present,Time and Magik,Yes,,
 362,,NC,Non Comm,C.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,duplicate,,,,
 363,V4,MO,Magnus Olsson,C.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Works,KATAKOMB,present,,,,
 364,V4,NC,Non Comm,C.Non Commercial Software,Snakes & Ladders,Game,???,NC,8200,*RUN LADDERS,Broken,LADDERS,duplicate,,,,
-365,V8B1,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",Test,LANDING,present,Magazines,,,
+365,V8B1,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,8200,"CH.""LANDING""",Broken,LANDING,present,Magazines,,,
 366,V4,NC,Non Comm,C.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
 367,V4,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
 368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Works,MASKEN,present,,,,
@@ -612,16 +612,16 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 385,V4,NC,Non Comm,C.Non Commercial Software,Race,Game,A.Clarke,NC,8200,"CH.""RACE""",Works,RACE,present,,,,
 386,,NC,Non Comm,C.Non Commercial Software,Formula One,Game,JVK,NC,8200,"CH.""RACING""",,RACING,duplicate,,,,
 387,V4,NC,Non Comm,C.Non Commercial Software,Race Rups,Game,???,NC,8200,"CH.""RACRUPS""",Works,RACRUPS,present,,,,
-389,V8B1,NC,Non Comm,C.Non Commercial Software,Reversi (R),Game,L.Bijnagte,NC,8200,*RUN REVERS3,Test,REVERS3,present,,,,
+389,V8B1,NC,Non Comm,C.Non Commercial Software,Reversi (R),Game,L.Bijnagte,NC,8200,*RUN REVERS3,Broken,REVERS3,present,,,,
 390,V4,NC,Non Comm,C.Non Commercial Software,Rhinoceros,Game,J.R.Marks,NC,8200,"CH.""RHINOS2""",Works,RHINOS2,present,,,,
 391,,NC,Non Comm,C.Non Commercial Software,Saturn,Game,R.Knapen,NC,8200,"CH.""SATURN""",,SATURN,missing,,,,
 392,,NC,Non Comm,C.Non Commercial Software,Shelobs Army (R),Game,G.Hillebrand,NC,8200,*RUN SHELOBS,,SHELOBS,missing,,,,
-393,V8B1,NC,Non Comm,C.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,"CH.""SHUTTLE""",Test,SHUTTLE,present,,,,
+393,V8B1,NC,Non Comm,C.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,,,,
 394,V4,ES,Electrocomp sups,A.Commercial Software,Ski Slope,Game,???,ES,8200,"CH.""SKI""",Works,SKI,present,,,,
 395,V4,C&VG,C&VG,D.Books/Magazines,Ski-ing,Game,S.  J. Harris,CVG,8200,"CH.""SKIING""",Works,SKIING,present,Magazines,,,
 396,V4,NC,Non Comm,C.Non Commercial Software,Skippy,Game,???,NC,8200,*RUN SKIPPY,Works,SKIPPY,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
-398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Test,SNOOPY,present,,,,
+398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Works,SNOOPY,present,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,missing,,,,
 400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
 *RUN 157S",Works,"157
@@ -632,12 +632,12 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 405,,MO,Magnus Olsson,C.Non Commercial Software,Super Zombie,Game,Magnus Olssen,MO,8200,*RUN SUPERZMB,,SUPERZMB,missing,,,,
 406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,*RUN TEACUPS,Works,TEACUPS,present,,,,
 407,,NC,Non Comm,C.Non Commercial Software,Tennis,Game,???,NC,8200,"CH.""TENNIS1""",,TENNIS1,missing,,,,
-408,V8B1,OL,Oak Leaves,A.Commercial Software,Walls,Game,J.Lasruk,OL,8200,"CH.""WALLS""",,WALLS,present,,,,
+408,V8B1,OL,Oak Leaves,A.Commercial Software,Walls,Game,J.Lasruk,OL,8200,"CH.""WALLS""",Works,WALLS,present,,,,
 409,V4,NC,Non Comm,C.Non Commercial Software,Wipeout,Game,???,NC,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,,,,
 410,V4,NC,Non Comm,C.Non Commercial Software,Woodland,Game,G.J.Noorland,NC,8200,"CH.""WOODLND""",Works,WOODLND,present,,,,
 411,V4,CS,Computersmith,A.Commercial Software,Word Gram,Game,???,CS,8200,"CH.""WRDGRAM""",Works,WRDGRAM,present,,,,
 413,,NC,Non Comm,C.Non Commercial Software,ZEESLA1,Game,,NC,8200,"CH.""ZEESLA1""",,ZEESLA1,missing,,,,
-414,V8B1,NC,Non Comm,C.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",Test,ZEESLAG,present,,,,
+414,V8B1,NC,Non Comm,C.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",Works,ZEESLAG,present,,,,
 415,,PPBA,Practical Programs,D.Books/Magazines,Card Trick,Game,???,PPBA,8200,,Works,,duplicate,,,,
 416,V4,AMB,Atom Magic Book,D.Books/Magazines,Breakout,Game,Mike Lord,AMB,8200,"CH.""BROUT""",Works,BROUT,present,Atom Magic Book,,,
 417,V4,AMB,Atom Magic Book,D.Books/Magazines,3D Maze,Game,Mike Lord,AMB,8200,"CH.""3DMAZE""",Works,3DMAZE,present,Atom Magic Book,,,
@@ -1412,14 +1412,14 @@ SIDMENU",present,SID,Yes,,
 764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V7,NC,Non Comm,E.ROMs,FPGA Utils,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D2DB 8800",Works,D2DB,present,,,,
-766,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 Dormann Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN DORMANN,Test,DORMANN,present,,Yes,,
-767,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Test,BCDTEST,present,,,,
-768,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Test,FLAPPY,present,,,,
-769,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Test,STATS1,present,,,,
-770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Test,STATS2,present,,,,
-771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Test,STATS3,present,,,,
-772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 4,Utility,,BB,8200,"CH.""STATS4""",Test,STATS4,present,,,,
-773,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 1,Game,,NC/GOKKAST1,8200,"CH.""GOKKAST""",Test,"CONTROL
+766,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 Dormann Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN DORMANN,Works,DORMANN,present,,Yes,,
+767,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Broken,BCDTEST,present,,,,
+768,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,FLAPPY,present,,,,
+769,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Works,STATS1,present,,,,
+770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Works,STATS2,present,,,,
+771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Works,STATS3,present,,,,
+772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 4,Utility,,BB,8200,"CH.""STATS4""",Works,STATS4,present,,,,
+773,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 1,Game,,NC/GOKKAST1,8200,"CH.""GOKKAST""",Works,"CONTROL
 GOKKAST
 HO-LA
 HO-NU
@@ -1428,7 +1428,7 @@ PICTURE
 PUNTEN
 SCHERM
 VDU",present,,,,
-774,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Test,"2BASC28
+774,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Works,"2BASC28
 2BASC65
 2BASC98
 2BONS68
@@ -1439,7 +1439,7 @@ VDU",present,,,,
 2SCHM80
 GKKST2
 VDU",present,,,,
-775,V8B1,NC,Non Comm,C.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Test,"2440VDU
+775,V8B1,NC,Non Comm,C.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Works,"2440VDU
 CONTROL
 DRAAI
 FRUITMA
@@ -1448,4 +1448,4 @@ PUNTEN
 SCHERM
 SYMBOOL",present,,,,
 776,V8B1,NC,Non Comm,C.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Test,CHARON,present,,,,
-777,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Test,SPEBOAT,present,,,,
+777,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
