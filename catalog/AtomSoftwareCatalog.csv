@@ -1413,8 +1413,8 @@ SIDMENU",present,SID,Yes,,
 764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V7,NC,Non Comm,E.ROMs,FPGA Utils,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D2DB 8800",Works,D2DB,present,,,,
-766,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Test,D6502,present,,Yes,,
-767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Test,D65C02,present,,Yes,,
+766,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
+767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
 768,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
 769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,FLAPPY,present,,Yes,,
 770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Works,STATS1,present,,,,
@@ -1451,7 +1451,9 @@ SCHERM
 SYMBOOL",present,,,,
 777,V8B1,NC,Non Comm,C.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Works,CHARON,present,,,,
 778,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
-779,V8B1,NC,Non Comm,B.Modern Creations/Ports,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"CH.""SW8""",Test,"SW8
+779,V8B1,NC,Non Comm,B.Modern Creations/Ports,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"*LOAD PLAY800
+*LOAD STARWARS
+CH.""SW8""",Work,"SW8
 SW1X.TXT
 PLAY800
 STARWARS",present,,Yes,,
