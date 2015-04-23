@@ -1261,7 +1261,7 @@ PRINT FOR HELP: SEE MANUAL
 672,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
 673,V6,NC,Non Comm,C.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
 674,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
-675,V6,NC,Non Comm,C.Non Commercial Software,Duck,Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,,,
+675,V6,NC,Non Comm,C.Non Commercial Software,Duck (32K),Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,Yes,,
 676,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
 679,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
@@ -1456,4 +1456,9 @@ SYMBOOL",present,,,,
 CH.""SW8""",Work,"SW8
 SW1X.TXT
 PLAY800
-STARWARS",present,,Yes,,
+STARWARS",present,GODIL,Yes,,
+780,V8B1,NC,Non Comm,C.Non Commercial Software,Duck-2 (32K),Game,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""",Test,"DUCK-2
+D2-EDIT
+D2-SCR
+D2-SPEL
+D2-SPRI",present,,Yes,,
