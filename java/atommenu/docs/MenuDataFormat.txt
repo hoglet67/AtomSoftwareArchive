@@ -54,8 +54,13 @@ Title Record:
 Byte 0 - RunIndex[7..0]
 Byte 1 - GenreId[5..0], RunIndex[9..8]
 Byte 2 - PublisherId[7..0]
-Byte 3 - CollectionId[7..0]
-Byte 4 - Start of Title String, terminated by #0D
+Byte 3 - #80 | CollectionId[6..0]
+Byte 4 - #80 | CollectionId[6..0]
+Byte 5 - #80 | CollectionId[6..0]
+...
+Byte N - Start of Title String, terminated by #0D
+
+The collectionId bytes are optional.
 
 Secondary Table for Short Publisher Names: (68 bytes)
 <Pointer to short name of publisher 0>
@@ -76,7 +81,7 @@ Secondary Table for Publisher Names: (192 bytes)
 
 Publisher Record:
 <Number of occurrences of the publisher>
-<Index of first occurrence of publisher in publisher sort table>
+#0000
 <Full name of publisher, terminated in #0D>
 
 Secondary Table for Short Genre Names: (21 bytes)
@@ -85,9 +90,8 @@ Same structure as the Secondary Table for Publisher Names
 Secondary Table for Collection Names: (727 bytes)
 Same structure as the Secondary Table for Publisher Names
 
-The additional pointer in the Publisher, Genre and Collection tables back to the respective sort table should make filtering a bit faster, when we come to implement this.
-
 Note: Genres are not currently present in the spreadsheet (apart from Adventure).
+Note: The #0000 word is used for computing counts when a search is active
 
 OTHER LINKS
 ===========
