@@ -121,8 +121,15 @@ public class SpreadsheetParser {
 				item.setPublisher(publisher);
 				String shortpub = program[shortpub_column].trim().toUpperCase();
 				item.setShortPublisher(shortpub);
-				String collection = program[collection_column].trim().toUpperCase();
-				item.setCollection(collection);
+				String[] collections = program[collection_column].trim().toUpperCase().split("\n");				
+				List<String> collectionsList = new ArrayList<String>();
+				for (String collection : collections) {
+					collection = collection.trim();
+					if (collection.length() > 0) {
+						collectionsList.add(collection);
+					}
+				}
+				item.setCollections(collectionsList);
 				String genre = program[genre_column].trim().toUpperCase();
 				item.setGenre(genre);
 				String[] filenames = program[filenames_column].trim().toUpperCase().split("\n");				

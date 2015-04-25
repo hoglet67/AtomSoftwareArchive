@@ -1,7 +1,9 @@
 package uk.co.acornatom.menu;
 
+import java.util.Set;
+
 public interface IFieldSelector {
 
-	public String getField(AtomTitle title);
+	public Set<String> getField(AtomTitle title);
 	
 }

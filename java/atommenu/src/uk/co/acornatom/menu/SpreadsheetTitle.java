@@ -16,7 +16,7 @@ public class SpreadsheetTitle {
 	private String boot;
 	private String publisher;
 	private String shortPublisher;
-	private String collection;
+	private List<String> collections;
 	private String genre;
 	private List<String> filenames;
 	
@@ -71,14 +71,11 @@ public class SpreadsheetTitle {
 	public String getPublisher() {
 		return publisher;
 	}
-	public void setCollection(String collection) {
-		if (collection.isEmpty()) {
-			collection = "???";
-		}
-		this.collection = collection;
+	public void setCollections(List<String> collections) {
+		this.collections = collections;
 	}
-	public String getCollection() {
-		return collection;
+	public List<String> getCollections() {
+		return collections;
 	}
 	public void setGenre(String genre) {
 		if (genre.isEmpty()) {

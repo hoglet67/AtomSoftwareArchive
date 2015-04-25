@@ -28,12 +28,12 @@ ENDIF
 	STA CurrentSort + 1
 
 	; Calculate a pointer to the requested annotation table, skipping the length field
-    LDA Annotation
-    ASL A
-    TAY
-    INY
-    INY
-    CLC
+	LDA Annotation
+	ASL A
+	TAY
+	INY
+	INY
+	CLC
 	LDA (MenuTablePtr),Y
 	ADC #2
 	STA AnnotationPtr
@@ -52,10 +52,13 @@ ENDIF
 	STA CurrentRow
 	STA CurrentRow + 1
 
+	; Default the Title Name Offset to 4
+	LDA #4
+	STA TitleNameOffset
+	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Start of loop that needs to be efficient
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
 	
 .NextRow
 
@@ -77,19 +80,28 @@ ENDIF
 	
 	; Test if we have run off the end of the list
 	CMP #$FF
-	BEQ WritePageEndOfList
-		
+	BNE NotEndOfList
+	JMP WritePageEndOfList
+.NotEndOfList
 
 	; Do the search comparison 
-.SearchCompare
 	LDA SearchMode
 	AND #3
 	BNE FilterCompare
+
+	; Find the offset to the title, by skipping over all the categories
+	LDY #2
+.FindTitle
+	INY
+	LDA (Title),Y
+	BMI FindTitle
+	STY TitleNameOffset
+	
 	LDA SearchBuffer
 	CMP #Return
 	BEQ FilterCompare
 	
-	LDY #3
+	DEY
 	STY TmpY
 .SearchCompare1
 	LDY TmpY
@@ -119,6 +131,22 @@ ENDIF
 	LDY Filter
 	BEQ MatchingRow
 
+	; Filter type 3 is the category filter
+	CPY #3
+	BNE NotCategoryFilter
+
+	; If the filter is catgory, there are is a list to try to match against
+	; This list is terminated by a non-negative value (the first char of the title name)
+.CategoryFilter
+	LDA (Title), Y
+	BPL NextRow
+	AND #$7F
+	CMP FilterVal
+	BEQ MatchingRow
+	INY
+	BNE CategoryFilter
+	
+.NotCategoryFilter
 	; Otherwise compare what's the the title record with the filter value
 	LDA (Title), Y
 
@@ -133,7 +161,6 @@ ENDIF
 	CMP FilterVal
 	BNE NextRow
 
-
 .MatchingRow
 	INC CurrentRow
 	BNE MatchingRow1
@@ -146,7 +173,8 @@ ENDIF
 	SBC StartRow
 	LDA CurrentRow + 1
 	SBC StartRow+1
-	BCC NextRow
+	BCS FoundRow
+	JMP NextRow
 	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; End of loop that needs to be *very efficient*
@@ -159,7 +187,8 @@ ENDIF
 	; Have we displayed the requested number of rows
 	LDA RowCount
 	CMP #LinesPerPage
-	BEQ NextRow
+	BNE FoundRow1
+	JMP NextRow
 
 .FoundRow1
 
@@ -210,8 +239,8 @@ ENDIF
 	LDX #CharsPerLine - 3
 	; Prepare the Annotation first (so we know how long it is...) 
 	
-    LDA Annotation
-    BPL NormalAnnotation
+	LDA Annotation
+	BPL NormalAnnotation
 
 	LDY #CountOffset
 
@@ -245,11 +274,30 @@ ENDIF
 	LDA AnnotationIdMap,Y
 	TAY
 	LDA (Title),Y
+	BMI NotNullCollection
+	CPY #3
+	BNE NotNullCollection	
+
+	; CollectionIDs always have bit 7 set
+	; If bit 7 is clear, there is no collection
+	PLA
+	LDA #<NullCollectionMessage
+	STA AnnotationString
+	LDA #>NullCollectionMessage	
+	STA AnnotationString + 1
+	BNE LengthOfAnnotation
+
+.NullCollectionMessage
+	EQUS "NO COLLECTION"
+	EQUB 13
+	
+.NotNullCollection
 	CPY #1
 	BNE NotGenre
 	LSR A
 	LSR A
-.NotGenre	
+.NotGenre
+	; Currently the MSB of the annotation is lost, which limits secondary tables to 7 bit values
 	ASL A
 	TAY
 	PLA
@@ -317,7 +365,7 @@ ENDIF
 	RTS
 
 .WriteTitleNoHighlight
-	LDY #TitleNameOffset
+	LDY TitleNameOffset
 .WriteTitleNoHighlight1
 	LDA (Title),Y
 	CMP #Return
@@ -331,7 +379,7 @@ ENDIF
 
 .WriteTitleHighlight
 	STX TmpX
-	LDY #TitleNameOffset	
+	LDY TitleNameOffset	
 .WriteTitleHighlight1
 	LDA (Title),Y
 	CMP #Return
@@ -494,7 +542,7 @@ ENDIF
 	LDY #16
 .BinToDecimal16Loop:
 	; Handle the binary bits one at a time
-    ASL BinBuffer
+	ASL BinBuffer
 	ROL BinBuffer+1
 	; Add into the BCD accumulator
 	LDA BcdBuffer
@@ -519,7 +567,7 @@ ENDIF
 	LDY #8
 .BinToDecimal8Loop:
 	; Handle the binary bits one at a time
-    ASL BinBuffer
+	ASL BinBuffer
 	; Add into the BCD accumulator
 	LDA BcdBuffer
 	ADC BcdBuffer
@@ -742,25 +790,40 @@ ENDIF
 
 IF properAnnotationCounts
 	
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Accumulate the annotation counts
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .AccumulateAnnotationCounts
 		
 	LDX #3
-.AnnotationCountLoop		
+.AnnotationTypeLoop
 	LDA AnnotationIdMap,X
 	TAY	
+	CPY #3
+	BNE AnnotationNotCategory
+
+.AnnotationNextCategory
+	LDA (Title),Y
+	BPL AnnotationNextType
+	AND #$7F
+	STY TmpY
+	JSR IncAnnotationCounts
+	LDY TmpY
+	INY
+	BNE AnnotationNextCategory
+
+.AnnotationNotCategory	
 	LDA (Title),Y
 	CPY #1
 	BNE AnnotationNotGenre	
 	LSR A
 	LSR A
 .AnnotationNotGenre	
-	JSR IncAnnotationCounts
+	;; 	JSR IncAnnotationCounts
+.AnnotationNextType
 	DEX
-	BNE AnnotationCountLoop
+	BNE AnnotationTypeLoop
 	RTS
 	
 	
@@ -774,12 +837,12 @@ IF properAnnotationCounts
 	ASL A
 	PHA
 	TXA
-    ASL A
-    TAY
-    INY
-    INY
-    CLC 
-    PLA 
+	ASL A
+	TAY
+	INY
+	INY
+	CLC 
+	PLA 
 	ADC (MenuTablePtr),Y
 	STA Tmp
 	INY

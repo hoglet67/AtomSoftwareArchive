@@ -1,5 +1,9 @@
 package uk.co.acornatom.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class AtomTitle {
 
 	public static int TYPE_NORMAL = 0;
@@ -11,19 +15,13 @@ public class AtomTitle {
 	private int index;
 	private int genreId;
 	private int publisherId;
-	private int collectionId;
+	private List<Integer> collectionIds;
 	private String genre;
 	private String publisher;
 	private String shortPublisher;
-	private String collection;
+	private List<String> collections;
 	private int absoluteAddress;
 	
-	public void setType(int type) {
-		this.type = type;
-	}
-	public int getType() {
-		return type;
-	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -48,12 +46,6 @@ public class AtomTitle {
 	public int getPublisherId() {
 		return publisherId;
 	}
-	public void setCollectionId(int collectionId) {
-		this.collectionId = collectionId;
-	}
-	public int getCollectionId() {
-		return collectionId;
-	}
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
@@ -66,11 +58,18 @@ public class AtomTitle {
 	public String getPublisher() {
 		return publisher;
 	}
-	public void setCollection(String collection) {
-		this.collection = collection;
+	public void setCollections(List<String> collections, Map<String, Integer> collectionMap) {
+		this.collections = collections;
+		this.collectionIds = new ArrayList<Integer>();
+		for (String collection : collections) {
+			this.collectionIds.add(collectionMap.get(collection));
+		}
 	}
-	public String getCollection() {
-		return collection;
+	public List<String> getCollections() {
+		return collections;
+	}
+	public List<Integer> getCollectionIds() {
+		return collectionIds;
 	}
 	public void setAbsoluteAddress(int absoluteAddress) {
 		this.absoluteAddress = absoluteAddress;
