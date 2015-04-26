@@ -428,7 +428,9 @@ MMINER",obsolete,,,,
 271,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
 JUNGLE
 MUSIC
-RUNME",present,RS Colour,Yes,,
+RUNME",present,"RS Colour
+Joystick
+Joystick AtoMMC",Yes,,
 272,V3,A&F,A&F S/W,A.Commercial Software,Frogger,Game,,AF,8200,"CH.""FROGGER""",Works,FROGGER,present,,,,
 273,,PP,Prog Power,A.Commercial Software,Dodge,Game,S. Draper,PP,,,,,missing,,,,
 274,,PP,Prog Power,A.Commercial Software,Reaction Race,Game,R.M.P. Hanson,PP,,,,,missing,,,,
@@ -476,7 +478,9 @@ MCH-EGG
 MCHUCK
 MENU
 ROTDATA
-RUNME",present,RS Mono,Yes,,
+RUNME",present,"RS Mono
+Joystick
+Joystick AtoMMC",Yes,,
 304,V3,RS,Retro S/W,B.Modern Creations/Ports,Chuckie Egg (C)(16K),Game,,RS/CHUCKIE,8200,*RUN CCH-EGG,Works,"ASM
 CCH-EGG
 CCHUCK
@@ -485,8 +489,10 @@ MCH-EGG
 MCHUCK
 MENU
 ROTDATA
-RUNME",present,RS Colour,Yes,,
-305,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
+RUNME",present,"RS Colour
+Joystick
+Joystick AtoMMC",Yes,,
+305,V8B2,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Test,"ASM
 CGALA
 CGALSCR
 FONT
@@ -495,8 +501,10 @@ MGALA
 MGALSCR
 ROTDATA
 RUNME
-SCORE",present,RS Mono,Yes,,
-306,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
+SCORE",present,"RS Mono
+Joystick
+Joystick AtoMMC",Yes,,
+306,V8B2,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Test,"ASM
 CGALA
 CGALSCR
 FONT
@@ -505,7 +513,9 @@ MGALA
 MGALSCR
 ROTDATA
 RUNME
-SCORE",present,RS Colour,Yes,,
+SCORE",present,"RS Colour
+Joystick
+Joystick AtoMMC",Yes,,
 307,V3,RS,Retro S/W,B.Modern Creations/Ports,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPER
 LOA-ASM
 LOADER
@@ -872,9 +882,11 @@ ERRTAB",present,Magazines,,,
 *RUN PS2A
 ",Works,"PROG
 PS2A",present,,,,
-615,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Repton,Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
+615,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Repton (32K),Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
 REPSCR
-REPTON",present,RS Colour,,,
+REPTON",present,"RS Colour
+Joystick
+Joystick AtoMMC",Yes,,
 616,V6,NC,Non Comm,B.Modern Creations/Ports,HubPlay (#BDC0),Music,,SID/ATOMSID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
 616,V5,NC,Non Comm,C.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
 617,V6,NC,Non Comm,B.Modern Creations/Ports,Reptune (#BDC0),Music,,SID/ATOMSID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
@@ -1266,7 +1278,9 @@ PRINT FOR HELP: SEE MANUAL
 679,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
-SCRE",present,RS Mono,Yes,,
+SCRE",present,"RS Mono
+Joystick
+Joystick AtoMMC",Yes,,
 680,V6,NC,Non Comm,C.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,Mainwaring,,,
 681,V6,NC,Non Comm,C.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,Mainwaring,,,
 682,V6,NC,Non Comm,C.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,Mainwaring,,,
@@ -1457,12 +1471,12 @@ CH.""SW8""",Work,"SW8
 SW1X.TXT
 PLAY800
 STARWARS",present,GODIL,Yes,,
-780,V8B1,NC,Non Comm,C.Non Commercial Software,Duck-2 (32K),Game,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""",Test,"DUCK-2
+780,V8B1,NC,Non Comm,C.Non Commercial Software,Duck-2 (32K),Game,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""",Works,"DUCK-2
 D2-EDIT
 D2-SCR
 D2-SPEL
 D2-SPRI",present,,Yes,,
-781,V8B1,NC,Non Comm,C.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Test,"S-RESET
+781,V8B2,NC,Non Comm,C.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Test,"S-RESET
 SCORE
 SOKATOM
 SOKBLD1
@@ -1474,3 +1488,8 @@ SOKSPEL
 SOKSPRI
 SSCORE
 SSOKSCR",present,,Yes,,
+782,V8B2,AS,Acornsoft,A.Commercial Software,Invaders (JS),Game,,AS/GAMES05,8200,"CH.""INVADJS""",Test,INVADJS,present,"Games Pack 5
+Joystick
+Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
+783,V8B2,BB,Bug Byte,A.Commercial Software,Galaxian (JS),Game,,BB,8200,"CH.""GALAXJS""",Test,GALAXJS,present,"Joystick
+Joystick Kbd",,,
