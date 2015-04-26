@@ -1493,3 +1493,5 @@ Joystick
 Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
 783,V8B2,BB,Bug Byte,A.Commercial Software,Galaxian (JS),Game,,BB,8200,"CH.""GALAXJS""",Test,GALAXJS,present,"Joystick
 Joystick Kbd",,,
+784,V8B2,BB,Bug Byte,A.Commercial Software,Atom Invaders (JS),Game,,BB,8200,"CH.""INVADJS""",Test,INVADJS,present,"Joystick
+Joystick Kbd",,,
