@@ -24,7 +24,7 @@ Title Sort Table: (374 bytes)
 <Pointer to 1st title in main table>
 ...
 <Pointer to last title in main table>
-#FF #FF
+#00 #00
 
 Publisher Sort Table: (374 bytes)
 Same structure as the Title Sort Table
@@ -58,7 +58,7 @@ Byte 3 - #80 | CollectionId[6..0]
 Byte 4 - #80 | CollectionId[6..0]
 Byte 5 - #80 | CollectionId[6..0]
 ...
-Byte N - Start of Title String, terminated by #0D
+Byte N - Start of Title String, terminated by #00
 
 The collectionId bytes are optional.
 
@@ -66,9 +66,9 @@ Secondary Table for Short Publisher Names: (68 bytes)
 <Pointer to short name of publisher 0>
 ...
 <Pointer to short name of publisher N>
-<Short name of Publisher 0, terminated in #0D>
+<Short name of Publisher 0, terminated in #00>
 ...
-<Short name of Publisher N, terminated in #0D>
+<Short name of Publisher N, terminated in #00>
 
 Secondary Table for Publisher Names: (192 bytes)
 <Number of Entries>
@@ -82,7 +82,7 @@ Secondary Table for Publisher Names: (192 bytes)
 Publisher Record:
 <Number of occurrences of the publisher>
 #0000
-<Full name of publisher, terminated in #0D>
+<Full name of publisher, terminated in #00>
 
 Secondary Table for Short Genre Names: (21 bytes)
 Same structure as the Secondary Table for Publisher Names

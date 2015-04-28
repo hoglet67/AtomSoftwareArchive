@@ -176,7 +176,7 @@ ENDIF
 	
 	; // Initialize the search buffer to empty
 	; 125 ?#120=13
-	LDA #Return
+	LDA #0
 	STA SearchBuffer
 
 .LabelA

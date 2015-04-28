@@ -339,7 +339,7 @@ public class GenerateMenuFiles extends GenerateBase {
 				writeByte(bos, 128 + collectionId);
 			}
 			writeString(bos, item.getTitle());
-			writeByte(bos, 13);
+			writeByte(bos, 0);
 		}
 		System.out.println("length " + bos.size() + " bytes");
 		return bos.toByteArray();
@@ -358,7 +358,7 @@ public class GenerateMenuFiles extends GenerateBase {
 			writeShort(bos, absoluteAddress);
 			absoluteAddress += (sort != null ? 4 : 0) + entry.getKey().length() + 1;
 		}
-		writeShort(bos, 0xFFFF);
+		writeShort(bos, 0x0000);
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
 			if (sort != null) {
 				int count = 0;
@@ -372,7 +372,7 @@ public class GenerateMenuFiles extends GenerateBase {
 				writeShort(bos, 0);
 			}
 			writeString(bos, entry.getKey());
-			writeByte(bos, 13);
+			writeByte(bos, 0);
 		}
 		System.out.println("length " + bos.size() + " bytes");
 		return bos.toByteArray();
@@ -390,7 +390,7 @@ public class GenerateMenuFiles extends GenerateBase {
 		for (AtomTitle item : items) {
 			writeShort(bos, item.getAbsoluteAddress());
 		}
-		writeShort(bos, 0xFFFF);
+		writeShort(bos, 0x0000);
 		System.out.println("length " + bos.size() + " bytes");
 		return bos.toByteArray();
 	}

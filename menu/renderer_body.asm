@@ -22,6 +22,9 @@ IF properAnnotationCounts
 
 ENDIF
 
+	LDA SearchBuffer
+	STA SearchFirst
+	
 	LDA Sort
 	STA CurrentSort
 	LDA Sort + 1
@@ -62,27 +65,28 @@ ENDIF
 	
 .NextRow
 
-	LDX #0
+	LDY #0
 
 	; Follow the sort pointer to the title record, and increment the sort pointer
-	LDA (CurrentSort, X)
+	LDA (CurrentSort),Y
 	STA Title
-	INC CurrentSort
-	BNE IncSort1
-	INC CurrentSort + 1		
-.IncSort1
-	LDA (CurrentSort, X)
+	INY
+	LDA (CurrentSort),Y
 	STA Title + 1
-	INC CurrentSort
-	BNE IncSort2
-	INC CurrentSort + 1		
-.IncSort2
-	
+
 	; Test if we have run off the end of the list
-	CMP #$FF
 	BNE NotEndOfList
 	JMP WritePageEndOfList
 .NotEndOfList
+
+	; Increment CurrentSort to point to the next title
+	CLC
+	LDA CurrentSort
+	ADC #$02
+	STA CurrentSort
+	BCC IncSort
+	INC CurrentSort + 1		
+.IncSort
 
 	; Do the search comparison 
 	LDA SearchMode
@@ -97,29 +101,29 @@ ENDIF
 	BMI FindTitle
 	STY TitleNameOffset
 	
-	LDA SearchBuffer
-	CMP #Return
+	LDA SearchFirst
 	BEQ FilterCompare
-	
+
 	DEY
-	STY TmpY
 .SearchCompare1
-	LDY TmpY
 	INY
-	STY TmpY
 	LDA (Title),Y
-	CMP #Return
 	BEQ NextRow
-	LDX #0
 .SearchCompare2
-	LDA SearchBuffer,X
-	CMP #Return
-	BEQ SearchMatch
-	CMP (Title),Y
+	CMP SearchFirst
 	BNE SearchCompare1
+	STY TmpY
+	LDX #0
+.SearchCompare3
 	INX
 	INY
-	BNE SearchCompare2
+	LDA SearchBuffer,X
+	BEQ SearchMatch
+	CMP (Title),Y
+	BEQ SearchCompare3
+	LDY TmpY
+	BNE SearchCompare1
+
 .SearchMatch
 
 IF properAnnotationCounts
@@ -245,8 +249,7 @@ ENDIF
 	LDY #CountOffset
 
 IF properAnnotationCounts	
-	LDA SearchBuffer
-	CMP #13
+	LDA SearchFirst
 	BEQ NoSearch
 	INY
 	INY
@@ -288,8 +291,8 @@ ENDIF
 	BNE LengthOfAnnotation
 
 .NullCollectionMessage
-	EQUS "NO COLLECTION"
-	EQUB 13
+	; Currently just blank, a string like "NO COLLECTION" could be put here
+	EQUB 0
 	
 .NotNullCollection
 	CPY #1
@@ -314,7 +317,6 @@ ENDIF
 
 .LengthOfAnnotationLoop
 	LDA (AnnotationString),Y
-	CMP #Return
 	BEQ WriteLetter
 	INY
 	DEX
@@ -332,8 +334,7 @@ ENDIF
 	
 	LDA SearchMode
 	BPL WriteTitle1
-	LDA SearchBuffer
-	CMP #Return
+	LDA SearchFirst
 	BEQ WriteTitle1
 	
 	; There is an active search filter, so try to highlight
@@ -355,7 +356,6 @@ ENDIF
 	LDY #0
 .WriteAnnotation
 	LDA (AnnotationString),Y
-	CMP #Return
 	BEQ WriteLineExit
 	JSR WriteToScreen 
 	INY
@@ -368,7 +368,6 @@ ENDIF
 	LDY TitleNameOffset
 .WriteTitleNoHighlight1
 	LDA (Title),Y
-	CMP #Return
 	BEQ WriteTitleNoHighlight2
 	JSR WriteToScreen
 	INY
@@ -382,9 +381,8 @@ ENDIF
 	LDY TitleNameOffset	
 .WriteTitleHighlight1
 	LDA (Title),Y
-	CMP #Return
 	BEQ WriteTitleHighlight3
-	CMP SearchBuffer
+	CMP SearchFirst
 	BEQ PossibleMatch	
 .WriteTitleHighlight2
 	JSR WriteToScreen
@@ -405,10 +403,8 @@ ENDIF
 	INX
 	INY
 	LDA SearchBuffer,X
-	CMP #Return
 	BEQ Match
 	LDA (Title),Y
-	CMP #Return
 	BEQ NoMatch
 	CMP SearchBuffer,X
 	BEQ PossibleMatchTestNext
@@ -514,7 +510,7 @@ ENDIF
 	LDA #')'
 	STA CountString,X
 	INX
-	LDA #Return
+	LDA #0
 	STA CountString,X
 	PLA
 	TAX
@@ -627,7 +623,7 @@ ENDIF
 	JSR Osrdch
 
 	; Return terminates the search
-	CMP #$0d
+	CMP #Return
 	BEQ SearchExit
 
 	CMP #$7F
@@ -638,13 +634,13 @@ ENDIF
 	BEQ SearchExit
 
 	DEY
-	LDA #Return
+	LDA #0
 	
 .Search1
 
 	STA SearchBuffer,Y
 	INY
-	LDA #Return
+	LDA #0
 	STA SearchBuffer,Y
 
 	JMP Search
@@ -685,7 +681,7 @@ ENDIF
 	LDY #0
 .ShowCurrentSearch3
 	LDA SearchBuffer,Y
-	CMP #Return
+	CMP #0
 	BEQ ShowCurrentSearch4
 	JSR WriteToScreen
 	INY
@@ -820,7 +816,7 @@ IF properAnnotationCounts
 	LSR A
 	LSR A
 .AnnotationNotGenre	
-	;; 	JSR IncAnnotationCounts
+	JSR IncAnnotationCounts
 .AnnotationNextType
 	DEX
 	BNE AnnotationTypeLoop
@@ -885,15 +881,14 @@ IF properAnnotationCounts
 	TYA
 	PHA
 	LDX #0
-	LDY #0
+	LDY #$FF
 .ClearAnnotationCounts3
+	INY
 	LDA (Tmp),Y
 	STA AnnotationString
 	INY
 	LDA (Tmp),Y
 	STA AnnotationString + 1
-	INY
-	CMP #$ff
 	BEQ ClearAnnotationCounts6
 	TYA
 	PHA

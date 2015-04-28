@@ -82,6 +82,10 @@ ENDIF
 	; The title name offet in the title record (used to be fixed at 4, but now collections are dynamic)
 	TitleNameOffset  = ZeroBase + $0d
 
+	; The first character in the search buffe
+	; Store this in Zero Page as a slight optimization
+	SearchFirst      = ZeroBase + $0e
+	
 	; The value used to return InKey
 	Key              = ZeroBase + $0f
 
