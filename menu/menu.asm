@@ -772,13 +772,13 @@ ENDIF
 	RTS	
 	
 .LabelXString1
-	EQUS "ATOMMC BY ", Return
+	EQUS "ATOMMC BY ", 0
 
 .LabelXString2
-	EQUS "FILTER BY ", Return
+	EQUS "FILTER BY ", 0
 
 .LabelXString3
-	EQUS "  PAGE   /  ", Return
+	EQUS "  PAGE   /  ", 0
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Subroutine to print the filter name padded with spaces to 10 chars
@@ -843,16 +843,16 @@ ENDIF
 	EQUW LabelZ3
 
 .LabelZ0
-	EQUS "TITLE     ", Return
+	EQUS "TITLE     ", 0
 
 .LabelZ1
-	EQUS "PUBLISHER", Return
+	EQUS "PUBLISHER", 0
 
 .LabelZ2
-	EQUS "GENRE", Return
+	EQUS "GENRE", 0
 
 .LabelZ3
-	EQUS "COLLECTION", Return
+	EQUS "COLLECTION", 0
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -935,7 +935,6 @@ ENDIF
 	LDY #0
 .ScreenString1
 	LDA (TmpPtr),Y
-	CMP #Return
 	BEQ ScreenString2	
 	JSR WriteToScreen
 	INY
