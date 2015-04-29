@@ -1533,4 +1533,5 @@ Joystick Kbd",,,
 802,V8B3,AR,A&R S/W,A.Commercial Software,Trap (JS),Game,,JS,8200,*RUN TRAP,Test,TRAP,present,"Joystick
 Joystick Kbd",,,
 803,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Test,BAINV,present,,,,
-804,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,8200,"CH.""DARTS""",Test,DARTS,present,,,,
+804,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,8200,"*RUN DARTS
+RUN",Test,DARTS,present,,,,
