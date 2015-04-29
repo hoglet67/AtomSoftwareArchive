@@ -1495,3 +1495,42 @@ Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp5.html
 Joystick Kbd",,,
 784,V8B2,BB,Bug Byte,A.Commercial Software,Atom Invaders (JS),Game,,BB,8200,"CH.""INVADJS""",Test,INVADJS,present,"Joystick
 Joystick Kbd",,,
+785,V8B3,PP,Prog Power,A.Commercial Software,Astrobirds (JS),Game,,JS,8200,*RUN ASTROBI,Test,ASTROBI,present,"Joystick
+Joystick Kbd",,,
+786,V8B3,AS,Acornsoft,A.Commercial Software,Babies (JS),Game,,JS,8200,*RUN BABIES,Test,BABIES,present,"Joystick
+Joystick Kbd",,,
+787,V8B3,MM,Micro Mania,A.Commercial Software,Centipede (JS),Game,,JS,8200,*RUN CENTIPE,Test,CENTIPE,present,"Joystick
+Joystick Kbd",,,
+788,V8B3,MM,Micro Mania,A.Commercial Software,Defender (JS),Game,,JS,8200,*RUN DEFENDE,Test,DEFENDE,present,"Joystick
+Joystick Kbd",,,
+789,V8B3,AS,Acornsoft,A.Commercial Software,Dodgems (JS),Game,,JS,8200,*RUN DODGEMS,Test,DODGEMS,present,"Joystick
+Joystick Kbd",,,
+790,V8B3,BB,Bug Byte,A.Commercial Software,Galaxian (JS),Game,,JS,8200,*RUN GALAXIA,Test,GALAXIA,present,"Joystick
+Joystick Kbd",,,
+791,V8B3,AS,Acornsoft,A.Commercial Software,Invaders (JS),Game,,JS,8200,*RUN INVADER,Test,INVADER,present,"Joystick
+Joystick Kbd",,,
+792,V8B3,YC,Your Computer,D.Books/Magazines,Donkey Kong (JS),Game,,JS,8200,*RUN KONG,Test,KONG,present,"Joystick
+Joystick Kbd",,,
+793,V8B3,PP,Prog Power,A.Commercial Software,Martians (JS),Game,,JS,8200,*RUN MARTIAN,Test,MARTIAN,present,"Joystick
+Joystick Kbd",,,
+794,V8B3,MM,Micro Mania,A.Commercial Software,Omega Mission (JS),Game,,JS,8200,*RUN OMEGA,Test,"OMEGA
+DATA",present,"Joystick
+Joystick Kbd",,,
+795,V8B3,NC,Non Comm,C.Non Commercial Software,Pointer (JS),Game,,JS,8200,*RUN POINTER,Test,POINTER,present,"Joystick
+Joystick Kbd",,,
+796,V8B3,MM,Micro Mania,A.Commercial Software,Puckman (JS),Game,,JS,8200,*RUN PUCKMAN,Test,PUCKMAN,present,"Joystick
+Joystick Kbd",,,
+797,V8B3,AS,Acornsoft,A.Commercial Software,Rat Trap (JS),Game,,JS,8200,*RUN RATTRAP,Test,RATTRAP,present,"Joystick
+Joystick Kbd",,,
+798,V8B3,AS,Acornsoft,A.Commercial Software,Robots (JS),Game,,JS,8200,*RUN ROBOTS,Test,ROBOTS,present,"Joystick
+Joystick Kbd",,,
+799,V8B3,PP,Prog Power,A.Commercial Software,Cowboy Shoot-Out (JS),Game,,JS,8200,*RUN SHOOTOU,Test,SHOOTOU,present,"Joystick
+Joystick Kbd",,,
+800,V8B3,AS,Acornsoft,A.Commercial Software,Star Gate (JS),Game,,JS,8200,*RUN STARGAT,Test,STARGAT,present,"Joystick
+Joystick Kbd",,,
+801,V8B3,AF,A&F S/W,A.Commercial Software,Torpedo Run (JS),Game,,JS,8200,*RUN TORP,Test,TORP,present,"Joystick
+Joystick Kbd",,,
+802,V8B3,AR,A&R S/W,A.Commercial Software,Trap (JS),Game,,JS,8200,*RUN TRAP,Test,TRAP,present,"Joystick
+Joystick Kbd",,,
+803,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Test,BAINV,present,,,,
+804,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,8200,"CH.""DARTS""",Test,DARTS,present,,,,
