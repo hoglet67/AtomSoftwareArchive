@@ -469,6 +469,7 @@ package "atms/Acl1-24/TRAP" "$ARCHIVE/$AR"
 cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
 cp -a roland/* $ARCHIVE
+cp -a wim/* $ARCHIVE
 
 ##############################################################
 # Build the menu
