@@ -1476,7 +1476,7 @@ D2-EDIT
 D2-SCR
 D2-SPEL
 D2-SPRI",present,,Yes,,
-781,V8B2,NC,Non Comm,C.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Test,"S-RESET
+781,V8B2,NC,Non Comm,C.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Works,"S-RESET
 SCORE
 SOKATOM
 SOKBLD1
@@ -1496,20 +1496,22 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 785,V8B3,A&F,A&F S/W,A.Commercial Software,Cylon Attack (JS),Game,,JS/DAVE,8200,"CH.""CYLONATT""",Works,CYLONATT,present,"Joystick
 Joystick Kbd",,,
-786,V8B3,AS,Acornsoft,A.Commercial Software,Dog Fight (JS),Game,,JS/DAVE,8200,"CH. ""DOGFIGHT""",Test,DOGFIGHT,present,"Joystick
-Joystick Kbd",,,
-787,V8B3,A&F,A&F S/W,A.Commercial Software,Space Panic (16K) (JS),Game,,JS/DAVE,8200,*RUN PANIC,Test,PANIC,present,"Joystick
+786,V8B3,AS,Acornsoft,A.Commercial Software,Dog Fight (JS),Game,,JS/DAVE,8200,"CH. ""DOGFIGHT""",Works,DOGFIGHT,present,"Joystick
+Joystick Kbd
+Joystick Twin",,,
+787,V8B3,A&F,A&F S/W,A.Commercial Software,Space Panic (16K) (JS),Game,,JS/DAVE,8200,*RUN PANIC,Works,PANIC,present,"Joystick
 Joystick Kbd",Yes*,,
-788,V8B3,PP,Prog Power,A.Commercial Software,Stock Car (JS),Game,,JS/DAVE,8200,"CH.""STOCKCAR""",Test,STOCKCAR,present,"Joystick
+788,V8B3,PP,Prog Power,A.Commercial Software,Stock Car (JS),Game,,JS/DAVE,8200,"CH.""STOCKCAR""",Works,STOCKCAR,present,"Joystick
+Joystick Kbd
+Joystick Twin",,,
+789,V8B3,AS,Acornsoft,A.Commercial Software,Asteroids (JS),Game,,JS/DAVE,8200,"CH.""ASTEROID""",Works,ASTEROID,present,"Joystick
 Joystick Kbd",,,
-789,V8B3,AS,Acornsoft,A.Commercial Software,Asteroids (JS),Game,,JS/DAVE,8200,"CH.""ASTEROID""",Test,ASTEROID,present,"Joystick
-Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp1.html
-790,V8B3,AS,Acornsoft,A.Commercial Software,Snooker (JS),Game,,JS/DAVE,8200,"CH.""SNOOKER""",Test,SNOOKER,present,"Joystick
-Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
-791,V8B3,AS,Acornsoft,A.Commercial Software,Lunar Lander (JS),Game,,JS/DAVE,8200,"CH.""LANDER""",Test,LANDER,present,"Joystick
-Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp3.html
-792,V8B3,AS,Acornsoft,A.Commercial Software,Amoeba (JS),Game,,JS/DAVE,8200,"CH.""AMOEBA""",Test,AMOEBA,present,"Joystick
-Joystick Kbd",,No,http://atomclub.nl/atom_handleidingen/misc/gp6.html
+790,V8B3,AS,Acornsoft,A.Commercial Software,Snooker (JS),Game,,JS/DAVE,8200,"CH.""SNOOKER""",Works,SNOOKER,present,"Joystick
+Joystick Kbd",,,
+791,V8B3,AS,Acornsoft,A.Commercial Software,Lunar Lander (JS),Game,,JS/DAVE,8200,"CH.""LANDER""",Works,LANDER,present,"Joystick
+Joystick Kbd",,,
+792,V8B3,AS,Acornsoft,A.Commercial Software,Amoeba (JS),Game,,JS/DAVE,8200,"CH.""AMOEBA""",Works,AMOEBA,present,"Joystick
+Joystick Kbd",,,
 793,V8B3,PP,Prog Power,A.Commercial Software,Astrobirds (JS),Game,,JS/KEES,8200,*RUN ASTROBI,Works,ASTROBI,present,"Joystick
 Joystick Kbd",,,
 794,V8B3,AS,Acornsoft,A.Commercial Software,Babies (JS),Game,,JS/KEES,8200,"CH.""BABIES""",Works,BABIES,present,"Joystick
@@ -1542,59 +1544,61 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 807,V8B3,AR,A&R S/W,A.Commercial Software,Trap (JS),Game,,JS/KEES,8200,*RUN TRAP,Works,TRAP,present,"Joystick
 Joystick Kbd",,,
-808,V8B3,PP,Prog Power,A.Commercial Software,3D Asteroids (JS),Game,,JS/WIM,8200,"CH.""3DASTER""",Works,3DASTER,present,"Joystick
+808,V8B3,NC,Non Comm,C.Non Commercial Software,Shelob's Army (16K) (JS),Game,,JS/KEES,8200,"CH.""SHELOBS""",Test,SHELOBS,present,"Joystick
+Joystick Kbd",yes,,
+809,V8B3,PP,Prog Power,A.Commercial Software,3D Asteroids (JS),Game,,JS/WIM,8200,"CH.""3DASTER""",Works,3DASTER,present,"Joystick
 Joystick Kbd",,,
-809,V8B3,AS,Acornsoft,A.Commercial Software,Four Row (JS),Game,,JS/WIM,8200,"CH.""4OP1RIJ""",Works,4OP1RIJ,present,"Joystick
+810,V8B3,AS,Acornsoft,A.Commercial Software,Four Row (JS),Game,,JS/WIM,8200,"CH.""4OP1RIJ""",Works,4OP1RIJ,present,"Joystick
 Joystick Kbd",,,
-810,V8B3,NC,Non Comm,C.Non Commercial Software,Bowling (R) (JS),Game,,JS/WIM,8200,"CH.""BOWLING""",Works,BOWLING,present,"Joystick
+811,V8B3,NC,Non Comm,C.Non Commercial Software,Bowling (R) (JS),Game,,JS/WIM,8200,"CH.""BOWLING""",Works,BOWLING,present,"Joystick
 Joystick Kbd",,,
-811,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BREAKOU""",Works,BREAKOU,present,"Joystick
+812,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BREAKOU""",Works,BREAKOU,present,"Joystick
 Joystick Kbd",,,
-812,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BRKOUT""",Works,BRKOUT,present,"Joystick
+813,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BRKOUT""",Works,BRKOUT,present,"Joystick
 Joystick Kbd",,,
-813,V8B3,AMB,Atom Magic Book,D.Books/Magazines,Drive (JS),Game,,JS/WIM,8200,"CH.""DRIVE""",Works,DRIVE,present,"Joystick
+814,V8B3,AMB,Atom Magic Book,D.Books/Magazines,Drive (JS),Game,,JS/WIM,8200,"CH.""DRIVE""",Works,DRIVE,present,"Joystick
 Joystick Kbd",,,
-814,V8B3,PP,Prog Power,A.Commercial Software,Space Fighter (JS),Game,,JS/WIM,8200,"CH.""FIGHTER""",Works,FIGHTER,present,"Joystick
+815,V8B3,PP,Prog Power,A.Commercial Software,Space Fighter (JS),Game,,JS/WIM,8200,"CH.""FIGHTER""",Works,FIGHTER,present,"Joystick
 Joystick Kbd",,,
-815,V8B3,A&F,A&F S/W,A.Commercial Software,Frogger (JS),Game,,JS/WIM,8200,"CH.""FROGGER""",Works,FROGGER,present,"Joystick
+816,V8B3,A&F,A&F S/W,A.Commercial Software,Frogger (JS),Game,,JS/WIM,8200,"CH.""FROGGER""",Works,FROGGER,present,"Joystick
 Joystick Kbd",,,
-816,V8B3,PP,Prog Power,A.Commercial Software,Hyperfire (JS),Game,,JS/WIM,8200,"CH.""HYPERFI""",Works,HYPERFI,present,"Joystick
+817,V8B3,PP,Prog Power,A.Commercial Software,Hyperfire (JS),Game,,JS/WIM,8200,"CH.""HYPERFI""",Works,HYPERFI,present,"Joystick
 Joystick Kbd",,,
-817,V8B3,NC,Non Comm,C.Non Commercial Software,Jet (JS),Game,,JS/WIM,8200,"CH.""JET""",Works,JET,present,"Joystick
+818,V8B3,NC,Non Comm,C.Non Commercial Software,Jet (JS),Game,,JS/WIM,8200,"CH.""JET""",Works,JET,present,"Joystick
 Joystick Kbd",,,
-818,V8B3,NC,Non Comm,C.Non Commercial Software,Race (JS),Game,,JS/WIM,8200,"CH.""JOYRACE""",Works,JOYRACE,present,"Joystick
+819,V8B3,NC,Non Comm,C.Non Commercial Software,Race (JS),Game,,JS/WIM,8200,"CH.""JOYRACE""",Works,JOYRACE,present,"Joystick
 Joystick Kbd",,,
-819,V8B3,NC,Non Comm,C.Non Commercial Software,Navigator (R) (JS),Game,,JS/WIM,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,"Joystick
+820,V8B3,NC,Non Comm,C.Non Commercial Software,Navigator (R) (JS),Game,,JS/WIM,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,"Joystick
 Joystick Kbd",,,
-820,V8B3,A&F,A&F S/W,A.Commercial Software,Painter (JS),Game,,JS/WIM,8200,"CH.""PAINTER""",Broken,PAINTER,present,"Joystick
+821,V8B3,A&F,A&F S/W,A.Commercial Software,Painter (JS),Game,,JS/WIM,8200,"CH.""PAINTER""",Broken,PAINTER,present,"Joystick
 Joystick Kbd",,,
-821,V8B3,MM,Micro Mania,A.Commercial Software,Puckman (JS),Game,,JS/WIM,8200,"CH.""PUCKMA""",Works,PUCKMA,present,"Joystick
+822,V8B3,MM,Micro Mania,A.Commercial Software,Puckman (JS),Game,,JS/WIM,8200,"CH.""PUCKMA""",Works,PUCKMA,present,"Joystick
 Joystick Kbd",,,
-822,V8B3,NC,Non Comm,C.Non Commercial Software,Race Rups (R) (JS),Game,,JS/WIM,8200,"CH.""RACRUPS""",Works,RACRUPS,present,"Joystick
+823,V8B3,NC,Non Comm,C.Non Commercial Software,Race Rups (R) (JS),Game,,JS/WIM,8200,"CH.""RACRUPS""",Works,RACRUPS,present,"Joystick
 Joystick Kbd",,,
-823,V8B3,NC,Non Comm,C.Non Commercial Software,Rhinoceros (JS),Game,,JS/WIM,8200,"CH.""RHINORO""",Works,RHINORO,present,"Joystick
+824,V8B3,NC,Non Comm,C.Non Commercial Software,Rhinoceros (JS),Game,,JS/WIM,8200,"CH.""RHINORO""",Works,RHINORO,present,"Joystick
 Joystick Kbd",,,
-824,V8B3,NC,Non Comm,C.Non Commercial Software,Shuttle (R) (JS),Game,,JS/WIM,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,"Joystick
+825,V8B3,NC,Non Comm,C.Non Commercial Software,Shuttle (R) (JS),Game,,JS/WIM,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,"Joystick
 Joystick Kbd",,,
-825,V8B3,AS,Acornsoft,A.Commercial Software,Snake (JS),Game,,JS/WIM,8200,"CH.""SNAKE""",Works,SNAKE,present,"Joystick
+826,V8B3,AS,Acornsoft,A.Commercial Software,Snake (JS),Game,,JS/WIM,8200,"CH.""SNAKE""",Works,SNAKE,present,"Joystick
 Joystick Kbd",,,
-826,V8B3,AS,Acornsoft,A.Commercial Software,Snapper (JS),Game,,JS/WIM,8200,"CH.""SNAPPER""",Works,SNAPPER,present,"Joystick
+827,V8B3,AS,Acornsoft,A.Commercial Software,Snapper (JS),Game,,JS/WIM,8200,"CH.""SNAPPER""",Works,SNAPPER,present,"Joystick
 Joystick Kbd",,,
-827,V8B3,NC,Non Comm,C.Non Commercial Software,Space Zap (JS),Game,,JS/WIM,8200,"CH.""SPACZAP""",Works,SPACZAP,present,"Joystick
+828,V8B3,NC,Non Comm,C.Non Commercial Software,Space Zap (JS),Game,,JS/WIM,8200,"CH.""SPACZAP""",Works,SPACZAP,present,"Joystick
 Joystick Kbd",,,
-828,V8B3,NC,Non Comm,C.Non Commercial Software,Space Robots (R) (JS),Game,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",Works,SPAROBS,present,"Joystick
+829,V8B3,NC,Non Comm,C.Non Commercial Software,Space Robots (R) (JS),Game,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",Works,SPAROBS,present,"Joystick
 Joystick Kbd",,,
-829,V8B3,PP,Prog Power,A.Commercial Software,Swarm (JS),Game,,JS/WIM,8200,"CH.""SWARM""",Works,SWARM,present,"Joystick
+830,V8B3,PP,Prog Power,A.Commercial Software,Swarm (JS),Game,,JS/WIM,8200,"CH.""SWARM""",Works,SWARM,present,"Joystick
 Joystick Kbd",,,
-830,V8B3,NC,Non Comm,C.Non Commercial Software,Stowaway (JS),Game,,JS/WIM,8200,"CH.""VERSTE1""",Works,VERSTE1,present,"Joystick
+831,V8B3,NC,Non Comm,C.Non Commercial Software,Stowaway (JS),Game,,JS/WIM,8200,"CH.""VERSTE1""",Works,VERSTE1,present,"Joystick
 Joystick Kbd",,,
-831,V8B3,PP,Prog Power,A.Commercial Software,Warlords (JS),Game,,JS/WIM,8200,"CH.""WARLOR""",Works,WARLOR,present,"Joystick
+832,V8B3,PP,Prog Power,A.Commercial Software,Warlords (JS),Game,,JS/WIM,8200,"CH.""WARLOR""",Works,WARLOR,present,"Joystick
 Joystick Kbd",,,
-832,V8B3,BB,Bug Byte,A.Commercial Software,Wiggle (JS),Game,,JS/WIM,8200,"CH.""WIGGLE""",Works,WIGGLE,present,"Joystick
+833,V8B3,BB,Bug Byte,A.Commercial Software,Wiggle (JS),Game,,JS/WIM,8200,"CH.""WIGGLE""",Works,WIGGLE,present,"Joystick
 Joystick Kbd",,,
-833,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Works,BAINV,present,,,,
-834,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,0300,"*RUN DARTS1
+834,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Works,BAINV,present,,,,
+835,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,0300,"*RUN DARTS1
 ?18=46
 CH.""DARTS2""",Works,"DARTS1
 DARTS2",present,,,,
-835,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
+836,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
