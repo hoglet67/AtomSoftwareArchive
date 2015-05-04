@@ -1604,11 +1604,15 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 837,V8B3,PP,Prog Power,A.Commercial Software,Munchyman (JS),Game,,JS/WIM,8200,"CH.""MUNCHJH""",Test,MUNCHJH,present,"Joystick
 Joystick Kbd",,,
-838,V8B3,NC,Non Comm,C.Non Commercial Software,Ghost,Game,,NC,8200,"CH.""GHOST""",Test,GHOST,present,,,,
-839,V8B3,NC,Non Comm,C.Non Commercial Software,Saturn,Game,,NC,8200,"CH.""SATURN""",Test,SATURN,present,,,,
-840,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Works,BAINV,present,,,,
-841,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,0300,"*RUN DARTS1
+838,V8,PP,Prog Power,A.Commercial Software,Air Attack (JS),Game,J. Dyson,JS/WIM,8200,"*LOAD AIRATTA
+RUN",Test,"AIRATTA
+ATDATA",present,"Joystick
+Joystick Kbd",,,
+839,V8B3,NC,Non Comm,C.Non Commercial Software,Ghost,Game,,NC,8200,"CH.""GHOST""",Test,GHOST,present,,,,
+840,V8B3,NC,Non Comm,C.Non Commercial Software,Saturn,Game,,NC,8200,"CH.""SATURN""",Test,SATURN,present,,,,
+841,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Works,BAINV,present,,,,
+842,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,0300,"*RUN DARTS1
 ?18=46
 CH.""DARTS2""",Works,"DARTS1
 DARTS2",present,,,,
-842,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
+843,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
