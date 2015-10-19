@@ -26,6 +26,7 @@ public class SpreadsheetParser {
 	private static final String INDEX = "index";
 	private static final String CHUNK = "chunk";
 	private static final String FILENAMES = "filenames";
+	private static final String UPDATED = "updated";
 
 	private File file;
 
@@ -62,6 +63,7 @@ public class SpreadsheetParser {
 			int collection_column = -1;
 			int genre_column = -1;
 			int filenames_column = -1;
+			int updated_column = -1;
 			for (int i = 0; i < headers.length; i++) {
 				if (headers[i].toLowerCase().contains(INDEX)) {
 					index_column = i;
@@ -98,6 +100,9 @@ public class SpreadsheetParser {
 				}
 				if (headers[i].toLowerCase().contains(FILENAMES)) {
 					filenames_column = i;
+				}
+				if (headers[i].toLowerCase().contains(UPDATED)) {
+					updated_column = i;
 				}
 			}
 
@@ -146,6 +151,14 @@ public class SpreadsheetParser {
 
 				}
 				item.setFilenames(filesnamesList);
+				// Define an implicit collection for each archive version, from the updated column
+				String updated = program[updated_column].trim().toUpperCase();
+				// Collapse V8, V8B1, V8B2, etc down to V8
+				if (updated.length() > 2) {
+					updated = updated.substring(0, 2);
+				}
+				collectionsList.add("#" + updated);
+				
 				items.add(item);
 				accumulateStats(item);
 			}

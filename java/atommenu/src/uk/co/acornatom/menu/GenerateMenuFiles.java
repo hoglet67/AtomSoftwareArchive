@@ -156,10 +156,10 @@ public class GenerateMenuFiles extends GenerateBase {
 		int lengthOfUpperText;
 		
 		if (allChunk) {
-			lengthOfLowerText = 0x1F00;
-			endOfLowerText = 0x5000;
-			startOfUpperText = 0x5000;
-			lengthOfUpperText = 0x3000;
+			lengthOfLowerText = 0x1700;
+			endOfLowerText = 0x4800;
+			startOfUpperText = 0x4800;
+			lengthOfUpperText = 0x3800;
 		} else {
 			lengthOfLowerText = 0x0B00;
 			endOfLowerText = 0x3c00;
@@ -267,7 +267,7 @@ public class GenerateMenuFiles extends GenerateBase {
 		}
 
 		if (titleTable.length > lengthOfUpperText) {
-			throw new RuntimeException("Upper Text Space is full");						
+			throw new RuntimeException("Upper Text Space is full: length = " + titleTable.length + "; space = " + lengthOfUpperText);						
 		}
 
 		// ------------------------------------------------------------------------------------
