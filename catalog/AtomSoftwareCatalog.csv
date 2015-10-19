@@ -1355,7 +1355,7 @@ MSDISP",present,Mainwaring,,,
 707,,BB,Bug Byte,A.Commercial Software,Snake,,,,,,,,missing,,,,
 708,,BB,Bug Byte,A.Commercial Software,1-Key Basic,,,,,,,,missing,,,,
 709,,BB,Bug Byte,A.Commercial Software,Stock Market,,,,,,,,missing,,,,
-710,V9,AF,A&F S/W,A.Commercial Software,Missile Command,Game,,AF,8200,"CH.""MISSILE""",Test,MISSILE,present,,,,
+710,V9,AF,A&F S/W,A.Commercial Software,Missile Command,Game,,AF,8200,"CH.""MISSILE""",Works,MISSILE,present,,,,
 711,V7B2,AF,A&F S/W,A.Commercial Software,Polaris,Game,,AF,8200,"CH.""POLARIS""",Works,POLARIS,present,,,,
 712,,AF,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
 713,,CS,Computersmith,A.Commercial Software,Financial Year,Game,, , ,,,,missing,,,,
@@ -1616,17 +1616,17 @@ Joystick Kbd",,,
 CH.""DARTS2""",Works,"DARTS1
 DARTS2",present,,,,
 843,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
-844,V9,NC,Non Comm,C.Non Commercial Software,Pacman (JS),Game,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",Test,PACMAN,present,"Joystick
+844,V9,NC,Non Comm,C.Non Commercial Software,Pacman (JS),Game,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",Works,PACMAN,present,"Joystick
 Joystick Kbd",,,
-845,V9,NC,Non Comm,C.Non Commercial Software,Burger Time (JS),Game,,JS/KEES,8200,"CH.""BTIME""",Test,BTIME,present,"Joystick
+845,V9,NC,Non Comm,C.Non Commercial Software,Burger Time (JS) (R),Game,,JS/KEES,8200,"CH.""BTIME""",Works,BTIME,present,"Joystick
 Joystick Kbd",,,
-846,V9,NC,Non Comm,C.Non Commercial Software,Egg Catcher (JS),Game,,JS/KEES,8200,"CH.""KIP""",Test,KIP,present,"Joystick
+846,V9,NC,Non Comm,C.Non Commercial Software,Egg Catcher (JS) (R),Game,,JS/KEES,8200,"CH.""KIP""",Works,KIP,present,"Joystick
 Joystick Kbd",,,
-847,V9,NC,Non Comm,C.Non Commercial Software,Helicopter Lander,Game,,JS/KEES,8200,"CH.""JHELI""",Test,JHELI,present,"Joystick
+847,V9,NC,Non Comm,C.Non Commercial Software,Helicopter Lander (JS),Game,,JS/KEES,8200,"CH.""JHELI""",Works,JHELI,present,"Joystick
 Joystick Kbd",,,
-848,V9,BB,Bug Byte,A.Commercial Software,Last Run,Game,,JS/KEES,8200,"CH.""JLAST""",Test,JLAST,present,"Joystick
+848,V9,BB,Bug Byte,A.Commercial Software,Last Run (JS),Game,,JS/KEES,8200,"CH.""JLAST""",Works,JLAST,present,"Joystick
 Joystick Kbd",,,
-849,V9,NC,Non Comm,B.Modern Creations/Ports,BeebSID15 70's Rock,Music,,SID/ATMSID15,2900,*RUN SIDMENU,Test,"69WHOLE
+849,V9,NC,Non Comm,B.Modern Creations/Ports,BeebSID15 70's Rock,Music,,SID/ATMSID15,2900,*RUN SIDMENU,Works,"69WHOLE
 70ALLRI
 70IRONM
 70LAYLA
@@ -1642,33 +1642,35 @@ Joystick Kbd",,,
 79ANOTH
 SIDMENU
 ",present,SID,Yes,,
-850,V9,HB,Hobbit,D.Books/Magazines,Valinet,Game,,HB,8200,"CH.""VALINET""",Test,VALINET,present,,,,
-851,V9,NC,Non Comm,C.Non Commercial Software,VDC FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Test,VDCTIME,present,,,,
-852,V9,PCW,PCW,D.Books/Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Test,QUEST,present,,,,
-853,V9,NC,Non Comm,C.Non Commercial Software, Co.ord                  ,Game, ??,GB,8200,"CH.""028.ATM""",Test,028.ATM,present,GameBase,,,
-854,V9,NC,Non Comm,C.Non Commercial Software,Shape edit   (R),Utility, ??,GB,8200,"CH.""057.ATM""",Test,057.ATM,present,GameBase,,, requires AXR1
-855,V9,NC,Non Comm,C.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,*RUN 069.ATM,Test,069.ATM,present,GameBase,,,
-856,V9,NC,Non Comm,C.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072.ATM""",Test,072.ATM,present,GameBase,,,
-857,V9,NC,Non Comm,C.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073.ATM""",Test,073.ATM,present,GameBase,,,
-858,V9,NC,Non Comm,C.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074.ATM""",Test,074.ATM,present,GameBase,,,
-859,V9,NC,Non Comm,C.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,*RUN 075.ATM,Test,075.ATM,present,GameBase,,,
-860,V9,NC,Non Comm,C.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,*RUN 078.ATM,Test,078.ATM,present,GameBase,,,
-861,V9,NC,Non Comm,C.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,*RUN 079.ATM,Test,079.ATM,present,GameBase,,,
-862,V9,NC,Non Comm,C.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098.ATM,Test,098.ATM,present,GameBase,,,
-863,V9,NC,Non Comm,C.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134.ATM""",Test,134.ATM,present,GameBase,,,
-864,V9,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144.ATM""",Test,144.ATM,present,GameBase,,,
-865,V9,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,*RUN 155.ATM,Test,155.ATM,present,GameBase,,,
-866,V9,NC,Non Comm,C.Non Commercial Software, Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158.ATM,Test,158.ATM,present,GameBase,,, requires WE-ROM
-867,V9,NC,Non Comm,C.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159.ATM""",Test,159.ATM,present,GameBase,,,
-868,V9,NC,Non Comm,C.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165.ATM""",Test,165.ATM,present,GameBase,,,
-869,V9,PCW,PCW,D.Books/Magazines,Acorn Scramble,Game, ??,GB,8200,*RUN 166.ATM,Test,166.ATM,present,GameBase,,,
-870,V9,NC,Non Comm,C.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168.ATM""",Test,168.ATM,present,GameBase,,,
-871,V9,NC,Non Comm,C.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,*RUN 169.ATM,Test,169.ATM,present,GameBase,,,requires WE-ROM
-872,V9,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,*RUN 172.ATM,Test,172.ATM,present,GameBase,,,
-873,V9,NC,Non Comm,C.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Test,185.ATM,present,GameBase,,,requires AXR1
-874,V9,NC,Non Comm,C.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Test,197.ATM,present,GameBase,,,
-875,V9,NC,Non Comm,C.Non Commercial Software,Cubic,Game, Steve Webster,GB,8200,"CH.""199.ATM""",Test,199.ATM,present,GameBase,,,
-876,V9,NC,Non Comm,C.Non Commercial Software,Starship Manna,Game, ??,GB,8200,*RUN 226.ATM,Test,226.ATM,present,GameBase,,,
-877,V9,NC,Non Comm,C.Non Commercial Software,Cement,Game,,NC,8200,*RUN CEMENT,Test,CEMENT,present,,,,
+850,V9,HB,Hobbit,D.Books/Magazines,Valtinet (R),Game,,HB,8200,"CH.""VALINET""",Works,VALINET,present,,,,
+851,V9,NC,Non Comm,C.Non Commercial Software,VDC FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
+852,V9,PCW,PCW,D.Books/Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Missing,QUEST,present,,,,
+853,V9,NC,Non Comm,C.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028.ATM""",Works,028.ATM,present,GameBase,,,
+854,V9,NC,Non Comm,C.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057.ATM""",Works,057.ATM,present,GameBase,,, requires AXR1
+855,V9,NC,Non Comm,C.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,*RUN 069.ATM,Works,069.ATM,present,GameBase,,,
+856,V9,NC,Non Comm,C.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072.ATM""",Works,072.ATM,present,GameBase,,,
+857,V9,NC,Non Comm,C.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073.ATM""",Works,073.ATM,present,GameBase,,,
+858,V9,NC,Non Comm,C.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074.ATM""",Works,074.ATM,present,GameBase,,,
+859,V9,NC,Non Comm,C.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,*RUN 075.ATM,Works,075.ATM,present,GameBase,,,
+860,V9,NC,Non Comm,C.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,*RUN 078.ATM,Works,078.ATM,present,GameBase,,,
+861,V9,NC,Non Comm,C.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,*RUN 079.ATM,Works,079.ATM,present,GameBase,,,
+862,V9,NC,Non Comm,C.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098.ATM,Works,098.ATM,present,GameBase,,,
+863,V9,NC,Non Comm,C.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134.ATM""",Works,134.ATM,present,GameBase,,,
+864,V9,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144.ATM""",Works,144.ATM,present,GameBase,,,
+865,V9,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,*RUN 155.ATM,Works,155.ATM,present,GameBase,,,
+866,V9,NC,Non Comm,C.Non Commercial Software,Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158.ATM,Works,158.ATM,present,GameBase,,, requires WE-ROM
+867,V9,NC,Non Comm,C.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159.ATM""",Works,159.ATM,present,GameBase,,,
+868,V9,NC,Non Comm,C.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165.ATM""",Works,165.ATM,present,GameBase,,,
+869,V9,PCW,PCW,D.Books/Magazines,Acorn Scramble,Game, ??,GB,8200,*RUN 166.ATM,Works,166.ATM,present,GameBase,,,
+870,V9,NC,Non Comm,C.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168.ATM""",Works,168.ATM,present,GameBase,,,
+871,V9,NC,Non Comm,C.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,*RUN 169.ATM,Works,169.ATM,present,GameBase,,,requires WE-ROM
+872,V9,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,*RUN 172.ATM,Works,172.ATM,present,GameBase,,,
+873,V9,NC,Non Comm,C.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Works,185.ATM,present,GameBase,,,requires AXR1
+874,V9,NC,Non Comm,C.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Works,197.ATM,present,GameBase,,,
+875,V9,NC,Non Comm,C.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199.ATM""",Works,199.ATM,present,GameBase,,,
+876,V9,NC,Non Comm,C.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226.ATM""",Test,226.ATM,present,GameBase,,,
+877,V9,NC,Non Comm,C.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
+RUN",Test,CEMENT,present,"Joystick
+Joystick Kbd",,,
 ,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,
