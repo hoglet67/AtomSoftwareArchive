@@ -48,6 +48,8 @@ SID=SID
 QUILL=QUILL
 # ASP Software
 ASP=ASP
+# PCW
+PCW=PCW
 
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
@@ -87,6 +89,13 @@ cp -a ../beebsid/ATMSID* $ARCHIVE/$SID
 
 mkdir -p $ARCHIVE/$ASP
 java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$ASP/WHITEBA
+
+##############################################################
+# Atom Quest
+##############################################################
+
+mkdir -p $ARCHIVE/$PCW
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/QUEST.bas $ARCHIVE/$PCW/QUEST
 
 ##############################################################
 # Books
