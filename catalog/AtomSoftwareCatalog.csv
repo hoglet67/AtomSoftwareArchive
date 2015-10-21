@@ -1668,7 +1668,15 @@ SIDMENU
 873,V9,NC,Non Comm,C.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Works,185.ATM,present,GameBase,,,requires AXR1
 874,V9,NC,Non Comm,C.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Works,197.ATM,present,GameBase,,,
 875,V9,NC,Non Comm,C.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199.ATM""",Works,199.ATM,present,GameBase,,,
-876,V9,NC,Non Comm,C.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226.ATM""",Test,226.ATM,present,GameBase,,,
+876,V9,NC,Non Comm,C.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226.ATM""",Works,226.ATM,present,GameBase,,,
 877,V9,NC,Non Comm,C.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
-RUN",Test,CEMENT,present,"Joystick
+RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
+878,V9,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat,Game,Kees van Oss,RS/F14,8200,*RUN F14RUN,Test,"F14CODE
+F14RUN
+F14SCR
+LEVEL1
+LEVEL2
+LEVEL3
+LEVEL4",present,"Joystick
+Joystick Kbd",Yes,,
