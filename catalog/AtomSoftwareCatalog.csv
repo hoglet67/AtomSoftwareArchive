@@ -1689,13 +1689,14 @@ LEVEL2
 LEVEL3
 LEVEL4",present,"Joystick
 Joystick Kbd",Yes,,
-880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite,Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Test,"CODE
+880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite Demo,Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Test,"CODE
 ELITE
 KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
-881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner,Game,Kees van Oss,RS/MMINER,8200,*RUN MANIC,Test,"MANIC
+881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner Demo,Game,Kees van Oss,RS/MMINER,8200,*RUN MANIC,Test,"MANIC
 MINER
 KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
 882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Test,TYPEAHD,present,,,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair,Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Test,DLAIR,present,,Yes,,
+884,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,USURII,*RUN USUR**,Test,USURII,present,,,,
