@@ -113,7 +113,7 @@ ENDIF
 	CMP #'F' + 1
 	BCC MenuNext
 	; Check for special system key for Rolands system
-	CMP #'S'
+	CMP #'R'
 	BNE MenuMain
 
 	LDY #0
