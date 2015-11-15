@@ -111,8 +111,23 @@ ENDIF
 	CMP #'A'
 	BCC MenuMain
 	CMP #'F' + 1
-	BCS MenuMain
+	BCC MenuNext
+	; Check for special system key for Rolands system
+	CMP #'S'
+	BNE MenuMain
 
+	LDY #0
+	JSR Clear
+	JSR OscliString
+	EQUS "CWD SYS", Return
+	JSR OscliString
+	EQUS "INIT", Return
+
+	; Don't expect to return, but just in case....
+	JMP $c2b2
+	
+.MenuNext
+		
 IF (sddos = 1)
 	ADC #<(1016 - 'A')
 	STA BinBuffer
