@@ -1699,4 +1699,4 @@ KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
 882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Test,TYPEAHD,present,,,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair,Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Test,DLAIR,present,,Yes,,
-884,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,USURII,*RUN USUR**,Test,USURII,present,,,,
+884,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Test,USURII,present,,,,
