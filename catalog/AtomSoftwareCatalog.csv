@@ -1036,7 +1036,8 @@ SILENTN
 WALKING
 WEWISHY
 WHITECH",present,SID,Yes,,
-631,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID08 Queen,Music,,SID/ATMSID8,2900,*RUN SIDMENU,Works,"1973SEV
+631,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID08 Queen,Music,,SID/ATMSID8,2900,*RUN SIDMENU,Works,"SIDMENU
+1973SEV
 1975BOH
 1977AWE
 1977BWE
@@ -1050,8 +1051,7 @@ WHITECH",present,SID,Yes,,
 1986AKI
 1986WHO
 1989SCA
-1991THE
-SIDMENU",present,SID,Yes,,
+1991THE",present,SID,Yes,,
 632,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID09 1981,Music,,SID/ATMSID9,2900,*RUN SIDMENU,Works,"01IMAGI
 01LOSPA
 02FADET
@@ -1701,17 +1701,18 @@ Joystick Kbd",Yes,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
 884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
 885,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
-886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,*RUN JSWRUN,Test,"JSWRUN
+886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,*RUN JSWRUN,Works,"JSWRUN
 JSWCODE",present,"Joystick
 Joystick Kbd",Yes,,
-887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,*RUN JSW2RUN,Test,"JSW2RUN
+887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,*RUN JSW2RUN,Works,"JSW2RUN
 JSW2CODE",present,"Joystick
 Joystick Kbd",Yes,,
-888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Test,"EHRUN
-EHCODE",present,,Yes,,
-889,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Test,TANGLED,present,,,,
-890,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIANS,Test,GALAXIANS,present,,,,
-891,V10B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Test,"1975BFE
+888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
+EHCODE",present,"Joystick
+Joystick Kbd",Yes,,
+889,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Works,TANGLED,present,,,,
+890,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,Bad Filename,GALAXIAN,present,,,,
+891,V10B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Two bad tracks,"1975BFE
 1975MAM
 1975SOS
 1976KNO
@@ -1726,12 +1727,13 @@ EHCODE",present,,Yes,,
 1982UND
 SIDMENU
 ",present,SID,Yes,,
-892,V10B1,NC,Non Comm,C.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Test,MAURICE,present,,,,
-893,V10B1,NC,Non Comm,C.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Test,SCRAMBLE,present,,,,
-894,V10B1,NC,Non Comm,B.Modern Creations/Ports,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Test,RAFTEST,present,,,,
-895,V10B1,NC,Non Comm,B.Modern Creations/Ports,Atom Tube Host,Utility,David Banks,TUBE,8200,*RUN TUBE,Test,"TUBE
+892,V10B1,NC,Non Comm,C.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
+893,V10B1,NC,Non Comm,C.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
+894,V10B1,NC,Non Comm,B.Modern Creations/Ports,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
+895,V10B1,NC,Non Comm,B.Modern Creations/Ports,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""","Works, but would benefit from a boot program.","TUBE
 BASIC2
 CLOCKSP
 HIBASIC
 COLOSS
+BOOT6502
 ",present,,,,
