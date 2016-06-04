@@ -154,8 +154,9 @@ public class SpreadsheetParser {
 				// Define an implicit collection for each archive version, from the updated column
 				String updated = program[updated_column].trim().toUpperCase();
 				// Collapse V8, V8B1, V8B2, etc down to V8
-				if (updated.length() > 2) {
-					updated = updated.substring(0, 2);
+				if (updated.length() > 3) {
+					// This is a bit fragile!
+					updated = updated.substring(0, updated.length() - 2);
 				}
 				collectionsList.add("#" + updated);
 				
