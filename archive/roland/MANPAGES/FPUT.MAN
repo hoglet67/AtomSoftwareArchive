@@ -1,0 +1,1 @@
+FPUT Floating-point putFPUT writes the 5 bytes representing a floating-point number to the seguential file whose handle is specified by its argument.Example:FPUTA,2^32+1

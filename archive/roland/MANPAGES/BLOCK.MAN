@@ -1,0 +1,1 @@
+BLOCK m,x,y,w,hDraws a bar (solid filled rectangle).m - plotting mode: 0=reset, 1=set, 2=invertx - x coordinate lower left cornery - y coordinate lower left cornerw - widthh - height

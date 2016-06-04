@@ -1,0 +1,1 @@
+INKEY Input key INK.The INKEY statement waits until a key is pressed, and then assigns an ASCII value to the specified variable. Example:DOINKEY APRINT $AUNTIL A=CH"."

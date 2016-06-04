@@ -1,0 +1,1 @@
+UPLOAD <start> <end>This statement in the FPGA Utils copies the specified memory block to the serial port. There is no handshake. After the upload is finished it displays the `crc checksum of the transmitted datablock.Example:   UPLOAD #4000,#47FFThis statement only works in an Atom with a `Godil installed or in the FPGA-Atom.

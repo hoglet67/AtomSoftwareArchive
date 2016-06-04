@@ -1,0 +1,1 @@
+B003     PPI CONTROL REGISTERThis register should not be changed. In the reset routine it is set to #8A which gives this configuration:Port A - all pins outputPort B - all pins inputPort C - pin 0 - 3 output, pin 4 - 7 input

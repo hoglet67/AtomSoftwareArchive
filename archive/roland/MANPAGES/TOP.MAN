@@ -1,0 +1,1 @@
+TOP First free byte T.This function returns the address of the first free byte after the end of a stored BASIC program. Its value is adjusted during line editing and by the `END statement and `LOAD command. It is vital for TOP to have the correct value (set by END) before using the line editor. See also END.

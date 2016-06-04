@@ -1,0 +1,1 @@
+Pointer X LocationAddress: #BDE8 or #9FE8Default value: #7F (centre of the screen)This register returns the X location of the pointer, from 0 (left) to 255 (right).The register is read-only - currently the pointer position cannot be set programmatically.

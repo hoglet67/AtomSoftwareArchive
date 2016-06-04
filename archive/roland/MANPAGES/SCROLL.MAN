@@ -1,0 +1,1 @@
+SCROLL eScrolls the screen in every direction, depending on extension e:U - up, 8 pixelsD - down, 8 pixelsL - left, 8 pixelsR - right, 8 pixels

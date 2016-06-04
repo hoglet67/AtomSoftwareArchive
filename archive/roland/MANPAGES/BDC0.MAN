@@ -1,0 +1,1 @@
+SID RegistersAddress: #BDC0-#BDDC or #9FC0-#9FDCSee the SID Datasheet for the function of these registers.

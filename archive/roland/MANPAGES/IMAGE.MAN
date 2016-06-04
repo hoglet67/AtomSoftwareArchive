@@ -1,0 +1,1 @@
+IMAGE:<name>,x,yIMAGE a,x,ySame as SET, but now the sprite position is not stored in the sprite administration.<name> - name of the spritea      - sprite assignment numberx      - x coordinate of the spritey      - y coordinate of the sprite

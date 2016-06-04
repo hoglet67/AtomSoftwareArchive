@@ -1,0 +1,1 @@
+VER <start>,<end>,<start 2>Compares two blocks of memory.  Block one starts at the first start address and ends at the end address. The second block starts at the second start address. Non-matching addresses are printed on the screen.Example:    VER #4000,#40FF,#4100

@@ -1,0 +1,1 @@
+NOT N.This function equals a logical negation. The values of NOT are exclusively `FALSE or `TRUE (0 or 1).

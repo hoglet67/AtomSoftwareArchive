@@ -1,0 +1,1 @@
+WHILE WHILE loop A WHILE block is executed until the expression behind WHILE is `FALSE.The WHILE statement can be nested up to 10 levels deep. 

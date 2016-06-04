@@ -1,0 +1,1 @@
+SAVE Save BASIC text space SA.This statement will cause the current contents of the memory between the start of the text area, given by ?18*256, and the value of `TOP, to be saved by the operating system with a specified name. The operating system is not requested to wait until the transfer is finished before returning to the interpreter. Example:SAVE"FRED"

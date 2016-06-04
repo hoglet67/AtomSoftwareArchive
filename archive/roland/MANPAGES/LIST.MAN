@@ -1,0 +1,1 @@
+LIST List BASIC text L.This command will list program lines in the current text area. It can be interrupted by pressing ESC and can take any of these forms:LIST       list all linesLIST 10    list line 10LIST , 40  list all lines up to 40LIST 100 , list all lines from 100LIST 10,40 list all lines between 10 and 40

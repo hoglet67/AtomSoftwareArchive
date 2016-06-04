@@ -1,0 +1,1 @@
+CIRCLE p,x,y,rDraws a circle in each graphics modep - plotting mode: 0=reset, 1=set, 2=invertx = x coordinate centery = y coordinate centerr = radius

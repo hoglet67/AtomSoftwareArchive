@@ -1,0 +1,1 @@
+ATKEY (A,B,C,....) (a,b,c,....)Using this statement, you can assign keys to linenumbers or labels. E.g.ATKEY (A,F,J) (100,k,90)If the [A]-key is pressed, a jump will be made to line 100. If the [F]-key is pressed, a jump will be made to label k.

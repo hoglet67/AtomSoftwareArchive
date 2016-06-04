@@ -1,0 +1,1 @@
+TURN:<name>TURN aFlips a horizontal or vertical sprite, on screen (if it's there) as well as in the sprite administration.  <name> - name of the spritea      - sprite assignment number

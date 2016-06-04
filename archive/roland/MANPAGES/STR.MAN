@@ -1,0 +1,1 @@
+STR Convert to stringSTR converts a floating-point expression into a string of characters. It takes two arguments, the floating point expression, and an integer expression which is evaluated to give the address where the string is to be stored.Example:STR PI, TOPPRINT $TOP'3.14159265

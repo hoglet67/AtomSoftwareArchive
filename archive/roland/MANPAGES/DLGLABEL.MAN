@@ -1,0 +1,1 @@
+DLGLABEL <Text$>,<Style>,<x>,<y>Places <Text$> at position <x>,<y> and is not selectable.

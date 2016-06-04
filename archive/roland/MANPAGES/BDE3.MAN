@@ -1,0 +1,1 @@
+VGA80x40 Hardware Cursor Row RegisterAddress: #BDE3 or #9FE3Default value: #00This register controls the vertical character position of the cursor in the VGA80x40 mode. Legal values are from 0 to 39, with zero being to top most row.

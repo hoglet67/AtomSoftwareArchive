@@ -1,0 +1,1 @@
+TRACE <start> [, <breakpoint>]Single step through an assembly program, starting at start address. If the breakpoint is provided then the program will run normally until this breakpoint is encountered.This statement needs a 6522 `VIA installed because it is based on (very short) timer interrupts.Example:    TRACE #F7D1            TRACE #37D1,#38A0 

@@ -1,0 +1,1 @@
+TO Limit specifier in FOR statement TOThis symbol is required in a `FOR statement to specify the limit which is to be reached before the FOR..NEXT loop can be terminated. See FOR for examples.

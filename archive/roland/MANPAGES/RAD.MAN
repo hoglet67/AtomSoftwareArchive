@@ -1,0 +1,1 @@
+RAD Degrees to radians R.Converts its argument from degrees to radians.Example:FPRINT RAD 901.57079632

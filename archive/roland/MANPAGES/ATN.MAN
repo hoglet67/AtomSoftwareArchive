@@ -1,0 +1,1 @@
+ATN Arc tangentReturns arc tangent of argument, in radians.Example:FPRINT ATN 17.85398163E-1

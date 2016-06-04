@@ -1,0 +1,1 @@
+STOP Stop execution 	 This statement is ment for trapping errors.If a program is stopped, the text 'STOPPED AT LINE ...' is printed.Execution can be resumed by typing `CONT. 

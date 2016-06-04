@@ -1,0 +1,1 @@
+FDIM Floatinq-point dimensionAllocates space after the end of text for the floating-point arrays %00 and %AA to %ZZ.Example:FDIM %JJ(5)allocates space for elements %JJ(0) to %JJ(5), a total of 30 bytes.

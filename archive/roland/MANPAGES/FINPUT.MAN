@@ -1,0 +1,1 @@
+FINPUT Floating-point input FIN.Exactly as `INPUT, but takes a floating-point variable or array element, and does not allow strings to be input.Example:FINPUT"Your weight "%A

@@ -1,0 +1,1 @@
+UNSET:<name>UNSET aRemoves a sprite from the screen.<name> - name of the spritea      - sprite assignment number

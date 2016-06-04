@@ -1,0 +1,1 @@
+CLSSelects text mode and clears the screen.

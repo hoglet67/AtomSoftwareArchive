@@ -1,0 +1,1 @@
+ASN Arc sineReturns arc sine of argument, in radians.Example:FPRINT ASN 11.57079633

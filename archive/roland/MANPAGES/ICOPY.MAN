@@ -1,0 +1,1 @@
+ICOPY Intelligent copy 	IC.This is almost the same as the `COPY statement. However, the fill effect cannot occur with this statement. 

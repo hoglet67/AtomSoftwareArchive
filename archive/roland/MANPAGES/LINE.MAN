@@ -1,0 +1,1 @@
+LINE <line number>Searches the address of the given line number in the current basic program.

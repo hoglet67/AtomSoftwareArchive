@@ -1,0 +1,1 @@
+DLGRADIOBUTTON <Var>,<Text$>,<Style>,<x>,<y>Places a radio button at position <x>,<y> with behind it <Text$> which is selectable. The first radio button is bit 0 of <Var>, the second radio button is bit 1 of <Var>, etc. Thus, there is a maximum of eight radio buttons per <Var>, of which only one can be selected.

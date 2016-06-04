@@ -1,0 +1,1 @@
+LIBDisplays a list of all basic programs in memory.

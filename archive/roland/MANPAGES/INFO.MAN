@@ -1,0 +1,1 @@
+INFODisplays information about the basic program at the current text space. It shows the start address, top of the program, value of the `DIM top, the program size and the number of free bytes. It assumes that the top of available memory always at #8000 is.

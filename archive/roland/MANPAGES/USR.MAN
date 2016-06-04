@@ -1,0 +1,1 @@
+USR <address>This is almost the same as the build-in `LINK statement. It calls the assembly program at the given address. You can preset the Accu, X and Y registers by setting the variables A, X and Y to the needed value. After the machine code routine has finished the values of the Accu, X and Y registers are written back into these variables.Example:    USR #FFE3

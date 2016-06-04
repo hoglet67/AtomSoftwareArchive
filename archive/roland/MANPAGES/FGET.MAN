@@ -1,0 +1,1 @@
+FGET Floating-point GETSame as `GET, but reads five bytes from a serial file and returns a floating-point number.

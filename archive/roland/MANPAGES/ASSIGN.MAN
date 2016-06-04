@@ -1,0 +1,1 @@
+ASSIGN:<name>,aAssigns a number to a sprite. The sprite is then accessible through both its name and its number.<name> - name of the sprite,a      - assignment number [1..255].

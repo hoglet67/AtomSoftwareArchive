@@ -1,0 +1,1 @@
+DLGFRAME <Text$>,<Style>,<x>,<y>,<w>,<h>Places a rectangle at position <x>,<y> with width <w> and height <h> and is not selectable. <Text$> is placed right above the rectangle and is centred horizontally.

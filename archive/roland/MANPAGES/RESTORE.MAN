@@ -1,0 +1,1 @@
+RESTORE Restore data RES.With this statement the data-pointer can be set to a specific line. Examples:RESTORERESTORE 160RESTORE a

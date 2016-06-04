@@ -1,0 +1,15 @@
+COS Cosine C.
+
+COS is a function in the floating point rom that returns the cosine of an angle in radians. COS is also a statement in the `PCHARME utility rom and is used for a faster cassette data transfer.
+
+Example:
+
+FPRINT COS 1
+5.40302306E-1
+
+Example:
+
+COS 0 - 300 baud
+COS 1 - 1200 baud
+
+During load and save operations there will be an indicator in the right upper corner of the screen.

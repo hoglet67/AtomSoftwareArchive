@@ -1,0 +1,1 @@
+MFIND <start>,<end>,<string>Search for a string in the given memory block.Example:    MFIND #E000,#EFFF, "CHARLIE"

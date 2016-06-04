@@ -1,0 +1,1 @@
+SINOUTSINOUT is a statement in the FPGA Utils. It redirects both the input and output streams to the serial port. Character data is written to and read from the serial interface instead of the keyboard and screen.This statement only works in an Atom with a `Godil installed or in the FPGA-Atom.

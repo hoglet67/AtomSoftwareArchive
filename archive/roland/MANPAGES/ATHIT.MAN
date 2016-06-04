@@ -1,0 +1,1 @@
+ATHIT:<name1>,<name2>ATHIT:<name1>,a2ATHIT a1,:<name2>ATHIT a1,a2Checks a sprite collision.<name1> - name of sprite 1<name2> - name of sprite 2a1      - assignment number of sprite 1a2      - assignment number of sprite 2If the two sprites collide, the rest of the line is processed.

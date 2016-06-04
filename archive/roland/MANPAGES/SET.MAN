@@ -1,0 +1,1 @@
+SET:<name>,x,ySET a,x,yPlaces a sprite on the screen.<name> - name of the spritea      - sprite assignment numberx      - x position of the spritey      - y position of the sprite

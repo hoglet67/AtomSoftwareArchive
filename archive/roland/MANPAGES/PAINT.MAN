@@ -1,0 +1,1 @@
+PAINT x,yPAINT x,y,pFills a closed area, using one of 32 user definable patternsx - x coordinate of start positiony - y coordinate of start positionp - pattern number (see CREATE), solid fill if p omitted

@@ -1,0 +1,1 @@
+FLASH <address>,<bank>This statement from FPGA Utils writes a block of 4K into the EEPROM of the FPGA-Atom.Example:     FLASH #4000,5

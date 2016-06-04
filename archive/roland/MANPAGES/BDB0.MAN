@@ -1,0 +1,11 @@
+UART Data Register
+
+Address: #BDB0 or #9DB0
+
+Default value: #00
+
+Writing to this register causes a character to be transmitted, and sets Tx Ready bit to 0.
+
+Reading from this register returns the last received, and sets the Rx Available bit to 0.
+
+The character format is fixed at 1 Start bit, 8 Data bits, 1 Stop bits, No Parity.

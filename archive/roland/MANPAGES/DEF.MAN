@@ -1,0 +1,1 @@
+DEF <name>,0/1..-16*-..0/1DEF:       0/1..-16*-..0/1Defines a horizontal sprite. A set pixel is defined as 1, a reset pixel is defined as 0. For a complete sprite eight DEFs are required.

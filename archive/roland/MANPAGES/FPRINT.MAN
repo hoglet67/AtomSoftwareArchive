@@ -1,0 +1,1 @@
+FPRINT Floating-point print FP.Exactly as `PRINT except that no $ expressions are allowed, and all expressions are treated as floating-point expressions. Floating-point numbers are printed out right justified in a field size determined by the value of 0.Example:FPRINT"You are "%H" metres tall"''

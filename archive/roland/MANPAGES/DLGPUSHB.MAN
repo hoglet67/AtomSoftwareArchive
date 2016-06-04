@@ -1,0 +1,1 @@
+DLGPUSHBUTTON <ExitCode>,<Text$>,<Style>,<x>,<y>Places a push button at position <x>,<y>, with header <Text$> and is selectable.

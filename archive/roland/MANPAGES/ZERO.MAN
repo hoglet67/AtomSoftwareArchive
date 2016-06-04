@@ -1,0 +1,1 @@
+ZERO Clear variables Z.Fills the BASIC variables A to Z with the value 0. 	

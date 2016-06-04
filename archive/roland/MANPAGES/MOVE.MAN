@@ -1,0 +1,1 @@
+MOVE Move to absolute position MOVEThe statement MOVE A,B is equivalent to `PLOT 4,A,B.

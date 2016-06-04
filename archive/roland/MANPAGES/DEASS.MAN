@@ -1,0 +1,1 @@
+DEASS:<name>Disables the recognition of the sprite through an assignment number.<name> - name of the sprite.

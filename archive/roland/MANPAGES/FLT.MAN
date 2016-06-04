@@ -1,0 +1,1 @@
+FLT Float F.Takes an integer argument and converts it to a floating-point number.Example:FPRINT FLT(4/3)1.00000000

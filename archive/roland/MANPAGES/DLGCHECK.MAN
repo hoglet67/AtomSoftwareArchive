@@ -1,0 +1,1 @@
+DLGCHECKBOX <Var>,<Text$>,<Style>,<x>,<y>Places a check box at position <x>,<y> with behind it <Text$> which is selectable. If the check box is empty, <Var> will be 0. If the check box is selected, <Var> is not 0.

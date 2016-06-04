@@ -1,0 +1,1 @@
+RUN Execute BASIC text from beginning RUNThis statement will cause the interpreter to commence execution at the lowest numbered line of the current text area. Since it is a statement, it may be used in both direct mode and programs.

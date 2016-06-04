@@ -1,0 +1,1 @@
+SOUND p,dProduces a sound according to:p - pitch 1  [1..255]d - duration [1..65535]

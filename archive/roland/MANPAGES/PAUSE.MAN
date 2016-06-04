@@ -1,0 +1,1 @@
+PAUSE Delay program execution PA.PAUSE is followed by an expression. PAUSE 60 waits for one second. 

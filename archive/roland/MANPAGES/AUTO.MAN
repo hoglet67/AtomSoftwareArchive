@@ -1,0 +1,1 @@
+AUTO Automatic line-numbering and indentation A.Examples:AUTO          - first line 10, each next one 10 higher.AUTO 40       - first line 40, each next one 10 higher.AUTO ,20      - first line 10, each next one 20 higher.AUTO 100,100  - first line 100, each next one 100 higher.

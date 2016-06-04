@@ -1,0 +1,1 @@
+DLGHOTSPOT <ExitCode>,<x>,<y>,<w>,<h>,<VarX>,<VarY>Marks a rectangle at position <x>,<y> with width <w> and height <h>, in which any point can be clicked. The relative x- and y-values of this  point are stored into <VarX> and <VarY>.

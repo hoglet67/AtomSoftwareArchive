@@ -1,0 +1,1 @@
+AND Relational AND A.This symbol provides the logical AND operation between two <relational expression>s. Its form is <relational expression a> AND <relational expression b> and the result will be true only if both <relational expression>s are true. AND has the same priority as OR. Example:IF A=B AND C=D PRINT"EQUAL PAIRS"'

@@ -1,0 +1,1 @@
+HTAB Horizontal tabulation HT.This statement is especially useful when creating tables. Example:HTAB 16

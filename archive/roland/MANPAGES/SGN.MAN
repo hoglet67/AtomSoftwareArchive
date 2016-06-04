@@ -1,0 +1,1 @@
+SGN SignReturns -1, 0, or 1 depending on whether its floating-point argument is negative, zero, or positive respectively.

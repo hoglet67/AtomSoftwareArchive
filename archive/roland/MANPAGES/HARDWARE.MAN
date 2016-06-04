@@ -1,0 +1,2 @@
+HARDWAREThis manpage gives you a start for the hardware pages. Use one of the following keywords for more information about the registers of the specified component:    `VIA    `PPI    `GODIL    `RAMROM
+    `TUBE    

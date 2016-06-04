@@ -1,0 +1,1 @@
+STEP Step specifier in FOR statement S.This symbol is an optional parameter in the `FOR statement, used to specify step sizes other than the default of +1. It is followed by an <expression> which is evaluated and its value stored along with the other FOR parameters. See FOR for examples.

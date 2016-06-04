@@ -1,0 +1,1 @@
+SOUTSOUT is a statement of the FPGA Utils and redirects the output stream to the serial port. All printed data is send to the serial port instead of the screen.This statement only works in an Atom with a `Godil installed or in the FPGA-Atom.

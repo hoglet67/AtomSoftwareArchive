@@ -1,0 +1,1 @@
+VGA32This statement from the FPGA Utils resets the Atom to its default text mode. The read and write vectors are set to their default addresses and the 6847 controller is set to 32x16 text mode.

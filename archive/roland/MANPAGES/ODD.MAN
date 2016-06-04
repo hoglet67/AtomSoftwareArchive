@@ -1,0 +1,1 @@
+ODD O.This function has the value `TRUE (1) if the argument is odd. Syntaxis:ODD (factor)

@@ -1,0 +1,1 @@
+TRUE TR.Always results in the value 1. 'A=1' and 'A=TRUE' are completely equal. 

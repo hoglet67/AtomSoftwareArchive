@@ -1,0 +1,1 @@
+EVEN EV.This function has the value `TRUE (1) if the argument is even.Syntax is:EVEN (factor)

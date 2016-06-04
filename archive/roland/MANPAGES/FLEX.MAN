@@ -1,0 +1,1 @@
+FLEX           (6809 CoPro)Here's how you get FLEX running (a bit more fiddly):>*CWD TUBE>?#BEE6=5 ;REM SELECT 6809 core>*TUBE*LOAD FLEX<Hit Break>>VGA80>*CWD TUBE>SDDOS>*DIN 0 BBCFLEX6.DSD>LINK #3000*GO C120

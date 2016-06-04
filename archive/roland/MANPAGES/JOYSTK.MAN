@@ -1,0 +1,1 @@
+JOYSTK A,B,CIf a joystick is available, it will be scanned, and the appropriate variables will be update according to the joysticks position.A - variable A to Z: +1 if joystick right, -1 if joystick left.B - variable A to Z: +1 if joystick up,    -1 if joystick down.C - variable A to Z: =0 if fire button not pressed, <>0 if fire button pressed.

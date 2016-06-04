@@ -1,0 +1,1 @@
+THEN Connective in IF statement omitThis symbol is an option in the `IF statement; it can be followed by any statement.

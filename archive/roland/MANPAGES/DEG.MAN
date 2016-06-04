@@ -1,0 +1,1 @@
+DEG Radians to degrees D.Converts its argument from radians to degrees.Example:FPRINT DEG PI180.000000

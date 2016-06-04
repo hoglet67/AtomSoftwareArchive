@@ -1,0 +1,1 @@
+HEX Hexadecimal / ASCII dump 	 Hexdump is started from the specified address. The syntax is:HEX <expr>

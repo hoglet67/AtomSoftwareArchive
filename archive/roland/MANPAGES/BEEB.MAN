@@ -1,0 +1,1 @@
+BEEBThis statement toggles bit 3 of `BFFE in the FPGA-Atom and switches to the BBC Basic memory map. A reset (break) is needed to start BBC Basic.

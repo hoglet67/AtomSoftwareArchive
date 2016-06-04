@@ -1,0 +1,1 @@
+CP/M    (Z80 CoPro)Here's how you get CP/M running (a bit fiddly):>VGA80>*CWD TUBE>*LOAD TUBE>SDDOS>*DIN 0 CPM1.DSD>*DIN 1 INFOCOM.DSD>?#BEE6=5 ;REM SELECT Z80 core>LINK #3000*CPMA>DIRA>B:B>DIRB>HITCH2Known issue 1: The slowest Z80 Co Pro hangs loading files. Select one of the faster ones.Known issue 2: The Z80 Co Pro Error Handler hangs.

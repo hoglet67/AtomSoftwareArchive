@@ -1,0 +1,1 @@
+RETURN Return from subroutine R.This statement causes a return to the last encountered `GOSUB statement. See GOSUB for examples.

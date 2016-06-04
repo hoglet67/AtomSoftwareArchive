@@ -1,0 +1,1 @@
+RAMROMAt the end of the I/O space there are often one or two registers for controlling bank switching boards. Some bits are also used for special purposes like switching write protection on of off and selecting a clock speed for the CPU clock.`BFFE option register`BFFF bank switching

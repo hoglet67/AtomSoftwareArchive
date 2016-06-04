@@ -1,0 +1,1 @@
+DLGENDGoes to interaction mode. The <COPY> key selects the next object; the <DELETE> key the previous object. The <ESCAPE> key exits the interaction mode. The <SPACEBAR> is used to execute an action. If you're using a mouse, the left mouse button has the same effect as the <SPACEBAR>.

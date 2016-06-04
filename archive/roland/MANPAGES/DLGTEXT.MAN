@@ -1,0 +1,1 @@
+DLGTEXT <StringVar>,<Text$>,<Style>,<x>,<y>,<w>Places <Text$> at position <x>,<y> with behind an input area with width <w>. As default, this input area contains $<StringVar>. On leaving the input area with the <RETURN> key, $<StringVar> is adjusted. On leaving the input area with the <ESCAPE> key, $<StringVar> is not adjusted.

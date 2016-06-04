@@ -1,0 +1,1 @@
+BASE qSelects a memory block, where sprites and paint patterns will be stored (together 2 kB). Also resets map-byte for `INT and `ATTRGq - high order byte of the start of the memory block.

@@ -1,0 +1,1 @@
+WINDOW m,x,y,w,hDefines a windows in which drawing is allowed or not.m = mode: 0 = draw only outside window, 1 = draw only inside windowx = x coordinate lower left cornery = y coordinate lower left cornerw = widthh = height

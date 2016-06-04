@@ -1,0 +1,1 @@
+POS:<name>,A,BPOS a,A,BStores the coordinates of a certain sprite in the appropriate varables.A - variable A to Z : x coordinateB - variable A to Z : y coordinate

@@ -1,0 +1,1 @@
+WP [<on> | <off>]Display or set write protect for ram blocks #A000 - #AFFF and #C000 - #FFFF.Examples:   WP            WP ON            WP OFF

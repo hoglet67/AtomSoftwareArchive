@@ -1,0 +1,1 @@
+ACS Arc cosineReturns arc cosine of argument, in radians. Example:FPRINT ACS 10.0

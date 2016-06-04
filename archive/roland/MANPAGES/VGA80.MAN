@@ -1,0 +1,1 @@
+VGA80This statement from the FPGA Utils enables a new graphic driver for the `Godil and FPGA-Atom. It supports 80x40 characters, colours and underlined text. The Atom2k15 version of FPGAUTIL also supports a number of BBC VDU commands which make BBC Basic more compatible with a real BBC computer.

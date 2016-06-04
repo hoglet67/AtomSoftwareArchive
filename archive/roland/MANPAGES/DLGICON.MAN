@@ -1,0 +1,1 @@
+DLGICON <ExitCode>,<IconNr>,<Text$>,<Style>,<x>,<y>Places an icon [0..31] at position <x>,<y>, with subscript <Text$> and is selectable.

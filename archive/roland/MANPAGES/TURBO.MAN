@@ -1,0 +1,1 @@
+TURBO [<on> | <off>]Display or set the CPU clock speed. Examples:   TURBO            TURBO ON            TURBO OFF

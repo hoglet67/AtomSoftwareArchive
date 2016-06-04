@@ -1,0 +1,1 @@
+BEEP Generate sound BE.Emits a tone of a specific pitch and duration. The syntax is:BEEP <expr>,<expr>

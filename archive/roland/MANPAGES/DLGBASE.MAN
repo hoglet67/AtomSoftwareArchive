@@ -1,0 +1,1 @@
+DLGBASE <Address>With this command a memory block from <address> to <address+06FFh> is reserved for a FontDataTable and an IconDataTable; From <address+0700h> onwards, there is space for object parameters.address       : address+02FFh   FontDataTableaddress+0300h : address+06FFh   IconDataTableaddress+0700h : ...             WindowsEventTable

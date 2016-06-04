@@ -1,0 +1,1 @@
+VAL Value of strinq V.Returns a number representing the string converted to a number. If no number is present, zero will be returned. VAL will read up to the first illegal character, and cannot cause an error.Example:FPRINT VAL "2.2#"2.20000000

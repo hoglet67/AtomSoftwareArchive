@@ -1,0 +1,1 @@
+B001     PPI PORT BThis port is used for keyboard input. In combination with the keyboard row selection, a row of keys can be scanned.bit 0 - 5    keyboard columnsbit 6        control keybit 7        shift keys

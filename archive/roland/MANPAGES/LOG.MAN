@@ -1,0 +1,1 @@
+LOG Natural logarithm L.Returns the natural logarithm of its argument.Example:FPRINT LOG 10.0

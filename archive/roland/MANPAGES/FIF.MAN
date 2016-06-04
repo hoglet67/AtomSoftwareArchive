@@ -1,0 +1,1 @@
+FIF Floating-point IFSame syntax as `IF, but connectives such as `AND and `OR are not allowed.Example:FIF %A < %B FPRINT %A "IS LOWER THAN "%B

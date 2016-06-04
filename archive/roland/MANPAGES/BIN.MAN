@@ -1,0 +1,1 @@
+BIN <binary value>Prints the hexadecimal value of the given binary string.Example:    BIN 01011010

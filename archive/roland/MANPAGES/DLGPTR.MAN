@@ -1,0 +1,1 @@
+DLGPOINTER <number>Assigns mouse pointer <number>. There are 32 predefined mouse cursors available.bit 7    : 0=Pointer on, 1=Pointer off.bits 0-4 : Mouse cursor number.

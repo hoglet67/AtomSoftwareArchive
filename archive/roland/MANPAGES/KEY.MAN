@@ -1,0 +1,1 @@
+KEY Single keyboard scanner K.The keyboard is scanned through once and an ASCII value is assigned to the specified variable.

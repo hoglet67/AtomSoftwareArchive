@@ -1,0 +1,1 @@
+OR Relational OR ORThis symbol provides the logical OR operation between two <relational expressions> Its form is <relational expression a> OR <relational expression b> and the result will be true (non-zero) if either <relational expression> is true. OR has the same priority as `AND.Example:IF A=B OR C=D PRINT"At least one pair equal"'

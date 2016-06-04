@@ -1,0 +1,1 @@
+HIP <address>Hexadecimal input: Displays the given address and asks for a new hexadecimal value.Example:    HIP #3000

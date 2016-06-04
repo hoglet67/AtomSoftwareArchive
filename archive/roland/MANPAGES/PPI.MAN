@@ -1,0 +1,1 @@
+PPI 8255The PPI is used for system I/O like the keyboard, audio speaker and tape I/O. It has four registers:`B000 display and keyboard`B001 keyboard input`B002 tape, audio and keyboard`B003 control register

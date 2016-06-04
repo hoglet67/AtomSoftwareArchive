@@ -1,0 +1,1 @@
+SHOVE:<name>,dx,dySHOVE a,dx,dyMoves a sprite on screen, according to the entered displacements.<name> - name of the sprite,a      - sprite assignment number,dx     - horizontal displacement,dy     - verticale displacement.

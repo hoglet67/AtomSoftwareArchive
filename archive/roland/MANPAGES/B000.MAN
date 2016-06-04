@@ -1,0 +1,1 @@
+B000     PPI PORT AThis port is used for keyboard row selection and for setting the graphic mode of the 6847 video controller.bits 0 - 3:   keyboard rowbits 4 - 7:   graphics mode

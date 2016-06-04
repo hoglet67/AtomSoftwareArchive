@@ -1,0 +1,1 @@
+B002     PPI PORT CThis port is used for tape I/O, audio en video control.bit 0   tape outputbit 1   enable 2400 Hzbit 2   speaker outputbit 3   video colour set selectbit 4   2400 Hz inputbit 5   tape inputbit 6   REPT key inputbit 7   FS 60 Hz input

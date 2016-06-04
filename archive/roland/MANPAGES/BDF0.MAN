@@ -1,0 +1,1 @@
+Character Data RegistersAddress: #BDF0-#BDFB or #9FD0-#9FDBThese 12 registers allow the character selected by the Character Address register to be re-programmed.Each character is 8 horizontal pixels by 12 vertical pixels. There is one register for each row of the character. Bit 7 corresponds to the left most pixel, and Bit 0 the right most pixel.

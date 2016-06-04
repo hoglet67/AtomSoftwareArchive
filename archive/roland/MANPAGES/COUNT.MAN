@@ -1,0 +1,1 @@
+COUNT Count of characters printed C.This function returns the number of characters printed since the last return, and is thus the column position on a line at which the next character will be printed. COUNT is useful for positioning table elements etc. Example:DO PRINT"=";UNTIL COUNT=20====================>

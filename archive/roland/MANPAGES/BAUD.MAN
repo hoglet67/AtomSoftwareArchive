@@ -1,0 +1,1 @@
+BAUD <baud rate>This statements sets the serial speed of the `Godil serial interface. Example:    BAUD 9600This statement only works in an Atom with a `Godil installed or in the FPGA-Atom.

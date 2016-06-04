@@ -1,0 +1,1 @@
+Pointer Y LocationAddress: #BDE9 or #9FE9Default value: #A0 (centre of the screen)This register returns the Y location of the pointer, from 255 (top) to 64 (bottom).The register is read-only - currently the pointer position cannot be set programmatically.

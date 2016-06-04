@@ -1,0 +1,1 @@
+EXP Exponent E.Returns exponent (i.e. e^<factor>).Example:FPRINT EXP 12.71828183

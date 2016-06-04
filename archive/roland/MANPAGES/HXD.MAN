@@ -1,0 +1,1 @@
+HXD  <start> [, <end>]Dumps the contents of memory to the screen. Starting at the start address up to the end address. If no end address is given it will continue until the escape key is pressed.This statement is similar to the `HEX statement but displays 16 addresses on one line, so an 80 column display is necessary.Examples:   HXD #200,#280            HXD #2800

@@ -1,0 +1,1 @@
+KILL:<name>KILL aRemoves a sprite from the sprite administration.<name> - name of the sprite,a      - sprite assignment number.

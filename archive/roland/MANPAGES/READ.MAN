@@ -1,0 +1,1 @@
+READ Read data With the READ statement integer, floating point variables, arrays and multi-dimensional arrays, and string variables can be read. Example:READ A,B,%A,%B,$T,DD(12),%FF(3,4)

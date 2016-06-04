@@ -1,0 +1,1 @@
+HTN Hyperbolic tangent H.Returns the hyperbolic tangent of an angle in radians.Example:FPRINT HTN 17.61594156E-l

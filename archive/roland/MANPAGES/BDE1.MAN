@@ -1,0 +1,1 @@
+Character Address RegisterAddress: #BDE1 or #9FE1Default value: #00This register is used to map a specific character of the character generator into the character data registers, so that the character definition can be updated.Bit 7    Enable Char WritingBit 6-0  Character Address 		

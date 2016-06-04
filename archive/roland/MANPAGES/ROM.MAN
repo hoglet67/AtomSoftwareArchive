@@ -1,0 +1,1 @@
+ROM <romnr>This statement switches to the given rom bank number at #Axxx and locks it. The `Branquar system will not switch between roms until the `UNLOCK statement is executed.In direct mode you can also type SHIFT+RETURN to unlock.

@@ -1,0 +1,1 @@
+Scroll Right MarginAddress: #BDEC or #9FECDefault value: #00This register the controls the right margin of the hardware scroll window. Units are the same as the horizontal scroll offset. A value of zero will eliminate the margin.This is not used in the VGA80x40 mode.

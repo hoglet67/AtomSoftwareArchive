@@ -1,0 +1,1 @@
+Scroll Top MarginAddress: #BDED or #9FEDDefault value: #00This register the controls the top margin of the hardware scroll window. Units are the same as the vertical scroll offset. A value of zero will eliminate the margin.This is not used in the VGA80x40 mode.

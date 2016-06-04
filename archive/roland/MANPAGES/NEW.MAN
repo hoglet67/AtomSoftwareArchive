@@ -1,0 +1,1 @@
+NEW Initialise text area N.This command inserts an 'end of text' marker at the start of the text area, and changes the value of TOP accordingly. The `OLD command provides an immediate recovery.
