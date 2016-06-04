@@ -13,8 +13,8 @@ ADV1D",present,,,,
 *RUN ADV2D",Works,"ADV2P
 ADV2D",present,,,,
 10,V1,A&R,A&R S/W,A.Commercial Software,Trap,Game,,AR,8200,*RUN TRAP,Works,TRAP,present,,,,
-11,,AA,Aardvark,A.Commercial Software,Hedgehog,Game,,AA,,,,,missing,,,,
-12,,AA,Aardvark,A.Commercial Software,Invaders,Game,,AA,,,,,missing,,,,
+11,,AA,Aardvark,A.Commercial Software,Hedgehog,Game,Nick Pelling (aka Orlando M Pilchard),AA,,,,,missing,,,,
+12,,AA,Aardvark,A.Commercial Software,Invaders,Game,Nick Pelling (aka Orlando M Pilchard),AA,,,,,missing,,,,
 13,V1,AS,Acornsoft,A.Commercial Software,House,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN HOUSE",Works,"ADVENTUR
 HOUSE",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/scans/acornsoft/adventures/thumbnails.html
@@ -1423,14 +1423,14 @@ MSDISP",present,Mainwaring,,,
 11MADWO
 12OURHO
 SIDMENU",present,SID,Yes,,
-763,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird,Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,Yes,,
+763,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,Yes,,
 764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V9B2,NC,Non Comm,E.ROMs,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D199 8800",Test,D199,present,,,,
 766,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
 767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
 768,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
-769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (SID),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,FLAPPY,present,,Yes,,
+769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,FLAPPY,present,,Yes,,
 770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Works,STATS1,present,,,,
 771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Works,STATS2,present,,,,
 772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Works,STATS3,present,,,,
@@ -1672,7 +1672,7 @@ SIDMENU
 877,V9B1,NC,Non Comm,C.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
-878,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat,Game,Kees van Oss,RS/F14,8200,*RUN F14RUN,Test,"F14CODE
+878,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,*RUN F14RUN,Works,"F14CODE
 F14RUN
 F14SCR
 LEVEL1
@@ -1680,7 +1680,7 @@ LEVEL2
 LEVEL3
 LEVEL4",present,"Joystick
 Joystick Kbd",Yes,,
-879,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (SID),Game,Kees van Oss,RS/F14SID,8200,*RUN F14RUN,Test,"F14CODE
+879,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,*RUN F14RUN,Works,"F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1689,15 +1689,49 @@ LEVEL2
 LEVEL3
 LEVEL4",present,"Joystick
 Joystick Kbd",Yes,,
-880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite Demo,Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Test,"CODE
+880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite Demo (32K),Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Works,"CODE
 ELITE
 KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
-881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner Demo,Game,Kees van Oss,RS/MMINER,8200,*RUN MANIC,Test,"MANIC
+881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner Demo (32K),Game,Kees van Oss,RS/MMINER,8200,*RUN MANIC,Works,"MANIC
 MINER
 KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
-882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Test,TYPEAHD,present,,,,
-883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Test,DLAIR,present,,Yes,,
-884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Test,DLAIR2M,present,,Yes,,
-885,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Test,USURII,present,,,,
+882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
+883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
+884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
+885,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
+886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,*RUN JSWRUN,Test,"JSWRUN
+JSWCODE",present,"Joystick
+Joystick Kbd",Yes,,
+887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,*RUN JSW2RUN,Test,"JSW2RUN
+JSW2CODE",present,"Joystick
+Joystick Kbd",Yes,,
+888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Test,"EHRUN
+EHCODE",present,,Yes,,
+889,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Test,TANGLED,present,,,,
+890,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIANS,Test,GALAXIANS,present,,,,
+891,V10B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Test,"1975BFE
+1975MAM
+1975SOS
+1976KNO
+1976MON
+1977TAK
+1977THA
+1979CHI
+1979DOE
+1979GIM
+1980THE
+1981ONE
+1982UND
+SIDMENU
+",present,SID,Yes,,
+892,V10B1,NC,Non Comm,C.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Test,MAURICE,present,,,,
+893,V10B1,NC,Non Comm,C.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Test,SCRAMBLE,present,,,,
+894,V10B1,NC,Non Comm,B.Modern Creations/Ports,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Test,RAFTEST,present,,,,
+895,V10B1,NC,Non Comm,B.Modern Creations/Ports,Atom Tube Host,Utility,David Banks,TUBE,8200,*RUN TUBE,Test,"TUBE
+BASIC2
+CLOCKSP
+HIBASIC
+COLOSS
+",present,,,,
