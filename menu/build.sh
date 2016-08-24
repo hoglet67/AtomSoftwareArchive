@@ -6,6 +6,8 @@ DIR=MNU
 
 VERSION=$*
 
+BEEBASM=../tools/beebasm/beebasm
+
 echo "Building with version $VERSION"
 
 # Delete the old MNU folders
@@ -16,20 +18,20 @@ rm -rf $ARCHIVE/$DIR[A-Z]
 # rm -rf $HOME/$DIR.zip
 
 # Compile the Boot Loader
-../../BeebASM/beebasm/beebasm -i boot.asm
+$BEEBASM -i boot.asm
 
 # Compile the ROM Boot Loader
-../../BeebASM/beebasm/beebasm -i bootrom.asm
+$BEEBASM -i bootrom.asm
 
 # Add in help screens
 cp splash/HELP.ATM $ARCHIVE/HELP
 
 # Compile the Standalone Menu (for AtomMMC)
-../../BeebASM/beebasm/beebasm -i menu_atommc.asm
+$BEEBASM -i menu_atommc.asm
 mv MENU $ARCHIVE
 
 # Compile the Standalone Menu (for SDDOS)
-../../BeebASM/beebasm/beebasm -i menu_sddos.asm
+$BEEBASM -i menu_sddos.asm
 mv MENUSD $ARCHIVE
 
 # Translate the Help from text to ATM

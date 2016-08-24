@@ -51,6 +51,8 @@ ASP=ASP
 # PCW
 PCW=PCW
 
+BEEBASM=../tools/beebasm/beebasm
+
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
 
@@ -60,7 +62,8 @@ mkdir -p $ARCHIVE
 
 mkdir -p $ARCHIVE/BBC
 pushd ../bbcbasic
-../../BeebASM/beebasm/beebasm -i Basic2.asm
+mkdir -p roms
+$BEEBASM -i Basic2.asm
 cp roms/ATBASIC2 ../archive/$ARCHIVE/BBC
 popd
 
@@ -162,12 +165,12 @@ package "atms/gamebase/229-DATA/*" "$ARCHIVE/$RS/CASQUEST"
 
 mkdir -p $ARCHIVE/$L9
 pushd ../level9
-../../BeebASM/beebasm/beebasm -i VDUBLO.ASM
-../../BeebASM/beebasm/beebasm -i VDUWLO.ASM
+$BEEBASM -i VDUBLO.ASM
+$BEEBASM -i VDUWLO.ASM
 for SRC in `find *.ASM | grep -v OSEMUL | grep -v VDU`
 do
 DST=`basename $SRC .ASM`
-../../BeebASM/beebasm/beebasm -i $SRC
+$BEEBASM -i $SRC
 # Each adventure has it's own subdirectory to keep the saved games seperate
 mkdir ../archive/$ARCHIVE/$L9/$DST
 mv $DST ../archive/$ARCHIVE/$L9/$DST
@@ -184,10 +187,10 @@ popd
 mkdir -p $ARCHIVE/$QUILL
 pushd ../quill
 # Compile the Quill interpreter
-../../BeebASM/beebasm/beebasm -i QLUC32.ASM
-../../BeebASM/beebasm/beebasm -i QLLC32.ASM
-../../BeebASM/beebasm/beebasm -i QLUC40.ASM
-../../BeebASM/beebasm/beebasm -i QLLC40.ASM
+$BEEBASM -i QLUC32.ASM
+$BEEBASM -i QLLC32.ASM
+$BEEBASM -i QLUC40.ASM
+$BEEBASM -i QLLC40.ASM
 for SRC in `find [a-zA-Z]* -type d`
 do
 DST=`basename $SRC`
@@ -484,6 +487,7 @@ cp -a wim/* $ARCHIVE
 # Build the menu
 ##############################################################
 pushd ../menu
+mkdir -p disks
 ./build.sh "$*"
 popd
 
