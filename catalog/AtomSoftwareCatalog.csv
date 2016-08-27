@@ -1739,3 +1739,5 @@ BOOT6502
 ",present,,,,
 896,V10B1,NC,Non Comm,C.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Test,"SQUIRL1
 SQUIRL2",present,,,,
+897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,*RUN SIDRUN,Test,"SIDCODE
+SIDRUN",present,,Yes,,
