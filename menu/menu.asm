@@ -6,6 +6,25 @@ include "renderer_header.asm"
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
+IF (sddos = 1)
+	RowReturnBuf = $3200         ; A temporary work around as SDDOS uses $22B,$22C
+
+	TmpPtr       = $78
+	DerefTmp     = $7a
+	SortTablePtr = $7c
+	PageState    = $7e
+	NumPages     = $7f
+	Item         = $97
+	SortType     = $8c
+	FilterType   = $8d
+	FilterString = $8e
+	AutoRepeat   = $8f
+
+	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
+        
+ELSE
+	RowReturnBuf = $021c
+
 	TmpPtr       = $70
 	DerefTmp     = $72
 	SortTablePtr = $74
@@ -17,13 +36,9 @@ include "renderer_header.asm"
 	FilterString = $7b
 	AutoRepeat   = $7d 
 
-IF (sddos = 1)
-	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
-ELSE	
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
+        
 ENDIF
-
-	RowReturnBuf = $021c 
 
 	AutoRepeat1  = -$200
 	AutoRepeat2  = -$20

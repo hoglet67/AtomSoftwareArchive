@@ -43,9 +43,10 @@
 
 	; SDDOS uses $80-$9F as workspace, so we need to relocate this
 	; Shouldn't be any side effect of borrowing Basic's Integer Workspace
-		
+   ; Oops, there were, because SDDOS also uses Basic's Integer Workspace
+   ; 
 IF (sddos = 1)
-	ZeroBase = $20
+	ZeroBase = $52
 ELSE
 	ZeroBase = $80
 ENDIF
