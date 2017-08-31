@@ -110,7 +110,7 @@ public class GenerateAll {
 				}
 
 				if (sddos) {
-					GenerateSDDOSFiles SDCardGenerator = new GenerateSDDOSFiles(archiveDir, new File(archiveDir + ".img"),	menuBase, chunks.size());
+					GenerateSDDOSFiles SDCardGenerator = new GenerateSDDOSFiles(archiveDir, new File(archiveDir + ".img"),	new File(archiveDir + ".js"), menuBase, chunks.size());
 					SDCardGenerator.generateFiles(items);
 					SDCardGenerator.writeSDImage();
 					new File(archiveDir, "MENUSD").delete();

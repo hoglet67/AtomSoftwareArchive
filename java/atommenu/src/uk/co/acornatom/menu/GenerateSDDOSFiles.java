@@ -3,8 +3,10 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 public class GenerateSDDOSFiles extends GenerateBase {
 
@@ -21,16 +23,20 @@ public class GenerateSDDOSFiles extends GenerateBase {
 	private int sectorNum;
 
 	private File sdImageFile;
+	private File jsImageFile;
+	private PrintWriter JSwriter;
 	private byte[] SDimage;
 	private File archiveDir;
 	private String menuBase;
 	private int numChunks;
 	
-	public GenerateSDDOSFiles(File archiveDir, File sdImageFile, String menuBase, int numChunks) throws IOException {
+	public GenerateSDDOSFiles(File archiveDir, File sdImageFile, File jsImageFile, String menuBase, int numChunks) throws IOException {
 		this.archiveDir = archiveDir;
 		this.sdImageFile = sdImageFile;
+		this.jsImageFile = jsImageFile;
 		this.menuBase = menuBase;
 		this.numChunks = numChunks;
+		createJSImage();
 		createSDImage();
 	}
 
@@ -73,7 +79,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 			0, 0, 1, 0, 2, 0, 3, 0, 'S', 'D', 'D', 'O', 'S', ' ', ' ', ' '
 	};
 	
-	public void createSDImage() throws IOException {
+	private void createSDImage() throws IOException {
 		byte[] SDimage = new byte[SDCARD_SIZE];
 		Arrays.fill(SDimage, (byte) 0xFF);
 		for (int i = 0; i < diskTable.length; i++) {
@@ -82,8 +88,31 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		this.SDimage = SDimage;
 		createMenuDisk();
 	}
+	
+	private void createJSImage() throws IOException {
+		JSwriter = new PrintWriter(jsImageFile);
+		JSwriter.println("var");
+		JSwriter.println("aDisks =");
+		JSwriter.println("[");
+	}
 
-	public void addDisk(byte[] image, int diskNum) {
+	private int getImageLen(byte[] image) {
+		int lastUsedSector = -1;
+		for (int i = 0; i < 31; i++) {
+			int dir = 256 + (i << 3) + 8;
+			int file_start_sec = (image[7 + dir] & 0xff) + ((image[6 + dir] & 0x03) << 8);
+			int file_len = (image[4 + dir] & 0xff) + ((image[5 + dir] & 0xff) << 8) + ((image[6 + dir] & 0x30) << 12);
+			int file_end_sec = file_start_sec + (file_len >> 8);
+			System.out.println(i + " = " + file_start_sec + " " + file_len + " " + file_end_sec);
+			if (file_end_sec > lastUsedSector)
+				lastUsedSector = file_end_sec;
+			
+		}
+		return (lastUsedSector + 1) << 8;
+	}
+	
+	private void addDisk(byte[] image, int diskNum) {
+		// *** RAW SD IMAGE FILE ***
 		// Copy the disk title
 		for (int i = 0; i < 13; i++) {
 			SDimage[16 + diskNum * 16 + i] = image[i < 8 ? i : i + 248];
@@ -95,6 +124,16 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		SDimage[16 + diskNum * 16 + 15] = 15;
 		// Copy the disk data
 		System.arraycopy(image, 0, SDimage, SD_SEC_SIZE * (32 + diskNum * 200), image.length);
+		// *** JS IMAGE FILE ***
+		if (diskNum > 0) {			
+			JSwriter.println(",");				
+		}
+		int len = getImageLen(image);
+		byte[] strippedImage = new byte[len];
+		System.arraycopy(image, 0, strippedImage, 0, len);
+		JSwriter.print("fDiskRead(\"" + diskNum + "\", D64(\"");
+		JSwriter.print(Base64.encodeBase64String(strippedImage));
+		JSwriter.print("\"))");		
 	}
 	
 	public void writeSDImage() throws IOException {
@@ -102,8 +141,10 @@ public class GenerateSDDOSFiles extends GenerateBase {
 		FileOutputStream fos = new FileOutputStream(sdImageFile);
 		fos.write(SDimage);
 		fos.close();		
+		JSwriter.println("]");
+		JSwriter.close();
 	}
-
+	
 	public byte[] createBlankDiskImage(String title) {
 		byte[] image = new byte[SEC_SIZE * NUM_SECS];
 		Arrays.fill(image, (byte) 0);
