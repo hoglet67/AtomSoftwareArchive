@@ -207,7 +207,7 @@ CH.""CAL""",Works,"CAL
 CALIN",present,2K Programs 2,,,
 135,V7B1,BB,Bug Byte,A.Commercial Software,Life,Game,,BB/2KPRGS2,8200,"CH.""LIFE3""",Works,"LIFE1
 LIFE2
-LIFE2
+LIFE3
 LIFEIN1
 LIFEIN2",present,2K Programs 2,,,
 136,V7B1,BB,Bug Byte,A.Commercial Software,O's and X's,Game,,BB/2KPRGS2,2900,"?18=130
@@ -572,7 +572,7 @@ REDMOON",present,Time and Magik,Yes,,
 325,V4,L9,Level 9,B.Modern Creations/Ports,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,Works,MAGIK,present,Time and Magik,Yes,,
 326,V4,YC,Your Computer,D.Books/Magazines,Acorn Kong,Game,???,YC,8200,"CH.""ACKONG""",Works,ACKONG,present,Magazines,,,
 328,V4,NC,Non Comm,C.Non Commercial Software,Artist,Utility,???,NC,8200,*RUN ARTIST,Works,ARTIST,duplicate,,,,
-330,V4,NC,Non Comm,C.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,*RUN ATOMICA,Works,ATOMICA,present,,,,
+330,V4,NC,Non Comm,C.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",Test,ATOMICA,present,,,,
 331,V7B2,YC,Your Computer,D.Books/Magazines,Bit Bandit,Game,S.P.Elliot,YC,8200,"CH.""BANDIT""",Works,BANDIT,present,Magazines,,,
 332,V4,NC,Non Comm,C.Non Commercial Software,Space Battle (R),Game,???,NC/TB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 333,V4,NC,Non Comm,C.Non Commercial Software,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,present,,,,
@@ -604,18 +604,18 @@ REDMOON",present,Time and Magik,Yes,,
 CH.""LANDING""",Works,LANDING,present,Magazines,,,
 366,V4,NC,Non Comm,C.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
 367,V4,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
-368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,*RUN MASKEN,Works,MASKEN,present,,,,
+368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,"CH.""MASKEN""",Test,MASKEN,present,,,,
 369,V4,NC,Non Comm,C.Non Commercial Software,Moonlander,Game,???,NC,8200,"CH.""MLANDER""",Works,MLANDER,present,,,,
-370,V4,NC,Non Comm,C.Non Commercial Software,Navigator (R),Game,R.Leurs,NC,8200,*RUN NAVIGAT,Works,NAVIGAT,present,,,,
+370,V4,NC,Non Comm,C.Non Commercial Software,Navigator (R),Game,R.Leurs,NC,8200,"CH.""NAVIGAT""",Test,NAVIGAT,present,,,,
 371,V4,NC,Non Comm,C.Non Commercial Software,Nightmare Park,Game,S.M.Probyn,NC,8200,"CH.""NIGHTM""",Works,NIGHTM,present,,,,
 373,V4,NC,Non Comm,C.Non Commercial Software,Othello,Game,???,NC,8200,"?18=40
 CH.""OTHEL1""",Works,OTHEL1,present,,,,
 375,V4,ES,Electrocomp sups,A.Commercial Software,OXO,Game,???,ES,8200,"CH.""OXO""",Works,OXO,present,,,,
 376,V4,NC,Non Comm,C.Non Commercial Software,Hyperman,Game,???,NC,8200,"CH.""PACKMAN""",Broken,PACKMAN,duplicate,,,,
 377,V4,NC,Non Comm,C.Non Commercial Software,Pacman,Game,Thony Brown,NC,8200,"CH.""PACMAN""",Works,PACMAN,present,,,,
-378,V4,NC,Non Comm,C.Non Commercial Software,Plakoto,Game,???,NC,8200,*RUN PLAKOTO,Works,PLAKOTO,present,,,,
+378,V4,NC,Non Comm,C.Non Commercial Software,Plakoto,Game,???,NC,8200,"CH.""PLAKOTO""",Test,PLAKOTO,present,,,,
 379,V4,NC,Non Comm,C.Non Commercial Software,Persuit Plane,Game,JC-ADM,NC,8200,*RUN PLANE,Works,PLANE,present,,,,
-380,V4,NC,Non Comm,C.Non Commercial Software,Plane,Game,???,NC,8200,*RUN PLANES,Works,PLANES,present,,,,
+380,V4,NC,Non Comm,C.Non Commercial Software,Plane,Game,???,NC,8200,"CH.""PLANES""",Works,PLANES,present,,,,
 381,V4,NC,Non Comm,C.Non Commercial Software,POGO (R),Game,Hamburgersoft,NC/TB,8200,"CH.""POGO""",Works,POGO,present,,,,
 382,V4,NC,Non Comm,C.Non Commercial Software,Pointer,Game,???,NC,8200,*RUN POINTER,Works,POINTER,present,,,,
 383,V4,NC,Non Comm,C.Non Commercial Software,Prinses (R),Game,G.T.H.,NC,8200,"CH.""PRINSES""",Works,PRINSES,present,,,,
@@ -634,14 +634,16 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
 398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Works,SNOOPY,present,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,duplicate,,,,
-400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
-*RUN 157S",Works,"157
+400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157+K2
+*LOAD 157S
+?18=40
+RUN",Test,"157
 157S",present,,,,
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
 403,V7B2,YC,Your Computer,D.Books/Magazines,Stuntman,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Works,STUNT,present,Magazines,,,
 404,,NC,Non Comm,C.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
 405,,MO,Magnus Olsson,C.Non Commercial Software,Super Zombie,Game,Magnus Olssen,MO,8200,*RUN SUPERZMB,,SUPERZMB,missing,,,,
-406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,*RUN TEACUPS,Works,TEACUPS,present,,,,
+406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,"CH.""TEACUPS""",Test,TEACUPS,present,,,,
 407,,NC,Non Comm,C.Non Commercial Software,Tennis,Game,???,NC,8200,"CH.""TENNIS1""",,TENNIS1,missing,,,,
 408,V8B1,OL,Oak Leaves,A.Commercial Software,Walls,Game,J.Lasruk,OL,8200,"CH.""WALLS""",Works,WALLS,present,,,,
 409,V4,NC,Non Comm,C.Non Commercial Software,Wipeout,Game,???,NC,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,,,,
@@ -1647,24 +1649,24 @@ SIDMENU
 852,V9B1,PCW,PCW,D.Books/Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Test,QUEST,present,,,,
 853,V9B1,NC,Non Comm,C.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028.ATM""",Works,028.ATM,present,GameBase,,,
 854,V9B1,NC,Non Comm,C.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057.ATM""",Works,057.ATM,present,GameBase,,, requires AXR1
-855,V9B1,NC,Non Comm,C.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,*RUN 069.ATM,Works,069.ATM,present,GameBase,,,
+855,V9B1,NC,Non Comm,C.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,"CH.""069.ATM""",Test,069.ATM,present,GameBase,,,
 856,V9B1,NC,Non Comm,C.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072.ATM""",Works,072.ATM,present,GameBase,,,
 857,V9B1,NC,Non Comm,C.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073.ATM""",Works,073.ATM,present,GameBase,,,
 858,V9B1,NC,Non Comm,C.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074.ATM""",Works,074.ATM,present,GameBase,,,
-859,V9B1,NC,Non Comm,C.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,*RUN 075.ATM,Works,075.ATM,present,GameBase,,,
-860,V9B1,NC,Non Comm,C.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,*RUN 078.ATM,Works,078.ATM,present,GameBase,,,
-861,V9B1,NC,Non Comm,C.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,*RUN 079.ATM,Works,079.ATM,present,GameBase,,,
+859,V9B1,NC,Non Comm,C.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,"CH.""075.ATM""",Test,075.ATM,present,GameBase,,,
+860,V9B1,NC,Non Comm,C.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,"CH.""078.ATM""",Test,078.ATM,present,GameBase,,,
+861,V9B1,NC,Non Comm,C.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,"CH.""079.ATM""",Test,079.ATM,present,GameBase,,,
 862,V9B1,NC,Non Comm,C.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098.ATM,Works,098.ATM,present,GameBase,,,
 863,V9B1,NC,Non Comm,C.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134.ATM""",Works,134.ATM,present,GameBase,,,
 864,V9B1,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144.ATM""",Works,144.ATM,present,GameBase,,,
-865,V9B1,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,*RUN 155.ATM,Works,155.ATM,present,GameBase,,,
+865,V9B1,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,"CH.""155.ATM""",Test,155.ATM,present,GameBase,,,
 866,V9B1,NC,Non Comm,C.Non Commercial Software,Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158.ATM,Works,158.ATM,present,GameBase,,, requires WE-ROM
 867,V9B1,NC,Non Comm,C.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159.ATM""",Works,159.ATM,present,GameBase,,,
 868,V9B1,NC,Non Comm,C.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165.ATM""",Works,165.ATM,present,GameBase,,,
 869,V9B1,PCW,PCW,D.Books/Magazines,Acorn Scramble,Game, ??,GB,8200,*RUN 166.ATM,Works,166.ATM,present,GameBase,,,
 870,V9B1,NC,Non Comm,C.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168.ATM""",Works,168.ATM,present,GameBase,,,
-871,V9B1,NC,Non Comm,C.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,*RUN 169.ATM,Works,169.ATM,present,GameBase,,,requires WE-ROM
-872,V9B1,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,*RUN 172.ATM,Works,172.ATM,present,GameBase,,,
+871,V9B1,NC,Non Comm,C.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,"CH.""169.ATM""",Test,169.ATM,present,GameBase,,,requires WE-ROM
+872,V9B1,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,"CH.""172.ATM""",Test,172.ATM,present,GameBase,,,
 873,V9B1,NC,Non Comm,C.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Works,185.ATM,present,GameBase,,,requires AXR1
 874,V9B1,NC,Non Comm,C.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Works,197.ATM,present,GameBase,,,
 875,V9B1,NC,Non Comm,C.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199.ATM""",Works,199.ATM,present,GameBase,,,
@@ -1672,7 +1674,7 @@ SIDMENU
 877,V9B1,NC,Non Comm,C.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
-878,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,*RUN F14RUN,Works,"F14CODE
+878,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,"CH.""F14RUN""",Test,"F14CODE
 F14RUN
 F14SCR
 LEVEL1
@@ -1680,7 +1682,7 @@ LEVEL2
 LEVEL3
 LEVEL4",present,"Joystick
 Joystick Kbd",Yes,,
-879,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,*RUN F14RUN,Works,"F14CODE
+879,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""",Test,"F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1701,10 +1703,10 @@ Joystick Kbd",Yes,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
 884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
 885,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
-886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,*RUN JSWRUN,Works,"JSWRUN
+886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""",Test,"JSWRUN
 JSWCODE",present,"Joystick
 Joystick Kbd",Yes,,
-887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,*RUN JSW2RUN,Works,"JSW2RUN
+887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""",Test,"JSW2RUN
 JSW2CODE",present,"Joystick
 Joystick Kbd",Yes,,
 888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
@@ -1739,5 +1741,5 @@ BOOT6502
 ",present,,,,
 896,V10B1,NC,Non Comm,C.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Test,"SQUIRL1
 SQUIRL2",present,,,,
-897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,*RUN SIDRUN,Test,"SIDCODE
+897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Test,"SIDCODE
 SIDRUN",present,,Yes,,
