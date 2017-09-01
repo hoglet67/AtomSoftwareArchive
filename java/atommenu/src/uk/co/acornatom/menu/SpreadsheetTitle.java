@@ -22,6 +22,7 @@ public class SpreadsheetTitle {
 	private String genre;
 	private List<String> filenames;
 	private Set<String> runnables = new HashSet<String>();
+	private Set<String> loadables = new HashSet<String>();
 	
 	public void setIndex(int index) {
 		this.index = index;
@@ -109,6 +110,10 @@ public class SpreadsheetTitle {
 	
 	public Set<String> getRunnables() {
 		return runnables;
+	}
+
+	public Set<String> getLoadables() {
+		return loadables;
 	}
 
 }

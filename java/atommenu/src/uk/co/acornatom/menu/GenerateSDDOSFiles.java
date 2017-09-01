@@ -5,7 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.codec.binary.Base64;
 
 public class GenerateSDDOSFiles extends GenerateBase {
@@ -269,6 +272,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 					bootAtmFile.setTitle("!BOOT");
 					addFile(image, bootAtmFile);
 					
+					Set<String> missing = new HashSet<String>(item.getLoadables());
 					for (String filename : item.getFilenames()) {
 						System.out.println("    >" + filename + "<");
 						File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -277,6 +281,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 						if (filename.length() > 7) {
 							filename = filename.substring(0, 7);
 						}
+						missing.remove(filename);
 						atmFile.setTitle(filename);
 						addFile(image, atmFile);
 						if (item.getRunnables().contains(filename)) {
@@ -285,6 +290,11 @@ public class GenerateSDDOSFiles extends GenerateBase {
 										" load:" + Integer.toHexString(atmFile.getLoadAddr()) + 
 										" exec:" + Integer.toHexString(atmFile.getExecAddr()));
 							}
+						}
+					}
+					if (!missing.isEmpty()) {
+						for (String m : missing) {
+							System.out.println("WARNING: " + item.getTitle() + ": missing : " + m);
 						}
 					}
 					System.out.println("Writing disk " + item.getIndex());

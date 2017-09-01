@@ -68,6 +68,9 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
 			} else if (cmd.startsWith("CH.")) {
 				String filename = trunc(cmd.split("\"")[1]);
+				if (sddos) {
+					item.getLoadables().add(filename);
+				}
 				bos.write(("LOAD " + filename).getBytes());
 				bos.write((byte) 13);
 				bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
@@ -84,9 +87,12 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				String[] parts = cmd.split(" ");
 				String filename = trunc(parts[1]);
 				cmd = parts[0] + " " + filename;
-				if (sddos && cmd.startsWith("*RUN")) {
-					// Add to list of runnables, so we can later check the exec address is valid
-					item.getRunnables().add(filename);
+				if (sddos) {
+					item.getLoadables().add(filename);
+					if (cmd.startsWith("*RUN")) {
+						// Add to list of runnables, so we can later check the exec address is valid
+						item.getRunnables().add(filename);
+					}
 				}
 				for (int j = 2; j < parts.length; j++) {
 				    cmd += " " + parts[j];
