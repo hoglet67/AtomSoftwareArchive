@@ -113,7 +113,8 @@ PROTOVDU",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/Fort
 70,V2,AS,Acornsoft,A.Commercial Software,Track,Game,,AS/GAMES10,2800,"?18=130
 *RUN TRACK",Works,TRACK,present,Games Pack 10,,No,http://atomclub.nl/atom_handleidingen/misc/gp10.html
 71,V3,AS,Acornsoft,A.Commercial Software,Missile Base,Game,,AS/GAMES11,8200,"*LOAD PART2
-*RUN MISSILE",Works,MISSILE,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
+*RUN MISSILE",Works,"MISSILE
+PART2",present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
 72,V1,AS,Acornsoft,A.Commercial Software,Snooker,Game,,AS/GAMES11,8200,"CH.""SNOOKER""",Works,SNOOKER,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
 73,V1,AS,Acornsoft,A.Commercial Software,Dominoes,Game,,AS/GAMES11,8200,"CH.""DOMINO""",Works,DOMINO,present,Games Pack 11,,No,http://atomclub.nl/atom_handleidingen/misc/gp11.html
 74,V1,AS,Acornsoft,A.Commercial Software,Introduction,Educational,,AS/INTRO1,8200,*RUN INTRODUC,Works,INTRODUC,present,Intro Pack 1,,No,http://atomclub.nl/atom_handleidingen/introp/introp01.htm
@@ -158,10 +159,11 @@ LISP2",present,,,No,http://www.vintagecomputer.net/fjkraan/comp/atom/doc/LispThe
 ADD
 COPY
 FACTOR",present,,,No,http://atomclub.nl/atom_handleidingen/asof/peeko.html
-105,V1,AS,Acornsoft,A.Commercial Software,White on Black,Utility,,AS/SOFTVDU,8200,*RUN VDUB,Works,VDUW,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
-106,V1,AS,Acornsoft,A.Commercial Software,Black on White,Utility,,AS/SOFTVDU,8200,*RUN VDUW,Works,VDUB,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
+105,V1,AS,Acornsoft,A.Commercial Software,White on Black,Utility,,AS/SOFTVDU,8200,*RUN VDUB,Works,VDUB,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
+106,V1,AS,Acornsoft,A.Commercial Software,Black on White,Utility,,AS/SOFTVDU,8200,*RUN VDUW,Works,VDUW,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
 107,V1,AS,Acornsoft,A.Commercial Software,Designer,Utility,,AS/SOFTVDU,8200,"*RUN VDUB
-CH.""DESIGN""",Works,DESIGN,present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
+CH.""DESIGN""",Works,"DESIGN
+VDUB",present,Soft VDU,,No,http://silicon-heaven.com/atom/manual/softvdu.html
 108,V1,AS,Acornsoft,A.Commercial Software,Synthesiser,Music,,AS/SYNTH,8200,"CH.""SYNTH""",Works,"SYNTH
 TOCCATA
 SEASIDE
@@ -634,7 +636,7 @@ CH.""OTHEL1""",Works,OTHEL1,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
 398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Works,SNOOPY,present,,,,
 399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,duplicate,,,,
-400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157+K2
+400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
 *LOAD 157S
 ?18=40
 RUN",Test,"157
@@ -1432,7 +1434,10 @@ SIDMENU",present,SID,Yes,,
 766,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
 767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
 768,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
-769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,FLAPPY,present,,Yes,,
+769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,"FLAPPY
+ANGRY
+SIDPLAY
+START",present,,Yes,,
 770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Works,STATS1,present,,,,
 771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Works,STATS2,present,,,,
 772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Works,STATS3,present,,,,
