@@ -552,7 +552,7 @@ IF (sddos = 1)
 	EQUS "DRIVE 2", Return
 
 	JSR OscliString
-	EQUS "RUN MENU", Return
+	EQUS "RUN !BOOT", Return
 		
 .LoadDisk
 	STA RunCommand + 4

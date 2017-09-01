@@ -266,7 +266,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 	
 					File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)), "" + item.getIndex());
 					ATMFile bootAtmFile = new ATMFile(bootfile);
-					bootAtmFile.setTitle("MENU");
+					bootAtmFile.setTitle("!BOOT");
 					addFile(image, bootAtmFile);
 					
 					for (String filename : item.getFilenames()) {
@@ -279,6 +279,13 @@ public class GenerateSDDOSFiles extends GenerateBase {
 						}
 						atmFile.setTitle(filename);
 						addFile(image, atmFile);
+						if (item.getRunnables().contains(filename)) {
+							if (atmFile.getExecAddr() == (0xc2b2)) {
+								System.out.println("WARNING: " + item.getTitle() + ": " + filename + 
+										" load:" + Integer.toHexString(atmFile.getLoadAddr()) + 
+										" exec:" + Integer.toHexString(atmFile.getExecAddr()));
+							}
+						}
 					}
 					System.out.println("Writing disk " + item.getIndex());
 					writeImage(new File("disks/" + item.getIndex()), image);

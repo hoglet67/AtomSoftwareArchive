@@ -1,6 +1,8 @@
 package uk.co.acornatom.menu;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SpreadsheetTitle {
 
@@ -19,6 +21,7 @@ public class SpreadsheetTitle {
 	private List<String> collections;
 	private String genre;
 	private List<String> filenames;
+	private Set<String> runnables = new HashSet<String>();
 	
 	public void setIndex(int index) {
 		this.index = index;
@@ -103,4 +106,9 @@ public class SpreadsheetTitle {
 	public void setFilenames(List<String> filenames) {
 		this.filenames = filenames;
 	}	
+	
+	public Set<String> getRunnables() {
+		return runnables;
+	}
+
 }

@@ -56,7 +56,8 @@ public class ATMFile {
 	    execAddr = readShort(fileWithAtmHeader, 18);
 	    int length = readShort(fileWithAtmHeader, 20);;
 	    if (length != fileWithAtmHeader.length - 22) {
-	    	throw new RuntimeException("Length mismatch: expected " + length + " actual + " + (fileWithAtmHeader.length - 22));
+          System.out.printf("WARNING: Length mismatch in ATM file: expected = " + length + "; actual = " + (fileWithAtmHeader.length - 22));
+          length = fileWithAtmHeader.length - 22; 
 	    }
 	    data = new byte[length];
 	    System.arraycopy(fileWithAtmHeader, 22, data, 0, length);

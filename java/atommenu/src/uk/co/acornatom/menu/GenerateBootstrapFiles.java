@@ -30,9 +30,14 @@ public class GenerateBootstrapFiles extends GenerateBase {
 		this.sddos = sddos;
 	}
 	
-	private void generateMachineCodeBootstrap(int index, String directory, String run, String boot, boolean rom)
+	private void generateMachineCodeBootstrap(SpreadsheetTitle item, boolean rom)
 			throws IOException {
 
+		int index = item.getIndex();
+		String directory = item.getDir();
+		String run = item.getRun();
+		String boot = item.getBoot();
+		
 		int loadAddr = Integer.parseInt(boot, 16);
 		int execAddr = loadAddr;
 
@@ -77,7 +82,12 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				bos.write((byte) 0);
 			} else if (cmd.startsWith("*LOAD") || cmd.startsWith("*RUN")) {
 				String[] parts = cmd.split(" ");
-				cmd = parts[0] + " " + trunc(parts[1]);
+				String filename = trunc(parts[1]);
+				cmd = parts[0] + " " + filename;
+				if (sddos && cmd.startsWith("*RUN")) {
+					// Add to list of runnables, so we can later check the exec address is valid
+					item.getRunnables().add(filename);
+				}
 				for (int j = 2; j < parts.length; j++) {
 				    cmd += " " + parts[j];
 				}
@@ -119,7 +129,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 		for (SpreadsheetTitle item : items) {
 			if (item.isPresent()) {
 				boolean rom = item.getChunk().contains("ROM");
-				generateMachineCodeBootstrap(item.getIndex(), item.getDir(), item.getRun(), item.getBoot(), rom);
+				generateMachineCodeBootstrap(item, rom);
 			}
 		}
 	}
