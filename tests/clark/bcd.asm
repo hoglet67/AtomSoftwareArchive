@@ -25,11 +25,11 @@ CPU 1
 
 TARGET_ATOM = 0
 TARGET_BEEB = 1
-	
+
 TARGET = TARGET_ATOM
 
 LOAD = $2900
-	
+
 AR    = $80
 CF    = $81
 DA    = $82
@@ -48,14 +48,25 @@ ZF    = $8E
 N2H   = $8F
 TMP   = $91
 AVEC  = $93
-SVEC  = $95	
+SVEC  = $95
+MODE  = $97
 
+MACRO CHECK_FULL_TEST VAL, LAB
+        BIT MODE
+        BVS FULL
+        CMP #VAL
+        BCS LAB
+.FULL
+ENDMACRO
+        
+        
 if (TARGET = TARGET_ATOM)
 
 OSWRCH = $FFF4
+OSRDCH = $FFE3
 
         org    LOAD - 22
-        
+
 .TESTSTART
 
         EQUS    "BCDTEST"
@@ -69,24 +80,51 @@ OSWRCH = $FFF4
 ELSE
 
 OSWRCH = $FFEE
+OSRDCH = $FFE0
 
         org    LOAD
 
 .TESTSTART
-	
-ENDIF
-	
-	
-.TEST
-	LDA #0
-	INC A
-	CMP #1
-	BCC NMOS
 
-.CMOS
-	JSR STROUT
-	EQUS "DETECTED CMOS 65C02...", 10, 13
-	NOP
+ENDIF
+
+
+.TEST
+   JSR STROUT
+   EQUS"     CPU:  RANGE: FLAGS:", 10, 13
+   EQUS"(A)  6502   00-99      C", 10, 13
+   EQUS"(B)  6502   00-99   NVZC", 10, 13
+   EQUS"(C)  6502   00-FF      C", 10, 13
+   EQUS"(D)  6502   00-FF   NVZC", 10, 13
+   EQUS"(E) 65C02   00-99      C", 10, 13
+   EQUS"(F) 65C02   00-99   NVZC", 10, 13
+   EQUS"(G) 65C02   00-FF      C", 10, 13
+   EQUS"(H) 65C02   00-FF   NVZC", 10, 13
+   NOP
+.CHOICE        
+   JSR OSRDCH   ; 41 42 43 44
+   CMP #$41
+   BCC CHOICE
+   CMP #$49
+   BCS CHOICE
+   PHA        
+   SEC
+   SBC #&41     ; 00 01 02 03
+   ROR A
+   ROR A
+   ROR A
+   ROR A        ; 00 40 80 C0
+   STA MODE
+   PLA
+   JSR OSWRCH
+   LDA #10
+   JSR OSWRCH
+   LDA #13
+   JSR OSWRCH
+        
+   BIT MODE
+   BPL NMOS    
+
 	LDA #<A65C02
 	STA AVEC
 	LDA #>A65C02
@@ -98,9 +136,6 @@ ENDIF
 	JMP TEST1
 
 .NMOS
-	JSR STROUT
-	EQUS "DETECTED NMOS 6502...", 10, 13
-	NOP	
 	LDA #<A6502
 	STA AVEC
 	LDA #>A6502
@@ -110,7 +145,7 @@ ENDIF
 	LDA #>S6502
 	STA SVEC + 1
 
-.TEST1	
+.TEST1
 	JSR STROUT
 	EQUS "TESTING ADC...", 10, 13
 	NOP
@@ -121,24 +156,30 @@ ENDIF
         STA N2
 .ALOOP1 LDA N2    ; N2L = N2 & $0F
         AND #$0F  ; [1] see text
+        CHECK_FULL_TEST $0A, ANEXT2
         STA N2L
         LDA N2    ; N2H = N2 & $F0
         AND #$F0  ; [2] see text
+        CHECK_FULL_TEST $A0, ANEXT2
         STA N2H
         ORA #$0F  ; N2H+1 = (N2 & $F0) + $0F
         STA N2H+1
 .ALOOP2 LDA N1    ; N1L = N1 & $0F
         AND #$0F  ; [3] see text
+        CHECK_FULL_TEST $0A, ANEXT1
         STA N1L
         LDA N1    ; N1H = N1 & $F0
         AND #$F0  ; [4] see text
+        CHECK_FULL_TEST $A0, ANEXT1
         STA N1H
         JSR ADD
         JSR ADDVEC
         JSR COMPARE
         BNE DONE
+.ANEXT1        
         INC N1    ; [5] see text
         BNE ALOOP2 ; loop through all 256 values of N1
+.ANEXT2
         INC N2    ; [6] see text
         BNE ALOOP1 ; loop through all 256 values of N2
         DEY
@@ -154,29 +195,35 @@ ENDIF
         STA N2
 .SLOOP1 LDA N2    ; N2L = N2 & $0F
         AND #$0F  ; [1] see text
+        CHECK_FULL_TEST $0A, SNEXT2
         STA N2L
         LDA N2    ; N2H = N2 & $F0
         AND #$F0  ; [2] see text
+        CHECK_FULL_TEST $A0, SNEXT2
         STA N2H
         ORA #$0F  ; N2H+1 = (N2 & $F0) + $0F
         STA N2H+1
 .SLOOP2 LDA N1    ; N1L = N1 & $0F
         AND #$0F  ; [3] see text
+        CHECK_FULL_TEST $0A, SNEXT1
         STA N1L
         LDA N1    ; N1H = N1 & $F0
         AND #$F0  ; [4] see text
+        CHECK_FULL_TEST $A0, SNEXT1
         STA N1H
         JSR SUB
         JSR SUBVEC
         JSR COMPARE
         BNE DONE
+.SNEXT1        
         INC N1    ; [5] see text
         BNE SLOOP2 ; loop through all 256 values of N1
+.SNEXT2
         INC N2    ; [6] see text
         BNE SLOOP1 ; loop through all 256 values of N2
         DEY
         BPL SLOOP1 ; loop through both values of the carry flag
-	
+
         LDA #0    ; test passed, so store 0 in ERROR
         STA ERROR
 
@@ -370,7 +417,15 @@ ENDIF
 	LDA #1
 	RTS
 
-.C1     LDA DNVZC ; [7] see text
+.C1
+   LDA MODE
+   AND #$20
+   BNE ALLFLAGS
+   JMP C4
+.ALLFLAGS
+        
+
+        LDA DNVZC ; [7] see text
         EOR NF
         AND #$80  ; mask off N flag
         BEQ C2
@@ -397,7 +452,7 @@ ENDIF
         EOR VF
         AND #$40  ; mask off V flag
         BEQ C3    ; [9] see text
-	
+
 	JSR STROUT
 	EQUS "V FAILED", 10, 13, "EXPECTED: "
 	NOP
@@ -470,7 +525,7 @@ ENDIF
 
 .SUBVEC
 	JMP (SVEC)
-	
+
 ; These routines store the predicted values for ADC and SBC for the 6502,
 ; 65C02, and 65816 in AR, CF, NF, VF, and ZF
 
@@ -544,7 +599,7 @@ ENDIF
 .HEXOUT2
 	ADC #$30
 	JMP OSWRCH
-	
+
 .STROUT
 	PLA
 	STA TMP
@@ -562,7 +617,7 @@ ENDIF
 	JMP STROUT1
 .STROUT3
 	JMP (TMP)
-	
+
 .TESTEND
 
 SAVE "BCDTEST",TESTSTART,TESTEND
