@@ -1700,9 +1700,9 @@ Joystick Kbd",Yes,,
 ELITE
 KEYS.TXT",present,"Joystick
 Joystick Kbd",Yes,,
-881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner Demo (32K),Game,Kees van Oss,RS/MMINER,8200,*RUN MANIC,Works,"MANIC
-MINER
-KEYS.TXT",present,"Joystick
+881,V10B4,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner (32K),Game,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""",Test,"MMRUN
+MMINTRO
+MMCODE",present,"Joystick
 Joystick Kbd",Yes,,
 882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
