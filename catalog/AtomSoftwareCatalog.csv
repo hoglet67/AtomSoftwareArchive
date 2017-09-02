@@ -1748,3 +1748,10 @@ BOOT6502
 SQUIRL2",present,,,,
 897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Test,"SIDCODE
 SIDRUN",present,,Yes,,
+898,10B4,RS,Retro S/W,B.Modern Creations/Ports,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Test,"GAME1
+GAME2
+LOADER1
+LOADER2
+LOADSC
+WAR
+WARSC",present,,Yes,,
