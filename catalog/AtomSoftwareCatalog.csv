@@ -1712,7 +1712,7 @@ Joystick Kbd",Yes,,
 JSWCODE",present,"Joystick
 Joystick Kbd",Yes,,
 887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""",Test,"JSW2RUN
-JSW2CODE",present,"Joystick
+JSW2COD",present,"Joystick
 Joystick Kbd",Yes,,
 888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
 EHCODE",present,"Joystick
@@ -1748,7 +1748,7 @@ BOOT6502
 SQUIRL2",present,,,,
 897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Test,"SIDCODE
 SIDRUN",present,,Yes,,
-898,10B4,RS,Retro S/W,B.Modern Creations/Ports,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Test,"GAME1
+898,V10B4,RS,Retro S/W,B.Modern Creations/Ports,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Test,"GAME1
 GAME2
 LOADER1
 LOADER2
