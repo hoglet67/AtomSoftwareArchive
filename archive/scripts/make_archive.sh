@@ -508,9 +508,11 @@ NAME=AtomSoftwareArchive_$(date +"%Y%m%d_%H%M")_$1
 
 
 mv $ARCHIVE.zip $NAME.zip
-zip -qr ${NAME}_SDDOS.zip $ARCHIVE.img
 zip -qr ${NAME}_JS.zip $ARCHIVE.js
-
+zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
+pushd ../menu
+zip -qr ../archive/${NAME}_SDDOS3.zip disks
+popd 
 ls -l ${NAME}*
 
 ##############################################################
