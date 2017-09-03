@@ -13,7 +13,6 @@ function package() {
 }
 
 ARCHIVE=archive
-ARCHIVE_SDDOS=archive_img
 
 # Define top level directories
 # Nice and short for easy navigation
@@ -498,10 +497,21 @@ popd
 pushd $ARCHIVE
 find . -type f | sort | zip -@ ../$ARCHIVE.zip
 popd
-mv $ARCHIVE.zip ~
 
-rm -f ~/$ARCHIVE_SDDOS.zip
 zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
+
+##############################################################
+# Rename up the archive
+##############################################################
+
+NAME=AtomSoftwareArchive_$(date +"%Y%m%d_%H%M")_$1
+
+
+mv $ARCHIVE.zip $NAME.zip
+zip -qr ${NAME}_SDDOS.zip $ARCHIVE.img
+zip -qr ${NAME}_JS.zip $ARCHIVE.js
+
+ls -l ${NAME}*
 
 ##############################################################
 # Deploy to Atomulator for testing
