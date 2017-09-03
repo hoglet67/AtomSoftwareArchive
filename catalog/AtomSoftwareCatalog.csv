@@ -1427,7 +1427,7 @@ MSDISP",present,Mainwaring,,,
 11MADWO
 12OURHO
 SIDMENU",present,SID,Yes,,
-763,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,,Yes,,
+763,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,RS Colour,Yes,,
 764,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 765,V9B2,NC,Non Comm,E.ROMs,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D199 8800",Test,D199,present,,,,
@@ -1437,7 +1437,7 @@ SIDMENU",present,SID,Yes,,
 769,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,"FLAPPY
 ANGRY
 SIDPLAY
-START",present,,Yes,,
+START",present,RS Colour,Yes,,
 770,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 1,Utility,,BB,8200,"CH.""STATS1""",Works,STATS1,present,,,,
 771,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Works,STATS2,present,,,,
 772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Works,STATS3,present,,,,
@@ -1685,7 +1685,8 @@ F14SCR
 LEVEL1
 LEVEL2
 LEVEL3
-LEVEL4",present,"Joystick
+LEVEL4",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 879,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""",Test,"F14CODE
 F14MUSIC
@@ -1694,28 +1695,34 @@ F14SCR
 LEVEL1
 LEVEL2
 LEVEL3
-LEVEL4",present,"Joystick
+LEVEL4",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite Demo (32K),Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Works,"CODE
 ELITE
-KEYS.TXT",present,"Joystick
+KEYS.TXT",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 881,V10B4,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner (32K),Game,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""",Test,"MMRUN
 MMINTRO
-MMCODE",present,"Joystick
+MMCODE",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 882,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
 883,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
 884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
 885,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
 886,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""",Test,"JSWRUN
-JSWCODE",present,"Joystick
+JSWCODE",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""",Test,"JSW2RUN
-JSW2COD",present,"Joystick
+JSW2COD",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
-EHCODE",present,"Joystick
+EHCODE",present,"RS Mono
+Joystick
 Joystick Kbd",Yes,,
 889,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Works,TANGLED,present,,,,
 890,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,Bad Filename,GALAXIAN,present,,,,
@@ -1747,11 +1754,15 @@ BOOT6502
 896,V10B1,NC,Non Comm,C.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Test,"SQUIRL1
 SQUIRL2",present,,,,
 897,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Test,"SIDCODE
-SIDRUN",present,,Yes,,
+SIDRUN",present,"RS Mono
+Joystick
+Joystick Kbd",Yes,,
 898,V10B4,RS,Retro S/W,B.Modern Creations/Ports,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Test,"GAME1
 GAME2
 LOADER1
 LOADER2
 LOADSC
 WAR
-WARSC",present,,Yes,,
+WARSC",present,"RS Mono
+Joystick
+Joystick Kbd",Yes,,
