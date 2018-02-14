@@ -122,6 +122,10 @@ cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
 
 java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIVE/$OTHER/RACER
 
+# A binary version was included instead, as there is a patch in issue 2
+#java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKBA.bas $ARCHIVE/$OTHER/BREAKBA 2900
+#java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKMC.bas $ARCHIVE/$OTHER/BREAKMC 2B00
+
 ##############################################################
 # Magnus Olsson
 ##############################################################
