@@ -21,7 +21,9 @@ for i in \
 "http://stardot.org.uk/forums/download/file.php?id=9282" \
 "http://stardot.org.uk/forums/download/file.php?id=12049" \
 "http://www.stardot.org.uk/forums/download/file.php?id=16496" \
-"http://www.stardot.org.uk/forums/download/file.php?id=20234"
+"http://www.stardot.org.uk/forums/download/file.php?id=20234" \
+"http://www.stardot.org.uk/forums/download/file.php?id=26437" \
+"http://www.stardot.org.uk/forums/download/file.php?id=33456"
 do
  # Grab the zipped SSD from StartDot
  wget -O tmp.zip $i
