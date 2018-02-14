@@ -1,0 +1,166 @@
+   5 GOS.a
+  10 P.$12" racer"'';IN."course:1-3"A;IFA<1ORA>3 G.10
+  11 B=#82ED;IFA=1;?B=0
+  12 IFA=2;?B=192
+  13 IFA=3;?B=240
+  14 IN.'"WIDTH:1-5"A;IFA<1ORA>5G.50
+  15 ?#80=A+3;LI.#82CF
+  16 B=500*(6-A)-10*(?#84*25+?#83);P."SCORE:"B';E.
+  20aDIM LL(9),MM(9)
+  25 FOR Z=0 TO 9
+  27 LL(Z)=-1
+  28 MM(Z)=-1
+  29 NEXT
+  30 FOR T=1 TO 2
+  35 P=#82CF
+  40 PRINT $21
+  50[
+  60     LDA @12
+  61     JSR #FFF4
+  62     LDA @0
+  63     STA #8B
+  64     STA #E1
+  65     STA #83
+  66     STA #84
+  67     STA #8C
+  70     STA #82
+  71     STA #8A
+  72     LDA @#10
+  73     STA #86
+  75     LDA @30
+  77     STA #89
+  78     LDA @#C0
+  79     STA #8D
+  80     LDA @10
+  81     STA #85
+  82     LDX @239
+  83:MM4 JSR #FFF4
+  84     INX
+  85     BNE MM4
+  90:LL0 JSR LL1
+ 100     INC #82
+ 105     BNE LL6
+ 110     INC #8A
+ 115     LDA #8A
+ 120     CMP @4
+ 125     BNE LL6
+ 126     LDA @#80
+ 127     STA #E1
+ 130     RTS
+ 132:LL6 INC #8C
+ 134     BNE LL0
+ 135     INC #8D
+ 136     BNE LL0
+ 140:LL1 LDY @0
+ 141     LDA (#8C),Y
+ 142     AND @3
+ 145     BEQ LL2
+ 150     CMP @1
+ 160     BEQ LL3
+ 260     INC #85
+ 270     LDA #85
+ 280     CMP @23
+ 290     BNE LL2
+ 320:LL3 DEC #85
+ 330     BNE LL2
+ 340     INC #85
+ 342:LL2 LDA #86
+ 344     STA #88
+ 350     LDA #B001
+ 360     AND @#80
+ 370     BNE LL4
+ 380     DEC #86
+ 390     BNE LL4
+ 400     INC #86
+ 410:LL4 LDA #B002
+ 420     AND @#40
+ 430     BNE LL5
+ 440     INC #86
+ 450     LDA #86
+ 460     CMP @#1F
+ 470     BNE LL5
+ 480     DEC #86
+ 485:LL5 LDX #88
+ 490     LDA @#20
+ 495     STA #80C0,X
+ 500     LDA @10
+ 505     JSR #FFF4
+ 506     LDX #86
+ 508     LDA #80C0,X
+ 510     SEC
+ 512     SBC @24
+ 514     STA #80C0,X
+ 516     STA #87
+ 519     LDA @160
+ 520     LDX #85
+ 530     STA #81E0,X
+ 540     TAY
+ 550     TXA
+ 560     CLC
+ 570     ADC #80
+ 580     TAX
+ 590     TYA
+ 600     STA #81E0,X
+ 670     LDA #87
+ 710     CMP @136
+ 720     BNE LL7
+ 730     INC #83
+ 740     BNE LL8
+ 750     INC #84
+ 760:LL8 LDA @20
+ 770     STA #89
+ 780     LDA @7
+ 785     JSR #FE66
+ 790     JSR #FFF4
+ 795     JSR #FE66
+ 800:LL7 LDX #89
+ 810     JSR #FB83
+ 820     DEC #89
+ 830     BNE LL9
+ 840     INC #89
+ 850:LL9 LDX @0
+ 852     STX #81
+ 860:MM0 LDA #80C0,X
+ 870     INX
+ 872     CPX @#20
+ 874     BEQ MM1
+ 880     CMP @#20
+ 890     BEQ MM0
+ 900     CMP @136
+ 910     BEQ MM1
+ 920     CMP @160
+ 930     BEQ MM2
+ 940     LDA #81
+ 950     BEQ MM3
+ 960     CMP @1
+ 970     BEQ MM1
+ 980:MM5 JSR #FE66
+ 990     LDA @136
+ 995     LDX #86
+1000     STA #80C0,X
+1010     LDA @7
+1015     JSR #FE66
+1020     JSR #FFF4
+1021     JSR #FE66
+1023     LDA @20
+1027     STA #89
+1030     INC #83
+1040     BNE MM1
+1050     INC #84
+1060:MM1 RTS
+1070:MM2 JSR #FE66
+1075     INC #81
+1080     BNE MM0
+1085:MM3 JSR #FE66
+1090:MM6 LDA #80C0,X
+1092     INX
+1094     CPX @#20
+1096     BEQ MM1
+1110     CMP @#20
+1120     BEQ MM6
+1130     JSR #FE66
+1140     JMP MM5
+1150]
+1160 NEXT T
+1170 PRINT $6
+1180 RETURN

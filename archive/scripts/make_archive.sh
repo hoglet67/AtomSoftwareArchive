@@ -120,6 +120,8 @@ popd
 mkdir -p $ARCHIVE/$OTHER
 cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
 
+java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIVE/$OTHER/RACER
+
 ##############################################################
 # Magnus Olsson
 ##############################################################
