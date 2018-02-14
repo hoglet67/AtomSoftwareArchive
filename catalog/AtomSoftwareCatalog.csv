@@ -457,7 +457,7 @@ Joystick AtoMMC",Yes,,
 293,V2,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,Works,COLOSSAL,obsolete,,Yes,,
 294,V2,L9,Level 9,B.Modern Creations/Ports,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,Works,SNOWBALL,obsolete,,Yes,,
 295,V3,MO,Magnus Olsson,C.Non Commercial Software,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Works,DIAMONDS,present,,,,
-296,,???,???,A.Commercial Software,Intra Terrestrial,Adventure,,,,,,,missing,,,,
+296,,???,???,A.Commercial Software,Intra Terrestrial,Adventure,,,,,,,duplicate,,,,
 297,V3,BS,Bearsoft,A.Commercial Software,Wolf Pack,Game,M. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
 298,V3,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN COLOSSAL",,"VDUBLO
@@ -644,9 +644,7 @@ RUN",Test,"157
 402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
 403,V7B2,YC,Your Computer,D.Books/Magazines,Stuntman,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Works,STUNT,present,Magazines,,,
 404,,NC,Non Comm,C.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
-405,,MO,Magnus Olsson,C.Non Commercial Software,Super Zombie,Game,Magnus Olssen,MO,8200,*RUN SUPERZMB,,SUPERZMB,missing,,,,
 406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,"CH.""TEACUPS""",Test,TEACUPS,present,,,,
-407,,NC,Non Comm,C.Non Commercial Software,Tennis,Game,???,NC,8200,"CH.""TENNIS1""",,TENNIS1,missing,,,,
 408,V8B1,OL,Oak Leaves,A.Commercial Software,Walls,Game,J.Lasruk,OL,8200,"CH.""WALLS""",Works,WALLS,present,,,,
 409,V4,NC,Non Comm,C.Non Commercial Software,Wipeout,Game,???,NC,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,,,,
 410,V4,NC,Non Comm,C.Non Commercial Software,Woodland,Game,G.J.Noorland,NC,8200,"CH.""WOODLND""",Works,WOODLND,present,,,,
@@ -1772,3 +1770,49 @@ MUSIC
 PLAYER
 RUNME2
 SIDPLAY",present,SID,Yes,,
+902,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID17 Pet Shop Boys,Music,,SID/ATMSID17,2900,*RUN SIDMENU,Test,"00GOWES
+01WESTE
+02LOVEC
+03OPPOR
+04SUBUR
+05HITMU
+06ITSAS
+07WHATH
+08RENTA
+09ALWAY
+10HEART
+11DOMIN
+19GOWES
+SIDMENU
+
+",present,SID,Yes,,
+903,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID18 Club Hits!,Music,,SID/ATMSID18,2900,*RUN SIDMENU,Test,"01RHYTH
+02LAMOU
+03PUMPU
+ANOTHER
+BETTERO
+BLUEDAB
+CHILDRE
+COTTONE
+GONNAMA
+GROOVEI
+ITSMYLI
+LIVINGO
+MRVAINC
+NOLIMIT
+PRAISEY
+PUMPUPT
+RHYTHMO
+RIDEONT
+RIGHTIN
+SANDSTO
+SCATMAN
+SIDMENU
+THEMEFR
+THESIGN
+UGOT2LE
+WHATISL
+WHATTIM
+",present,SID,Yes,,
+904,V10B5,TA,The Atom,D.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Test,RACER,present,,,,
+905,V10B5,TA,The Atom,D.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Test,BREAKOU,present,,,,
