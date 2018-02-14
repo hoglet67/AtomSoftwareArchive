@@ -1766,3 +1766,9 @@ WAR
 WARSC",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
+900,V10B5,A&F,A&F S/W,A.Commercial Software,Kamikaze,Game,,AF,8200,"CH.""KAMIKAZ""",Test,KAMIKAZ,present,,,,
+901,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Test,"MOVIE
+MUSIC
+PLAYER
+RUNME2
+SIDPLAY",present,SID,Yes,,
