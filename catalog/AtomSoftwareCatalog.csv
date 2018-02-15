@@ -1811,17 +1811,17 @@ WHATTIM
 ",present,SID,Yes,,
 903,V10B5,TA,The Atom,D.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Test,RACER,present,,,,
 904,V10B5,TA,The Atom,D.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Test,BREAKOU,present,,,,
-905,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 0,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Test,"MOVIE0
+905,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 0),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Test,"MOVIE0
 MUSIC
 PLAYER0
 RUNME0
 SIDPLAY",present,SID,Yes,,
-906,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 2,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Test,"MOVIE2
+906,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 2),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Test,"MOVIE2
 MUSIC
 PLAYER2
 RUNME2
 SIDPLAY",present,SID,Yes,,
-907,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 4,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""",Test,"BACKSCR
+907,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 4),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""",Test,"BACKSCR
 MOVIE2
 MUSIC
 PLAYER4
