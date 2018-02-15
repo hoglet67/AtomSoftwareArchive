@@ -93,7 +93,7 @@ public class AtomPackage {
 			}
 
 			// booleans are: makeBas, makeAtm, makeWav
-			extractFiles(dstDir, srcDirOrFile, true, true, false);
+			extractFiles(dstDir, srcDirOrFile, true, true, true);
 
 		} catch (Exception e) {
 			e.printStackTrace();

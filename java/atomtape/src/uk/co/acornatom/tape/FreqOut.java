@@ -6,10 +6,10 @@ public class FreqOut {
 
 	/*
 	 * From some old text or other (ATAP probably):
-	 * 
+	 *
 	 * A logic 0 consists of 4 cycles of a 1.2 kHz tone, and a logic 1 consists
 	 * of 8 cycles of a 2.4 kHz tone.
-	 * 
+	 *
 	 * Each byte of data is preceeded by a logic zero start bit, and is
 	 * terminated by a logic 1 stop bit.
 	 */
@@ -32,7 +32,7 @@ public class FreqOut {
 	int m_writtenSampleCount;
 	static short[] m_sine = new short[147];
 	int m_checksum;
-	
+
 	static {
 		// Build the output table. 4 cycles into 147 bytes.
 		//
@@ -53,13 +53,23 @@ public class FreqOut {
 
 			m_sine[i] = (short) s;
 			val += step;
-		}	
+		}
 	}
 
 	public FreqOut(AtomFile atmfile, OutputStream out) {
 		m_atmfile = atmfile;
 		m_out = out;
 		m_writtenSampleCount = 0;
+	}
+
+	// Output silence for 1 bit time
+	//
+	void outSilence() throws IOException {
+		for (int i = 0; i < 147; ++i) {
+			m_out.write(0);
+			m_out.write(0);
+		}
+		m_writtenSampleCount += 147;
 	}
 
 	// Output a 1 bit, 8 cycles of 24khz
@@ -114,8 +124,9 @@ public class FreqOut {
 
 	// Write atom formatted data to the wave file.
 	//
-	boolean write(boolean shortheaders) throws IOException {
+	boolean write() throws IOException {
 
+		float time;
 		int blockNum = 0;
 		int blockLoadAddr = m_atmfile.getLoadAddr();
 
@@ -127,15 +138,21 @@ public class FreqOut {
 		//
 		int flags = _BV(7) | _BV(6);
 
-		// Initial header time about 4 1/2 seconds. One out() call puts ~3.3ms
-		// of data.
-		//
-		float headerTime = (float) (shortheaders ? 2500 : 4550);
+		// Additional initial header time of 2 seconds.
+		// One out() call puts ~3.3ms of data.
+
+		time = 2000F;
+		while (time > 0.0) {
+			out1();
+			time -= 3.3F;
+		}
 
 		while ((flags & _BV(7)) > 0) {
-			while (headerTime > 0.0) {
+
+			time = 2000.0F;
+			while (time > 0.0) {
 				out1();
-				headerTime -= 3.3F;
+				time -= 3.3F;
 			}
 
 			m_checksum = 0;
@@ -184,13 +201,12 @@ public class FreqOut {
 			outByte((blockLoadAddr & 0xff00) >> 8);
 			outByte(blockLoadAddr & 0xff);
 
-			// Header/data gap is about 1 second. One out() call puts ~3.3ms of
-			// data.
-			//
-			headerTime = (float) (shortheaders ? 500 : 1000);
-			while (headerTime > 0.0) {
+			// Header/data gap is about 0.5 seconds.
+			// One out() call puts ~3.3ms of data.
+			time = 500.0F;
+			while (time > 0.0) {
 				out1();
-				headerTime -= 3.3F;
+				time -= 3.3F;
 			}
 
 			// Now for the data. You know you want it.
@@ -213,20 +229,17 @@ public class FreqOut {
 			//
 			flags |= _BV(5);
 
-			// Reset inter-block header time ready for leader tone at start of
-			// loop.
-			//
-			headerTime = (float) (shortheaders ? 500 : 1000);
-		}
-		
-		while (headerTime > 0.0) {
-			out1();
-			headerTime -= 3.3F;
+			// 2.0 silence between blocks
+			time = 2000.0F;
+			while (time > 0.0) {
+				outSilence();
+				time -= 3.3F;
+			}
 		}
 
 		return true;
 	}
-	
+
 	public int getWrittenSampleCount() {
 		return m_writtenSampleCount;
 	}

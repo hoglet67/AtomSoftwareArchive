@@ -180,7 +180,7 @@ public class AtomFile {
 	public void writeWavFile(OutputStream out) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		FreqOut freqout = new FreqOut(this, bos);
-		freqout.write(false);
+		freqout.write();
 		int bytesWrit = freqout.m_writtenSampleCount * BITSPERSAMPLE / 8;
 		writeString(out, "RIFF"); // 0
 		writeInt(out, bytesWrit + 36); // 4
