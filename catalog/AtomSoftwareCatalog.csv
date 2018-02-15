@@ -1765,12 +1765,8 @@ WARSC",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
 900,V10B5,A&F,A&F S/W,A.Commercial Software,Kamikaze,Game,,AF,8200,"CH.""KAMIKAZ""",Test,KAMIKAZ,present,,,,
-901,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Test,"MOVIE
-MUSIC
-PLAYER
-RUNME2
-SIDPLAY",present,SID,Yes,,
-902,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID17 Pet Shop Boys,Music,,SID/ATMSID17,2900,*RUN SIDMENU,Test,"00GOWES
+,,,,,,,,,,,,,,,,,
+901,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID17 Pet Shop Boys,Music,,SID/ATMSID17,2900,*RUN SIDMENU,Test,"00GOWES
 01WESTE
 02LOVEC
 03OPPOR
@@ -1786,7 +1782,7 @@ SIDPLAY",present,SID,Yes,,
 SIDMENU
 
 ",present,SID,Yes,,
-903,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID18 Club Hits!,Music,,SID/ATMSID18,2900,*RUN SIDMENU,Test,"01RHYTH
+902,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID18 Club Hits!,Music,,SID/ATMSID18,2900,*RUN SIDMENU,Test,"01RHYTH
 02LAMOU
 03PUMPU
 ANOTHER
@@ -1814,5 +1810,21 @@ UGOT2LE
 WHATISL
 WHATTIM
 ",present,SID,Yes,,
-904,V10B5,TA,The Atom,D.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Test,RACER,present,,,,
-905,V10B5,TA,The Atom,D.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Test,BREAKOU,present,,,,
+903,V10B5,TA,The Atom,D.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Test,RACER,present,,,,
+904,V10B5,TA,The Atom,D.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Test,BREAKOU,present,,,,
+905,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 0,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Test,"MOVIE0
+MUSIC
+PLAYER0
+RUNME0
+SIDPLAY",present,SID,Yes,,
+906,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 2,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Test,"MOVIE2
+MUSIC
+PLAYER2
+RUNME2
+SIDPLAY",present,SID,Yes,,
+907,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple 4,Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""",Test,"BACKSCR
+MOVIE2
+MUSIC
+PLAYER4
+RUNME4
+SIDPLAY",present,SID,Yes,,
