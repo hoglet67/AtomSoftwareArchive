@@ -328,7 +328,7 @@ package "atms/dd-21/SENTD" "$ARCHIVE/$AS/WORDTUT"
 
 package "atms/Acl1-15/747" "$ARCHIVE/$BB"
 # package "atms/Acl1-06/BREAKOU" "$ARCHIVE/$BB" # not bugbyte
-package "atms/Acl1-15/INVADBB" "$ARCHIVE/$BB"
+# package "atms/Acl1-15/INVADBB" "$ARCHIVE/$BB" # manually fixed
 package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # not sure this is bug byte, but could be
 # package "atms/Acl1-21/BATSHIP" "$ARCHIVE/$BB" # this is actually a program called space battle that need FP Rom
 package "atms/Acl2-19/BIORYTH" "$ARCHIVE/$BB"
@@ -402,10 +402,10 @@ package "atms/Acl1-15/TEXT" "$ARCHIVE/$PP"
 package "atms/Friso/CONSTELL" "$ARCHIVE/$PP"
 package "atms/Friso/DEMONDUN" "$ARCHIVE/$PP"
 package "atms/Acl1-03/ROME*" "$ARCHIVE/$PP"
-package "atms/dd-01/FIGHTER" "$ARCHIVE/$PP"
+#package "atms/dd-01/FIGHTER" "$ARCHIVE/$PP"
 package "atms/Acl1-25/HYPERFI" "$ARCHIVE/$PP"
 package "atms/Steve/INVADERF" "$ARCHIVE/$PP"
-package "atms/Games1/MARTIANS" "$ARCHIVE/$PP"
+#package "atms/Games1/MARTIANS" "$ARCHIVE/$PP" # manually fixed
 package "atms/Menno1/MOONPATR" "$ARCHIVE/$PP"
 package "atms/dd-09/MUNCHY" "$ARCHIVE/$PP"
 package "atms/Menno1/SHOOTOUT" "$ARCHIVE/$PP"
