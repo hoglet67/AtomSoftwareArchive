@@ -224,7 +224,7 @@ TUNEIN2",present,2K Programs 2,,,
 140,V5,BB,Bug Byte,A.Commercial Software,Alien Destroy,Game,,BB,8200,"CH.""ALIEN""",Works,ALIEN,present,,,,
 141,V2,BB,Bug Byte,A.Commercial Software,Atom Breakout,Game,,BB,8200,"CH.""BKOUT""",Works,"BKOUT
 BKOUTINS",present,,,,
-142,V1,BB,Bug Byte,A.Commercial Software,Atom Invaders,Game,,BB,8200,"CH.""INVADBB""",Works,INVADBB,present,,,,
+142,V10B5,BB,Bug Byte,A.Commercial Software,Atom Invaders,Game,,BB,8200,"CH.""INVADBB""",Test,INVADBB,present,,,,
 143,V1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,BACKGAM,present,,,,
 144,V5,BB,Bug Byte,A.Commercial Software,Battleships,Game,,BB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 145,V1,BB,Bug Byte,A.Commercial Software,Bio-Rhythms,Simulation,,BB,8200,"CH.""BIORYTH""",Works,BIORYTH,present,,,,
@@ -326,7 +326,7 @@ GALAXIN",present,,,,
 204,V1,PP,Prog Power,A.Commercial Software,Invader Force,Game,R.M.P. Hanson,PP,8200,"CH.""INVADERF""",Works,INVADERF,present,,,,
 205,,PP,Prog Power,A.Commercial Software,Life,Game,R.M.P. Hanson,PP,,,,,missing,,,,
 206,,PP,Prog Power,A.Commercial Software,Lunar Lander,Game,J.M. Dyson,PP,,,,,missing,,,,
-207,V1,PP,Prog Power,A.Commercial Software,Martians,Game,R.M.P. Hanson,PP,8200,"CH.""MARTIANS""",Works,MARTIANS,present,,,,
+207,V10B5,PP,Prog Power,A.Commercial Software,Martians,Game,R.M.P. Hanson,PP,8200,*RUN MARTIANS,Test,MARTIANS,present,,,,
 208,,PP,Prog Power,A.Commercial Software,Mazeball,Game,S. Draper,PP,,,,,missing,,,,
 209,V3,PP,Prog Power,A.Commercial Software,Micro-Budget,Business,R.M.P. Hanson,PP,8200,"CH.""MICROB""",Works,MICROB,present,,,,
 210,,PP,Prog Power,A.Commercial Software,Minefield,Game,T.Madden,PP,,,,,missing,,,,
@@ -344,7 +344,7 @@ OTHINST",present,,,,
 220,,PP,Prog Power,A.Commercial Software,Sketchpad,Graphics,R.M.P. Hanson,PP,,,,,missing,,,,
 221,,PP,Prog Power,A.Commercial Software,Ski Run,Game,R.M.P. Hanson,PP,,,,,missing,,,,
 222,V1,PP,Prog Power,A.Commercial Software,Snake,Game,T.Madden,PP,8200,"CH.""SNAKES""",Works,SNAKES,present,,,,
-223,V1,PP,Prog Power,A.Commercial Software,Space Fighter,Game,R.M.P. Hanson,PP,8200,"CH.""FIGHTER""",Works,FIGHTER,present,,,,
+223,V10B5,PP,Prog Power,A.Commercial Software,Space Fighter,Game,R.M.P. Hanson,PP,8200,"CH.""FIGHTER""",Test,FIGHTER,present,,,,
 224,,PP,Prog Power,A.Commercial Software,Space Storm,Game,R. Howells,PP,,,,,missing,,,,
 225,,PP,Prog Power,A.Commercial Software,Star Trek,Game,R.M.P. Hanson,PP,,,,,arcadian,,,,
 226,V1,PP,Prog Power,A.Commercial Software,Stock Car,Game,,PP,8200,"CH.""STOCKCAR""",Works,STOCKCAR,present,,,,
@@ -506,7 +506,7 @@ RUNME
 SCORE",present,"RS Mono
 Joystick
 Joystick AtoMMC",Yes,,
-306,V8B2,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Test,"ASM
+306,V10B5,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Test,"ASM
 CGALA
 CGALSCR
 FONT
@@ -1497,7 +1497,7 @@ SSOKSCR",present,,Yes,,
 Joystick Kbd",,,
 784,V8B2,BB,Bug Byte,A.Commercial Software,Galaxian (JS),Game,,JS/DAVE,8200,"CH.""GALAXBB""",Works,GALAXBB,present,"Joystick
 Joystick Kbd",,,
-785,V8B2,BB,Bug Byte,A.Commercial Software,Atom Invaders (JS),Game,,JS/DAVE,8200,"CH.""INVADBB""",Works,INVADBB,present,"Joystick
+785,V10B5,BB,Bug Byte,A.Commercial Software,Atom Invaders (JS),Game,,JS/DAVE,8200,"CH.""INVADBB""",Test,INVADBB,present,"Joystick
 Joystick Kbd",,,
 786,V8B3,A&F,A&F S/W,A.Commercial Software,Cylon Attack (JS),Game,,JS/DAVE,8200,"CH.""CYLONATT""",Works,CYLONATT,present,"Joystick
 Joystick Kbd",,,
