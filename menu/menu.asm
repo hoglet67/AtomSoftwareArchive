@@ -2,6 +2,8 @@ Base = $2800
 
 include "renderer_header.asm"
 
+	PlotDriverLS = $f6d3
+	PlotDriverMS = $f6d8
 	GraphicsCtrl = $f6dd
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
@@ -910,6 +912,10 @@ ENDIF
 
 	
 .Clear
+	LDA PlotDriverLS,Y
+	STA $3FE
+	LDA PlotDriverMS,Y
+	STA $3FF
 	LDA GraphicsCtrl,Y
 	PHA
 	LDA GraphicsLastPage,Y
