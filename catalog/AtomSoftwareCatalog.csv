@@ -302,9 +302,12 @@ STDAT",present,,,,
 189,V1,PP,Prog Power,A.Commercial Software,Awari,Game,T.Madden,PP,8200,"CH.""AWARI""",Works,AWARI,present,,,,
 190,,PP,Prog Power,A.Commercial Software,Aztec,Game,R. Ellis,PP,,,,,missing,,,,
 191,,PP,Prog Power,A.Commercial Software,Breakaway,Game,R.M.P. Hanson,PP,,,,,missing,,,,
-192,V2,PP,Prog Power,A.Commercial Software,Chess,Game,D. Thompson,PP,8200,"CH.""CHESSPP""",Works,"CHESSPP
-TEXT
-1.12",present,,,,
+192,V10B5,PP,Prog Power,A.Commercial Software,Chess,Game,D. Thompson,PP/CHESS,8200,"CH.""CHESS""",Test,"CHESS
+INS
+DATA
+ERROR
+1.F12
+COPY",present,,,,
 193,V1,PP,Prog Power,A.Commercial Software,Constellation,Simulation,R.M.P. Hanson,PP,8200,"CH.""CONSTELL""",Works,CONSTELL,present,,,,
 194,V1,PP,Prog Power,A.Commercial Software,Cowboy Shoot-Out,Game,S. Vout,PP,8200,"CH.""SHOOTOUT""",Works,SHOOTOUT,present,,,,
 195,V7B2,PP,Prog Power,A.Commercial Software,Dambusters,Game,G. Douglass,PP,8200,"CH.""DAMBUST""",Works,DAMBUST,present,,,,
