@@ -5,13 +5,13 @@ import java.io.IOException;
 
 public class AtomPackage {
 
-	public static final void extractFiles(File dstDir, File src, boolean makeBas, boolean makeAtm, boolean makeWav)
+	public static final void extractFiles(File dstDir, File src, boolean makeBas, boolean makeAtm, boolean makeWav, boolean makeCsw)
 			throws IOException {
 		
 		if (src.isDirectory()) {
 			
 			for (File child : src.listFiles()) {
-				extractFiles(dstDir, child, makeBas, makeAtm, makeWav);
+				extractFiles(dstDir, child, makeBas, makeAtm, makeWav, makeCsw);
 			}
 			
 		} else {
@@ -58,7 +58,7 @@ public class AtomPackage {
 				System.out.println("####################################################");
 				try {
 					base.processArchive();
-					base.generateFiles(makeBas, makeAtm, makeWav);
+					base.generateFiles(makeBas, makeAtm, makeWav, makeCsw);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -93,7 +93,7 @@ public class AtomPackage {
 			}
 
 			// booleans are: makeBas, makeAtm, makeWav
-			extractFiles(dstDir, srcDirOrFile, true, true, true);
+			extractFiles(dstDir, srcDirOrFile, true, true, false, true);
 
 		} catch (Exception e) {
 			e.printStackTrace();

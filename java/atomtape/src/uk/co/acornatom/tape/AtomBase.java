@@ -50,7 +50,7 @@ public abstract class AtomBase {
 		return ous.toByteArray();
 	}
 	
-	public void generateFiles(boolean writeBAS, boolean writeATM, boolean writeWAV)
+	public void generateFiles(boolean writeBAS, boolean writeATM, boolean writeWAV, boolean writeCSW)
 			throws IOException {
 
 
@@ -156,6 +156,15 @@ public abstract class AtomBase {
 						throw new IOException("Command failed: " + command);
 					}
 				}
+
+				if (writeCSW) {
+					File cswFile = new File(dir, toDecimal(count, 2) + "_"
+							+ file.getTitleClean() + ".csw");
+					System.out.println("    ->" + cswFile);
+					FileOutputStream fos = new FileOutputStream(cswFile);
+					file.writeCswFile(fos);
+					fos.close();
+            }
 
 				count++;
 			}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.zip.DeflaterOutputStream;
 
 public class AtomFile {
 
@@ -12,35 +13,35 @@ public class AtomFile {
 	private static final int BITSPERSAMPLE = 16;
 
 	/*
-	 * 
+	 *
 	 * atm2wav By Charlie Robson
-	 * 
+	 *
 	 * charlie_robson@hotmail.com arduinonut.blogspot.com
-	 * 
+	 *
 	 * Convert an .atm format file to a WAV playable back to a real Atom or
 	 * similar.
-	 * 
+	 *
 	 * This is not intended to be production quality code, there may well be one
 	 * or more of the following: Mistakes, misapprehensions, booboos, blunders
 	 * or nasty hard-coding.
-	 * 
+	 *
 	 * This is however to the best of my knowledge servicable code and may well
 	 * provide one or more of the following: Understanding, amusement,
 	 * usefulness.
-	 * 
+	 *
 	 * Writes 16 bit 44.1khz mono wav file.
-	 * 
+	 *
 	 * Enjoy!
-	 * 
-	 * 
+	 *
+	 *
 	 * Information sources:
-	 * 
+	 *
 	 * Atom technical manual:
 	 * http://acorn.chriswhy.co.uk/docs/Acorn/Manuals/Acorn_AtomTechnicalManual
 	 * .pdf
-	 * 
+	 *
 	 * Atomic theory and practice: http://www.xs4all.nl/~fjkraan/comp/atom/atap/
-	 * 
+	 *
 	 * Atom Rom disassembly:
 	 * http://www.stairwaytohell.com/atom/wouterras/romdisas.zip
 	 */
@@ -136,7 +137,7 @@ public class AtomFile {
 	public void writeBasicFile(OutputStream out) throws IOException {
 		int state = 0;
 		int lineno = 0;
-		
+
 		// Deal with the case where the load address is not page aligned
 		// (the start of a basic program must be page aligned)
 		int i = (0x100 - (loadAddr & 0xFF)) & 0xFF;
@@ -150,16 +151,16 @@ public class AtomFile {
 				i += 256;
 			}
 		}
-		
+
 		// Now run the state machine
 		while (i < data.length) {
 			int c = data[i] & 0xff;
 			if (state == 0) {
 				if (c == 13) {
 					state = 1;
-				    out.write(10);
+					out.write(10);
 				} else {
-				    out.write(c);						
+					out.write(c);
 				}
 			} else if (state == 1) {
 				lineno = c;
@@ -176,7 +177,7 @@ public class AtomFile {
 			i++;
 		}
 	}
-	
+
 	public void writeWavFile(OutputStream out) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		FreqOut freqout = new FreqOut(this, bos);
@@ -233,6 +234,57 @@ public class AtomFile {
 		// output << chars[0] << chars[1] << chars[2] << chars[3];
 	}
 
+
+	public void writeCswFile(OutputStream out) throws IOException {
+		// Generate the date in 16-bit wav samples
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		FreqOut freqout = new FreqOut(this, bos);
+		freqout.write();
+		byte[] wavbytes = bos.toByteArray();
+
+		// Re-encode as Deflater compressed CSW data
+		boolean initialPolarity = (wavbytes[0] >= 0);
+		boolean polarity = initialPolarity;
+		ByteArrayOutputStream cswbos = new ByteArrayOutputStream();
+		DeflaterOutputStream cswzlib = new DeflaterOutputStream(cswbos);
+
+		int count = 0; // number of samples of the same polarity
+		int pulses = 0;
+		int i = 1;
+		while (i < wavbytes.length) {
+			// We only need to look at the high byte of each sample to determine the polarity
+			byte sample = wavbytes[i];
+			count++;
+			// Look for a zero crossing
+			if ((polarity && (sample < 0)) || ((!polarity) && (sample >= 0))) {
+				if (count <= 0xff) {
+					writeByte(cswzlib, count);
+				} else {
+					writeByte(cswzlib, 0x00);
+					writeInt(cswzlib, count);
+				}
+				pulses++;
+				polarity = !polarity;
+				count = 0;
+			}
+			i += 2;
+		}
+		cswzlib.finish();
+
+		writeString(out, "Compressed Square Wave");
+		writeByte(out, 0x1A);		// Terminator
+		writeByte(out, 0x02);		// Version (major)
+		writeByte(out, 0x00);		// Version (minor)
+		writeInt(out, SAMPLERATE); // Sample rate
+		writeInt(out, pulses);		// Number of pulses
+		writeByte(out, 0x02);		// Encoding: Z-RLE
+		writeByte(out, initialPolarity ? 0x01 : 0x00); // Flags, b0 = polarity
+		writeByte(out, 0x00);		// HDR: unused
+		writeString(out, "AtomTape (Java)");
+		writeByte(out, 0x00);		// Terminator
+		out.write(cswbos.toByteArray());
+	}
+
 	private void writeString(OutputStream out, String value) throws IOException {
 		out.write(value.getBytes());
 	}
@@ -251,5 +303,9 @@ public class AtomFile {
 		buffer[0] = (byte) (value & 0xff);
 		buffer[1] = (byte) ((value >> 8) & 0xff);
 		out.write(buffer);
+	}
+
+	private void writeByte(OutputStream out, int value) throws IOException {
+		out.write(value);
 	}
 }
