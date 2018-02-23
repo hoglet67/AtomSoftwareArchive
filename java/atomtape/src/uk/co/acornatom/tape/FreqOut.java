@@ -40,7 +40,7 @@ public class FreqOut {
 		double step = (Math.PI * 8.0) / 147.0;
 
 		for (int i = 0; i < 147; ++i) {
-			double s = Math.sin(val) * 16384.0;
+			double s = Math.sin(val) * -16384.0;
 
 			// Sinusoidal data doesn't look to good at this audio resolution,
 			// so square it off.
@@ -72,7 +72,7 @@ public class FreqOut {
 		m_writtenSampleCount += 147;
 	}
 
-	// Output a 1 bit, 8 cycles of 24khz
+	// Output a 1 bit, 8 cycles of 2400Hz
 	//
 	void out1() throws IOException {
 		for (int i = 0; i < 147; ++i) {
@@ -87,7 +87,7 @@ public class FreqOut {
 		m_writtenSampleCount += 147;
 	}
 
-	// Output a 0 bit, 4 cycles of 12khz
+	// Output a 0 bit, 4 cycles of 1200Hz
 	//
 	void out0() throws IOException {
 		for (int i = 0; i < 147; ++i) {
@@ -100,12 +100,33 @@ public class FreqOut {
 		m_writtenSampleCount += 147;
 	}
 
+	// Output a start bit, same as a zero
+	//
+	void outStart() throws IOException {
+		out0();
+	}
+
+	// Output a stop bit, 9 cycles of 2400Hz
+	// (i.e. one extra cycle)
+	//
+	void outStop() throws IOException {
+		for (int i = 0; i < 165; ++i) {
+			// Double step the table for a higher frequency
+			//
+			short val = m_sine[(i * 2) % 147];
+			byte lo = (byte) ((val >> 8) & 255);
+			byte hi = (byte) (val & 255);
+			m_out.write(hi);
+			m_out.write(lo);
+		}
+		m_writtenSampleCount += 165;
+	}
+
 	// Output a byte plus its surrounding start & stop bit.
 	// Add the byte's value to the rolling checksum.
 	//
-
 	void outByte(int value) throws IOException {
-		out0();
+		outStart();
 		for (int i = 0; i < 8; ++i) {
 			if ((value & _BV(i)) > 0) {
 				out1();
@@ -113,7 +134,7 @@ public class FreqOut {
 				out0();
 			}
 		}
-		out1();
+		outStop();
 
 		m_checksum += value;
 	}
