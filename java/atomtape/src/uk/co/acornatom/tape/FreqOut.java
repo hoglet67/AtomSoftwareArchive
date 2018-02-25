@@ -164,6 +164,12 @@ public class FreqOut {
 
 		time = 2000F;
 		while (time > 0.0) {
+			outSilence();
+			time -= 3.3F;
+		}
+
+		time = 2000F;
+		while (time > 0.0) {
 			out1();
 			time -= 3.3F;
 		}
