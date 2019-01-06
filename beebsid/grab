@@ -23,7 +23,8 @@ for i in \
 "http://www.stardot.org.uk/forums/download/file.php?id=16496" \
 "http://www.stardot.org.uk/forums/download/file.php?id=20234" \
 "http://www.stardot.org.uk/forums/download/file.php?id=26437" \
-"http://www.stardot.org.uk/forums/download/file.php?id=33456"
+"http://www.stardot.org.uk/forums/download/file.php?id=33456" \
+"https://stardot.org.uk/forums/download/file.php?id=42658"
 do
  # Grab the zipped SSD from StartDot
  wget -O tmp.zip $i
