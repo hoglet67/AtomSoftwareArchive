@@ -1830,68 +1830,68 @@ MUSIC
 PLAYER4
 RUNME4
 SIDPLAY",present,SID,Yes,,
-908,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest  (M)(32K),Game,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""",Test,"FOGCODE
+908,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest  (M)(32K),Game,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""",Works,"FOGCODE
 FOGRUN
 FOGSCR",present,AGD,Yes,,
-909,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest  (C)(32K),Game,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""",Test,"FOGCODE
+909,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest  (C)(32K),Game,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""",Works,"FOGCODE
 FOGRUN
 FOGSCR",present,AGD,Yes,,
-910,V11B1,AGD,AGD,B.Modern Creations/Ports,Grumpy Santa (32K),Game,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""",Test,"GSCODE
+910,V11B1,AGD,AGD,B.Modern Creations/Ports,Grumpy Santa (32K),Game,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""",Works,"GSCODE
 GSRUN
 GSSCR",present,AGD,Yes,,
-911,V11B1,AGD,AGD,B.Modern Creations/Ports,Christmas Gift Hunt (32K),Game,Kees van Oss,AGD/GIFTHUNT,8200,"CH.""GHRUN""",Test,"GHCODE
+911,V11B1,AGD,AGD,B.Modern Creations/Ports,Christmas Gift Hunt (32K),Game,Kees van Oss,AGD/GIFTHUNT,8200,"CH.""GHRUN""",Works,"GHCODE
 GHRUN
 GHSCR",present,AGD,Yes,,
-912,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 1 - Arrival (32K),Game,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""",Test,"A1CODE
+912,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 1 - Arrival (32K),Game,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""",Works,"A1CODE
 A1RUN
 A1SCR",present,AGD,Yes,,
-913,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 2 - Surveying (32K),Game,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""",Test,"A2CODE
+913,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 2 - Surveying (32K),Game,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""",Works,"A2CODE
 A2RUN
 A2SCR",present,AGD,Yes,,
-914,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 3 - Comms (32K),Game,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""",Test,"A3CODE
+914,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 3 - Comms (32K),Game,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""",Works,"A3CODE
 A3RUN
 A3SCR",present,AGD,Yes,,
-915,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 4 - Escape (32K),Game,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""",Test,"A4CODE
+915,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 4 - Escape (32K),Game,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""",Works,"A4CODE
 A4RUN
 A4SCR",present,AGD,Yes,,
-916,V11B1,AGD,AGD,B.Modern Creations/Ports,Baldy ZX (32K),Game,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""",Test,"BALCODE
+916,V11B1,AGD,AGD,B.Modern Creations/Ports,Baldy ZX (32K),Game,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""",Works,"BALCODE
 BALRUN
 BALSCR",present,AGD,Yes,,
-917,V11B1,AGD,AGD,B.Modern Creations/Ports,Baby Monkey Alba (32K),Game,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""",Test,"BMCODE
+917,V11B1,AGD,AGD,B.Modern Creations/Ports,Baby Monkey Alba (32K),Game,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""",Works,"BMCODE
 BMRUN
 BMSCR",present,AGD,Yes,,
-918,V11B1,AGD,AGD,B.Modern Creations/Ports,Brick Racer (32K),Game,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""",Test,"BRCODE
+918,V11B1,AGD,AGD,B.Modern Creations/Ports,Brick Racer (32K),Game,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""",Works,"BRCODE
 BRRUN
 BRSCR",present,AGD,Yes,,
-919,V11B1,AGD,AGD,B.Modern Creations/Ports,B-Squared (32K),Game,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""",Test,"BSCODE
+919,V11B1,AGD,AGD,B.Modern Creations/Ports,B-Squared (32K),Game,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""",Works,"BSCODE
 BSRUN
 BSSCR",present,AGD,Yes,,
-920,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 1 - Bustin Ghosts (32K),Game,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""",Test,"B1CODE
+920,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 1 - Bustin Ghosts (32K),Game,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""",Works,"B1CODE
 B1RUN
 B1SCR",present,AGD,Yes,,
-921,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 2 - Lurching Dead (32K),Game,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""",Test,"B2CODE
+921,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 2 - Lurching Dead (32K),Game,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""",Works,"B2CODE
 B2RUN
 B2SCR",present,AGD,Yes,,
-922,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 3 - Summer Breeze (32K),Game,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""",Test,"B3CODE
+922,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 3 - Summer Breeze (32K),Game,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""",Works,"B3CODE
 B3RUN
 B3SCR",present,AGD,Yes,,
-923,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 4 - Jet Set Bob (32K),Game,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""",Test,"B4CODE
+923,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob 4 - Jet Set Bob (32K),Game,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""",Works,"B4CODE
 B4RUN
 B4SCR",present,AGD,Yes,,
-924,V11B1,NC,Non Comm,C.Non Commercial Software,Logger,Game,,NC,8200,"CH. ""LOGGER""",Test,LOGGER,present,,,,
-925,V11B1,NC,Non Comm,C.Non Commercial Software,Worm,Game,,NC,8200,"CH. ""WORM""",Test,WORM,present,,,,
-926,V11B1,NC,Non Comm,C.Non Commercial Software,Parachute,Game,,NC,8200,"CH. ""PARACHU""",Test,PARACHU,present,,,,
-927,V11B1,NC,Non Comm,C.Non Commercial Software,Shopper,Game,,NC,8200,"CH. ""SHOPPER""",Test,SHOPPER,present,,,,
-928,V11B1,NC,Non Comm,C.Non Commercial Software,Gattack,Game,,NC,8200,"CH. ""GATTACK""",Test,GATTACK,present,,,,
-929,V11B1,NC,Non Comm,C.Non Commercial Software,Topographie,Game,,NC/TOPOG,8200,"CH. ""TOPOG""",Test,"DATA
+924,V11B1,NC,Non Comm,C.Non Commercial Software,Logger,Game,,NC,8200,"CH. ""LOGGER""",Works,LOGGER,present,,,,
+925,V11B1,NC,Non Comm,C.Non Commercial Software,Worm,Game,,NC,8200,"CH. ""WORM""",Works,WORM,present,,,,
+926,V11B1,NC,Non Comm,C.Non Commercial Software,Parachute,Game,,NC,8200,"CH. ""PARACHU""",Works,PARACHU,present,,,,
+927,V11B1,NC,Non Comm,C.Non Commercial Software,Shopper,Game,,NC,8200,"CH. ""SHOPPER""",Works,SHOPPER,present,,,,
+928,V11B1,NC,Non Comm,C.Non Commercial Software,Gattack,Game,,NC,8200,"CH. ""GATTACK""",Works,GATTACK,present,,,,
+929,V11B1,NC,Non Comm,C.Non Commercial Software,Topographie,Game,,NC/TOPOT,8200,"CH. ""TOPOT""",Test,"DATA
 MAP
 PROG
 TOPOT",present,,,,
 930,V11B1,NC,Non Comm,C.Non Commercial Software,Deadstar,Game,,NC,8200,"CH. ""DEADSTA""",Test,DEADSTA,present,,,,
 931,V11B1,PP,Prog Power,E.ROMs,PP MC Monitor,Language,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
-*LOAD FC5A 8800",Test,FC5A,present,ROMs,,,
-932,V11B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID19 Classical!,Music,,SID/ATMSID19,2900,*RUN SIDMENU,Test,"AIRONTH
+*LOAD FC5A 8800",Works,FC5A,present,ROMs,,,
+932,V11B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID19 Classical,Music,,SID/ATMSID19,2900,*RUN SIDMENU,Test,"AIRONTH
 ALSOSPR
 CANCANO
 DEUTSCH
