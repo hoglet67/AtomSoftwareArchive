@@ -1883,11 +1883,11 @@ B4SCR",present,AGD,Yes,,
 926,V11B1,NC,Non Comm,C.Non Commercial Software,Parachute,Game,,NC,8200,"CH. ""PARACHU""",Works,PARACHU,present,,,,
 927,V11B1,NC,Non Comm,C.Non Commercial Software,Shopper,Game,,NC,8200,"CH. ""SHOPPER""",Works,SHOPPER,present,,,,
 928,V11B1,NC,Non Comm,C.Non Commercial Software,Gattack,Game,,NC,8200,"CH. ""GATTACK""",Works,GATTACK,present,,,,
-929,V11B1,NC,Non Comm,C.Non Commercial Software,Topographie,Game,,NC/TOPOT,8200,"CH. ""TOPOT""",Test,"DATA
+929,V11B1,NC,Non Comm,C.Non Commercial Software,Topografie,Game,,NC/TOPOT,8200,"CH. ""TOPOT""",Works,"DATA
 MAP
 PROG
 TOPOT",present,,,,
-930,V11B1,NC,Non Comm,C.Non Commercial Software,Deadstar,Game,,NC,8200,"CH. ""DEADSTA""",Test,DEADSTA,present,,,,
+930,V11B1,NC,Non Comm,C.Non Commercial Software,Deadstar,Game,,NC,8200,"CH. ""DEADSTA""",Works,DEADSTA,present,,,,
 931,V11B1,PP,Prog Power,E.ROMs,PP MC Monitor,Language,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
 *LOAD FC5A 8800",Works,FC5A,present,ROMs,,,
