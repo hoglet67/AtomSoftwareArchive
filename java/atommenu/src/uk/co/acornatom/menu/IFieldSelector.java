@@ -4,6 +4,6 @@ import java.util.Set;
 
 public interface IFieldSelector {
 
-	public Set<String> getField(AtomTitle title);
-	
+    public Set<String> getField(AtomTitle title);
+
 }
