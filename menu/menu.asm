@@ -23,7 +23,24 @@ IF (sddos = 1)
 	AutoRepeat   = $8f
 
 	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
-        
+
+ELIF (econet = 1)
+
+	RowReturnBuf = $3200
+
+	TmpPtr       = $78
+	DerefTmp     = $7a
+	SortTablePtr = $7c
+	PageState    = $7e
+	NumPages     = $7f
+	Item         = $97
+	SortType     = $8c
+	FilterType   = $8d
+	FilterString = $8e
+	AutoRepeat   = $8f
+
+	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
+   
 ELSE
 	RowReturnBuf = $021c
 
@@ -42,6 +59,12 @@ ELSE
         
 ENDIF
 
+IF (econet = 1)
+   DirSep = '.'
+ELSE   
+   DirSep = '/'
+ENDIF
+   
 	AutoRepeat1  = -$200
 	AutoRepeat2  = -$20
 	
@@ -107,8 +130,13 @@ ENDIF
 
 	; 10 *NOMON
 	JSR OscliString
-	EQUS "NOMON", Return
+IF (econet = 1)
+	EQUS "DIR $", Return
 
+ELSE
+	EQUS "NOMON", Return
+ENDIF
+   
 .MenuSplash
 
 	; 20 CLEAR 4
@@ -120,7 +148,7 @@ ENDIF
 IF (sddos = 1)
 	EQUS "LOAD SPLASH", Return
 ELSE
-	EQUS "LOAD MNUA/SPLASH", Return
+	EQUS "LOAD MNUA", DirSep, "SPLASH", Return
 ENDIF
 	
 .MenuMain
@@ -136,7 +164,11 @@ ENDIF
 	LDY #0
 	JSR Clear
 	JSR OscliString
+IF (econet = 1)
+	EQUS "DIR SYS", Return
+ELSE
 	EQUS "CWD SYS", Return
+ENDIF
 	JSR OscliString
 	EQUS "INIT", Return
 
@@ -154,6 +186,10 @@ IF (sddos = 1)
 	JSR LoadDisk
 	JSR OscliString
 	EQUS "DRIVE 1", Return
+ELIF (econet = 1)
+	STA MenuDat1Chunk
+	STA MenuDat2Chunk
+	STA SortDatChunk
 ELSE
 	STA MenuDat1Chunk
 	STA MenuDat2Chunk
@@ -175,7 +211,7 @@ IF (sddos = 1)
 ELSE
 	EQUS "LOAD MNU"
 .MenuDat1Chunk
-	EQUS " /MENUDAT1", Return
+	EQUS " ", DirSep, "MENUDAT1", Return
 ENDIF
 
 	;110 D=!#CD&#FFFF	
@@ -192,7 +228,7 @@ if (sddos = 1)
 ELSE	
 	EQUS "LOAD MNU"
 .MenuDat2Chunk
-	EQUS " /MENUDAT2", Return
+	EQUS " ", DirSep, "MENUDAT2", Return
 ENDIF
 	
 	; // Initialize the variables
@@ -554,11 +590,21 @@ IF (sddos = 1)
 	EQUS "DRIVE 2", Return
 
 	JSR OscliString
-	EQUS "RUN !BOOT", Return
+	EQUS "RUN BOOT", Return
 		
 .LoadDisk
 	STA RunCommand + 4
 ENDIF
+
+IF (econet = 1)
+	JSR ChangeDirectory
+
+	JSR OscliString
+	EQUS "BOOT", Return
+		
+.ChangeDirectory
+ENDIF
+   
 		
 .RunCommand0
 	LDX #0
@@ -569,24 +615,33 @@ ENDIF
 	INX
 	BNE RunCommand1
 .RunCommand2
+IF (econet = 1)
+	JSR WritePath   
+ELSE
 	JSR WriteDecimal
+ENDIF
 	LDA #Return
 	STA OscliBuffer, X
 	INX
 	STA OscliBuffer, X
 	JMP Oscli
 	
-if (sddos = 1)
+IF (sddos = 1)
 
 .RunCommand
 	EQUS "DIN  ,",0
-		
+
+ELIF (econet = 1)
+
+.RunCommand
+	EQUS "DIR ",0
+   
 ELSE 
 
 .RunCommand
 	EQUS "RUN MNU"
 .RunCommandMenuChunk
-	EQUS " /", 0
+	EQUS " ", DirSep, 0
 		
 ENDIF	
 
@@ -1040,7 +1095,7 @@ IF (sddos = 1)
 ELSE
 	EQUS "LOAD MNU"
 .SortDatChunk
-	EQUS " /SORTDAT"
+	EQUS " ", DirSep, "SORTDAT"
 ENDIF
 .SortDatNum
 	EQUS " ", Return
@@ -1056,5 +1111,29 @@ ENDIF
 		
 include "renderer_body.asm"
 
+IF (econet = 1)
+.WritePath
+	SEC
+	ROR SuppressFlag
+	LDA BinBuffer + 1
+	AND #$03
+	JSR WriteHex1
+	LDA #DirSep
+	STA OscliBuffer, X
+	INX
+	LDA BinBuffer
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR WriteHex1
+	LDA #DirSep
+	STA OscliBuffer, X
+	INX
+	PLA
+	JMP WriteHex1
+ENDIF
+   
 .ENDOF
 

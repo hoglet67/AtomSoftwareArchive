@@ -514,6 +514,7 @@ NAME=AtomSoftwareArchive_$(date +"%Y%m%d_%H%M")_$1
 
 
 mv $ARCHIVE.zip $NAME.zip
+mv ${ARCHIVE}_ECONET.zip ${NAME}_ECONET.zip
 zip -qr ${NAME}_JS.zip $ARCHIVE.js
 zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
 pushd ../menu

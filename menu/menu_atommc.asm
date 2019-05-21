@@ -1,4 +1,5 @@
 sddos = 0
+econet = 0
 
 include "menu.asm"
 

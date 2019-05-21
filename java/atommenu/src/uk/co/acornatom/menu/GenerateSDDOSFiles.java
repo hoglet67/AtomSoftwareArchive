@@ -269,7 +269,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
 	
 					File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)), "" + item.getIndex());
 					ATMFile bootAtmFile = new ATMFile(bootfile);
-					bootAtmFile.setTitle("!BOOT");
+					bootAtmFile.setTitle("BOOT");
 					addFile(image, bootAtmFile);
 					
 					Set<String> missing = new HashSet<String>(item.getLoadables());

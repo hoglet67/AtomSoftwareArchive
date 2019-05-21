@@ -17,17 +17,23 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	public static final int CMD_PRINT = 5;
 	public static final int CMD_ROMCOPY = 6;
 		
+	public enum Target {
+			ATOMMC,
+			SDDOS,
+			ECONET		
+	}
+	
 	private File menuDir;
 	private File bootLoaderBinary;
 	private File romBootLoaderBinary;
-	private boolean sddos;
+	private Target target;
+
 	
-	
-	public GenerateBootstrapFiles(File menuDir, File bootLoaderBinary, File romBootLoaderBinary, boolean sddos) {
+	public GenerateBootstrapFiles(File menuDir, File bootLoaderBinary, File romBootLoaderBinary, Target target) {
 		this.menuDir = menuDir;
 		this.bootLoaderBinary = bootLoaderBinary;
 		this.romBootLoaderBinary = romBootLoaderBinary;
-		this.sddos = sddos;
+		this.target = target;
 	}
 	
 	private void generateMachineCodeBootstrap(SpreadsheetTitle item, boolean rom)
@@ -48,7 +54,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 		    bos.write(b);
 		}
 		fis.close();
-		if (!sddos) {
+		if (target == Target.ATOMMC) {
 			// Break long directory paths into separate CWD commands to avoid hitting the 13 char limit to *CWD
 			if (directory.length() > 13) {
 				for (String d : directory.split("/")) {
@@ -68,7 +74,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 				bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
 			} else if (cmd.startsWith("CH.")) {
 				String filename = trunc(cmd.split("\"")[1]);
-				if (sddos) {
+				if (target == Target.SDDOS) {
 					item.getLoadables().add(filename);
 				}
 				bos.write(("LOAD " + filename).getBytes());
@@ -86,8 +92,13 @@ public class GenerateBootstrapFiles extends GenerateBase {
 			} else if (cmd.startsWith("*LOAD") || cmd.startsWith("*RUN")) {
 				String[] parts = cmd.split(" ");
 				String filename = trunc(parts[1]);
-				cmd = parts[0] + " " + filename;
-				if (sddos) {
+				if (target == Target.ECONET && cmd.startsWith("*RUN")) {
+					// L3 Econet doesn't have a *RUN or */ command
+					cmd = filename;					
+				} else {
+					cmd = parts[0] + " " + filename;
+				}
+				if (target == Target.SDDOS || target == Target.ECONET) {
 					item.getLoadables().add(filename);
 					if (cmd.startsWith("*RUN")) {
 						// Add to list of runnables, so we can later check the exec address is valid
@@ -124,7 +135,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 	}
 
 	private String trunc(String filename) {
-		if (sddos && filename.length() > 7) {
+		if (target == Target.SDDOS && filename.length() > 7) {
 			return filename.substring(0, 7);
 		} else {
 			return filename;

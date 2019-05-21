@@ -34,6 +34,10 @@ mv MENU $ARCHIVE
 $BEEBASM -i menu_sddos.asm
 mv MENUSD $ARCHIVE
 
+# Compile the Standalone Menu (for Econet)
+$BEEBASM -i menu_econet.asm
+mv MENUECO $ARCHIVE
+
 # Translate the Help from text to ATM
 #java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
 #mv HELPGEN $DIR

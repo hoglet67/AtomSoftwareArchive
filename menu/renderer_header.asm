@@ -45,7 +45,7 @@
 	; Shouldn't be any side effect of borrowing Basic's Integer Workspace
    ; Oops, there were, because SDDOS also uses Basic's Integer Workspace
    ; 
-IF (sddos = 1)
+IF (sddos = 1 OR econet = 1)
 	ZeroBase = $52
 ELSE
 	ZeroBase = $80

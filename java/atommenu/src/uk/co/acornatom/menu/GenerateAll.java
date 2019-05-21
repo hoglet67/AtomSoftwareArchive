@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import uk.co.acornatom.menu.GenerateBootstrapFiles.Target;
+
 public class GenerateAll {
 
 	private static final String ALL_TITLES = "All Titles (32K)";
@@ -58,11 +60,20 @@ public class GenerateAll {
 			// Temporarily disabled sddos until we figure out how to avoid SDDOS overflow
 			// Each menu chapter will be a seperate disk
 			
-			for (int pass = 0; pass < 2; pass++) {
-
-				boolean sddos = (pass == 0);
+			for (int pass = 0; pass < 3; pass++) {
+				Target target;
 				
-				System.out.println("Generating " + (sddos ? "SDDOS" : "ATOMMC") + "menu files version " + version);
+				if (pass == 1) {
+					System.out.print("Generating SDDOS");
+					target = Target.SDDOS;
+				} else if (pass == 2) {
+					System.out.print("Generating Econet");
+					target = Target.ECONET;
+				} else {
+					System.out.print("Generating AtoMMC");					
+					target = Target.ATOMMC;
+				}
+				System.out.println(" menu files version " + version);
 
 				Map<String, Integer> chunks = new TreeMap<String, Integer>();
 				int total = 0;
@@ -99,7 +110,7 @@ public class GenerateAll {
 						}
 					}
 					List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
-					generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, sddos));
+					generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
 					generators.add(new GenerateMenuFiles(menuDir, allChunk));
 					generators.add(new GenerateSplashFiles(menuDir, version, chunks));
 					for (IFileGenerator generator : generators) {
@@ -109,12 +120,19 @@ public class GenerateAll {
 					chunkId++;
 				}
 
-				if (sddos) {
+				if (target == Target.SDDOS) {
 					GenerateSDDOSFiles SDCardGenerator = new GenerateSDDOSFiles(archiveDir, new File(archiveDir + ".img"),	new File(archiveDir + ".js"), menuBase, chunks.size());
 					SDCardGenerator.generateFiles(items);
 					SDCardGenerator.writeSDImage();
 					new File(archiveDir, "MENUSD").delete();
 				}
+				if (target == Target.ECONET) {
+					GenerateEconetFiles econetGenerator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"), menuBase, chunks.size());
+					econetGenerator.generateFiles(items);
+					econetGenerator.close();
+					new File(archiveDir, "MENUSD").delete();
+				}
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
