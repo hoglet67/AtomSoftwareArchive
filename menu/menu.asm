@@ -131,7 +131,7 @@ ENDIF
 	; 10 *NOMON
 	JSR OscliString
 IF (econet = 1)
-	EQUS "DIR $", Return
+	EQUS "DIR $.ASA", Return
 
 ELSE
 	EQUS "NOMON", Return

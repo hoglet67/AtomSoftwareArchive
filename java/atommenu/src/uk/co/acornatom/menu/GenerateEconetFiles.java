@@ -11,6 +11,12 @@ import java.util.zip.ZipOutputStream;
 
 public class GenerateEconetFiles extends GenerateBase {
 
+    public static final String DIRSEP = "/";
+
+    public static final String ROOTDIR = "";
+
+    public static final String BASEDIR = "ASA" + DIRSEP;
+
     private ZipOutputStream zipStream;
     private File archiveDir;
     private String menuBase;
@@ -30,12 +36,8 @@ public class GenerateEconetFiles extends GenerateBase {
 
     private byte[] build_extra_field(ATMFile atmFile) {
         /*
-         * 0 extra header id 2 bytes "AC" 2 extra header sublength 2 bytes
-         * ------------v 4 Acorn header id 4 bytes "ARC0" 4 8 load address 4
-         * bytes 8 12 execution address 4 bytes 12 16 attributes 4 bytes 16 20
-         * &00000000 4 bytes 20 24 creation time 2 bytes 22 26 creation date 2
-         * bytes 24 28 main account number 2 bytes 26 30 auxilary account number
-         * 2 bytes 28
+         * For the Acorn specific ZIP header, see
+         * http://mdfs.net/Docs/ManPages/Z/1Zip.htm
          */
         byte[] extra = new byte[16];
         extra[0] = 'A';
@@ -70,18 +72,24 @@ public class GenerateEconetFiles extends GenerateBase {
     public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3", "SPLASH" };
 
     private void createMenus() throws IOException {
-        String root = "";
+        // !BOOT
+        ATMFile bootFile = new ATMFile("!BOOT", 0, 0, "*MENU\r".getBytes());
+        addFile(BASEDIR, bootFile);
+        // MENU
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUECO"));
         menuFile.setTitle("MENU");
-        addFile(root, menuFile);
+        addFile(ROOTDIR, menuFile);
+        addFile(BASEDIR, menuFile);
+        // HELP
         ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
-        addFile(root, helpFile);
+        addFile(BASEDIR, helpFile);
+        // MNU[A-F]/...
         if (numChunks > 8) {
             throw new RuntimeException("Too many menu chunks");
         }
         for (int chunk = 0; chunk < numChunks; chunk++) {
             char chunkLetter = (char) ('A' + chunk);
-            String dir = "MNU" + chunkLetter + "/";
+            String dir = BASEDIR + "MNU" + chunkLetter + DIRSEP;
             for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
                 addFile(dir, atmFile);
@@ -91,7 +99,7 @@ public class GenerateEconetFiles extends GenerateBase {
     }
 
     // private void addSysFolder() throws IOException {
-    // String dir = "SYS/";
+    // String dir = BASEDIR + "SYS" + DIRSEP;
     // File file = new File(archiveDir, "SYS");
     // for (File child : file.listFiles()) {
     // ATMFile atmFile = new ATMFile(child);
@@ -104,12 +112,13 @@ public class GenerateEconetFiles extends GenerateBase {
         int i1 = (index >> 4) & 0x0f;
         int i2 = (index >> 0) & 0x0f;
         StringBuilder dir = new StringBuilder();
+        dir.append(BASEDIR);
         dir.append(Integer.toHexString(i0).toUpperCase());
-        dir.append("/");
+        dir.append(DIRSEP);
         dir.append(Integer.toHexString(i1).toUpperCase());
-        dir.append("/");
+        dir.append(DIRSEP);
         dir.append(Integer.toHexString(i2).toUpperCase());
-        dir.append("/");
+        dir.append(DIRSEP);
         return dir.toString();
 
     }
@@ -161,5 +170,4 @@ public class GenerateEconetFiles extends GenerateBase {
             }
         }
     }
-
 }
