@@ -91,7 +91,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
                 String filename = trunc(parts[1]);
                 if (target == Target.ECONET && cmd.startsWith("*RUN")) {
                     // L3 Econet doesn't have a *RUN or */ command
-                    cmd = filename;
+                    cmd = "*" + filename;
                 } else {
                     cmd = parts[0] + " " + filename;
                 }
