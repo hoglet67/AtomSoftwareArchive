@@ -32,6 +32,8 @@ java/makeatm/bin/
 java/asciiart/asciiart.jar
 java/asciiart/bin/
 
+java/afsutils/afsutils.jar
+java/afsutils/bin/
 
 beebsid/ATMSID*/
 beebsid/BEEBSID*/
