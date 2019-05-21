@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -91,6 +92,9 @@ public class AFSVolume extends ADFSVolume {
         System.out.println();
 
         // Sanity check
+        //if (num_sectors_per_bitmap != 1) {
+        //    throw new AFSException("Multi-sector free space bitmaps not yet supported", afs_start_sector + 1);
+        //}
         if (afs_sectors_per_track != num_sectors_per_track) {
             throw new AFSException("afs_nd adfs disagree on cylinder size", afs_start_sector + 1);
         }
@@ -137,8 +141,24 @@ public class AFSVolume extends ADFSVolume {
                 free_space_map[m++] = bit;
             }
         }
-        dumpFreeSpaceMap();
+    }
 
+    protected void writeFreeSpaceMap() throws IOException {
+        byte[] sector = new byte[SECT_SIZE];
+        int m = 0;
+        for (int i = 0; i < afs_tracks; i++) {
+            Arrays.fill(sector, (byte) 0);
+            int b = 0;
+            for (int j = 0; j < num_sectors_per_track; j++) {
+                int bit = free_space_map[m++];
+                b = b | (bit << (j & 7));
+                if ((j & 7) == 7 || j == num_sectors_per_track - 1) {
+                    sector[j >> 3] = (byte) b;
+                    b = 0;
+                }
+            }
+            writeSector(afs_start_sector + num_sectors_per_track * i, sector, 0, SECT_SIZE);
+        }
     }
 
     protected int allocateSector() throws IOException {

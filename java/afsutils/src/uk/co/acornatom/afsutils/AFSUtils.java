@@ -10,11 +10,11 @@ public class AFSUtils {
             AFSVolume afs = new AFSVolume(new File(args[0]), "rw");
             afs.parseDiskInfoBlock();
             afs.readFreeSpaceMap();
+            afs.dumpFreeSpaceMap();
             afs.parseRootDirectory();
-            System.out.println("AFS: first free sector = " + afs.allocateSector());
-
             afs.addZip(new File(args[1]));
-
+            afs.writeFreeSpaceMap();
+            afs.dumpFreeSpaceMap();
         } catch (IOException e) {
             e.printStackTrace();
         }
