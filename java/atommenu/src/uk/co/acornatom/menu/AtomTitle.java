@@ -10,7 +10,6 @@ public class AtomTitle {
     public static int TYPE_GROUP = 1;
     public static int TYPE_CHILD = 2; // Not sure this is necessary
 
-    private int type;
     private String title;
     private int index;
     private int genreId;
