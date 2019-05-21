@@ -39,10 +39,10 @@ public class GenerateEconetFiles extends GenerateBase {
          * For the Acorn specific ZIP header, see
          * http://mdfs.net/Docs/ManPages/Z/1Zip.htm
          */
-        byte[] extra = new byte[16];
+        byte[] extra = new byte[24];
         extra[0] = 'A';
         extra[1] = 'C';
-        extra[2] = 12;
+        extra[2] = 20;
         extra[3] = 0;
         extra[4] = 'A';
         extra[5] = 'R';
@@ -56,6 +56,14 @@ public class GenerateEconetFiles extends GenerateBase {
         extra[13] = (byte) ((atmFile.getExecAddr() >> 8) & 0xff);
         extra[14] = 0;
         extra[15] = 0;
+        extra[16] = 3; // Attribute = RW
+        extra[17] = 0;
+        extra[18] = 0;
+        extra[19] = 0;
+        extra[20] = 0;
+        extra[21] = 0;
+        extra[22] = 0;
+        extra[23] = 0;
         return extra;
     }
 
