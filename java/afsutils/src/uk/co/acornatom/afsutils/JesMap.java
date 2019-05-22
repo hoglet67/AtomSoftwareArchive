@@ -51,7 +51,7 @@ public class JesMap extends DiskObject {
         this.jesmap = volume.readSector(sin);
         this.dirty = false;
 
-        String id = readString(jesmap, 0x00, 0x06);
+        String id = readString(jesmap, 0x00, 0x06, -1);
         if (!JESMAP.equals(id)) {
             throw new AFSException("JesMap not found", sin);
         }

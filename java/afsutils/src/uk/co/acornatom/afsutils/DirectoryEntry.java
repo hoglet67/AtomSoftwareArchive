@@ -1,6 +1,6 @@
 package uk.co.acornatom.afsutils;
 
-public class DirectoryEntry extends DiskObject {
+public class DirectoryEntry extends DiskObject implements Comparable<DirectoryEntry> {
 
     // Directory Entries
     // -----------------
@@ -24,7 +24,6 @@ public class DirectoryEntry extends DiskObject {
 
     private byte[] directory;
     private int offset;
-    private boolean used;
 
     public DirectoryEntry(byte[] directory, int offset) {
         this.directory = directory;
@@ -44,11 +43,11 @@ public class DirectoryEntry extends DiskObject {
     }
 
     public String getName() {
-        return readString(directory, offset + 0x02, 10);
+        return readString(directory, offset + 0x02, AFSDirectory.NAME_SIZE, ' ');
     }
 
     public void setName(String name) {
-        writeString(directory, offset + 0x02, name, 10);
+        writeString(directory, offset + 0x02, name, AFSDirectory.NAME_SIZE);
     }
 
     public int getLoadAddress() {
@@ -95,7 +94,7 @@ public class DirectoryEntry extends DiskObject {
         return (getAccessByte() & 0x20) > 0;
     }
 
-    public void dump(int depth) {
+    public void dump(int depth, boolean used) {
         String pad = pad(depth * 8);
         if (!used) {
             System.out.println(pad + "FREE Entry: (" + offset + ")");
@@ -105,5 +104,12 @@ public class DirectoryEntry extends DiskObject {
             System.out.println(pad + "FILE Entry: (" + offset + ") " + getName() + " " + Integer.toHexString(getSin()) + " "
                     + Integer.toHexString(getLoadAddress()) + " " + Integer.toHexString(getExecAddress()));
         }
+    }
+
+    @Override
+    public int compareTo(DirectoryEntry o) {
+        String n1 = this.getName();
+        String n2 = o.getName();
+        return n1.compareTo(n2);
     }
 }

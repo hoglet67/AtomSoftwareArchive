@@ -4,6 +4,8 @@ public class DiskObject {
 
     public static final int SECT_SIZE = 256;
 
+    public static final String BACK_LINK = "^";
+
     public int read8(byte[] bytes, int offset) {
         return bytes[offset] & 0xff;
     }
@@ -20,9 +22,9 @@ public class DiskObject {
         return read16(bytes, offset) + (read16(bytes, offset + 2) << 16);
     }
 
-    public String readString(byte[] bytes, int offset, int length) {
+    public String readString(byte[] bytes, int offset, int length, int terminator) {
         StringBuffer sb = new StringBuffer(length);
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length && (terminator < 0 || bytes[offset + i] != terminator); i++) {
             sb.append((char) bytes[offset + i]);
         }
         return sb.toString();

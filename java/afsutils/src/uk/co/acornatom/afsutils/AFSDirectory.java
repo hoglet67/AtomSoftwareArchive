@@ -43,7 +43,15 @@ public class AFSDirectory extends JesMap {
 
     byte[] directory;
 
-    public AFSDirectory(AFSVolume volume, String name) throws IOException {
+    private void createBackLink(AFSDirectory parent) throws IOException {
+        if (parent != null && getEntry(BACK_LINK) == null) {
+            DirectoryEntry entry = createEntry(BACK_LINK);
+            entry.setAccessByte(0x30);
+            entry.setSin(parent.getSin());
+        }
+    }
+
+    public AFSDirectory(AFSVolume volume, AFSDirectory parent, String name) throws IOException {
         super(volume);
         directory = new byte[SECT_SIZE * 4];
         Arrays.fill(directory, (byte) 0);
@@ -53,15 +61,16 @@ public class AFSDirectory extends JesMap {
         setFree(offset);
         while (offset > 0) {
             int next = offset - ENTRY_SIZE;
-            if (next < 0) {
+            if (next <= 0x10) {
                 next = 0;
             }
             write16(directory, offset, next);
             offset = next;
         }
+        createBackLink(parent);
     }
 
-    public AFSDirectory(AFSVolume volume, int sin) throws IOException {
+    public AFSDirectory(AFSVolume volume, AFSDirectory parent, int sin) throws IOException {
         super(volume, sin);
         directory = getBytes();
         int cycle1 = read8(directory, 0x02);
@@ -69,6 +78,7 @@ public class AFSDirectory extends JesMap {
         if (cycle2 != cycle1) {
             throw new AFSException("Mismatched directory cycle numbers", sin);
         }
+        createBackLink(parent);   
     }
 
     private void saveDirectory() throws IOException {
@@ -100,7 +110,7 @@ public class AFSDirectory extends JesMap {
     }
 
     private String getName() {
-        return readString(directory, 0x03, NAME_SIZE);
+        return readString(directory, 0x03, NAME_SIZE, ' ');
     }
 
     private void setName(String name) {
@@ -110,6 +120,7 @@ public class AFSDirectory extends JesMap {
     public void dump(boolean recurse, int depth) throws IOException {
         int pointer;
         String pad = pad(depth * 8);
+        System.out.println(pad + "DIR: sin = " + Integer.toHexString(getSin()));
         System.out.println(pad + "DIR: length = " + directory.length);
         System.out.println(pad + "DIR: first = " + getFirst());
         System.out.println(pad + "DIR: name = " + getName());
@@ -120,9 +131,9 @@ public class AFSDirectory extends JesMap {
         pointer = getFirst();
         while (pointer != 0) {
             DirectoryEntry entry = new DirectoryEntry(directory, pointer);
-            entry.dump(depth);
-            if (recurse && entry.isDirectory()) {
-                AFSDirectory child = new AFSDirectory(getVolume(), entry.getSin());
+            entry.dump(depth, true);
+            if (recurse && entry.isDirectory() && !entry.getName().equals(BACK_LINK)) {
+                AFSDirectory child = new AFSDirectory(getVolume(), null, entry.getSin());
                 child.dump(recurse, depth + 1);
             }
             pointer = entry.getNext();
@@ -130,7 +141,7 @@ public class AFSDirectory extends JesMap {
         pointer = getFree();
         while (pointer != 0) {
             DirectoryEntry entry = new DirectoryEntry(directory, pointer);
-            entry.dump(depth);
+            entry.dump(depth, false);
             pointer = entry.getNext();
         }
     }
@@ -174,7 +185,7 @@ public class AFSDirectory extends JesMap {
             DirectoryEntry lastEntry = null;
             while (true) {
                 DirectoryEntry entry = (pointer > 0) ? new DirectoryEntry(directory, pointer) : null;
-                if (entry == null || entry.getName().compareTo(name) > 0) {
+                if (entry == null || entry.compareTo(newEntry) > 0) {
                     if (lastEntry == null) {
                         setFirst(newEntry.getOffset());
                     } else {
@@ -195,20 +206,14 @@ public class AFSDirectory extends JesMap {
         return newEntry;
     }
 
-    private String padName(String name) throws AFSException {
+    private void checkName(String name) throws AFSException {
         if (name.length() > NAME_SIZE) {
             throw new AFSException("Name too long: " + name, 0);
         }
-        StringBuffer sb = new StringBuffer(NAME_SIZE);
-        sb.append(name);
-        for (int i = name.length(); i < NAME_SIZE; i++) {
-            sb.append(' ');
-        }
-        return sb.toString();
     }
 
     protected AFSFile addFile(String name, int load, int exec, byte[] bytes) throws IOException {
-        name = padName(name);
+        checkName(name);
         DirectoryEntry entry = createEntry(name);
         AFSFile file = new AFSFile(getVolume());
         file.setBytes(bytes);
@@ -221,21 +226,22 @@ public class AFSDirectory extends JesMap {
     }
 
     protected AFSDirectory addDir(String name) throws IOException {
-        name = padName(name);
+        checkName(name);
         AFSDirectory dir;
         DirectoryEntry entry = getEntry(name);
         if (entry != null) {
             if (entry.isDirectory()) {
-                dir = new AFSDirectory(getVolume(), entry.getSin());
+                dir = new AFSDirectory(getVolume(), this, entry.getSin());
             } else {
                 throw new AFSException("Add Dir: found a file instead", 0);
             }
         } else {
             entry = createEntry(name);
-            dir = new AFSDirectory(getVolume(), name);
+            dir = new AFSDirectory(getVolume(), this, name);
             entry.setAccessByte(0x30);
             entry.setSin(dir.getSin());
             saveDirectory();
+            dir.saveDirectory();
         }
         return dir;
     }

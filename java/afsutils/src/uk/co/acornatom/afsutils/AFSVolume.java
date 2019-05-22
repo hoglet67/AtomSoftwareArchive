@@ -68,8 +68,8 @@ public class AFSVolume extends ADFSVolume {
         // 22-23: Initialisation date in filing system standard date format.
         // 24-25: First free cylinder.
 
-        disk_id = readString(diskInfoBlock, 0x00, 0x04);
-        disk_title = readString(diskInfoBlock, 0x04, 0x10);
+        disk_id = readString(diskInfoBlock, 0x00, 0x04, -1);
+        disk_title = readString(diskInfoBlock, 0x04, 0x10, -1);
         int num_tracks = read16(diskInfoBlock, 0x14);
         int num_sectors = read24(diskInfoBlock, 0x16);
         num_disks = read8(diskInfoBlock, 0x19);
@@ -183,7 +183,7 @@ public class AFSVolume extends ADFSVolume {
     }
 
     protected void parseRootDirectory() throws IOException {
-        rootDir = new AFSDirectory(this, root_sin);
+        rootDir = new AFSDirectory(this, null, root_sin);
         rootDir.dump(true, 0);
     }
 
