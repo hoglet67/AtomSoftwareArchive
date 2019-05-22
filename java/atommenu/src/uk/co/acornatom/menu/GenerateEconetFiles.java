@@ -17,6 +17,8 @@ public class GenerateEconetFiles extends GenerateBase {
 
     public static final String BASEDIR = "ASA" + DIRSEP;
 
+    public static final String LIBDIR = "ATOMLIB" + DIRSEP;
+
     private ZipOutputStream zipStream;
     private File archiveDir;
     private String menuBase;
@@ -86,8 +88,9 @@ public class GenerateEconetFiles extends GenerateBase {
         // MENU
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUECO"));
         menuFile.setTitle("MENU");
-        addFile(ROOTDIR, menuFile);
         addFile(BASEDIR, menuFile);
+        // Add a second copy to the lib directory
+        addFile(LIBDIR, menuFile);
         // HELP
         ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
         addFile(BASEDIR, helpFile);
@@ -116,9 +119,34 @@ public class GenerateEconetFiles extends GenerateBase {
     // }
 
     private void addLibFolder() throws IOException {
-        String lib = "ATOMLIB/";
-        ATMFile nomon = new ATMFile("NOMON", 0x03c5, 0x03c5, new byte[] { 0x60 });
-        addFile(lib, nomon);
+        ATMFile nomon = new ATMFile("NOMON", 0x03c5, 0x03c5,
+                new byte[] {
+                        (byte) 0x60                               //        RTS
+                        });
+        addFile(LIBDIR, nomon);
+        ATMFile run = new ATMFile("RUN", 0x2800, 0x2800
+                , new byte[] {
+                        (byte) 0xa0, (byte) 0x00,                 //        LDY #$00
+                        (byte) 0x20, (byte) 0x76, (byte) 0xf8,    //        JSR $F876
+                        (byte) 0x88,                              //        DEY
+                        (byte) 0xc8,                              // .loop1 INY
+                        (byte) 0xb9, (byte) 0x00, (byte) 0x01,    //        LDA $0100,Y
+                        (byte) 0xc9, (byte) 0x0d,                 //        CMP #$0D
+                        (byte) 0xf0, (byte) 0x1a,                 //        BEQ exit
+                        (byte) 0xc9, (byte) 0x20,                 //        CMP #$20
+                        (byte) 0xd0, (byte) 0xf4,                 //        BNE loop1
+                        (byte) 0x20, (byte) 0x76, (byte) 0xf8,    //        JSR $F876
+                        (byte) 0xa2, (byte) 0x00,                 //        LDX #$00
+                        (byte) 0xb9, (byte) 0x00, (byte) 0x01,    // .loop2 LDA $0100,Y
+                        (byte) 0x9d, (byte) 0x00, (byte) 0x01,    //        STA $0100,Y
+                        (byte) 0xc8,                              //        INY
+                        (byte) 0xe8,                              //        INX
+                        (byte) 0xc9, (byte) 0x0d,                 //        CMP #$0D
+                        (byte) 0xd0, (byte) 0xf4,                 //        BNE loop2
+                        (byte) 0x4c, (byte) 0xf7, (byte) 0xff,    //        JMP $FFF7
+                        (byte) 0x60                               // .exit RTS
+                      });
+        addFile(LIBDIR, run);
     }
 
     private String getDir(int index) {
