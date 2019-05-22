@@ -3,6 +3,7 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -119,34 +120,52 @@ public class GenerateEconetFiles extends GenerateBase {
     // }
 
     private void addLibFolder() throws IOException {
-        ATMFile nomon = new ATMFile("NOMON", 0x03c5, 0x03c5,
-                new byte[] {
-                        (byte) 0x60                               //        RTS
-                        });
-        addFile(LIBDIR, nomon);
-        ATMFile run = new ATMFile("RUN", 0x2800, 0x2800
-                , new byte[] {
-                        (byte) 0xa0, (byte) 0x00,                 //        LDY #$00
-                        (byte) 0x20, (byte) 0x76, (byte) 0xf8,    //        JSR $F876
-                        (byte) 0x88,                              //        DEY
-                        (byte) 0xc8,                              // .loop1 INY
-                        (byte) 0xb9, (byte) 0x00, (byte) 0x01,    //        LDA $0100,Y
-                        (byte) 0xc9, (byte) 0x0d,                 //        CMP #$0D
-                        (byte) 0xf0, (byte) 0x1a,                 //        BEQ exit
-                        (byte) 0xc9, (byte) 0x20,                 //        CMP #$20
-                        (byte) 0xd0, (byte) 0xf4,                 //        BNE loop1
-                        (byte) 0x20, (byte) 0x76, (byte) 0xf8,    //        JSR $F876
-                        (byte) 0xa2, (byte) 0x00,                 //        LDX #$00
-                        (byte) 0xb9, (byte) 0x00, (byte) 0x01,    // .loop2 LDA $0100,Y
-                        (byte) 0x9d, (byte) 0x00, (byte) 0x01,    //        STA $0100,Y
-                        (byte) 0xc8,                              //        INY
-                        (byte) 0xe8,                              //        INX
-                        (byte) 0xc9, (byte) 0x0d,                 //        CMP #$0D
-                        (byte) 0xd0, (byte) 0xf4,                 //        BNE loop2
-                        (byte) 0x4c, (byte) 0xf7, (byte) 0xff,    //        JMP $FFF7
-                        (byte) 0x60                               // .exit RTS
-                      });
-        addFile(LIBDIR, run);
+        HashMap<Integer, Integer> patch = new HashMap<>();
+        //
+        // There are address changes from v2.40 to v3.50 or the ROM
+        //
+        patch.put(0xA793, 0xA788);
+        patch.put(0xA7A4, 0xA799);
+        patch.put(0xA7D8, 0xA7C3);
+        patch.put(0xA7F7, 0xA658);
+        patch.put(0xA80F, 0xA670);
+        patch.put(0xA82F, 0xA690);
+        patch.put(0xA85B, 0xA6BC);
+        patch.put(0xA883, 0xA7F7);
+        patch.put(0xA899, 0xA80D);
+        patch.put(0xA8A4, 0xA818);
+        patch.put(0xA8A6, 0xA81A);
+        patch.put(0xA8C8, 0xA83C);
+        patch.put(0xA8D4, 0xA848);
+        patch.put(0xA8E9, 0xA85D);
+        patch.put(0xA8ED, 0xA861);
+        patch.put(0xA8FF, 0xA6F1);
+        patch.put(0xA90C, 0xA873);
+        patch.put(0xAD6C, 0xAD2A);
+        patch.put(0xAD80, 0xAD3E);
+        File file = new File(archiveDir, "../../atomlib");
+        for (File child : file.listFiles()) {
+            ATMFile atmFile = new ATMFile(child);
+            atmFile.setTitle(child.getName());
+            byte[] data = atmFile.getData();
+            for (int i = 0; i < data.length - 3; i++) {
+                if (data[i] == 0x20 || data[i] == 0x4c) {
+                    Integer oldAddr = (data[i + 1] & 0xff) + ((data[i + 2] & 0xff) << 8);
+                    Integer newAddr = patch.get(oldAddr);
+                    if (oldAddr >= 0xa000 && oldAddr <= 0xafff) {
+                        System.out.print("Patching: " + atmFile.getTitle() + " " + Integer.toHexString(oldAddr) + " => ");
+                        if (newAddr != null) {
+                            data[i + 1] = (byte) (newAddr & 0xff);
+                            data[i + 2] = (byte) ((newAddr >> 8) & 0xff);
+                            System.out.println(Integer.toHexString(newAddr));
+                        } else {
+                            System.out.println("FAILED");
+                        }
+                    }
+                }
+            }
+            addFile(LIBDIR, atmFile);
+        }
     }
 
     private String getDir(int index) {

@@ -1,6 +1,19 @@
 
+   LOAD = $0140
+
+   org LOAD - 22
+
+ .start
+      
+   EQUS "RUN"
+
+   org LOAD - 6
    
-.start
+   EQUW LOAD
+   EQUW LOAD
+   EQUW end - code
+
+.code
    
    ;; Skip leading spaces
    LDY #$00
