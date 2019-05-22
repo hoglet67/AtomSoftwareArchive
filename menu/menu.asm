@@ -128,12 +128,14 @@ ENDIF
 	LDA #>KernelOsrdch
 	STA RDCVEC + 1
 
+IF (econet = 1)
+	JSR OscliString
+	EQUS "DIR $.ASA", Return
+	JSR OscliString
+	EQUS "LIB $.ATOMLIB", Return
+ELSE
 	; 10 *NOMON
 	JSR OscliString
-IF (econet = 1)
-	EQUS "DIR $.ASA", Return
-
-ELSE
 	EQUS "NOMON", Return
 ENDIF
    

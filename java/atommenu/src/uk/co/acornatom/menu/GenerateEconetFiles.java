@@ -115,6 +115,12 @@ public class GenerateEconetFiles extends GenerateBase {
     // }
     // }
 
+    private void addLibFolder() throws IOException {
+        String lib = "ATOMLIB/";
+        ATMFile nomon = new ATMFile("NOMON", 0x03c5, 0x03c5, new byte[] { 0x60 });
+        addFile(lib, nomon);
+    }
+
     private String getDir(int index) {
         int i0 = (index >> 8) & 0x0f;
         int i1 = (index >> 4) & 0x0f;
@@ -128,7 +134,6 @@ public class GenerateEconetFiles extends GenerateBase {
         dir.append(Integer.toHexString(i2).toUpperCase());
         dir.append(DIRSEP);
         return dir.toString();
-
     }
 
     public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
@@ -136,6 +141,8 @@ public class GenerateEconetFiles extends GenerateBase {
         // This needs more work to deal with long fine names
         //
         // addSysFolder();
+
+        addLibFolder();
 
         for (SpreadsheetTitle item : items) {
             try {
