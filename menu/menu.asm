@@ -131,8 +131,8 @@ ENDIF
 IF (econet = 1)
 	JSR OscliString
 	EQUS "DIR $.ASA", Return
-	JSR OscliString
-	EQUS "LIB $.ATOMLIB", Return
+	;JSR OscliString
+	;EQUS "LIB $.ATOMLIB", Return
 ELSE
 	; 10 *NOMON
 	JSR OscliString

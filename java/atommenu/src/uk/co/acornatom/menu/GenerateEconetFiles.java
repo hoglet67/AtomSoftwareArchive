@@ -18,7 +18,7 @@ public class GenerateEconetFiles extends GenerateBase {
 
     public static final String BASEDIR = "ASA" + DIRSEP;
 
-    public static final String LIBDIR = "ATOMLIB" + DIRSEP;
+    public static final String LIBDIR = "LIBRARY" + DIRSEP;
 
     private ZipOutputStream zipStream;
     private File archiveDir;
