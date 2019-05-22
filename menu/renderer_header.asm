@@ -19,7 +19,11 @@
 	
 	OscliBuffer     = $100
 	CountString     = OscliBuffer
+IF (econet = 1)
+	SearchBuffer    = $140
+ELSE
 	SearchBuffer    = $120
+ENDIF
 	ScreenStart     = $8000
 
 	; Note: Making CountString and Oscli buffer the same avoids a copy
