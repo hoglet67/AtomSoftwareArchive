@@ -23,9 +23,7 @@ public class GenerateSplashFiles extends GenerateBase {
         SOFTVDU, MC6847, MC6847T1
     };
 
-    private static final Font font = Font.SOFTVDU;
-
-    private static final boolean forceUpper = true;
+    private static final Font font = Font.MC6847T1;
 
     int fontdata6847t1[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08,
             0x08, 0x08, 0x08, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -216,8 +214,7 @@ public class GenerateSplashFiles extends GenerateBase {
         this.chunks = chunks;
     }
 
-    private void writeAtomString(byte[] screen, String s, int x, int y, boolean inverse) {
-        int a = y * 32 + x;
+    private void writeAtomString(byte[] screen, String s, int x, int y,boolean forceUpper) {
         for (int i = 0; i < s.length(); i++) {
             int c = s.charAt(i);
             if (forceUpper) {
@@ -234,16 +231,31 @@ public class GenerateSplashFiles extends GenerateBase {
             for (int j = 0; j < 12; j++) {
 
                 int b = fonts[font.ordinal()][c * 12 + j];
-                if (inverse) {
-                    b = b ^ 255;
+                for (int k = 7; k >= 0; k--) {
+                    if ((b & (1 << k)) != 0) {
+                        int xb = x + 8 * i + (7 - k);
+                        int yb = (y + j);
+                        int addr = 32 * yb + (xb >> 3);
+                        int bit = 1 << (7 - (xb & 7));
+                        screen[addr] ^=bit;
+                    }
                 }
-                screen[a + i + j * 32] = (byte) b;
             }
+        }
+    }
+    
+    private void drawLine(byte[] screen, int x1, int x2, int y) {
+        for (int x = x1; x <= x2; x++) {
+            int addr = y * 32 + (x >> 3);
+            int bit = 1 << (7 - (x & 7));
+            screen[addr] ^= bit;
         }
     }
 
     public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
+        int linex = 9;
+        
         // Create an grey image
         byte[] screen = new byte[0x1800];
         fill(screen, 0, 0, 256, 192, 0);
@@ -252,18 +264,42 @@ public class GenerateSplashFiles extends GenerateBase {
         readSplashTemplate(SPASH_TEMPLATE, screen);
 
         // Overlay the menu items
-        int y = 60;
+        int y = 48;
+        writeAtomString(screen, "maintained by Hoglet", 46, y, false);
+        y += 14;
+
+        drawLine(screen, linex, 255 - linex, y);
+        y += 2;
+        
         for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
-            String line = chunk.getKey();
-            String count = "(" + chunk.getValue() + ")";
-            while (line.length() < 30 - count.length()) {
-                line += " ";
+            // Re-write the chunk titles
+            String title;
+            switch (chunk.getKey().charAt(0)) {
+            case 'A' : title = "Commercial";           break;
+            case 'B' : title = "Modern Creations";     break;
+            case 'C' : title = "Arcade Game Designer"; break;
+            case 'D' : title = "Non Commercial";       break;
+            case 'E' : title = "Books and Magazines";  break;
+            case 'F' : title = "Utility ROMS";         break;
+            default  : title = "All Titles";           break;                
             }
-            line += count;
-            writeAtomString(screen, line, 1, y, true);
+            String count = "" + chunk.getValue();
+            while (title.length() < 27 - count.length()) {
+                title += " ";
+            }
+            title += count;
+            // Nasty hack to get proportionally spaced brackets
+            writeAtomString(screen, "(", 8, y, false);
+            writeAtomString(screen, chunk.getKey(), 14, y, false);
+            writeAtomString(screen, ")", 20, y, false);            
+            writeAtomString(screen, title, 30, y, true);
             y += 12;
         }
+        
+        y += 2;
+        drawLine(screen, linex, 255 - linex, y);
 
+        
         // Overlay the status line
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
         String date = sdf.format(new Date());
@@ -276,8 +312,11 @@ public class GenerateSplashFiles extends GenerateBase {
             throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
         }
         y = 192 - 18;
-        writeAtomString(screen, line, 1, y, true);
+        drawLine(screen, linex, 255 - linex, y);
 
+        writeAtomString(screen, line, 8, y, false);
+
+        
         // Save the file
         String name = "SPLASH";
         FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));

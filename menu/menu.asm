@@ -157,7 +157,7 @@ ENDIF
 	JSR Osrdch
 	CMP #'A'
 	BCC MenuMain
-	CMP #'F' + 1
+	CMP #'G' + 1
 	BCC MenuNext
 	; Check for special system key for Rolands system
 	CMP #'R'

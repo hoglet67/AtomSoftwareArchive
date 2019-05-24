@@ -11,8 +11,6 @@ import uk.co.acornatom.menu.GenerateBootstrapFiles.Target;
 
 public class GenerateAll {
 
-    private static final String ALL_TITLES = "All Titles (32K)";
-
     public static final void main(String[] args) {
         try {
             if (args.length != 5) {
@@ -61,7 +59,7 @@ public class GenerateAll {
             // overflow
             // Each menu chapter will be a seperate disk
 
-            for (int pass = 0; pass < 3; pass++) {
+            for (int pass = 1; pass <= 3; pass++) {
                 Target target;
 
                 if (pass == 1) {
@@ -92,7 +90,7 @@ public class GenerateAll {
                 }
 
                 char chunkId = 'A';
-                String chunkAll = (char) (chunkId + chunks.size()) + "." + ALL_TITLES;
+                String chunkAll = "" + (char)(chunkId + chunks.size());
                 chunks.put(chunkAll, total);
 
                 for (String chunk : chunks.keySet()) {

@@ -111,7 +111,7 @@ public class SpreadsheetParser {
                 String index = program[index_column].trim();
                 item.setIndex(Integer.parseInt(index));
                 String chunk = program[chunk_column].trim();
-                item.setChunk(chunk);
+                item.setChunk(chunk.substring(0,  1)); // Only use first character of chunk
                 String title = program[title_column].trim().toUpperCase();
                 item.setTitle(title);
                 String dir = program[dir_column].trim();
