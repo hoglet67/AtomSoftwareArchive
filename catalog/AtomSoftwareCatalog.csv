@@ -380,16 +380,16 @@ EL-INSTR",present,,,,
 251,V5,PS,Pro Software,A.Commercial Software,Fizzle Bricks,Game,,PS,8200,"CH.""FIZZLE""",Works,"FIZZLE
 FIZ-INSTR",present,,,,
 252,V5,QUO,Quodlibet,A.Commercial Software,Meanies,Game,,QUO,8200,*RUN MEANIES,Works,MEANIES,present,,,,
-253,,DPS,DP Saville,C.Non Commercial Software,Life,Simulation,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
-254,,DPS,DP Saville,C.Non Commercial Software,Mindmaster,Game,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
+253,,DPS,DP Saville,D.Non Commercial Software,Life,Simulation,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
+254,,DPS,DP Saville,D.Non Commercial Software,Mindmaster,Game,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
 255,V2,RAM,Ramtronics,A.Commercial Software,Africa Diamond,Adventure,,OTHER,8200,"CH.""AFRICA1""",Works,"AFRICA1
 AFRICA2",present,,,,
 257,V5,SUP,Superlex,A.Commercial Software,Draw Pic,Graphics,,SUP,8200,"CH.""DRAWPIC""",Works,DRAWPIC,present,,,,
 259,V5,???,???,A.Commercial Software,The I.A Atom Pencil,Graphics,,TB,8200,"CH.""PENCIL""",Works,PENCIL,present,,,,
 260,V5,A&F,A&F S/W,A.Commercial Software,Football Pools,Game,,AF,8200,"CH.""POOLS""",Works,POOLS,present,,,,
-263,V2,MO,Magnus Olsson,C.Non Commercial Software,Atomia Akorny,Adventure,,MO,8200,*RUN ATOMI,"Works - Dave updated lines 3100,3110 as original relied on an extension ROM to provide RESTORE/READ/DATA at line 3100.","ATOMI
+263,V2,MO,Magnus Olsson,D.Non Commercial Software,Atomia Akorny,Adventure,,MO,8200,*RUN ATOMI,"Works - Dave updated lines 3100,3110 as original relied on an extension ROM to provide RESTORE/READ/DATA at line 3100.","ATOMI
 ATOMIDAT",present,,,,
-264,V2,MO,Magnus Olsson,C.Non Commercial Software,Dragon,Adventure,,MO,9700,"*LOAD 171
+264,V2,MO,Magnus Olsson,D.Non Commercial Software,Dragon,Adventure,,MO,9700,"*LOAD 171
 *LOAD 171B
 *LOAD DRAGONC
 RUN",Works,"171
@@ -459,7 +459,7 @@ Joystick AtoMMC",Yes,,
 292,,PP,Prog Power,A.Commercial Software,Galactica,Game,S. Vout,PP,,,,,missing,,,,
 293,V2,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,Works,COLOSSAL,obsolete,,Yes,,
 294,V2,L9,Level 9,B.Modern Creations/Ports,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,Works,SNOWBALL,obsolete,,Yes,,
-295,V3,MO,Magnus Olsson,C.Non Commercial Software,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Works,DIAMONDS,present,,,,
+295,V3,MO,Magnus Olsson,D.Non Commercial Software,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Works,DIAMONDS,present,,,,
 296,,???,???,A.Commercial Software,Intra Terrestrial,Adventure,,,,,,,duplicate,,,,
 297,V3,BS,Bearsoft,A.Commercial Software,Wolf Pack,Game,M. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
 298,V3,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
@@ -546,12 +546,12 @@ EDITOR
 LOADER
 MMINER",present,RS Colour,,,
 311,V3,A&F,A&F S/W,A.Commercial Software,Minefield,Game,,AF,8200,"CH.""MINEFIEL""",Works,MINEFIEL,present,,,,
-312,V3,NC,Non Comm,C.Non Commercial Software,Bell Hop,Game,ML & JMF,OTHER,8200,*RUN BELLHOP,Works,BELLHOP,present,,,,
-313,V3,NC,Non Comm,C.Non Commercial Software,Boxes,Game,,OTHER,8200,"CH.""BOXES""",Works,BOXES,present,,,,
-314,V3,NC,Non Comm,C.Non Commercial Software,Cement,Game,RK,OTHER,8200,"*LOAD CEMENT
+312,V3,NC,Non Comm,D.Non Commercial Software,Bell Hop,Game,ML & JMF,OTHER,8200,*RUN BELLHOP,Works,BELLHOP,present,,,,
+313,V3,NC,Non Comm,D.Non Commercial Software,Boxes,Game,,OTHER,8200,"CH.""BOXES""",Works,BOXES,present,,,,
+314,V3,NC,Non Comm,D.Non Commercial Software,Cement,Game,RK,OTHER,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,,,,
-315,V3,NC,Non Comm,C.Non Commercial Software,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,,,,
-316,V3,NC,Non Comm,C.Non Commercial Software,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,,,,
+315,V3,NC,Non Comm,D.Non Commercial Software,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,,,,
+316,V3,NC,Non Comm,D.Non Commercial Software,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,,,,
 317,V4,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
 *RUN COLOSSAL",Works,"VDUBLO
 COLOSSAL",present,Middle Earth,Yes,,
@@ -575,304 +575,304 @@ LORDSOF",present,Time and Magik,Yes,,
 *RUN REDMOON",Works,"VDUBLO
 REDMOON",present,Time and Magik,Yes,,
 325,V4,L9,Level 9,B.Modern Creations/Ports,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,Works,MAGIK,present,Time and Magik,Yes,,
-326,V4,YC,Your Computer,D.Books/Magazines,Acorn Kong,Game,???,YC,8200,"CH.""ACKONG""",Works,ACKONG,present,Magazines,,,
-328,V4,NC,Non Comm,C.Non Commercial Software,Artist,Utility,???,NC,8200,*RUN ARTIST,Works,ARTIST,duplicate,,,,
-330,V4,NC,Non Comm,C.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",Works,ATOMICA,present,,,,
-331,V7B2,YC,Your Computer,D.Books/Magazines,Bit Bandit,Game,S.P.Elliot,YC,8200,"CH.""BANDIT""",Works,BANDIT,present,Magazines,,,
-332,V4,NC,Non Comm,C.Non Commercial Software,Space Battle (R),Game,???,NC/TB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
-333,V4,NC,Non Comm,C.Non Commercial Software,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,present,,,,
-334,V4,NC,Non Comm,C.Non Commercial Software,Beetle,Game,???,NC,8200,"CH.""BEETLE""",Works,BEETLE,duplicate,,,,
-335,V7B2,YC,Your Computer,D.Books/Magazines,Blitzkrieg,Game,???,YC,8200,"CH.""BLITZ""",Works,BLITZ,present,Magazines,,,
-336,V4,C&VG,C&VG,D.Books/Magazines,Blockbuster,Game,Chris Cytera,CVG,8200,"CH.""BLOBUST""",Works,BLOBUST,present,Magazines,,,
-338,V4,NC,Non Comm,C.Non Commercial Software,Bowling (R),Game,F.Bitter,NC/TB,8200,"CH.""BOWL2""",Works,BOWL2,present,,,,
-339,V4,NC,Non Comm,C.Non Commercial Software,Breakout,Game,???,NC,8200,"CH.""BREAKOU""",Works,BREAKOU,duplicate,,,,
-340,V4,C&VG,C&VG,D.Books/Magazines,Bug Battle,Game,G. Dunnett,CVG,8200,"CH.""BUGBATT""",Works,BUGBATT,present,Magazines,,,
-341,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,,,,
-342,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
-345,V4,NC,Non Comm,C.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
-346,,NC,Non Comm,C.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,duplicate,,,,
+326,V4,YC,Your Computer,E.Books/Magazines,Acorn Kong,Game,???,YC,8200,"CH.""ACKONG""",Works,ACKONG,present,Magazines,,,
+328,V4,NC,Non Comm,D.Non Commercial Software,Artist,Utility,???,NC,8200,*RUN ARTIST,Works,ARTIST,duplicate,,,,
+330,V4,NC,Non Comm,D.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",Works,ATOMICA,present,,,,
+331,V7B2,YC,Your Computer,E.Books/Magazines,Bit Bandit,Game,S.P.Elliot,YC,8200,"CH.""BANDIT""",Works,BANDIT,present,Magazines,,,
+332,V4,NC,Non Comm,D.Non Commercial Software,Space Battle (R),Game,???,NC/TB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
+333,V4,NC,Non Comm,D.Non Commercial Software,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,present,,,,
+334,V4,NC,Non Comm,D.Non Commercial Software,Beetle,Game,???,NC,8200,"CH.""BEETLE""",Works,BEETLE,duplicate,,,,
+335,V7B2,YC,Your Computer,E.Books/Magazines,Blitzkrieg,Game,???,YC,8200,"CH.""BLITZ""",Works,BLITZ,present,Magazines,,,
+336,V4,C&VG,C&VG,E.Books/Magazines,Blockbuster,Game,Chris Cytera,CVG,8200,"CH.""BLOBUST""",Works,BLOBUST,present,Magazines,,,
+338,V4,NC,Non Comm,D.Non Commercial Software,Bowling (R),Game,F.Bitter,NC/TB,8200,"CH.""BOWL2""",Works,BOWL2,present,,,,
+339,V4,NC,Non Comm,D.Non Commercial Software,Breakout,Game,???,NC,8200,"CH.""BREAKOU""",Works,BREAKOU,duplicate,,,,
+340,V4,C&VG,C&VG,E.Books/Magazines,Bug Battle,Game,G. Dunnett,CVG,8200,"CH.""BUGBATT""",Works,BUGBATT,present,Magazines,,,
+341,V4,NC,Non Comm,D.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,,,,
+342,V4,NC,Non Comm,D.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
+345,V4,NC,Non Comm,D.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
+346,,NC,Non Comm,D.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,duplicate,,,,
 347,V4,GA,Getting Acquainted,A.Commercial Software,Dodgem,Game,???,GA,8200,"CH.""DODGEM2""",Works,DODGEM2,present,,,,
-349,V4,NC,Non Comm,C.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
-350,,NC,Non Comm,C.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,duplicate,,,,
-351,V4,NC,Non Comm,C.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
-352,V4,NC,Non Comm,C.Non Commercial Software,Golf,Game,???,NC,8200,"CH.""GOLF""",Works,GOLF,present,,,,
+349,V4,NC,Non Comm,D.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
+350,,NC,Non Comm,D.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,duplicate,,,,
+351,V4,NC,Non Comm,D.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
+352,V4,NC,Non Comm,D.Non Commercial Software,Golf,Game,???,NC,8200,"CH.""GOLF""",Works,GOLF,present,,,,
 353,V4,CS,Computersmith,A.Commercial Software,Golf,Game,???,CS,8200,"CH.""GOLF-CS""",Works,GOLF-CS,present,,,,
-354,,NC,Non Comm,C.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,duplicate,,,,
-356,V4,YC,Your Computer,D.Books/Magazines,The Hawk,Game,???,YC,8200,"CH.""HAWK""",Works,HAWK,present,Magazines,,,
-357,,NC,Non Comm,C.Non Commercial Software,Highway (R),Game,R.Leurs,NC,8200,"CH.""HIGHWAY""",,HIGHWAY,missing,,,,
-359,V4,NC,Non Comm,C.Non Commercial Software,Huncher (R),Game,S.Myngheer,NC/TB,8200,"CH.""HUNCHER""",Works,HUNCHER,present,,,,
-361,,NC,Non Comm,C.Non Commercial Software,Intra Terrestrial (R),Game,J.Biel,NC,8200,"CH.""INTRA""",,INTRA,missing,,,,
-362,,NC,Non Comm,C.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,duplicate,,,,
-363,V4,MO,Magnus Olsson,C.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Works,KATAKOMB,present,,,,
-364,V4,NC,Non Comm,C.Non Commercial Software,Snakes & Ladders,Game,???,NC,8200,*RUN LADDERS,Broken,LADDERS,duplicate,,,,
-365,V8B1,HBSC,Hobbyscoop,D.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,2900,"?18=130
+354,,NC,Non Comm,D.Non Commercial Software,Hostage,Game,???,NC,8200,"CH.""GYZEL""",,GYZEL,duplicate,,,,
+356,V4,YC,Your Computer,E.Books/Magazines,The Hawk,Game,???,YC,8200,"CH.""HAWK""",Works,HAWK,present,Magazines,,,
+357,,NC,Non Comm,D.Non Commercial Software,Highway (R),Game,R.Leurs,NC,8200,"CH.""HIGHWAY""",,HIGHWAY,missing,,,,
+359,V4,NC,Non Comm,D.Non Commercial Software,Huncher (R),Game,S.Myngheer,NC/TB,8200,"CH.""HUNCHER""",Works,HUNCHER,present,,,,
+361,,NC,Non Comm,D.Non Commercial Software,Intra Terrestrial (R),Game,J.Biel,NC,8200,"CH.""INTRA""",,INTRA,missing,,,,
+362,,NC,Non Comm,D.Non Commercial Software,Jet (R),Game,B.Hommel,NC,8200,*RUN JET,,JET,duplicate,,,,
+363,V4,MO,Magnus Olsson,D.Non Commercial Software,Katakomb,Game,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",Works,KATAKOMB,present,,,,
+364,V4,NC,Non Comm,D.Non Commercial Software,Snakes & Ladders,Game,???,NC,8200,*RUN LADDERS,Broken,LADDERS,duplicate,,,,
+365,V8B1,HBSC,Hobbyscoop,E.Books/Magazines,Zachte landing,Game,H.Wagenaar,HS,2900,"?18=130
 CH.""LANDING""",Works,LANDING,present,Magazines,,,
-366,V4,NC,Non Comm,C.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
-367,V4,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
-368,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,"CH.""MASKEN""",Works,MASKEN,present,,,,
-369,V4,NC,Non Comm,C.Non Commercial Software,Moonlander,Game,???,NC,8200,"CH.""MLANDER""",Works,MLANDER,present,,,,
-370,V4,NC,Non Comm,C.Non Commercial Software,Navigator (R),Game,R.Leurs,NC,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,,,,
-371,V4,NC,Non Comm,C.Non Commercial Software,Nightmare Park,Game,S.M.Probyn,NC,8200,"CH.""NIGHTM""",Works,NIGHTM,present,,,,
-373,V4,NC,Non Comm,C.Non Commercial Software,Othello,Game,???,NC,8200,"?18=40
+366,V4,NC,Non Comm,D.Non Commercial Software,Grand Prix Special,Game,???,NC,8200,"CH.""LEMANS""",Works,LEMANS,present,,,,
+367,V4,NC,Non Comm,D.Non Commercial Software,Lunar Lander,Game,???,NC,8200,"CH.""LUNLAN""",Works,LUNLAN,present,,,,
+368,V7B2,MO,Magnus Olsson,D.Non Commercial Software,Masken,Game,Magnus Olssen,MO,8200,"CH.""MASKEN""",Works,MASKEN,present,,,,
+369,V4,NC,Non Comm,D.Non Commercial Software,Moonlander,Game,???,NC,8200,"CH.""MLANDER""",Works,MLANDER,present,,,,
+370,V4,NC,Non Comm,D.Non Commercial Software,Navigator (R),Game,R.Leurs,NC,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,,,,
+371,V4,NC,Non Comm,D.Non Commercial Software,Nightmare Park,Game,S.M.Probyn,NC,8200,"CH.""NIGHTM""",Works,NIGHTM,present,,,,
+373,V4,NC,Non Comm,D.Non Commercial Software,Othello,Game,???,NC,8200,"?18=40
 CH.""OTHEL1""",Works,OTHEL1,duplicate,,,,
 375,V4,ES,Electrocomp sups,A.Commercial Software,OXO,Game,???,ES,8200,"CH.""OXO""",Works,OXO,present,,,,
-376,V4,NC,Non Comm,C.Non Commercial Software,Hyperman,Game,???,NC,8200,"CH.""PACKMAN""",Broken,PACKMAN,duplicate,,,,
-377,V4,NC,Non Comm,C.Non Commercial Software,Pacman,Game,Thony Brown,NC,8200,"CH.""PACMAN""",Works,PACMAN,present,,,,
-378,V4,NC,Non Comm,C.Non Commercial Software,Plakoto,Game,???,NC,8200,"CH.""PLAKOTO""",Works,PLAKOTO,present,,,,
-379,V4,NC,Non Comm,C.Non Commercial Software,Persuit Plane,Game,JC-ADM,NC,8200,*RUN PLANE,Works,PLANE,present,,,,
-380,V4,NC,Non Comm,C.Non Commercial Software,Plane,Game,???,NC,8200,"CH.""PLANES""",Works,PLANES,present,,,,
-381,V4,NC,Non Comm,C.Non Commercial Software,POGO (R),Game,Hamburgersoft,NC/TB,8200,"CH.""POGO""",Works,POGO,present,,,,
-382,V4,NC,Non Comm,C.Non Commercial Software,Pointer,Game,???,NC,8200,*RUN POINTER,Works,POINTER,present,,,,
-383,V4,NC,Non Comm,C.Non Commercial Software,Prinses (R),Game,G.T.H.,NC,8200,"CH.""PRINSES""",Works,PRINSES,present,,,,
-384,V4,NC,Non Comm,C.Non Commercial Software,Puzzel (R),Game,Frans,NC/TB,8200,"CH.""PUZZEL""",Works,PUZZEL,present,,,,
-385,V4,NC,Non Comm,C.Non Commercial Software,Race,Game,A.Clarke,NC,8200,"CH.""RACE""",Works,RACE,present,,,,
-386,,NC,Non Comm,C.Non Commercial Software,Formula One,Game,JVK,NC,8200,"CH.""RACING""",,RACING,duplicate,,,,
-387,V4,NC,Non Comm,C.Non Commercial Software,Race Rups (R),Game,???,NC,8200,"CH.""RACRUPS""",Works,RACRUPS,present,,,,
-389,V8B1,NC,Non Comm,C.Non Commercial Software,Reversi (R),Game,L.Bijnagte,NC,8200,*RUN REVERS3,Works,REVERS3,present,,,,
-390,V4,NC,Non Comm,C.Non Commercial Software,Rhinoceros,Game,J.R.Marks,NC,8200,"CH.""RHINOS2""",Works,RHINOS2,present,,,,
-391,,NC,Non Comm,C.Non Commercial Software,Saturn,Game,R.Knapen,NC,8200,"CH.""SATURN""",,SATURN,duplicate,,,,
-392,,NC,Non Comm,C.Non Commercial Software,Shelobs Army (R),Game,G.Hillebrand,NC,8200,*RUN SHELOBS,,SHELOBS,duplicate,,,,
-393,V8B1,NC,Non Comm,C.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,,,,
+376,V4,NC,Non Comm,D.Non Commercial Software,Hyperman,Game,???,NC,8200,"CH.""PACKMAN""",Broken,PACKMAN,duplicate,,,,
+377,V4,NC,Non Comm,D.Non Commercial Software,Pacman,Game,Thony Brown,NC,8200,"CH.""PACMAN""",Works,PACMAN,present,,,,
+378,V4,NC,Non Comm,D.Non Commercial Software,Plakoto,Game,???,NC,8200,"CH.""PLAKOTO""",Works,PLAKOTO,present,,,,
+379,V4,NC,Non Comm,D.Non Commercial Software,Persuit Plane,Game,JC-ADM,NC,8200,*RUN PLANE,Works,PLANE,present,,,,
+380,V4,NC,Non Comm,D.Non Commercial Software,Plane,Game,???,NC,8200,"CH.""PLANES""",Works,PLANES,present,,,,
+381,V4,NC,Non Comm,D.Non Commercial Software,POGO (R),Game,Hamburgersoft,NC/TB,8200,"CH.""POGO""",Works,POGO,present,,,,
+382,V4,NC,Non Comm,D.Non Commercial Software,Pointer,Game,???,NC,8200,*RUN POINTER,Works,POINTER,present,,,,
+383,V4,NC,Non Comm,D.Non Commercial Software,Prinses (R),Game,G.T.H.,NC,8200,"CH.""PRINSES""",Works,PRINSES,present,,,,
+384,V4,NC,Non Comm,D.Non Commercial Software,Puzzel (R),Game,Frans,NC/TB,8200,"CH.""PUZZEL""",Works,PUZZEL,present,,,,
+385,V4,NC,Non Comm,D.Non Commercial Software,Race,Game,A.Clarke,NC,8200,"CH.""RACE""",Works,RACE,present,,,,
+386,,NC,Non Comm,D.Non Commercial Software,Formula One,Game,JVK,NC,8200,"CH.""RACING""",,RACING,duplicate,,,,
+387,V4,NC,Non Comm,D.Non Commercial Software,Race Rups (R),Game,???,NC,8200,"CH.""RACRUPS""",Works,RACRUPS,present,,,,
+389,V8B1,NC,Non Comm,D.Non Commercial Software,Reversi (R),Game,L.Bijnagte,NC,8200,*RUN REVERS3,Works,REVERS3,present,,,,
+390,V4,NC,Non Comm,D.Non Commercial Software,Rhinoceros,Game,J.R.Marks,NC,8200,"CH.""RHINOS2""",Works,RHINOS2,present,,,,
+391,,NC,Non Comm,D.Non Commercial Software,Saturn,Game,R.Knapen,NC,8200,"CH.""SATURN""",,SATURN,duplicate,,,,
+392,,NC,Non Comm,D.Non Commercial Software,Shelobs Army (R),Game,G.Hillebrand,NC,8200,*RUN SHELOBS,,SHELOBS,duplicate,,,,
+393,V8B1,NC,Non Comm,D.Non Commercial Software,Shuttle (R),Game,B.Bekooy,NC,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,,,,
 394,V4,ES,Electrocomp sups,A.Commercial Software,Ski Slope,Game,???,ES,8200,"CH.""SKI""",Works,SKI,present,,,,
-395,V4,C&VG,C&VG,D.Books/Magazines,Ski-ing,Game,S.  J. Harris,CVG,8200,"CH.""SKIING""",Works,SKIING,present,Magazines,,,
-396,V4,NC,Non Comm,C.Non Commercial Software,Skippy,Game,???,NC,8200,*RUN SKIPPY,Works,SKIPPY,present,,,,
+395,V4,C&VG,C&VG,E.Books/Magazines,Ski-ing,Game,S.  J. Harris,CVG,8200,"CH.""SKIING""",Works,SKIING,present,Magazines,,,
+396,V4,NC,Non Comm,D.Non Commercial Software,Skippy,Game,???,NC,8200,*RUN SKIPPY,Works,SKIPPY,present,,,,
 397,V4,ES,Electrocomp sups,A.Commercial Software,Snakes,Game,???,ES,8200,"CH.""SLANGEN""",Works,SLANGEN,present,,,,
-398,V8B1,NC,Non Comm,C.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Works,SNOOPY,present,,,,
-399,,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,duplicate,,,,
-400,V7B2,MO,Magnus Olsson,C.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
+398,V8B1,NC,Non Comm,D.Non Commercial Software,Snoopy,Game,???,NC,8200,"CH.""SNOOPY""",Works,SNOOPY,present,,,,
+399,,NC,Non Comm,D.Non Commercial Software,Space Zap,Game,G.Groenewold,NC,8200,"CH.""SPACZAB""",,SPACZAB,duplicate,,,,
+400,V7B2,MO,Magnus Olsson,D.Non Commercial Software,Star Trek IV (R),Game,Magnus Olssen,MO,9700,"*LOAD 157
 *LOAD 157S
 ?18=40
 RUN",Broken,"157
 157S",present,,,,
-402,V4,NC,Non Comm,C.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
-403,V7B2,YC,Your Computer,D.Books/Magazines,Stuntman,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Works,STUNT,present,Magazines,,,
-404,,NC,Non Comm,C.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
-406,V4,NC,Non Comm,C.Non Commercial Software,Teacups,Game,???,NC,8200,"CH.""TEACUPS""",Works,TEACUPS,present,,,,
+402,V4,NC,Non Comm,D.Non Commercial Software,Star War,Game,???,NC,8200,*RUN STARWAR,Works,STARWAR,duplicate,,,,
+403,V7B2,YC,Your Computer,E.Books/Magazines,Stuntman,Game,C.Szpojarowicz,YC,8200,"CH.""STUNT""",Works,STUNT,present,Magazines,,,
+404,,NC,Non Comm,D.Non Commercial Software,SUBMAR,Game,,NC,8200,"CH.""SUBMAR""",,SUBMAR,missing,,,,
+406,V4,NC,Non Comm,D.Non Commercial Software,Teacups,Game,???,NC,8200,"CH.""TEACUPS""",Works,TEACUPS,present,,,,
 408,V8B1,OL,Oak Leaves,A.Commercial Software,Walls,Game,J.Lasruk,OL,8200,"CH.""WALLS""",Works,WALLS,present,,,,
-409,V4,NC,Non Comm,C.Non Commercial Software,Wipeout,Game,???,NC,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,,,,
-410,V4,NC,Non Comm,C.Non Commercial Software,Woodland,Game,G.J.Noorland,NC,8200,"CH.""WOODLND""",Works,WOODLND,present,,,,
+409,V4,NC,Non Comm,D.Non Commercial Software,Wipeout,Game,???,NC,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,,,,
+410,V4,NC,Non Comm,D.Non Commercial Software,Woodland,Game,G.J.Noorland,NC,8200,"CH.""WOODLND""",Works,WOODLND,present,,,,
 411,V4,CS,Computersmith,A.Commercial Software,Word Gram,Game,???,CS,8200,"CH.""WRDGRAM""",Works,WRDGRAM,present,,,,
-413,,NC,Non Comm,C.Non Commercial Software,ZEESLA1,Game,,NC,8200,"CH.""ZEESLA1""",,ZEESLA1,duplicate,,,,
-414,V8B1,NC,Non Comm,C.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",Works,ZEESLAG,present,,,,
-415,,PPBA,Practical Programs,D.Books/Magazines,Card Trick,Game,???,PPBA,8200,,Works,,duplicate,,,,
-416,V4,AMB,Atom Magic Book,D.Books/Magazines,Breakout,Game,Mike Lord,AMB,8200,"CH.""BROUT""",Works,BROUT,present,Atom Magic Book,,,
-417,V4,AMB,Atom Magic Book,D.Books/Magazines,3D Maze,Game,Mike Lord,AMB,8200,"CH.""3DMAZE""",Works,3DMAZE,present,Atom Magic Book,,,
-418,V4,AMB,Atom Magic Book,D.Books/Magazines,Letters,Game,Mike Lord,AMB,8200,"CH.""LETTERS""",Works,LETTERS,present,Atom Magic Book,,,
-419,V4,AMB,Atom Magic Book,D.Books/Magazines,Matches,Game,Mike Lord,AMB,8200,"CH.""MATCHES""",Works,MATCHES,present,Atom Magic Book,,,
-420,V4,AMB,Atom Magic Book,D.Books/Magazines,Russian Roulette,Game,Mike Lord,AMB,8200,"CH.""RROUL""",Works,RROUL,present,Atom Magic Book,,,
-421,V4,AMB,Atom Magic Book,D.Books/Magazines,Compart,Graphics,Mike Lord,AMB,8200,"CH.""COMPART""",Works,COMPART,present,Atom Magic Book,,,
-422,V4,AMB,Atom Magic Book,D.Books/Magazines,Talkback,Utility,Mike Lord,AMB,8200,"CH.""TALKBOX""",Works,TALKBOX,present,Atom Magic Book,,,
-423,V4,AMB,Atom Magic Book,D.Books/Magazines,Moon Lander,Game,Mike Lord,AMB,8200,"CH.""MOONL""",Works,MOONL,present,Atom Magic Book,,,
-424,V4,AMB,Atom Magic Book,D.Books/Magazines,Bouncing Ball,Graphics,Mike Lord,AMB,8200,"CH.""BBALL""",Works,BBALL,present,Atom Magic Book,,,
-425,V4,AMB,Atom Magic Book,D.Books/Magazines,Patchwork,Graphics,Mike Lord,AMB,8200,"CH.""PATCHW""",Works,PATCHW,present,Atom Magic Book,,,
-426,V4,AMB,Atom Magic Book,D.Books/Magazines,Bug Race,Game,Mike Lord,AMB,8200,"CH.""BUGRACE""",Works,BUGRACE,present,Atom Magic Book,,,
-427,V4,AMB,Atom Magic Book,D.Books/Magazines,Space Battle,Game,Mike Lord,AMB,8200,"CH.""SPBAT""",Works,SPBAT,present,Atom Magic Book,,,
-428,V4,AMB,Atom Magic Book,D.Books/Magazines,Hammurabi,Game,Mike Lord,AMB,8200,"CH.""HAMMUR""",Works,HAMMUR,present,Atom Magic Book,,,
-429,V4,AMB,Atom Magic Book,D.Books/Magazines,Higher/Lower,Game,Mike Lord,AMB,8200,"CH.""HILO""",Works,HILO,present,Atom Magic Book,,,
-430,V4,AMB,Atom Magic Book,D.Books/Magazines,Buzz-Word,Business,Mike Lord,AMB,8200,"CH.""BUZZW""",Works,BUZZW,present,Atom Magic Book,,,
-431,V4,AMB,Atom Magic Book,D.Books/Magazines,Othello,Game,Mike Lord,AMB,8200,"CH.""OTHELLO""",Works,OTHELLO,present,Atom Magic Book,,,
-432,V4,AMB,Atom Magic Book,D.Books/Magazines,Number Guessing A,Game,Mike Lord,AMB,8200,"CH.""NUMA""",Works,NUMA,present,Atom Magic Book,,,
-433,V4,AMB,Atom Magic Book,D.Books/Magazines,Number Guessing B,Game,Mike Lord,AMB,8200,"CH.""NUMB""",Works,NUMB,present,Atom Magic Book,,,
-434,V4,AMB,Atom Magic Book,D.Books/Magazines,Hexpawn,Game,Mike Lord,AMB,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,Atom Magic Book,,,
-435,V4,AMB,Atom Magic Book,D.Books/Magazines,Drive,Game,Mike Lord,AMB,8200,"CH.""DRIVE""",Works,DRIVE,present,Atom Magic Book,,,
-436,V4,AMB,Atom Magic Book,D.Books/Magazines,Biorythm,Simulation,Mike Lord,AMB,8200,"CH.""BIORYT""",Works,BIORYT,present,Atom Magic Book,,,
-437,V4,AMB,Atom Magic Book,D.Books/Magazines,Sums tester,Educational,Mike Lord,AMB,8200,"CH.""SUMS""",Works,SUMS,present,Atom Magic Book,,,
-438,V4,AMB,Atom Magic Book,D.Books/Magazines,Scramble,Game,Mike Lord,AMB,8200,"CH.""SCRAMB""",Works,SCRAMB,present,Atom Magic Book,,,
-439,V4,AMB,Atom Magic Book,D.Books/Magazines,Designs,Graphics,Mike Lord,AMB,8200,"CH.""DESIGNS""",Works,DESIGNS,present,Atom Magic Book,,,
-440,V4,AMB,Atom Magic Book,D.Books/Magazines,Hunt the Wampus,Game,Mike Lord,AMB,8200,"CH.""WAMPUS""",Works,WAMPUS,present,Atom Magic Book,,,
-441,V4,AMB,Atom Magic Book,D.Books/Magazines,Simon,Game,Mike Lord,AMB,8200,"CH.""SIMON""",Works,SIMON,present,Atom Magic Book,,,
-442,V4,AMB,Atom Magic Book,D.Books/Magazines,Screens,Utility,Mike Lord,AMB,8200,"CH.""SCREENS""",Works,SCREENS,present,Atom Magic Book,,,
-443,V4,AMB,Atom Magic Book,D.Books/Magazines,Hangman,Game,Mike Lord,AMB,8200,"CH.""HANGMAN""",Works,HANGMAN,present,Atom Magic Book,,,
-444,V4,ATAP,Atomic Theory,D.Books/Magazines,Cubic Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""4-18""",Works,4-18,present,Atomic Theory,,,
-445,V4,ATAP,Atomic Theory,D.Books/Magazines,Curve Stitching,Graphics,David Johnson Davies,ATAP,8200,"CH.""5-6""",Works,5-6,present,Atomic Theory,,,
-446,V4,ATAP,Atomic Theory,D.Books/Magazines,GCD,Utility,David Johnson Davies,ATAP,8200,"CH.""5-9""",Works,5-9,present,Atomic Theory,,,
-447,V4,ATAP,Atomic Theory,D.Books/Magazines,Square Root,Utility,David Johnson Davies,ATAP,8200,"CH.""5-10""",Works,5-10,present,Atomic Theory,,,
-448,V4,ATAP,Atomic Theory,D.Books/Magazines,Powers,Utility,David Johnson Davies,ATAP,8200,"CH.""5-11""",Works,5-11,present,Atomic Theory,,,
-449,V4,ATAP,Atomic Theory,D.Books/Magazines,Digital Clock,Utility,David Johnson Davies,ATAP,8200,"CH.""5-13""",Works,5-13,present,Atomic Theory,,,
-450,V4,ATAP,Atomic Theory,D.Books/Magazines,Reaction Timer,Utility,David Johnson Davies,ATAP,8200,"CH.""5-14""",Works,5-14,present,Atomic Theory,,,
-451,V4,ATAP,Atomic Theory,D.Books/Magazines,Chequebook,Utility,David Johnson Davies,ATAP,8200,"CH.""6-3""",Works,6-3,present,Atomic Theory,,,
-452,V4,ATAP,Atomic Theory,D.Books/Magazines,Linear Interpolation,Utility,David Johnson Davies,ATAP,8200,"CH.""6-4""",Works,6-4,present,Atomic Theory,,,
-453,V4,ATAP,Atomic Theory,D.Books/Magazines,Tower of Hanoi,Game,David Johnson Davies,ATAP,8200,"CH.""6-6""",Works,6-6,present,Atomic Theory,,,
-454,V4,ATAP,Atomic Theory,D.Books/Magazines,Eight Queens,Game,David Johnson Davies,ATAP,8200,"CH.""6-7""",Works,6-7,present,Atomic Theory,,,
-455,V4,ATAP,Atomic Theory,D.Books/Magazines,Digital Waveform,Graphics,David Johnson Davies,ATAP,8200,"CH.""7-4""",Works,7-4,present,Atomic Theory,,,
-456,V4,ATAP,Atomic Theory,D.Books/Magazines,Simultaneous Equations,Utility,David Johnson Davies,ATAP,8200,"CH.""7-5""",Works,7-5,present,Atomic Theory,,,
-457,V4,ATAP,Atomic Theory,D.Books/Magazines,Prime Numbers,Utility,David Johnson Davies,ATAP,8200,"CH.""7-6""",Works,7-6,present,Atomic Theory,,,
-458,V4,ATAP,Atomic Theory,D.Books/Magazines,Arb Prec Powers,Utility,David Johnson Davies,ATAP,8200,"CH.""7-8""",Works,7-8,present,Atomic Theory,,,
-459,V4,ATAP,Atomic Theory,D.Books/Magazines,Animals,Game,David Johnson Davies,ATAP,8200,"CH.""9-3""",Broken - depends on BPUT/BGET,9-3,present,Atomic Theory,,,
-460,V4,ATAP,Atomic Theory,D.Books/Magazines,Random Rectangles,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-1""",Works,11-1,present,Atomic Theory,,,
-461,V4,ATAP,Atomic Theory,D.Books/Magazines,Sierpinski Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-2""",Works,11-2,present,Atomic Theory,,,
-462,V4,ATAP,Atomic Theory,D.Books/Magazines,3D Plotting,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-3""",Works,11-3,present,Atomic Theory,,,
-463,V4,ATAP,Atomic Theory,D.Books/Magazines,Hex Plotting,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-4""",Works,11-4,present,Atomic Theory,,,
-464,V4,ATAP,Atomic Theory,D.Books/Magazines,Clock,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-5""",Works,11-5,present,Atomic Theory,,,
-465,V4,ATAP,Atomic Theory,D.Books/Magazines,4 Colour Plot,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-6""",Works,11-6,present,Atomic Theory,,,
-466,V4,ATAP,Atomic Theory,D.Books/Magazines,Ram Test,Utility,David Johnson Davies,ATAP,8200,"CH.""12-1""",Works,12-1,present,Atomic Theory,,,
-467,V4,ATAP,Atomic Theory,D.Books/Magazines,Rom Test,Utility,David Johnson Davies,ATAP,8200,"CH.""12-2""",Works,12-2,present,Atomic Theory,,,
-468,V4,ATAP,Atomic Theory,D.Books/Magazines,Harpsichord,Music,David Johnson Davies,ATAP,8200,"CH.""17-3""",Works,17-3,present,Atomic Theory,,,
-469,V4,ATAP,Atomic Theory,D.Books/Magazines,Bulls and Cows,Game,David Johnson Davies,ATAP,8200,"CH.""17-4""",Works,17-4,present,Atomic Theory,,,
-470,V4,ATAP,Atomic Theory,D.Books/Magazines,Sine and Tangent,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-1""",Works,22-1,present,Atomic Theory,,,
-471,V4,ATAP,Atomic Theory,D.Books/Magazines,Cycloid Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-2""",Works,22-2,present,Atomic Theory,,,
-472,V4,ATAP,Atomic Theory,D.Books/Magazines,Saddle Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-3""",Works,22-3,present,Atomic Theory,,,
-473,V4,PPBA,Practical Programs,D.Books/Magazines,Silver-Dollar Game,Game,David Johnson Davies,PPBA,8200,"CH.""DOLLAR""",Works,DOLLAR,present,Practical Programs,,,
-474,V4,PPBA,Practical Programs,D.Books/Magazines,Car Maze,Game,David Johnson Davies,PPBA,8200,"CH.""CARMAZE""",Works,CARMAZE,present,Practical Programs,,,
-475,V4,PPBA,Practical Programs,D.Books/Magazines,Card Trick,Game,David Johnson Davies,PPBA,8200,"CH.""CARDTRIC""",Works,CARDTRIC,present,Practical Programs,,,
-476,V4,PPBA,Practical Programs,D.Books/Magazines,Patterns,Game,David Johnson Davies,PPBA,8200,"CH.""PATTERNS""",Works,PATTERNS,present,Practical Programs,,,
-477,V4,PPBA,Practical Programs,D.Books/Magazines,Contours,Graphics,David Johnson Davies,PPBA,8200,"CH.""CONTOURS""",Works,CONTOURS,present,Practical Programs,,,
-478,V4,PPBA,Practical Programs,D.Books/Magazines,Rotation,Graphics,David Johnson Davies,PPBA,8200,"CH.""ROTATION""",Works,ROTATION,present,Practical Programs,,,
-479,V4,PPBA,Practical Programs,D.Books/Magazines,Surface,Graphics,David Johnson Davies,PPBA,8200,"CH.""SURFACE""",Works,SURFACE,present,Practical Programs,,,
-480,V4,PPBA,Practical Programs,D.Books/Magazines,Anagrams,Utility,David Johnson Davies,PPBA,8200,"CH.""ANAGRAMS""",Works,ANAGRAMS,present,Practical Programs,,,
-481,V4,PPBA,Practical Programs,D.Books/Magazines,Buzz-Phrases,Utility,David Johnson Davies,PPBA,8200,"CH.""BUZZ""",Works,BUZZ,present,Practical Programs,,,
-482,V4,PPBA,Practical Programs,D.Books/Magazines,Limericks,Utility,David Johnson Davies,PPBA,8200,"CH.""LIMERICK""",Works,LIMERICK,present,Practical Programs,,,
-483,V4,PPBA,Practical Programs,D.Books/Magazines,Catalogue,Utility,David Johnson Davies,PPBA,8200,"CH.""CATALOG""",Works,CATALOG,present,Practical Programs,,,
-484,V4,PPBA,Practical Programs,D.Books/Magazines,Fractions,Utility,David Johnson Davies,PPBA,8200,"CH.""FRACTION""",Works,FRACTION,present,Practical Programs,,,
-485,V4,PPBA,Practical Programs,D.Books/Magazines,Polynomials,Utility,David Johnson Davies,PPBA,8200,"CH.""POLYNOMI""",Works,POLYNOMI,present,Practical Programs,,,
-486,V4,PPBA,Practical Programs,D.Books/Magazines,Calculator,Utility,David Johnson Davies,PPBA,8200,"CH.""CALCULAT""",Works,CALCULAT,present,Practical Programs,,,
-487,V4,PPBA,Practical Programs,D.Books/Magazines,Assignment,Language,David Johnson Davies,PPBA,8200,"CH.""ASSIGN""",Works,ASSIGN,present,Practical Programs,,,
-488,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - Bubble Sort,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSORT
+413,,NC,Non Comm,D.Non Commercial Software,ZEESLA1,Game,,NC,8200,"CH.""ZEESLA1""",,ZEESLA1,duplicate,,,,
+414,V8B1,NC,Non Comm,D.Non Commercial Software,Zeeslag (R),Game,J.J.Mertens,NC,8200,"CH.""ZEESLAG""",Works,ZEESLAG,present,,,,
+415,,PPBA,Practical Programs,E.Books/Magazines,Card Trick,Game,???,PPBA,8200,,Works,,duplicate,,,,
+416,V4,AMB,Atom Magic Book,E.Books/Magazines,Breakout,Game,Mike Lord,AMB,8200,"CH.""BROUT""",Works,BROUT,present,Atom Magic Book,,,
+417,V4,AMB,Atom Magic Book,E.Books/Magazines,3D Maze,Game,Mike Lord,AMB,8200,"CH.""3DMAZE""",Works,3DMAZE,present,Atom Magic Book,,,
+418,V4,AMB,Atom Magic Book,E.Books/Magazines,Letters,Game,Mike Lord,AMB,8200,"CH.""LETTERS""",Works,LETTERS,present,Atom Magic Book,,,
+419,V4,AMB,Atom Magic Book,E.Books/Magazines,Matches,Game,Mike Lord,AMB,8200,"CH.""MATCHES""",Works,MATCHES,present,Atom Magic Book,,,
+420,V4,AMB,Atom Magic Book,E.Books/Magazines,Russian Roulette,Game,Mike Lord,AMB,8200,"CH.""RROUL""",Works,RROUL,present,Atom Magic Book,,,
+421,V4,AMB,Atom Magic Book,E.Books/Magazines,Compart,Graphics,Mike Lord,AMB,8200,"CH.""COMPART""",Works,COMPART,present,Atom Magic Book,,,
+422,V4,AMB,Atom Magic Book,E.Books/Magazines,Talkback,Utility,Mike Lord,AMB,8200,"CH.""TALKBOX""",Works,TALKBOX,present,Atom Magic Book,,,
+423,V4,AMB,Atom Magic Book,E.Books/Magazines,Moon Lander,Game,Mike Lord,AMB,8200,"CH.""MOONL""",Works,MOONL,present,Atom Magic Book,,,
+424,V4,AMB,Atom Magic Book,E.Books/Magazines,Bouncing Ball,Graphics,Mike Lord,AMB,8200,"CH.""BBALL""",Works,BBALL,present,Atom Magic Book,,,
+425,V4,AMB,Atom Magic Book,E.Books/Magazines,Patchwork,Graphics,Mike Lord,AMB,8200,"CH.""PATCHW""",Works,PATCHW,present,Atom Magic Book,,,
+426,V4,AMB,Atom Magic Book,E.Books/Magazines,Bug Race,Game,Mike Lord,AMB,8200,"CH.""BUGRACE""",Works,BUGRACE,present,Atom Magic Book,,,
+427,V4,AMB,Atom Magic Book,E.Books/Magazines,Space Battle,Game,Mike Lord,AMB,8200,"CH.""SPBAT""",Works,SPBAT,present,Atom Magic Book,,,
+428,V4,AMB,Atom Magic Book,E.Books/Magazines,Hammurabi,Game,Mike Lord,AMB,8200,"CH.""HAMMUR""",Works,HAMMUR,present,Atom Magic Book,,,
+429,V4,AMB,Atom Magic Book,E.Books/Magazines,Higher/Lower,Game,Mike Lord,AMB,8200,"CH.""HILO""",Works,HILO,present,Atom Magic Book,,,
+430,V4,AMB,Atom Magic Book,E.Books/Magazines,Buzz-Word,Business,Mike Lord,AMB,8200,"CH.""BUZZW""",Works,BUZZW,present,Atom Magic Book,,,
+431,V4,AMB,Atom Magic Book,E.Books/Magazines,Othello,Game,Mike Lord,AMB,8200,"CH.""OTHELLO""",Works,OTHELLO,present,Atom Magic Book,,,
+432,V4,AMB,Atom Magic Book,E.Books/Magazines,Number Guessing A,Game,Mike Lord,AMB,8200,"CH.""NUMA""",Works,NUMA,present,Atom Magic Book,,,
+433,V4,AMB,Atom Magic Book,E.Books/Magazines,Number Guessing B,Game,Mike Lord,AMB,8200,"CH.""NUMB""",Works,NUMB,present,Atom Magic Book,,,
+434,V4,AMB,Atom Magic Book,E.Books/Magazines,Hexpawn,Game,Mike Lord,AMB,8200,"CH.""HEXPAWN""",Works,HEXPAWN,present,Atom Magic Book,,,
+435,V4,AMB,Atom Magic Book,E.Books/Magazines,Drive,Game,Mike Lord,AMB,8200,"CH.""DRIVE""",Works,DRIVE,present,Atom Magic Book,,,
+436,V4,AMB,Atom Magic Book,E.Books/Magazines,Biorythm,Simulation,Mike Lord,AMB,8200,"CH.""BIORYT""",Works,BIORYT,present,Atom Magic Book,,,
+437,V4,AMB,Atom Magic Book,E.Books/Magazines,Sums tester,Educational,Mike Lord,AMB,8200,"CH.""SUMS""",Works,SUMS,present,Atom Magic Book,,,
+438,V4,AMB,Atom Magic Book,E.Books/Magazines,Scramble,Game,Mike Lord,AMB,8200,"CH.""SCRAMB""",Works,SCRAMB,present,Atom Magic Book,,,
+439,V4,AMB,Atom Magic Book,E.Books/Magazines,Designs,Graphics,Mike Lord,AMB,8200,"CH.""DESIGNS""",Works,DESIGNS,present,Atom Magic Book,,,
+440,V4,AMB,Atom Magic Book,E.Books/Magazines,Hunt the Wampus,Game,Mike Lord,AMB,8200,"CH.""WAMPUS""",Works,WAMPUS,present,Atom Magic Book,,,
+441,V4,AMB,Atom Magic Book,E.Books/Magazines,Simon,Game,Mike Lord,AMB,8200,"CH.""SIMON""",Works,SIMON,present,Atom Magic Book,,,
+442,V4,AMB,Atom Magic Book,E.Books/Magazines,Screens,Utility,Mike Lord,AMB,8200,"CH.""SCREENS""",Works,SCREENS,present,Atom Magic Book,,,
+443,V4,AMB,Atom Magic Book,E.Books/Magazines,Hangman,Game,Mike Lord,AMB,8200,"CH.""HANGMAN""",Works,HANGMAN,present,Atom Magic Book,,,
+444,V4,ATAP,Atomic Theory,E.Books/Magazines,Cubic Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""4-18""",Works,4-18,present,Atomic Theory,,,
+445,V4,ATAP,Atomic Theory,E.Books/Magazines,Curve Stitching,Graphics,David Johnson Davies,ATAP,8200,"CH.""5-6""",Works,5-6,present,Atomic Theory,,,
+446,V4,ATAP,Atomic Theory,E.Books/Magazines,GCD,Utility,David Johnson Davies,ATAP,8200,"CH.""5-9""",Works,5-9,present,Atomic Theory,,,
+447,V4,ATAP,Atomic Theory,E.Books/Magazines,Square Root,Utility,David Johnson Davies,ATAP,8200,"CH.""5-10""",Works,5-10,present,Atomic Theory,,,
+448,V4,ATAP,Atomic Theory,E.Books/Magazines,Powers,Utility,David Johnson Davies,ATAP,8200,"CH.""5-11""",Works,5-11,present,Atomic Theory,,,
+449,V4,ATAP,Atomic Theory,E.Books/Magazines,Digital Clock,Utility,David Johnson Davies,ATAP,8200,"CH.""5-13""",Works,5-13,present,Atomic Theory,,,
+450,V4,ATAP,Atomic Theory,E.Books/Magazines,Reaction Timer,Utility,David Johnson Davies,ATAP,8200,"CH.""5-14""",Works,5-14,present,Atomic Theory,,,
+451,V4,ATAP,Atomic Theory,E.Books/Magazines,Chequebook,Utility,David Johnson Davies,ATAP,8200,"CH.""6-3""",Works,6-3,present,Atomic Theory,,,
+452,V4,ATAP,Atomic Theory,E.Books/Magazines,Linear Interpolation,Utility,David Johnson Davies,ATAP,8200,"CH.""6-4""",Works,6-4,present,Atomic Theory,,,
+453,V4,ATAP,Atomic Theory,E.Books/Magazines,Tower of Hanoi,Game,David Johnson Davies,ATAP,8200,"CH.""6-6""",Works,6-6,present,Atomic Theory,,,
+454,V4,ATAP,Atomic Theory,E.Books/Magazines,Eight Queens,Game,David Johnson Davies,ATAP,8200,"CH.""6-7""",Works,6-7,present,Atomic Theory,,,
+455,V4,ATAP,Atomic Theory,E.Books/Magazines,Digital Waveform,Graphics,David Johnson Davies,ATAP,8200,"CH.""7-4""",Works,7-4,present,Atomic Theory,,,
+456,V4,ATAP,Atomic Theory,E.Books/Magazines,Simultaneous Equations,Utility,David Johnson Davies,ATAP,8200,"CH.""7-5""",Works,7-5,present,Atomic Theory,,,
+457,V4,ATAP,Atomic Theory,E.Books/Magazines,Prime Numbers,Utility,David Johnson Davies,ATAP,8200,"CH.""7-6""",Works,7-6,present,Atomic Theory,,,
+458,V4,ATAP,Atomic Theory,E.Books/Magazines,Arb Prec Powers,Utility,David Johnson Davies,ATAP,8200,"CH.""7-8""",Works,7-8,present,Atomic Theory,,,
+459,V4,ATAP,Atomic Theory,E.Books/Magazines,Animals,Game,David Johnson Davies,ATAP,8200,"CH.""9-3""",Broken - depends on BPUT/BGET,9-3,present,Atomic Theory,,,
+460,V4,ATAP,Atomic Theory,E.Books/Magazines,Random Rectangles,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-1""",Works,11-1,present,Atomic Theory,,,
+461,V4,ATAP,Atomic Theory,E.Books/Magazines,Sierpinski Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-2""",Works,11-2,present,Atomic Theory,,,
+462,V4,ATAP,Atomic Theory,E.Books/Magazines,3D Plotting,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-3""",Works,11-3,present,Atomic Theory,,,
+463,V4,ATAP,Atomic Theory,E.Books/Magazines,Hex Plotting,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-4""",Works,11-4,present,Atomic Theory,,,
+464,V4,ATAP,Atomic Theory,E.Books/Magazines,Clock,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-5""",Works,11-5,present,Atomic Theory,,,
+465,V4,ATAP,Atomic Theory,E.Books/Magazines,4 Colour Plot,Graphics,David Johnson Davies,ATAP,8200,"CH.""11-6""",Works,11-6,present,Atomic Theory,,,
+466,V4,ATAP,Atomic Theory,E.Books/Magazines,Ram Test,Utility,David Johnson Davies,ATAP,8200,"CH.""12-1""",Works,12-1,present,Atomic Theory,,,
+467,V4,ATAP,Atomic Theory,E.Books/Magazines,Rom Test,Utility,David Johnson Davies,ATAP,8200,"CH.""12-2""",Works,12-2,present,Atomic Theory,,,
+468,V4,ATAP,Atomic Theory,E.Books/Magazines,Harpsichord,Music,David Johnson Davies,ATAP,8200,"CH.""17-3""",Works,17-3,present,Atomic Theory,,,
+469,V4,ATAP,Atomic Theory,E.Books/Magazines,Bulls and Cows,Game,David Johnson Davies,ATAP,8200,"CH.""17-4""",Works,17-4,present,Atomic Theory,,,
+470,V4,ATAP,Atomic Theory,E.Books/Magazines,Sine and Tangent,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-1""",Works,22-1,present,Atomic Theory,,,
+471,V4,ATAP,Atomic Theory,E.Books/Magazines,Cycloid Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-2""",Works,22-2,present,Atomic Theory,,,
+472,V4,ATAP,Atomic Theory,E.Books/Magazines,Saddle Curve,Graphics,David Johnson Davies,ATAP,8200,"CH.""22-3""",Works,22-3,present,Atomic Theory,,,
+473,V4,PPBA,Practical Programs,E.Books/Magazines,Silver-Dollar Game,Game,David Johnson Davies,PPBA,8200,"CH.""DOLLAR""",Works,DOLLAR,present,Practical Programs,,,
+474,V4,PPBA,Practical Programs,E.Books/Magazines,Car Maze,Game,David Johnson Davies,PPBA,8200,"CH.""CARMAZE""",Works,CARMAZE,present,Practical Programs,,,
+475,V4,PPBA,Practical Programs,E.Books/Magazines,Card Trick,Game,David Johnson Davies,PPBA,8200,"CH.""CARDTRIC""",Works,CARDTRIC,present,Practical Programs,,,
+476,V4,PPBA,Practical Programs,E.Books/Magazines,Patterns,Game,David Johnson Davies,PPBA,8200,"CH.""PATTERNS""",Works,PATTERNS,present,Practical Programs,,,
+477,V4,PPBA,Practical Programs,E.Books/Magazines,Contours,Graphics,David Johnson Davies,PPBA,8200,"CH.""CONTOURS""",Works,CONTOURS,present,Practical Programs,,,
+478,V4,PPBA,Practical Programs,E.Books/Magazines,Rotation,Graphics,David Johnson Davies,PPBA,8200,"CH.""ROTATION""",Works,ROTATION,present,Practical Programs,,,
+479,V4,PPBA,Practical Programs,E.Books/Magazines,Surface,Graphics,David Johnson Davies,PPBA,8200,"CH.""SURFACE""",Works,SURFACE,present,Practical Programs,,,
+480,V4,PPBA,Practical Programs,E.Books/Magazines,Anagrams,Utility,David Johnson Davies,PPBA,8200,"CH.""ANAGRAMS""",Works,ANAGRAMS,present,Practical Programs,,,
+481,V4,PPBA,Practical Programs,E.Books/Magazines,Buzz-Phrases,Utility,David Johnson Davies,PPBA,8200,"CH.""BUZZ""",Works,BUZZ,present,Practical Programs,,,
+482,V4,PPBA,Practical Programs,E.Books/Magazines,Limericks,Utility,David Johnson Davies,PPBA,8200,"CH.""LIMERICK""",Works,LIMERICK,present,Practical Programs,,,
+483,V4,PPBA,Practical Programs,E.Books/Magazines,Catalogue,Utility,David Johnson Davies,PPBA,8200,"CH.""CATALOG""",Works,CATALOG,present,Practical Programs,,,
+484,V4,PPBA,Practical Programs,E.Books/Magazines,Fractions,Utility,David Johnson Davies,PPBA,8200,"CH.""FRACTION""",Works,FRACTION,present,Practical Programs,,,
+485,V4,PPBA,Practical Programs,E.Books/Magazines,Polynomials,Utility,David Johnson Davies,PPBA,8200,"CH.""POLYNOMI""",Works,POLYNOMI,present,Practical Programs,,,
+486,V4,PPBA,Practical Programs,E.Books/Magazines,Calculator,Utility,David Johnson Davies,PPBA,8200,"CH.""CALCULAT""",Works,CALCULAT,present,Practical Programs,,,
+487,V4,PPBA,Practical Programs,E.Books/Magazines,Assignment,Language,David Johnson Davies,PPBA,8200,"CH.""ASSIGN""",Works,ASSIGN,present,Practical Programs,,,
+488,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - Bubble Sort,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSORT
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLSORT
 COMPILER",present,Practical Programs,,,
-489,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - Crawling Snake,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSNAKE
+489,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - Crawling Snake,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLSNAKE
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLSNAKE
 COMPILER",present,Practical Programs,,,
-490,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - Primes,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLPRIME
+490,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - Primes,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLPRIME
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLPRIME
 COMPILER",present,Practical Programs,,,
-491,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - GCD,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLGCD
+491,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - GCD,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLGCD
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLGCD
 COMPILER",present,Practical Programs,,,
-492,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - Multiply,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMULT
+492,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - Multiply,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMULT
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLMULT
 COMPILER",present,Practical Programs,,,
-493,V4,PPBA,Practical Programs,D.Books/Magazines,SPL - Mastermind,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMAST
+493,V4,PPBA,Practical Programs,E.Books/Magazines,SPL - Mastermind,Language,David Johnson Davies,PPBA,3A00,"*LOAD SPLMAST
 *LOAD COMPILER
 ?18=130
 RUN",Works,"SPLMAST
 COMPILER",present,Practical Programs,,,
-494,V4,TBOI,Interface,D.Books/Magazines,Holocaust,Game,Robert Heard,TBOI,8200,"CH.""HOLO""",Works,HOLO,present,Interface,,,
-495,V4,TBOI,Interface,D.Books/Magazines,Breakout,Game,G. Hillebrand,TBOI,8200,"CH.""BROUT""",Works,BROUT,present,Interface,,,
-496,V4,TBOI,Interface,D.Books/Magazines,Soccer,Game,Ian Smith,TBOI,8200,"CH.""SOCCER""",Works,SOCCER,present,Interface,,,
-497,V4,TBOI,Interface,D.Books/Magazines,Life,Simulation,Anne Marshall,TBOI,8200,"CH.""LIFE""",Works,LIFE,present,Interface,,,
-498,V4,TBOI,Interface,D.Books/Magazines,Ski-Run,Game,Robert Heard,TBOI,8200,"CH.""SKIRUN""",Works,SKIRUN,present,Interface,,,
-499,V4,TBOI,Interface,D.Books/Magazines,Fruit Machine,Game,Ian Smith,TBOI,8200,"CH.""FRMACH""",Works,FRMACH,present,Interface,,,
-500,V4,TBOI,Interface,D.Books/Magazines,10 Pin Bowling,Game,Tim Hartnell,TBOI,8200,"CH.""BOWLING""",Works,BOWLING,present,Interface,,,
-501,V4,TBOI,Interface,D.Books/Magazines,Starwars,Game,G. Hillebrand,TBOI,8200,"CH.""STARWAR""",Works,STARWAR,present,Interface,,,
-502,V4,TBOI,Interface,D.Books/Magazines,Invader Force,Game,Ian Smith,TBOI,8200,"CH.""INVADE""",Works,INVADE,present,Interface,,,
-503,V4,TBOI,Interface,D.Books/Magazines,Number Rotate!,Game,Markus Jakobsson,TBOI,8200,"CH.""ROTATE""",Works,ROTATE,present,Interface,,,
-504,V4,TBOI,Interface,D.Books/Magazines,Nim,Game,,TBOI,8200,"CH.""NIM""",Works,NIM,present,Interface,,,
-505,V4,TBOI,Interface,D.Books/Magazines,Reversi,Game,Jeremy Ruston,TBOI,8200,"CH.""REVERSI""",Works,REVERSI,present,Interface,,,
-506,V4,TBOI,Interface,D.Books/Magazines,Superothello,Game,Jeremy Ruston,TBOI,8200,"CH.""OTHELLO""",Works,OTHELLO,present,Interface,,,
-507,V4,TBOI,Interface,D.Books/Magazines,E.T. Invaders,Game,G. Mathews,TBOI,8200,"CH.""ETINV""",Works,ETINV,present,Interface,,,
-508,V4,TBOI,Interface,D.Books/Magazines,Deathstar Draughts,Game,Tim Hartnell,TBOI,8200,"CH.""DRAUGHT""",Works,DRAUGHT,present,Interface,,,
-509,V4,TBOI,Interface,D.Books/Magazines,Thumble strummer 1,Game,Amelia Bridge,TBOI,8200,"CH.""THUM1""",Works,THUM1,present,Interface,,,
-510,V4,TBOI,Interface,D.Books/Magazines,Thumble strummer 2,Game,Amelia Bridge,TBOI,8200,"CH.""THUM2""",Works,THUM2,present,Interface,,,
-511,V4,TBOI,Interface,D.Books/Magazines,Amazing!,Game,Russel Heins and Robert Heard,TBOI,8200,"CH.""AMAZING""",Works,AMAZING,present,Interface,,,
-512,V4,TBOI,Interface,D.Books/Magazines,Flight,Game,G.S. Buttrick,TBOI,8200,"CH.""FLIGHT""",Works,FLIGHT,present,Interface,,,
-513,V4,TBOI,Interface,D.Books/Magazines,Symphonique,Music,Colin Barker,TBOI,8200,"CH.""SYMPH""",Works,SYMPH,present,Interface,,,
-514,V4,TBOI,Interface,D.Books/Magazines,Kinetic String Art,Graphics,Jeremy Ruston,TBOI,8200,"CH.""KINETIC""",Works,KINETIC,present,Interface,,,
-515,V4,TBOI,Interface,D.Books/Magazines,Saucer Plot,Graphics,Russel Heins and Robert Heard,TBOI,8200,"CH.""SAUCER""",Works,SAUCER,present,Interface,,,
-516,V4,TBOI,Interface,D.Books/Magazines,Threedee etch,Graphics,Jeremy Ruston,TBOI,8200,"CH.""3DETCH""",Works,3DETCH,present,Interface,,,
-517,V4,TBOI,Interface,D.Books/Magazines,Tablet,Graphics,Russel Heins and Robert Heard,TBOI,8200,"CH.""TABLET""",Works,TABLET,present,Interface,,,
-518,V4,TBOI,Interface,D.Books/Magazines,Doomswatch Cave,Game,Tim Hartnell,TBOI,8200,"CH.""CAVE""",Works,CAVE,present,Interface,,,
-519,V4,TBOI,Interface,D.Books/Magazines,Easter Sunday,Utility,Lars Jakobsson,TBOI,8200,"CH.""EASTER""",Works,EASTER,present,Interface,,,
-520,V4,TBOI,Interface,D.Books/Magazines,Twenty-one,Game,,TBOI,8200,"CH.""21""",Works,21,present,Interface,,,
-521,V4,TBOI,Interface,D.Books/Magazines,Spiral Eater,Game,Ken Mahohany,TBOI,8200,"CH.""SPIRAL""",Works,SPIRAL,present,Interface,,,
-522,V4,TBOI,Interface,D.Books/Magazines,Yahtzee,Game,Ian Smith,TBOI,8200,"CH.""YAHTZEE""",Works,YAHTZEE,present,Interface,,,
-523,V4,TBOI,Interface,D.Books/Magazines,24 Steps,Game,,TBOI,8200,"CH.""24STEPS""",Works,24STEPS,present,Interface,,,
-524,V4,TBOI,Interface,D.Books/Magazines,Schizo,Game,Mark Devon,TBOI,8200,"CH.""SCHIZO""",Works,SCHIZO,present,Interface,,,
-525,V4,TBOI,Interface,D.Books/Magazines,Ice Cave,Graphics,Normal Alms,TBOI,8200,"CH.""ICECAVE""",Works,ICECAVE,present,Interface,,,
-526,V4,TBOI,Interface,D.Books/Magazines,Data Sort,Utility,,TBOI,8200,"CH.""DATASORT""",Works,DATASORT,present,Interface,,,
-527,V4,TBOI,Interface,D.Books/Magazines,100 Up,Game,Ian Smith,TBOI,8200,"CH.""100UP""",Works,100UP,present,Interface,,,
-528,V4,TBOI,Interface,D.Books/Magazines,Demon,Game,Wilton J. Faberge,TBOI,8200,"CH.""DEMON""",Works,DEMON,present,Interface,,,
-529,V4,TBOI,Interface,D.Books/Magazines,Monster munch,Game,Tim Hartnell,TBOI,8200,"CH.""MONSTER""",Works,MONSTER,present,Interface,,,
-530,V4,TBOI,Interface,D.Books/Magazines,Asteroid belt,Game,Ian Smith,TBOI,8200,"CH.""ASTROID""",Works,ASTROID,present,Interface,,,
-531,V4,TBOI,Interface,D.Books/Magazines,Co-ord,Game,Robert Heard,TBOI,8200,"CH.""COORD""",Works,COORD,present,Interface,,,
-532,V4,TBOI,Interface,D.Books/Magazines,Artist,Graphics,Ken North,TBOI,8200,"CH.""ARTIST""",Works,ARTIST,present,Interface,,,
-533,V5,C&VG,C&VG,D.Books/Magazines,Dodgems,Game,John Dyson,CVG,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Magazines,,,
-534,V4,C&VG,C&VG,D.Books/Magazines,Breakout,Game,Tim Jackson,CVG,8200,"CH.""BREAKOU""",Works,BREAKOU,present,Magazines,,,
-535,V7B2,C&VG,C&VG,D.Books/Magazines,Life,Game,Tim Jackson,CVG,2900,"*LOAD LIFE 8200
+494,V4,TBOI,Interface,E.Books/Magazines,Holocaust,Game,Robert Heard,TBOI,8200,"CH.""HOLO""",Works,HOLO,present,Interface,,,
+495,V4,TBOI,Interface,E.Books/Magazines,Breakout,Game,G. Hillebrand,TBOI,8200,"CH.""BROUT""",Works,BROUT,present,Interface,,,
+496,V4,TBOI,Interface,E.Books/Magazines,Soccer,Game,Ian Smith,TBOI,8200,"CH.""SOCCER""",Works,SOCCER,present,Interface,,,
+497,V4,TBOI,Interface,E.Books/Magazines,Life,Simulation,Anne Marshall,TBOI,8200,"CH.""LIFE""",Works,LIFE,present,Interface,,,
+498,V4,TBOI,Interface,E.Books/Magazines,Ski-Run,Game,Robert Heard,TBOI,8200,"CH.""SKIRUN""",Works,SKIRUN,present,Interface,,,
+499,V4,TBOI,Interface,E.Books/Magazines,Fruit Machine,Game,Ian Smith,TBOI,8200,"CH.""FRMACH""",Works,FRMACH,present,Interface,,,
+500,V4,TBOI,Interface,E.Books/Magazines,10 Pin Bowling,Game,Tim Hartnell,TBOI,8200,"CH.""BOWLING""",Works,BOWLING,present,Interface,,,
+501,V4,TBOI,Interface,E.Books/Magazines,Starwars,Game,G. Hillebrand,TBOI,8200,"CH.""STARWAR""",Works,STARWAR,present,Interface,,,
+502,V4,TBOI,Interface,E.Books/Magazines,Invader Force,Game,Ian Smith,TBOI,8200,"CH.""INVADE""",Works,INVADE,present,Interface,,,
+503,V4,TBOI,Interface,E.Books/Magazines,Number Rotate!,Game,Markus Jakobsson,TBOI,8200,"CH.""ROTATE""",Works,ROTATE,present,Interface,,,
+504,V4,TBOI,Interface,E.Books/Magazines,Nim,Game,,TBOI,8200,"CH.""NIM""",Works,NIM,present,Interface,,,
+505,V4,TBOI,Interface,E.Books/Magazines,Reversi,Game,Jeremy Ruston,TBOI,8200,"CH.""REVERSI""",Works,REVERSI,present,Interface,,,
+506,V4,TBOI,Interface,E.Books/Magazines,Superothello,Game,Jeremy Ruston,TBOI,8200,"CH.""OTHELLO""",Works,OTHELLO,present,Interface,,,
+507,V4,TBOI,Interface,E.Books/Magazines,E.T. Invaders,Game,G. Mathews,TBOI,8200,"CH.""ETINV""",Works,ETINV,present,Interface,,,
+508,V4,TBOI,Interface,E.Books/Magazines,Deathstar Draughts,Game,Tim Hartnell,TBOI,8200,"CH.""DRAUGHT""",Works,DRAUGHT,present,Interface,,,
+509,V4,TBOI,Interface,E.Books/Magazines,Thumble strummer 1,Game,Amelia Bridge,TBOI,8200,"CH.""THUM1""",Works,THUM1,present,Interface,,,
+510,V4,TBOI,Interface,E.Books/Magazines,Thumble strummer 2,Game,Amelia Bridge,TBOI,8200,"CH.""THUM2""",Works,THUM2,present,Interface,,,
+511,V4,TBOI,Interface,E.Books/Magazines,Amazing!,Game,Russel Heins and Robert Heard,TBOI,8200,"CH.""AMAZING""",Works,AMAZING,present,Interface,,,
+512,V4,TBOI,Interface,E.Books/Magazines,Flight,Game,G.S. Buttrick,TBOI,8200,"CH.""FLIGHT""",Works,FLIGHT,present,Interface,,,
+513,V4,TBOI,Interface,E.Books/Magazines,Symphonique,Music,Colin Barker,TBOI,8200,"CH.""SYMPH""",Works,SYMPH,present,Interface,,,
+514,V4,TBOI,Interface,E.Books/Magazines,Kinetic String Art,Graphics,Jeremy Ruston,TBOI,8200,"CH.""KINETIC""",Works,KINETIC,present,Interface,,,
+515,V4,TBOI,Interface,E.Books/Magazines,Saucer Plot,Graphics,Russel Heins and Robert Heard,TBOI,8200,"CH.""SAUCER""",Works,SAUCER,present,Interface,,,
+516,V4,TBOI,Interface,E.Books/Magazines,Threedee etch,Graphics,Jeremy Ruston,TBOI,8200,"CH.""3DETCH""",Works,3DETCH,present,Interface,,,
+517,V4,TBOI,Interface,E.Books/Magazines,Tablet,Graphics,Russel Heins and Robert Heard,TBOI,8200,"CH.""TABLET""",Works,TABLET,present,Interface,,,
+518,V4,TBOI,Interface,E.Books/Magazines,Doomswatch Cave,Game,Tim Hartnell,TBOI,8200,"CH.""CAVE""",Works,CAVE,present,Interface,,,
+519,V4,TBOI,Interface,E.Books/Magazines,Easter Sunday,Utility,Lars Jakobsson,TBOI,8200,"CH.""EASTER""",Works,EASTER,present,Interface,,,
+520,V4,TBOI,Interface,E.Books/Magazines,Twenty-one,Game,,TBOI,8200,"CH.""21""",Works,21,present,Interface,,,
+521,V4,TBOI,Interface,E.Books/Magazines,Spiral Eater,Game,Ken Mahohany,TBOI,8200,"CH.""SPIRAL""",Works,SPIRAL,present,Interface,,,
+522,V4,TBOI,Interface,E.Books/Magazines,Yahtzee,Game,Ian Smith,TBOI,8200,"CH.""YAHTZEE""",Works,YAHTZEE,present,Interface,,,
+523,V4,TBOI,Interface,E.Books/Magazines,24 Steps,Game,,TBOI,8200,"CH.""24STEPS""",Works,24STEPS,present,Interface,,,
+524,V4,TBOI,Interface,E.Books/Magazines,Schizo,Game,Mark Devon,TBOI,8200,"CH.""SCHIZO""",Works,SCHIZO,present,Interface,,,
+525,V4,TBOI,Interface,E.Books/Magazines,Ice Cave,Graphics,Normal Alms,TBOI,8200,"CH.""ICECAVE""",Works,ICECAVE,present,Interface,,,
+526,V4,TBOI,Interface,E.Books/Magazines,Data Sort,Utility,,TBOI,8200,"CH.""DATASORT""",Works,DATASORT,present,Interface,,,
+527,V4,TBOI,Interface,E.Books/Magazines,100 Up,Game,Ian Smith,TBOI,8200,"CH.""100UP""",Works,100UP,present,Interface,,,
+528,V4,TBOI,Interface,E.Books/Magazines,Demon,Game,Wilton J. Faberge,TBOI,8200,"CH.""DEMON""",Works,DEMON,present,Interface,,,
+529,V4,TBOI,Interface,E.Books/Magazines,Monster munch,Game,Tim Hartnell,TBOI,8200,"CH.""MONSTER""",Works,MONSTER,present,Interface,,,
+530,V4,TBOI,Interface,E.Books/Magazines,Asteroid belt,Game,Ian Smith,TBOI,8200,"CH.""ASTROID""",Works,ASTROID,present,Interface,,,
+531,V4,TBOI,Interface,E.Books/Magazines,Co-ord,Game,Robert Heard,TBOI,8200,"CH.""COORD""",Works,COORD,present,Interface,,,
+532,V4,TBOI,Interface,E.Books/Magazines,Artist,Graphics,Ken North,TBOI,8200,"CH.""ARTIST""",Works,ARTIST,present,Interface,,,
+533,V5,C&VG,C&VG,E.Books/Magazines,Dodgems,Game,John Dyson,CVG,8200,"CH.""DODGEMS""",Works,DODGEMS,present,Magazines,,,
+534,V4,C&VG,C&VG,E.Books/Magazines,Breakout,Game,Tim Jackson,CVG,8200,"CH.""BREAKOU""",Works,BREAKOU,present,Magazines,,,
+535,V7B2,C&VG,C&VG,E.Books/Magazines,Life,Game,Tim Jackson,CVG,2900,"*LOAD LIFE 8200
 ?18=130
 RUN",Works,LIFE,present,Magazines,,,
-536,V5,C&VG,C&VG,D.Books/Magazines,Alien Hunt,Game,John Kirk,CVG,8200,"CH.""ALIEN""",Works,ALIEN,present,Magazines,,,
-537,V7B2,C&VG,C&VG,D.Books/Magazines,Entomb,Game,Murray Allen,CVG,8200,"CH.""ENTOMB""",Works,ENTOMB,present,Magazines,,,
-538,V7B2,C&VG,C&VG,D.Books/Magazines,Moon Lander,Game,S Draper,CVG,8200,"CH.""MOONLAN""",Works,MOONLAN,present,Magazines,,,
-539,V6,C&VG,C&VG,D.Books/Magazines,Spiderman,Game,Martin Hurley,CVG,8200,"CH.""SPIDERMA""",Works,SPIDERMA,present,Magazines,,,
-540,V7B2,C&VG,C&VG,D.Books/Magazines,Save the Princess,Game,George Taylor,CVG,8200,"CH.""PRNCSS""",Works,PRNCSS,present,Magazines,,,
-541,V5,C&VG,C&VG,D.Books/Magazines,Snakes & Ladders,Game,A. Worral,CVG,8200,"CH.""LADDERS""",Works,LADDERS,present,Magazines,,,
-542,V4,C&VG,C&VG,D.Books/Magazines,Haunted House,Game,Alex Pearson,CVG,8200,"CH.""HAUNTED""",Works,HAUNTED,present,Magazines,,,
-543,V4,C&VG,C&VG,D.Books/Magazines,Starwar,Game,J. C. Flower,CVG,8200,"CH.""STARWAR""",Works,STARWAR,present,Magazines,,,
-544,V7B2,C&VG,C&VG,D.Books/Magazines,Mining Colony,Game,Robert Campbell,CVG,8200,"CH.""MINING""",Works,MINING,present,Magazines,,,
-545,V6,C&VG,C&VG,D.Books/Magazines,Monster,Game,Marcus Jakobsson,CVG,8200,"CH.""MONSTER""",Works,MONSTER,present,Magazines,,,
-546,V7B2,C&VG,C&VG,D.Books/Magazines,Bullion Snatch,Game,Stephen Mayfroidt,CVG,8200,"CH.""BULLION""",Works,BULLION,present,Magazines,,,
-547,V7B2,C&VG,C&VG,D.Books/Magazines,Rhino,Game,R. M. Andrews,CVG,8200,"CH.""RHINO""",Works,RHINO,present,Magazines,,,
-548,V5,C&VG,C&VG,D.Books/Magazines,Formula One,Game,Chris Johnson,CVG,8200,"CH.""RACING""",Works,RACING,present,Magazines,,,
-549,V7B2,C&VG,C&VG,D.Books/Magazines,Grow,Game,Marcus Jacobsson,CVG,8200,"CH.""GROW""",Works,GROW,present,Magazines,,,
-550,V4,C&VG,C&VG,D.Books/Magazines,Duck Shoot,Game,Tim Jackson,CVG,8200,"CH.""DUCK""",Works,DUCK,present,Magazines,,,
-551,V4,WUYA,Wake up your Atom,D.Books/Magazines,Hostage,Game,,WUYA,8200,"CH.""HOSTAGE""",Works,HOSTAGE,present,Wake up your Atom,,,
-552,V4,WUYA,Wake up your Atom,D.Books/Magazines,Hyperman,Game,,WUYA,8200,"CH.""HYPERMAN""",Works,HYPERMAN,present,Wake up your Atom,,,
-553,V4,WUYA,Wake up your Atom,D.Books/Magazines,Bone Hunt,Game,,WUYA,8200,"CH.""BONEHUNT""",Works,BONEHUNT,present,Wake up your Atom,,,
-554,V4,WUYA,Wake up your Atom,D.Books/Magazines,Directory,Business,,WUYA,8200,"CH.""DIRECTOR""",Works,DIRECTOR,present,Wake up your Atom,,,
-555,V4,WUYA,Wake up your Atom,D.Books/Magazines,Tennis,Game,,WUYA,8200,"CH.""TENNIS""",Works,TENNIS,present,Wake up your Atom,,,
-556,V4,WUYA,Wake up your Atom,D.Books/Magazines,French Test,Educational,,WUYA,8200,"CH.""FRENCH""",Works,FRENCH,present,Wake up your Atom,,,
-557,V4,WUYA,Wake up your Atom,D.Books/Magazines,Pontoon,Game,,WUYA,8200,"*LOAD PONTOON
+536,V5,C&VG,C&VG,E.Books/Magazines,Alien Hunt,Game,John Kirk,CVG,8200,"CH.""ALIEN""",Works,ALIEN,present,Magazines,,,
+537,V7B2,C&VG,C&VG,E.Books/Magazines,Entomb,Game,Murray Allen,CVG,8200,"CH.""ENTOMB""",Works,ENTOMB,present,Magazines,,,
+538,V7B2,C&VG,C&VG,E.Books/Magazines,Moon Lander,Game,S Draper,CVG,8200,"CH.""MOONLAN""",Works,MOONLAN,present,Magazines,,,
+539,V6,C&VG,C&VG,E.Books/Magazines,Spiderman,Game,Martin Hurley,CVG,8200,"CH.""SPIDERMA""",Works,SPIDERMA,present,Magazines,,,
+540,V7B2,C&VG,C&VG,E.Books/Magazines,Save the Princess,Game,George Taylor,CVG,8200,"CH.""PRNCSS""",Works,PRNCSS,present,Magazines,,,
+541,V5,C&VG,C&VG,E.Books/Magazines,Snakes & Ladders,Game,A. Worral,CVG,8200,"CH.""LADDERS""",Works,LADDERS,present,Magazines,,,
+542,V4,C&VG,C&VG,E.Books/Magazines,Haunted House,Game,Alex Pearson,CVG,8200,"CH.""HAUNTED""",Works,HAUNTED,present,Magazines,,,
+543,V4,C&VG,C&VG,E.Books/Magazines,Starwar,Game,J. C. Flower,CVG,8200,"CH.""STARWAR""",Works,STARWAR,present,Magazines,,,
+544,V7B2,C&VG,C&VG,E.Books/Magazines,Mining Colony,Game,Robert Campbell,CVG,8200,"CH.""MINING""",Works,MINING,present,Magazines,,,
+545,V6,C&VG,C&VG,E.Books/Magazines,Monster,Game,Marcus Jakobsson,CVG,8200,"CH.""MONSTER""",Works,MONSTER,present,Magazines,,,
+546,V7B2,C&VG,C&VG,E.Books/Magazines,Bullion Snatch,Game,Stephen Mayfroidt,CVG,8200,"CH.""BULLION""",Works,BULLION,present,Magazines,,,
+547,V7B2,C&VG,C&VG,E.Books/Magazines,Rhino,Game,R. M. Andrews,CVG,8200,"CH.""RHINO""",Works,RHINO,present,Magazines,,,
+548,V5,C&VG,C&VG,E.Books/Magazines,Formula One,Game,Chris Johnson,CVG,8200,"CH.""RACING""",Works,RACING,present,Magazines,,,
+549,V7B2,C&VG,C&VG,E.Books/Magazines,Grow,Game,Marcus Jacobsson,CVG,8200,"CH.""GROW""",Works,GROW,present,Magazines,,,
+550,V4,C&VG,C&VG,E.Books/Magazines,Duck Shoot,Game,Tim Jackson,CVG,8200,"CH.""DUCK""",Works,DUCK,present,Magazines,,,
+551,V4,WUYA,Wake up your Atom,E.Books/Magazines,Hostage,Game,,WUYA,8200,"CH.""HOSTAGE""",Works,HOSTAGE,present,Wake up your Atom,,,
+552,V4,WUYA,Wake up your Atom,E.Books/Magazines,Hyperman,Game,,WUYA,8200,"CH.""HYPERMAN""",Works,HYPERMAN,present,Wake up your Atom,,,
+553,V4,WUYA,Wake up your Atom,E.Books/Magazines,Bone Hunt,Game,,WUYA,8200,"CH.""BONEHUNT""",Works,BONEHUNT,present,Wake up your Atom,,,
+554,V4,WUYA,Wake up your Atom,E.Books/Magazines,Directory,Business,,WUYA,8200,"CH.""DIRECTOR""",Works,DIRECTOR,present,Wake up your Atom,,,
+555,V4,WUYA,Wake up your Atom,E.Books/Magazines,Tennis,Game,,WUYA,8200,"CH.""TENNIS""",Works,TENNIS,present,Wake up your Atom,,,
+556,V4,WUYA,Wake up your Atom,E.Books/Magazines,French Test,Educational,,WUYA,8200,"CH.""FRENCH""",Works,FRENCH,present,Wake up your Atom,,,
+557,V4,WUYA,Wake up your Atom,E.Books/Magazines,Pontoon,Game,,WUYA,8200,"*LOAD PONTOON
 RUN",Works,PONTOON,present,Wake up your Atom,,,
-558,V4,WUYA,Wake up your Atom,D.Books/Magazines,Safe Break,Educational,,WUYA,8200,"CH.""SAFEBRK""",Works,SAFEBRK,present,Wake up your Atom,,,
-559,V4,WUYA,Wake up your Atom,D.Books/Magazines,Alarm Clock,Utility,,WUYA,8200,"CH.""ALARM""",Works,ALARM,present,Wake up your Atom,,,
-560,V4,WUYA,Wake up your Atom,D.Books/Magazines,Wipeout,Game,,WUYA,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,Wake up your Atom,,,
-561,V4,WUYA,Wake up your Atom,D.Books/Magazines,Cat and Mouse,Game,,WUYA,8200,"CH.""CATMOUSE""",Works,CATMOUSE,present,Wake up your Atom,,,
-562,V4,WUYA,Wake up your Atom,D.Books/Magazines,Anagrams,Utility,,WUYA,8200,"CH.""ANAGRAM""",Works,ANAGRAM,present,Wake up your Atom,,,
-563,V4,WUYA,Wake up your Atom,D.Books/Magazines,Spacefire,Game,,WUYA,8200,"CH.""SPAFIRE""",Works,SPAFIRE,present,Wake up your Atom,,,
-564,V4,WUYA,Wake up your Atom,D.Books/Magazines,Bases,Utility,,WUYA,8200,"CH.""BASES""",Works,BASES,present,Wake up your Atom,,,
-565,V4,WUYA,Wake up your Atom,D.Books/Magazines,Shoot Out,Game,,WUYA,8200,"CH.""SHOOTOUT""",Works,SHOOTOUT,present,Wake up your Atom,,,
-566,V4,WUYA,Wake up your Atom,D.Books/Magazines,Solitaire,Game,,WUYA,8200,"CH.""SOLIT""",Works,SOLIT,present,Wake up your Atom,,,
-567,V4,WUYA,Wake up your Atom,D.Books/Magazines,Beetle,Game,,WUYA,8200,"CH.""BEETLE""",Works,BEETLE,present,Wake up your Atom,,,
-568,V4,WUYA,Wake up your Atom,D.Books/Magazines,Helicopter Lander,Game,,WUYA,8200,"CH.""HELICOP""",Works,HELICOP,present,Wake up your Atom,,,
-569,V4,WUYA,Wake up your Atom,D.Books/Magazines,Atomic Drawing Pad,Graphics,,WUYA,8200,"CH.""DRAWING""",Works,DRAWING,present,Wake up your Atom,,,
-570,V4,WUYA,Wake up your Atom,D.Books/Magazines,Fractions,Utility,,WUYA,8200,"CH.""FRACTION""",Works,FRACTION,present,Wake up your Atom,,,
-571,V5,NC,Non Comm,C.Non Commercial Software,Devil's Dungeon,Adventure,Jerry Lakin,NC,8200,"CH.""DUNGEON""",Works,DUNGEON,present,,,,
+558,V4,WUYA,Wake up your Atom,E.Books/Magazines,Safe Break,Educational,,WUYA,8200,"CH.""SAFEBRK""",Works,SAFEBRK,present,Wake up your Atom,,,
+559,V4,WUYA,Wake up your Atom,E.Books/Magazines,Alarm Clock,Utility,,WUYA,8200,"CH.""ALARM""",Works,ALARM,present,Wake up your Atom,,,
+560,V4,WUYA,Wake up your Atom,E.Books/Magazines,Wipeout,Game,,WUYA,8200,"CH.""WIPEOUT""",Works,WIPEOUT,present,Wake up your Atom,,,
+561,V4,WUYA,Wake up your Atom,E.Books/Magazines,Cat and Mouse,Game,,WUYA,8200,"CH.""CATMOUSE""",Works,CATMOUSE,present,Wake up your Atom,,,
+562,V4,WUYA,Wake up your Atom,E.Books/Magazines,Anagrams,Utility,,WUYA,8200,"CH.""ANAGRAM""",Works,ANAGRAM,present,Wake up your Atom,,,
+563,V4,WUYA,Wake up your Atom,E.Books/Magazines,Spacefire,Game,,WUYA,8200,"CH.""SPAFIRE""",Works,SPAFIRE,present,Wake up your Atom,,,
+564,V4,WUYA,Wake up your Atom,E.Books/Magazines,Bases,Utility,,WUYA,8200,"CH.""BASES""",Works,BASES,present,Wake up your Atom,,,
+565,V4,WUYA,Wake up your Atom,E.Books/Magazines,Shoot Out,Game,,WUYA,8200,"CH.""SHOOTOUT""",Works,SHOOTOUT,present,Wake up your Atom,,,
+566,V4,WUYA,Wake up your Atom,E.Books/Magazines,Solitaire,Game,,WUYA,8200,"CH.""SOLIT""",Works,SOLIT,present,Wake up your Atom,,,
+567,V4,WUYA,Wake up your Atom,E.Books/Magazines,Beetle,Game,,WUYA,8200,"CH.""BEETLE""",Works,BEETLE,present,Wake up your Atom,,,
+568,V4,WUYA,Wake up your Atom,E.Books/Magazines,Helicopter Lander,Game,,WUYA,8200,"CH.""HELICOP""",Works,HELICOP,present,Wake up your Atom,,,
+569,V4,WUYA,Wake up your Atom,E.Books/Magazines,Atomic Drawing Pad,Graphics,,WUYA,8200,"CH.""DRAWING""",Works,DRAWING,present,Wake up your Atom,,,
+570,V4,WUYA,Wake up your Atom,E.Books/Magazines,Fractions,Utility,,WUYA,8200,"CH.""FRACTION""",Works,FRACTION,present,Wake up your Atom,,,
+571,V5,NC,Non Comm,D.Non Commercial Software,Devil's Dungeon,Adventure,Jerry Lakin,NC,8200,"CH.""DUNGEON""",Works,DUNGEON,present,,,,
 572,V5,AT,Atomic S/W,A.Commercial Software,Dragon Writer,Business,,AT,8200,"CH.""DRAGON""",Works,DRAGON,present,,,,
-573,V5,ECCE,ECCE Prods,D.Books/Magazines,Alpha Beta Sort,Educational,,ECCE,8200,"*LOAD ABSORT
+573,V5,ECCE,ECCE Prods,E.Books/Magazines,Alpha Beta Sort,Educational,,ECCE,8200,"*LOAD ABSORT
 CH.""ABDEMO""",Works,"ABSORT
 ABDEMO",present,Atomic Machine Code,,,
-574,V5,ECCE,ECCE Prods,D.Books/Magazines,Auto Number,Educational,,ECCE,8200,*RUN AUTONUM,Works,AUTONUM,present,Atomic Machine Code,,,
-575,V5,ECCE,ECCE Prods,D.Books/Magazines,BRK & Page 0,Educational,,ECCE,8200,*LOAD BRKPAG0,Broken - need the book understand,BRKPAG0,present,Atomic Machine Code,,,
-576,V5,ECCE,ECCE Prods,D.Books/Magazines,*CAT Store,Educational,,ECCE,8200,"CH.""CATSTO""",Broken - need the book understand,CATSTO,present,Atomic Machine Code,,,
-577,V5,ECCE,ECCE Prods,D.Books/Magazines,Realtime Clock,Educational,,ECCE,8200,"*LOAD CLOCK
+574,V5,ECCE,ECCE Prods,E.Books/Magazines,Auto Number,Educational,,ECCE,8200,*RUN AUTONUM,Works,AUTONUM,present,Atomic Machine Code,,,
+575,V5,ECCE,ECCE Prods,E.Books/Magazines,BRK & Page 0,Educational,,ECCE,8200,*LOAD BRKPAG0,Broken - need the book understand,BRKPAG0,present,Atomic Machine Code,,,
+576,V5,ECCE,ECCE Prods,E.Books/Magazines,*CAT Store,Educational,,ECCE,8200,"CH.""CATSTO""",Broken - need the book understand,CATSTO,present,Atomic Machine Code,,,
+577,V5,ECCE,ECCE Prods,E.Books/Magazines,Realtime Clock,Educational,,ECCE,8200,"*LOAD CLOCK
 RUN",Works,CLOCK,present,Atomic Machine Code,,,
-578,V5,ECCE,ECCE Prods,D.Books/Magazines,Delete Lines,Educational,,ECCE,8200,"CH.""DELLINE""",Works,DELLINE,present,Atomic Machine Code,,,
-579,V5,ECCE,ECCE Prods,D.Books/Magazines,Design Letters,Educational,,ECCE,8200,"CH.""DESLET""",Works,DESLET,present,Atomic Machine Code,,,
-580,V5,ECCE,ECCE Prods,D.Books/Magazines,Direct Hex,Educational,,ECCE,8200,"CH.""DIRHEX""",Works,DIRHEX,present,Atomic Machine Code,,,
-581,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Screen Chase,Educational,,ECCE,8200,"CH.""CHASE""",Works,CHASE,present,Atomic Machine Code,,,
-582,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Pontoon,Educational,,ECCE,8200,"CH.""PONTOON""",Works - but needs WorkPack at A000,PONTOON,present,Atomic Machine Code,,,
-583,V7B2,ECCE,ECCE Prods,D.Books/Magazines,Pools,Educational,,ECCE,8200,"CH.""POOLS""",Works,"POOLS
+578,V5,ECCE,ECCE Prods,E.Books/Magazines,Delete Lines,Educational,,ECCE,8200,"CH.""DELLINE""",Works,DELLINE,present,Atomic Machine Code,,,
+579,V5,ECCE,ECCE Prods,E.Books/Magazines,Design Letters,Educational,,ECCE,8200,"CH.""DESLET""",Works,DESLET,present,Atomic Machine Code,,,
+580,V5,ECCE,ECCE Prods,E.Books/Magazines,Direct Hex,Educational,,ECCE,8200,"CH.""DIRHEX""",Works,DIRHEX,present,Atomic Machine Code,,,
+581,V7B2,ECCE,ECCE Prods,E.Books/Magazines,Screen Chase,Educational,,ECCE,8200,"CH.""CHASE""",Works,CHASE,present,Atomic Machine Code,,,
+582,V7B2,ECCE,ECCE Prods,E.Books/Magazines,Pontoon,Educational,,ECCE,8200,"CH.""PONTOON""",Works - but needs WorkPack at A000,PONTOON,present,Atomic Machine Code,,,
+583,V7B2,ECCE,ECCE Prods,E.Books/Magazines,Pools,Educational,,ECCE,8200,"CH.""POOLS""",Works,"POOLS
 POOLS1
 POOLS2",present,Atomic Machine Code,,,
-584,V5,ECCE,ECCE Prods,D.Books/Magazines,Find End of Text,Educational,,ECCE,8200,"CH.""FINDEND""",Works,FINDEND,present,Atomic Machine Code,,,
-585,V5,ECCE,ECCE Prods,D.Books/Magazines,Flashing Lines,Educational,,ECCE,8200,"CH.""FLASH""",Works,FLASH,present,Atomic Machine Code,,,
-586,V5,ECCE,ECCE Prods,D.Books/Magazines,Fruit Machine,Educational,,ECCE,8200,"CH.""FRUIT""",Works,FRUIT,present,Atomic Machine Code,,,
-587,V5,ECCE,ECCE Prods,D.Books/Magazines,Index,Educational,,ECCE,8200,*RUN INDEX,Works,INDEX,present,Atomic Machine Code,,,
-588,V5,ECCE,ECCE Prods,D.Books/Magazines,Key Scan,Educational,,ECCE,8200,"CH.""KEYSCAN""",Works,KEYSCAN,present,Atomic Machine Code,,,
-589,V5,ECCE,ECCE Prods,D.Books/Magazines,Long Strings,Educational,,ECCE,8200,"CH.""LONGSTR""",Works,LONGSTR,present,Atomic Machine Code,,,
-590,V5,ECCE,ECCE Prods,D.Books/Magazines,Menu,Educational,,ECCE,8200,*LOAD MENU,Broken - need the book understand,MENU,present,Atomic Machine Code,,,
-591,V5,ECCE,ECCE Prods,D.Books/Magazines,On Error,Educational,,ECCE,8200,*LOAD ONERROR,Broken - need the book understand,ONERROR,present,Atomic Machine Code,,,
-592,V5,ECCE,ECCE Prods,D.Books/Magazines,Read/Data/Restore,Educational,,ECCE,8200,*LOAD READDAT,Broken - need the book understand,READDAT,present,Atomic Machine Code,,,
-593,V5,ECCE,ECCE Prods,D.Books/Magazines,Record Test,Educational,,ECCE,8200,"CH.""RECTST""",Works,RECTST,present,Atomic Machine Code,,,
-594,V5,ECCE,ECCE Prods,D.Books/Magazines,Record Verify,Educational,,ECCE,8200,"CH.""RECVER""",Works,RECVER,present,Atomic Machine Code,,,
-595,V5,ECCE,ECCE Prods,D.Books/Magazines,Renumber,Educational,,ECCE,8200,"CH.""RENUM""",Works,RENUM,present,Atomic Machine Code,,,
-596,V5,ECCE,ECCE Prods,D.Books/Magazines,Search Lines,Educational,,ECCE,8200,"*LOAD SEARCH
+584,V5,ECCE,ECCE Prods,E.Books/Magazines,Find End of Text,Educational,,ECCE,8200,"CH.""FINDEND""",Works,FINDEND,present,Atomic Machine Code,,,
+585,V5,ECCE,ECCE Prods,E.Books/Magazines,Flashing Lines,Educational,,ECCE,8200,"CH.""FLASH""",Works,FLASH,present,Atomic Machine Code,,,
+586,V5,ECCE,ECCE Prods,E.Books/Magazines,Fruit Machine,Educational,,ECCE,8200,"CH.""FRUIT""",Works,FRUIT,present,Atomic Machine Code,,,
+587,V5,ECCE,ECCE Prods,E.Books/Magazines,Index,Educational,,ECCE,8200,*RUN INDEX,Works,INDEX,present,Atomic Machine Code,,,
+588,V5,ECCE,ECCE Prods,E.Books/Magazines,Key Scan,Educational,,ECCE,8200,"CH.""KEYSCAN""",Works,KEYSCAN,present,Atomic Machine Code,,,
+589,V5,ECCE,ECCE Prods,E.Books/Magazines,Long Strings,Educational,,ECCE,8200,"CH.""LONGSTR""",Works,LONGSTR,present,Atomic Machine Code,,,
+590,V5,ECCE,ECCE Prods,E.Books/Magazines,Menu,Educational,,ECCE,8200,*LOAD MENU,Broken - need the book understand,MENU,present,Atomic Machine Code,,,
+591,V5,ECCE,ECCE Prods,E.Books/Magazines,On Error,Educational,,ECCE,8200,*LOAD ONERROR,Broken - need the book understand,ONERROR,present,Atomic Machine Code,,,
+592,V5,ECCE,ECCE Prods,E.Books/Magazines,Read/Data/Restore,Educational,,ECCE,8200,*LOAD READDAT,Broken - need the book understand,READDAT,present,Atomic Machine Code,,,
+593,V5,ECCE,ECCE Prods,E.Books/Magazines,Record Test,Educational,,ECCE,8200,"CH.""RECTST""",Works,RECTST,present,Atomic Machine Code,,,
+594,V5,ECCE,ECCE Prods,E.Books/Magazines,Record Verify,Educational,,ECCE,8200,"CH.""RECVER""",Works,RECVER,present,Atomic Machine Code,,,
+595,V5,ECCE,ECCE Prods,E.Books/Magazines,Renumber,Educational,,ECCE,8200,"CH.""RENUM""",Works,RENUM,present,Atomic Machine Code,,,
+596,V5,ECCE,ECCE Prods,E.Books/Magazines,Search Lines,Educational,,ECCE,8200,"*LOAD SEARCH
 RUN",Works,SEARCH,present,Atomic Machine Code,,,
-597,V5,ECCE,ECCE Prods,D.Books/Magazines,Transfer Test,Educational,,ECCE,8200,"CH.""TRANSF""",Works,TRANSF,present,Atomic Machine Code,,,
-598,V5,ECCE,ECCE Prods,D.Books/Magazines,Write Mode 4 (e),Educational,,ECCE,8200,*RUN WRTMODE4,Broken - corrupt,WRTMODE4,present,Atomic Machine Code,,,
-599,V5,NC,Non Comm,C.Non Commercial Software,BBC Lister,Utility,,NC,8200,"CH.""BBCLIST""","Works, but needs bbc prog as 8218",BBCLIST,present,,,,
-604,V5,YC,Your Computer,D.Books/Magazines,Easy Atom Codes,Utility,,YC,8200,"CH.""ERRDEMO""",Works,"ERRDEMO
+597,V5,ECCE,ECCE Prods,E.Books/Magazines,Transfer Test,Educational,,ECCE,8200,"CH.""TRANSF""",Works,TRANSF,present,Atomic Machine Code,,,
+598,V5,ECCE,ECCE Prods,E.Books/Magazines,Write Mode 4 (e),Educational,,ECCE,8200,*RUN WRTMODE4,Broken - corrupt,WRTMODE4,present,Atomic Machine Code,,,
+599,V5,NC,Non Comm,D.Non Commercial Software,BBC Lister,Utility,,NC,8200,"CH.""BBCLIST""","Works, but needs bbc prog as 8218",BBCLIST,present,,,,
+604,V5,YC,Your Computer,E.Books/Magazines,Easy Atom Codes,Utility,,YC,8200,"CH.""ERRDEMO""",Works,"ERRDEMO
 ERRPROG
 ERRTAB",present,Magazines,,,
 606,V5,PP,Prog Power,A.Commercial Software,Mode 4 VDU (2900),Utility,R.M.P. Hanson,PP,8200,*RUN VDU29,Works,VDU29,present,,,,
@@ -893,7 +893,7 @@ REPTON",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
 616,V6,NC,Non Comm,B.Modern Creations/Ports,HubPlay (#BDC0),Music,,SID/ATOMSID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
-617,V5,NC,Non Comm,C.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
+617,V5,NC,Non Comm,D.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
 618,V6,NC,Non Comm,B.Modern Creations/Ports,Reptune (#BDC0),Music,,SID/ATOMSID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
 619,V6,NC,Non Comm,B.Modern Creations/Ports,SidTest (#BDC0),Music,,SID/ATOMSID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
 620,V6,NC,Non Comm,B.Modern Creations/Ports,AtomSID (#BDC0) (32K),Music,,SID/ATOMSID,2900,*RUN SIDMENU,Works,"AXELF
@@ -1164,132 +1164,132 @@ TREE
 VU-MENU
 WAROVER
 WHITE",present,SID,Yes,,
-639,V6,A&F,A&F S/W,E.ROMs,A&F Utilikit,Utility,,ROMS/AF/UTILITY,8200,"PRINT TO INITIALIZE: COLD
+639,V6,A&F,A&F S/W,F.ROMS,A&F Utilikit,Utility,,ROMS/AF/UTILITY,8200,"PRINT TO INITIALIZE: COLD
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7261 8800",Works,7261,present,ROMs,,,
-640,V6,AS,Acornsoft,E.ROMs,Atom Calc,Business,,ROMS/ACORN/CALC,8200,"PRINT INITIALIZATION: AUTOMATIC
+640,V6,AS,Acornsoft,F.ROMS,Atom Calc,Business,,ROMS/ACORN/CALC,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: CALC
 PRINT FOR HELP: SEE MANUAL
 *LOAD B1C5 8800",Works,B1C5,present,ROMs,,,
-641,V6,AS,Acornsoft,E.ROMs,Atom Demo,Graphics,,ROMS/ACORN/DEMO,8200,"PRINT TO RUN: RUN
+641,V6,AS,Acornsoft,F.ROMS,Atom Demo,Graphics,,ROMS/ACORN/DEMO,8200,"PRINT TO RUN: RUN
 ?18=160
 *LOAD BANNER
 *LOAD 49F5 8800",Works,"BANNER
 49F5",present,ROMs,,,
-642,V6,AS,Acornsoft,E.ROMs,Word Pack,Business,,ROMS/ACORN/WORD,8200,"PRINT INITIALIZATION: AUTOMATIC
+642,V6,AS,Acornsoft,F.ROMS,Word Pack,Business,,ROMS/ACORN/WORD,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: EDIT
 PRINT FOR HELP: SEE MANUAL
 *LOAD B326 8800",Works,B326,present,ROMs,,,
-643,V6,AS,Acornsoft,E.ROMs,Word Pack - ED64,Business,,ROMS/ACORN/ED64,8200,"PRINT INITIALIZATION: AUTOMATIC
+643,V6,AS,Acornsoft,F.ROMS,Word Pack - ED64,Business,,ROMS/ACORN/ED64,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: ED64
 PRINT FOR HELP: SEE MANUAL
 *LOAD B0F1 8800",Works,B0F1,present,ROMs,,,
-644,V6,AS,Acornsoft,E.ROMs,Word Pack - ED80,Business,,ROMS/ACORN/ED80,8200,"PRINT INITIALIZATION: AUTOMATIC
+644,V6,AS,Acornsoft,F.ROMS,Word Pack - ED80,Business,,ROMS/ACORN/ED80,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: EDIT
 PRINT FOR HELP: SEE MANUAL
 *LOAD CEFA 8800",Fails; need 80 Column VDU Board,CEFA,broken,ROMs,,,
-645,V6,NC,Non Comm,E.ROMs,AEK Monitor ROM,Utility,Alan Knowles,ROMS/AEK/MONITOR,8200,"PRINT TO INITIALIZE: LINK #A7C7
+645,V6,NC,Non Comm,F.ROMS,AEK Monitor ROM,Utility,Alan Knowles,ROMS/AEK/MONITOR,8200,"PRINT TO INITIALIZE: LINK #A7C7
 PRINT TO RUN: *BRK
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9243 8800",Works,9243,present,ROMs,,,
-646,V6,NC,Non Comm,E.ROMs,AEK Screen ROM,Utility,Alan Knowles,ROMS/AEK/SCREEN,8200,"PRINT TO INITIALIZE: COLD
+646,V6,NC,Non Comm,F.ROMS,AEK Screen ROM,Utility,Alan Knowles,ROMS/AEK/SCREEN,8200,"PRINT TO INITIALIZE: COLD
 PRINT FOR HELP: SEE MANUAL
 *LOAD 1201 8800",Works,1201,present,ROMs,,,
-647,V6,NC,Non Comm,E.ROMs,Salfaa,Language,B.Poot/J.Jobse,ROMS/NC/SALFAA,8200,"PRINT INITIALIZATION: AUTOMATIC
+647,V6,NC,Non Comm,F.ROMS,Salfaa,Language,B.Poot/J.Jobse,ROMS/NC/SALFAA,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR COMMANDS: SALFAA
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9F75 8800",Works,9F75,present,ROMs,,,
-648,V6,NC,Non Comm,E.ROMs,Combox,Utility,Bram Poot ,ROMS/NC/COMBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
+648,V6,NC,Non Comm,F.ROMS,Combox,Utility,Bram Poot ,ROMS/NC/COMBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR COMMANDS: COMBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 54D4 8800",Works,54D4,present,ROMs,,,
-649,V6,ECD,ECD,E.ROMs,AXR1,Utility,,ROMS/NC/AXR1,8200,"PRINT INITIALIZATION: AUTOMATIC
+649,V6,ECD,ECD,F.ROMS,AXR1,Utility,,ROMS/NC/AXR1,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD CCEB 8800",Works,CCEB,present,ROMs,,,
-650,V6,NC,Non Comm,E.ROMs,Disk ROM,Utility,Frans le Blanc,ROMS/NC/DISKROM,8200,"PRINT INITIALIZATION: AUTOMATIC
+650,V6,NC,Non Comm,F.ROMS,Disk ROM,Utility,Frans le Blanc,ROMS/NC/DISKROM,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD B2F9 8800",Works,B2F9,present,ROMs,,,
-651,V6,NC,Non Comm,E.ROMs,P-Charme,Language,Frans van Hoesel,ROMS/NC/PCHARME,8200,"PRINT INITIALIZATION: AUTOMATIC
+651,V6,NC,Non Comm,F.ROMS,P-Charme,Language,Frans van Hoesel,ROMS/NC/PCHARME,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD C16B 8800",Works,C16B,present,ROMs,,,
-652,V6,NC,Non Comm,E.ROMs,ACE 2.0,Utility,G. Brandhof,ROMS/NC/ACE20,8200,"PRINT INITIALIZATION: AUTOMATIC
+652,V6,NC,Non Comm,F.ROMS,ACE 2.0,Utility,G. Brandhof,ROMS/NC/ACE20,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD E1FB 8800",Works,E1FB,present,ROMs,,,
-653,V6,NC,Non Comm,E.ROMs,ACE 2.2,Utility,G. Brandhof,ROMS/NC/ACE22,8200,"PRINT INITIALIZATION: AUTOMATIC
+653,V6,NC,Non Comm,F.ROMS,ACE 2.2,Utility,G. Brandhof,ROMS/NC/ACE22,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD 97BE 8800",Works,97BE,present,ROMs,,,
-654,V6,NC,Non Comm,E.ROMs,ACE 3.0,Utility,G. Brandhof,ROMS/NC/ACE30,8200,"PRINT INITIALIZATION: AUTOMATIC
+654,V6,NC,Non Comm,F.ROMS,ACE 3.0,Utility,G. Brandhof,ROMS/NC/ACE30,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD 2BBB 8800",Works,2BBB,present,ROMs,,,
-655,V6,NC,Non Comm,E.ROMs,Gags,Utility,Gerrit Hillebrand,ROMS/NC/GAGS,8200,"PRINT INITIALIZATION: AUTOMATIC
+655,V6,NC,Non Comm,F.ROMS,Gags,Utility,Gerrit Hillebrand,ROMS/NC/GAGS,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: GAGS
 PRINT FOR HELP: SEE MANUAL 
 *LOAD 9F4C 8800",Works,9F4C,present,ROMs,,,
-656,V6,NC,Non Comm,E.ROMs,JosBox,Utility,Jos Horsmeijer,ROMS/NC/JOSBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
+656,V6,NC,Non Comm,F.ROMS,JosBox,Utility,Jos Horsmeijer,ROMS/NC/JOSBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD 6206 8800",Works,6206,present,ROMs,,,
-657,V6,NC,Non Comm,E.ROMs,Atomic Windows,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
+657,V6,NC,Non Comm,F.ROMS,Atomic Windows,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
 *LOAD 4234 8800",Works,4234,present,ROMs,,,
-658,V6,NC,Non Comm,E.ROMs,SDROM 2,Utility,Kees van Oss,ROMS/NC/SDROM2,8200,"PRINT TO INITIALIZE: SDDOS
+658,V6,NC,Non Comm,F.ROMS,SDROM 2,Utility,Kees van Oss,ROMS/NC/SDROM2,8200,"PRINT TO INITIALIZE: SDDOS
 PRINT FOR HELP: SEE MANUAL
 *LOAD 0006 8800","Works, but needs VIA interface",0006,present,ROMs,,,
-659,V6,NC,Non Comm,E.ROMs,SDROM 3,Utility,Kees van Oss,ROMS/NC/SDROM3,8200,"PRINT TO INITIALIZE: SDDOS
+659,V6,NC,Non Comm,F.ROMS,SDROM 3,Utility,Kees van Oss,ROMS/NC/SDROM3,8200,"PRINT TO INITIALIZE: SDDOS
 PRINT FOR HELP: SEE MANUAL
 *LOAD CEE2 8800",Works,CEE2,present,ROMs,,,
-660,V6,PP,Prog Power,E.ROMs,PP Toolbox,Utility,,ROMS/PP/TOOLBOX,8200,"PRINT TO INITIALIZE: LINK #AF00
+660,V6,PP,Prog Power,F.ROMS,PP Toolbox,Utility,,ROMS/PP/TOOLBOX,8200,"PRINT TO INITIALIZE: LINK #AF00
 PRINT FOR HELP: SEE MANUAL
 *LOAD 6C9E 8800",Works,6C9E,present,ROMs,,,
-661,V6,PP,Prog Power,E.ROMs,PP Super Basic,Language,,ROMS/PP/SUPERB,8200,"PRINT TO INITIALIZE: LINK #AF00
+661,V6,PP,Prog Power,F.ROMS,PP Super Basic,Language,,ROMS/PP/SUPERB,8200,"PRINT TO INITIALIZE: LINK #AF00
 PRINT FOR HELP: SEE MANUAL
 *LOAD B1BD 8800",Works,B1BD,present,ROMs,,,
-662,V6,PROC,Procyon,E.ROMs,DisAtom Super ROM,Utility,,ROMS/PROCYON/DISATOM,8200,"PRINT INITIALIZATION: AUTOMATIC
+662,V6,PROC,Procyon,F.ROMS,DisAtom Super ROM,Utility,,ROMS/PROCYON/DISATOM,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7049 8800",Works,7049,present,ROMs,,,
-663,V6,PSI,Psion,E.ROMs,Psion Debug,Utility,,ROMS/PSION/DEBUG,8200,"PRINT INITIALIZATION: AUTOMATIC
+663,V6,PSI,Psion,F.ROMS,Psion Debug,Utility,,ROMS/PSION/DEBUG,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: DEBUG
 PRINT NO MANUAL EXISTS
 *LOAD 0160 8800",Works,0160,present,ROMs,,,
-664,V6,PSI,Psion,E.ROMs,Psion Edit,Utility,,ROMS/PSION/EDIT,8200,"PRINT INITIALIZATION: AUTOMATIC
+664,V6,PSI,Psion,F.ROMS,Psion Edit,Utility,,ROMS/PSION/EDIT,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT TO RUN: EDIT
 PRINT NO MANUAL EXISTS
 *LOAD 129F 8800",Works,129F,present,ROMs,,,
-665,V6,RS,Ross S/W,E.ROMs,Ross Utility,Utility,,ROMS/ROSS/UTILITY,8200,"PRINT TO INITIALIZE: LINK 44992
+665,V6,RS,Ross S/W,F.ROMS,Ross Utility,Utility,,ROMS/ROSS/UTILITY,8200,"PRINT TO INITIALIZE: LINK 44992
 PRINT FOR HELP: SEE MANUAL
 *LOAD 4B99 8800",Works,4B99,present,ROMs,,,
-666,V6,WE,Watford Elec,E.ROMs,WE-ROM,Utility,,ROMS/WATFORD/WEROM,8200,"PRINT INITIALIZATION: AUTOMATIC
+666,V6,WE,Watford Elec,F.ROMS,WE-ROM,Utility,,ROMS/WATFORD/WEROM,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
 *LOAD F545 8800",Works,F545,present,ROMs,,,
-667,V6,WS,Willow S/W,E.ROMs,Willow Utility,Utility,,ROMS/WILLOW/UTILITY,8200,"PRINT TO INITIALIZE: LINK #A000
+667,V6,WS,Willow S/W,F.ROMS,Willow Utility,Utility,,ROMS/WILLOW/UTILITY,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
 *LOAD F315 8800",Works,F315,present,ROMs,,,
-668,V10B5,NC,Non Comm,E.ROMs,MouseBox,Utility,Wouter Ras,ROMS/NC/MOUSEBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
+668,V10B5,NC,Non Comm,F.ROMS,MouseBox,Utility,Wouter Ras,ROMS/NC/MOUSEBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR COMMANDS: MDBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9496 8800","Broken - commands work, but crash/corrupt",9496,present,ROMs,,,
 669,V6,AS,Acornsoft,A.Commercial Software,BBC Basic II (32K),Language,,BBC,8200,*RUN ATBASIC2,Works,ATBASIC2,present,,Yes,,
-670,V6,NC,Non Comm,E.ROMs,Atomic Windows 1.2 BD,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
+670,V6,NC,Non Comm,F.ROMS,Atomic Windows 1.2 BD,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7D81 8800",Works,7D81,present,ROMs,,,
 671,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Works,SCROLL1,present,GODIL,,,
 672,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Works,SCROLL2,present,GODIL,,,
 673,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
-674,V6,NC,Non Comm,C.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
-675,V6,NC,Non Comm,C.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
-676,V6,NC,Non Comm,C.Non Commercial Software,Duck (32K),Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,Yes,,
-679,V6,NC,Non Comm,C.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
+674,V6,NC,Non Comm,D.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
+675,V6,NC,Non Comm,D.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
+676,V6,NC,Non Comm,D.Non Commercial Software,Duck (32K),Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,Yes,,
+679,V6,NC,Non Comm,D.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
 680,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,"RS Mono
 Joystick
 Joystick AtoMMC",Yes,,
-681,V6,NC,Non Comm,C.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,Mainwaring,,,
-682,V6,NC,Non Comm,C.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,Mainwaring,,,
-683,V6,NC,Non Comm,C.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,Mainwaring,,,
-684,V7B2,YC,Your Computer,D.Books/Magazines,Atom Quest,Adventure,,YC,2800,"*LOAD QUESTDA 8200
+681,V6,NC,Non Comm,D.Non Commercial Software,3-2-1,Game,Phil Mainwaring,NC,8200,"CH.""3-2-1""",Works,3-2-1,present,Mainwaring,,,
+682,V6,NC,Non Comm,D.Non Commercial Software,X-Wing Attack,Game,Phil Mainwaring,NC,8200,"CH.""X-WING""",Works,X-WING,present,Mainwaring,,,
+683,V6,NC,Non Comm,D.Non Commercial Software,Robot Nim,Game,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",Works,ROBOTNIM,present,Mainwaring,,,
+684,V7B2,YC,Your Computer,E.Books/Magazines,Atom Quest,Adventure,,YC,2800,"*LOAD QUESTDA 8200
 CH.""QUEST""",Works,"QUEST
 QUESTDA",present,Magazines,,,
 685,V6,ECD,ECD,A.Commercial Software,Moonlander,Game,,OTHER,8200,"CH.""MOONLAN""",Works,MOONLAN,present,,,,
@@ -1365,54 +1365,54 @@ MSDISP",present,Mainwaring,,,
 713,,AF,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
 714,,CS,Computersmith,A.Commercial Software,Financial Year,Game,, , ,,,,missing,,,,
 715,,CS,Computersmith,A.Commercial Software,Stock Market,Game,, , ,,,,missing,,,,
-716,V7B2,YC,Your Computer,D.Books/Magazines,Real-Time Clock,Utility,Kamal Jabbour,YC,8200,"CH.""CLOCK""",Works,CLOCK,present,Magazines,,,
-717,V7B2,YC,Your Computer,D.Books/Magazines,Graph Char,Utility,A. F. Burgin,YC,8200,"CH.""GRAPHCH""",Works,GRAPHCH,present,Magazines,,,
-718,V7B2,CT,Comp Today,D.Books/Magazines,GRAF-RITE,Utility,Bruce F. Smith,CT,8200,"CH.""GRAFRITE""",Works,GRAFRITE,present,Magazines,,,
-719,V7B2,PCW,PCW,D.Books/Magazines,HiRes Print,Utility,,PCW,8200,"CH.""HIRES""",Works,HIRES,present,Magazines,,,
-720,V7B2,AU,Acorn User,D.Books/Magazines,Morse,Utility,,AU,8200,"CH.""MORSE""",Works,MORSE,present,Magazines,,,
-721,V7B2,NC,Non Comm,C.Non Commercial Software,3D Maze,Game,,TAPES/001A,8200,"CH.""MAZE""",Works,MAZE,present,Arcadian Tapes,,,
-722,V7B2,NC,Non Comm,C.Non Commercial Software,Owl,Graphics,,TAPES/001A,8200,"CH.""OWL""",Works,OWL,present,Arcadian Tapes,,,
-723,V7B2,NC,Non Comm,C.Non Commercial Software,Pelmanism,Game,,TAPES/001A,8200,"CH.""PELMANI""",Needs Fixing,PELMANI,present,Arcadian Tapes,,,
-724,V7B2,NC,Non Comm,C.Non Commercial Software,Reversal,Game,,TAPES/002A,8200,"CH.""REVERSA""",Works,REVERSA,present,Arcadian Tapes,,,
-725,V7B2,NC,Non Comm,C.Non Commercial Software,Sketchpad,Graphics,,TAPES/002A,8200,"CH.""SKETCHP""",Works,SKETCHP,present,Arcadian Tapes,,,
-726,V7B2,NC,Non Comm,C.Non Commercial Software,Graphics Demos,Graphics,,TAPES/006B,8200,"CH.""GRAPHIC""",Works,GRAPHIC,present,Arcadian Tapes,,,
-727,V7B2,NC,Non Comm,C.Non Commercial Software,3D OXO,Game,,TAPES/009B,8200,"CH.""3DOXO""",Works,3DOXO,present,Arcadian Tapes,,,
-728,V7B2,NC,Non Comm,C.Non Commercial Software,Life,Simulation,,TAPES/011A,8200,"CH.""LIFEMC""",Works,LIFEMC,present,Arcadian Tapes,,,
-729,V7B2,NC,Non Comm,C.Non Commercial Software,Fighter,Game,,TAPES/013A,8200,"CH.""FIGHTER""",Works,FIGHTER,present,Arcadian Tapes,,,
-730,V7B2,NC,Non Comm,C.Non Commercial Software,Spiroprint,Graphics,,TAPES/022A,8200,"CH.""SPIROPR""",Works,SPIROPR,present,Arcadian Tapes,,,
-731,V7B2,NC,Non Comm,C.Non Commercial Software,Air Raid,Game,,TAPES/023A,8200,"CH.""AIRRAID""",Works,AIRRAID,present,Arcadian Tapes,,,
-732,V7B2,NC,Non Comm,C.Non Commercial Software,Camel,Game,,TAPES/023A,8200,"CH.""CAMEL""",Works,CAMEL,present,Arcadian Tapes,,,
-733,V7B2,NC,Non Comm,C.Non Commercial Software,Depth Charge,Game,,TAPES/023A,8200,"CH.""DEPTHCH""",Works,DEPTHCH,present,Arcadian Tapes,,,
-734,V7B2,NC,Non Comm,C.Non Commercial Software,Fighter,Game,,TAPES/023A,8200,"CH.""FIGHTER""",Works,FIGHTER,present,Arcadian Tapes,,,
-735,V7B2,NC,Non Comm,C.Non Commercial Software,Spirograph,Graphics,,TAPES/030A,8200,"CH.""SPIROGR""",Works,SPIROGR,present,Arcadian Tapes,,,
-736,V7B2,NC,Non Comm,C.Non Commercial Software,War Fish,Game,,TAPES/034A,8200,"CH.""WARFISH""",Works,WARFISH,present,Arcadian Tapes,,,
-737,V7B2,NC,Non Comm,C.Non Commercial Software,Car Maze,Game,,NC,8200,"CH.""CARMAZE""",Works,CARMAZE,present,,,,
-738,V7B2,NC,Non Comm,C.Non Commercial Software,Plane and Tank Battle,Game,,NC,8200,"CH.""TANKBAT""",Works,TANKBAT,present,,,,
-739,V7B2,NC,Non Comm,C.Non Commercial Software,Space Zap,Game,,NC,8200,"CH.""SPACZAP""",Works,SPACZAP,present,,,,
-740,V7B2,NC,Non Comm,C.Non Commercial Software,Stow Away,Game,,NC,8200,"CH.""VERSTEK""",Works,VERSTEK,present,,,,
-741,V7B3,YC,Your Computer,D.Books/Magazines,Atomic Space battle,Game,,YC,8200,"CH.""SBATTL""",Works,SBATTL,present,Magazines,,,
-742,V7B3,YC,Your Computer,D.Books/Magazines,Atom Art,Graphics,,YC,8200,"CH.""ATOMART""",Works,ATOMART,present,Magazines,,,
-743,V7B3,YC,Your Computer,D.Books/Magazines,Atom Squash,Game,,YC,8200,"CH.""SQUASH""",Works,SQUASH,present,Magazines,,,
-744,V7B3,YC,Your Computer,D.Books/Magazines,Acorn Pilot,Game,,YC,8200,"CH.""PILOTX""",Works,PILOTX,present,Magazines,,,
-745,V7B3,YC,Your Computer,D.Books/Magazines,Forth Connection,Game,,YC,8200,"CH.""CONNECT""",Broken,CONNECT,present,Magazines,,,
-746,V7B3,YC,Your Computer,D.Books/Magazines,Rally Racer,Game,,YC,8200,"CH.""RALLY""",Works,RALLY,present,Magazines,,,
-747,V7B3,NC,Non Comm,E.ROMs,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
+716,V7B2,YC,Your Computer,E.Books/Magazines,Real-Time Clock,Utility,Kamal Jabbour,YC,8200,"CH.""CLOCK""",Works,CLOCK,present,Magazines,,,
+717,V7B2,YC,Your Computer,E.Books/Magazines,Graph Char,Utility,A. F. Burgin,YC,8200,"CH.""GRAPHCH""",Works,GRAPHCH,present,Magazines,,,
+718,V7B2,CT,Comp Today,E.Books/Magazines,GRAF-RITE,Utility,Bruce F. Smith,CT,8200,"CH.""GRAFRITE""",Works,GRAFRITE,present,Magazines,,,
+719,V7B2,PCW,PCW,E.Books/Magazines,HiRes Print,Utility,,PCW,8200,"CH.""HIRES""",Works,HIRES,present,Magazines,,,
+720,V7B2,AU,Acorn User,E.Books/Magazines,Morse,Utility,,AU,8200,"CH.""MORSE""",Works,MORSE,present,Magazines,,,
+721,V7B2,NC,Non Comm,D.Non Commercial Software,3D Maze,Game,,TAPES/001A,8200,"CH.""MAZE""",Works,MAZE,present,Arcadian Tapes,,,
+722,V7B2,NC,Non Comm,D.Non Commercial Software,Owl,Graphics,,TAPES/001A,8200,"CH.""OWL""",Works,OWL,present,Arcadian Tapes,,,
+723,V7B2,NC,Non Comm,D.Non Commercial Software,Pelmanism,Game,,TAPES/001A,8200,"CH.""PELMANI""",Needs Fixing,PELMANI,present,Arcadian Tapes,,,
+724,V7B2,NC,Non Comm,D.Non Commercial Software,Reversal,Game,,TAPES/002A,8200,"CH.""REVERSA""",Works,REVERSA,present,Arcadian Tapes,,,
+725,V7B2,NC,Non Comm,D.Non Commercial Software,Sketchpad,Graphics,,TAPES/002A,8200,"CH.""SKETCHP""",Works,SKETCHP,present,Arcadian Tapes,,,
+726,V7B2,NC,Non Comm,D.Non Commercial Software,Graphics Demos,Graphics,,TAPES/006B,8200,"CH.""GRAPHIC""",Works,GRAPHIC,present,Arcadian Tapes,,,
+727,V7B2,NC,Non Comm,D.Non Commercial Software,3D OXO,Game,,TAPES/009B,8200,"CH.""3DOXO""",Works,3DOXO,present,Arcadian Tapes,,,
+728,V7B2,NC,Non Comm,D.Non Commercial Software,Life,Simulation,,TAPES/011A,8200,"CH.""LIFEMC""",Works,LIFEMC,present,Arcadian Tapes,,,
+729,V7B2,NC,Non Comm,D.Non Commercial Software,Fighter,Game,,TAPES/013A,8200,"CH.""FIGHTER""",Works,FIGHTER,present,Arcadian Tapes,,,
+730,V7B2,NC,Non Comm,D.Non Commercial Software,Spiroprint,Graphics,,TAPES/022A,8200,"CH.""SPIROPR""",Works,SPIROPR,present,Arcadian Tapes,,,
+731,V7B2,NC,Non Comm,D.Non Commercial Software,Air Raid,Game,,TAPES/023A,8200,"CH.""AIRRAID""",Works,AIRRAID,present,Arcadian Tapes,,,
+732,V7B2,NC,Non Comm,D.Non Commercial Software,Camel,Game,,TAPES/023A,8200,"CH.""CAMEL""",Works,CAMEL,present,Arcadian Tapes,,,
+733,V7B2,NC,Non Comm,D.Non Commercial Software,Depth Charge,Game,,TAPES/023A,8200,"CH.""DEPTHCH""",Works,DEPTHCH,present,Arcadian Tapes,,,
+734,V7B2,NC,Non Comm,D.Non Commercial Software,Fighter,Game,,TAPES/023A,8200,"CH.""FIGHTER""",Works,FIGHTER,present,Arcadian Tapes,,,
+735,V7B2,NC,Non Comm,D.Non Commercial Software,Spirograph,Graphics,,TAPES/030A,8200,"CH.""SPIROGR""",Works,SPIROGR,present,Arcadian Tapes,,,
+736,V7B2,NC,Non Comm,D.Non Commercial Software,War Fish,Game,,TAPES/034A,8200,"CH.""WARFISH""",Works,WARFISH,present,Arcadian Tapes,,,
+737,V7B2,NC,Non Comm,D.Non Commercial Software,Car Maze,Game,,NC,8200,"CH.""CARMAZE""",Works,CARMAZE,present,,,,
+738,V7B2,NC,Non Comm,D.Non Commercial Software,Plane and Tank Battle,Game,,NC,8200,"CH.""TANKBAT""",Works,TANKBAT,present,,,,
+739,V7B2,NC,Non Comm,D.Non Commercial Software,Space Zap,Game,,NC,8200,"CH.""SPACZAP""",Works,SPACZAP,present,,,,
+740,V7B2,NC,Non Comm,D.Non Commercial Software,Stow Away,Game,,NC,8200,"CH.""VERSTEK""",Works,VERSTEK,present,,,,
+741,V7B3,YC,Your Computer,E.Books/Magazines,Atomic Space battle,Game,,YC,8200,"CH.""SBATTL""",Works,SBATTL,present,Magazines,,,
+742,V7B3,YC,Your Computer,E.Books/Magazines,Atom Art,Graphics,,YC,8200,"CH.""ATOMART""",Works,ATOMART,present,Magazines,,,
+743,V7B3,YC,Your Computer,E.Books/Magazines,Atom Squash,Game,,YC,8200,"CH.""SQUASH""",Works,SQUASH,present,Magazines,,,
+744,V7B3,YC,Your Computer,E.Books/Magazines,Acorn Pilot,Game,,YC,8200,"CH.""PILOTX""",Works,PILOTX,present,Magazines,,,
+745,V7B3,YC,Your Computer,E.Books/Magazines,Forth Connection,Game,,YC,8200,"CH.""CONNECT""",Broken,CONNECT,present,Magazines,,,
+746,V7B3,YC,Your Computer,E.Books/Magazines,Rally Racer,Game,,YC,8200,"CH.""RALLY""",Works,RALLY,present,Magazines,,,
+747,V7B3,NC,Non Comm,F.ROMS,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",Works,46E8,present,ROMs,,,
-748,V7B3,AU,Acorn User,D.Books/Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Works,SCRDUMP,present,Magazines,,,
-749,V7,NC,Non Comm,C.Non Commercial Software,Heads or Tails,Game,Bob Mockford,BM,8200,"CH.""25COINS""",Works,25COINS,present,Mockford,,,
-750,V7,NC,Non Comm,C.Non Commercial Software,Anagram,Game,Bob Mockford,BM,8200,"CH.""ARGANAM""",Works,ARGANAM,present,Mockford,,,
-751,V7,NC,Non Comm,C.Non Commercial Software,Battleships,Game,Bob Mockford,BM,8200,"CH.""BATTLE""",Works,BATTLE,present,Mockford,,,
-752,V7,NC,Non Comm,C.Non Commercial Software,The Box Game,Game,Bob Mockford,BM,8200,"CH.""BOXGAME""",Works,BOXGAME,present,Mockford,,,
-753,V7,NC,Non Comm,C.Non Commercial Software,UK Day Finder,Utility,Bob Mockford,BM,8200,"CH.""DAYDATE""",Works,DAYDATE,present,Mockford,,,
-754,V7,NC,Non Comm,C.Non Commercial Software,Digitz,Game,Bob Mockford,BM,8200,"CH.""DIGITZ""",Works,DIGITZ,present,Mockford,,,
-755,V7,NC,Non Comm,C.Non Commercial Software,Egyptian Arithmetic,Utility,Bob Mockford,BM,8200,"CH.""EMATHS""",Works,EMATHS,present,Mockford,,,
-756,V7,NC,Non Comm,C.Non Commercial Software,Decimal and Hexadecimal Conversion,Utility,Bob Mockford,BM,8200,"CH.""HEXDEC""",Works,HEXDEC,present,Mockford,,,
-757,V7,NC,Non Comm,C.Non Commercial Software,Higher or Lower,Game,Bob Mockford,BM,8200,"CH.""HILO""",Works,HILO,present,Mockford,,,
-758,V7,NC,Non Comm,C.Non Commercial Software,Any Month Calendar,Utility,Bob Mockford,BM,8200,"CH.""MONTHS""",Works,MONTHS,present,Mockford,,,
-759,V7,NC,Non Comm,C.Non Commercial Software,Random Numbers,Utility,Bob Mockford,BM,8200,"CH.""RND2099""",Works,RND2099,present,Mockford,,,
-760,V7,NC,Non Comm,C.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Works,ROMAN,present,Mockford,,,
-761,V7,NC,Non Comm,C.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Works,ROSCPA,present,Mockford,,,
-762,V7,NC,Non Comm,C.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Mockford,,,
+748,V7B3,AU,Acorn User,E.Books/Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Works,SCRDUMP,present,Magazines,,,
+749,V7,NC,Non Comm,D.Non Commercial Software,Heads or Tails,Game,Bob Mockford,BM,8200,"CH.""25COINS""",Works,25COINS,present,Mockford,,,
+750,V7,NC,Non Comm,D.Non Commercial Software,Anagram,Game,Bob Mockford,BM,8200,"CH.""ARGANAM""",Works,ARGANAM,present,Mockford,,,
+751,V7,NC,Non Comm,D.Non Commercial Software,Battleships,Game,Bob Mockford,BM,8200,"CH.""BATTLE""",Works,BATTLE,present,Mockford,,,
+752,V7,NC,Non Comm,D.Non Commercial Software,The Box Game,Game,Bob Mockford,BM,8200,"CH.""BOXGAME""",Works,BOXGAME,present,Mockford,,,
+753,V7,NC,Non Comm,D.Non Commercial Software,UK Day Finder,Utility,Bob Mockford,BM,8200,"CH.""DAYDATE""",Works,DAYDATE,present,Mockford,,,
+754,V7,NC,Non Comm,D.Non Commercial Software,Digitz,Game,Bob Mockford,BM,8200,"CH.""DIGITZ""",Works,DIGITZ,present,Mockford,,,
+755,V7,NC,Non Comm,D.Non Commercial Software,Egyptian Arithmetic,Utility,Bob Mockford,BM,8200,"CH.""EMATHS""",Works,EMATHS,present,Mockford,,,
+756,V7,NC,Non Comm,D.Non Commercial Software,Decimal and Hexadecimal Conversion,Utility,Bob Mockford,BM,8200,"CH.""HEXDEC""",Works,HEXDEC,present,Mockford,,,
+757,V7,NC,Non Comm,D.Non Commercial Software,Higher or Lower,Game,Bob Mockford,BM,8200,"CH.""HILO""",Works,HILO,present,Mockford,,,
+758,V7,NC,Non Comm,D.Non Commercial Software,Any Month Calendar,Utility,Bob Mockford,BM,8200,"CH.""MONTHS""",Works,MONTHS,present,Mockford,,,
+759,V7,NC,Non Comm,D.Non Commercial Software,Random Numbers,Utility,Bob Mockford,BM,8200,"CH.""RND2099""",Works,RND2099,present,Mockford,,,
+760,V7,NC,Non Comm,D.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Works,ROMAN,present,Mockford,,,
+761,V7,NC,Non Comm,D.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Works,ROSCPA,present,Mockford,,,
+762,V7,NC,Non Comm,D.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Mockford,,,
 763,V7,NC,Non Comm,B.Modern Creations/Ports,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Works,"01THELA
 02ILLFI
 03THEMO
@@ -1430,7 +1430,7 @@ MSDISP",present,Mainwaring,,,
 SIDMENU",present,SID,Yes,,
 764,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,RS Colour,Yes,,
 765,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
-766,V9B2,NC,Non Comm,E.ROMs,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
+766,V9B2,NC,Non Comm,F.ROMS,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D199 8800",Works,D199,present,,,,
 767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
 768,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
@@ -1443,7 +1443,7 @@ START",present,RS Colour,Yes,,
 772,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 2,Utility,,BB,8200,"CH.""STATS2""",Works,STATS2,present,,,,
 773,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 3,Utility,,BB,8200,"CH.""STATS3""",Works,STATS3,present,,,,
 774,V8B1,BB,Bug Byte,A.Commercial Software,Statistics 4,Utility,,BB,8200,"CH.""STATS4""",Works,STATS4,present,,,,
-775,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 1,Game,,NC/GOKKAST1,8200,"CH.""GOKKAST""",Works,"CONTROL
+775,V8B1,NC,Non Comm,D.Non Commercial Software,Gokkast 1,Game,,NC/GOKKAST1,8200,"CH.""GOKKAST""",Works,"CONTROL
 GOKKAST
 HO-LA
 HO-NU
@@ -1452,7 +1452,7 @@ PICTURE
 PUNTEN
 SCHERM
 VDU",present,,,,
-776,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Works,"2BASC28
+776,V8B1,NC,Non Comm,D.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Works,"2BASC28
 2BASC65
 2BASC98
 2BONS68
@@ -1463,7 +1463,7 @@ VDU",present,,,,
 2SCHM80
 GKKST2
 VDU",present,,,,
-777,V8B1,NC,Non Comm,C.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Works,"2440VDU
+777,V8B1,NC,Non Comm,D.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Works,"2440VDU
 CONTROL
 DRAAI
 FRUITMA
@@ -1471,20 +1471,20 @@ OMKEER
 PUNTEN
 SCHERM
 SYMBOOL",present,,,,
-778,V8B1,NC,Non Comm,C.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Works,CHARON,present,,,,
-779,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
+778,V8B1,NC,Non Comm,D.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Works,CHARON,present,,,,
+779,V8B1,NC,Non Comm,D.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
 780,V8B1,NC,Non Comm,B.Modern Creations/Ports,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"*LOAD PLAY800
 *LOAD STARWARS
 CH.""SW8""",Works,"SW8
 SW1X.TXT
 PLAY800
 STARWARS",present,GODIL,Yes,,
-781,V8B1,NC,Non Comm,C.Non Commercial Software,Duck-2 (32K),Game,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""",Works,"DUCK-2
+781,V8B1,NC,Non Comm,D.Non Commercial Software,Duck-2 (32K),Game,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""",Works,"DUCK-2
 D2-EDIT
 D2-SCR
 D2-SPEL
 D2-SPRI",present,,Yes,,
-782,V8B2,NC,Non Comm,C.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Works,"S-RESET
+782,V8B2,NC,Non Comm,D.Non Commercial Software,Sokatom (32K),Game,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""",Works,"S-RESET
 SCORE
 SOKATOM
 SOKBLD1
@@ -1532,14 +1532,14 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 799,V8B3,AS,Acornsoft,A.Commercial Software,Dodgems (JS),Game,,JS/KEES,8200,*RUN DODGEMS,Works,DODGEMS,present,"Joystick
 Joystick Kbd",,,
-800,V8B3,YC,Your Computer,D.Books/Magazines,Acorn Kong (JS),Game,,JS/KEES,8200,"CH.""KONG""",Works,KONG,present,"Joystick
+800,V8B3,YC,Your Computer,E.Books/Magazines,Acorn Kong (JS),Game,,JS/KEES,8200,"CH.""KONG""",Works,KONG,present,"Joystick
 Joystick Kbd",,,
 801,V8B3,PP,Prog Power,A.Commercial Software,Martians (JS),Game,,JS/KEES,8200,*RUN MARTIAN,Works,MARTIAN,present,"Joystick
 Joystick Kbd",,,
 802,V8B3,MM,Micro Mania,A.Commercial Software,Omega Mission (JS),Game,,JS/KEES,8200,*RUN OMEGA,Works,"OMEGA
 DATA",present,"Joystick
 Joystick Kbd",,,
-803,V8B3,NC,Non Comm,C.Non Commercial Software,Pointer (JS),Game,,JS/KEES,8200,"*LOAD POINTER
+803,V8B3,NC,Non Comm,D.Non Commercial Software,Pointer (JS),Game,,JS/KEES,8200,"*LOAD POINTER
 RUN",Works,POINTER,present,"Joystick
 Joystick Kbd",,,
 804,V8B3,AS,Acornsoft,A.Commercial Software,Rat Trap (JS),Game,,JS/KEES,8200,*RUN RATTRAP,Works,RATTRAP,present,"Joystick
@@ -1554,23 +1554,23 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 809,V8B3,AR,A&R S/W,A.Commercial Software,Trap (JS),Game,,JS/KEES,8200,*RUN TRAP,Works,TRAP,present,"Joystick
 Joystick Kbd",,,
-810,V8B3,NC,Non Comm,C.Non Commercial Software,Shelob's Army (16K) (JS),Game,,JS/KEES,8200,"CH.""SHELOBS""",Works,SHELOBS,present,"Joystick
+810,V8B3,NC,Non Comm,D.Non Commercial Software,Shelob's Army (16K) (JS),Game,,JS/KEES,8200,"CH.""SHELOBS""",Works,SHELOBS,present,"Joystick
 Joystick Kbd",yes,,
-811,V8B3,NC,Non Comm,C.Non Commercial Software,Ghost (JS),Game,,JS/KEES,8200,"CH.""GHOST""",Works,GHOST,present,"Joystick
+811,V8B3,NC,Non Comm,D.Non Commercial Software,Ghost (JS),Game,,JS/KEES,8200,"CH.""GHOST""",Works,GHOST,present,"Joystick
 Joystick Kbd",,,
-812,V8B3,NC,Non Comm,C.Non Commercial Software,Saturn (JS),Game,,JS/KEES,8200,"CH.""SATURN""",Works,SATURN,present,"Joystick
+812,V8B3,NC,Non Comm,D.Non Commercial Software,Saturn (JS),Game,,JS/KEES,8200,"CH.""SATURN""",Works,SATURN,present,"Joystick
 Joystick Kbd",,,
 813,V8B3,PP,Prog Power,A.Commercial Software,3D Asteroids (JS),Game,,JS/WIM,8200,"CH.""3DASTER""",Works,3DASTER,present,"Joystick
 Joystick Kbd",,,
 814,V8B3,AS,Acornsoft,A.Commercial Software,Four Row (JS),Game,,JS/WIM,8200,"CH.""4OP1RIJ""",Works,4OP1RIJ,present,"Joystick
 Joystick Kbd",,,
-815,V8B3,NC,Non Comm,C.Non Commercial Software,Bowling (R) (JS),Game,,JS/WIM,8200,"CH.""BOWLING""",Works,BOWLING,present,"Joystick
+815,V8B3,NC,Non Comm,D.Non Commercial Software,Bowling (R) (JS),Game,,JS/WIM,8200,"CH.""BOWLING""",Works,BOWLING,present,"Joystick
 Joystick Kbd",,,
 816,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BREAKOU""",Works,BREAKOU,present,"Joystick
 Joystick Kbd",,,
 817,V8B3,AS,Acornsoft,A.Commercial Software,Breakout (JS),Game,,JS/WIM,8200,"CH.""BRKOUT""",Works,BRKOUT,present,"Joystick
 Joystick Kbd",,,
-818,V8B3,AMB,Atom Magic Book,D.Books/Magazines,Drive (JS),Game,,JS/WIM,8200,"CH.""DRIVE""",Works,DRIVE,present,"Joystick
+818,V8B3,AMB,Atom Magic Book,E.Books/Magazines,Drive (JS),Game,,JS/WIM,8200,"CH.""DRIVE""",Works,DRIVE,present,"Joystick
 Joystick Kbd",,,
 819,V8B3,PP,Prog Power,A.Commercial Software,Space Fighter (JS),Game,,JS/WIM,8200,"CH.""FIGHTER""",Works,FIGHTER,present,"Joystick
 Joystick Kbd",,,
@@ -1578,33 +1578,33 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 821,V8B3,PP,Prog Power,A.Commercial Software,Hyperfire (JS),Game,,JS/WIM,8200,"CH.""HYPERFI""",Works,HYPERFI,present,"Joystick
 Joystick Kbd",,,
-822,V8B3,NC,Non Comm,C.Non Commercial Software,Jet (JS),Game,,JS/WIM,8200,"CH.""JET""",Works,JET,present,"Joystick
+822,V8B3,NC,Non Comm,D.Non Commercial Software,Jet (JS),Game,,JS/WIM,8200,"CH.""JET""",Works,JET,present,"Joystick
 Joystick Kbd",,,
-823,V8B3,NC,Non Comm,C.Non Commercial Software,Race (JS),Game,,JS/WIM,8200,"CH.""JOYRACE""",Works,JOYRACE,present,"Joystick
+823,V8B3,NC,Non Comm,D.Non Commercial Software,Race (JS),Game,,JS/WIM,8200,"CH.""JOYRACE""",Works,JOYRACE,present,"Joystick
 Joystick Kbd",,,
-824,V8B3,NC,Non Comm,C.Non Commercial Software,Navigator (R) (JS),Game,,JS/WIM,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,"Joystick
+824,V8B3,NC,Non Comm,D.Non Commercial Software,Navigator (R) (JS),Game,,JS/WIM,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,"Joystick
 Joystick Kbd",,,
 825,V8B3,A&F,A&F S/W,A.Commercial Software,Painter (JS),Game,,JS/WIM,8200,"CH.""PAINTER""",Works,PAINTER,present,"Joystick
 Joystick Kbd",,,
 826,V8B3,MM,Micro Mania,A.Commercial Software,Puckman (JS),Game,,JS/WIM,8200,"CH.""PUCKMA""",Works,PUCKMA,present,"Joystick
 Joystick Kbd",,,
-827,V8B3,NC,Non Comm,C.Non Commercial Software,Race Rups (R) (JS),Game,,JS/WIM,8200,"CH.""RACRUPS""",Works,RACRUPS,present,"Joystick
+827,V8B3,NC,Non Comm,D.Non Commercial Software,Race Rups (R) (JS),Game,,JS/WIM,8200,"CH.""RACRUPS""",Works,RACRUPS,present,"Joystick
 Joystick Kbd",,,
-828,V8B3,NC,Non Comm,C.Non Commercial Software,Rhinoceros (JS),Game,,JS/WIM,8200,"CH.""RHINORO""",Works,RHINORO,present,"Joystick
+828,V8B3,NC,Non Comm,D.Non Commercial Software,Rhinoceros (JS),Game,,JS/WIM,8200,"CH.""RHINORO""",Works,RHINORO,present,"Joystick
 Joystick Kbd",,,
-829,V8B3,NC,Non Comm,C.Non Commercial Software,Shuttle (R) (JS),Game,,JS/WIM,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,"Joystick
+829,V8B3,NC,Non Comm,D.Non Commercial Software,Shuttle (R) (JS),Game,,JS/WIM,8200,"CH.""SHUTTLE""",Works,SHUTTLE,present,"Joystick
 Joystick Kbd",,,
 830,V8B3,AS,Acornsoft,A.Commercial Software,Snake (JS),Game,,JS/WIM,8200,"CH.""SNAKE""",Works,SNAKE,present,"Joystick
 Joystick Kbd",,,
 831,V8B3,AS,Acornsoft,A.Commercial Software,Snapper (JS),Game,,JS/WIM,8200,"CH.""SNAPPER""",Works,SNAPPER,present,"Joystick
 Joystick Kbd",,,
-832,V8B3,NC,Non Comm,C.Non Commercial Software,Space Zap (JS),Game,,JS/WIM,8200,"CH.""SPACZAP""",Works,SPACZAP,present,"Joystick
+832,V8B3,NC,Non Comm,D.Non Commercial Software,Space Zap (JS),Game,,JS/WIM,8200,"CH.""SPACZAP""",Works,SPACZAP,present,"Joystick
 Joystick Kbd",,,
-833,V8B3,NC,Non Comm,C.Non Commercial Software,Space Robots (R) (JS),Game,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",Works,SPAROBS,present,"Joystick
+833,V8B3,NC,Non Comm,D.Non Commercial Software,Space Robots (R) (JS),Game,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",Works,SPAROBS,present,"Joystick
 Joystick Kbd",,,
 834,V8B3,PP,Prog Power,A.Commercial Software,Swarm (JS),Game,,JS/WIM,8200,"CH.""SWARM""",Works,SWARM,present,"Joystick
 Joystick Kbd",,,
-835,V8B3,NC,Non Comm,C.Non Commercial Software,Stowaway (JS),Game,,JS/WIM,8200,"CH.""VERSTE1""",Works,VERSTE1,present,"Joystick
+835,V8B3,NC,Non Comm,D.Non Commercial Software,Stowaway (JS),Game,,JS/WIM,8200,"CH.""VERSTE1""",Works,VERSTE1,present,"Joystick
 Joystick Kbd",,,
 836,V8B3,PP,Prog Power,A.Commercial Software,Warlords (JS),Game,,JS/WIM,8200,"CH.""WARLOR""",Works,WARLOR,present,"Joystick
 Joystick Kbd",,,
@@ -1616,21 +1616,21 @@ Joystick Kbd",,,
 RUN",Works,"AIRATTA
 ATDATA",present,"Joystick
 Joystick Kbd",,,
-840,V8B3,NC,Non Comm,C.Non Commercial Software,Ghost,Game,,NC,8200,"CH.""GHOST""",Works,GHOST,present,,,,
-841,V8B3,NC,Non Comm,C.Non Commercial Software,Saturn,Game,,NC,8200,"CH.""SATURN""",Works,SATURN,present,,,,
+840,V8B3,NC,Non Comm,D.Non Commercial Software,Ghost,Game,,NC,8200,"CH.""GHOST""",Works,GHOST,present,,,,
+841,V8B3,NC,Non Comm,D.Non Commercial Software,Saturn,Game,,NC,8200,"CH.""SATURN""",Works,SATURN,present,,,,
 842,V8B3,ES,Electrocomp sups,A.Commercial Software,Basic Invaders,Game,,ES,8200,"CH.""BAINV""",Works,BAINV,present,,,,
 843,V8B3,ES,Electrocomp sups,A.Commercial Software,Darts,Game,,ES,0300,"*RUN DARTS1
 ?18=46
 CH.""DARTS2""",Works,"DARTS1
 DARTS2",present,,,,
-844,V8B3,NC,Non Comm,C.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
-845,V9B1,NC,Non Comm,C.Non Commercial Software,Pacman (JS),Game,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",Works,PACMAN,present,"Joystick
+844,V8B3,NC,Non Comm,D.Non Commercial Software,Le Passe Temps,Game,,NC,8200,"CH.""4OP1RY""",Works,4OP1RY,present,,,,
+845,V9B1,NC,Non Comm,D.Non Commercial Software,Pacman (JS),Game,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",Works,PACMAN,present,"Joystick
 Joystick Kbd",,,
-846,V9B1,NC,Non Comm,C.Non Commercial Software,Burger Time (JS) (R),Game,,JS/KEES,8200,"CH.""BTIME""",Works,BTIME,present,"Joystick
+846,V9B1,NC,Non Comm,D.Non Commercial Software,Burger Time (JS) (R),Game,,JS/KEES,8200,"CH.""BTIME""",Works,BTIME,present,"Joystick
 Joystick Kbd",,,
-847,V9B1,NC,Non Comm,C.Non Commercial Software,Egg Catcher (JS) (R),Game,,JS/KEES,8200,"CH.""KIP""",Works,KIP,present,"Joystick
+847,V9B1,NC,Non Comm,D.Non Commercial Software,Egg Catcher (JS) (R),Game,,JS/KEES,8200,"CH.""KIP""",Works,KIP,present,"Joystick
 Joystick Kbd",,,
-848,V9B1,NC,Non Comm,C.Non Commercial Software,Helicopter Lander (JS),Game,,JS/KEES,8200,"CH.""JHELI""",Works,JHELI,present,"Joystick
+848,V9B1,NC,Non Comm,D.Non Commercial Software,Helicopter Lander (JS),Game,,JS/KEES,8200,"CH.""JHELI""",Works,JHELI,present,"Joystick
 Joystick Kbd",,,
 849,V9B1,BB,Bug Byte,A.Commercial Software,Last Run (JS),Game,,JS/KEES,8200,"CH.""JLAST""",Works,JLAST,present,"Joystick
 Joystick Kbd",,,
@@ -1650,34 +1650,34 @@ Joystick Kbd",,,
 79ANOTH
 SIDMENU
 ",present,SID,Yes,,
-851,V9B1,HB,Hobbit,D.Books/Magazines,Valtinet (R),Game,,HB,8200,"CH.""VALINET""",Works,VALINET,present,,,,
-852,V9B1,NC,Non Comm,C.Non Commercial Software,VDC FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
-853,V9B1,PCW,PCW,D.Books/Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Works,QUEST,present,,,,
-854,V9B1,NC,Non Comm,C.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028.ATM""",Works,028.ATM,present,GameBase,,,
-855,V9B1,NC,Non Comm,C.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057.ATM""",Works,057.ATM,present,GameBase,,, requires AXR1
-856,V9B1,NC,Non Comm,C.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,"CH.""069.ATM""",Works,069.ATM,present,GameBase,,,
-857,V9B1,NC,Non Comm,C.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072.ATM""",Works,072.ATM,present,GameBase,,,
-858,V9B1,NC,Non Comm,C.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073.ATM""",Works,073.ATM,present,GameBase,,,
-859,V9B1,NC,Non Comm,C.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074.ATM""",Works,074.ATM,present,GameBase,,,
-860,V9B1,NC,Non Comm,C.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,"CH.""075.ATM""",Works,075.ATM,present,GameBase,,,
-861,V9B1,NC,Non Comm,C.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,"CH.""078.ATM""",Works,078.ATM,present,GameBase,,,
-862,V9B1,NC,Non Comm,C.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,"CH.""079.ATM""",Works,079.ATM,present,GameBase,,,
-863,V9B1,NC,Non Comm,C.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098.ATM,Works,098.ATM,present,GameBase,,,
-864,V9B1,NC,Non Comm,C.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134.ATM""",Works,134.ATM,present,GameBase,,,
-865,V9B1,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144.ATM""",Works,144.ATM,present,GameBase,,,
-866,V9B1,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,"CH.""155.ATM""",Works,155.ATM,present,GameBase,,,
-867,V9B1,NC,Non Comm,C.Non Commercial Software,Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158.ATM,Works,158.ATM,present,GameBase,,, requires WE-ROM
-868,V9B1,NC,Non Comm,C.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159.ATM""",Works,159.ATM,present,GameBase,,,
-869,V9B1,NC,Non Comm,C.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165.ATM""",Works,165.ATM,present,GameBase,,,
-870,V9B1,PCW,PCW,D.Books/Magazines,Acorn Scramble,Game, ??,GB,8200,*RUN 166.ATM,Works,166.ATM,present,GameBase,,,
-871,V9B1,NC,Non Comm,C.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168.ATM""",Works,168.ATM,present,GameBase,,,
-872,V9B1,NC,Non Comm,C.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,"CH.""169.ATM""",Works,169.ATM,present,GameBase,,,requires WE-ROM
-873,V9B1,NC,Non Comm,C.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,"CH.""172.ATM""",Works,172.ATM,present,GameBase,,,
-874,V9B1,NC,Non Comm,C.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Works,185.ATM,present,GameBase,,,requires AXR1
-875,V9B1,NC,Non Comm,C.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Works,197.ATM,present,GameBase,,,
-876,V9B1,NC,Non Comm,C.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199.ATM""",Works,199.ATM,present,GameBase,,,
-877,V9B1,NC,Non Comm,C.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226.ATM""",Works,226.ATM,present,GameBase,,,
-878,V9B1,NC,Non Comm,C.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
+851,V9B1,HB,Hobbit,E.Books/Magazines,Valtinet (R),Game,,HB,8200,"CH.""VALINET""",Works,VALINET,present,,,,
+852,V9B1,NC,Non Comm,D.Non Commercial Software,VDC FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
+853,V9B1,PCW,PCW,E.Books/Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Works,QUEST,present,,,,
+854,V9B1,NC,Non Comm,D.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028.ATM""",Works,028.ATM,present,GameBase,,,
+855,V9B1,NC,Non Comm,D.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057.ATM""",Works,057.ATM,present,GameBase,,, requires AXR1
+856,V9B1,NC,Non Comm,D.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,"CH.""069.ATM""",Works,069.ATM,present,GameBase,,,
+857,V9B1,NC,Non Comm,D.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072.ATM""",Works,072.ATM,present,GameBase,,,
+858,V9B1,NC,Non Comm,D.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073.ATM""",Works,073.ATM,present,GameBase,,,
+859,V9B1,NC,Non Comm,D.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074.ATM""",Works,074.ATM,present,GameBase,,,
+860,V9B1,NC,Non Comm,D.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,"CH.""075.ATM""",Works,075.ATM,present,GameBase,,,
+861,V9B1,NC,Non Comm,D.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,"CH.""078.ATM""",Works,078.ATM,present,GameBase,,,
+862,V9B1,NC,Non Comm,D.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,"CH.""079.ATM""",Works,079.ATM,present,GameBase,,,
+863,V9B1,NC,Non Comm,D.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098.ATM,Works,098.ATM,present,GameBase,,,
+864,V9B1,NC,Non Comm,D.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134.ATM""",Works,134.ATM,present,GameBase,,,
+865,V9B1,NC,Non Comm,D.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144.ATM""",Works,144.ATM,present,GameBase,,,
+866,V9B1,NC,Non Comm,D.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,"CH.""155.ATM""",Works,155.ATM,present,GameBase,,,
+867,V9B1,NC,Non Comm,D.Non Commercial Software,Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158.ATM,Works,158.ATM,present,GameBase,,, requires WE-ROM
+868,V9B1,NC,Non Comm,D.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159.ATM""",Works,159.ATM,present,GameBase,,,
+869,V9B1,NC,Non Comm,D.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165.ATM""",Works,165.ATM,present,GameBase,,,
+870,V9B1,PCW,PCW,E.Books/Magazines,Acorn Scramble,Game, ??,GB,8200,*RUN 166.ATM,Works,166.ATM,present,GameBase,,,
+871,V9B1,NC,Non Comm,D.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168.ATM""",Works,168.ATM,present,GameBase,,,
+872,V9B1,NC,Non Comm,D.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,"CH.""169.ATM""",Works,169.ATM,present,GameBase,,,requires WE-ROM
+873,V9B1,NC,Non Comm,D.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,"CH.""172.ATM""",Works,172.ATM,present,GameBase,,,
+874,V9B1,NC,Non Comm,D.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185.ATM""",Works,185.ATM,present,GameBase,,,requires AXR1
+875,V9B1,NC,Non Comm,D.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197.ATM""",Works,197.ATM,present,GameBase,,,
+876,V9B1,NC,Non Comm,D.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199.ATM""",Works,199.ATM,present,GameBase,,,
+877,V9B1,NC,Non Comm,D.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226.ATM""",Works,226.ATM,present,GameBase,,,
+878,V9B1,NC,Non Comm,D.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
 879,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,"CH.""F14RUN""",Works,"F14CODE
@@ -1709,10 +1709,10 @@ MMINTRO
 MMCODE",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-883,V9B2,NC,Non Comm,C.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
+883,V9B2,NC,Non Comm,D.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
 884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
 885,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
-886,V9B2,NC,Non Comm,C.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
+886,V9B2,NC,Non Comm,D.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
 887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""",Works,"JSWRUN
 JSWCODE",present,"RS Mono
 Joystick
@@ -1742,8 +1742,8 @@ Joystick Kbd",Yes,,
 1982UND
 SIDMENU
 ",present,SID,Yes,,
-893,V10B1,NC,Non Comm,C.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
-894,V10B1,NC,Non Comm,C.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
+893,V10B1,NC,Non Comm,D.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
+894,V10B1,NC,Non Comm,D.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
 895,V10B1,NC,Non Comm,B.Modern Creations/Ports,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
 896,V10B1,NC,Non Comm,B.Modern Creations/Ports,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""","Works, but would benefit from a boot program.","TUBE
 BASIC2
@@ -1752,7 +1752,7 @@ HIBASIC
 COLOSS
 BOOT6502
 ",present,,,,
-897,V10B1,NC,Non Comm,C.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
+897,V10B1,NC,Non Comm,D.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
 SQUIRL2",present,,,,
 898,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
 SIDRUN",present,"RS Mono
@@ -1812,8 +1812,8 @@ UGOT2LE
 WHATISL
 WHATTIM
 ",present,SID,Yes,,
-903,V10B5,TA,The Atom,D.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Works,RACER,present,,,,
-904,V10B5,TA,The Atom,D.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
+903,V10B5,TA,The Atom,E.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Works,RACER,present,,,,
+904,V10B5,TA,The Atom,E.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
 905,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 0),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Works,"MOVIE0
 MUSIC
 PLAYER0
@@ -1830,17 +1830,17 @@ MUSIC
 PLAYER4
 RUNME4
 SIDPLAY",present,SID,Yes,,
-908,V11B1,NC,Non Comm,C.Non Commercial Software,Logger,Game,,NC,8200,"CH. ""LOGGER""",Works,LOGGER,present,,,,
-909,V11B1,NC,Non Comm,C.Non Commercial Software,Worm,Game,,NC,8200,"CH. ""WORM""",Works,WORM,present,,,,
-910,V11B1,NC,Non Comm,C.Non Commercial Software,Parachute,Game,,NC,8200,"CH. ""PARACHU""",Works,PARACHU,present,,,,
-911,V11B1,NC,Non Comm,C.Non Commercial Software,Shopper,Game,,NC,8200,"CH. ""SHOPPER""",Works,SHOPPER,present,,,,
-912,V11B1,NC,Non Comm,C.Non Commercial Software,Gattack,Game,,NC,8200,"CH. ""GATTACK""",Works,GATTACK,present,,,,
-913,V11B1,NC,Non Comm,C.Non Commercial Software,Topografie,Game,,NC/TOPOT,8200,"CH. ""TOPOT""",Works,"DATA
+908,V11B1,NC,Non Comm,D.Non Commercial Software,Logger,Game,,NC,8200,"CH. ""LOGGER""",Works,LOGGER,present,,,,
+909,V11B1,NC,Non Comm,D.Non Commercial Software,Worm,Game,,NC,8200,"CH. ""WORM""",Works,WORM,present,,,,
+910,V11B1,NC,Non Comm,D.Non Commercial Software,Parachute,Game,,NC,8200,"CH. ""PARACHU""",Works,PARACHU,present,,,,
+911,V11B1,NC,Non Comm,D.Non Commercial Software,Shopper,Game,,NC,8200,"CH. ""SHOPPER""",Works,SHOPPER,present,,,,
+912,V11B1,NC,Non Comm,D.Non Commercial Software,Gattack,Game,,NC,8200,"CH. ""GATTACK""",Works,GATTACK,present,,,,
+913,V11B1,NC,Non Comm,D.Non Commercial Software,Topografie,Game,,NC/TOPOT,8200,"CH. ""TOPOT""",Works,"DATA
 MAP
 PROG
 TOPOT",present,,,,
-914,V11B1,NC,Non Comm,C.Non Commercial Software,Deadstar,Game,,NC,8200,"CH. ""DEADSTA""",Works,DEADSTA,present,,,,
-915,V11B1,PP,Prog Power,E.ROMs,PP MC Monitor,Language,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
+914,V11B1,NC,Non Comm,D.Non Commercial Software,Deadstar,Game,,NC,8200,"CH. ""DEADSTA""",Works,DEADSTA,present,,,,
+915,V11B1,PP,Prog Power,F.ROMS,PP MC Monitor,Language,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
 *LOAD FC5A 8800",Works,FC5A,present,ROMs,,,
 916,V11B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID19 Classical,Music,,SID/ATMSID19,2900,*RUN SIDMENU,Works,"AIRONTH
@@ -1858,303 +1858,303 @@ SIDMENU
 SYMPHON
 THEMAGI
 TOCCATA",present,SID,Yes,,
-917,V11B2,AGD,AGD,B.Modern Creations/Ports,The Amethyst Dagger,Game,Kees van Oss,AGD/ADAGGER,8200,"CH.""DAGRUN""",Test,"DAGCODE
+917,V11B2,AGD,AGD,C.Kees' AGD Ports,The Amethyst Dagger,Game,Kees van Oss,AGD/ADAGGER,8200,"CH.""DAGRUN""",Test,"DAGCODE
 DAGRUN
 DAGSCR",present,AGD,Yes,,
-918,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 1,Game,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""",Test,"A1CODE
+918,V11B1,AGD,AGD,C.Kees' AGD Ports,Aeon 1,Game,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""",Test,"A1CODE
 A1RUN
 A1SCR",present,AGD,Yes,,
-919,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 2,Game,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""",Test,"A2CODE
+919,V11B1,AGD,AGD,C.Kees' AGD Ports,Aeon 2,Game,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""",Test,"A2CODE
 A2RUN
 A2SCR",present,AGD,Yes,,
-920,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 3,Game,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""",Test,"A3CODE
+920,V11B1,AGD,AGD,C.Kees' AGD Ports,Aeon 3,Game,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""",Test,"A3CODE
 A3RUN
 A3SCR",present,AGD,Yes,,
-921,V11B1,AGD,AGD,B.Modern Creations/Ports,Aeon 4,Game,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""",Test,"A4CODE
+921,V11B1,AGD,AGD,C.Kees' AGD Ports,Aeon 4,Game,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""",Test,"A4CODE
 A4RUN
 A4SCR",present,AGD,Yes,,
-922,V11B2,AGD,AGD,B.Modern Creations/Ports,Baffo Jones,Game,Kees van Oss,AGD/BAFFO,8200,"CH.""BAFRUN""",Test,"BAFCODE
+922,V11B2,AGD,AGD,C.Kees' AGD Ports,Baffo Jones,Game,Kees van Oss,AGD/BAFFO,8200,"CH.""BAFRUN""",Test,"BAFCODE
 BAFRUN
 BAFSCR",present,AGD,Yes,,
-923,V11B1,AGD,AGD,B.Modern Creations/Ports,Baldy ZX,Game,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""",Test,"BALCODE
+923,V11B1,AGD,AGD,C.Kees' AGD Ports,Baldy ZX,Game,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""",Test,"BALCODE
 BALRUN
 BALSCR",present,AGD,Yes,,
-924,V11B2,AGD,AGD,B.Modern Creations/Ports,Bean Brothers,Game,Kees van Oss,AGD/BEANBRO,8200,"CH.""BBRUN""",Test,"BBCODE
+924,V11B2,AGD,AGD,C.Kees' AGD Ports,Bean Brothers,Game,Kees van Oss,AGD/BEANBRO,8200,"CH.""BBRUN""",Test,"BBCODE
 BBRUN
 BBSCR",present,AGD,Yes,,
-925,V11B2,AGD,AGD,B.Modern Creations/Ports,The Big Javi's Adventure,Game,Kees van Oss,AGD/BIGJAVI,8200,"CH.""BJRUN""",Test,"BJCODE
+925,V11B2,AGD,AGD,C.Kees' AGD Ports,The Big Javi's Adventure,Game,Kees van Oss,AGD/BIGJAVI,8200,"CH.""BJRUN""",Test,"BJCODE
 BJRUN
 BJSCR",present,AGD,Yes,,
-926,V11B1,AGD,AGD,B.Modern Creations/Ports,Baby Monkey Alba,Game,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""",Test,"BMCODE
+926,V11B1,AGD,AGD,C.Kees' AGD Ports,Baby Monkey Alba,Game,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""",Test,"BMCODE
 BMRUN
 BMSCR",present,AGD,Yes,,
-927,V11B2,AGD,AGD,B.Modern Creations/Ports,Bubble Monkey Bros,Game,Kees van Oss,AGD/BMBROS,8200,"CH.""BMBRUN""",Test,"BMBCODE
+927,V11B2,AGD,AGD,C.Kees' AGD Ports,Bubble Monkey Bros,Game,Kees van Oss,AGD/BMBROS,8200,"CH.""BMBRUN""",Test,"BMBCODE
 BMBRUN",present,AGD,Yes,,
-928,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob Bustin Ghosts,Game,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""",Test,"B1CODE
+928,V11B1,AGD,AGD,C.Kees' AGD Ports,Bob Bustin Ghosts,Game,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""",Test,"B1CODE
 B1RUN
 B1SCR",present,AGD,Yes,,
-929,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob Lurching Dead,Game,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""",Test,"B2CODE
+929,V11B1,AGD,AGD,C.Kees' AGD Ports,Bob Lurching Dead,Game,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""",Test,"B2CODE
 B2RUN
 B2SCR",present,AGD,Yes,,
-930,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob Summer Breeze,Game,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""",Test,"B3CODE
+930,V11B1,AGD,AGD,C.Kees' AGD Ports,Bob Summer Breeze,Game,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""",Test,"B3CODE
 B3RUN
 B3SCR",present,AGD,Yes,,
-931,V11B1,AGD,AGD,B.Modern Creations/Ports,Bob Jet Pack,Game,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""",Test,"B4CODE
+931,V11B1,AGD,AGD,C.Kees' AGD Ports,Bob Jet Pack,Game,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""",Test,"B4CODE
 B4RUN
 B4SCR",present,AGD,Yes,,
-932,V11B1,AGD,AGD,B.Modern Creations/Ports,Brick Racer,Game,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""",Test,"BRCODE
+932,V11B1,AGD,AGD,C.Kees' AGD Ports,Brick Racer,Game,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""",Test,"BRCODE
 BRRUN
 BRSCR",present,AGD,Yes,,
-933,V11B1,AGD,AGD,B.Modern Creations/Ports,B-Squared,Game,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""",Test,"BSCODE
+933,V11B1,AGD,AGD,C.Kees' AGD Ports,B-Squared,Game,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""",Test,"BSCODE
 BSRUN
 BSSCR",present,AGD,Yes,,
-934,V11B2,AGD,AGD,B.Modern Creations/Ports,Bumber,Game,Kees van Oss,AGD/BUMBER,8200,"CH.""BUMRUN""",Test,"BUMCODE
+934,V11B2,AGD,AGD,C.Kees' AGD Ports,Bumber,Game,Kees van Oss,AGD/BUMBER,8200,"CH.""BUMRUN""",Test,"BUMCODE
 BUMRUN
 BUMSCR",present,AGD,Yes,,
-935,V11B2,AGD,AGD,B.Modern Creations/Ports,Castle Capers,Game,Kees van Oss,AGD/CAPERS,8200,"CH.""CAPRUN""",Test,"CAPCODE
+935,V11B2,AGD,AGD,C.Kees' AGD Ports,Castle Capers,Game,Kees van Oss,AGD/CAPERS,8200,"CH.""CAPRUN""",Test,"CAPCODE
 CAPRUN",present,AGD,Yes,,
-936,V11B2,AGD,AGD,B.Modern Creations/Ports,Caps and Rescue 1,Game,Kees van Oss,AGD/CAPRES1,8200,"CH.""CR1RUN""",Test,"CR1CODE
+936,V11B2,AGD,AGD,C.Kees' AGD Ports,Caps and Rescue 1,Game,Kees van Oss,AGD/CAPRES1,8200,"CH.""CR1RUN""",Test,"CR1CODE
 CR1RUN
 CR1SCR",present,AGD,Yes,,
-937,V11B2,AGD,AGD,B.Modern Creations/Ports,Caps and Rescue 2,Game,Kees van Oss,AGD/CAPRES2,8200,"CH.""CR2RUN""",Test,"CR2CODE
+937,V11B2,AGD,AGD,C.Kees' AGD Ports,Caps and Rescue 2,Game,Kees van Oss,AGD/CAPRES2,8200,"CH.""CR2RUN""",Test,"CR2CODE
 CR2RUN
 CR2SCR",present,AGD,Yes,,
-938,V11B2,AGD,AGD,B.Modern Creations/Ports,Caps and Rescue 3,Game,Kees van Oss,AGD/CAPRES3,8200,"CH.""CR3RUN""",Test,"CR3CODE
+938,V11B2,AGD,AGD,C.Kees' AGD Ports,Caps and Rescue 3,Game,Kees van Oss,AGD/CAPRES3,8200,"CH.""CR3RUN""",Test,"CR3CODE
 CR3RUN
 CR3SCR",present,AGD,Yes,,
-939,V11B2,AGD,AGD,B.Modern Creations/Ports,Prelude to chaos,Game,Kees van Oss,AGD/CHAOS,8200,"CH.""CHRUN""",Test,"CHCODE
+939,V11B2,AGD,AGD,C.Kees' AGD Ports,Prelude to chaos,Game,Kees van Oss,AGD/CHAOS,8200,"CH.""CHRUN""",Test,"CHCODE
 CHRUN
 CHSCR",present,AGD,Yes,,
-940,V11B2,AGD,AGD,B.Modern Creations/Ports,Circuitry,Game,Kees van Oss,AGD/CIRCUIT,8200,"CH.""CIRRUN""",Test,"CIRCODE
+940,V11B2,AGD,AGD,C.Kees' AGD Ports,Circuitry,Game,Kees van Oss,AGD/CIRCUIT,8200,"CH.""CIRRUN""",Test,"CIRCODE
 CIRRUN
 CIRSCR",present,AGD,Yes,,
-941,V11B2,AGD,AGD,B.Modern Creations/Ports,Cyber Mania,Game,Kees van Oss,AGD/CYBER,8200,"CH.""CYBRUN""",Test,"CYBCODE
+941,V11B2,AGD,AGD,C.Kees' AGD Ports,Cyber Mania,Game,Kees van Oss,AGD/CYBER,8200,"CH.""CYBRUN""",Test,"CYBCODE
 CYBRUN",present,AGD,Yes,,
-942,V11B2,AGD,AGD,B.Modern Creations/Ports,Davey Dudds,Game,Kees van Oss,AGD/DAVEY,8200,"CH.""DDRUN""",Test,"DDCODE
+942,V11B2,AGD,AGD,C.Kees' AGD Ports,Davey Dudds,Game,Kees van Oss,AGD/DAVEY,8200,"CH.""DDRUN""",Test,"DDCODE
 DDRUN
 DDSCR",present,AGD,Yes,,
-943,V11B2,AGD,AGD,B.Modern Creations/Ports,Double Bubble,Game,Kees van Oss,AGD/DBUBBLE,8200,"CH.""DBRUN""",Test,"DBCODE
+943,V11B2,AGD,AGD,C.Kees' AGD Ports,Double Bubble,Game,Kees van Oss,AGD/DBUBBLE,8200,"CH.""DBRUN""",Test,"DBCODE
 DBRUN
 DBSCR",present,AGD,Yes,,
-944,V11B2,AGD,AGD,B.Modern Creations/Ports,Doodle Bug,Game,Kees van Oss,AGD/DBUG,8200,"CH.""DBRUN""",Test,"DBCODE
+944,V11B2,AGD,AGD,C.Kees' AGD Ports,Doodle Bug,Game,Kees van Oss,AGD/DBUG,8200,"CH.""DBRUN""",Test,"DBCODE
 DBRUN
 DBSCR",present,AGD,Yes,,
-945,V11B2,AGD,AGD,B.Modern Creations/Ports,Droid Buster,Game,Kees van Oss,AGD/DBUSTER,8200,"CH.""DBRUN""",Test,"DBCODE
+945,V11B2,AGD,AGD,C.Kees' AGD Ports,Droid Buster,Game,Kees van Oss,AGD/DBUSTER,8200,"CH.""DBRUN""",Test,"DBCODE
 DBRUN
 DBSCR",present,AGD,Yes,,
-946,V11B2,AGD,AGD,B.Modern Creations/Ports,Dungeon Raiders,Game,Kees van Oss,AGD/DRAIDER,8200,"CH.""DRRUN""",Test,"DRCODE
+946,V11B2,AGD,AGD,C.Kees' AGD Ports,Dungeon Raiders,Game,Kees van Oss,AGD/DRAIDER,8200,"CH.""DRRUN""",Test,"DRCODE
 DRRUN",present,AGD,Yes,,
-947,V11B2,AGD,AGD,B.Modern Creations/Ports,Dark Tricks,Game,Kees van Oss,AGD/DTRICKS,8200,"CH.""DTRUN""",Test,"DTCODE
+947,V11B2,AGD,AGD,C.Kees' AGD Ports,Dark Tricks,Game,Kees van Oss,AGD/DTRICKS,8200,"CH.""DTRUN""",Test,"DTCODE
 DTRUN
 DTSCR",present,AGD,Yes,,
-948,V11B2,AGD,AGD,B.Modern Creations/Ports,In the Walls of ERYX,Game,Kees van Oss,AGD/ERYX,8200,"CH.""ERRUN""",Test,"ERCODE
+948,V11B2,AGD,AGD,C.Kees' AGD Ports,In the Walls of ERYX,Game,Kees van Oss,AGD/ERYX,8200,"CH.""ERRUN""",Test,"ERCODE
 ERRUN
 ERSCR",present,AGD,Yes,,
-949,V11B2,AGD,AGD,B.Modern Creations/Ports,Space Escape,Game,Kees van Oss,AGD/ESCAPE,8200,"CH.""ESRUN""",Test,"ESCODE
+949,V11B2,AGD,AGD,C.Kees' AGD Ports,Space Escape,Game,Kees van Oss,AGD/ESCAPE,8200,"CH.""ESRUN""",Test,"ESCODE
 ESRUN
 ESSCR",present,AGD,Yes,,
-950,V11B2,AGD,AGD,B.Modern Creations/Ports,Mini Explorer,Game,Kees van Oss,AGD/EXPLORE,8200,"CH.""EXPRUN""",Test,"EXPCODE
+950,V11B2,AGD,AGD,C.Kees' AGD Ports,Mini Explorer,Game,Kees van Oss,AGD/EXPLORE,8200,"CH.""EXPRUN""",Test,"EXPCODE
 EXPRUN
 EXPSCR",present,AGD,Yes,,
-951,V11B2,AGD,AGD,B.Modern Creations/Ports,Flappy the Ghost,Game,Kees van Oss,AGD/FGHOST,8200,"CH.""FGRUN""",Test,"FGCODE
+951,V11B2,AGD,AGD,C.Kees' AGD Ports,Flappy the Ghost,Game,Kees van Oss,AGD/FGHOST,8200,"CH.""FGRUN""",Test,"FGCODE
 FGRUN
 FGSCR",present,AGD,Yes,,
-952,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest (M),Game,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""",Test,"FOGCODE
+952,V11B1,AGD,AGD,C.Kees' AGD Ports,Foggy's Quest (M),Game,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""",Test,"FOGCODE
 FOGRUN
 FOGSCR",present,AGD,Yes,,
-953,V11B1,AGD,AGD,B.Modern Creations/Ports,Foggy's Quest (C),Game,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""",Test,"FOGCODE
+953,V11B1,AGD,AGD,C.Kees' AGD Ports,Foggy's Quest (C),Game,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""",Test,"FOGCODE
 FOGRUN
 FOGSCR",present,AGD,Yes,,
-954,V11B2,AGD,AGD,B.Modern Creations/Ports,Funky Fungus,Game,Kees van Oss,AGD/FUNGUS,8200,"CH.""FUNRUN""",Test,"FUNCODE
+954,V11B2,AGD,AGD,C.Kees' AGD Ports,Funky Fungus,Game,Kees van Oss,AGD/FUNGUS,8200,"CH.""FUNRUN""",Test,"FUNCODE
 FUNPAN
 FUNRUN
 FUNSCR",present,AGD,Yes,,
-955,V11B1,AGD,AGD,B.Modern Creations/Ports,Christmas Gift Hunt,Game,Kees van Oss,AGD/GIFTHUN,8200,"CH.""GHRUN""",Test,"GHCODE
+955,V11B1,AGD,AGD,C.Kees' AGD Ports,Christmas Gift Hunt,Game,Kees van Oss,AGD/GIFTHUN,8200,"CH.""GHRUN""",Test,"GHCODE
 GHRUN
 GHSCR",present,AGD,Yes,,
-956,V11B1,AGD,AGD,B.Modern Creations/Ports,Grumpy Santa,Game,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""",Test,"GSCODE
+956,V11B1,AGD,AGD,C.Kees' AGD Ports,Grumpy Santa,Game,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""",Test,"GSCODE
 GSRUN
 GSSCR",present,AGD,Yes,,
-957,V11B2,AGD,AGD,B.Modern Creations/Ports,Hedgehog,Game,Kees van Oss,AGD/HEDGEHO,8200,"CH.""HHRUN""",Test,"HHCODE
+957,V11B2,AGD,AGD,C.Kees' AGD Ports,Hedgehog,Game,Kees van Oss,AGD/HEDGEHO,8200,"CH.""HHRUN""",Test,"HHCODE
 HHRUN
 HHSCR",present,AGD,Yes,,
-958,V11B2,AGD,AGD,B.Modern Creations/Ports,Heroes Rescue,Game,Kees van Oss,AGD/HEROES,8200,"CH.""HERRUN""",Test,"HERCODE
+958,V11B2,AGD,AGD,C.Kees' AGD Ports,Heroes Rescue,Game,Kees van Oss,AGD/HEROES,8200,"CH.""HERRUN""",Test,"HERCODE
 HERRUN
 HERSCR",present,AGD,Yes,,
-959,V11B2,AGD,AGD,B.Modern Creations/Ports,Higgy 2 The Wrath of McMania,Game,Kees van Oss,AGD/HIGGY2,8200,"CH.""HIGRUN""",Test,"HIGCODE
+959,V11B2,AGD,AGD,C.Kees' AGD Ports,Higgy 2 The Wrath of McMania,Game,Kees van Oss,AGD/HIGGY2,8200,"CH.""HIGRUN""",Test,"HIGCODE
 HIGRUN
 HIGSCR",present,AGD,Yes,,
-960,V11B2,AGD,AGD,B.Modern Creations/Ports,HopNFrog,Game,Kees van Oss,AGD/HOPNFRO,8200,"CH.""HOPRUN""",Test,"HOPCODE
+960,V11B2,AGD,AGD,C.Kees' AGD Ports,HopNFrog,Game,Kees van Oss,AGD/HOPNFRO,8200,"CH.""HOPRUN""",Test,"HOPCODE
 HOPRUN",present,AGD,Yes,,
-961,V11B2,AGD,AGD,B.Modern Creations/Ports,Hyperkill,Game,Kees van Oss,AGD/HYPERKI,8200,"CH.""HYPRUN""",Test,"HYPCODE
+961,V11B2,AGD,AGD,C.Kees' AGD Ports,Hyperkill,Game,Kees van Oss,AGD/HYPERKI,8200,"CH.""HYPRUN""",Test,"HYPCODE
 HYPRUN
 HYPSCR",present,AGD,Yes,,
-962,V11B2,AGD,AGD,B.Modern Creations/Ports,Ice Slider Z,Game,Kees van Oss,AGD/ICESLID,8200,"CH.""ISRUN""",Test,"ISCODE
+962,V11B2,AGD,AGD,C.Kees' AGD Ports,Ice Slider Z,Game,Kees van Oss,AGD/ICESLID,8200,"CH.""ISRUN""",Test,"ISCODE
 ISRUN
 ISSCR",present,AGD,Yes,,
-963,V11B2,AGD,AGD,B.Modern Creations/Ports,Impossabubble,Game,Kees van Oss,AGD/IMPOSS,8200,"CH.""IMPRUN""",Test,"IMPCODE
+963,V11B2,AGD,AGD,C.Kees' AGD Ports,Impossabubble,Game,Kees van Oss,AGD/IMPOSS,8200,"CH.""IMPRUN""",Test,"IMPCODE
 IMPRUN
 IMPSCR",present,AGD,Yes,,
-964,V11B2,AGD,AGD,B.Modern Creations/Ports,Jane Jelly Egg Diamond,Game,Kees van Oss,AGD/JANE1,8200,"CH.""J1RUN""",Test,"J1CODE
+964,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Egg Diamond,Game,Kees van Oss,AGD/JANE1,8200,"CH.""J1RUN""",Test,"J1CODE
 J1RUN
 J1SCR",present,AGD,Yes,,
-965,V11B2,AGD,AGD,B.Modern Creations/Ports,Jane Jelly Hot Marmelade,Game,Kees van Oss,AGD/JANE2,8200,"CH.""J2RUN""",Test,"J2CODE
+965,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Hot Marmelade,Game,Kees van Oss,AGD/JANE2,8200,"CH.""J2RUN""",Test,"J2CODE
 J2RUN
 J2SCR",present,AGD,Yes,,
-966,V11B2,AGD,AGD,B.Modern Creations/Ports,Jane Jelly Treasure of Zedin ,Game,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""",Test,"J3CODE
+966,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Treasure of Zedin ,Game,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""",Test,"J3CODE
 J3RUN
 J3SCR",present,AGD,Yes,,
-967,V11B2,AGD,AGD,B.Modern Creations/Ports,Jump Collision,Game,Kees van Oss,AGD/JUMPCOL,8200,"CH.""JCRUN""",Test,"JCCODE
+967,V11B2,AGD,AGD,C.Kees' AGD Ports,Jump Collision,Game,Kees van Oss,AGD/JUMPCOL,8200,"CH.""JCRUN""",Test,"JCCODE
 JCRUN
 JCSCR",present,AGD,Yes,,
-968,V11B2,AGD,AGD,B.Modern Creations/Ports,Kanga,Game,Kees van Oss,AGD/KANGA,8200,"CH.""KANRUN""",Test,"KANCODE
+968,V11B2,AGD,AGD,C.Kees' AGD Ports,Kanga,Game,Kees van Oss,AGD/KANGA,8200,"CH.""KANRUN""",Test,"KANCODE
 KANRUN
 KANSCR",present,AGD,Yes,,
-969,V11B2,AGD,AGD,B.Modern Creations/Ports,Killerbees,Game,Kees van Oss,AGD/KILLERB,8200,"CH.""KBRUN""",Test,"KBCODE
+969,V11B2,AGD,AGD,C.Kees' AGD Ports,Killerbees,Game,Kees van Oss,AGD/KILLERB,8200,"CH.""KBRUN""",Test,"KBCODE
 KBRUN
 KBSCR",present,AGD,Yes,,
-970,V11B2,AGD,AGD,B.Modern Creations/Ports,Knight Hero,Game,Kees van Oss,AGD/KNIGHT,8200,"CH.""KHRUN""",Test,"KHCODE
+970,V11B2,AGD,AGD,C.Kees' AGD Ports,Knight Hero,Game,Kees van Oss,AGD/KNIGHT,8200,"CH.""KHRUN""",Test,"KHCODE
 KHRUN
 KHSCR",present,AGD,Yes,,
-971,V11B2,AGD,AGD,B.Modern Creations/Ports,Diamond Geezer,Game,Kees van Oss,AGD/LADDER,8200,"CH.""LADRUN""",Test,"LADCODE
+971,V11B2,AGD,AGD,C.Kees' AGD Ports,Diamond Geezer,Game,Kees van Oss,AGD/LADDER,8200,"CH.""LADRUN""",Test,"LADCODE
 LADRUN
 LADSCR",present,AGD,Yes,,
-972,V11B2,AGD,AGD,B.Modern Creations/Ports,Little Dragon 2,Game,Kees van Oss,AGD/LDRAG2,8200,"CH.""LDRUN""",Test,"LDCODE
+972,V11B2,AGD,AGD,C.Kees' AGD Ports,Little Dragon 2,Game,Kees van Oss,AGD/LDRAG2,8200,"CH.""LDRUN""",Test,"LDCODE
 LDRUN
 LDSCR",present,AGD,Yes,,
-973,V11B2,AGD,AGD,B.Modern Creations/Ports,The Treasure of Lumos,Game,Kees van Oss,AGD/LUMOS,8200,"CH.""LUMRUN""",Test,"LUMCODE
+973,V11B2,AGD,AGD,C.Kees' AGD Ports,The Treasure of Lumos,Game,Kees van Oss,AGD/LUMOS,8200,"CH.""LUMRUN""",Test,"LUMCODE
 LUMRUN
 LUMSCR",present,AGD,Yes,,
-974,V11B2,AGD,AGD,B.Modern Creations/Ports,The Malignant Core,Game,Kees van Oss,AGD/MALIGNA,8200,"CH.""MGRUN""",Test,"MGCODE
+974,V11B2,AGD,AGD,C.Kees' AGD Ports,The Malignant Core,Game,Kees van Oss,AGD/MALIGNA,8200,"CH.""MGRUN""",Test,"MGCODE
 MGRUN
 MGSCR",present,AGD,Yes,,
-975,V11B2,AGD,AGD,B.Modern Creations/Ports,Mike The Guitar,Game,Kees van Oss,AGD/MIKE,8200,"CH.""MGRUN""",Test,"MGCODE
+975,V11B2,AGD,AGD,C.Kees' AGD Ports,Mike The Guitar,Game,Kees van Oss,AGD/MIKE,8200,"CH.""MGRUN""",Test,"MGCODE
 MGRUN
 MGSCR",present,AGD,Yes,,
-976,V11B2,AGD,AGD,B.Modern Creations/Ports,LandOfMireMare Instructions,Game,Kees van Oss,AGD/MIREMAR,8200,"CH.""MMRUN""",Test,"MMCODE
+976,V11B2,AGD,AGD,C.Kees' AGD Ports,LandOfMireMare Instructions,Game,Kees van Oss,AGD/MIREMAR,8200,"CH.""MMRUN""",Test,"MMCODE
 MMPAN
 MMRUN
 MMSCR",present,AGD,Yes,,
-977,V11B2,AGD,AGD,B.Modern Creations/Ports,Montys Honey Run,Game,Kees van Oss,AGD/MONTY1,8200,"CH.""MM1RUN""",Test,"MM1CODE
+977,V11B2,AGD,AGD,C.Kees' AGD Ports,Montys Honey Run,Game,Kees van Oss,AGD/MONTY1,8200,"CH.""MM1RUN""",Test,"MM1CODE
 MM1RUN
 MM1SCR",present,AGD,Yes,,
-978,V11B2,AGD,AGD,B.Modern Creations/Ports,Montys Last Strike Christmas Job,Game,Kees van Oss,AGD/MONTYXM,8200,"CH.""MMXRUN""",Test,"MMXCODE
+978,V11B2,AGD,AGD,C.Kees' AGD Ports,Montys Last Strike Christmas Job,Game,Kees van Oss,AGD/MONTYXM,8200,"CH.""MMXRUN""",Test,"MMXCODE
 MMXRUN
 MMXSCR",present,AGD,Yes,,
-979,V11B2,AGD,AGD,B.Modern Creations/Ports,Nadral,Game,Kees van Oss,AGD/NADRAL,8200,"CH.""NADRUN""",Test,"NADCODE
+979,V11B2,AGD,AGD,C.Kees' AGD Ports,Nadral,Game,Kees van Oss,AGD/NADRAL,8200,"CH.""NADRUN""",Test,"NADCODE
 NADRUN
 NADSCR",present,AGD,Yes,,
-980,V11B2,AGD,AGD,B.Modern Creations/Ports,Nemokay Island,Game,Kees van Oss,AGD/NEMOKAY,8200,"CH.""NEMRUN""",Test,"NEMCODE
+980,V11B2,AGD,AGD,C.Kees' AGD Ports,Nemokay Island,Game,Kees van Oss,AGD/NEMOKAY,8200,"CH.""NEMRUN""",Test,"NEMCODE
 NEMRUN
 NEMSCR",present,AGD,Yes,,
-981,V11B2,AGD,AGD,B.Modern Creations/Ports,Night Stalker ZX,Game,Kees van Oss,AGD/NIGHTST,8200,"CH.""NSRUN""",Test,"NSCODE
+981,V11B2,AGD,AGD,C.Kees' AGD Ports,Night Stalker ZX,Game,Kees van Oss,AGD/NIGHTST,8200,"CH.""NSRUN""",Test,"NSCODE
 NSRUN
 NSSCR",present,AGD,Yes,,
-982,V11B2,AGD,AGD,B.Modern Creations/Ports,Ninja Garden Simulator,Game,Kees van Oss,AGD/NINJA,8200,"CH.""NINRUN""",Test,"NINCODE
+982,V11B2,AGD,AGD,C.Kees' AGD Ports,Ninja Garden Simulator,Game,Kees van Oss,AGD/NINJA,8200,"CH.""NINRUN""",Test,"NINCODE
 NINRUN
 NINSCR",present,AGD,Yes,,
-983,V11B2,AGD,AGD,B.Modern Creations/Ports,Oceano,Game,Kees van Oss,AGD/OCEANO,8200,"CH.""OCERUN""",Test,"OCECODE
+983,V11B2,AGD,AGD,C.Kees' AGD Ports,Oceano,Game,Kees van Oss,AGD/OCEANO,8200,"CH.""OCERUN""",Test,"OCECODE
 OCERUN
 OCESCR",present,AGD,Yes,,
-984,V11B2,AGD,AGD,B.Modern Creations/Ports,Octukitty,Game,Kees van Oss,AGD/OCTUKIT,8200,"CH.""OCTRUN""",Test,"OCTCODE
+984,V11B2,AGD,AGD,C.Kees' AGD Ports,Octukitty,Game,Kees van Oss,AGD/OCTUKIT,8200,"CH.""OCTRUN""",Test,"OCTCODE
 OCTRUN
 OCTSCR",present,AGD,Yes,,
-985,V11B2,AGD,AGD,B.Modern Creations/Ports,Ooze,Game,Kees van Oss,AGD/OOZE,8200,"CH.""OOZRUN""",Test,"OOZCODE
+985,V11B2,AGD,AGD,C.Kees' AGD Ports,Ooze,Game,Kees van Oss,AGD/OOZE,8200,"CH.""OOZRUN""",Test,"OOZCODE
 OOZRUN
 OOZSCR",present,AGD,Yes,,
-986,V11B2,AGD,AGD,B.Modern Creations/Ports,Parachute,Game,Kees van Oss,AGD/PARACHU,8200,"CH.""PARRUN""",Test,"PARCODE
+986,V11B2,AGD,AGD,C.Kees' AGD Ports,Parachute,Game,Kees van Oss,AGD/PARACHU,8200,"CH.""PARRUN""",Test,"PARCODE
 PARRUN
 PARSCR",present,AGD,Yes,,
-987,V11B2,AGD,AGD,B.Modern Creations/Ports,Pages Castle Quest,Game,Kees van Oss,AGD/PCQUEST,8200,"CH.""PCQRUN""",Test,"PCQCODE
+987,V11B2,AGD,AGD,C.Kees' AGD Ports,Pages Castle Quest,Game,Kees van Oss,AGD/PCQUEST,8200,"CH.""PCQRUN""",Test,"PCQCODE
 PCQRUN
 PCQSCR",present,AGD,Yes,,
-988,V11B2,AGD,AGD,B.Modern Creations/Ports,Page and the Curse of the Pharaoh,Game,Kees van Oss,AGD/PHARAOH,8200,"CH.""PHARUN""",Test,"PHACODE
+988,V11B2,AGD,AGD,C.Kees' AGD Ports,Page and the Curse of the Pharaoh,Game,Kees van Oss,AGD/PHARAOH,8200,"CH.""PHARUN""",Test,"PHACODE
 PHARUN
 PHASCR",present,AGD,Yes,,
-989,V11B2,AGD,AGD,B.Modern Creations/Ports,Pick Axe Pete,Game,Kees van Oss,AGD/PICKAXE,8200,"CH.""PAPRUN""",Test,"PAPCODE
+989,V11B2,AGD,AGD,C.Kees' AGD Ports,Pick Axe Pete,Game,Kees van Oss,AGD/PICKAXE,8200,"CH.""PAPRUN""",Test,"PAPCODE
 PAPRUN
 PAPSCR",present,AGD,Yes,,
-990,V11B2,AGD,AGD,B.Modern Creations/Ports,Pink Pills Moritz Meds,Game,Kees van Oss,AGD/PINKPIL,8200,"CH.""PPRUN""",Test,"PPCODE
+990,V11B2,AGD,AGD,C.Kees' AGD Ports,Pink Pills Moritz Meds,Game,Kees van Oss,AGD/PINKPIL,8200,"CH.""PPRUN""",Test,"PPCODE
 PPRUN
 PPSCR",present,AGD,Yes,,
-991,V11B2,AGD,AGD,B.Modern Creations/Ports,Popeye,Game,Kees van Oss,AGD/POPEYE,8200,"CH.""POPRUN""",Test,"POPCODE
+991,V11B2,AGD,AGD,C.Kees' AGD Ports,Popeye,Game,Kees van Oss,AGD/POPEYE,8200,"CH.""POPRUN""",Test,"POPCODE
 POPRUN
 POPSCR",present,AGD,Yes,,
-992,V11B2,AGD,AGD,B.Modern Creations/Ports,Pumpkin Poe,Game,Kees van Oss,AGD/PUMPKIN,8200,"CH.""PKPRUN""",Test,"PKPCODE
+992,V11B2,AGD,AGD,C.Kees' AGD Ports,Pumpkin Poe,Game,Kees van Oss,AGD/PUMPKIN,8200,"CH.""PKPRUN""",Test,"PKPCODE
 PKPRUN
 PKPSCR",present,AGD,Yes,,
-993,V11B2,AGD,AGD,B.Modern Creations/Ports,QBox,Game,Kees van Oss,AGD/QBOX,8200,"CH.""QBRUN""",Test,"QBCODE
+993,V11B2,AGD,AGD,C.Kees' AGD Ports,QBox,Game,Kees van Oss,AGD/QBOX,8200,"CH.""QBRUN""",Test,"QBCODE
 QBRUN
 QBSCR",present,AGD,Yes,,
-994,V11B2,AGD,AGD,B.Modern Creations/Ports,R2D2,Game,Kees van Oss,AGD/R2D2,8200,"CH.""R2RUN""",Test,"R2CODE
+994,V11B2,AGD,AGD,C.Kees' AGD Ports,R2D2,Game,Kees van Oss,AGD/R2D2,8200,"CH.""R2RUN""",Test,"R2CODE
 R2RUN
 R2SCR",present,AGD,Yes,,
-995,V11B2,AGD,AGD,B.Modern Creations/Ports,Rescue Lander,Game,Kees van Oss,AGD/RESCUE,8200,"CH.""RESRUN""",Test,"RESCODE
+995,V11B2,AGD,AGD,C.Kees' AGD Ports,Rescue Lander,Game,Kees van Oss,AGD/RESCUE,8200,"CH.""RESRUN""",Test,"RESCODE
 RESRUN
 RESSCR",present,AGD,Yes,,
-996,V11B2,AGD,AGD,B.Modern Creations/Ports,Robo Probe,Game,Kees van Oss,AGD/ROBOPRO,8200,"CH.""RPRUN""",Test,"RPCODE
+996,V11B2,AGD,AGD,C.Kees' AGD Ports,Robo Probe,Game,Kees van Oss,AGD/ROBOPRO,8200,"CH.""RPRUN""",Test,"RPCODE
 RPRUN
 RPSCR",present,AGD,Yes,,
-997,V11B2,AGD,AGD,B.Modern Creations/Ports,ROVR,Game,Kees van Oss,AGD/ROVR,8200,"CH.""ROVRUN""",Test,"ROVCODE
+997,V11B2,AGD,AGD,C.Kees' AGD Ports,ROVR,Game,Kees van Oss,AGD/ROVR,8200,"CH.""ROVRUN""",Test,"ROVCODE
 ROVRUN
 ROVSCR",present,AGD,Yes,,
-998,V11B2,AGD,AGD,B.Modern Creations/Ports,Rubicon,Game,Kees van Oss,AGD/RUBICON,8200,"CH.""RUBRUN""",Test,"RUBCODE
+998,V11B2,AGD,AGD,C.Kees' AGD Ports,Rubicon,Game,Kees van Oss,AGD/RUBICON,8200,"CH.""RUBRUN""",Test,"RUBCODE
 RUBRUN
 RUBSCR",present,AGD,Yes,,
-999,V11B2,AGD,AGD,B.Modern Creations/Ports,Santos Christmas Adventure,Game,Kees van Oss,AGD/SANTOS,8200,"CH.""SANRUN""",Test,"SANCODE
+999,V11B2,AGD,AGD,C.Kees' AGD Ports,Santos Christmas Adventure,Game,Kees van Oss,AGD/SANTOS,8200,"CH.""SANRUN""",Test,"SANCODE
 SANPAN
 SANRUN
 SANSCR",present,AGD,Yes,,
-1000,V11B2,AGD,AGD,B.Modern Creations/Ports,Robot1 Ship of Doom,Game,Kees van Oss,AGD/SHIPOFD,8200,"CH.""SODRUN""",Test,"SODCODE
+1000,V11B2,AGD,AGD,C.Kees' AGD Ports,Robot1 Ship of Doom,Game,Kees van Oss,AGD/SHIPOFD,8200,"CH.""SODRUN""",Test,"SODCODE
 SODRUN
 SODSCR",present,AGD,Yes,,
-1001,V11B2,AGD,AGD,B.Modern Creations/Ports,That Sinking Feeling,Game,Kees van Oss,AGD/SINKING,8200,"CH.""SINRUN""",Test,"SINCODE
+1001,V11B2,AGD,AGD,C.Kees' AGD Ports,That Sinking Feeling,Game,Kees van Oss,AGD/SINKING,8200,"CH.""SINRUN""",Test,"SINCODE
 SINRUN
 SINSCR",present,AGD,Yes,,
-1002,V11B2,AGD,AGD,B.Modern Creations/Ports,Sophia,Game,Kees van Oss,AGD/SOPHIA,8200,"CH.""SOPRUN""",Test,"SOPCODE
+1002,V11B2,AGD,AGD,C.Kees' AGD Ports,Sophia,Game,Kees van Oss,AGD/SOPHIA,8200,"CH.""SOPRUN""",Test,"SOPCODE
 SOPPAN
 SOPRUN
 SOPSCR",present,AGD,Yes,,
-1003,V11B2,AGD,AGD,B.Modern Creations/Ports,Sorceress,Game,Kees van Oss,AGD/SORCE,8200,"CH.""SO1RUN""",Test,"SO1CODE
+1003,V11B2,AGD,AGD,C.Kees' AGD Ports,Sorceress,Game,Kees van Oss,AGD/SORCE,8200,"CH.""SO1RUN""",Test,"SO1CODE
 SO1RUN
 SO1SCR",present,AGD,Yes,,
-1004,V11B2,AGD,AGD,B.Modern Creations/Ports,Sorceress2 ,Game,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""",Test,"SO2CODE
+1004,V11B2,AGD,AGD,C.Kees' AGD Ports,Sorceress2 ,Game,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""",Test,"SO2CODE
 SO2RUN
 SO2SCR",present,AGD,Yes,,
-1005,V11B2,AGD,AGD,B.Modern Creations/Ports,pace Junk,Game,Kees van Oss,AGD/SPACEJU,8200,"CH.""SJRUN""",Test,"SJCODE
+1005,V11B2,AGD,AGD,C.Kees' AGD Ports,pace Junk,Game,Kees van Oss,AGD/SPACEJU,8200,"CH.""SJRUN""",Test,"SJCODE
 SJRUN
 SJSCR",present,AGD,Yes,,
-1006,V11B2,AGD,AGD,B.Modern Creations/Ports,Speccy Pong,Game,Kees van Oss,AGD/SPECCYP,8200,"CH.""PONRUN""",Test,"PONCODE
+1006,V11B2,AGD,AGD,C.Kees' AGD Ports,Speccy Pong,Game,Kees van Oss,AGD/SPECCYP,8200,"CH.""PONRUN""",Test,"PONCODE
 PONRUN
 PONSCR",present,AGD,Yes,,
-1007,V11B2,AGD,AGD,B.Modern Creations/Ports,Steel Jeeg,Game,Kees van Oss,AGD/STEEL,8200,"CH.""STERUN""",Test,"STECODE
+1007,V11B2,AGD,AGD,C.Kees' AGD Ports,Steel Jeeg,Game,Kees van Oss,AGD/STEEL,8200,"CH.""STERUN""",Test,"STECODE
 STERUN
 STESCR",present,AGD,Yes,,
-1008,V11B2,AGD,AGD,B.Modern Creations/Ports,Tea and Sympathy,Game,Kees van Oss,AGD/TEASYMP,8200,"CH.""TSRUN""",Test,"TSCODE
+1008,V11B2,AGD,AGD,C.Kees' AGD Ports,Tea and Sympathy,Game,Kees van Oss,AGD/TEASYMP,8200,"CH.""TSRUN""",Test,"TSCODE
 TSRUN
 TSSCR",present,AGD,Yes,,
-1009,V11B2,AGD,AGD,B.Modern Creations/Ports,Terrahawks,Game,Kees van Oss,AGD/TERRAHA,8200,"CH.""TERRUN""",Test,"TERCODE
+1009,V11B2,AGD,AGD,C.Kees' AGD Ports,Terrahawks,Game,Kees van Oss,AGD/TERRAHA,8200,"CH.""TERRUN""",Test,"TERCODE
 TERRUN
 TERSCR",present,AGD,Yes,,
-1010,V11B2,AGD,AGD,B.Modern Creations/Ports,The Incredible Shrinking Professor,Game,Kees van Oss,AGD/TISP,8200,"CH.""TISRUN""",Test,"TISCODE
+1010,V11B2,AGD,AGD,C.Kees' AGD Ports,The Incredible Shrinking Professor,Game,Kees van Oss,AGD/TISP,8200,"CH.""TISRUN""",Test,"TISCODE
 TISRUN
 TISSCR",present,AGD,Yes,,
-1011,V11B2,AGD,AGD,B.Modern Creations/Ports,Tea Leaf Ted Bear,Game,Kees van Oss,AGD/TLBEAR,8200,"CH.""TLBRUN""",Test,"TLBCODE
+1011,V11B2,AGD,AGD,C.Kees' AGD Ports,Tea Leaf Ted Bear,Game,Kees van Oss,AGD/TLBEAR,8200,"CH.""TLBRUN""",Test,"TLBCODE
 TLBRUN
 TLBSCR",present,AGD,Yes,,
-1012,V11B2,AGD,AGD,B.Modern Creations/Ports,Tea Leaf Ted,Game,Kees van Oss,AGD/TLTED,8200,"CH.""TLTRUN""",Test,"TLTCODE
+1012,V11B2,AGD,AGD,C.Kees' AGD Ports,Tea Leaf Ted,Game,Kees van Oss,AGD/TLTED,8200,"CH.""TLTRUN""",Test,"TLTCODE
 TLTRUN
 TLTSCR",present,AGD,Yes,,
-1013,V11B2,AGD,AGD,B.Modern Creations/Ports,The Vectornauts,Game,Kees van Oss,AGD/VECTORN,8200,"CH.""VECRUN""",Test,"VECCODE
+1013,V11B2,AGD,AGD,C.Kees' AGD Ports,The Vectornauts,Game,Kees van Oss,AGD/VECTORN,8200,"CH.""VECRUN""",Test,"VECCODE
 VECRUN
 VECSCR",present,AGD,Yes,,
-1014,V11B2,AGD,AGD,B.Modern Creations/Ports,Vintik,Game,Kees van Oss,AGD/VINTIK,8200,"CH.""VINRUN""",Test,"VINCODE
+1014,V11B2,AGD,AGD,C.Kees' AGD Ports,Vintik,Game,Kees van Oss,AGD/VINTIK,8200,"CH.""VINRUN""",Test,"VINCODE
 VINRUN
 VINSCR",present,AGD,Yes,,
-1015,V11B2,AGD,AGD,B.Modern Creations/Ports,Zombo's Christmas Capers,Game,Kees van Oss,AGD/ZOMBOX,8200,"CH.""ZOXRUN""",Test,"ZOXCODE
+1015,V11B2,AGD,AGD,C.Kees' AGD Ports,Zombo's Christmas Capers,Game,Kees van Oss,AGD/ZOMBOX,8200,"CH.""ZOXRUN""",Test,"ZOXCODE
 ZOXPAN
 ZOXRUN
 ZOXSCR",present,AGD,Yes,,
-1016,V11B2,AGD,AGD,B.Modern Creations/Ports,Zukinox,Game,Kees van Oss,AGD/ZUKINOX,8200,"CH.""ZUKRUN""",Test,"ZUKCODE
+1016,V11B2,AGD,AGD,C.Kees' AGD Ports,Zukinox,Game,Kees van Oss,AGD/ZUKINOX,8200,"CH.""ZUKRUN""",Test,"ZUKCODE
 ZUKRUN
 ZUKSCR",present,AGD,Yes,,
