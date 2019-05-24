@@ -159,10 +159,11 @@ public class GenerateMenuFiles extends GenerateBase {
         int lengthOfUpperText;
 
         if (allChunk) {
-            lengthOfLowerText = 0x1700;
-            endOfLowerText = 0x4800;
-            startOfUpperText = 0x4800;
-            lengthOfUpperText = 0x3800;
+            // swap the lower and upper text spces
+            lengthOfLowerText = 0x1600;
+            endOfLowerText = 0x9800;
+            startOfUpperText = 0x3400;
+            lengthOfUpperText = 0x4c00;
         } else {
             lengthOfLowerText = 0x0B00;
             endOfLowerText = 0x3c00;
