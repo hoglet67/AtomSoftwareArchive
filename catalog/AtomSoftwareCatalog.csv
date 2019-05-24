@@ -381,7 +381,7 @@ EL-INSTR",present,,,,
 FIZ-INSTR",present,,,,
 252,V5,QUO,Quodlibet,A.Commercial Software,Meanies,Game,,QUO,8200,*RUN MEANIES,Works,MEANIES,present,,,,
 253,,DPS,DP Saville,D.Non Commercial Software,Life,Simulation,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
-254,,DPS,DP Saville,D.Non Commercial Software,Mindmaster,Game,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
+254,,DPS,DP Saville,B.Modern Creations,Mindmaster,Game,,OTHER,,,Duplicate of Atomic Software entry,,duplicate,,,,
 255,V2,RAM,Ramtronics,A.Commercial Software,Africa Diamond,Adventure,,OTHER,8200,"CH.""AFRICA1""",Works,"AFRICA1
 AFRICA2",present,,,,
 257,V5,SUP,Superlex,A.Commercial Software,Draw Pic,Graphics,,SUP,8200,"CH.""DRAWPIC""",Works,DRAWPIC,present,,,,
@@ -395,9 +395,9 @@ ATOMIDAT",present,,,,
 RUN",Works,"171
 171B
 DRAGONC",present,,,,
-265,V3,RS,Retro S/W,B.Modern Creations/Ports,Castle Quest (16K) (R),Game,,RS/CASQUEST,8200,"CH.""CAST""",Works,"CAST
+265,V3,RS,Retro S/W,B.Modern Creations,Castle Quest (16K) (R),Game,,RS/CASQUEST,8200,"CH.""CAST""",Works,"CAST
 DATA",present,RS Mono,Yes,,
-266,V2,RS,Retro S/W,B.Modern Creations/Ports,Chuckie Egg (16K),Game,,RS/CHUCKIE,8200,"CH.""RUNME""",Works,"ASM
+266,V2,RS,Retro S/W,B.Modern Creations,Chuckie Egg (16K),Game,,RS/CHUCKIE,8200,"CH.""RUNME""",Works,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -406,7 +406,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",obsolete,,Yes,,
-267,V2,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (32K),Game,,RS/GALA,8200,"CH.""RUNME""",Works,"ASM
+267,V2,RS,Retro S/W,B.Modern Creations,Galaforce (32K),Game,,RS/GALA,8200,"CH.""RUNME""",Works,"ASM
 CGALA
 CGALSCR
 FONT
@@ -416,21 +416,21 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",obsolete,,Yes,,
-268,V3,RS,Retro S/W,B.Modern Creations/Ports,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
+268,V3,RS,Retro S/W,B.Modern Creations,Hard Hat Harry (32K),Game,,RS/HARRY,8200,*RUN HARRY,Works,"HARRY
 LOADER",present,RS Colour,Yes,,
-269,V2,RS,Retro S/W,B.Modern Creations/Ports,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPER
+269,V2,RS,Retro S/W,B.Modern Creations,Hyper Viper,Game,,RS/HYPERV,8200,"CH.""LOADER""",Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
 MHYPER",obsolete,,,,
-270,V2,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Miner,Game,,RS/MINER,8200,"CH.""LOADER""",Works,"CMINER
+270,V2,RS,Retro S/W,B.Modern Creations,Jet Set Miner,Game,,RS/MINER,8200,"CH.""LOADER""",Works,"CMINER
 DAT0
 DAT1
 EDITOR
 LOADER
 MMINER",obsolete,,,,
-271,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
+271,V8B1,RS,Retro S/W,B.Modern Creations,Jungle Journey (32K),Game,,RS/JUNGLE,8200,"CH.""RUNME""",Works,"INTRO
 JUNGLE
 MUSIC
 RUNME",present,"RS Colour
@@ -457,25 +457,25 @@ Joystick AtoMMC",Yes,,
 290,V7B2,PP,Prog Power,A.Commercial Software,Blitz,Game,S. Skippo,PP,8200,"CH.""BLITZ""",Works,BLITZ,present,,,,
 291,,PP,Prog Power,A.Commercial Software,Rat Race,Game,S. Skippo,PP,,,,,missing,,,,
 292,,PP,Prog Power,A.Commercial Software,Galactica,Game,S. Vout,PP,,,,,missing,,,,
-293,V2,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,Works,COLOSSAL,obsolete,,Yes,,
-294,V2,L9,Level 9,B.Modern Creations/Ports,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,Works,SNOWBALL,obsolete,,Yes,,
+293,V2,L9,Level 9,B.Modern Creations,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,Works,COLOSSAL,obsolete,,Yes,,
+294,V2,L9,Level 9,B.Modern Creations,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,Works,SNOWBALL,obsolete,,Yes,,
 295,V3,MO,Magnus Olsson,D.Non Commercial Software,Diamonds,Adventure,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",Works,DIAMONDS,present,,,,
 296,,???,???,A.Commercial Software,Intra Terrestrial,Adventure,,,,,,,duplicate,,,,
 297,V3,BS,Bearsoft,A.Commercial Software,Wolf Pack,Game,M. Barwise,BS,8200,"CH.""WOLFPAC""",Works,WOLFPAC,present,,,,
-298,V3,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+298,V3,L9,Level 9,B.Modern Creations,Colossal Adv (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN COLOSSAL",,"VDUBLO
 COLOSSAL",obsolete,,Yes,,
-299,V3,L9,Level 9,B.Modern Creations/Ports,Snowball (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+299,V3,L9,Level 9,B.Modern Creations,Snowball (B)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN SNOWBALL",,"VDUBLO
 SNOWBALL",obsolete,,Yes,,
-300,V3,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
+300,V3,L9,Level 9,B.Modern Creations,Colossal Adv (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN COLOSSAL",,"VDUWLO
 COLOSSAL",obsolete,,Yes,,
-301,V3,L9,Level 9,B.Modern Creations/Ports,Snowball (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
+301,V3,L9,Level 9,B.Modern Creations,Snowball (W)(32K),Adventure,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN SNOWBALL",,"VDUWLO
 SNOWBALL",obsolete,,Yes,,
 302,,,,A.Commercial Software,Astrofire (Kees),,,,,,Duplicate of Prog Power Astrafire,,duplicate,,,,
-303,V3,RS,Retro S/W,B.Modern Creations/Ports,Chuckie Egg (M)(16K),Game,,RS/CHUCKIE,8200,*RUN MCH-EGG,Works,"ASM
+303,V3,RS,Retro S/W,B.Modern Creations,Chuckie Egg (M)(16K),Game,,RS/CHUCKIE,8200,*RUN MCH-EGG,Works,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -486,7 +486,7 @@ ROTDATA
 RUNME",present,"RS Mono
 Joystick
 Joystick AtoMMC",Yes,,
-304,V3,RS,Retro S/W,B.Modern Creations/Ports,Chuckie Egg (C)(16K),Game,,RS/CHUCKIE,8200,*RUN CCH-EGG,Works,"ASM
+304,V3,RS,Retro S/W,B.Modern Creations,Chuckie Egg (C)(16K),Game,,RS/CHUCKIE,8200,*RUN CCH-EGG,Works,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -497,7 +497,7 @@ ROTDATA
 RUNME",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
-305,V8B2,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
+305,V8B2,RS,Retro S/W,B.Modern Creations,Galaforce (M)(32K),Game,,RS/GALA,8200,*RUN MGALA,Works,"ASM
 CGALA
 CGALSCR
 FONT
@@ -509,7 +509,7 @@ RUNME
 SCORE",present,"RS Mono
 Joystick
 Joystick AtoMMC",Yes,,
-306,V10B5,RS,Retro S/W,B.Modern Creations/Ports,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
+306,V10B5,RS,Retro S/W,B.Modern Creations,Galaforce (C)(32K),Game,,RS/GALA,8200,*RUN CGALA,Works,"ASM
 CGALA
 CGALSCR
 FONT
@@ -521,25 +521,25 @@ RUNME
 SCORE",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
-307,V3,RS,Retro S/W,B.Modern Creations/Ports,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPER
+307,V3,RS,Retro S/W,B.Modern Creations,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
 MHYPER",present,RS Mono,,,
-308,V3,RS,Retro S/W,B.Modern Creations/Ports,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPER
+308,V3,RS,Retro S/W,B.Modern Creations,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPER
 LOA-ASM
 LOADER
 LOA-FNT
 LOA-SCR
 MHYPER",present,RS Colour,,,
-309,V3,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Miner (M),Game,,RS/MINER,8200,*RUN MMINER,Works,"CMINER
+309,V3,RS,Retro S/W,B.Modern Creations,Jet Set Miner (M),Game,,RS/MINER,8200,*RUN MMINER,Works,"CMINER
 DAT0
 DAT1
 EDITOR
 LOADER
 MMINER",present,RS Mono,,,
-310,V3,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Miner (C),Game,,RS/MINER,8200,*RUN CMINER,Works,"CMINER
+310,V3,RS,Retro S/W,B.Modern Creations,Jet Set Miner (C),Game,,RS/MINER,8200,*RUN CMINER,Works,"CMINER
 DAT0
 DAT1
 EDITOR
@@ -552,29 +552,29 @@ MMINER",present,RS Colour,,,
 RUN",Works,CEMENT,present,,,,
 315,V3,NC,Non Comm,D.Non Commercial Software,Pengo,Game,M.LAUWERENS,OTHER,8200,*RUN PENGO,Works,PENGO,present,,,,
 316,V3,NC,Non Comm,D.Non Commercial Software,Stitch,Game,,OTHER,8200,"CH.""STITCH""",Works,STITCH,present,,,,
-317,V4,L9,Level 9,B.Modern Creations/Ports,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
+317,V4,L9,Level 9,B.Modern Creations,Colossal Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
 *RUN COLOSSAL",Works,"VDUBLO
 COLOSSAL",present,Middle Earth,Yes,,
-318,V4,L9,Level 9,B.Modern Creations/Ports,Adv Quest (32K),Adventure,"Mike, Nick and Pete Austin",L9/ADQUEST,2900,"*RUN VDUBLO
+318,V4,L9,Level 9,B.Modern Creations,Adv Quest (32K),Adventure,"Mike, Nick and Pete Austin",L9/ADQUEST,2900,"*RUN VDUBLO
 *RUN ADQUEST",Works,"VDUBLO
 ADQUEST",present,Middle Earth,Yes,,
-319,V4,L9,Level 9,B.Modern Creations/Ports,Dungeon Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/DUNGEON,2900,"*RUN VDUBLO
+319,V4,L9,Level 9,B.Modern Creations,Dungeon Adv (32K),Adventure,"Mike, Nick and Pete Austin",L9/DUNGEON,2900,"*RUN VDUBLO
 *RUN DUNGEON",Works,"VDUBLO
 DUNGEON",present,Middle Earth,Yes,,
-320,V4,L9,Level 9,B.Modern Creations/Ports,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9/SNOWBALL,2900,"*RUN VDUBLO
+320,V4,L9,Level 9,B.Modern Creations,Snowball (32K),Adventure,"Mike, Nick and Pete Austin",L9/SNOWBALL,2900,"*RUN VDUBLO
 *RUN SNOWBALL",Works,"VDUBLO
 SNOWBALL",present,Silicon Dreams,Yes,,
-321,V4,L9,Level 9,B.Modern Creations/Ports,Return to Eden (32K),Adventure,"Mike, Nick and Pete Austin",L9/EDEN,2900,"*RUN VDUBLO
+321,V4,L9,Level 9,B.Modern Creations,Return to Eden (32K),Adventure,"Mike, Nick and Pete Austin",L9/EDEN,2900,"*RUN VDUBLO
 *RUN EDEN",Works,"VDUBLO
 EDEN",present,Silicon Dreams,Yes,,
-322,V4,L9,Level 9,B.Modern Creations/Ports,Worm in Paradise (32K),Adventure,"Mike, Nick and Pete Austin",L9/WORM,2900,*RUN WORM,Works,WORM,present,Silicon Dreams,Yes,,
-323,V4,L9,Level 9,B.Modern Creations/Ports,Lords of Time (32K),Adventure,"Mike, Nick and Pete Austin",L9/LORDSOF,2900,"*RUN VDUBLO
+322,V4,L9,Level 9,B.Modern Creations,Worm in Paradise (32K),Adventure,"Mike, Nick and Pete Austin",L9/WORM,2900,*RUN WORM,Works,WORM,present,Silicon Dreams,Yes,,
+323,V4,L9,Level 9,B.Modern Creations,Lords of Time (32K),Adventure,"Mike, Nick and Pete Austin",L9/LORDSOF,2900,"*RUN VDUBLO
 *RUN LORDSOF",Works,"VDUBLO
 LORDSOF",present,Time and Magik,Yes,,
-324,V4,L9,Level 9,B.Modern Creations/Ports,Red Moon (32K),Adventure,"Mike, Nick and Pete Austin",L9/REDMOON,2900,"*RUN VDUBLO
+324,V4,L9,Level 9,B.Modern Creations,Red Moon (32K),Adventure,"Mike, Nick and Pete Austin",L9/REDMOON,2900,"*RUN VDUBLO
 *RUN REDMOON",Works,"VDUBLO
 REDMOON",present,Time and Magik,Yes,,
-325,V4,L9,Level 9,B.Modern Creations/Ports,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,Works,MAGIK,present,Time and Magik,Yes,,
+325,V4,L9,Level 9,B.Modern Creations,Price of Magik (32K),Adventure,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,Works,MAGIK,present,Time and Magik,Yes,,
 326,V4,YC,Your Computer,E.Books/Magazines,Acorn Kong,Game,???,YC,8200,"CH.""ACKONG""",Works,ACKONG,present,Magazines,,,
 328,V4,NC,Non Comm,D.Non Commercial Software,Artist,Utility,???,NC,8200,*RUN ARTIST,Works,ARTIST,duplicate,,,,
 330,V4,NC,Non Comm,D.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",Works,ATOMICA,present,,,,
@@ -887,16 +887,16 @@ ERRTAB",present,Magazines,,,
 *RUN PS2A
 ",Works,"PROG
 PS2A",present,,,,
-615,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Repton (32K),Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
+615,V8B1,RS,Retro S/W,B.Modern Creations,Repton (32K),Game,,RS/REPTON,8200,*RUN REPTON,Works,"LOADER
 REPSCR
 REPTON",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
-616,V6,NC,Non Comm,B.Modern Creations/Ports,HubPlay (#BDC0),Music,,SID/ATOMSID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
+616,V6,NC,Non Comm,B.Modern Creations,HubPlay (#BDC0),Music,,SID/ATOMSID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
 617,V5,NC,Non Comm,D.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
-618,V6,NC,Non Comm,B.Modern Creations/Ports,Reptune (#BDC0),Music,,SID/ATOMSID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
-619,V6,NC,Non Comm,B.Modern Creations/Ports,SidTest (#BDC0),Music,,SID/ATOMSID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
-620,V6,NC,Non Comm,B.Modern Creations/Ports,AtomSID (#BDC0) (32K),Music,,SID/ATOMSID,2900,*RUN SIDMENU,Works,"AXELF
+618,V6,NC,Non Comm,B.Modern Creations,Reptune (#BDC0),Music,,SID/ATOMSID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
+619,V6,NC,Non Comm,B.Modern Creations,SidTest (#BDC0),Music,,SID/ATOMSID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
+620,V6,NC,Non Comm,B.Modern Creations,AtomSID (#BDC0) (32K),Music,,SID/ATOMSID,2900,*RUN SIDMENU,Works,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
@@ -911,10 +911,10 @@ TERMINA
 TITANIC
 TOPGUN
 WIZARDO",present,SID,Yes,,
-621,V6,NC,Non Comm,B.Modern Creations/Ports,HubPlay (#9FC0),Music,,SID/DAVESID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
-622,V6,NC,Non Comm,B.Modern Creations/Ports,Reptune (#9FC0),Music,,SID/DAVESID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
-623,V6,NC,Non Comm,B.Modern Creations/Ports,SidTest (#9FC0),Music,,SID/DAVESID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
-624,V6,NC,Non Comm,B.Modern Creations/Ports,AtomSID (#9FC0) (32K),Music,,SID/DAVESID,2900,*RUN SIDMENU,Works,"AXELF
+621,V6,NC,Non Comm,B.Modern Creations,HubPlay (#9FC0),Music,,SID/DAVESID,8200,*RUN HUBPLAY,Works,HUBPLAY,present,SID,,,
+622,V6,NC,Non Comm,B.Modern Creations,Reptune (#9FC0),Music,,SID/DAVESID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
+623,V6,NC,Non Comm,B.Modern Creations,SidTest (#9FC0),Music,,SID/DAVESID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
+624,V6,NC,Non Comm,B.Modern Creations,AtomSID (#9FC0) (32K),Music,,SID/DAVESID,2900,*RUN SIDMENU,Works,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
@@ -929,7 +929,7 @@ TERMINA
 TITANIC
 TOPGUN
 WIZARDO",present,SID,Yes,,
-625,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID01 Bill Carr,Music,,SID/ATMSID1,2900,*RUN SIDMENU,Works,"4X4
+625,V6,NC,Non Comm,B.Modern Creations,BeebSID01 Bill Carr,Music,,SID/ATMSID1,2900,*RUN SIDMENU,Works,"4X4
 BATMAN
 CHRDN
 CNFZN
@@ -943,7 +943,7 @@ THRUST
 URIDIUM
 VISAGE
 ",present,SID,Yes,,
-626,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID02 BBC Games,Music,,SID/ATMSID2,2900,*RUN SIDMENU,Works,"BUBBLEB
+626,V6,NC,Non Comm,B.Modern Creations,BeebSID02 BBC Games,Music,,SID/ATMSID2,2900,*RUN SIDMENU,Works,"BUBBLEB
 FIRETRA
 HOPPER1
 HOPPER3
@@ -957,7 +957,7 @@ REPTONA
 SABREWU
 SIDMENU
 WAYOFTH",present,SID,Yes,,
-627,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID03 The 80s,Music,,SID/ATMSID3,2900,*RUN SIDMENU,Works,"ALWAYSO
+627,V6,NC,Non Comm,B.Modern Creations,BeebSID03 The 80s,Music,,SID/ATMSID3,2900,*RUN SIDMENU,Works,"ALWAYSO
 AXELFAA
 BILLIEJ
 CARELES
@@ -973,7 +973,7 @@ SWEETDR
 TAKEMYB
 THEFINA
 TOGETHE",present,SID,Yes,,
-628,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID04 The Beatles,Music,,SID/ATMSID4,2900,*RUN SIDMENU,Works,"ALLYOUN
+628,V6,NC,Non Comm,B.Modern Creations,BeebSID04 The Beatles,Music,,SID/ATMSID4,2900,*RUN SIDMENU,Works,"ALLYOUN
 COMETOG
 ELEANOR
 HERECOM
@@ -989,7 +989,7 @@ WHENIM6
 WITHALI
 YELLOWS
 YESTERD",present,SID,Yes,,
-629,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID05 Movies,Music,,SID/ATMSID5,2900,*RUN SIDMENU,Works,"BLADERU
+629,V6,NC,Non Comm,B.Modern Creations,BeebSID05 Movies,Music,,SID/ATMSID5,2900,*RUN SIDMENU,Works,"BLADERU
 BLUESBR
 CHARIOT
 GHOSTBU
@@ -1005,7 +1005,7 @@ TERMINA
 TITANIC
 TOPGUNA
 WIZARDO",present,SID,Yes,,
-630,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID06 Madonna,Music,,SID/ATMSID6,2900,*RUN SIDMENU,Works,"DEEPERA
+630,V6,NC,Non Comm,B.Modern Creations,BeebSID06 Madonna,Music,,SID/ATMSID6,2900,*RUN SIDMENU,Works,"DEEPERA
 FROZENA
 HOLIDAY
 INTOTHE
@@ -1021,7 +1021,7 @@ SPOTLIG
 THISUSE
 WHOSTHA
 YOULLSE",present,SID,Yes,,
-631,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID07 XMAS Time,Music,,SID/ATMSID7,2900,*RUN SIDMENU,Works,"ANIOLPA
+631,V6,NC,Non Comm,B.Modern Creations,BeebSID07 XMAS Time,Music,,SID/ATMSID7,2900,*RUN SIDMENU,Works,"ANIOLPA
 DECKTHE
 DOTHEYK
 FAIRYTA
@@ -1041,7 +1041,7 @@ SILENTN
 WALKING
 WEWISHY
 WHITECH",present,SID,Yes,,
-632,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID08 Queen,Music,,SID/ATMSID8,2900,*RUN SIDMENU,Works,"SIDMENU
+632,V6,NC,Non Comm,B.Modern Creations,BeebSID08 Queen,Music,,SID/ATMSID8,2900,*RUN SIDMENU,Works,"SIDMENU
 1973SEV
 1975BOH
 1977AWE
@@ -1057,7 +1057,7 @@ WHITECH",present,SID,Yes,,
 1986WHO
 1989SCA
 1991THE",present,SID,Yes,,
-633,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID09 1981,Music,,SID/ATMSID9,2900,*RUN SIDMENU,Works,"01IMAGI
+633,V6,NC,Non Comm,B.Modern Creations,BeebSID09 1981,Music,,SID/ATMSID9,2900,*RUN SIDMENU,Works,"01IMAGI
 01LOSPA
 02FADET
 02INTHE
@@ -1078,7 +1078,7 @@ WHITECH",present,SID,Yes,,
 12CAMBO
 12DONTY
 SIDMENU",present,SID,Yes,,
-634,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID10 Olympics,Music,,SID/ATMSID10,2900,*RUN SIDMENU,Works,"01GODSA
+634,V6,NC,Non Comm,B.Modern Creations,BeebSID10 Olympics,Music,,SID/ATMSID10,2900,*RUN SIDMENU,Works,"01GODSA
 02JAMES
 03TUBUL
 04INDUL
@@ -1096,7 +1096,7 @@ SIDMENU",present,SID,Yes,,
 98COMET
 99HEYJU
 SIDMENU",present,SID,Yes,,
-635,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID11 Telly,Music,,SID/ATMSID11,2900,*RUN SIDMENU,Works,"ADDAMSF
+635,V6,NC,Non Comm,B.Modern Creations,BeebSID11 Telly,Music,,SID/ATMSID11,2900,*RUN SIDMENU,Works,"ADDAMSF
 AUFWIED
 BACARDI
 BENNYHI
@@ -1123,7 +1123,7 @@ SOOTYAN
 STARTRE
 THOMAST
 WOMBLES",present,SID,Yes,,
-636,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID12 Jarre,Music,,SID/ATMSID12,2900,*RUN SIDMENU,Works,"01OXYGE
+636,V6,NC,Non Comm,B.Modern Creations,BeebSID12 Jarre,Music,,SID/ATMSID12,2900,*RUN SIDMENU,Works,"01OXYGE
 02EQUIN
 03MAGNE
 04ZOOLO
@@ -1134,7 +1134,7 @@ WOMBLES",present,SID,Yes,,
 09WAITI
 10CHRON
 SIDMENU",present,SID,Yes,,
-637,V6,NC,Non Comm,B.Modern Creations/Ports,BeebSID13 Jackson,Music,,SID/ATMSID13,2900,*RUN SIDMENU,Works,"82ABILL
+637,V6,NC,Non Comm,B.Modern Creations,BeebSID13 Jackson,Music,,SID/ATMSID13,2900,*RUN SIDMENU,Works,"82ABILL
 82BBEAT
 83AWANN
 83BSAYS
@@ -1152,7 +1152,7 @@ SIDMENU",present,SID,Yes,,
 93GIVEI
 SIDMENU
 ",present,SID,Yes,,
-638,V6,NC,Non Comm,B.Modern Creations/Ports,XMAS SID (#BDC0) (32K),Music,,SID/XMASSID,2900,*RUN VU-MENU,Works,"DOKNOW
+638,V6,NC,Non Comm,B.Modern Creations,XMAS SID (#BDC0) (32K),Music,,SID/XMASSID,2900,*RUN VU-MENU,Works,"DOKNOW
 JINGLE
 JOHNXMAS
 LAST
@@ -1273,14 +1273,14 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
 *LOAD 7D81 8800",Works,7D81,present,ROMs,,,
-671,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Works,SCROLL1,present,GODIL,,,
-672,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Works,SCROLL2,present,GODIL,,,
-673,V6,NC,Non Comm,B.Modern Creations/Ports,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
+671,V6,NC,Non Comm,B.Modern Creations,GODIL Scroll Demo 1,Graphics,David Banks,GODIL,8200,"CH.""SCROLL1""",Works,SCROLL1,present,GODIL,,,
+672,V6,NC,Non Comm,B.Modern Creations,GODIL Scroll Demo 2,Graphics,David Banks,GODIL,8200,"CH.""SCROLL2""",Works,SCROLL2,present,GODIL,,,
+673,V6,NC,Non Comm,B.Modern Creations,GODIL 80x40 Demo,Graphics,David Banks,GODIL,8200,"CH.""DEMO""",Works,DEMO,present,GODIL,,,
 674,V6,NC,Non Comm,D.Non Commercial Software,Bombs Away,Game,,NC,8200,"CH.""BOMBS""",Works,BOMBS,present,,,,
 675,V6,NC,Non Comm,D.Non Commercial Software,Desert,Game,,NC,8200,"CH.""DESERT""",Works,DESERT,present,,,,
 676,V6,NC,Non Comm,D.Non Commercial Software,Duck (32K),Game,Roland Leurs,NC,8200,"CH.""DUCK""",Works,DUCK,present,,Yes,,
 679,V6,NC,Non Comm,D.Non Commercial Software,Jet,Game,Boede Hommel,NC,8200,"CH.""JET""",Works,JET,present,,,,
-680,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
+680,V8B1,RS,Retro S/W,B.Modern Creations,Joe Blade (32K),Game,Kees van Oss,RS/JOE,8200,*RUN JOE,Works,"JOE
 JOECODE
 PANEL1
 SCRE",present,"RS Mono
@@ -1299,34 +1299,34 @@ QUESTDA",present,Magazines,,,
 689,,PS,Pro Software,A.Commercial Software,Air Strike,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 690,,PS,Pro Software,A.Commercial Software,Chase,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
 691,,PS,Pro Software,A.Commercial Software,Road Race,Game,,,,,"Advert in Personal Computing Today, Nov 82",,missing,,,,
-692,V7B3,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
+692,V7B3,RS,Retro S/W,B.Modern Creations,TCCOTMV (32),Adventure,Stuart,QUILL/TCC,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-693,V7B3,RS,Retro S/W,B.Modern Creations/Ports,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
+693,V7B3,RS,Retro S/W,B.Modern Creations,TCCOTMV (40),Adventure,Stuart,QUILL/TCC,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-694,V7B1,LS,Larsoft,B.Modern Creations/Ports,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
+694,V7B1,LS,Larsoft,B.Modern Creations,Hex (32),Adventure,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-695,V7B2,LS,Larsoft,B.Modern Creations/Ports,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
+695,V7B2,LS,Larsoft,B.Modern Creations,Hex (40),Adventure,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-696,V7B1,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
+696,V7B1,LEE,Lee S/W,B.Modern Creations,Atahaulpa Part 1 (32),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-697,V7B2,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
+697,V7B2,LEE,Lee S/W,B.Modern Creations,Atahaulpa Part 1 (40),Adventure,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40",Works,"VDU2440
 DB40
 QLLC40",present,Quill,Yes,,
-698,V7B1,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
+698,V7B1,LEE,Lee S/W,B.Modern Creations,Atahaulpa Part 2 (32),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
 *RUN QLUC32",Works,"DB32
 QLUC32",present,Quill,Yes,,
-699,V7B2,LEE,Lee S/W,B.Modern Creations/Ports,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
+699,V7B2,LEE,Lee S/W,B.Modern Creations,Atahaulpa Part 2 (40),Adventure,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40",Works,"VDU2440
 DB40
@@ -1334,13 +1334,13 @@ QLLC40",present,Quill,Yes,,
 700,V7B1,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Works,"INVAS
 INVASIN",present,,,,
-701,V7B1,NC,Non Comm,B.Modern Creations/Ports,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
+701,V7B1,NC,Non Comm,B.Modern Creations,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
 702,V7B2,ASP,ASP S/W,A.Commercial Software,The White Barrows,Adventure,,ASP,8200,"CH.""WHITEBA""",Works,WHITEBA,present,,,,
-703,V7B2,NC,Non Comm,B.Modern Creations/Ports,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Works,"KRFTWRK
+703,V7B2,NC,Non Comm,B.Modern Creations,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Works,"KRFTWRK
 CMPWRLD
 SIDPLAY
 LOADER",present,Mainwaring,,,
-704,V7B2,NC,Non Comm,B.Modern Creations/Ports,Mandelbrot,Graphics,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""",Works,"MSC3A
+704,V7B2,NC,Non Comm,B.Modern Creations,Mandelbrot,Graphics,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""",Works,"MSC3A
 MSC3AD
 MSC3AL
 MSC3ALD
@@ -1413,7 +1413,7 @@ MSDISP",present,Mainwaring,,,
 760,V7,NC,Non Comm,D.Non Commercial Software,Roman Numerals,Utility,Bob Mockford,BM,8200,"CH.""ROMAN""",Works,ROMAN,present,Mockford,,,
 761,V7,NC,Non Comm,D.Non Commercial Software,"Rock, Scissors, Paper",Game,Bob Mockford,BM,8200,"CH.""ROSCPA""",Works,ROSCPA,present,Mockford,,,
 762,V7,NC,Non Comm,D.Non Commercial Software,Sub Hunt,Game,Bob Mockford,BM,8200,"CH.""SUBHUNT""",Works,SUBHUNT,present,Mockford,,,
-763,V7,NC,Non Comm,B.Modern Creations/Ports,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Works,"01THELA
+763,V7,NC,Non Comm,B.Modern Creations,BeebSID14 1982,Music,,SID/ATMSID14,2900,*RUN SIDMENU,Works,"01THELA
 02ILLFI
 03THEMO
 04GOLDE
@@ -1428,14 +1428,14 @@ MSDISP",present,Mainwaring,,,
 11MADWO
 12OURHO
 SIDMENU",present,SID,Yes,,
-764,V7,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,RS Colour,Yes,,
+764,V7,RS,Retro S/W,B.Modern Creations,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,RS Colour,Yes,,
 765,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
 766,V9B2,NC,Non Comm,F.ROMS,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD D199 8800",Works,D199,present,,,,
-767,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
-768,V8B1,NC,Non Comm,B.Modern Creations/Ports,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
-769,V8B1,NC,Non Comm,B.Modern Creations/Ports,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
-770,V8B1,RS,Retro S/W,B.Modern Creations/Ports,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,"FLAPPY
+767,V8B1,NC,Non Comm,B.Modern Creations,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
+768,V8B1,NC,Non Comm,B.Modern Creations,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
+769,V8B1,NC,Non Comm,B.Modern Creations,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
+770,V8B1,RS,Retro S/W,B.Modern Creations,Flappy Bird SID (32K),Game,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,Works,"FLAPPY
 ANGRY
 SIDPLAY
 START",present,RS Colour,Yes,,
@@ -1473,7 +1473,7 @@ SCHERM
 SYMBOOL",present,,,,
 778,V8B1,NC,Non Comm,D.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Works,CHARON,present,,,,
 779,V8B1,NC,Non Comm,D.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
-780,V8B1,NC,Non Comm,B.Modern Creations/Ports,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"*LOAD PLAY800
+780,V8B1,NC,Non Comm,B.Modern Creations,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"*LOAD PLAY800
 *LOAD STARWARS
 CH.""SW8""",Works,"SW8
 SW1X.TXT
@@ -1634,7 +1634,7 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 849,V9B1,BB,Bug Byte,A.Commercial Software,Last Run (JS),Game,,JS/KEES,8200,"CH.""JLAST""",Works,JLAST,present,"Joystick
 Joystick Kbd",,,
-850,V9B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID15 70's Rock,Music,,SID/ATMSID15,2900,*RUN SIDMENU,Works,"69WHOLE
+850,V9B1,NC,Non Comm,B.Modern Creations,BeebSID15 70's Rock,Music,,SID/ATMSID15,2900,*RUN SIDMENU,Works,"69WHOLE
 70ALLRI
 70IRONM
 70LAYLA
@@ -1680,7 +1680,7 @@ SIDMENU
 878,V9B1,NC,Non Comm,D.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
-879,V9B1,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,"CH.""F14RUN""",Works,"F14CODE
+879,V9B1,RS,Retro S/W,B.Modern Creations,F-14 Tomcat (32K),Game,Kees van Oss,RS/F14,8200,"CH.""F14RUN""",Works,"F14CODE
 F14RUN
 F14SCR
 LEVEL1
@@ -1689,7 +1689,7 @@ LEVEL3
 LEVEL4",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-880,V9B2,RS,Retro S/W,B.Modern Creations/Ports,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""",Works,"F14CODE
+880,V9B2,RS,Retro S/W,B.Modern Creations,F-14 Tomcat SID (32K),Game,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""",Works,"F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1699,35 +1699,35 @@ LEVEL3
 LEVEL4",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-881,V9B2,RS,Retro S/W,B.Modern Creations/Ports,Elite Demo (32K),Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Works,"CODE
+881,V9B2,RS,Retro S/W,B.Modern Creations,Elite Demo (32K),Game,Kees van Oss,RS/ELITE,8200,*RUN ELITE,Works,"CODE
 ELITE
 KEYS.TXT",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-882,V10B4,RS,Retro S/W,B.Modern Creations/Ports,Manic Miner (32K),Game,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""",Works,"MMRUN
+882,V10B4,RS,Retro S/W,B.Modern Creations,Manic Miner (32K),Game,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""",Works,"MMRUN
 MMINTRO
 MMCODE",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
 883,V9B2,NC,Non Comm,D.Non Commercial Software,Type Ahead,Utility,Ronald Boers,NC,8200,"CH.""TYPEAHD""",Works,TYPEAHD,present,,,,
-884,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
-885,V9B2,JB,Jim Bagley,B.Modern Creations/Ports,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
+884,V9B2,JB,Jim Bagley,B.Modern Creations,Dragon's Lair (1MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR,Works,DLAIR,present,,Yes,,
+885,V9B2,JB,Jim Bagley,B.Modern Creations,Dragon's Lair (2MHz),Game,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,Works,DLAIR2M,present,,Yes,,
 886,V9B2,NC,Non Comm,D.Non Commercial Software,Chess (Usurpator II),Game,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,Works,USURII,present,,,,
-887,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""",Works,"JSWRUN
+887,V10B1,RS,Retro S/W,B.Modern Creations,Jet Set Willy (32K),Game,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""",Works,"JSWRUN
 JSWCODE",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-888,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""",Works,"JSW2RUN
+888,V10B1,RS,Retro S/W,B.Modern Creations,Jet Set Willy II (32K),Game,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""",Works,"JSW2RUN
 JSW2COD",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-889,V10B1,RS,Retro S/W,B.Modern Creations/Ports,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
+889,V10B1,RS,Retro S/W,B.Modern Creations,Egghead in Space (32K),Game,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,Works,"EHRUN
 EHCODE",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
 890,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Works,TANGLED,present,,,,
 891,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,Bad Filename,GALAXIAN,present,,,,
-892,V10B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Two bad tracks,"1975BFE
+892,V10B1,NC,Non Comm,B.Modern Creations,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Two bad tracks,"1975BFE
 1975MAM
 1975SOS
 1976KNO
@@ -1744,8 +1744,8 @@ SIDMENU
 ",present,SID,Yes,,
 893,V10B1,NC,Non Comm,D.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
 894,V10B1,NC,Non Comm,D.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
-895,V10B1,NC,Non Comm,B.Modern Creations/Ports,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
-896,V10B1,NC,Non Comm,B.Modern Creations/Ports,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""","Works, but would benefit from a boot program.","TUBE
+895,V10B1,NC,Non Comm,B.Modern Creations,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
+896,V10B1,NC,Non Comm,B.Modern Creations,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""","Works, but would benefit from a boot program.","TUBE
 BASIC2
 CLOCKSP
 HIBASIC
@@ -1754,11 +1754,11 @@ BOOT6502
 ",present,,,,
 897,V10B1,NC,Non Comm,D.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
 SQUIRL2",present,,,,
-898,V10B2,RS,Retro S/W,B.Modern Creations/Ports,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
+898,V10B2,RS,Retro S/W,B.Modern Creations,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
 SIDRUN",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
-899,V10B4,RS,Retro S/W,B.Modern Creations/Ports,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Works,"GAME1
+899,V10B4,RS,Retro S/W,B.Modern Creations,W.A.R. (32K),Game,Kees van Oss,RS/WAR,8200,"CH.""WAR""",Works,"GAME1
 GAME2
 LOADER1
 LOADER2
@@ -1768,7 +1768,7 @@ WARSC",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
 900,V10B5,A&F,A&F S/W,A.Commercial Software,Kamikaze,Game,,AF,8200,"CH.""KAMIKAZ""",Works,KAMIKAZ,present,,,,
-901,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID17 Pet Shop Boys,Music,,SID/ATMSID17,2900,*RUN SIDMENU,Works,"00GOWES
+901,V10B5,NC,Non Comm,B.Modern Creations,BeebSID17 Pet Shop Boys,Music,,SID/ATMSID17,2900,*RUN SIDMENU,Works,"00GOWES
 01WESTE
 02LOVEC
 03OPPOR
@@ -1784,7 +1784,7 @@ Joystick Kbd",Yes,,
 SIDMENU
 
 ",present,SID,Yes,,
-902,V10B5,NC,Non Comm,B.Modern Creations/Ports,BeebSID18 Club Hits!,Music,,SID/ATMSID18,2900,*RUN SIDMENU,Works,"01RHYTH
+902,V10B5,NC,Non Comm,B.Modern Creations,BeebSID18 Club Hits!,Music,,SID/ATMSID18,2900,*RUN SIDMENU,Works,"01RHYTH
 02LAMOU
 03PUMPU
 ANOTHER
@@ -1814,17 +1814,17 @@ WHATTIM
 ",present,SID,Yes,,
 903,V10B5,TA,The Atom,E.Books/Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Works,RACER,present,,,,
 904,V10B5,TA,The Atom,E.Books/Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
-905,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 0),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Works,"MOVIE0
+905,V10B5,NC,Non Comm,B.Modern Creations,Bad Apple (Clear 0),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Works,"MOVIE0
 MUSIC
 PLAYER0
 RUNME0
 SIDPLAY",present,SID,Yes,,
-906,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 2),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Works,"MOVIE2
+906,V10B5,NC,Non Comm,B.Modern Creations,Bad Apple (Clear 2),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""",Works,"MOVIE2
 MUSIC
 PLAYER2
 RUNME2
 SIDPLAY",present,SID,Yes,,
-907,V10B5,NC,Non Comm,B.Modern Creations/Ports,Bad Apple (Clear 4),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""",Works,"BACKSCR
+907,V10B5,NC,Non Comm,B.Modern Creations,Bad Apple (Clear 4),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""",Works,"BACKSCR
 MOVIE2
 MUSIC
 PLAYER4
@@ -1843,7 +1843,7 @@ TOPOT",present,,,,
 915,V11B1,PP,Prog Power,F.ROMS,PP MC Monitor,Language,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
 *LOAD FC5A 8800",Works,FC5A,present,ROMs,,,
-916,V11B1,NC,Non Comm,B.Modern Creations/Ports,BeebSID19 Classical,Music,,SID/ATMSID19,2900,*RUN SIDMENU,Works,"AIRONTH
+916,V11B1,NC,Non Comm,B.Modern Creations,BeebSID19 Classical,Music,,SID/ATMSID19,2900,*RUN SIDMENU,Works,"AIRONTH
 ALSOSPR
 CANCANO
 DEUTSCH
