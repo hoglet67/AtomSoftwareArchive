@@ -168,7 +168,6 @@ sid_reg         = $9700
 ;--------------------------------------------
 
 .play_song			; SPACE pressed
-	sei			; Disable interrupts
 
 	jsr resetSID
 	jsr restore_irq		; Restore IRQ vec
@@ -494,10 +493,13 @@ irqtime	= 20000
 
 .restore_irq
 	sei
+	lda #$40			; Enable T1-IRQ
+	sta $b80e
 	lda #<$a000			; Reset IRQ vector
 	sta $204
 	lda #>$a000
 	sta $205
+	cli
 	rts
 
 ;--------------------------------------------
