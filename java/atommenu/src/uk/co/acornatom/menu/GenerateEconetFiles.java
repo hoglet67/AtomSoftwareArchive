@@ -80,21 +80,30 @@ public class GenerateEconetFiles extends GenerateBase {
     }
 
     // Original AtomMMC Names
-    public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3", "SPLASH" };
+    public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3"};
 
     private void createMenus() throws IOException {
         // !BOOT
         ATMFile bootFile = new ATMFile("!BOOT", 0, 0, "*MENU\r".getBytes());
         addFile(BASEDIR, bootFile);
+
         // MENU
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUECO"));
         menuFile.setTitle("MENU");
         addFile(BASEDIR, menuFile);
         // Add a second copy to the lib directory
         addFile(LIBDIR, menuFile);
+
         // HELP
         ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
         addFile(BASEDIR, helpFile);
+        
+        // Splash files are only loaded from chapter A
+        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH1"));
+        addFile(BASEDIR + "MNUA" + DIRSEP, splashFile1);        
+        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH2"));
+        addFile(BASEDIR + "MNUA" + DIRSEP, splashFile2);
+        
         // MNU[A-F]/...
         if (numChunks > 8) {
             throw new RuntimeException("Too many menu chunks");

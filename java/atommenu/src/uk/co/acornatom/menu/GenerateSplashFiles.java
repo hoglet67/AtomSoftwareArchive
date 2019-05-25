@@ -255,94 +255,122 @@ public class GenerateSplashFiles extends GenerateBase {
     public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         int linex = 9;
-        
-        // Create an grey image
-        byte[] screen = new byte[0x1800];
-        fill(screen, 0, 0, 256, 192, 0);
 
-        // Start with the template
-        readSplashTemplate(SPASH_TEMPLATE, screen);
+        for (int pass = 1; pass <= 2; pass++) {
+            boolean includeAll = (pass == 1);
 
-        // Overlay the menu items
-        int y = 48;
-        writeAtomString(screen, "maintained by Hoglet", 46, y, false);
-        y += 14;
+            // Create an grey image
+            byte[] screen = new byte[0x1800];
+            fill(screen, 0, 0, 256, 192, 0);
 
-        drawLine(screen, linex, 255 - linex, y);
-        y += 2;
-        
-        for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
-            // Re-write the chunk titles
-            String title;
-            switch (chunk.getKey().charAt(0)) {
-            case 'A' : title = "Commercial";           break;
-            case 'B' : title = "Modern Creations";     break;
-            case 'C' : title = "Arcade Game Designer"; break;
-            case 'D' : title = "Non Commercial";       break;
-            case 'E' : title = "Books and Magazines";  break;
-            case 'F' : title = "Utility ROMS";         break;
-            default  : title = "All Titles";           break;                
-            }
-            String count = "" + chunk.getValue();
-            while (title.length() < 27 - count.length()) {
-                title += " ";
-            }
-            title += count;
-            // Nasty hack to get proportionally spaced brackets
-            writeAtomString(screen, "(", 8, y, false);
-            writeAtomString(screen, chunk.getKey(), 14, y, false);
-            writeAtomString(screen, ")", 20, y, false);            
-            writeAtomString(screen, title, 30, y, true);
-            y += 12;
-        }
-        
-        y += 2;
-        drawLine(screen, linex, 255 - linex, y);
+            // Start with the template
+            readSplashTemplate(SPASH_TEMPLATE, screen);
 
-        
-        // Overlay the status line
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-        String date = sdf.format(new Date());
-        String line = "Release " + version;
-        while (line.length() < 19) {
-            line += " ";
-        }
-        line += date;
-        if (line.length() != 30) {
-            throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
-        }
-        y = 192 - 18;
-        drawLine(screen, linex, 255 - linex, y);
+            // Overlay the menu items
+            int y = 48;
+            writeAtomString(screen, "maintained by Hoglet", 46, y, false);
+            y += 14;
 
-        writeAtomString(screen, line, 8, y, false);
+            drawLine(screen, linex, 255 - linex, y);
 
-        
-        // Save the file
-        String name = "SPLASH";
-        FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
-        writeATMFile(fosSplash, name, 0x8000, 0x8000, screen);
-        fosSplash.close();
+            y += 2;
 
-        // Save the file as a PNG
-        int s = 3;
-        int b = 32;
-        BufferedImage save = new BufferedImage(s * (256 + b + b), s * (192 + b + b), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = (Graphics2D) save.createGraphics();
-        g2.setColor(Color.GREEN);
-        g2.fillRect(0, 0, s * (256 + b + b), s * (192 + b + b));
-        g2.setColor(Color.BLACK);
-        g2.fillRect(s * b, s * b, s * 256, s * 192);
-        g2.setColor(Color.GREEN);
-        for (int i = 0; i < screen.length; i++) {
-            for (int j = 0; j < 8; j++) {
-                int px = ((i & 31) << 3) + 7 - j;
-                int py = (i >> 5);
-                if (((screen[i] >> j) & 1) > 0) {
-                    g2.fillRect(s * (b + px), s * (b + py), s, s);
+            for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
+                if (!includeAll && chunk.getKey().charAt(0) == 'G') {
+                    continue;
+                }
+                // Re-write the chunk titles
+                String title;
+                switch (chunk.getKey().charAt(0)) {
+                case 'A':
+                    title = "Commercial";
+                    break;
+                case 'B':
+                    title = "Modern Creations";
+                    break;
+                case 'C':
+                    title = "Arcade Game Designer";
+                    break;
+                case 'D':
+                    title = "Non Commercial";
+                    break;
+                case 'E':
+                    title = "Books and Magazines";
+                    break;
+                case 'F':
+                    title = "Utility ROMS";
+                    break;
+                case 'G':
+                    title = "All Titles";
+                    break;
+                default:
+                    title = "* Unknown Chapter *";
+                    break;
+                }
+                String count = "" + chunk.getValue();
+                while (title.length() < 27 - count.length()) {
+                    title += " ";
+                }
+                title += count;
+                // Nasty hack to get proportionally spaced brackets
+                writeAtomString(screen, "(", 8, y, false);
+                writeAtomString(screen, chunk.getKey(), 14, y, false);
+                writeAtomString(screen, ")", 20, y, false);
+                writeAtomString(screen, title, 30, y, true);
+                if (includeAll) {
+                    y += 12;
+                } else {
+                    y += 14;
                 }
             }
+
+            y += 2;
+
+            drawLine(screen, linex, 255 - linex, y);
+
+            // Overlay the status line
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+            String date = sdf.format(new Date());
+            String line = "Release " + version;
+            while (line.length() < 19) {
+                line += " ";
+            }
+            line += date;
+            if (line.length() != 30) {
+                throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
+            }
+            y = 192 - 18;
+            drawLine(screen, linex, 255 - linex, y);
+
+            writeAtomString(screen, line, 8, y, false);
+
+            // Save the file
+            String name = "SPLASH" + pass;
+            FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, name));
+            writeATMFile(fosSplash, name, 0x8000, 0x8000, screen);
+            fosSplash.close();
+
+            // Save the file as a PNG
+            int s = 3;
+            int b = 32;
+            BufferedImage save = new BufferedImage(s * (256 + b + b), s * (192 + b + b), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2 = (Graphics2D) save.createGraphics();
+            g2.setColor(Color.GREEN);
+            g2.fillRect(0, 0, s * (256 + b + b), s * (192 + b + b));
+            g2.setColor(Color.BLACK);
+            g2.fillRect(s * b, s * b, s * 256, s * 192);
+            g2.setColor(Color.GREEN);
+            for (int i = 0; i < screen.length; i++) {
+                for (int j = 0; j < 8; j++) {
+                    int px = ((i & 31) << 3) + 7 - j;
+                    int py = (i >> 5);
+                    if (((screen[i] >> j) & 1) > 0) {
+                        g2.fillRect(s * (b + px), s * (b + py), s, s);
+                    }
+                }
+            }
+            ImageIO.write(save, "PNG", new File("Splash" + pass + ".png"));
         }
-        ImageIO.write(save, "PNG", new File("Splash.png"));
     }
 
     // Colour 0 = black

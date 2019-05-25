@@ -229,12 +229,22 @@ public class GenerateSDDOSFiles extends GenerateBase {
     public void createMenuDisk() throws IOException {
         // Disk 0 is just the menu disk
         byte[] image = createBlankDiskImage("MENU");
-        ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
+
+        // HELP
         ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
-        ATMFile splashFile = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH"));
+
+        // MENU
+        ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
         menuFile.setTitle("MENU");
         addFile(image, menuFile);
-        addFile(image, splashFile);
+        
+        // Splash files
+        // In AtoMMC these are only present in MNUA, but in SDDOS they are needed in the MENU disk (disk 0)
+        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH1"));
+        addFile(image, splashFile1);        
+        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH2"));
+        addFile(image, splashFile2);
+        
         writeImage(new File("disks/0"), image);
         addDisk(image, 0);
         // Disk 1016-1023 are the chapters

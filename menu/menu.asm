@@ -128,6 +128,35 @@ ENDIF
 	LDA #>KernelOsrdch
 	STA RDCVEC + 1
 
+	; Quick test for memory beyond 0x3C00
+	LDY #0
+	STY TmpPtr
+	LDA #$3C
+	STA TmpPtr + 1
+.MemWrLoop
+	LDA TmpPtr + 1
+	EOR #$FF
+	STA (TmpPtr),Y
+	INC TmpPtr + 1
+	BPL MemWrLoop
+
+	LDA #$3C
+	STA TmpPtr + 1
+.MemRdLoop
+	LDA TmpPtr + 1
+	EOR #$FF
+	CMP (TmpPtr),Y
+	BNE MemTestFail
+	INC TmpPtr + 1
+	BPL MemRdLoop
+	BMI MemTestDone
+
+.MemTestFail
+   INC SplashNum
+	DEC MenuMaxKey + 1
+
+.MemTestDone
+
 IF (econet = 1)
 	JSR OscliString
 	EQUS "DIR $.ASA", Return
@@ -148,15 +177,19 @@ ENDIF
 	; 30 *LOAD SPLASH
 	JSR OscliString
 IF (sddos = 1)
-	EQUS "LOAD SPLASH", Return
+	EQUS "LOAD SPLASH"
 ELSE
-	EQUS "LOAD MNUA", DirSep, "SPLASH", Return
-ENDIF
+	EQUS "LOAD MNUA", DirSep, "SPLASH"
+   ENDIF
+
+.SplashNum
+   EQUB '1', Return
 	
 .MenuMain
 	JSR Osrdch
 	CMP #'A'
 	BCC MenuMain
+.MenuMaxKey
 	CMP #'G' + 1
 	BCC MenuNext
 	; Check for special system key for Rolands system

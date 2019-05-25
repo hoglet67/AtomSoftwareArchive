@@ -159,13 +159,16 @@ public class GenerateMenuFiles extends GenerateBase {
         int lengthOfUpperText;
 
         if (allChunk) {
-            // swap the lower and upper text spces
+            // swap the lower and upper text spaces
             lengthOfLowerText = 0x1600;
             endOfLowerText = 0x9800;
-            startOfUpperText = 0x3400;
-            lengthOfUpperText = 0x4c00;
+            startOfUpperText = 0x3300;
+            lengthOfUpperText = 0x4d00;
         } else {
-            lengthOfLowerText = 0x0B00;
+            // Note: SDDOS/Econet use 3200 as the RowReturnBuffer
+            // MENU 2800 2800 979
+            // MENU 2800 2800 98c
+            lengthOfLowerText = 0x0900;
             endOfLowerText = 0x3c00;
             startOfUpperText = 0x8200;
             lengthOfUpperText = 0x1600;
