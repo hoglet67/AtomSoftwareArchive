@@ -183,6 +183,31 @@ public class GenerateEconetFiles extends GenerateBase {
         return dir.toString();
     }
 
+    private void patch_interupt_vector(ATMFile atmFile) {
+        byte[] bytes = atmFile.getData();
+        for (int i = 0; i < bytes.length - 3; i++) {
+            int addrhi = (bytes[i + 2] & 0xff);
+            if (addrhi == 0x02) {
+                int addrlo = (bytes[i + 1] & 0xff);
+                if (addrlo == 0x04 || addrlo == 0x05) {
+                    int opcode = bytes[i] & 0xff;
+                    if (opcode == 0x8D || opcode == 0x8E || opcode == 0x8C ||    // LDA/X/Y absolute
+                        opcode == 0xAD || opcode == 0xAE || opcode == 0xAC) {    // STA/X/Y absolute
+                        System.out.println(String.format("Patching %s %04x %04x at %04X : %02X %02X %02X",
+                                        atmFile.getTitle(),
+                                        atmFile.getLoadAddr(),
+                                        i,
+                                        atmFile.getLoadAddr() + i,
+                                        opcode,
+                                        addrlo,
+                                        addrhi));
+                        bytes[i + 1] += (0x21c - 0x204);
+                    }
+                }
+            }
+        }
+    }
+
     public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         // This needs more work to deal with long fine names
@@ -211,6 +236,7 @@ public class GenerateEconetFiles extends GenerateBase {
                         ATMFile atmFile = new ATMFile(file);
                         missing.remove(filename);
                         atmFile.setTitle(filename);
+                        patch_interupt_vector(atmFile);
                         addFile(dir, atmFile);
                         if (item.getRunnables().contains(filename)) {
                             if (atmFile.getExecAddr() == (0xc2b2)) {
