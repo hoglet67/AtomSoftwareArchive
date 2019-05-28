@@ -1745,11 +1745,12 @@ SIDMENU
 865,V10B1,NC,Non Comm,D.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
 866,V10B1,NC,Non Comm,D.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
 867,V10B1,NC,Non Comm,B.Modern Creations,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
-868,V10B1,NC,Non Comm,B.Modern Creations,Atom Tube Host,Utility,David Banks,TUBE,8200,*RUN TUBE 0,Works,"TUBE
+868,V10B1,NC,Non Comm,B.Modern Creations,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""",Works,"TUBE
 BASIC2
 CLOCKSP
 HIBASIC
-COLOSS",present,,,,
+COLOSS
+BOOT6502",present,,,,
 869,V10B1,NC,Non Comm,D.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
 SQUIRL2",present,,,,
 870,V10B2,RS,Retro S/W,B.Modern Creations,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
