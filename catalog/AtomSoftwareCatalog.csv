@@ -2170,4 +2170,4 @@ CZSCR",present,AGD,Yes,,
 993,V11B3,AGD,AGD,C.Kees' AGD Ports,Puzzle Boxes,Game,Kees van Oss,AGD/BOXES,8200,"CH.""BOXRUN""",Test,"BOXCODE
 BOXRUN
 BOXSCR",present,AGD,Yes,,
-994,V11B3,NC,Non Comm,D.Non Commercial Software,Colour Test 1,Utility,David Banks,NC/TEST,8200,"CH.""CLTST1""",Test,VDCTIME,present,,,,
+994,V11B3,NC,Non Comm,D.Non Commercial Software,Colour Test 1,Utility,David Banks,NC/TEST,8200,"CH.""CLTST1""",Test,CLTST1,present,,,,
