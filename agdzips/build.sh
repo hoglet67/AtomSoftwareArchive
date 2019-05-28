@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=../archive/archive/AGD
+DIR=../archive/kees/AGD
 
 rm -rf $DIR
 mkdir -p $DIR
@@ -60,7 +60,7 @@ mv MIKE/_MikeTheGuitar.txt MIKE/_Mike_The_Guitar.txt
 mv NIGHTST/_NightStalker\ ZX.txt NIGHTST/_Night_Stalker_ZX.txt
 mv PINKPIL/_PinkPillsMoritzMeds_Instructions.txt PINKPIL/_Pink_Pills_Moritz_Meds.txt
 mv ROBOPRO/_RoboProbe.txt ROBOPRO/_Robo_Probe.txt
-mv SPACEJU/_SpaceJunk.txt SPACEJU/Space_Junk.txt 
+mv SPACEJU/_SpaceJunk.txt SPACEJU/Space_Junk.txt
 
 
 id=908
@@ -74,14 +74,13 @@ do
     #echo -e "=========================="
     #echo -e "$i"
     #echo -e "$title" | cut -c1-26
-    mv *.txt README.TXT
+    mv *.txt README.txt
     #
     run=$(find [A-Za-z]* | sort | grep RUN)
     files=$(find [A-Za-z]* | sort | grep -v README)
     cd ..
     echo -e "$id,V11B2,AGD,AGD,B.Modern Creations/Ports,$title,Game,Kees van Oss,AGD/$i,8200,CH.\"$run\",Test,\"$files\",present,AGD,Yes"
-    
-    id=$((id+1))
-    
-done
 
+    id=$((id+1))
+
+done
