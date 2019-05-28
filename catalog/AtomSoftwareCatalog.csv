@@ -1651,7 +1651,7 @@ Joystick Kbd",,,
 SIDMENU
 ",present,SID,Yes,,
 823,V9B1,HB,Hobbit,E.Books and Magazines,Valtinet (R),Game,,HB,8200,"CH.""VALINET""",Works,VALINET,present,,,,
-824,V9B1,NC,Non Comm,D.Non Commercial Software,VDC FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
+824,V9B1,NC,Non Comm,D.Non Commercial Software,VDG FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
 825,V9B1,PCW,PCW,E.Books and Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Works,QUEST,present,,,,
 826,V9B1,NC,Non Comm,D.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028.ATM""",Works,028.ATM,present,GameBase,,,
 827,V9B1,NC,Non Comm,D.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057.ATM""",Works,057.ATM,present,GameBase,,, requires AXR1
@@ -1745,13 +1745,11 @@ SIDMENU
 865,V10B1,NC,Non Comm,D.Non Commercial Software,Maurice (Demo),Game,,NC,8200,"CH.""MAURICE""",Works,MAURICE,present,,,,
 866,V10B1,NC,Non Comm,D.Non Commercial Software,Scramble,Game,,NC,8200,"CH.""SCRAMBLE""",Works,SCRAMBLE,present,,,,
 867,V10B1,NC,Non Comm,B.Modern Creations,RAF Test,Utility,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",Works,RAFTEST,present,,,,
-868,V10B1,NC,Non Comm,B.Modern Creations,Atom Tube Host,Utility,David Banks,TUBE,8200,"CH.""BOOT6502""","Works, but would benefit from a boot program.","TUBE
+868,V10B1,NC,Non Comm,B.Modern Creations,Atom Tube Host,Utility,David Banks,TUBE,8200,*RUN TUBE 0,Works,"TUBE
 BASIC2
 CLOCKSP
 HIBASIC
-COLOSS
-BOOT6502
-",present,,,,
+COLOSS",present,,,,
 869,V10B1,NC,Non Comm,D.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
 SQUIRL2",present,,,,
 870,V10B2,RS,Retro S/W,B.Modern Creations,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
@@ -2159,3 +2157,17 @@ ZOXSCR",present,AGD,Yes,,
 989,V11B2,AGD,AGD,C.Kees' AGD Ports,Zukinox,Game,Kees van Oss,AGD/ZUKINOX,8200,"CH.""ZUKRUN""",Test,"ZUKCODE
 ZUKRUN
 ZUKSCR",present,AGD,Yes,,
+990,V11B3,AGD,AGD,C.Kees' AGD Ports,Astronaut Labyrinth,Game,Kees van Oss,AGD/ASTRONA,8200,"CH.""ASTRUN""",Test,"ASTCODE
+ASTRUN
+ASTSCR",present,AGD,Yes,,
+991,V11B3,AGD,AGD,C.Kees' AGD Ports,Cronopios Y Famas,Game,Kees van Oss,AGD/CRONOPI,8200,"CH.""CRORUN""",Test,"CROCODE
+CROPAN
+CRORUN
+CROSCR",present,AGD,Yes,,
+992,V11B3,AGD,AGD,C.Kees' AGD Ports,Code Zero,Game,Kees van Oss,AGD/CODEZER,8200,"CH.""CZRUN""",Test,"CZCODE
+CZRUN
+CZSCR",present,AGD,Yes,,
+993,V11B3,AGD,AGD,C.Kees' AGD Ports,Puzzle Boxes,Game,Kees van Oss,AGD/BOXES,8200,"CH.""BOXRUN""",Test,"BOXCODE
+BOXRUN
+BOXSCR",present,AGD,Yes,,
+994,V11B3,NC,Non Comm,D.Non Commercial Software,Colour Test 1,Utility,David Banks,NC/TEST,8200,"CH.""CLTST1""",Test,VDCTIME,present,,,,
