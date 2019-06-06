@@ -1,4 +1,4 @@
-Base = $2800
+   Base = $2800
 
 include "renderer_header.asm"
 
@@ -40,7 +40,7 @@ ELIF (econet = 1)
 	AutoRepeat   = $8f
 
 	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
-   
+
 ELSE
 	RowReturnBuf = $021c
 
@@ -51,26 +51,26 @@ ELSE
 	NumPages     = $77
 	Item         = $78
 	SortType     = $79
-	FilterType   = $7a	
+	FilterType   = $7a
 	FilterString = $7b
-	AutoRepeat   = $7d 
+	AutoRepeat   = $7d
 
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
-        
+
 ENDIF
 
 IF (econet = 1)
    DirSep = '.'
-ELSE   
+ELSE
    DirSep = '/'
 ENDIF
-   
+
 	AutoRepeat1  = -$200
 	AutoRepeat2  = -$20
-	
+
 ; Basic -> Machine Code Variable Mapping
 ;
-; A -> Annotation      - the annotation to show on the RHS 
+; A -> Annotation      - the annotation to show on the RHS
 ; B -> n/a             - the load address of the MENUMC file
 ; C -> SortTablePtr    - the load address of the SORTDAT file
 ; D -> MenuTablePtr    - the load address of the MENUDAT file
@@ -83,7 +83,7 @@ ENDIF
 ; L -> LinesPerPage    - (CONSTANT) The number of lines per page
 ; M -> NumPages        - The current number of pages
 ; P -> Page            - The current page (1..M)
-; Q -> n/a             - The constant #8f 
+; Q -> n/a             - The constant #8f
 ; R -> RowReturnBuf - (CONSTANT) The address of a buffer into which the machine code stores the rendered row addresses
 ; S -> SortType        - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
 ; Y -> Item            - The currently highlighted row (0..L-1)
@@ -112,7 +112,7 @@ ENDIF
 
 	EQUB    <Base
 	EQUB    >Base
-	
+
 	EQUB    <Base
 	EQUB    >Base
 
@@ -167,7 +167,7 @@ ELSE
 	JSR OscliString
 	EQUS "NOMON", Return
 ENDIF
-   
+
 .MenuSplash
 
 	; 20 CLEAR 4
@@ -184,7 +184,7 @@ ELSE
 
 .SplashNum
    EQUB '1', Return
-	
+
 .MenuMain
 	JSR Osrdch
 	CMP #'A'
@@ -209,9 +209,9 @@ ENDIF
 
 	; Don't expect to return, but just in case....
 	JMP $c2b2
-	
+
 .MenuNext
-		
+
 IF (sddos = 1)
 	ADC #<(1016 - 'A')
 	STA BinBuffer
@@ -231,7 +231,7 @@ ELSE
 	STA SortDatChunk
 	STA RunCommandMenuChunk
 ENDIF
-		
+
 	; 90 CLEAR 0
 	LDY #0
 	JSR Clear
@@ -240,8 +240,8 @@ ENDIF
 
 	;100 *LOAD MNU/MENUDAT1
 	JSR OscliString
-	
-IF (sddos = 1)	
+
+IF (sddos = 1)
 	EQUS "LOAD MENU1", Return
 ELSE
 	EQUS "LOAD MNU"
@@ -249,7 +249,7 @@ ELSE
 	EQUS " ", DirSep, "MENUDAT1", Return
 ENDIF
 
-	;110 D=!#CD&#FFFF	
+	;110 D=!#CD&#FFFF
 	LDA ExecAddr
 	STA MenuTablePtr
 	LDA ExecAddr + 1
@@ -257,15 +257,15 @@ ENDIF
 
 	;115 *LOAD MNU/MENUDAT2
 	JSR OscliString
-	
-if (sddos = 1)	
+
+if (sddos = 1)
 	EQUS "LOAD MENU2", Return
-ELSE	
+ELSE
 	EQUS "LOAD MNU"
 .MenuDat2Chunk
 	EQUS " ", DirSep, "MENUDAT2", Return
 ENDIF
-	
+
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
 	LDY #0
@@ -276,7 +276,7 @@ ENDIF
 	STY Annotation  ; A=1
 
 	JSR LoadSortTable
-	
+
 	; // Initialize the search buffer to empty
 	; 125 ?#120=13
 	LDA #0
@@ -287,23 +287,23 @@ ENDIF
 	; 130a?#E1=0;GOS.x
 	; ?#E1=0 Not needed as we do our own screen output driver
 	JSR LabelX
-	
+
 .LabelB
 	; // Refresh rows, page number and total number of pages
 	; 200bGOS.j
 	JSR LabelJ
-	
+
 	; 260 LINK B;M=(!R&#FFFF+L-1)/L
 	JSR WritePage
 	JSR CalculateNumPages
 	STY NumPages
-	
+
 	; 270 ?#801B=P/10+176;?#801C=P%10+176
 	; 280 ?#801E=M/10+176;?#801F=M%10+176
 	JSR UpdateTotalPages
-	
+
 	; 290 GOS.i
-	JSR LabelI	
+	JSR LabelI
 
 .ReleaseKey
 	JSR HandleAutoRepeat
@@ -313,13 +313,13 @@ ENDIF
 	LDA $bd00
 	CMP #$bf
 	BNE HandleUpKeyOriginal
-	
+
 	; // Shift Key is pressed emulator (scroll up)
 	; 300cIF ?#B001&128>0 G.d
 	BIT $b001
 	BMI LabelD
 	JMP LabelC2
-	
+
 .HandleUpKeyOriginal
 	; // Ctrl Key is pressed Original Atom (scroll up)
 	; 300cIF ?#B001&64>0 G.d
@@ -345,14 +345,14 @@ ENDIF
 	LDA #(LinesPerPage - 1)
 	STA Item
 	JMP LabelB
-		
+
 .LabelD
 	; // Check for original Atom
 	LDA $bd00
 	CMP #$bf
 	BNE HandleDownKeyOriginal
 
-	; // Control Key is pressed emulator (scroll down)		
+	; // Control Key is pressed emulator (scroll down)
 	; 400dIF?#B001&64>0 G.e
 	BIT $b001
 	BVS LabelE
@@ -363,7 +363,7 @@ ENDIF
 	; 300cIF ?#B001&128>0 G.d
 	BIT $b001
 	BMI LabelE
-	
+
 .LabelD2
 	; 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
 	LDA Item
@@ -371,13 +371,13 @@ ENDIF
 	BEQ LabelD1
 	CLC
 	ADC #1
-	JSR TestRowActive	
-	BEQ LabelD1	
+	JSR TestRowActive
+	BEQ LabelD1
 	JSR LabelI
 	INC Item
 	JSR LabelI
 	JMP ReleaseKey
-		
+
 .LabelD1
 	; 420 IF P<M P=P+1;GOS.i;Y=0;G.b
 	LDA Page
@@ -390,7 +390,7 @@ ENDIF
 	LDA #0
 	STA Item
 	JMP LabelB
-	
+
 .LabelE
 	; 500eIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.b
 	BIT $b002
@@ -402,7 +402,7 @@ ENDIF
 	AND #3
 	STA Annotation
 	JMP SetItemToZero
-	
+
 .CallInkey
 	; // Call InKey()
 	; 510 LINK (B+3)
@@ -416,7 +416,7 @@ ENDIF
 
 .TestForPrevPage
     ; // < key pressed (previous page)
-    ; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b   
+    ; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
     CPY #28
     BNE TestForNextPage
     LDA NumPages
@@ -424,7 +424,7 @@ ENDIF
     BEQ TestForNextPage
     DEC Page
     BNE PrevPageNoWrap
- 	STA Page 
+ 	STA Page
 .PrevPageNoWrap
  	JMP SetItemToZero
 
@@ -444,7 +444,7 @@ ENDIF
 	STA Page
 .NextPageNoWrap
 	JMP SetItemToZero
-	
+
 .TestForHelp
 	; // ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
@@ -463,10 +463,10 @@ ENDIF
 	TYA
 	SBC #16
 	STA SortType
-	
+
 	; Page in the appropriate sort table
 	JSR LoadSortTable
-	
+
 .PageStateZero
 	LDA #0
 	STA PageState
@@ -503,7 +503,7 @@ ENDIF
 
 .TestForSelect
     ; // <Return> or <Space> pressed (select current item)
-	; 650 IF ?Q=0 OR ?Q=13 G.f 
+	; 650 IF ?Q=0 OR ?Q=13 G.f
 	CPY #0
 	BEQ LabelF
 	CPY #Return
@@ -520,20 +520,20 @@ ENDIF
 	STA Page
 	JSR LabelJ
 	JSR Search
-	
+
 	JMP LabelA
-	
+
 .JumpToLabelC
 	JMP LabelC
 
 .TestForAtoM
     ; // A..M key pressed (select an item)
-	; 660 IF ?Q<33 OR ?Q>45 G.c	
+	; 660 IF ?Q<33 OR ?Q>45 G.c
 	CPY #32
 	BCC JumpToLabelC
 	CPY #46
 	BCS JumpToLabelC
-	
+
     ; // Make sure that the row is not blank
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 	TYA
@@ -543,7 +543,7 @@ ENDIF
 	BEQ JumpToLabelC
 	TYA
 	STA Item
-	
+
 .LabelF
 
     ; // Get the address of the record selected
@@ -563,7 +563,7 @@ ENDIF
 	STA TmpPtr + 1
 	PLA
 	STA TmpPtr
-	
+
     ; // Handle selection of a filter item
 	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
 	LDA PageState
@@ -577,7 +577,7 @@ ENDIF
 	LDA TmpPtr + 1
 	ADC #0
 	STA FilterString + 1
-	
+
 	; Assume the filter item is an 8 bit value
 	LDA Item
 	LDY Page
@@ -589,7 +589,7 @@ ENDIF
 	BCC LabelF1
 .LabelF2
 	STA FilterVal
-	JMP PageStateZero		
+	JMP PageStateZero
 
 .BootProgram
 
@@ -611,7 +611,7 @@ ENDIF
 	; 860 ?P=48+K%10;P?1=13;P?2=13
 
 	; CountString and OscliBuffer are the same ($100)
-	
+
 	; 870 P.$12;LINK #FFF7
 	; 880 END
 	LDA #12
@@ -626,7 +626,7 @@ IF (sddos = 1)
 
 	JSR OscliString
 	EQUS "RUN BOOT", Return
-		
+
 .LoadDisk
 	STA RunCommand + 4
 ENDIF
@@ -636,11 +636,11 @@ IF (econet = 1)
 
 	JSR OscliString
 	EQUS "BOOT", Return
-		
+
 .ChangeDirectory
 ENDIF
-   
-		
+
+
 .RunCommand0
 	LDX #0
 .RunCommand1
@@ -651,7 +651,7 @@ ENDIF
 	BNE RunCommand1
 .RunCommand2
 IF (econet = 1)
-	JSR WritePath   
+	JSR WritePath
 ELSE
 	JSR WriteDecimal
 ENDIF
@@ -660,7 +660,7 @@ ENDIF
 	INX
 	STA OscliBuffer, X
 	JMP Oscli
-	
+
 IF (sddos = 1)
 
 .RunCommand
@@ -670,22 +670,22 @@ ELIF (econet = 1)
 
 .RunCommand
 	EQUS "DIR ",0
-   
-ELSE 
+
+ELSE
 
 .RunCommand
 	EQUS "RUN MNU"
 .RunCommandMenuChunk
 	EQUS " ", DirSep, 0
-		
-ENDIF	
 
-	
+ENDIF
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Translated Basic Subroutines
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
-	
+
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to show the help
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -705,13 +705,13 @@ ENDIF
 	RTS
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to invert line 2+Y on the screen 
+	; Subroutine to invert line 2+Y on the screen
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelI
 
 	;900i?Q=Y+2;LINK(B+6);R.
-	
+
 	LDY Item
 	INY
 	INY
@@ -719,9 +719,9 @@ ENDIF
 	JMP HighlightRow
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to set the zero page locations prior to calling machine code 
+	; Subroutine to set the zero page locations prior to calling machine code
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
+
 .LabelJ
 
 	;950j!#80=Z
@@ -737,7 +737,7 @@ ENDIF
 	BEQ LabelJ3
 	CLC
 	LDA StartRow
-	ADC #LinesPerPage	
+	ADC #LinesPerPage
 	STA StartRow
 	BCC LabelJ2
 	INC StartRow + 1
@@ -766,15 +766,15 @@ ENDIF
 
 	;955 ?#88=H
 	;not needed as these are collapsed
-	
+
 	;956 ?#89=F
 	LDA PageState
 	STA SearchMode
 
 	; 957 ?#8A=P
 	;not needed as these are collapsed
-	
-	;958 R.	
+
+	;958 R.
 	RTS
 
 
@@ -782,7 +782,7 @@ ENDIF
     ; Subroutine to update the page header
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	
+
 	; 1000xP.$30'"                                "$30
 	; 1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
 	; 1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2 + 2)&#FFFF
@@ -806,16 +806,16 @@ ENDIF
 	STA Screen
 	LDA #>ScreenStart
 	STA Screen + 1
-	
+
 	LDA PageState
 	BNE LabelX2
 	; F is zero
-	;1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF		
+	;1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
 	LDA #<LabelXString1
 	STA TmpPtr
 	LDA #>LabelXString1
 	STA TmpPtr + 1
-	
+
 	LDA SortType
 	PHA
 	LDA SortTablePtr
@@ -823,11 +823,11 @@ ENDIF
 	LDA SortTablePtr + 1
 	STA Sort + 1
 
-	BNE LabelX3	
+	BNE LabelX3
 
 .LabelX2
 	; F is not zero
-	;1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2 + 2)&#FFFF	
+	;1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2 + 2)&#FFFF
 	LDA #<LabelXString2
 	STA TmpPtr
 	LDA #>LabelXString2
@@ -844,9 +844,9 @@ ENDIF
 
 	LDX #Sort
 	JSR Dereference
-	
+
 .LabelX3
-	
+
 	;1030 P." BY ";GOS.y;P."  PAGE   /  "
 	JSR ScreenString
 	PLA
@@ -856,7 +856,7 @@ ENDIF
 	LDA #>LabelXString3
 	STA TmpPtr + 1
 	JSR ScreenString
-	
+
 	;1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
 	LDA FilterType
 	BEQ LabelX4
@@ -874,7 +874,7 @@ ENDIF
 	JSR ScreenString
 
 .LabelX4
-	;1050 Z=Z+2	
+	;1050 Z=Z+2
 	CLC
 	LDA Sort
 	ADC #2
@@ -882,7 +882,7 @@ ENDIF
 	BCC LabelX5
 	INC Sort + 1
 
-.LabelX5	
+.LabelX5
 	;1060 Y=-2;GOS.i;Y=0;P=1;R.
 	LDA #$fe
 	STA Item
@@ -891,8 +891,8 @@ ENDIF
 	STY Item
 	INY
 	STY Page
-	RTS	
-	
+	RTS
+
 .LabelXString1
 	EQUS "ATOMMC BY ", 0
 
@@ -913,23 +913,23 @@ ENDIF
 	PHA
 	JSR LabelZ
 	PLA
-	
+
 	;1220 IF I=1 P." "
 	;1230 IF I=2 P."     "
 	;1240 R.
 	TAY
 	LDA LabelYNumSpaces,Y
-	TAY	
+	TAY
 	LDA #' '
 .LabelYLoop
 	DEY
 	BMI LabelYExit
 	JSR WriteToScreen
-	BNE LabelYLoop 
+	BNE LabelYLoop
 
 .LabelYExit
 	RTS
-	
+
 .LabelYNumSpaces
 	EQUB 0, 1, 5, 0
 
@@ -957,7 +957,7 @@ ENDIF
 	LDX #TmpPtr
 	JSR Dereference
 	JMP ScreenString
-		
+
 .LabelZJumpTable
 	EQUW LabelZ0
 	EQUW LabelZ1
@@ -980,7 +980,7 @@ ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Machine Code Subroutines
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
+
 .TestRowActive
 	ASL A
 	ASL A
@@ -1000,7 +1000,7 @@ ENDIF
 	CMP #' '
 	RTS
 
-	
+
 .Clear
 	LDA PlotDriverLS,Y
 	STA $3FE
@@ -1016,7 +1016,7 @@ ENDIF
 	STA TmpPtr
 	CPY #0
 	BNE NotClear0
-	ORA #$20	
+	ORA #$20
 .NotClear0
 	LDY #0
 .ClearLoop
@@ -1029,7 +1029,7 @@ ENDIF
 	PLA
 	STA $B000
 	RTS
-	
+
 .GraphicsLastPage
 	EQUB $82, $84, $86, $8c, $98
 
@@ -1050,25 +1050,25 @@ ENDIF
 	INX
 	CMP #Return
 	BNE OscliString1
-	JSR Oscli	
+	JSR Oscli
 	INC	TmpPtr
 	BNE OscliString3
 	INC TmpPtr + 1
 .OscliString3
 	JMP (TmpPtr)
-	
+
 .ScreenString
 	LDY #0
 .ScreenString1
 	LDA (TmpPtr),Y
-	BEQ ScreenString2	
+	BEQ ScreenString2
 	JSR WriteToScreen
 	INY
 	BNE ScreenString1
 .ScreenString2
-	RTS	
+	RTS
 
-	
+
 	; Dereferences the pointer at zero page location X,X+1
 .Dereference
 	LDA 0,X
@@ -1082,7 +1082,7 @@ ENDIF
 	LDA (DerefTmp),Y
 	STA 1,X
 	RTS
-	
+
 .HandleAutoRepeat
 	LDA AutoRepeat
 	STA TmpPtr
@@ -1108,7 +1108,7 @@ ENDIF
 	STA AutoRepeat
 	LDA #>AutoRepeat2
 	STA AutoRepeat + 1
-	RTS	
+	RTS
 .HandleAutoRepeatKeyReleased
 	; Key was released
 	; Update the auto repeat timer to the delay value
@@ -1117,7 +1117,7 @@ ENDIF
 	LDA #>AutoRepeat1
 	STA AutoRepeat + 1
 	RTS
-	
+
 .LoadSortTable
 	; 60 *LOAD MNU/SORTDAT
 	LDA SortType
@@ -1135,15 +1135,15 @@ ENDIF
 .SortDatNum
 	EQUS " ", Return
 
-.LoadSortTable1	
+.LoadSortTable1
 	; 70 C=!#CD&#FFFF
 	LDA ExecAddr
 	STA SortTablePtr
 	LDA ExecAddr + 1
 	STA SortTablePtr + 1
 	RTS
-	
-		
+
+
 include "renderer_body.asm"
 
 IF (econet = 1)
@@ -1169,6 +1169,5 @@ IF (econet = 1)
 	PLA
 	JMP WriteHex1
 ENDIF
-   
-.ENDOF
 
+.ENDOF
