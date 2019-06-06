@@ -45,11 +45,12 @@ mv MENUECO $ARCHIVE
 # Compile the menu data and boostrap files
 java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE BOOT.bin BOOTROM.bin "$VERSION"
 
+# Remove unnecessary files from the root directory
+rm -f $ARCHIVE/HELP
+rm -f $ARCHIVE/MENUECO
+
 # Also copy to Atomulator
-cp -a $ARCHIVE/MENU $ARCHIVE/HELP $ARCHIVE/$DIR[A-Z] ../../Atomulator/mmc
+cp -a $ARCHIVE/MENU $ARCHIVE/$DIR[A-Z] ../../Atomulator/mmc
 
 # Zip everything up somewhere nice
 # zip -qr $HOME/$DIR.zip $ARCHIVE/MENU $ARCHIVE/HELP $ARCHIVE/$DIR[A-Z]
-
-
-

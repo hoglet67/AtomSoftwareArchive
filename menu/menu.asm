@@ -72,8 +72,8 @@ ENDIF
 ;
 ; A -> Annotation      - the annotation to show on the RHS
 ; B -> n/a             - the load address of the MENUMC file
-; C -> SortTablePtr    - the load address of the SORTDAT file
-; D -> MenuTablePtr    - the load address of the MENUDAT file
+; C -> SortTablePtr    - the load address of the SORT data file
+; D -> MenuTablePtr    - the load address of the MENU data file
 ; E -> FilterString    - current filter record address
 ; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3 showing the filter selection pages)
 ; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Collection)
@@ -176,11 +176,7 @@ ENDIF
 
 	; 30 *LOAD SPLASH
 	JSR OscliString
-IF (sddos = 1)
 	EQUS "LOAD SPLASH"
-ELSE
-	EQUS "LOAD MNUA", DirSep, "SPLASH"
-   ENDIF
 
 .SplashNum
    EQUB '1', Return
@@ -221,15 +217,16 @@ IF (sddos = 1)
 	JSR LoadDisk
 	JSR OscliString
 	EQUS "DRIVE 1", Return
-ELIF (econet = 1)
-	STA MenuDat1Chunk
-	STA MenuDat2Chunk
-	STA SortDatChunk
 ELSE
-	STA MenuDat1Chunk
-	STA MenuDat2Chunk
-	STA SortDatChunk
-	STA RunCommandMenuChunk
+   STA MenuDirChunk
+	JSR OscliString
+   IF (econet = 1)
+	   EQUS "DIR MNU"
+   ELSE
+	   EQUS "CWD MNU"
+   ENDIF
+   .MenuDirChunk
+   EQUS " ", Return
 ENDIF
 
 	; 90 CLEAR 0
@@ -238,16 +235,9 @@ ENDIF
 	LDA #12
 	JSR Oswrch
 
-	;100 *LOAD MNU/MENUDAT1
+	;100 *LOAD MNU/MENU1
 	JSR OscliString
-
-IF (sddos = 1)
 	EQUS "LOAD MENU1", Return
-ELSE
-	EQUS "LOAD MNU"
-.MenuDat1Chunk
-	EQUS " ", DirSep, "MENUDAT1", Return
-ENDIF
 
 	;110 D=!#CD&#FFFF
 	LDA ExecAddr
@@ -255,16 +245,9 @@ ENDIF
 	LDA ExecAddr + 1
 	STA MenuTablePtr + 1
 
-	;115 *LOAD MNU/MENUDAT2
+	;115 *LOAD MNU/MENU2
 	JSR OscliString
-
-if (sddos = 1)
 	EQUS "LOAD MENU2", Return
-ELSE
-	EQUS "LOAD MNU"
-.MenuDat2Chunk
-	EQUS " ", DirSep, "MENUDAT2", Return
-ENDIF
 
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
@@ -618,6 +601,7 @@ ENDIF
 	JSR Oswrch
 
 IF (sddos = 1)
+
 	LDA #'2'
 	JSR LoadDisk
 
@@ -629,17 +613,17 @@ IF (sddos = 1)
 
 .LoadDisk
 	STA RunCommand + 4
-ENDIF
 
-IF (econet = 1)
+ELIF (econet = 1)
+
 	JSR ChangeDirectory
 
 	JSR OscliString
 	EQUS "BOOT", Return
 
 .ChangeDirectory
-ENDIF
 
+ENDIF
 
 .RunCommand0
 	LDX #0
@@ -669,14 +653,12 @@ IF (sddos = 1)
 ELIF (econet = 1)
 
 .RunCommand
-	EQUS "DIR ",0
+	EQUS "DIR $.ASA.",0
 
 ELSE
 
 .RunCommand
-	EQUS "RUN MNU"
-.RunCommandMenuChunk
-	EQUS " ", DirSep, 0
+	EQUS "RUN ", 0
 
 ENDIF
 
@@ -1119,19 +1101,13 @@ ENDIF
 	RTS
 
 .LoadSortTable
-	; 60 *LOAD MNU/SORTDAT
+	; 60 *LOAD MNU/SORT
 	LDA SortType
 	ORA #'0'
 	STA SortDatNum
 	JSR OscliString
 
-IF (sddos = 1)
 	EQUS "LOAD SORT"
-ELSE
-	EQUS "LOAD MNU"
-.SortDatChunk
-	EQUS " ", DirSep, "SORTDAT"
-ENDIF
 .SortDatNum
 	EQUS " ", Return
 

@@ -220,18 +220,9 @@ public class GenerateSDDOSFiles extends GenerateBase {
 
     }
 
-    // Original AtomMMC Names
-    public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3" };
-
-    // Shorter SDDOS names
-    public static String[] SDDOS_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3" };
-
     public void createMenuDisk() throws IOException {
         // Disk 0 is just the menu disk
         byte[] image = createBlankDiskImage("MENU");
-
-        // HELP
-        ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
 
         // MENU
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
@@ -239,10 +230,10 @@ public class GenerateSDDOSFiles extends GenerateBase {
         addFile(image, menuFile);
         
         // Splash files
-        // In AtoMMC these are only present in MNUA, but in SDDOS they are needed in the MENU disk (disk 0)
-        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH1"));
+        // In AtoMMC these are present in the root directory, but in SDDOS they are needed in the MENU disk (disk 0)
+        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
         addFile(image, splashFile1);        
-        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH2"));
+        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
         addFile(image, splashFile2);
         
         writeImage(new File("disks/0"), image);
@@ -256,10 +247,8 @@ public class GenerateSDDOSFiles extends GenerateBase {
             byte[] chunkImage = createBlankDiskImage("MENU" + chunkLetter);
             for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
-                atmFile.setTitle(SDDOS_MENU_FILES[i]);
                 addFile(chunkImage, atmFile);
             }
-            addFile(chunkImage, helpFile);
             int num = 1016 + chunk;
             writeImage(new File("disks/" + num), chunkImage);
             addDisk(chunkImage, num);

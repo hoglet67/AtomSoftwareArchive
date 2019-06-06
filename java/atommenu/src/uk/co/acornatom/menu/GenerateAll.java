@@ -93,6 +93,8 @@ public class GenerateAll {
                 String chunkAll = "" + (char)(chunkId + chunks.size());
                 chunks.put(chunkAll, total);
 
+                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
+                splashGen.generateFiles(null);
                 for (String chunk : chunks.keySet()) {
 
                     // true if this is the last chunk containing all titles
@@ -109,8 +111,7 @@ public class GenerateAll {
                     }
                     List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
-                    generators.add(new GenerateMenuFiles(menuDir, allChunk));
-                    generators.add(new GenerateSplashFiles(menuDir, version, chunks));
+                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, allChunk));
                     for (IFileGenerator generator : generators) {
                         generator.generateFiles(chunkItems);
                     }

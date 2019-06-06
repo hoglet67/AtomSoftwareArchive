@@ -29,10 +29,12 @@ public class GenerateMenuFiles extends GenerateBase {
     int maxShortPublisherLen;
     int maxPublisherLen;
     int maxCollectionLen;
+    File archiveDir;
     File menuDir;
     boolean allChunk;
 
-    public GenerateMenuFiles(File menuDir, boolean allChunk) {
+    public GenerateMenuFiles(File archiveDir, File menuDir, boolean allChunk) {
+        this.archiveDir = archiveDir;
         this.menuDir = menuDir;
         this.allChunk = allChunk;
     }
@@ -286,14 +288,15 @@ public class GenerateMenuFiles extends GenerateBase {
         // Write the tables as Atom Files
         // ------------------------------------------------------------------------------------
 
-        writeTables(menuDir, "MENUDAT1", menuTableAddr, new int[] { titleTableAddr, 0, 0, 0, 0 },
+        writeTables(menuDir, "MENU1", menuTableAddr, new int[] { titleTableAddr, 0, 0, 0, 0 },
                 new byte[][] { null, shortPublisherTable, publisherTable, genreTable, collectionsTable });
-        writeTable(menuDir, "MENUDAT2", titleTableAddr, titleTable);
-        writeTable(menuDir, "SORTDAT0", sortTableAddr, titleSortTable);
-        writeTable(menuDir, "SORTDAT1", sortTableAddr, publisherSortTable);
-        writeTable(menuDir, "SORTDAT2", sortTableAddr, genreSortTable);
-        writeTable(menuDir, "SORTDAT3", sortTableAddr, collectionSortTable);
-
+        writeTable(menuDir, "MENU2", titleTableAddr, titleTable);
+        writeTable(menuDir, "SORT0", sortTableAddr, titleSortTable);
+        writeTable(menuDir, "SORT1", sortTableAddr, publisherSortTable);
+        writeTable(menuDir, "SORT2", sortTableAddr, genreSortTable);
+        writeTable(menuDir, "SORT3", sortTableAddr, collectionSortTable);
+ 
+        ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
     }
 
     private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {

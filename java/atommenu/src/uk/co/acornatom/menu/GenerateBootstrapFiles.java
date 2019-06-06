@@ -51,6 +51,9 @@ public class GenerateBootstrapFiles extends GenerateBase {
         }
         fis.close();
         if (target == Target.ATOMMC) {
+            // Reverse back to the root directory
+            bos.write("CWD ..".getBytes());
+            bos.write((byte) 13);
             // Break long directory paths into separate CWD commands to avoid
             // hitting the 13 char limit to *CWD
             if (directory.length() > 13) {

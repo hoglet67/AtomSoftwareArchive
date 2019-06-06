@@ -79,9 +79,6 @@ public class GenerateEconetFiles extends GenerateBase {
         zipStream.closeEntry();
     }
 
-    // Original AtomMMC Names
-    public static String[] ATOMMC_MENU_FILES = { "MENUDAT1", "MENUDAT2", "SORTDAT0", "SORTDAT1", "SORTDAT2", "SORTDAT3"};
-
     private void createMenus() throws IOException {
         // !BOOT
         ATMFile bootFile = new ATMFile("!BOOT", 0, 0, "*MENU\r".getBytes());
@@ -94,15 +91,11 @@ public class GenerateEconetFiles extends GenerateBase {
         // Add a second copy to the lib directory
         addFile(LIBDIR, menuFile);
 
-        // HELP
-        ATMFile helpFile = new ATMFile(new File(archiveDir, "HELP"));
-        addFile(BASEDIR, helpFile);
-        
-        // Splash files are only loaded from chapter A
-        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH1"));
-        addFile(BASEDIR + "MNUA" + DIRSEP, splashFile1);        
-        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "MNUA" + File.separator + "SPLASH2"));
-        addFile(BASEDIR + "MNUA" + DIRSEP, splashFile2);
+        // Splash files
+        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
+        addFile(BASEDIR, splashFile1);
+        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
+        addFile(BASEDIR, splashFile2);
         
         // MNU[A-F]/...
         if (numChunks > 8) {
@@ -115,7 +108,6 @@ public class GenerateEconetFiles extends GenerateBase {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
                 addFile(dir, atmFile);
             }
-            addFile(dir, helpFile);
         }
     }
 

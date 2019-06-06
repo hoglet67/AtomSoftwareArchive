@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class ATMFile {
 
@@ -19,6 +21,10 @@ public class ATMFile {
         this.loadAddr = loadAddr;
         this.execAddr = execAddr;
         this.data = data;
+    }
+
+    public static void copy(File src, File dst) throws IOException {
+        Files.copy(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     public ATMFile(File file) throws IOException {
