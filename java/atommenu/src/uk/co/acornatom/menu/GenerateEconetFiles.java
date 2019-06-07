@@ -59,7 +59,7 @@ public class GenerateEconetFiles extends GenerateBase {
         extra[13] = (byte) ((atmFile.getExecAddr() >> 8) & 0xff);
         extra[14] = 0;
         extra[15] = 0;
-        extra[16] = 3; // Attribute = RW
+        extra[16] = 0x33; // Attribute = Public(RW) Owner(RW)
         extra[17] = 0;
         extra[18] = 0;
         extra[19] = 0;
