@@ -3,6 +3,7 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ public class GenerateEconetFiles extends GenerateBase {
     public static final String LIBDIR = "LIBRARY" + DIRSEP;
 
     private ZipOutputStream zipStream;
+    private ZipOutputStream nullStream;
     private File archiveDir;
     private String menuBase;
     private int numChunks;
@@ -30,6 +32,11 @@ public class GenerateEconetFiles extends GenerateBase {
         this.menuBase = menuBase;
         this.numChunks = numChunks;
         this.zipStream = new ZipOutputStream(new FileOutputStream(econetZipFile));
+        this.nullStream = new ZipOutputStream(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+            }
+        });
         createMenus();
     }
 
@@ -74,6 +81,9 @@ public class GenerateEconetFiles extends GenerateBase {
         String filename = dir + atmFile.getTitle();
         ZipEntry entry = new ZipEntry(filename);
         entry.setExtra(build_extra_field(atmFile));
+        nullStream.putNextEntry(entry);
+        nullStream.write(atmFile.getData());
+        nullStream.closeEntry();
         zipStream.putNextEntry(entry);
         zipStream.write(atmFile.getData());
         zipStream.closeEntry();
