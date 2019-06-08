@@ -1334,7 +1334,7 @@ QLLC40",present,Quill,Yes,,
 672,V7B1,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Works,"INVAS
 INVASIN",present,,,,
-673,V7B1,NC,Non Comm,B.Modern Creations,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
+673,V11B6,NC,Non Comm,B.Modern Creations,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
 674,V7B2,ASP,ASP S/W,A.Commercial Software,The White Barrows,Adventure,,ASP,8200,"CH.""WHITEBA""",Works,WHITEBA,present,,,,
 675,V7B2,NC,Non Comm,B.Modern Creations,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Works,"KRFTWRK
 CMPWRLD
@@ -1430,8 +1430,8 @@ MSDISP",present,Mainwaring,,,
 SIDMENU",present,SID,Yes,,
 736,V7,RS,Retro S/W,B.Modern Creations,Flappy Bird (32K),Game,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,Works,FLAPPY,present,RS Colour,Yes,,
 737,V7,BS,Bearsoft,A.Commercial Software,Frogger,Game,,BS,8200,*RUN FROGGER,Works,FROGGER,present,,,,
-738,V9B2,NC,Non Comm,F.ROMS,FPGA Utils 0.25,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
-*LOAD D199 8800",Works,D199,present,,,,
+738,V11B6,NC,Non Comm,F.ROMS,FPGA Utils 0.28,Utility,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
+*LOAD 6844 8800",Works,6844,present,,,,
 739,V8B1,NC,Non Comm,B.Modern Creations,Dormann 6502 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D6502,Works,D6502,present,,Yes,,
 740,V8B1,NC,Non Comm,B.Modern Creations,Dormann 65C02 Tests,Utility,Klaus Dormann,NC/TEST,8200,*RUN D65C02,Works,D65C02,present,,Yes,,
 741,V8B1,NC,Non Comm,B.Modern Creations,6502 BCD Tests,Utility,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,Works,BCDTEST,present,,,,
