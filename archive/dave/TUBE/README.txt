@@ -113,14 +113,14 @@ Known issue 2: The Z80 Co Pro Error Handler might be unreliable.
 -----------
 
 TUBE/FLEX                   - Flex boot loader
-TUBE/BBCFLEX6.DSD           - Disc Image for Flex
+TUBE/BBCFLEX7.DSD           - Disc Image for Flex
 
 Here's how you get CP/M running (a bit more fiddly):
 
 >VGA80                      - if you have it
 >*CWD TUBE
 >*TUBE 9
-*DIN 0 BBCFLEX6.DSD
+*DIN 0 BBCFLEX7.DSD
 *FLEX
 
 PDP11 files:
