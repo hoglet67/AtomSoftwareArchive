@@ -7,6 +7,11 @@ mkdir -p $DIR
 
 find . -name '*.zip' -print0 | xargs -n1 -0 unzip -q -d $DIR
 
+#for i in `seq 29 41`
+#do
+#    unzip -q -d $DIR *$i.zip
+#done
+
 cd $DIR
 
 # Rename directorys containing a - characters
@@ -20,7 +25,12 @@ done
 mv SORCERESS SORCE
 mv SORCERESS2 SORCE2
 mv LDRAGON2 LDRAG2
-
+mv CATTIVIK1A CATTI1A
+mv CATTIVIK1B CATTI1B
+mv CATTIVIK1C CATTI1C
+mv CATTIVIK2  CATTI2
+mv COUSINH3 COUSIN3
+mv COUSINH5 COUSIN5
 
 # Rename directorys > 7 chars
 DIRS=$(find . -maxdepth 1 -type d  | sort  | cut -c3-)
@@ -32,7 +42,6 @@ done
 
 rm -f */*.DSK
 rm -f */*.CSW
-
 
 # Create some missing _.txt files
 touch LADDER/_Diamond_Geezer.txt
@@ -62,8 +71,10 @@ mv PINKPIL/_PinkPillsMoritzMeds_Instructions.txt PINKPIL/_Pink_Pills_Moritz_Meds
 mv ROBOPRO/_RoboProbe.txt ROBOPRO/_Robo_Probe.txt
 mv SPACEJU/_SpaceJunk.txt SPACEJU/Space_Junk.txt
 
+mv BOTFLOA/_BotFloater.txt BOTFLOA/_Bot_Floater.txt
+mv ANGRYBI/_Angrybirds.txt ANGRYBI/_Angry_Birds_Opposition.txt
 
-id=908
+id=1000
 
 # Extract titles
 DIRS=$(find [A-Z]* -maxdepth 1 -type d  | sort)
@@ -71,15 +82,16 @@ for i in $DIRS
 do
     cd $i
     title=$(ls *.txt | cut -c2- | tr "_" " " | sed 's/_Instructions//' | sed 's/.txt//')
+    title=$(echo -e "$title" | cut -c1-26)
     #echo -e "=========================="
     #echo -e "$i"
-    #echo -e "$title" | cut -c1-26
+    #echo -e "$title"
     mv *.txt README.txt
     #
     run=$(find [A-Za-z]* | sort | grep RUN)
     files=$(find [A-Za-z]* | sort | grep -v README)
     cd ..
-    echo -e "$id,V11B2,AGD,AGD,B.Modern Creations/Ports,$title,Game,Kees van Oss,AGD/$i,8200,CH.\"$run\",Test,\"$files\",present,AGD,Yes"
+    echo -e "$id,V11B6,AGD,AGD,C.Kees' AGD Ports,$title,Game,Kees van Oss,AGD/$i,8200,CH.\"$run\",Test,\"$files\",present,AGD,Yes"
 
     id=$((id+1))
 
