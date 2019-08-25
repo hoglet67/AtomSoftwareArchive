@@ -13,7 +13,9 @@ import java.util.TreeMap;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class SpreadsheetParser {
-
+    
+    private static final String STATUS_PRESENT = "present";
+    
     private static final String GENRE = "genre";
     private static final String COLLECTION = "collection";
     private static final String PUBLISHER = "publisher";
@@ -29,6 +31,7 @@ public class SpreadsheetParser {
     private static final String UPDATED = "updated";
 
     private File file;
+    private int index;
 
     private Set<String> filesPaths = new HashSet<String>();
 
@@ -38,6 +41,7 @@ public class SpreadsheetParser {
 
     public SpreadsheetParser(File file) {
         this.file = file;
+        this.index = 1;
     }
 
     public List<SpreadsheetTitle> parseSpreadSheet() {
@@ -51,7 +55,7 @@ public class SpreadsheetParser {
             List<String[]> programs = csvReader.readAll();
 
             String[] headers = programs.remove(0);
-            int index_column = -1;
+            //int index_column = -1;
             int chunk_column = -1;
             int title_column = -1;
             int status_column = -1;
@@ -65,9 +69,9 @@ public class SpreadsheetParser {
             int filenames_column = -1;
             int updated_column = -1;
             for (int i = 0; i < headers.length; i++) {
-                if (headers[i].toLowerCase().contains(INDEX)) {
-                    index_column = i;
-                }
+//                if (headers[i].toLowerCase().contains(INDEX)) {
+//                    index_column = i;
+//                }
                 if (headers[i].toLowerCase().contains(CHUNK)) {
                     chunk_column = i;
                 }
@@ -108,8 +112,14 @@ public class SpreadsheetParser {
 
             for (String[] program : programs) {
                 SpreadsheetTitle item = new SpreadsheetTitle();
-                String index = program[index_column].trim();
-                item.setIndex(Integer.parseInt(index));
+                String status = program[status_column].trim();
+                if (!status.equalsIgnoreCase(STATUS_PRESENT)) {
+                    continue;
+                }
+                //Ignore the index in the spreadsheet as there are holes, and we have a limited 10-bit address space
+                //String index = program[index_column].trim();
+                //item.setIndex(Integer.parseInt(index));
+                item.setIndex(index++);
                 String chunk = program[chunk_column].trim();
                 item.setChunk(chunk.substring(0,  1)); // Only use first character of chunk
                 String title = program[title_column].trim().toUpperCase();
@@ -118,8 +128,6 @@ public class SpreadsheetParser {
                 item.setDir(dir);
                 String run = program[run_column].trim();
                 item.setRun(run);
-                String status = program[status_column].trim();
-                item.setStatus(status);
                 String boot = program[boot_column].trim();
                 item.setBoot(boot);
                 String publisher = program[publisher_column].trim().toUpperCase();

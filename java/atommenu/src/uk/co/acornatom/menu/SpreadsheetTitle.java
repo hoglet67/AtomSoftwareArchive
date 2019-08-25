@@ -6,15 +6,11 @@ import java.util.Set;
 
 public class SpreadsheetTitle {
 
-    private static final String STATUS_PRESENT = "present";
-    private static final String STATUS_UPDATED = "updated";
-
     private int index;
     private String chunk;
     private String title;
     private String dir;
     private String run;
-    private String status;
     private String boot;
     private String publisher;
     private String shortPublisher;
@@ -64,14 +60,6 @@ public class SpreadsheetTitle {
         return run;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setBoot(String boot) {
         this.boot = boot;
     }
@@ -111,7 +99,7 @@ public class SpreadsheetTitle {
     }
 
     public boolean isPresent() {
-        return STATUS_PRESENT.equalsIgnoreCase(status) || STATUS_UPDATED.equalsIgnoreCase(status);
+        return true;
     }
 
     public void setShortPublisher(String shortPublisher) {
