@@ -259,7 +259,7 @@ public class GenerateEconetFiles extends GenerateBase {
                     }
                     if (!missing.isEmpty()) {
                         for (String m : missing) {
-                            System.out.println("WARNING: " + item.getTitle() + ": missing : " + m);
+                            System.out.println("WARNING: " + item.getTitle() + ": missing in Econet build : " + m);
                         }
                     }
                 }

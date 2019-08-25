@@ -67,6 +67,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
             }
         }
         String[] cmds = run.split("\n");
+        item.getLoadables().clear();
         for (int i = 0; i < cmds.length; i++) {
             String cmd = cmds[i].trim();
             System.out.println(">>" + cmd + "<<");
@@ -74,9 +75,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
                 bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
             } else if (cmd.startsWith("CH.")) {
                 String filename = trunc(cmd.split("\"")[1]);
-                if (target == Target.SDDOS) {
-                    item.getLoadables().add(filename);
-                }
+                item.getLoadables().add(filename);
                 bos.write(("LOAD " + filename).getBytes());
                 bos.write((byte) 13);
                 bos.write((byte) CMD_UPDATE_TOP_AND_RUN);

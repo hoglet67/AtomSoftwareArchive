@@ -271,14 +271,14 @@ public class GenerateSDDOSFiles extends GenerateBase {
 
                     Set<String> missing = new HashSet<String>(item.getLoadables());
                     for (String filename : item.getFilenames()) {
-                        System.out.println("    >" + filename + "<");
-                        File file = new File(new File(archiveDir, item.getDir()), filename);
-                        ATMFile atmFile = new ATMFile(file);
                         // Some of the ATM files still contain the original long
                         // tape titles
                         if (filename.length() > 7) {
                             filename = filename.substring(0, 7);
                         }
+                        System.out.println("    >" + filename + "<");
+                        File file = new File(new File(archiveDir, item.getDir()), filename);
+                        ATMFile atmFile = new ATMFile(file);
                         missing.remove(filename);
                         atmFile.setTitle(filename);
                         addFile(image, atmFile);
@@ -292,7 +292,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
                     }
                     if (!missing.isEmpty()) {
                         for (String m : missing) {
-                            System.out.println("WARNING: " + item.getTitle() + ": missing : " + m);
+                            System.out.println("WARNING: " + item.getTitle() + ": missing in SDDOS build : " + m);
                         }
                     }
                     System.out.println("Writing disk " + item.getIndex());
