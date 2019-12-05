@@ -7,7 +7,7 @@ mkdir -p $DIR
 
 find . -name '*.zip' -print0 | xargs -n1 -0 unzip -q -d $DIR
 
-#for i in `seq 29 41`
+#for i in `seq 42 51`
 #do
 #    unzip -q -d $DIR *$i.zip
 #done
@@ -31,6 +31,15 @@ mv CATTIVIK1C CATTI1C
 mv CATTIVIK2  CATTI2
 mv COUSINH3 COUSIN3
 mv COUSINH5 COUSIN5
+mv MYSTERIOUS MYSTER
+mv MYSTERIOUS2 MYSTER2
+
+mv DOOMPIT1 DOOMPT1
+mv DOOMPIT2 DOOMPT2
+mv DOOMPIT3 DOOMPT3
+mv SOPHIA21 SOPHI21
+mv SOPHIA22 SOPHI22
+mv SOPHIA23 SOPHI23
 
 # Rename directorys > 7 chars
 DIRS=$(find . -maxdepth 1 -type d  | sort  | cut -c3-)
@@ -48,6 +57,11 @@ touch LADDER/_Diamond_Geezer.txt
 touch LDRAG2/_Little_Dragon_2.txt
 touch LUMOS/_The_Treasure_of_Lumos.txt
 touch MALIGNA/_The_Malignant_Core.txt
+
+touch GREENRO/_Find_the_Green_Room.txt
+touch SC0TB0T/_Sc0tb0t.txt
+touch SETOYOK/_Seto_Taisho_to_Kazan.txt
+touch ZOMBO/_Zombo.txt
 
 # Put back some spaces
 mv AEON1/_Aeon.txt AEON1/_Aeon1.txt
@@ -74,7 +88,12 @@ mv SPACEJU/_SpaceJunk.txt SPACEJU/Space_Junk.txt
 mv BOTFLOA/_BotFloater.txt BOTFLOA/_Bot_Floater.txt
 mv ANGRYBI/_Angrybirds.txt ANGRYBI/_Angry_Birds_Opposition.txt
 
-id=1000
+mv SOPHI21/_Sophia_II.txt SOPHI21/_Sophia_II_Part_1.txt
+mv SOPHI22/_Sophia_II.txt SOPHI22/_Sophia_II_Part_2.txt
+mv SOPHI23/_Sophia_II.txt SOPHI23/_Sophia_II_Part_3.txt
+
+
+id=1052
 
 # Extract titles
 DIRS=$(find [A-Z]* -maxdepth 1 -type d  | sort)
@@ -91,7 +110,7 @@ do
     run=$(find [A-Za-z]* | sort | grep RUN)
     files=$(find [A-Za-z]* | sort | grep -v README)
     cd ..
-    echo -e "$id,V11B6,AGD,AGD,C.Kees' AGD Ports,$title,Game,Kees van Oss,AGD/$i,8200,CH.\"$run\",Test,\"$files\",present,AGD,Yes"
+    echo -e "$id,V11B7,AGD,AGD,C.Kees' AGD Ports,$title,Game,Kees van Oss,AGD/$i,8200,CH.\"$run\",Test,\"$files\",present,AGD,Yes"
 
     id=$((id+1))
 
