@@ -14,7 +14,7 @@ ADV1D",present,,,,
 ADV2D",present,,,,
 11,V1,A&R,A&R S/W,A.Commercial Software,Trap,Game,,AR,8200,*RUN TRAP,Works,TRAP,present,,,,
 12,,AA,Aardvark,A.Commercial Software,Hedgehog,Game,Nick Pelling (aka Orlando M Pilchard),AA,,,,,missing,,,,
-13,,AA,Aardvark,A.Commercial Software,Invaders,Game,Nick Pelling (aka Orlando M Pilchard),AA,,,,,missing,,,,
+13,V11B7,AA,Aardvark,A.Commercial Software,Invaders,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN INVADERS,,INVADERS,present,,,,
 14,V1,AS,Acornsoft,A.Commercial Software,House,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN HOUSE",Works,"ADVENTUR
 HOUSE",present,Atom Adventures,,No,http://wouter.bbcmicro.net/_archive/atom/scans/acornsoft/adventures/thumbnails.html
@@ -1726,7 +1726,7 @@ EHCODE",present,"RS Mono
 Joystick
 Joystick Kbd",Yes,,
 862,V10B1,A&F,A&F S/W,A.Commercial Software,Tangled,Game,,AF,8200,"CH.""TANGLED""",Works,TANGLED,present,,,,
-863,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,Bad Filename,GALAXIAN,present,,,,
+863,V10B1,AA,Aardvark,A.Commercial Software,Galaxians,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,,GALAXIAN,present,,,,
 864,V10B1,NC,Non Comm,B.Modern Creations,BeebSID16 ABBA,Music,,SID/ATMSID16,2900,*RUN SIDMENU,Two bad tracks,"1975BFE
 1975MAM
 1975SOS
@@ -2350,3 +2350,135 @@ TRISCR",present,AGD,Yes,,
 1051,V11B6,AGD,AGD,C.Kees' AGD Ports,Zoes Adventure,Game,Kees van Oss,AGD/ZOESADV,8200,"CH.""ZOERUN""",Test,"ZOECODE
 ZOERUN
 ZOESCR",present,AGD,Yes,,
+1052,V11B7,AGD,AGD,C.Kees' AGD Ports,Andys Escape,Game,Kees van Oss,AGD/ANDYSES,8200,"CH.""AERUN""",Test,"AECODE
+AERUN",present,AGD,Yes,,
+1053,V11B7,AGD,AGD,C.Kees' AGD Ports,Being Left is not Right,Game,Kees van Oss,AGD/BEINGLE,8200,"CH.""BLRUN""",Test,"BLCODE
+BLRUN
+BLSCR",present,AGD,Yes,,
+1054,V11B7,AGD,AGD,C.Kees' AGD Ports,Deadzone,Game,Kees van Oss,AGD/DEADZON,8200,"CH.""DZRUN""",Test,"DZCODE
+DZPAN
+DZRUN
+DZSCR",present,AGD,Yes,,
+1055,V11B7,AGD,AGD,C.Kees' AGD Ports,Doompit part1,Game,Kees van Oss,AGD/DOOMPT1,8200,"CH.""DP1RUN""",Test,"DP1CODE
+DP1PAN
+DP1RUN
+DP1SCR",present,AGD,Yes,,
+1056,V11B7,AGD,AGD,C.Kees' AGD Ports,Doompit part2,Game,Kees van Oss,AGD/DOOMPT2,8200,"CH.""DP2RUN""",Test,"DP2CODE
+DP2PAN
+DP2RUN
+DP2SCR",present,AGD,Yes,,
+1057,V11B7,AGD,AGD,C.Kees' AGD Ports,Doompit part3,Game,Kees van Oss,AGD/DOOMPT3,8200,"CH.""DP3RUN""",Test,"DP3CODE
+DP3PAN
+DP3RUN
+DP3SCR",present,AGD,Yes,,
+1058,V11B7,AGD,AGD,C.Kees' AGD Ports,Funky Fungus part 2,Game,Kees van Oss,AGD/FUNGUS2,8200,"CH.""F2RUN""",Test,"F2CODE
+F2PAN
+F2RUN
+F2SCR",present,AGD,Yes,,
+1059,V11B7,AGD,AGD,C.Kees' AGD Ports,Funky Fungus part 3,Game,Kees van Oss,AGD/FUNGUS3,8200,"CH.""F3RUN""",Test,"F3CODE
+F3PAN
+F3RUN
+F3SCR",present,AGD,Yes,,
+1060,V11B7,AGD,AGD,C.Kees' AGD Ports,Funky Fungus part 4,Game,Kees van Oss,AGD/FUNGUS4,8200,"CH.""F4RUN""",Test,"F4CODE
+F4PAN
+F4RUN
+F4SCR",present,AGD,Yes,,
+1061,V11B7,AGD,AGD,C.Kees' AGD Ports,Generatio Digital,Game,Kees van Oss,AGD/GENERAC,8200,"CH.""GDRUN""",Test,"GDCODE
+GDRUN
+GDSCR",present,AGD,Yes,,
+1062,V11B7,AGD,AGD,C.Kees' AGD Ports,Find the Green Room,Game,Kees van Oss,AGD/GREENRO,8200,"CH.""GRRUN""",Test,"GRCODE
+GRRUN",present,AGD,Yes,,
+1063,V11B7,AGD,AGD,C.Kees' AGD Ports,Knight Hero White,Game,Kees van Oss,AGD/KNIGHTW,8200,"CH.""KWRUN""",Test,"KWCODE
+KWRUN
+KWSCR",present,AGD,Yes,,
+1064,V11B7,AGD,AGD,C.Kees' AGD Ports,Meteromania,Game,Kees van Oss,AGD/METEORM,8200,"CH.""MMRUN""",Test,"MMCODE
+MMRUN
+MMSCR",present,AGD,Yes,,
+1065,V11B7,AGD,AGD,C.Kees' AGD Ports,Monkey J The Treasure of t,Game,Kees van Oss,AGD/MONKEY,8200,"CH.""MJRUN""",Test,"MJCODE
+MJRUN",present,AGD,Yes,,
+1066,V11B7,AGD,AGD,C.Kees' AGD Ports,Montys Last Strike,Game,Kees van Oss,AGD/MONTYLS,8200,"CH.""MLSRUN""",Test,"MLSCODE
+MLSRUN",present,AGD,Yes,,
+1067,V11B7,AGD,AGD,C.Kees' AGD Ports,Moritz,Game,Kees van Oss,AGD/MORITZ,8200,"CH.""MORUN""",Test,"MOCODE
+MORUN
+MOSCR",present,AGD,Yes,,
+1068,V11B7,AGD,AGD,C.Kees' AGD Ports,Mouser,Game,Kees van Oss,AGD/MOUSER,8200,"CH.""MOURUN""",Test,"MOUCODE
+MOURUN
+MOUSCR",present,AGD,Yes,,
+1069,V11B7,AGD,AGD,C.Kees' AGD Ports,Mysterious Dimensions part,Game,Kees van Oss,AGD/MYSTER,8200,"CH.""M1RUN""",Test,"M1CODE
+M1PAN
+M1RUN
+M1SCR",present,AGD,Yes,,
+1070,V11B7,AGD,AGD,C.Kees' AGD Ports,Mysterious Dimensions part,Game,Kees van Oss,AGD/MYSTER2,8200,"CH.""M2RUN""",Test,"M2CODE
+M2PAN
+M2RUN
+M2SCR",present,AGD,Yes,,
+1071,V11B7,AGD,AGD,C.Kees' AGD Ports,Nixy the glade Sprite,Game,Kees van Oss,AGD/NIXY,8200,"CH.""NIXRUN""",Test,"NIXCODE
+NIXRUN
+NIXSCR",present,AGD,Yes,,
+1072,V11B7,AGD,AGD,C.Kees' AGD Ports,Nixy The Seeds of Doom,Game,Kees van Oss,AGD/NIXY2,8200,"CH.""NI2RUN""",Test,"NI2CODE
+NI2RUN
+NI2SCR",present,AGD,Yes,,
+1073,V11B7,AGD,AGD,C.Kees' AGD Ports,OhLaLa,Game,Kees van Oss,AGD/OHLALA,8200,"CH.""OLLRUN""",Test,"OLLCODE
+OLLRUN",present,AGD,Yes,,
+1074,V11B7,AGD,AGD,C.Kees' AGD Ports,Operation Labyrinth Fall,Game,Kees van Oss,AGD/OPLABFA,8200,"CH.""OLFRUN""",Test,"OLFCODE
+OLFRUN
+OLFSCR",present,AGD,Yes,,
+1075,V11B7,AGD,AGD,C.Kees' AGD Ports,Pengo,Game,Kees van Oss,AGD/PENGO,8200,"CH.""PENRUN""",Test,"PENCODE
+PENRUN
+PENSCR
+PRNRUN",present,AGD,Yes,,
+1076,V11B7,AGD,AGD,C.Kees' AGD Ports,Percy Penguin in The Prese,Game,Kees van Oss,AGD/PERCY,8200,"CH.""PPRUN""",Test,"PPCODE
+PPRUN
+PPSCR",present,AGD,Yes,,
+1077,V11B7,AGD,AGD,C.Kees' AGD Ports,Prospector,Game,Kees van Oss,AGD/PROSPEC,8200,"CH.""PRORUN""",Test,"PROCODE
+PRORUN
+PROSCR",present,AGD,Yes,,
+1078,V11B7,AGD,AGD,C.Kees' AGD Ports,PTM,Game,Kees van Oss,AGD/PTM,8200,"CH.""PTMRUN""",Test,"PTMCODE
+PTMRUN
+PTMSCR",present,AGD,Yes,,
+1079,V11B7,AGD,AGD,C.Kees' AGD Ports,Quahappy,Game,Kees van Oss,AGD/QUAHAPP,8200,"CH.""QHRUN""",Test,"QHCODE
+QHRUN
+QHSCR",present,AGD,Yes,,
+1080,V11B7,AGD,AGD,C.Kees' AGD Ports,Robots Rumble,Game,Kees van Oss,AGD/ROBOTSR,8200,"CH.""RRRUN""",Test,"RRCODE
+RRRUN
+RRSCR",present,AGD,Yes,,
+1081,V11B7,AGD,AGD,C.Kees' AGD Ports,Sc0tb0t,Game,Kees van Oss,AGD/SC0TB0T,8200,"CH.""SBRUN""",Test,"SBCODE
+SBRUN
+SBSCR",present,AGD,Yes,,
+1082,V11B7,AGD,AGD,C.Kees' AGD Ports,Seto Taiso to Kazan,Game,Kees van Oss,AGD/SETOKAZ,8200,"CH.""SKRUN""",Test,"SKCODE
+SKPAN
+SKRUN
+SKSCR",present,AGD,Yes,,
+1083,V11B7,AGD,AGD,C.Kees' AGD Ports,Seto Taisho to Kazan,Game,Kees van Oss,AGD/SETOYOK,8200,"CH.""SYRUN""",Test,"SYCODE
+SYPAN
+SYRUN
+SYSCR",present,AGD,Yes,,
+1084,V11B7,AGD,AGD,C.Kees' AGD Ports,Sophia II Part 1,Game,Kees van Oss,AGD/SOPHI21,8200,"CH.""S21RUN""",Test,"S21CODE
+S21PAN
+S21RUN
+S21SCR",present,AGD,Yes,,
+1085,V11B7,AGD,AGD,C.Kees' AGD Ports,Sophia II Part 2,Game,Kees van Oss,AGD/SOPHI22,8200,"CH.""S22RUN""",Test,"S22CODE
+S22PAN
+S22RUN
+S22SCR",present,AGD,Yes,,
+1086,V11B7,AGD,AGD,C.Kees' AGD Ports,Sophia II Part 3,Game,Kees van Oss,AGD/SOPHI23,8200,"CH.""S23RUN""",Test,"S23CODE
+S23PAN
+S23RUN
+S23SCR",present,AGD,Yes,,
+1087,V11B7,AGD,AGD,C.Kees' AGD Ports,Space Disposal,Game,Kees van Oss,AGD/SPACEDI,8200,"CH.""SDRUN""",Test,"SDCODE
+SDRUN
+SDSCR",present,AGD,Yes,,
+1088,V11B7,AGD,AGD,C.Kees' AGD Ports,Super 48k Box,Game,Kees van Oss,AGD/SUPER48,8200,"CH.""SBRUN""",Test,"SBCODE
+SBRUN
+SBSCR",present,AGD,Yes,,
+1089,V11B7,AGD,AGD,C.Kees' AGD Ports,Terrapins,Game,Kees van Oss,AGD/TERRAPI,8200,"CH.""TPRUN""",Test,"TPCODE
+TPRUN
+TPSCR",present,AGD,Yes,,
+1090,V11B7,AGD,AGD,C.Kees' AGD Ports,Zbylut Owrzodzien,Game,Kees van Oss,AGD/ZBYLUT,8200,"CH.""ZBRUN""",Test,"ZBCODE
+ZBPAN
+ZBRUN
+ZBSCR",present,AGD,Yes,,
+1091,V11B7,AGD,AGD,C.Kees' AGD Ports,Zombo,Game,Kees van Oss,AGD/ZOMBO,8200,"CH.""ZORUN""",Test,"ZOCODE
+ZOPAN
+ZORUN
+ZOSCR",present,AGD,Yes,,
