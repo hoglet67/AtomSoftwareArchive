@@ -228,14 +228,14 @@ public class GenerateSDDOSFiles extends GenerateBase {
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
         menuFile.setTitle("MENU");
         addFile(image, menuFile);
-        
+
         // Splash files
         // In AtoMMC these are present in the root directory, but in SDDOS they are needed in the MENU disk (disk 0)
         ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
-        addFile(image, splashFile1);        
+        addFile(image, splashFile1);
         ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
         addFile(image, splashFile2);
-        
+
         writeImage(new File("disks/0"), image);
         addDisk(image, 0);
         // Disk 1016-1023 are the chapters
@@ -271,13 +271,13 @@ public class GenerateSDDOSFiles extends GenerateBase {
 
                     Set<String> missing = new HashSet<String>(item.getLoadables());
                     for (String filename : item.getFilenames()) {
+                        System.out.println("    >" + filename + "<");
+                        File file = new File(new File(archiveDir, item.getDir()), filename);
                         // Some of the ATM files still contain the original long
                         // tape titles
                         if (filename.length() > 7) {
                             filename = filename.substring(0, 7);
                         }
-                        System.out.println("    >" + filename + "<");
-                        File file = new File(new File(archiveDir, item.getDir()), filename);
                         ATMFile atmFile = new ATMFile(file);
                         missing.remove(filename);
                         atmFile.setTitle(filename);
