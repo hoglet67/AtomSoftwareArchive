@@ -1,4 +1,7 @@
-    10C=#100;P=#2800
+    10C=#100;P=#2800;G=#BDE0
+    17?G=#10
+    18CLEAR4
+    19?G=#20
     20CLEAR4
     30DO
     40FOR N=0 TO 187
@@ -12,6 +15,7 @@
    120$C+LEN(C)=$P+X+1
    130$C+LEN(C)=" 8000"
    140LINK #FFF7;
+   145?G=?G:#30
    150*CWD ..
    160FOR I=1TO120;WAIT;NEXT
    170NEXT
