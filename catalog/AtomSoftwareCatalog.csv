@@ -2262,7 +2262,7 @@ DRARUN
 DRASCR",present,AGD,Yes,,
 1022,V11B6,AGD,AGD,C.Kees' AGD Ports,Ferret Buster,Game,Kees van Oss,AGD/FBUSTER,8200,"CH.""FBRUN""",Test,"FBCODE
 FBRUN",present,AGD,Yes,,
-1023,V11B6,AGD,AGD,C.Kees' AGD Ports,Gerry Andersons UFO,Game,Kees van Oss,AGD/G.A.UFO,8200,"CH.""GAURUN""",Test,"GAUCODE
+1023,V11B6,AGD,AGD,C.Kees' AGD Ports,Gerry Andersons UFO,Game,Kees van Oss,AGD/GAUFO,8200,"CH.""GAURUN""",Test,"GAUCODE
 GAURUN
 GAUSCR",present,AGD,Yes,,
 1024,V11B6,AGD,AGD,C.Kees' AGD Ports,Indiana Jones and the Foun,Game,Kees van Oss,AGD/IJONES,8200,"CH.""IJRUN""",Test,"IJCODE
