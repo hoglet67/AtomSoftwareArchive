@@ -126,6 +126,9 @@ java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIV
 #java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKBA.bas $ARCHIVE/$OTHER/BREAKBA 2900
 #java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKMC.bas $ARCHIVE/$OTHER/BREAKMC 2B00
 
+java -jar ../java/atombasic/atombasic.jar ../agdzips/SHOW1.bas $ARCHIVE/AGD/SHOW1 2900 ce86
+java -jar ../java/atombasic/atombasic.jar ../agdzips/SHOW2.bas $ARCHIVE/AGD/SHOW2 2900 ce86
+
 ##############################################################
 # Magnus Olsson
 ##############################################################
@@ -208,7 +211,7 @@ cp QLUC32 QLLC32 QLUC40 QLLC40 ../archive/$ARCHIVE/$QUILL/$DST
 # Copy VDU2440 to each subdirectory
 cp VDU2440 ../archive/$ARCHIVE/$QUILL/$DST
 done
-rm QLUC32 QLLC32 QLUC40 QLLC40 
+rm QLUC32 QLLC32 QLUC40 QLLC40
 popd
 
 ##############################################################
@@ -216,12 +219,12 @@ popd
 ##############################################################
 
 package "atms/1_interactive_teaching/*" "$ARCHIVE/$AS/INTRO1"
-package "atms/2_financial_planning/*" "$ARCHIVE/$AS/INTRO2" 
-package "atms/3_household/*" "$ARCHIVE/$AS/INTRO3" 
-package "atms/4_games/*" "$ARCHIVE/$AS/INTRO4" 
+package "atms/2_financial_planning/*" "$ARCHIVE/$AS/INTRO2"
+package "atms/3_household/*" "$ARCHIVE/$AS/INTRO3"
+package "atms/4_games/*" "$ARCHIVE/$AS/INTRO4"
 
-package "atms/business/*" "$ARCHIVE/$AS/BUSINESS" 
-package "atms/introduction/DCF" "$ARCHIVE/$AS/BUSINESS" 
+package "atms/business/*" "$ARCHIVE/$AS/BUSINESS"
+package "atms/introduction/DCF" "$ARCHIVE/$AS/BUSINESS"
 
 package "atms/Acl1-13/SYNTH" "$ARCHIVE/$AS/SYNTH"
 package "atms/Acl1-13/TOCCATA" "$ARCHIVE/$AS/SYNTH"
@@ -487,4 +490,3 @@ cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
 cp -a roland/* $ARCHIVE
 cp -a wim/* $ARCHIVE
-
