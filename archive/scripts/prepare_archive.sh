@@ -126,9 +126,11 @@ java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIV
 #java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKBA.bas $ARCHIVE/$OTHER/BREAKBA 2900
 #java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKMC.bas $ARCHIVE/$OTHER/BREAKMC 2B00
 
-java -jar ../java/atombasic/atombasic.jar ../agdzips/SHOW1.bas $ARCHIVE/AGD/SHOW1 2900 ce86
-java -jar ../java/atombasic/atombasic.jar ../agdzips/SHOW2.bas $ARCHIVE/AGD/SHOW2 2900 ce86
-
+for i in SHOW1 SHOW2 SHOW3 DISOLV3 DISOLV4 DISOLV5 DISOLV6
+do   
+    java -jar ../java/atombasic/atombasic.jar ../agdzips/$i.bas $ARCHIVE/AGD/$i 2900 ce86
+done
+    
 ##############################################################
 # Magnus Olsson
 ##############################################################
