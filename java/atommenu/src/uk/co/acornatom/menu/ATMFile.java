@@ -63,7 +63,7 @@ public class ATMFile {
         int length = readShort(fileWithAtmHeader, 20);
         ;
         if (length != fileWithAtmHeader.length - 22) {
-            System.out.printf(
+            System.out.println(
                     "WARNING: Length mismatch in ATM file: expected = " + length + "; actual = " + (fileWithAtmHeader.length - 22));
             length = fileWithAtmHeader.length - 22;
         }
