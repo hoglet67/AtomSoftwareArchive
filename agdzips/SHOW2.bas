@@ -5,6 +5,7 @@
     20CLEAR4
     30DO
     40FOR N=0 TO 157
+    45*CWD /AGD
     50GOSUB (1000+N)
     60X=0;DO X=X+1;U.P?X=47;
     70$C="CWD "
@@ -15,8 +16,7 @@
    120$C+LEN(C)=$P+X+1
    130$C+LEN(C)=" 8000"
    140LINK #FFF7;
-   145?G=?G:#30
-   150*CWD ..
+   150?G=?G:#30
    160FOR I=1TO120;WAIT;NEXT
    170NEXT
    180UNTIL 0
