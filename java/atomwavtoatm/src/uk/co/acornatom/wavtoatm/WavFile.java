@@ -32,8 +32,8 @@ public class WavFile
 	private long numFrames;					// Number of frames within the data section
 	private FileOutputStream oStream;	// Output stream used for writting data
 	private FileInputStream iStream;		// Input stream used for reading data
-	private double floatScale;				// Scaling factor used for int <-> float conversion				
-	private double floatOffset;			// Offset factor used for int <-> float conversion				
+	private double floatScale;				// Scaling factor used for int <-> float conversion
+	private double floatOffset;			// Offset factor used for int <-> float conversion
 	private boolean wordAlignAdjust;		// Specify if an extra byte at the end of the data chunk is required for word alignment
 
 	// Wav Header
@@ -268,7 +268,7 @@ public class WavFile
 
 				// Calculate the number of frames
 				wavFile.numFrames = chunkSize / wavFile.blockAlign;
-				
+
 				// Flag that we've found the wave data chunk
 				foundData = true;
 
@@ -355,7 +355,7 @@ public class WavFile
 
 		for (int b=0 ; b<bytesPerSample ; b++)
 		{
-			if (bufferPointer == bytesRead) 
+			if (bufferPointer == bytesRead)
 			{
 				int read = iStream.read(buffer, 0, BUFFER_SIZE);
 				if (read == -1) throw new WavFileException("Not enough data available");
@@ -671,7 +671,7 @@ public class WavFile
 			iStream = null;
 		}
 
-		if (oStream != null) 
+		if (oStream != null)
 		{
 			// Write out anything still in the local buffer
 			if (bufferPointer > 0) oStream.write(buffer, 0, bufferPointer);
@@ -742,7 +742,7 @@ public class WavFile
 					System.out.printf("%d %d\n", framesRead, framesWritten);
 				}
 				while (framesRead != 0);
-				
+
 				readWavFile.close();
 				writeWavFile.close();
 			}

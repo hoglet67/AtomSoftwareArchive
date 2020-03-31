@@ -1,10 +1,9 @@
 package uk.co.acornatom.wavtoatm;
 
-
 public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 
 	private double cutoff;
-	
+
 	public WaveformSquarerUsingLowPassFilter(int cutoff, int window2, int sampleRate, int frequency, boolean bothEdges) {
 		super(window2, sampleRate, frequency, bothEdges);
 		this.cutoff = cutoff;
@@ -16,7 +15,7 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 		samples = compare(samples, baseLine);
 		return samples;
 	}
-	
+
 	private int[] compare(int[] samples, int[] baseline) {
 		int[] newSamples = new int[samples.length];
 		for (int i = 0; i < samples.length; i++) {
@@ -24,7 +23,7 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 		}
 		return newSamples;
 	}
-	
+
 	void getLPCoefficientsButterworth2Pole(double samplerate, double cutoff, double[] ax, double[] by)
 	{
 	    double sqrt2 = Math.sqrt(2.0);
@@ -40,7 +39,7 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 	    ax[1] = 2 * gain;
 	    ax[2] = 1 * gain;
 	}
-	
+
 	void calcFilter(double samplerate, double cutoff, int type, double[] ax, double[] by) {
 		double fudge;
 		IIRFilter iir = new IIRFilter();
@@ -63,7 +62,7 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 		for (int i = 0; i <= 2; i++) {
 			ax[i] = iir.getACoeff(i) * fudge;
 			by[i] = iir.getBCoeff(i);
-		}		
+		}
 	}
 
 	private int[] lowPassFilter(int[] samples, double samplerate, double cutoff) {
@@ -84,9 +83,9 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 		if (type == IIRFilter.LP) {
 			getLPCoefficientsButterworth2Pole(samplerate, cutoff, ax, by);
 		} else {
-			calcFilter(samplerate, cutoff, type, ax, by);			
+			calcFilter(samplerate, cutoff, type, ax, by);
 		}
-		
+
 		// dumpCoeffs(ax, by);
 
 		for (int i = 0; i < samples.length; i++) {
@@ -102,7 +101,7 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 		}
 		return newSamples;
 	}
-	
+
 	private void dumpCoeffs(double[] ax, double[] by) {
 		for (int i = 0; i < ax.length; i++) {
 			System.out.println("ax[" + i + "] = " + ax[i]);
@@ -111,10 +110,10 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 			System.out.println("by[" + i + "] = " + by[i]);
 		}
 	}
-	
+
 	public String toString() {
 		return "LowPass(" + cutoff + ") based Squarer";
 	}
 
-	
+
 }

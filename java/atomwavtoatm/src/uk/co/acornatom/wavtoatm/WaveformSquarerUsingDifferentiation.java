@@ -14,7 +14,7 @@ public class WaveformSquarerUsingDifferentiation extends WaveformSquarerBase  {
 		samples = differentiate(samples);
 		return samples;
 	}
-	
+
 	private int[] differentiate(int[] samples) {
 		int[] newSamples = new int[samples.length];
 		for (int i = 1; i < samples.length; i++) {
@@ -22,7 +22,7 @@ public class WaveformSquarerUsingDifferentiation extends WaveformSquarerBase  {
 		}
 		return newSamples;
 	}
-	
+
 	public String toString() {
 		return "Diff based Squarer";
 	}

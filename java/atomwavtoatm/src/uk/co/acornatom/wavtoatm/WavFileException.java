@@ -19,7 +19,7 @@ public class WavFileException extends IOException
 		super(message, cause);
 	}
 
-	public WavFileException(Throwable cause) 
+	public WavFileException(Throwable cause)
 	{
 		super(cause);
 	}

@@ -44,7 +44,7 @@ public class Optimizer {
 			System.out.println("@@@ Sample Rate = " + sampleRate);
 			System.out.println("@@@ Duration = " + numFrames / sampleRate + " secs");
 		}
-		
+
 		// Create a buffer to hold all of the samples
 		short[] samples = new short[numFrames * numChannels];
 
@@ -80,7 +80,7 @@ public class Optimizer {
 			}
 			return newSamples;
 	}
-	
+
 	public void process(List<File> srcFiles, File dstDir) throws IOException {
 
 		int totalGoodBlocks = 0;
@@ -541,7 +541,7 @@ public class Optimizer {
 	public boolean optimizeParam(ByteDecoder byteDecoder, BlockDecoder blockDecoder,
 			Set<FileSelector> expectedFilenames,
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapRecent,
-			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,			
+			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllGood,
 			Map<FileSelector, Map<Integer, Set<Block>>> fileMapAllBad) {
 
 
@@ -557,29 +557,29 @@ public class Optimizer {
 
 		byte[] bytes;
 		List<Block> blocks;
-		
+
 		int mid = (hiThreshold + loThreshold) / 2;
 		int numPoints = step == 0 ? 0 : (hiThreshold - loThreshold) / step;
-	
+
 		// Example:
 		// 500 to 1000 step 5
 		// mid = 750
 		// numPoints = 100
-		// i =   1; threshold =  750 
+		// i =   1; threshold =  750
 		// i =   2; threshold =  745
 		// i =   3; threshold =  755
 		// i = 100; threshold =  500
 		// i = 101; threshold = 1000
-		
+
 		boolean loDone = false;
 		boolean hiDone = false;
-			
+
 		for (int i = 1; i <= numPoints + 1; i++) {
 
 			if (loDone && hiDone) {
 				break;
 			}
-			
+
 			// Start at the mid point
 			int threshold;
 			if ((i & 1 ) == 1) {
@@ -600,7 +600,7 @@ public class Optimizer {
 			int numBlocks = blocks.size();
 			int numGoodBlocks = getNumGoodBlock(blocks);
 			int numBadBlocks = numBlocks - numGoodBlocks;
-			
+
 			System.out.println("### Threshold = " + threshold + " numGoodBlocks = " + numGoodBlocks + "; numBadBlocks = " + numBadBlocks + "; total = " + numBlocks);;
 
 			if ((i & 1) == 1) {
@@ -612,7 +612,7 @@ public class Optimizer {
 					loDone = true;
 				}
 			}
-			
+
 			if (numGoodBlocks > best) {
 				best = numGoodBlocks;
 				bestThreshold1 = threshold;
@@ -651,7 +651,7 @@ public class Optimizer {
 		int threshold = (bestThreshold1 + bestThreshold2) / 2;
 		bytes = byteDecoder.decodeBytes(Integer.MAX_VALUE, 0, threshold);
 		blocks = blockDecoder.decodeBlocks(bytes);
-		
+
 		int numBlocks = blocks.size();
 		int numGoodBlocks = getNumGoodBlock(blocks);
 		int numBadBlocks = numBlocks - numGoodBlocks;
@@ -670,7 +670,7 @@ public class Optimizer {
 		return false;
 
 	}
-	
+
 	private void addToExpectedFilenames(List<Block> blocks, Set<FileSelector> expectedFilenames) {
 		Map<FileSelector, Integer> goodFilenameCounts = new HashMap<FileSelector, Integer>();
 		Map<FileSelector, Integer> badFilenameCounts = new HashMap<FileSelector, Integer>();
@@ -689,7 +689,7 @@ public class Optimizer {
 				filenameCounts.put(fileName, count);
 			}
 		}
-		
+
 		for (Block block : blocks) {
 			FileSelector fileName = block.getSelector();
 			if (expectedFilenames.contains(fileName)) {

@@ -32,11 +32,11 @@ public abstract class WaveformSquarerBase implements WaveformSquarer {
 	public double getBitLength() {
 		return bitLength;
 	}
-	
+
 	public int getSampleRate() {
 		return sampleRate;
 	}
-	
+
 	public boolean isBothEdges() {
 		return bothEdges;
 	}

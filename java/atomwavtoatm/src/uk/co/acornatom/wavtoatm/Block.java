@@ -14,7 +14,7 @@ public class Block {
 		LEN,
 		CHECKSUM
 	}
-	
+
 	private String fileName;
 	private int flag;
 	private int num;
@@ -25,7 +25,7 @@ public class Block {
 	private int checksum;
 
 	private boolean checkSumValid;
-	
+
 	public int getField(Field field) {
 		switch (field) {
 		case FLAG:
@@ -115,7 +115,7 @@ public class Block {
 		sb.append(']');
 		return sb.toString();
 	}
-	
+
 	public static String cleanFilename(String fileName) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < fileName.length(); i++) {
@@ -157,7 +157,7 @@ public class Block {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
+
 	public boolean isFileNameValid() {
 		for (int i = 0; i < fileName.length(); i++) {
 			if (fileName.charAt(i) > 126) {
@@ -231,7 +231,7 @@ public class Block {
 	public void setLen(int len) {
 		this.len = len;
 	}
-	
+
 	public void updateChecksumValid() {
 		if (bytes.length != len) {
 			System.out.println("@@@ " + cleanFilename(fileName) + " " + toHex4(num) + " invalid number of bytes: expected " + len + " actual " + bytes.length);
@@ -257,13 +257,13 @@ public class Block {
 			checkSumValid = checksum == csum;
 			if (!checkSumValid) {
 				System.out.println("@@@ " + cleanFilename(fileName) + " " + toHex4(num) + " checksum mis-match: old cksum = " + toHex2(checksum) + "; new checksum = " + toHex2(csum));}
-			
+
 		}
 	}
-	
+
 	public FileSelector getSelector() {
 		return new FileSelector(this);
 	}
-	
+
 
 }

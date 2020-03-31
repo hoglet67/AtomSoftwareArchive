@@ -6,7 +6,7 @@ public abstract class ByteDecoderBase implements ByteDecoder {
 	protected int[] samples;
 
 	private double bitLength = -1;
-	
+
 	public ByteDecoderBase(WaveformSquarer squarer) {
 		this.squarer = squarer;
 	}
@@ -17,7 +17,7 @@ public abstract class ByteDecoderBase implements ByteDecoder {
 		}
 		return bitLength;
 	}
-	
+
 	public void close() {
 		samples = null;
 	}

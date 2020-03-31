@@ -9,7 +9,7 @@ public class BlockDecoderStandard extends BlockDecoderBase {
 	private static boolean DEBUG = false;
 	private static final int ASCII_STAR = '*';
 	private static final int ASCII_CR = 13;
-	
+
 	private enum STATE {
 		SYNC0, SYNC1, SYNC2, SYNC3, FILENAME, BLOCKFLAG, BLOCKNUMLO, BLOCKNUMHI, DATALEN, EXECHI, EXECLO, LOADHI, LOADLO, DATA, CKSUM
 	}
@@ -191,7 +191,7 @@ public class BlockDecoderStandard extends BlockDecoderBase {
 					block.setNum(Block.BLOCK_NUM_MAX);
 					block.updateChecksumValid();
 				}
-				
+
 				blocks.add(block);
 
 				state = STATE.SYNC0;

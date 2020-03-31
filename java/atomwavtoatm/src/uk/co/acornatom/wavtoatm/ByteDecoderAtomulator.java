@@ -7,7 +7,7 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
 	public ByteDecoderAtomulator(WaveformSquarer squarer) {
 		super(squarer);
 	}
-	
+
 	@Override
 	public int getOptimizationParamMin() {
 		return 12000;
@@ -17,13 +17,13 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
 	public int getOptimizationParamMax() {
 		return 13500;
 	}
-	
+
 
 	@Override
 	public int getOptimizationStep() {
 		return 50;
 	}
-	
+
 	@Override
 	public void initialize(int[] samples) {
 		this.samples = squarer.square(samples);
@@ -31,13 +31,13 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
 
 	@Override
 	public byte[] decodeBytes(int numBytes, int start, int optimationParam) {
-		
+
 		int countThresh = optimationParam;
-		
+
 		double cswmul = (double) 4000000 / (double) squarer.getSampleRate();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		
+
 		int last = 0;
 		int header = 0;
 		boolean cinbyte = false;
@@ -46,7 +46,7 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
 		int bitsleft = 0;
 		int c = 0;
 		int count = 0;
- 
+
 		for (int i = 0; i < samples.length; i++) {
 			if (samples[i] == 1) {
 				int d = (int) (((double) (i - last)) * cswmul + 0.5);
@@ -96,5 +96,5 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
 		return "Atomulator's Byte Decoder with " + squarer;
 	}
 
-	
+
 }

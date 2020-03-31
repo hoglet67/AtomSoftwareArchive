@@ -3,7 +3,7 @@ package uk.co.acornatom.wavtoatm;
 public class FileSelector implements Comparable<FileSelector>{
 
 	private static final boolean INCLUDE_LOAD_ADDR = true;
-	
+
 	private String fileName;
 	private int loadAddr;
 
@@ -49,7 +49,7 @@ public class FileSelector implements Comparable<FileSelector>{
 		}
 		return (fileName == null && that.fileName == null) || fileName.equals(that.fileName);
 	}
-	
+
 	@Override
 	public int compareTo(FileSelector that) {
 		int ret = 0;
@@ -70,7 +70,7 @@ public class FileSelector implements Comparable<FileSelector>{
 
 	@Override
 	public String toString() {
-		return Block.cleanFilename(fileName) + ":" + Block.toHex4(loadAddr); 
+		return Block.cleanFilename(fileName) + ":" + Block.toHex4(loadAddr);
 	}
 
 }

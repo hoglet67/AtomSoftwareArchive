@@ -9,9 +9,9 @@ public class ByteDecoderKees extends ByteDecoderBase {
 	}
 
 	private int[] samples;
-	
+
 	private int Sum;
-	
+
 	@Override
 	public int getOptimizationParamMin() {
 		return 256;
@@ -36,17 +36,17 @@ public class ByteDecoderKees extends ByteDecoderBase {
 	public byte[] decodeBytes(int numBytes, int start, int optimationParam) {
 
 		int flatMargin = optimationParam;
-		
+
 		String pulses = decodePulses(samples, 16, flatMargin);
 
 		//System.out.println(pulses);
 
 		String bits = decodeBits(pulses);
-		
+
 		//System.out.println(bits);
 
 		byte[] bytes = readBytes(bits);
-		
+
 		return bytes;
 	}
 
@@ -107,7 +107,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 			// Read 2 sample values
 			int val1 = samples[filePointer - 1];
 			int val2 = samples[filePointer];
-			
+
 			// Check current pulse direction
 			if (Math.abs(val1 - val2) < flatMargin) {
 				waveStatus = "="; // Puls is flat
@@ -118,11 +118,11 @@ public class ByteDecoderKees extends ByteDecoderBase {
 			}
 
 			// Check all puls states
-			
+
 			String status = lastStatus + waveStatus;
 
 			switch (status) {
-	
+
 				case "FR": // Falling peak detected
 					if (flatCounter == 0) {
 						t1 = filePointer;
@@ -132,7 +132,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 					flatCounter = 0;
 					lastStatus = "R";
 					break;
-	
+
 				case "RF": // Rising Peak detected
 					if (flatCounter == 0) {
 						pulsLen = 2 * (filePointer - t1);
@@ -142,25 +142,25 @@ public class ByteDecoderKees extends ByteDecoderBase {
 					flatCounter = 0;
 					lastStatus = "F";
 					break;
-	
+
 				case "FF": // Falling puls
 					lastStatus = waveStatus;
 					flatCounter = 0;
 					break;
-	
+
 				case "RR": // Rising puls
 					lastStatus = waveStatus;
 					flatCounter = 0;
 					break;
-	
+
 				case "F=": // Falling puls going flat
 					flatCounter = flatCounter + 1;
 					break;
-	
+
 				case "R=": // Rising puls going flat
 					flatCounter = flatCounter + 1;
 					break;
-				
+
 				default: {
 					throw new RuntimeException("Unexpected status " + status);
 				}
@@ -183,8 +183,8 @@ public class ByteDecoderKees extends ByteDecoderBase {
 		return pulses.toString();
 	}
 
-	
-	
+
+
 	/*
 	'========================================================================================
 	'DecodeBits
@@ -237,7 +237,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 				case "LL": // No Pulse change
 					longCount = longCount + 1;
 					break;
-	
+
 				case "SS": // No Pulse change
 					shortCount = shortCount + 1;
 					break;
@@ -256,7 +256,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 						}
 					}
 					break;
-	
+
 				case "SL": // Pulse change detected, write 1-bits
 					longCount = 1;
 					nrBits = (shortCount / 8) + (shortCount % 8 > 6 ? 1 : 0); // Check
@@ -286,7 +286,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 						}
 					}
 					break;
-					
+
 				default: {
 					throw new RuntimeException("Unexpected state" + state);
 				}
@@ -320,7 +320,7 @@ public class ByteDecoderKees extends ByteDecoderBase {
 	' Return byte value and add to sum
 	'===================================================================
 	 */
-	
+
 	private byte[] readBytes(String bits) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 

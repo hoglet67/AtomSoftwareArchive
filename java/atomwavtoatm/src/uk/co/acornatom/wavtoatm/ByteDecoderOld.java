@@ -5,12 +5,12 @@ import java.io.ByteArrayOutputStream;
 public class ByteDecoderOld extends ByteDecoderBase {
 
 	private int window2;
-	
+
 	public ByteDecoderOld(WaveformSquarer squarer, int window2) {
 		super(squarer);
 		this.window2 = window2;
 	}
-	
+
 	@Override
 	public int getOptimizationParamMin() {
 		int factor = squarer.isBothEdges() ? 2 : 1;
@@ -32,8 +32,8 @@ public class ByteDecoderOld extends ByteDecoderBase {
 		}
 		return factor * step;
 	}
-	
-	
+
+
 	@Override
 	public void initialize(int[] samples) {
 		samples = squarer.square(samples);
@@ -42,24 +42,24 @@ public class ByteDecoderOld extends ByteDecoderBase {
 		samples = WaveformSquarerBase.sumOverWindow(samples, (int) (bitLength / window2 + 0.5));
 		this.samples = samples;
 	}
-	
+
 	@Override
 	public byte[] decodeBytes(int numBytes, int start, int optimationParam) {
-		
+
 		double bitLength = getBitLength();
-		
+
 		int threshold = optimationParam;
 		int bitThreshold = squarer.isBothEdges() ? 12 : 6;
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		
+
 		double id = start + 1;
 		while (id < samples.length - 1) {
 			// Find the start bit, a 1 to 0 transition
 			if ((getSample(id - 1) > threshold) && (getSample(id) <= threshold)) {
 				// Skip 1.5 bits
 				id += bitLength * 31 / 20;
-				
+
 				// Sample next 8 bits
 				int b = 0;
 				for (int j = 0; j < 8; j++) {
@@ -78,11 +78,11 @@ public class ByteDecoderOld extends ByteDecoderBase {
 			} else {
 				id++;
 			}
-			
+
 		}
 		return bos.toByteArray();
 	}
-	
+
 
 	// Interpolate between two samples
 	private int getSample(double id) {
@@ -93,7 +93,7 @@ public class ByteDecoderOld extends ByteDecoderBase {
 		}
 		return (int) (samples[i1] * (id - i1) + samples[i2] * (i2 - id) + 0.5);
 	}
-	
+
 	public String toString() {
 		return "Dave's Byte Decoder with " + squarer;
 	}
