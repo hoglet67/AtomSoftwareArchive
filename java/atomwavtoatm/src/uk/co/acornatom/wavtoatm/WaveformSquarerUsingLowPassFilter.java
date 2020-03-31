@@ -1,11 +1,12 @@
 package uk.co.acornatom.wavtoatm;
 
+
 public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
 
 	private double cutoff;
 
-	public WaveformSquarerUsingLowPassFilter(int cutoff, int window2, int sampleRate, int frequency, boolean bothEdges) {
-		super(window2, sampleRate, frequency, bothEdges);
+	public WaveformSquarerUsingLowPassFilter(int cutoff, int sampleRate, int frequency, boolean bothEdges) {
+		super(sampleRate, frequency, bothEdges);
 		this.cutoff = cutoff;
 	}
 

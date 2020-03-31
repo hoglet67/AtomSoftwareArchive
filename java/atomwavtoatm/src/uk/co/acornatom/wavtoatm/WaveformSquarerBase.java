@@ -2,15 +2,13 @@ package uk.co.acornatom.wavtoatm;
 
 public abstract class WaveformSquarerBase implements WaveformSquarer {
 
-	protected int window2;
 	protected int sampleRate;
 	protected int frequency;
 	protected boolean bothEdges;
 
 	private double bitLength;
 
-	public WaveformSquarerBase(int window2, int sampleRate, int frequency, boolean bothEdges) {
-		this.window2 = window2;
+	public WaveformSquarerBase(int sampleRate, int frequency, boolean bothEdges) {
 		this.sampleRate = sampleRate;
 		this.frequency = frequency;
 		this.bothEdges = bothEdges;

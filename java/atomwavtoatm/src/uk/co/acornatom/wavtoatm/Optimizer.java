@@ -81,7 +81,7 @@ public class Optimizer {
 			return newSamples;
 	}
 
-	public void process(List<File> srcFiles, File dstDir) throws IOException {
+	public void process(List<File> srcFiles, File dstDir, boolean baud2400) throws IOException {
 
 		int totalGoodBlocks = 0;
 		int totalBadBlocks = 0;
@@ -133,21 +133,30 @@ public class Optimizer {
 				}
 				origSamples = null;
 
-				WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, window2, sampleRate, frequency,
-						bothEdges);
-				WaveformSquarer lowPass300Squarer = new WaveformSquarerUsingLowPassFilter(300, window2, sampleRate, frequency,
-						bothEdges);
-				WaveformSquarer lowPass700Squarer = new WaveformSquarerUsingLowPassFilter(700, window2, sampleRate, frequency,
-						bothEdges);
-
 				List<ByteDecoder> byteDecoders = new ArrayList<ByteDecoder>();
-//				byteDecoders.add(new ByteDecoderKees());
-				byteDecoders.add(new ByteDecoderAtomulator(lowPass700Squarer));
-				byteDecoders.add(new ByteDecoderOld(lowPass700Squarer, window2));
-				byteDecoders.add(new ByteDecoderAtomulator(diffSquarer));
-				byteDecoders.add(new ByteDecoderOld(diffSquarer, window2));
-				byteDecoders.add(new ByteDecoderAtomulator(lowPass300Squarer));
-				byteDecoders.add(new ByteDecoderOld(lowPass300Squarer, window2));
+
+				if (baud2400) {
+
+				   // With my example so far, 1700...2700 seems to work
+				   for (int i = 3500; i >= 1500; i = i - 500) {
+					  byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingLowPassFilter(i, sampleRate, 4800, bothEdges)));
+				   }
+				   byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingSign(sampleRate, 4800, bothEdges)));
+
+				} else {
+
+				   WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, sampleRate, frequency, bothEdges);
+				   WaveformSquarer lowPass300Squarer = new WaveformSquarerUsingLowPassFilter(300, sampleRate, frequency, bothEdges);
+				   WaveformSquarer lowPass700Squarer = new WaveformSquarerUsingLowPassFilter(700, sampleRate, frequency, bothEdges);
+				   // byteDecoders.add(new ByteDecoderKees());
+				   byteDecoders.add(new ByteDecoderAtomulator(lowPass700Squarer));
+				   byteDecoders.add(new ByteDecoderOld(lowPass700Squarer, window2));
+				   byteDecoders.add(new ByteDecoderAtomulator(diffSquarer));
+				   byteDecoders.add(new ByteDecoderOld(diffSquarer, window2));
+				   byteDecoders.add(new ByteDecoderAtomulator(lowPass300Squarer));
+				   byteDecoders.add(new ByteDecoderOld(lowPass300Squarer, window2));
+
+				}
 
 				for (ByteDecoder byteDecoder : byteDecoders) {
 					System.out.println("@@@ Decoding with " + byteDecoder);
@@ -730,17 +739,32 @@ public class Optimizer {
 	public static void main(String[] args) {
 
 		try {
-			if (args.length < 2) {
-				System.out.println("usage: java -jar atomwavtoatm.jar <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
+
+			boolean baud2400 = false;
+
+			// Very primitive option parsing
+			int i = 0;
+			while (i < args.length && args[i].startsWith("-")) {
+				if (args[i].equals("-x")) {
+					baud2400 = true;
+				} else {
+					System.out.println("Unknown options: " + args[i]);
+					System.exit(1);
+				}
+				i++;
+			}
+
+			if (args.length < 2 + i) {
+				System.out.println("usage: java -jar atomwavtoatm.jar [-x] <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
 				System.exit(1);
 			}
 
-			File dstDir = new File(args[0]);
+			File dstDir = new File(args[i]);
 			dstDir.mkdirs();
+			i++;
 
 			List<File> srcFiles = new ArrayList<File>();
-
-			for (int i = 1; i < args.length; i++) {
+			while (i < args.length) {
 
 				File src = new File(args[i]);
 				if (!src.exists()) {
@@ -760,13 +784,15 @@ public class Optimizer {
 				} else {
 					srcFiles.add(src);
 				}
+
+				i++;
 			}
 
 			Collections.sort(srcFiles);
 
 			Optimizer optimizer = new Optimizer();
 
-			optimizer.process(srcFiles, dstDir);
+			optimizer.process(srcFiles, dstDir, baud2400);
 
 		} catch (Exception e) {
 			e.printStackTrace();
