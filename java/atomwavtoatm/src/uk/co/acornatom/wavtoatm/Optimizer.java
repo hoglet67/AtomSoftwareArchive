@@ -142,6 +142,9 @@ public class Optimizer {
 					  byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingLowPassFilter(i, sampleRate, 4800, bothEdges)));
 				   }
 				   byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingSign(sampleRate, 4800, bothEdges)));
+				   for (int i = 1; i < 10; i++) {
+					  byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingDifferentiation(i, sampleRate, 4800, bothEdges)));
+				   }
 
 				} else {
 

@@ -24,7 +24,7 @@ public class WaveformSquarerUsingDifferentiation extends WaveformSquarerBase  {
 	}
 
 	public String toString() {
-		return "Diff based Squarer";
+		return "Diff(" + window + ") based Squarer";
 	}
 
 }
