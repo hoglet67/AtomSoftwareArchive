@@ -81,19 +81,15 @@ public class Optimizer {
             return newSamples;
     }
 
-    public void process(List<File> srcFiles, File dstDir, boolean baud2400) throws IOException {
+    public void process(List<File> srcFiles, File dstDir, int frequency, int cyclesPerBit) throws IOException {
 
         int totalGoodBlocks = 0;
         int totalBadBlocks = 0;
         int totalMissingBlocks = 0;
         int totalBlocks = 0;
 
-        int window1 = 8; // smooth wav by averaging over window1 samples
-        int window2 = 5; // smooth number of cycles in the next bit by averaging
-                            // over bitlength / windows2 samples
 
         boolean bothEdges = true;
-        int frequency = 2400;
 
         BlockDecoder blockDecoder = new BlockDecoderStandard();
 
@@ -135,29 +131,51 @@ public class Optimizer {
 
                 List<ByteDecoder> byteDecoders = new ArrayList<ByteDecoder>();
 
-                if (baud2400) {
+                // smooth number of cycles in the next bit by averaging over
+                // bitlength / windows2 samples
+                int window2 = 5;
 
-                   // With my example so far, 1700...2700 seems to work
-                   for (int i = 3500; i >= 1500; i = i - 500) {
-                      byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingLowPassFilter(i, sampleRate, 4800, bothEdges)));
-                   }
-                   byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingSign(sampleRate, 4800, bothEdges)));
-                   for (int i = 1; i < 10; i++) {
-                      byteDecoders.add(new ByteDecoder2400Baud(new WaveformSquarerUsingDifferentiation(i, sampleRate, 4800, bothEdges)));
-                   }
+                if (frequency == 4800) {
+                    WaveformSquarer squarer;
+                    
+                    // WaveformSquarerUsingLowPassFilter
+                    // With my example so far, 1700...2700 seems to work
+                    for (int i = 3500; i >= 1500; i = i - 500) {
+                        squarer = new WaveformSquarerUsingLowPassFilter(i, sampleRate, frequency, bothEdges);
+                        byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
+                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                    }
+                    
+                    // WaveformSquarerUsingSign
+                    squarer = new WaveformSquarerUsingSign(sampleRate, frequency, bothEdges);
+                    byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
+                    byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                    
+                    // WaveformSquarerUsingDifferentiation
+                    for (int i = 1; i < 10; i++) {
+                        squarer = new WaveformSquarerUsingDifferentiation(i, sampleRate, frequency, bothEdges);
+                        byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
+                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                    }
 
                 } else {
 
-                   WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, sampleRate, frequency, bothEdges);
-                   WaveformSquarer lowPass300Squarer = new WaveformSquarerUsingLowPassFilter(300, sampleRate, frequency, bothEdges);
-                   WaveformSquarer lowPass700Squarer = new WaveformSquarerUsingLowPassFilter(700, sampleRate, frequency, bothEdges);
-                   // byteDecoders.add(new ByteDecoderKees());
-                   byteDecoders.add(new ByteDecoderAtomulator(lowPass700Squarer));
-                   byteDecoders.add(new ByteDecoderOld(lowPass700Squarer, window2));
-                   byteDecoders.add(new ByteDecoderAtomulator(diffSquarer));
-                   byteDecoders.add(new ByteDecoderOld(diffSquarer, window2));
-                   byteDecoders.add(new ByteDecoderAtomulator(lowPass300Squarer));
-                   byteDecoders.add(new ByteDecoderOld(lowPass300Squarer, window2));
+                    // smooth wav by averaging over window1 samples
+                    int window1 = 8;
+
+                    WaveformSquarer diffSquarer = new WaveformSquarerUsingDifferentiation(window1, sampleRate, frequency,
+                            bothEdges);
+                    WaveformSquarer lowPass300Squarer = new WaveformSquarerUsingLowPassFilter(300, sampleRate, frequency,
+                            bothEdges);
+                    WaveformSquarer lowPass700Squarer = new WaveformSquarerUsingLowPassFilter(700, sampleRate, frequency,
+                            bothEdges);
+                    // byteDecoders.add(new ByteDecoderKees());
+                    byteDecoders.add(new ByteDecoderAtomulator(lowPass700Squarer, cyclesPerBit));
+                    byteDecoders.add(new ByteDecoderOld(lowPass700Squarer, cyclesPerBit, window2));
+                    byteDecoders.add(new ByteDecoderAtomulator(diffSquarer, cyclesPerBit));
+                    byteDecoders.add(new ByteDecoderOld(diffSquarer, cyclesPerBit, window2));
+                    byteDecoders.add(new ByteDecoderAtomulator(lowPass300Squarer, cyclesPerBit));
+                    byteDecoders.add(new ByteDecoderOld(lowPass300Squarer, cyclesPerBit, window2));
 
                 }
 
@@ -741,15 +759,21 @@ public class Optimizer {
 
     public static void main(String[] args) {
 
-        try {
+        // Atom default
+        int baud = 300;
 
-            boolean baud2400 = false;
+        // Calculated below
+        int frequency = 0;
+        int cyclesPerBit = 0;
+        
+        try {
 
             // Very primitive option parsing
             int i = 0;
             while (i < args.length && args[i].startsWith("-")) {
-                if (args[i].equals("-x")) {
-                    baud2400 = true;
+                if (args[i].equals("-b")) {
+                    i++;
+                    baud = Integer.parseInt(args[i]);
                 } else {
                     System.out.println("Unknown options: " + args[i]);
                     System.exit(1);
@@ -758,10 +782,30 @@ public class Optimizer {
             }
 
             if (args.length < 2 + i) {
-                System.out.println("usage: java -jar atomwavtoatm.jar [-x] <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
+                System.out.println("usage: java -jar atomwavtoatm.jar [ -b bauid ] <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
                 System.exit(1);
             }
 
+            if (baud == 300) {
+                frequency = 2400;
+                cyclesPerBit = 8;
+            } else if (baud == 600) {
+                frequency = 2400;
+                cyclesPerBit = 4;                
+            } else if (baud == 1200) {
+                frequency = 2400;
+                cyclesPerBit = 2;                
+            } else if (baud == 2400) {
+                frequency = 4800;
+                cyclesPerBit = 2;                
+            } else {
+                System.out.println("Unsupported Baud Rate: " + baud);
+                System.exit(1);
+            }             
+            
+            System.out.println("@@@ baud rate      = " + baud);            
+            System.out.println("@@@ frequency      = " + frequency + " Hz");            
+            System.out.println("@@@ cycles per bit = " + cyclesPerBit);
             File dstDir = new File(args[i]);
             dstDir.mkdirs();
             i++;
@@ -795,7 +839,7 @@ public class Optimizer {
 
             Optimizer optimizer = new Optimizer();
 
-            optimizer.process(srcFiles, dstDir, baud2400);
+            optimizer.process(srcFiles, dstDir, frequency, cyclesPerBit);
 
         } catch (Exception e) {
             e.printStackTrace();

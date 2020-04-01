@@ -4,24 +4,36 @@ import java.io.ByteArrayOutputStream;
 
 public class ByteDecoderAtomulator extends ByteDecoderBase {
 
-    public ByteDecoderAtomulator(WaveformSquarer squarer) {
+    private int cyclesPerBit;
+    
+    public ByteDecoderAtomulator(WaveformSquarer squarer, int cyclesPerBit) {
         super(squarer);
+        this.cyclesPerBit = cyclesPerBit;
     }
 
     @Override
     public int getOptimizationParamMin() {
-        return 12000;
+        // Bit period in 4MHz cycles (less 10%)
+        // Was fixed at 12000 for 300 baud
+        return cyclesPerBit * 4000000 * 9 / 10 / squarer.getFrequency();
     }
 
     @Override
     public int getOptimizationParamMax() {
-        return 13500;
+        // Bit period in 4MHz cycles (plus 10%)
+        // Was fixed at 13500 for 300 baud 
+        return cyclesPerBit * 4000000 * 11 / 10 / squarer.getFrequency();
     }
 
 
     @Override
     public int getOptimizationStep() {
-        return 50;
+        // Step size between min and max, giving approx 50 steps
+        int step = (getOptimizationParamMax() - getOptimizationParamMin()) / 50;
+        if (step < 1) {
+            step = 1;
+        }
+        return step;
     }
 
     @Override
@@ -32,9 +44,20 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
     @Override
     public byte[] decodeBytes(int numBytes, int start, int optimationParam) {
 
+        // countThreshold is the bit period, in 4MHz cycles
         int countThresh = optimationParam;
 
         double cswmul = (double) 4000000 / (double) squarer.getSampleRate();
+
+        // Threshold for discriminating between a 0 and a 1
+        // (units are edges per bit period)
+        // This was originally hard coded at 12
+        int oneThresh = cyclesPerBit * 3 / 2;
+        
+        // Threshold for detecting high tone
+        // (units are 4MHz cycles)
+        // This was originally hard coded at 1200 (some way between 833 and 1666)
+        int highToneDetectThresh = 3 * 4000000 /  squarer.getFrequency() / 4;
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -51,13 +74,13 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
             if (samples[i] == 1) {
                 int d = (int) (((double) (i - last)) * cswmul + 0.5);
                 if (header < 1000) {
-                    if (d > 1200) {
+                    if (d > highToneDetectThresh) {
                         header = 0;
                     } else {
                         header++;
                     }
                 } else if (!cinbyte) {
-                    if (d > 1200) { /*0*/
+                    if (d > highToneDetectThresh) { /*0*/
                         cinbyte = true;
                         bitsleft = 10;
                         byt = 0;
@@ -69,7 +92,7 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
                     count += d;
                     if (count >= countThresh) {
                         count = 0;
-                        if (c >= 12) {
+                        if (c >= oneThresh) {
                             byt = (byt >> 1) | 0x80;
                         } else {
                             byt >>= 1;

@@ -70,9 +70,9 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
         return filter(samples, samplerate, cutoff, IIRFilter.LP);
     }
 
-    private int[] highPassFilter(int[] samples, double samplerate, double cutoff) {
-        return filter(samples, samplerate, cutoff, IIRFilter.HP);
-    }
+//    private int[] highPassFilter(int[] samples, double samplerate, double cutoff) {
+//        return filter(samples, samplerate, cutoff, IIRFilter.HP);
+//    }
 
     private int[] filter(int[] samples, double samplerate, double cutoff,  int type) {
         int[] newSamples = new int[samples.length];
@@ -103,14 +103,14 @@ public class WaveformSquarerUsingLowPassFilter extends WaveformSquarerBase {
         return newSamples;
     }
 
-    private void dumpCoeffs(double[] ax, double[] by) {
-        for (int i = 0; i < ax.length; i++) {
-            System.out.println("ax[" + i + "] = " + ax[i]);
-        }
-        for (int i = 0; i < by.length; i++) {
-            System.out.println("by[" + i + "] = " + by[i]);
-        }
-    }
+//    private void dumpCoeffs(double[] ax, double[] by) {
+//        for (int i = 0; i < ax.length; i++) {
+//            System.out.println("ax[" + i + "] = " + ax[i]);
+//        }
+//        for (int i = 0; i < by.length; i++) {
+//            System.out.println("by[" + i + "] = " + by[i]);
+//        }
+//    }
 
     public String toString() {
         return "LowPass(" + cutoff + ") based Squarer";

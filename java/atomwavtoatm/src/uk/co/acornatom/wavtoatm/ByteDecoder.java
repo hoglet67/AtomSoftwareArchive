@@ -14,6 +14,4 @@ public interface ByteDecoder {
 
     public byte[] decodeBytes(int numBytes, int start, int optimationParam);
 
-    public double getBitLength();
-
 }

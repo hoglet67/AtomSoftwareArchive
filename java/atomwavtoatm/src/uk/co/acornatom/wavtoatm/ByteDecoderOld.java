@@ -4,41 +4,55 @@ import java.io.ByteArrayOutputStream;
 
 public class ByteDecoderOld extends ByteDecoderBase {
 
+    private int cyclesPerBit;
     private int window2;
 
-    public ByteDecoderOld(WaveformSquarer squarer, int window2) {
+    private double bitLength = -1;
+
+    public ByteDecoderOld(WaveformSquarer squarer, int cyclesPerBit, int window2) {
         super(squarer);
+        this.cyclesPerBit = cyclesPerBit;
         this.window2 = window2;
     }
 
     @Override
-    public int getOptimizationParamMin() {
+    public int getOptimizationParamMin() {        
         int factor = squarer.isBothEdges() ? 2 : 1;
-        return (int) (factor * 5 * getBitLength() / window2) ;  // 180 when window2=4
+        if (bitLength == -1) {
+            throw new RuntimeException("bitLength not initialized");
+        }
+        return (int) (factor * 5 * cyclesPerBit * bitLength / 8 / window2) ;  // 180 when window2=4
     }
 
     @Override
     public int getOptimizationParamMax() {
         int factor = squarer.isBothEdges() ? 2 : 1;
-        return (int) (factor * 8 * getBitLength() / window2); // 288 when window2=4
+        if (bitLength == -1) {
+            throw new RuntimeException("bitLength not initialized");
+        }
+        return (int) (factor * 8 * cyclesPerBit * bitLength / 8 / window2); // 288 when window2=4
     }
 
     @Override
     public int getOptimizationStep() {
-        int factor = squarer.isBothEdges() ? 2 : 1;
-        int step = 4 / window2;
+        // Step size between min and max, giving approx 50 steps
+        int step = (getOptimizationParamMax() - getOptimizationParamMin()) / 50;
         if (step < 1) {
             step = 1;
         }
-        return factor * step;
+        return step;
     }
-
 
     @Override
     public void initialize(int[] samples) {
         samples = squarer.square(samples);
-        double bitLength = squarer.getBitLength();
+        // At 300 Baud and 44.1KHz sampling bitlength is nominally 147 samples
+        bitLength = calculateBitLength(samples);
+        System.out.println("@@@ BitLength = " + bitLength + " samples");
+        // Compute a rolling sum of the number of zero crossings over a bit period
         samples = WaveformSquarerBase.sumOverWindow(samples, (int) (bitLength + 0.5));
+        // Compute a rolling sum of the number of zero crossings over a fraction of a bit period
+        // TODO: I don't recall why this is useful....
         samples = WaveformSquarerBase.sumOverWindow(samples, (int) (bitLength / window2 + 0.5));
         this.samples = samples;
     }
@@ -46,10 +60,15 @@ public class ByteDecoderOld extends ByteDecoderBase {
     @Override
     public byte[] decodeBytes(int numBytes, int start, int optimationParam) {
 
-        double bitLength = getBitLength();
-
+        // threshold represents the point of the 1 to 0 transition on the start bit
+        // min: factor * 5 * bitLength / window2
+        // max: factor * 8 * bitLength / window2
+        
         int threshold = optimationParam;
-        int bitThreshold = squarer.isBothEdges() ? 12 : 6;
+        
+        // At  300 baud, cyclesPerBit = 8, giving 12 and 6
+        // At 1200 baud, cyclePerBit = 2, giving  3 and 1.5 (bothEdges must be used in his mode)
+        int bitThreshold = squarer.isBothEdges() ? (cyclesPerBit * 6 / 4) : (cyclesPerBit * 6 / 8);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -83,7 +102,41 @@ public class ByteDecoderOld extends ByteDecoderBase {
         return bos.toByteArray();
     }
 
+    // Calculate the actual bit length in samples from the edge crossings
+    // multiplied by cyclesPerBit.
+    //
+    // The nominal value, n, is sampleRate / high-tone-frequency.
+    // (e.g. at 44100, 2400Hz is n is ~18 samples)
+    //
+    // The actual edge crossing data is used to refine this by +/- 1 sample
+    //
+    // The result is the average based on the size of the n-1, n and n+1 buckets
+    // this is returned as a double.
+    
+    private double calculateBitLength(int[] samples) {
+        int n = (int) (((double) squarer.getSampleRate() / (double) squarer.getFrequency()) + 0.5);
+        int max = n * 2;
+        int[] periods = new int[max];
+        int last1 = 0;
+        int last2 = 0;
+        for (int i = 0; i < max; i++) {
+            periods[i] = 0;
+        }
+        for (int i = 0; i < samples.length; i++) {
+            if (samples[i] == 1) {
+                int period = i - (squarer.isBothEdges() ? last2 : last1);
+                last2 = last1;
+                last1 = i;
+                periods[period < max - 1 ? period : max - 1]++;
+            }
+        }
 
+        return (double) ((n - 1) * periods[n - 1] + n * periods[n] + (n + 1) * periods[n + 1]) * cyclesPerBit
+                / (double) (periods[n - 1] + periods[n] + periods[n + 1]);
+
+    }
+
+    
     // Interpolate between two samples
     private int getSample(double id) {
         int i1 = (int) id;
