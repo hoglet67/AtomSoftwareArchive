@@ -14,22 +14,23 @@ public class ByteDecoderAtomulator extends ByteDecoderBase {
     @Override
     public int getOptimizationParamMin() {
         // Bit period in 4MHz cycles (less 10%)
-        // Was fixed at 12000 for 300 baud
-        return cyclesPerBit * 4000000 * 9 / 10 / squarer.getFrequency();
+        // Was fixed at 12000 for  300 baud (now calculated at 12000)
+        // Was fixed at  1560 for 1200 baud (now calculated at  1500)
+        return cyclesPerBit * (4000000/10000) * 9000 / squarer.getFrequency();
     }
 
     @Override
     public int getOptimizationParamMax() {
-        // Bit period in 4MHz cycles (plus 10%)
-        // Was fixed at 13500 for 300 baud 
-        return cyclesPerBit * 4000000 * 11 / 10 / squarer.getFrequency();
+        // Bit period in 4MHz cycles (plus 5%)
+        // Was fixed at 13500 for  300 baud (now calculated at 14000)
+        // Was fixed at  1760 for 1200 baud (now calculated at  1750)
+        return cyclesPerBit * (4000000/10000) * 10500 / squarer.getFrequency();
     }
-
 
     @Override
     public int getOptimizationStep() {
-        // Step size between min and max, giving approx 50 steps
-        int step = (getOptimizationParamMax() - getOptimizationParamMin()) / 50;
+        // Step size between min and max, giving approx 25 steps
+        int step = (getOptimizationParamMax() - getOptimizationParamMin()) / 25;
         if (step < 1) {
             step = 1;
         }
