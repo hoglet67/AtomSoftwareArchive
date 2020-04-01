@@ -143,19 +143,19 @@ public class Optimizer {
                     for (int i = 3500; i >= 1500; i = i - 500) {
                         squarer = new WaveformSquarerUsingLowPassFilter(i, sampleRate, frequency, bothEdges);
                         byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                        //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     }
                     
                     // WaveformSquarerUsingSign
                     squarer = new WaveformSquarerUsingSign(sampleRate, frequency, bothEdges);
                     byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                    byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                    //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     
                     // WaveformSquarerUsingDifferentiation
                     for (int i = 1; i < 10; i++) {
                         squarer = new WaveformSquarerUsingDifferentiation(i, sampleRate, frequency, bothEdges);
                         byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                        //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     }
 
                 } else {
