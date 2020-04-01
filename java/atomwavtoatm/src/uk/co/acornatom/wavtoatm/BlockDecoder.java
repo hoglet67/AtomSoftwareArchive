@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface BlockDecoder {
 
-	List<Block> decodeBlocks(byte[] bytes);
+    List<Block> decodeBlocks(byte[] bytes);
 
 }
