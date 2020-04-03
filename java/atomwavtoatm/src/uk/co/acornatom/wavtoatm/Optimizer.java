@@ -22,8 +22,10 @@ public class Optimizer {
     private int numChannels;
     private int numFrames;
     private int sampleRate;
+    private boolean debug;
 
-    public Optimizer() {
+    public Optimizer(boolean debug) {
+        this.debug = debug;
     }
 
     private short[] readWavIntoMemory(File file, boolean log) throws IOException {
@@ -143,19 +145,19 @@ public class Optimizer {
                     for (int i = 3500; i >= 1500; i = i - 500) {
                         squarer = new WaveformSquarerUsingLowPassFilter(i, sampleRate, frequency, bothEdges);
                         byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                        //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     }
                     
                     // WaveformSquarerUsingSign
                     squarer = new WaveformSquarerUsingSign(sampleRate, frequency, bothEdges);
                     byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                    //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                    byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     
                     // WaveformSquarerUsingDifferentiation
                     for (int i = 1; i < 10; i++) {
                         squarer = new WaveformSquarerUsingDifferentiation(i, sampleRate, frequency, bothEdges);
                         byteDecoders.add(new ByteDecoderAtomulator(squarer, cyclesPerBit));
-                        //byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
+                        byteDecoders.add(new ByteDecoderOld(squarer, cyclesPerBit, window2));
                     }
 
                 } else {
@@ -318,6 +320,20 @@ public class Optimizer {
         out.write(buffer);
     }
 
+    private void addBlockToSet(Block block, Set<Block> set) {
+        if (set.contains(block)) {
+            // Already there
+            for (Block existing : set) {
+                if (existing.equals(block)) {
+                    existing.setInstances(existing.getInstances() + block.getInstances());
+                }
+            }            
+        } else {
+            // Add
+            set.add(block);
+        }
+    }
+
     private void mergeFileMaps(Map<FileSelector, Map<Integer, Set<Block>>> fromFileMap,
             Map<FileSelector, Map<Integer, Set<Block>>> toFileMap) {
         for (FileSelector fileName : fromFileMap.keySet()) {
@@ -340,7 +356,7 @@ public class Optimizer {
                 toBlockMap.put(blockNum, toSet);
             }
             for (Block block : fromSet) {
-                toSet.add(block);
+                addBlockToSet(block, toSet);
             }
         }
     }
@@ -460,22 +476,28 @@ public class Optimizer {
 
     private Block findBestBlock(FileSelector blockSelector, int blockNum, Set<Block> blocks) {
         String fileName = blockSelector.getFileName();
+
         if (blocks.size() == 1) {
+            // There is only one block, so use it
             Block block = blocks.iterator().next();
             block.updateChecksumValid();
             return block;
         } else if (blocks.size() == 0) {
+            // There are no blocks, so log as missing
             System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " is missing");
             return null;
         } else {
+            // There is a choice of blocks, so attempt recovery            
+            System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " has " + blocks.size()
+                    + " multiple alternatives, recovering data");
+            // For each alternative, log the number of instances (which is used when weighting)
             for (Block block : blocks) {
-                if (block.isCheckSumValid()) {
-                    return block;
+                if (block.isCheckSumValid()) {                    
+                    System.out.println("@@@ Good block: " + block.getInstances() + " instances");
+                } else {
+                    System.out.println("@@@ Bad block: " + block.getInstances() + " instances");                    
                 }
             }
-
-            System.out.println("@@@ " + Block.cleanFilename(fileName) + " " + Block.toHex4(blockNum) + " has " + blocks.size()
-                    + " instances, recovering data");
             Block block = new Block();
             block.setFileName(fileName);
             block.setNum(blockNum);
@@ -516,11 +538,12 @@ public class Optimizer {
                 if (count == null) {
                     count = 0;
                 }
-                stats.put(val, count + 1);
+                stats.put(val, count + block.getInstances());
             }
         }
         int bestVal = -1;
         int bestCount = -1;
+        int total = 0;
         for (Map.Entry<Integer, Integer> entry : stats.entrySet()) {
             // if (field != null) {
             // System.out.println("    " + field + " " +
@@ -531,18 +554,22 @@ public class Optimizer {
             // Block.toHex2(entry.getKey()) + " occurred " + entry.getValue() +
             // " times");
             // }
+            total += entry.getValue();
             if (entry.getValue() > bestCount) {
                 bestCount = entry.getValue();
                 bestVal = entry.getKey();
             }
         }
-        // if (field != null) {
-        // System.out.println("    " + field + " best value " +
-        // Block.toHex4(bestVal));
-        // } else {
-        // System.out.println("    data[" + index + "] best value " +
-        // Block.toHex4(bestVal));
-        // }
+        if (debug) {
+            int confidence = 100 * bestCount / total;
+            if (field != null) {
+                System.out.print("    " + field + " best value " + Block.toHex4(bestVal));
+            } else {
+                System.out.print("    data[" + Block.toHex2(index) + "] best value " + Block.toHex2(bestVal) + " ("
+                        + Block.toAscii(bestVal) + ")");
+            }
+            System.out.println("; conf = " + confidence + "%");
+        }
         return bestVal;
     }
 
@@ -564,7 +591,7 @@ public class Optimizer {
                 goodSet = new HashSet<Block>();
                 blockMap.put(block.getNum(), goodSet);
             }
-            goodSet.add(block);
+            addBlockToSet(block, goodSet);
         }
     }
 
@@ -758,7 +785,10 @@ public class Optimizer {
     }
 
     public static void main(String[] args) {
-
+        
+        // Debug
+        boolean debug = false;
+        
         // Atom default
         int baud = 300;
 
@@ -774,6 +804,8 @@ public class Optimizer {
                 if (args[i].equals("-b")) {
                     i++;
                     baud = Integer.parseInt(args[i]);
+                } else if (args[i].equals("-d")) {
+                    debug = true;
                 } else {
                     System.out.println("Unknown options: " + args[i]);
                     System.exit(1);
@@ -782,7 +814,7 @@ public class Optimizer {
             }
 
             if (args.length < 2 + i) {
-                System.out.println("usage: java -jar atomwavtoatm.jar [ -b bauid ] <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
+                System.out.println("usage: java -jar atomwavtoatm.jar [ -d ] [ -b baud ] <Dst ATM Dir> <Src Wav/Dat File or Directory>... ");
                 System.exit(1);
             }
 
@@ -837,7 +869,7 @@ public class Optimizer {
 
             Collections.sort(srcFiles);
 
-            Optimizer optimizer = new Optimizer();
+            Optimizer optimizer = new Optimizer(debug);
 
             optimizer.process(srcFiles, dstDir, frequency, cyclesPerBit);
 

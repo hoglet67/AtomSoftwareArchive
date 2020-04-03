@@ -23,9 +23,18 @@ public class Block {
     private int len;
     private byte[] bytes;
     private int checksum;
+    private int instances = 1;
 
     private boolean checkSumValid;
 
+    public int getInstances() {
+        return instances;
+    };
+    
+    public void setInstances(int value) {
+        this.instances = value;
+    }
+    
     public int getField(Field field) {
         switch (field) {
         case FLAG:
@@ -127,6 +136,14 @@ public class Block {
             }
         }
         return sb.toString();
+    }
+
+    public static char toAscii(int i) {
+        if (i >= 32 && i < 127) {
+            return (char) i;
+        } else {
+            return '.';
+        }
     }
 
     public static String toHex2(int i) {
@@ -264,6 +281,5 @@ public class Block {
     public FileSelector getSelector() {
         return new FileSelector(this);
     }
-
 
 }
