@@ -23,9 +23,11 @@ public class Optimizer {
     private int numFrames;
     private int sampleRate;
     private boolean debug;
+    private boolean bitwise;
 
-    public Optimizer(boolean debug) {
+    public Optimizer(boolean debug, boolean bitwise) {
         this.debug = debug;
+        this.bitwise = bitwise;
     }
 
     private short[] readWavIntoMemory(File file, boolean log) throws IOException {
@@ -524,6 +526,8 @@ public class Optimizer {
 
     private int getField(Field field, int index, Set<Block> blocks) {
         Map<Integer, Integer> stats = new TreeMap<Integer, Integer>();
+        int bestVal;
+        int confidence;
         for (Block block : blocks) {
             int val = -1;
             if (field != null) {
@@ -541,27 +545,50 @@ public class Optimizer {
                 stats.put(val, count + block.getInstances());
             }
         }
-        int bestVal = -1;
-        int bestCount = -1;
-        int total = 0;
-        for (Map.Entry<Integer, Integer> entry : stats.entrySet()) {
-            // if (field != null) {
-            // System.out.println("    " + field + " " +
-            // Block.toHex4(entry.getKey()) + " occurred " + entry.getValue() +
-            // " times");
-            // } else {
-            // System.out.println("    data[" + index + "] " +
-            // Block.toHex2(entry.getKey()) + " occurred " + entry.getValue() +
-            // " times");
-            // }
-            total += entry.getValue();
-            if (entry.getValue() > bestCount) {
-                bestCount = entry.getValue();
-                bestVal = entry.getKey();
+        if (bitwise) {
+            bestVal = 0;
+            double conf = 1.0;
+            for (int bit = 0; bit < 16; bit++) {
+                int zeroCount = 0;
+                int oneCount = 0;        
+                for (Map.Entry<Integer, Integer> entry : stats.entrySet()) {
+                    if ((entry.getKey() & (1 << bit)) == 0) {
+                        zeroCount += entry.getValue();
+                    } else {
+                        oneCount += entry.getValue();                    
+                    }
+                }
+                if (oneCount > zeroCount) {
+                    bestVal |= (1 << bit);
+                    conf *= ((double) oneCount) / ((double) (zeroCount + oneCount));
+                } else {
+                    conf *= ((double) zeroCount) / ((double) (zeroCount + oneCount));
+                }                
             }
+            confidence = (int) (100 * conf);            
+        } else {
+            bestVal = -1;
+            int bestCount = -1;
+            int total = 0;
+            for (Map.Entry<Integer, Integer> entry : stats.entrySet()) {
+                // if (field != null) {
+                // System.out.println("    " + field + " " +
+                // Block.toHex4(entry.getKey()) + " occurred " + entry.getValue() +
+                // " times");
+                // } else {
+                // System.out.println("    data[" + index + "] " +
+                // Block.toHex2(entry.getKey()) + " occurred " + entry.getValue() +
+                // " times");
+                // }
+                total += entry.getValue();
+                if (entry.getValue() > bestCount) {
+                    bestCount = entry.getValue();
+                    bestVal = entry.getKey();
+                }
+            }
+            confidence = 100 * bestCount / total;
         }
         if (debug) {
-            int confidence = 100 * bestCount / total;
             if (field != null) {
                 System.out.print("    " + field + " best value " + Block.toHex4(bestVal));
             } else {
@@ -572,7 +599,7 @@ public class Optimizer {
         }
         return bestVal;
     }
-
+    
     private void updateMap(Map<FileSelector, Map<Integer, Set<Block>>> fileMapGood,
             Map<FileSelector, Map<Integer, Set<Block>>> fileMapBad, List<Block> blocks) {
         for (Block block : blocks) {
@@ -788,6 +815,9 @@ public class Optimizer {
         
         // Debug
         boolean debug = false;
+                
+        // Bitwise recovery
+        boolean bitwise = false; 
         
         // Atom default
         int baud = 300;
@@ -806,6 +836,8 @@ public class Optimizer {
                     baud = Integer.parseInt(args[i]);
                 } else if (args[i].equals("-d")) {
                     debug = true;
+                } else if (args[i].equals("-z")) {
+                    bitwise = true;
                 } else {
                     System.out.println("Unknown options: " + args[i]);
                     System.exit(1);
@@ -869,7 +901,7 @@ public class Optimizer {
 
             Collections.sort(srcFiles);
 
-            Optimizer optimizer = new Optimizer(debug);
+            Optimizer optimizer = new Optimizer(debug, bitwise);
 
             optimizer.process(srcFiles, dstDir, frequency, cyclesPerBit);
 
