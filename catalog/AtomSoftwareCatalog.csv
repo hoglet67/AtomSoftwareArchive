@@ -2484,3 +2484,6 @@ ZORUN
 ZOSCR",present,AGD,Yes,,
 1092,V11B7,AGD,AGD,C.Kees' AGD Ports,*** AGD Demo Carousel ***,Game,Kees van Oss,AGD,8200,"CH.""SHOW1""",Test,"SHOW1
 SHOW2",present,AGD,Yes,,
+1093,V11B7,NC,Non Comm,D.Non Commercial Software,Jackpot,Game,,NC,8400,*RUN JACKPOT,Test,"JACKPOT
+J-PROG
+J-SHAPE",present,,Yes,,
