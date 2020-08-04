@@ -98,6 +98,11 @@ java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$
 
 mkdir -p $ARCHIVE/$PCW
 java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/QUEST.bas $ARCHIVE/$PCW/QUEST
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/MISDODG.bas $ARCHIVE/$PCW/MISDODG
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/BACKGAM.bas $ARCHIVE/$PCW/BACKGAM
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/GHOST.bas $ARCHIVE/$PCW/GHOST
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/TURBO.bas $ARCHIVE/$PCW/TURBO
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/CAKES.bas $ARCHIVE/$PCW/CAKES
 
 ##############################################################
 # Books
@@ -127,10 +132,10 @@ java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIV
 #java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKMC.bas $ARCHIVE/$OTHER/BREAKMC 2B00
 
 for i in SHOW1 SHOW2 SHOW3 DISOLV3 DISOLV4 DISOLV5 DISOLV6 DISOLV7
-do   
+do
     java -jar ../java/atombasic/atombasic.jar ../agdzips/$i.bas $ARCHIVE/AGD/$i 2900 ce86
 done
-    
+
 ##############################################################
 # Magnus Olsson
 ##############################################################
@@ -334,7 +339,7 @@ package "atms/dd-21/SENTD" "$ARCHIVE/$AS/WORDTUT"
 package "atms/Acl1-15/747" "$ARCHIVE/$BB"
 # package "atms/Acl1-06/BREAKOU" "$ARCHIVE/$BB" # not bugbyte
 # package "atms/Acl1-15/INVADBB" "$ARCHIVE/$BB" # manually fixed
-package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # not sure this is bug byte, but could be
+# package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # not sure this is bug byte, but could be
 # package "atms/Acl1-21/BATSHIP" "$ARCHIVE/$BB" # this is actually a program called space battle that need FP Rom
 package "atms/Acl2-19/BIORYTH" "$ARCHIVE/$BB"
 #package "atms/bugbyte__chess_disk/*" "$ARCHIVE/$BB"
