@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class SpreadsheetTitle {
 
+    private int identifier;
     private int index;
     private String chunk;
     private String title;
@@ -20,10 +21,20 @@ public class SpreadsheetTitle {
     private Set<String> runnables = new HashSet<String>();
     private Set<String> loadables = new HashSet<String>();
 
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
+
+    /* Identifier is a persistent ID, taken from the first column of the spreadsheet */
+    public int getIdentifier() {
+        return identifier;
+    }
+
     public void setIndex(int index) {
         this.index = index;
     }
 
+    /* Index is a simple sequence number, with no holes */
     public int getIndex() {
         return index;
     }
