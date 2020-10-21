@@ -55,46 +55,41 @@ public class GenerateAll {
             SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
             List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
-            // Temporarily disabled sddos until we figure out how to avoid SDDOS
-            // overflow
-            // Each menu chapter will be a seperate disk
-
-            for (int pass = 1; pass <= 3; pass++) {
-                Target target;
-
-                if (pass == 1) {
-                    System.out.print("Generating SDDOS");
-                    target = Target.SDDOS;
-                } else if (pass == 2) {
-                    System.out.print("Generating Econet");
-                    target = Target.ECONET;
-                } else {
-                    System.out.print("Generating AtoMMC");
-                    target = Target.ATOMMC;
+            // Count the number of titles in each chunk
+            Map<String, Integer> chunks = new TreeMap<String, Integer>();
+            int total = 0;
+            for (SpreadsheetTitle item : items) {
+                if (!item.isPresent()) {
+                    continue;
                 }
+                String chunk = item.getChunk();
+                Integer count = chunks.get(chunk);
+                if (count == null) {
+                    count = 0;
+                }
+                chunks.put(chunk, count + 1);
+                total++;
+            }
+            char startChunkId = 'A';
+            String chunkAll = "" + (char)(startChunkId + chunks.size());
+            chunks.put(chunkAll, total);
+
+            System.out.println("Found " + chunks.size() + " chunks");
+            
+            // Each menu chapter will be a separate disk
+            for (Target target : Target.values()) {
+
+                System.out.println("*******************************");
+                System.out.println("Generating " + target.name());                
+                System.out.println("*******************************");
+                
                 System.out.println(" menu files version " + version);
-
-                Map<String, Integer> chunks = new TreeMap<String, Integer>();
-                int total = 0;
-                for (SpreadsheetTitle item : items) {
-                    if (!item.isPresent()) {
-                        continue;
-                    }
-                    String chunk = item.getChunk();
-                    Integer count = chunks.get(chunk);
-                    if (count == null) {
-                        count = 0;
-                    }
-                    chunks.put(chunk, count + 1);
-                    total++;
-                }
-
-                char chunkId = 'A';
-                String chunkAll = "" + (char)(chunkId + chunks.size());
-                chunks.put(chunkAll, total);
 
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
                 splashGen.generateFiles(null, target);
+                
+                char chunkId = startChunkId;
+
                 for (String chunk : chunks.keySet()) {
 
                     // true if this is the last chunk containing all titles
@@ -120,12 +115,21 @@ public class GenerateAll {
                 }
 
                 if (target == Target.SDDOS) {
-                    GenerateSDDOSFiles SDCardGenerator = new GenerateSDDOSFiles(archiveDir, new File(archiveDir + ".img"),
-                            new File(archiveDir + ".js"), menuBase, chunks.size());
-                    SDCardGenerator.generateFiles(items, target);
-                    SDCardGenerator.writeSDImage();
+                    GenerateSDDOSFiles sdGenerator = new GenerateSDDOSFiles(archiveDir, menuBase, chunks.size(),
+                            new File(archiveDir + ".img"));                    
+                    sdGenerator.generateFiles(items, target);
+                    sdGenerator.writeImage();
                     new File(archiveDir, "MENUSD").delete();
                 }
+                
+                if (target == Target.JS) {
+                    GenerateJSFiles jsGenerator = new GenerateJSFiles(archiveDir, menuBase, chunks.size(),
+                            new File(archiveDir + ".js"));
+                    jsGenerator.generateFiles(items, target);
+                    jsGenerator.writeImage();
+                    new File(archiveDir, "MENUSD").delete();                  
+                }
+                
                 if (target == Target.ECONET) {
                     GenerateEconetFiles econetGenerator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"),
                             menuBase, chunks.size());
