@@ -113,7 +113,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
         return (lastUsedSector + 1) << 8;
     }
 
-    private void addDisk(byte[] image, int diskNum) {
+    private void addDisk(byte[] image, int diskNum, int diskIdentifier) {
         // *** RAW SD IMAGE FILE ***
         // Copy the disk title
         for (int i = 0; i < 13; i++) {
@@ -127,13 +127,13 @@ public class GenerateSDDOSFiles extends GenerateBase {
         // Copy the disk data
         System.arraycopy(image, 0, SDimage, SD_SEC_SIZE * (32 + diskNum * 200), image.length);
         // *** JS IMAGE FILE ***
-        if (diskNum > 0) {
+        if (diskIdentifier > 0) {
             JSwriter.println(",");
         }
         int len = getImageLen(image);
         byte[] strippedImage = new byte[len];
         System.arraycopy(image, 0, strippedImage, 0, len);
-        JSwriter.print("fDiskRead(\"" + diskNum + "\", D64(\"");
+        JSwriter.print("fDiskRead(\"" + diskIdentifier + "\", D64(\"");
         JSwriter.print(Base64.encodeBase64String(strippedImage));
         JSwriter.print("\"))");
     }
@@ -237,7 +237,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
         addFile(image, splashFile2);
 
         writeImage(new File("disks/0"), image);
-        addDisk(image, 0);
+        addDisk(image, 0, 0);
         // Disk 1016-1023 are the chapters
         if (numChunks > 8) {
             throw new RuntimeException("Too many menu chunks");
@@ -251,7 +251,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
             }
             int num = 1016 + chunk;
             writeImage(new File("disks/" + num), chunkImage);
-            addDisk(chunkImage, num);
+            addDisk(chunkImage, num, 1024 + num); // TODO - this is a hack, fix me please!
         }
     }
 
@@ -297,7 +297,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
                     }
                     System.out.println("Writing disk " + item.getIndex());
                     writeImage(new File("disks/" + item.getIndex()), image);
-                    addDisk(image, item.getIndex());
+                    addDisk(image, item.getIndex(), item.getIdentifier());
                 }
             } catch (Exception e) {
                 System.out.println("Problem SDDOS files for title " + item.getTitle());
