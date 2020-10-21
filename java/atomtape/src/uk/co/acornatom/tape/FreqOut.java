@@ -156,8 +156,9 @@ public class FreqOut {
 		// Bit 7 = last block. Clear = last block.
 		// Bit 6 = do load me. Set = load. Clear = don't.
 		// Bit 5 = first block. Clear = first block.
+		// Bits 4..0 = bits 15..11 of the (load address + length)
 		//
-		int flags = _BV(7) | _BV(6);
+		int flags = _BV(7) | _BV(6) | (((m_atmfile.getLoadAddr() + m_atmfile.getData().length) >> 11) & 0x1F);
 
 		// Additional initial header time of 2 seconds.
 		// One out() call puts ~3.3ms of data.
@@ -251,6 +252,9 @@ public class FreqOut {
 			blockLoadAddr += 0x100;
 			m_rawdata += 0x100;
 			++blockNum;
+
+			// flags.4..0 come from previous flags 6..2
+			flags = (flags & 0xE0) | ((flags >> 2) & 0x1F);
 
 			// flags.5 is clear on first block
 			//
