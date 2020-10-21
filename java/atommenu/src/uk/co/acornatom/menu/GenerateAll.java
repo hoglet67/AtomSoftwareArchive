@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import uk.co.acornatom.menu.GenerateBootstrapFiles.Target;
+import uk.co.acornatom.menu.IFileGenerator.Target;
 
 public class GenerateAll {
 
@@ -94,7 +94,7 @@ public class GenerateAll {
                 chunks.put(chunkAll, total);
 
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
-                splashGen.generateFiles(null);
+                splashGen.generateFiles(null, target);
                 for (String chunk : chunks.keySet()) {
 
                     // true if this is the last chunk containing all titles
@@ -113,7 +113,7 @@ public class GenerateAll {
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
                     generators.add(new GenerateMenuFiles(archiveDir, menuDir, allChunk));
                     for (IFileGenerator generator : generators) {
-                        generator.generateFiles(chunkItems);
+                        generator.generateFiles(chunkItems, target);
                     }
 
                     chunkId++;
@@ -122,14 +122,14 @@ public class GenerateAll {
                 if (target == Target.SDDOS) {
                     GenerateSDDOSFiles SDCardGenerator = new GenerateSDDOSFiles(archiveDir, new File(archiveDir + ".img"),
                             new File(archiveDir + ".js"), menuBase, chunks.size());
-                    SDCardGenerator.generateFiles(items);
+                    SDCardGenerator.generateFiles(items, target);
                     SDCardGenerator.writeSDImage();
                     new File(archiveDir, "MENUSD").delete();
                 }
                 if (target == Target.ECONET) {
                     GenerateEconetFiles econetGenerator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"),
                             menuBase, chunks.size());
-                    econetGenerator.generateFiles(items);
+                    econetGenerator.generateFiles(items, target);
                     econetGenerator.close();
                     new File(archiveDir, "MENUSD").delete();
                 }

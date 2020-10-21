@@ -219,7 +219,7 @@ public class GenerateEconetFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         // This needs more work to deal with long fine names
         //
@@ -232,10 +232,10 @@ public class GenerateEconetFiles extends GenerateBase {
                 if (item.isPresent()) {
                     System.out.println(item.getTitle());
 
-                    String dir = getDir(item.getIndex());
+                    String dir = getDir(item.getIdentifier());
 
                     File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                            "" + item.getIndex());
+                            "" + item.getIdentifier());
                     ATMFile bootAtmFile = new ATMFile(bootfile);
                     bootAtmFile.setTitle("BOOT");
                     addFile(dir, bootAtmFile);

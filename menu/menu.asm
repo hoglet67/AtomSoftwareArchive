@@ -577,13 +577,13 @@ ENDIF
 .BootProgram
 
     ; // Handle *RUN of a title - K is the title index
-	; 800 K=(!I)&#3FF
+	; 800 K=(!I)&#7FF
 	LDX #TmpPtr
 	JSR Dereference
 	LDA TmpPtr
 	STA BinBuffer
 	LDA TmpPtr + 1
-	AND #$3
+	AND #$7
 	STA BinBuffer + 1
 
 	; 810 P=#100

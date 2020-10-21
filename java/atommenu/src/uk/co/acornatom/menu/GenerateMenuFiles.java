@@ -65,7 +65,7 @@ public class GenerateMenuFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         // ------------------------------------------------------------------------------------
         // Process the spreadsheet items to generate IDs for Publishers, Genres
@@ -132,7 +132,11 @@ public class GenerateMenuFiles extends GenerateBase {
             if (item.isPresent()) {
                 AtomTitle atomTitle = new AtomTitle();
                 atomTitle.setTitle(item.getTitle());
-                atomTitle.setIndex(item.getIndex());
+                if (target == Target.SDDOS) {
+                    atomTitle.setIndex(item.getIndex()); // Use compressed identifier to overcome 1023 disk limit
+                } else {
+                    atomTitle.setIndex(item.getIdentifier()); // Use persistent identifier everywhere else
+                }
                 atomTitle.setShortPublisher(item.getShortPublisher());
                 atomTitle.setPublisher(item.getPublisher());
                 atomTitle.setPublisherId(publishers.get(item.getPublisher()));
@@ -349,7 +353,7 @@ public class GenerateMenuFiles extends GenerateBase {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         for (AtomTitle item : items) {
             item.setAbsoluteAddress(absoluteAddress + bos.size());
-            writeShort(bos, item.getIndex() + (item.getGenreId() << 10));
+            writeShort(bos, item.getIndex() + (item.getGenreId() << 11));
             writeByte(bos, item.getPublisherId());
             for (Integer collectionId : item.getCollectionIds()) {
                 writeByte(bos, 128 + collectionId);

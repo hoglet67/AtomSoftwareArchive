@@ -255,7 +255,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         for (SpreadsheetTitle item : items) {
             try {
@@ -264,7 +264,7 @@ public class GenerateSDDOSFiles extends GenerateBase {
                     byte[] image = createBlankDiskImage(item.getTitle());
 
                     File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                            "" + item.getIndex());
+                            "" + item.getIdentifier());
                     ATMFile bootAtmFile = new ATMFile(bootfile);
                     bootAtmFile.setTitle("BOOT");
                     addFile(image, bootAtmFile);

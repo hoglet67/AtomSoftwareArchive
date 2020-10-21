@@ -4,5 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IFileGenerator {
-    void generateFiles(List<SpreadsheetTitle> items) throws IOException;
+    
+    // The various build targets we support
+    public enum Target {
+        ATOMMC, SDDOS, ECONET
+    }
+
+    void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;
 }

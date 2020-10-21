@@ -17,10 +17,6 @@ public class GenerateBootstrapFiles extends GenerateBase {
     public static final int CMD_PRINT = 5;
     public static final int CMD_ROMCOPY = 6;
 
-    public enum Target {
-        ATOMMC, SDDOS, ECONET
-    }
-
     private File menuDir;
     private File bootLoaderBinary;
     private File romBootLoaderBinary;
@@ -35,7 +31,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
 
     private void generateMachineCodeBootstrap(SpreadsheetTitle item, boolean rom) throws IOException {
 
-        int index = item.getIndex();
+        int identifier = item.getIdentifier();
         String directory = item.getDir();
         String run = item.getRun();
         String boot = item.getBoot();
@@ -118,7 +114,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
                     bos.write((byte) 13);
                 }
             } else {
-                throw new RuntimeException("Illegal command " + cmd + " in title " + index);
+                throw new RuntimeException("Illegal command " + cmd + " in title " + identifier);
             }
         }
 
@@ -128,8 +124,8 @@ public class GenerateBootstrapFiles extends GenerateBase {
             bos.write((byte) CMD_ROMCOPY);
         }
 
-        FileOutputStream fos = new FileOutputStream(new File(menuDir, "" + index));
-        writeATMFile(fos, "" + index, loadAddr, execAddr, bos.toByteArray());
+        FileOutputStream fos = new FileOutputStream(new File(menuDir, "" + identifier));
+        writeATMFile(fos, "" + identifier, loadAddr, execAddr, bos.toByteArray());
         fos.close();
 
     }
@@ -142,7 +138,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
         for (SpreadsheetTitle item : items) {
             if (item.isPresent()) {
                 boolean rom = item.getChunk().equals("F");

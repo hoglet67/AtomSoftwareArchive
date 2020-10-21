@@ -252,7 +252,7 @@ public class GenerateSplashFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         int linex = 9;
 

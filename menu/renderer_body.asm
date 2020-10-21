@@ -12,7 +12,7 @@
 
 .WritePage
 
-IF properAnnotationCounts	
+IF properAnnotationCounts
 
 	LDA SearchMode
 	AND #3
@@ -24,7 +24,7 @@ ENDIF
 
 	LDA SearchBuffer
 	STA SearchFirst
-	
+
 	LDA Sort
 	STA CurrentSort
 	LDA Sort + 1
@@ -44,7 +44,7 @@ ENDIF
 	LDA (MenuTablePtr),Y
 	ADC #0
 	STA AnnotationPtr + 1
-	
+
 	LDA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
@@ -58,11 +58,11 @@ ENDIF
 	; Default the Title Name Offset to 4
 	LDA #4
 	STA TitleNameOffset
-	
+
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Start of loop that needs to be efficient
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
-	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 .NextRow
 
 	LDY #0
@@ -85,10 +85,10 @@ ENDIF
 	ADC #$02
 	STA CurrentSort
 	BCC IncSort
-	INC CurrentSort + 1		
+	INC CurrentSort + 1
 .IncSort
 
-	; Do the search comparison 
+	; Do the search comparison
 	LDA SearchMode
 	AND #3
 	BNE FilterCompare
@@ -100,7 +100,7 @@ ENDIF
 	LDA (Title),Y
 	BMI FindTitle
 	STY TitleNameOffset
-	
+
 	LDA SearchFirst
 	BEQ FilterCompare
 
@@ -127,7 +127,7 @@ ENDIF
 .SearchMatch
 
 IF properAnnotationCounts
-	JSR AccumulateAnnotationCounts	
+	JSR AccumulateAnnotationCounts
 ENDIF
 
 .FilterCompare
@@ -149,7 +149,7 @@ ENDIF
 	BEQ MatchingRow
 	INY
 	BNE CategoryFilter
-	
+
 .NotCategoryFilter
 	; Otherwise compare what's the the title record with the filter value
 	LDA (Title), Y
@@ -158,7 +158,8 @@ ENDIF
 	CPY #1
 	BNE CompareFilterValue
 	LSR A
-	LSR A	
+	LSR A
+	LSR A
 
 	;; Do the filter comparison, skip to next row if no match
 .CompareFilterValue
@@ -169,7 +170,7 @@ ENDIF
 	INC CurrentRow
 	BNE MatchingRow1
 	INC CurrentRow + 1
-	
+
 	;; Have we reached the required start row yet?
 .MatchingRow1
 	SEC
@@ -179,11 +180,11 @@ ENDIF
 	SBC StartRow+1
 	BCS FoundRow
 	JMP NextRow
-	
+
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; End of loop that needs to be *very efficient*
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	
+
 	; Found a row that matches all filter and search
 
 .FoundRow
@@ -201,7 +202,7 @@ ENDIF
 
 	; Write the line at (Title) to the screen
 	JSR WriteLine
-	
+
 	; Store Title so that the basic program knows what's on each line
 	LDA RowCount
 	ASL A
@@ -210,14 +211,14 @@ ENDIF
 	STA (RowRet),Y
 	INY
 	LDA Title + 1
-	STA (RowRet),Y	
+	STA (RowRet),Y
 	JMP NextRow
-	
+
 .WritePageEndOfList
 	; We have hit the end of the sort list
 	LDA RowCount
 	CMP #LinesPerPage
-	BEQ UpdateTotalRows		
+	BEQ UpdateTotalRows
 	LDX #CharsPerLine
 .WritePageEndOfList1
 	LDA #Space
@@ -233,22 +234,22 @@ ENDIF
 	STA (RowRet), Y
 	INY
 	LDA CurrentRow + 1
-	STA (RowRet), Y	
+	STA (RowRet), Y
 	RTS
 
 .WriteLine
-	
+
 	; Keep track of how many chars we have available
-	
+
 	LDX #CharsPerLine - 3
-	; Prepare the Annotation first (so we know how long it is...) 
-	
+	; Prepare the Annotation first (so we know how long it is...)
+
 	LDA Annotation
 	BPL NormalAnnotation
 
 	LDY #CountOffset
 
-IF properAnnotationCounts	
+IF properAnnotationCounts
 	LDA SearchFirst
 	BEQ NoSearch
 	INY
@@ -260,14 +261,14 @@ ENDIF
 	STA BinBuffer
 	INY
 	LDA (Title),Y
-	STA BinBuffer + 1		
+	STA BinBuffer + 1
 	JSR WriteCount
 
 	LDA #<CountString
 	STA AnnotationString
 	LDA #>CountString
 	STA AnnotationString + 1
-	
+
 	JMP LengthOfAnnotation
 
 .NormalAnnotation
@@ -279,24 +280,25 @@ ENDIF
 	LDA (Title),Y
 	BMI NotNullCollection
 	CPY #3
-	BNE NotNullCollection	
+	BNE NotNullCollection
 
 	; CollectionIDs always have bit 7 set
 	; If bit 7 is clear, there is no collection
 	PLA
 	LDA #<NullCollectionMessage
 	STA AnnotationString
-	LDA #>NullCollectionMessage	
+	LDA #>NullCollectionMessage
 	STA AnnotationString + 1
 	BNE LengthOfAnnotation
 
 .NullCollectionMessage
 	; Currently just blank, a string like "NO COLLECTION" could be put here
 	EQUB 0
-	
+
 .NotNullCollection
 	CPY #1
 	BNE NotGenre
+	LSR A
 	LSR A
 	LSR A
 .NotGenre
@@ -329,14 +331,14 @@ ENDIF
 	JSR WriteToScreen
 	LDA #Dot
 	JSR WriteToScreen
-	
+
 .WriteTitle
-	
+
 	LDA SearchMode
 	BPL WriteTitle1
 	LDA SearchFirst
 	BEQ WriteTitle1
-	
+
 	; There is an active search filter, so try to highlight
 	JSR WriteTitleHighlight
 	JMP WriteSeperator
@@ -347,7 +349,7 @@ ENDIF
 
 .WriteSeperator
 	LDA #Space
-	
+
 .WriteSeperatorLoop
 	JSR WriteToScreen
 	DEX
@@ -357,7 +359,7 @@ ENDIF
 .WriteAnnotation
 	LDA (AnnotationString),Y
 	BEQ WriteLineExit
-	JSR WriteToScreen 
+	JSR WriteToScreen
 	INY
 	BNE WriteAnnotation
 
@@ -378,12 +380,12 @@ ENDIF
 
 .WriteTitleHighlight
 	STX TmpX
-	LDY TitleNameOffset	
+	LDY TitleNameOffset
 .WriteTitleHighlight1
 	LDA (Title),Y
 	BEQ WriteTitleHighlight3
 	CMP SearchFirst
-	BEQ PossibleMatch	
+	BEQ PossibleMatch
 .WriteTitleHighlight2
 	JSR WriteToScreen
 	INY
@@ -392,8 +394,8 @@ ENDIF
 .WriteTitleHighlight3
 	LDX TmpX
 	RTS
-	
-	
+
+
 .PossibleMatch
 	PHA
 	TYA
@@ -414,7 +416,7 @@ ENDIF
 	TAY
 	PLA
 	JMP WriteTitleHighlight2
-	
+
 .Match
 	PLA
 	TAY
@@ -428,8 +430,8 @@ ENDIF
 	BEQ WriteTitleHighlight3
 	DEX
 	BEQ WriteTitleHighlight1
-	BNE Match1	
-	
+	BNE Match1
+
 .Inkey
 	JSR $FE71
 	BCC Inkey1
@@ -437,11 +439,11 @@ ENDIF
 .Inkey1
 	STY Key
 	RTS
-	
+
 .HighlightRow
-	
+
 	LDA #<(ScreenStart)
-	STA Screen	
+	STA Screen
 	LDA #>(ScreenStart)
 	STA Screen+1
 	LDA Row
@@ -452,17 +454,17 @@ ENDIF
 	ASL A
 	BCC HighlightRow1
 	INC Screen+1
-.HighlightRow1	
+.HighlightRow1
 	CLC
 	ADC Screen
 	STA Screen
-	
+
 	LDY #2
 .HighlightRow2
 	JSR WaitUntilVSync
 	DEY
 	BNE HighlightRow2
-	
+
 	LDY #$1F
 .HighlightRow3
 	LDA (Screen),Y
@@ -482,12 +484,12 @@ ENDIF
 	INC Screen
 	BNE WriteToScreen1
 	INC Screen + 1
-	
+
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
 	AND #$81
 	STA Screen + 1
-	
+
 .WriteToScreen1
 	LDY TmpY
 	PLA
@@ -515,7 +517,7 @@ ENDIF
 	PLA
 	TAX
 	RTS
-	
+
 .WriteDecimal:
 	JSR BinToDecimal16
 	; Set the flag to support suppression of leading zeros
@@ -577,7 +579,7 @@ ENDIF
 	LDA BcdBuffer
 	RTS
 
-	
+
 .WriteHex
 	PHA
 	LSR A
@@ -597,7 +599,7 @@ ENDIF
 	SEC
 	ROR	SuppressFlag
 	CMP #$0a
-	BCC WriteHex3	
+	BCC WriteHex3
 	ADC #$06
 .WriteHex3
 	ADC #$30
@@ -605,12 +607,12 @@ ENDIF
 	INX
 .WriteHex4
 	RTS
-		
+
 .Search
 
 	LDA #$80
 	STA SearchMode
-	
+
 	; Update current results set and number of pages
 	JSR WritePage
 	JSR UpdateTotalPages
@@ -618,7 +620,7 @@ ENDIF
 	; Returns with Y being the end of the search buffer
 	LDA #$A0
 	JSR ShowCurrentSearch
-	
+
 	; Read a character
 	JSR Osrdch
 
@@ -628,14 +630,14 @@ ENDIF
 
 	CMP #$7F
 	BNE Search1
-	
+
 	; Delete at the beginning of the line also terminates the search
 	CPY #0
 	BEQ SearchExit
 
 	DEY
 	LDA #0
-	
+
 .Search1
 
 	STA SearchBuffer,Y
@@ -644,11 +646,11 @@ ENDIF
 	STA SearchBuffer,Y
 
 	JMP Search
-	
+
 .SearchExit
 	CPY #0
 	BNE ShowCurrentSearchNoCursor
-	
+
 	LDA #Space
 	LDY #CharsPerLine - 1
 .SearchExit2
@@ -656,14 +658,14 @@ ENDIF
 	DEY
 	BPL SearchExit2
 	RTS
-	
+
 .ShowCurrentSearchNoCursor
 	LDA #$20
-	
+
 .ShowCurrentSearch
 	; Save the cursor
 	PHA
-	
+
 	LDA #<(ScreenStart + $1E0)
 	STA Screen
 	LDA #>(ScreenStart + $1E0)
@@ -676,7 +678,7 @@ ENDIF
 	JSR WriteToScreen
 	INY
 	BNE ShowCurrentSearch1
-	
+
 .ShowCurrentSearch2
 	LDY #0
 .ShowCurrentSearch3
@@ -686,7 +688,7 @@ ENDIF
 	JSR WriteToScreen
 	INY
 	BNE ShowCurrentSearch3
-	
+
 .ShowCurrentSearch4
 	STY TmpY
 	PLA
@@ -694,10 +696,10 @@ ENDIF
 	STA (Screen),Y
 	INY
 	LDA #$20
-	STA (Screen),Y	
+	STA (Screen),Y
 	LDY TmpY
 	RTS
-	
+
 .SearchString
 	EQUS "  SEARCH="
 	EQUB 0
@@ -710,7 +712,7 @@ ENDIF
 	STA BinBuffer
 	LDA #0
 	STA BinBuffer+1
-	
+
 	JSR BinToDecimal8
 
 	; X is used as the index into CountString
@@ -726,9 +728,9 @@ ENDIF
 	LDA #'/'
 	LDX #2
 	STA CountString, X
-		
+
 	JSR CalculateNumPages
-	
+
 	; Write the number of pages into to the CountString
 	LDX #3
 	JSR WriteHex
@@ -743,12 +745,12 @@ ENDIF
 	CPX #5
 	BNE UpdateTotalPages1
 	RTS
-	
+
 
 	; Reads the total number of filtered rows returned
 	; Inefficiently divide number of rows by the rows per page
 	; Returns the number of pages in BCD in A
-	; Returns the number of pages in Binary in Y	
+	; Returns the number of pages in Binary in Y
 .CalculateNumPages
 	LDY #0
 	SEC
@@ -785,17 +787,17 @@ ENDIF
 
 
 IF properAnnotationCounts
-	
+
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Accumulate the annotation counts
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .AccumulateAnnotationCounts
-		
+
 	LDX #3
 .AnnotationTypeLoop
 	LDA AnnotationIdMap,X
-	TAY	
+	TAY
 	CPY #3
 	BNE AnnotationNotCategory
 
@@ -809,20 +811,21 @@ IF properAnnotationCounts
 	INY
 	BNE AnnotationNextCategory
 
-.AnnotationNotCategory	
+.AnnotationNotCategory
 	LDA (Title),Y
 	CPY #1
-	BNE AnnotationNotGenre	
+	BNE AnnotationNotGenre
 	LSR A
 	LSR A
-.AnnotationNotGenre	
+	LSR A
+.AnnotationNotGenre
 	JSR IncAnnotationCounts
 .AnnotationNextType
 	DEX
 	BNE AnnotationTypeLoop
 	RTS
-	
-	
+
+
 	; Increment an annotation count
 	; X=Annotation value (1 = Long Publisher, 2 = Genre, 3 = Collection)
 	; A=Annotation Value
@@ -837,8 +840,8 @@ IF properAnnotationCounts
 	TAY
 	INY
 	INY
-	CLC 
-	PLA 
+	CLC
+	PLA
 	ADC (MenuTablePtr),Y
 	STA Tmp
 	INY
@@ -848,7 +851,7 @@ IF properAnnotationCounts
 	LDY #0
 	LDA (Tmp),Y
 	STA AnnotationString
-	INY	
+	INY
 	LDA (Tmp),Y
 	STA AnnotationString + 1
 	INY
@@ -857,8 +860,8 @@ IF properAnnotationCounts
 	ADC #1
 	STA (AnnotationString),Y
 	RTS
-	
-	
+
+
 	; Clear the 2nd and 3rd byte of each annotation record
 	; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
@@ -903,6 +906,6 @@ IF properAnnotationCounts
 .ClearAnnotationCounts6
 	PLA
 	TAY
-	RTS	
+	RTS
 
 ENDIF
