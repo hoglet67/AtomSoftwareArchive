@@ -70,6 +70,11 @@ ls -l ${NAME}*
 ##############################################################
 
 pushd $ARCHIVE
-cp -a * ../../../Atomulator/mmc
+MMC=../../../Atomulator/mmc
+if [ -d "$MMC" ]; then
+    cp -a * $MMC
+else
+    echo "Skipping copy to Atomulator"
+fi
 popd
 

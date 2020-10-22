@@ -51,7 +51,7 @@ ASP=ASP
 # PCW
 PCW=PCW
 
-BEEBASM=../tools/beebasm/beebasm
+BEEBASM=beebasm
 
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE

@@ -6,7 +6,7 @@ DIR=MNU
 
 VERSION=$*
 
-BEEBASM=../tools/beebasm/beebasm
+BEEBASM=beebasm
 
 echo "Building with version $VERSION"
 
@@ -50,7 +50,14 @@ rm -f $ARCHIVE/HELP
 rm -f $ARCHIVE/MENUECO
 
 # Also copy to Atomulator
-cp -a $ARCHIVE/MENU $ARCHIVE/$DIR[A-Z] ../../Atomulator/mmc
+MMC=../../Atomulator/mmc
+if [ -d "$MMC" ]; then
+    cp -a $ARCHIVE/MENU $ARCHIVE/$DIR[A-Z] $MMC
+else
+    echo "Skipping copy to Atomulator"
+fi
+
+
 
 # Zip everything up somewhere nice
 # zip -qr $HOME/$DIR.zip $ARCHIVE/MENU $ARCHIVE/HELP $ARCHIVE/$DIR[A-Z]
