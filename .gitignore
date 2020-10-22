@@ -37,15 +37,13 @@ java/asciiart/bin/
 java/afsutils/afsutils.jar
 java/afsutils/bin/
 
-beebsid/ATMSID*/
+# beebsid/ATMSID*/
 beebsid/BEEBSID*/
 
 archive/archive.js
 archive/archive.img
 archive/archive/
-archive/atms/
-archive/originals/
-archive/wouter/
+archive/releases/
 
 bbcbasic/BBCBASIC2
 bbcbasic/Basic1.src
@@ -60,3 +58,8 @@ menu/BOOTROM.bin
 menu/Splash1.png
 menu/Splash2.png
 menu/disks/
+
+java/afsutils/scsi0.*
+java/afsutils/test.zip
+
+
