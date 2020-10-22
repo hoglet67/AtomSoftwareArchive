@@ -12,6 +12,7 @@ function package() {
  rm -f $dst/*.bas
 }
 
+
 ARCHIVE=archive
 
 # Define top level directories
@@ -54,6 +55,23 @@ BEEBASM=../tools/beebasm/beebasm
 
 rm -rf $ARCHIVE
 mkdir -p $ARCHIVE
+
+##############################################################
+# Compile the java
+##############################################################
+
+pushd ../java/makeatm
+mkdir -p lib
+ant clean jar
+popd
+pushd ../java/atombasic
+mkdir -p lib
+ant clean jar
+popd
+pushd ../java/atomquill
+mkdir -p lib
+ant clean jar
+popd
 
 ##############################################################
 # BBC Basic
