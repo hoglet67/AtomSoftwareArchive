@@ -2491,3 +2491,95 @@ J-SHAPE",present,,Yes,,
 1123,,CC,Computer Concepts,A.Commercial Software,Invaders,Game,,,,,Advert in Computing Today March 82,,missing,,,,
 1124,,CC,Computer Concepts,A.Commercial Software,Alarn Clock,Utility,,,,,Advert in Computing Today March 82,,missing,,,,
 1125,,CC,Computer Concepts,A.Commercial Software,Sound Effects,Utility,,,,,Advert in Computing Today March 82,,missing,,,,
+1126,V12B1,AGD,AGD,C.Kees' AGD Ports,Alchemist II,Game,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""",Test,"AL2CODE
+AL2RUN
+AL2SCR",present,AGD,Yes,,
+1127,V12B1,AGD,AGD,C.Kees' AGD Ports,Amongbad,Game,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""",Test,"ABCODE
+ABRUN
+ABSCR",present,AGD,Yes,,
+1128,V12B1,AGD,AGD,C.Kees' AGD Ports,Apulija-13,Game,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""",Test,"APCODE
+APPAN
+APRUN
+APSCR",present,AGD,Yes,,
+1129,V12B1,AGD,AGD,C.Kees' AGD Ports,Blimpgeddon,Game,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""",Test,"BGCODE
+BGRUN
+BGSCR",present,AGD,Yes,,
+1130,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Daytime,Game,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""",Test,"BLDCODE
+BLDRUN
+BLDSCR",present,AGD,Yes,,
+1131,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Nighttime,Game,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""",Test,"BLNCODE
+BLNRUN
+BLNSCR",present,AGD,Yes,,
+1132,V12B1,AGD,AGD,C.Kees' AGD Ports,Bulletstorm,Game,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""",Test,"BSCODE
+BSRUN
+BSSCR",present,AGD,Yes,,
+1133,V12B1,AGD,AGD,C.Kees' AGD Ports,Chiquito,Game,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""",Test,"CHCODE
+CHRUN
+CHSCR",present,AGD,Yes,,
+1134,V12B1,AGD,AGD,C.Kees' AGD Ports,Code112,Game,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""",Test,"112CODE
+112PAN
+112RUN
+112SCR",present,AGD,Yes,,
+1135,V12B1,AGD,AGD,C.Kees' AGD Ports,Deepcore Raider,Game,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""",Test,"DCCODE
+DCRUN
+DCSCR",present,AGD,Yes,,
+1136,V12B1,AGD,AGD,C.Kees' AGD Ports,Dirty Dozer,Game,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""",Test,"DDCODE
+DDPAN
+DDRUN
+DDSCR",present,AGD,Yes,,
+1137,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong jr2,Game,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""",Test,"JR2CODE
+JR2RUN",present,AGD,Yes,,
+1138,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong Reloaded,Game,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""",Test,"DKRCODE
+DKRRUN
+DKRSCR",present,AGD,Yes,,
+1139,V12B1,AGD,AGD,C.Kees' AGD Ports,Flype,Game,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""",Test,"FLCODE
+FLRUN
+FLSCR",present,AGD,Yes,,
+1140,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 1,Game,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""",Test,"F21CODE
+F21PAN
+F21RUN
+F21SCR",present,AGD,Yes,,
+1141,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 2,Game,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""",Test,"F22CODE
+F22PAN
+F22RUN
+F22SCR",present,AGD,Yes,,
+1142,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 3,Game,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""",Test,"F23CODE
+F23PAN
+F23RUN
+F23SCR
+menu",present,AGD,Yes,,
+1143,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 4,Game,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""",Test,"F24CODE
+F24PAN
+F24RUN
+F24SCR",present,AGD,Yes,,
+1144,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded Boss,Game,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""",Test,"F25CODE
+F25PAN
+F25RUN
+F25SCR",present,AGD,Yes,,
+1145,V12B1,AGD,AGD,C.Kees' AGD Ports,Gherkins Christmas Carnage,Game,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""",Test,"GXCODE
+GXRUN
+GXSCR",present,AGD,Yes,,
+1146,V12B1,AGD,AGD,C.Kees' AGD Ports,Gnoni 2020,Game,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""",Test,"GNCODE
+GNRUN
+GNSCR",present,AGD,Yes,,
+1147,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 1,Game,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""",Test,"L1CODE
+L1RUN
+L1SCR",present,AGD,Yes,,
+1148,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 2,Game,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""",Test,"L2CODE
+L2RUN
+L2SCR",present,AGD,Yes,,
+1149,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 3,Game,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""",Test,"L3CODE
+L3RUN
+L3SCR",present,AGD,Yes,,
+1150,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 4,Game,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""",Test,"L4CODE
+L4RUN
+L4SCR",present,AGD,Yes,,
+1151,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Cavern,Game,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""",Test,"LCCODE
+LCRUN
+LCSCR",present,AGD,Yes,,
+1152,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Island,Game,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""",Test,"LICODE
+LIRUN
+LISCR",present,AGD,Yes,,
+1153,V12B1,AGD,AGD,C.Kees' AGD Ports,Magicable,Game,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""",Test,"MACODE
+MARUN
+MASCR",present,AGD,Yes,,
