@@ -106,7 +106,7 @@ public class GenerateEconetFiles extends GenerateBase {
         addFile(BASEDIR, splashFile1);
         ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
         addFile(BASEDIR, splashFile2);
-        
+
         // MNU[A-F]/...
         if (numChunks > 8) {
             throw new RuntimeException("Too many menu chunks");
@@ -194,6 +194,26 @@ public class GenerateEconetFiles extends GenerateBase {
         return dir.toString();
     }
 
+   private void patch_nomon(ATMFile atmFile, SpreadsheetTitle item) {
+        byte[] bytes = atmFile.getData();
+        String[] matches= {"N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\t"};
+        for (String match : matches) {
+           byte[] ref = match.getBytes();
+           for (int i = 0; i < bytes.length - ref.length - 2; i++) {
+              if (bytes[i] != 13 && bytes[i + 2] == '*' && bytes[i + 3] == 'N') {
+                 for (int j = 0; j < ref.length && bytes[i + 3 + j] == ref[j]; j++) {
+                    if (ref[j] == 13) {
+                       System.out.println("Patching *" + match.substring(0, match.length() - 1) + " in " + item.getPublisher() + " " + item.getTitle() + " file " + atmFile.getTitle());
+                       bytes[i + 2] = 'R';
+                       bytes[i + 3] = 'E';
+                       bytes[i + 4] = 'M';
+                    }
+                 }
+              }
+           }
+        }
+    }
+
     private void patch_interupt_vector(ATMFile atmFile) {
         byte[] bytes = atmFile.getData();
         for (int i = 0; i < bytes.length - 3; i++) {
@@ -248,6 +268,7 @@ public class GenerateEconetFiles extends GenerateBase {
                         missing.remove(filename);
                         atmFile.setTitle(filename);
                         patch_interupt_vector(atmFile);
+                        patch_nomon(atmFile, item);
                         addFile(dir, atmFile);
                         if (item.getRunnables().contains(filename)) {
                             if (atmFile.getExecAddr() == (0xc2b2)) {
