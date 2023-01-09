@@ -44,10 +44,13 @@ public class AFSDirectory extends JesMap {
     byte[] directory;
 
     private void createBackLink(AFSDirectory parent) throws IOException {
-        if (parent != null && getEntry(BACK_LINK) == null) {
-            DirectoryEntry entry = createEntry(BACK_LINK);
-            entry.setAccessByte(0x30);
+        if (parent != null) {
+            // The first directory entry (at 0x11) is reserved for the parent link
+            DirectoryEntry entry = new DirectoryEntry(directory, 0x11);
+            // The next pointer must be 0xFFFF
+            entry.setNext(0xFFFF);
             entry.setSin(parent.getSin());
+            // All other entries are zero
         }
     }
 
@@ -61,7 +64,7 @@ public class AFSDirectory extends JesMap {
         setFree(offset);
         while (offset > 0) {
             int next = offset - ENTRY_SIZE;
-            if (next <= 0x10) {
+            if (next <= 0x10 + ENTRY_SIZE) {
                 next = 0;
             }
             write16(directory, offset, next);
@@ -78,7 +81,7 @@ public class AFSDirectory extends JesMap {
         if (cycle2 != cycle1) {
             throw new AFSException("Mismatched directory cycle numbers", sin);
         }
-        createBackLink(parent);   
+        //createBackLink(parent);
     }
 
     private void saveDirectory() throws IOException {
@@ -132,7 +135,7 @@ public class AFSDirectory extends JesMap {
         while (pointer != 0) {
             DirectoryEntry entry = new DirectoryEntry(directory, pointer);
             entry.dump(depth, true);
-            if (recurse && entry.isDirectory() && !entry.getName().equals(BACK_LINK)) {
+            if (recurse && entry.isDirectory()) {
                 AFSDirectory child = new AFSDirectory(getVolume(), null, entry.getSin());
                 child.dump(recurse, depth + 1);
             }

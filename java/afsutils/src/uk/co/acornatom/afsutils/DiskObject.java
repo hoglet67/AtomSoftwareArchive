@@ -4,8 +4,6 @@ public class DiskObject {
 
     public static final int SECT_SIZE = 256;
 
-    public static final String BACK_LINK = "^";
-
     public int read8(byte[] bytes, int offset) {
         return bytes[offset] & 0xff;
     }

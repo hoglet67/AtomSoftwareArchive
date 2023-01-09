@@ -15,6 +15,7 @@ public class AFSUtils {
             afs.addZip(new File(args[1]));
             afs.writeFreeSpaceMap();
             afs.dumpFreeSpaceMap();
+            // afs.parseRootDirectory();
         } catch (IOException e) {
             e.printStackTrace();
         }
