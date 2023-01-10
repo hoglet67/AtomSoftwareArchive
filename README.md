@@ -59,7 +59,7 @@ Review the log file for errors.
 
 There are a number of expected errors in the log file:
 ```
-grep Exception log 
+grep Exception log
 java.lang.RuntimeException: Disk full is title: 1986WHO
 java.lang.RuntimeException: Disk full is title: 11UNDER
 java.lang.RuntimeException: Disk full is title: SW1X.TX
@@ -86,5 +86,14 @@ These all relatate to files that cause certain 100KB disk images to overflow.
 Official binary releases can be found on github:
 
 https://github.com/hoglet67/AtomSoftwareArchive/releases
+
+## Known Issues with Econet
+
+- Program Power Chess - doesn't load over Econet.
+
+- The RS/GALA, RS/CHUCKIE, ECCE directories all contain a file called
+  MENU, which means subsequent Shift-BREAK don't work as *MENU loads
+  that file, rather than the one in the library directory. Ideally
+  these should be renamed.
 
 (c) 2013-2020 David Banks
