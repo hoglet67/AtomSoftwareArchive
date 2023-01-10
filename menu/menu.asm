@@ -1127,7 +1127,6 @@ IF (econet = 1)
 	SEC
 	ROR SuppressFlag
 	LDA BinBuffer + 1
-	AND #$03
 	JSR WriteHex1
 	LDA #DirSep
 	STA OscliBuffer, X
