@@ -81,9 +81,34 @@ public class GenerateEconetFiles extends GenerateBase {
         String filename = dir + atmFile.getTitle();
         ZipEntry entry = new ZipEntry(filename);
         entry.setExtra(build_extra_field(atmFile));
+        // To improve compatibility with old Archimedes ZIP tools we
+        // want to avoid the ZIP file containing streaming data
+        // headers PK<07><08> i.e. 0x08074b50. These are included when
+        // using DEFLATE compression and the size of the ZipEntry is
+        // unknown, because it hasn't yet been compressed.
+        //
+        // To avoid this, we first write the ZipEntry to a dummy
+        // stream which causes it to be compressed and the various
+        // sizes in ZipEntry get filled in.
         nullStream.putNextEntry(entry);
         nullStream.write(atmFile.getData());
         nullStream.closeEntry();
+        // This is needed as the openjdk-17 ZipEntry includes an
+        // additional variable csizeSet, that is only set when
+        // setCompressedSize() is called. ZipOutputStream now checks
+        // this flag as well, and if it's still false it will use the
+        // streaming data header pattern.
+        //
+        // What's really a bug is that ZipOutputStream sets csize
+        // directly, rather than calling setCompressedSize(), which
+        // results in the csizeSet flag being inconsistent.
+        //
+        // So we need to explicitely now call setCompressedSize() for
+        // our previous workaround to work with openjdk-17.
+        //
+        // This is a horrible hack to make a horrible class do what we
+        // want!
+        entry.setCompressedSize(entry.getCompressedSize());
         zipStream.putNextEntry(entry);
         zipStream.write(atmFile.getData());
         zipStream.closeEntry();
