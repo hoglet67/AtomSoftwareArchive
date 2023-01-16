@@ -21,6 +21,8 @@ public class GenerateEconetFiles extends GenerateBase {
 
     public static final String LIBDIR = "LIBRARY" + DIRSEP;
 
+    public static final String LIBDIR2 = "LIBRARY2" + DIRSEP;
+
     private ZipOutputStream zipStream;
     private ZipOutputStream nullStream;
     private File archiveDir;
@@ -125,6 +127,7 @@ public class GenerateEconetFiles extends GenerateBase {
         addFile(BASEDIR, menuFile);
         // Add a second copy to the lib directory
         addFile(LIBDIR, menuFile);
+        addFile(LIBDIR2, menuFile);
 
         // Splash files
         ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
@@ -146,27 +149,19 @@ public class GenerateEconetFiles extends GenerateBase {
         }
     }
 
-    // private void addSysFolder() throws IOException {
-    // String dir = BASEDIR + "SYS" + DIRSEP;
-    // File file = new File(archiveDir, "SYS");
-    // for (File child : file.listFiles()) {
-    // ATMFile atmFile = new ATMFile(child);
-    // addFile(dir, atmFile);
-    // }
-    // }
-
-    private void addLibFolder() throws IOException {
+    //
+    // There are address changes from the original v2.40 to the original v3.50 at #A000
+    //
+    static HashMap<Integer, Integer> eco350APatches() {
         HashMap<Integer, Integer> patch = new HashMap<>();
-        //
-        // There are address changes from v2.40 to v3.50 or the ROM
-        //
-        patch.put(0xA793, 0xA788);
-        patch.put(0xA7A4, 0xA799);
-        patch.put(0xA7D8, 0xA7C3);
         patch.put(0xA7F7, 0xA658);
         patch.put(0xA80F, 0xA670);
         patch.put(0xA82F, 0xA690);
         patch.put(0xA85B, 0xA6BC);
+        patch.put(0xA8FF, 0xA6F1);
+        patch.put(0xA793, 0xA788);
+        patch.put(0xA7A4, 0xA799);
+        patch.put(0xA7D8, 0xA7C3);
         patch.put(0xA883, 0xA7F7);
         patch.put(0xA899, 0xA80D);
         patch.put(0xA8A4, 0xA818);
@@ -175,10 +170,48 @@ public class GenerateEconetFiles extends GenerateBase {
         patch.put(0xA8D4, 0xA848);
         patch.put(0xA8E9, 0xA85D);
         patch.put(0xA8ED, 0xA861);
-        patch.put(0xA8FF, 0xA6F1);
         patch.put(0xA90C, 0xA873);
         patch.put(0xAD6C, 0xAD2A);
         patch.put(0xAD80, 0xAD3E);
+        return patch;
+    }
+
+    //
+    // There are address changes from the original v2.40 to the original v3.50 at #E000 with *MENU added
+    //
+    static HashMap<Integer, Integer> eco350EPatches() {
+        HashMap<Integer, Integer> patch = new HashMap<>();
+        patch.put(0xA7F7, 0xE65F);
+        patch.put(0xA80F, 0xE677);
+        patch.put(0xA82F, 0xE697);
+        patch.put(0xA85B, 0xE6C3);
+        patch.put(0xA8FF, 0xE6F8);
+        patch.put(0xA793, 0xE78D);
+        patch.put(0xA7A4, 0xE79E);
+        patch.put(0xA7D8, 0xE7C8);
+        patch.put(0xA883, 0xE7FC);
+        patch.put(0xA899, 0xE812);
+        patch.put(0xA8A4, 0xE81D);
+        patch.put(0xA8A6, 0xE81F);
+        patch.put(0xA8C8, 0xE841);
+        patch.put(0xA8D4, 0xE84D);
+        patch.put(0xA8E9, 0xE862);
+        patch.put(0xA8ED, 0xE866);
+        patch.put(0xA90C, 0xE878);
+        patch.put(0xAD6C, 0xED27);
+        patch.put(0xAD80, 0xED3B);
+        return patch;
+    }
+
+    // private void addSysFolder() throws IOException {
+    // String dir = BASEDIR + "SYS" + DIRSEP;
+    // File file = new File(archiveDir, "SYS");
+    // for (File child : file.listFiles()) {
+    // ATMFile atmFile = new ATMFile(child);
+    // addFile(dir, atmFile);
+    // }
+    // }
+    private void addLibFolder(String libdir, HashMap<Integer, Integer> patch) throws IOException {
         File file = new File(archiveDir, "../../atomlib");
         for (File child : file.listFiles()) {
             ATMFile atmFile = new ATMFile(child);
@@ -200,7 +233,7 @@ public class GenerateEconetFiles extends GenerateBase {
                     }
                 }
             }
-            addFile(LIBDIR, atmFile);
+            addFile(libdir, atmFile);
         }
     }
 
@@ -270,7 +303,8 @@ public class GenerateEconetFiles extends GenerateBase {
         //
         // addSysFolder();
 
-        addLibFolder();
+        addLibFolder(LIBDIR, eco350APatches());
+        addLibFolder(LIBDIR2, eco350EPatches());
 
         for (SpreadsheetTitle item : items) {
             try {
