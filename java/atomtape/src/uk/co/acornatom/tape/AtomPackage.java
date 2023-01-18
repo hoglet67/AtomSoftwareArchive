@@ -7,26 +7,25 @@ public class AtomPackage {
 
 	public static final void extractFiles(File dstDir, File src, boolean makeBas, boolean makeAtm, boolean makeWav, boolean makeCsw)
 			throws IOException {
-		
+
 		if (src.isDirectory()) {
-			
+
 			for (File child : src.listFiles()) {
 				extractFiles(dstDir, child, makeBas, makeAtm, makeWav, makeCsw);
 			}
-			
+
 		} else {
 
 			AtomBase base = null;
-
-			if (src.getName().toLowerCase().endsWith(".40t") || src.getName().toLowerCase().endsWith(".80t")
-					|| src.getName().toLowerCase().endsWith(".dsk")) {
+			String name = src.getName().toLowerCase();
+			if (name.endsWith(".40t") || name.endsWith(".80t") || name.endsWith(".dsk") || name.endsWith(".ssd") || name.endsWith(".dsd")) {
 				// For DISK files, the name of the dest directory is derived
 				// from the name of the TAP file
 				String dirName = src.getName();
 				dirName = dirName.substring(0, dirName.lastIndexOf('.'));
 				File dst = new File(dstDir, dirName);
 				base = new AtomDisk(src, dst);
-			} else if (src.getName().toLowerCase().endsWith(".inf")) {
+			} else if (name.endsWith(".inf")) {
 				// For INF files, the name of the dest directory is derived from
 				// directory the INF file is in
 				String dirName = src.getParentFile().getName();
@@ -34,7 +33,7 @@ public class AtomPackage {
 				File infFile = src;
 				File binFile = new File(src.getCanonicalPath().substring(0, src.getCanonicalPath().length() - 4));
 				base = new AtomInf(infFile, binFile, dst);
-			} else if (src.getName().toLowerCase().endsWith(".atom1")) {
+			} else if (name.endsWith(".atom1")) {
 				// For INF files, the name of the dest directory is derived from
 				// directory the INF file is in
 				String dirName = src.getParentFile().getName();
@@ -51,7 +50,7 @@ public class AtomPackage {
 				File dst = new File(dstDir, dirName);
 				base = new AtomTape(src, dst);
 			}
-			
+
 			if (base != null) {
 				System.out.println("####################################################");
 				System.out.println("# " + base);
@@ -93,7 +92,7 @@ public class AtomPackage {
 			}
 
 			// booleans are: makeBas, makeAtm, makeWav
-			extractFiles(dstDir, srcDirOrFile, true, true, true, true);
+			extractFiles(dstDir, srcDirOrFile, false, true, false, false);
 
 		} catch (Exception e) {
 			e.printStackTrace();
