@@ -56,7 +56,7 @@ public abstract class AtomBase {
 
 		if (!dir.exists()) {
 			if (!dir.mkdirs()) {
-				throw new IOException("Filed to create directory " + dir);
+				throw new IOException("Failed to create directory " + dir);
 			}
 		}
 		int count = 1;
