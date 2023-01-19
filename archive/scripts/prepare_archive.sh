@@ -72,6 +72,22 @@ pushd ../java/atomquill
 mkdir -p lib
 ant clean jar
 popd
+pushd ../java/atomtape
+mkdir -p lib
+ant clean jar
+popd
+
+##############################################################
+# OZMOO Games
+##############################################################
+
+mkdir -p $ARCHIVE/OZMOO
+
+pushd ../ozmoo
+./clean.sh
+./build.sh
+popd
+cp -a ../ozmoo/build/* $ARCHIVE/OZMOO
 
 ##############################################################
 # BBC Basic
@@ -515,18 +531,6 @@ cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
 cp -a roland/* $ARCHIVE
 cp -a wim/* $ARCHIVE
-
-##############################################################
-# OZMOO Games
-##############################################################
-
-mkdir -p $ARCHIVE/OZMOO
-
-pushd ../ozmoo
-./clean.sh
-./build.sh
-popd
-cp -a ../ozmoo/build/* $ARCHIVE/OZMOO
 
 ##############################################################
 # Library directory
