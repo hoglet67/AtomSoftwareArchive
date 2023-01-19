@@ -515,3 +515,23 @@ cp -a dave/* $ARCHIVE
 cp -a kees/* $ARCHIVE
 cp -a roland/* $ARCHIVE
 cp -a wim/* $ARCHIVE
+
+##############################################################
+# OZMOO Games
+##############################################################
+
+mkdir -p $ARCHIVE/OZMOO
+
+pushd ../ozmoo
+./clean.sh
+./build.sh
+popd
+cp -a ../ozmoo/build/* $ARCHIVE/OZMOO
+
+##############################################################
+# Library directory
+##############################################################
+
+mkdir -p $ARCHIVE/LIB
+cp ../quill/VDU2440 $ARCHIVE/LIB
+cp dave/GODIL/OSWRCH80 $ARCHIVE/LIB
