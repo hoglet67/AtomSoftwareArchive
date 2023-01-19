@@ -2491,142 +2491,202 @@ J-SHAPE",present,,Yes,,
 1123,,CC,Computer Concepts,A.Commercial Software,Invaders,Game,,,,,Advert in Computing Today March 82,,missing,,,,
 1124,,CC,Computer Concepts,A.Commercial Software,Alarn Clock,Utility,,,,,Advert in Computing Today March 82,,missing,,,,
 1125,,CC,Computer Concepts,A.Commercial Software,Sound Effects,Utility,,,,,Advert in Computing Today March 82,,missing,,,,
-1126,V12B1,AGD,AGD,C.Kees' AGD Ports,Alchemist II,Game,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""",Test,"AL2CODE
+1126,V12B1,AGD,AGD,C.Kees' AGD Ports,Alchemist II,Game,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""",Works,"AL2CODE
 AL2RUN
 AL2SCR",present,AGD,Yes,,
-1127,V12B1,AGD,AGD,C.Kees' AGD Ports,Amongbad,Game,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""",Test,"ABCODE
+1127,V12B1,AGD,AGD,C.Kees' AGD Ports,Amongbad,Game,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""",Works,"ABCODE
 ABRUN
 ABSCR",present,AGD,Yes,,
-1128,V12B1,AGD,AGD,C.Kees' AGD Ports,Apulija-13,Game,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""",Test,"APCODE
+1128,V12B1,AGD,AGD,C.Kees' AGD Ports,Apulija-13,Game,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""",Works,"APCODE
 APPAN
 APRUN
 APSCR",present,AGD,Yes,,
-1129,V12B1,AGD,AGD,C.Kees' AGD Ports,Blimpgeddon,Game,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""",Test,"BGCODE
+1129,V12B1,AGD,AGD,C.Kees' AGD Ports,Blimpgeddon,Game,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""",Works,"BGCODE
 BGRUN
 BGSCR",present,AGD,Yes,,
-1130,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Daytime,Game,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""",Test,"BLDCODE
+1130,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Daytime,Game,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""",Works,"BLDCODE
 BLDRUN
 BLDSCR",present,AGD,Yes,,
-1131,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Nighttime,Game,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""",Test,"BLNCODE
+1131,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Nighttime,Game,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""",Works,"BLNCODE
 BLNRUN
 BLNSCR",present,AGD,Yes,,
-1132,V12B1,AGD,AGD,C.Kees' AGD Ports,Bulletstorm,Game,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""",Test,"BSCODE
+1132,V12B1,AGD,AGD,C.Kees' AGD Ports,Bulletstorm,Game,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""",Works,"BSCODE
 BSRUN
 BSSCR",present,AGD,Yes,,
-1133,V12B1,AGD,AGD,C.Kees' AGD Ports,Chiquito,Game,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""",Test,"CHCODE
+1133,V12B1,AGD,AGD,C.Kees' AGD Ports,Chiquito,Game,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""",Works,"CHCODE
 CHRUN
 CHSCR",present,AGD,Yes,,
-1134,V12B1,AGD,AGD,C.Kees' AGD Ports,Code112,Game,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""",Test,"112CODE
+1134,V12B1,AGD,AGD,C.Kees' AGD Ports,Code112,Game,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""",Works,"112CODE
 112PAN
 112RUN
 112SCR",present,AGD,Yes,,
-1135,V12B1,AGD,AGD,C.Kees' AGD Ports,Deepcore Raider,Game,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""",Test,"DCCODE
+1135,V12B1,AGD,AGD,C.Kees' AGD Ports,Deepcore Raider,Game,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""",Works,"DCCODE
 DCRUN
 DCSCR",present,AGD,Yes,,
-1136,V12B1,AGD,AGD,C.Kees' AGD Ports,Dirty Dozer,Game,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""",Test,"DDCODE
+1136,V12B1,AGD,AGD,C.Kees' AGD Ports,Dirty Dozer,Game,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""",Works,"DDCODE
 DDPAN
 DDRUN
 DDSCR",present,AGD,Yes,,
-1137,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong jr2,Game,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""",Test,"JR2CODE
+1137,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong jr2,Game,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""",Works,"JR2CODE
 JR2RUN",present,AGD,Yes,,
-1138,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong Reloaded,Game,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""",Test,"DKRCODE
+1138,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong Reloaded,Game,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""",Works,"DKRCODE
 DKRRUN
 DKRSCR",present,AGD,Yes,,
-1139,V12B1,AGD,AGD,C.Kees' AGD Ports,Flype,Game,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""",Test,"FLCODE
+1139,V12B1,AGD,AGD,C.Kees' AGD Ports,Flype,Game,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""",Works,"FLCODE
 FLRUN
 FLSCR",present,AGD,Yes,,
-1140,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 1,Game,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""",Test,"F21CODE
+1140,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 1,Game,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""",Works,"F21CODE
 F21PAN
 F21RUN
 F21SCR",present,AGD,Yes,,
-1141,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 2,Game,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""",Test,"F22CODE
+1141,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 2,Game,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""",Works,"F22CODE
 F22PAN
 F22RUN
 F22SCR",present,AGD,Yes,,
-1142,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 3,Game,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""",Test,"F23CODE
+1142,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 3,Game,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""",Works,"F23CODE
 F23PAN
 F23RUN
 F23SCR
 menu",present,AGD,Yes,,
-1143,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 4,Game,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""",Test,"F24CODE
+1143,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 4,Game,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""",Works,"F24CODE
 F24PAN
 F24RUN
 F24SCR",present,AGD,Yes,,
-1144,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded Boss,Game,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""",Test,"F25CODE
+1144,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded Boss,Game,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""",Works,"F25CODE
 F25PAN
 F25RUN
 F25SCR",present,AGD,Yes,,
-1145,V12B1,AGD,AGD,C.Kees' AGD Ports,Gherkins Christmas Carnage,Game,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""",Test,"GXCODE
+1145,V12B1,AGD,AGD,C.Kees' AGD Ports,Gherkins Christmas Carnage,Game,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""",Works,"GXCODE
 GXRUN
 GXSCR",present,AGD,Yes,,
-1146,V12B1,AGD,AGD,C.Kees' AGD Ports,Gnoni 2020,Game,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""",Test,"GNCODE
+1146,V12B1,AGD,AGD,C.Kees' AGD Ports,Gnoni 2020,Game,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""",Works,"GNCODE
 GNRUN
 GNSCR",present,AGD,Yes,,
-1147,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 1,Game,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""",Test,"L1CODE
+1147,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 1,Game,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""",Works,"L1CODE
 L1RUN
 L1SCR",present,AGD,Yes,,
-1148,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 2,Game,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""",Test,"L2CODE
+1148,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 2,Game,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""",Works,"L2CODE
 L2RUN
 L2SCR",present,AGD,Yes,,
-1149,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 3,Game,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""",Test,"L3CODE
+1149,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 3,Game,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""",Works,"L3CODE
 L3RUN
 L3SCR",present,AGD,Yes,,
-1150,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 4,Game,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""",Test,"L4CODE
+1150,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 4,Game,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""",Works,"L4CODE
 L4RUN
 L4SCR",present,AGD,Yes,,
-1151,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Cavern,Game,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""",Test,"LCCODE
+1151,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Cavern,Game,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""",Works,"LCCODE
 LCRUN
 LCSCR",present,AGD,Yes,,
-1152,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Island,Game,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""",Test,"LICODE
+1152,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Island,Game,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""",Works,"LICODE
 LIRUN
 LISCR",present,AGD,Yes,,
-1153,V12B1,AGD,AGD,C.Kees' AGD Ports,Magicable,Game,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""",Test,"MACODE
+1153,V12B1,AGD,AGD,C.Kees' AGD Ports,Magicable,Game,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""",Works,"MACODE
 MARUN
 MASCR",present,AGD,Yes,,
-1154,V12B1,AGD,AGD,C.Kees' AGD Ports,Akane,Game,Kees van Oss,AGD/AKANE,8200,"CH.""AKRUN""",Test,"AKCODE
+1154,V12B1,AGD,AGD,C.Kees' AGD Ports,Akane,Game,Kees van Oss,AGD/AKANE,8200,"CH.""AKRUN""",Works,"AKCODE
 AKRUN
 AKSCR",present,AGD,Yes,,
-1155,V12B1,AGD,AGD,C.Kees' AGD Ports,Monty Mole and The Lost So,Game,Kees van Oss,AGD/MONTYTL,8200,"CH.""MTLRUN""",Test,"MTLCODE
+1155,V12B1,AGD,AGD,C.Kees' AGD Ports,Monty Mole and The Lost So,Game,Kees van Oss,AGD/MONTYTL,8200,"CH.""MTLRUN""",Works,"MTLCODE
 MTLRUN
 MTLSCR",present,AGD,Yes,,
-1156,V12B1,AGD,AGD,C.Kees' AGD Ports,Mr Hair Adventure,Game,Kees van Oss,AGD/MRHAIRA,8200,"CH.""MHARUN""",Test,"MHACODE
+1156,V12B1,AGD,AGD,C.Kees' AGD Ports,Mr Hair Adventure,Game,Kees van Oss,AGD/MRHAIRA,8200,"CH.""MHARUN""",Works,"MHACODE
 MHARUN
 MHASCR",present,AGD,Yes,,
-1157,V12B1,AGD,AGD,C.Kees' AGD Ports,Omelettes for breakfast,Game,Kees van Oss,AGD/OMELETT,8200,"CH.""OMRUN""",Test,"OMCODE
+1157,V12B1,AGD,AGD,C.Kees' AGD Ports,Omelettes for breakfast,Game,Kees van Oss,AGD/OMELETT,8200,"CH.""OMRUN""",Works,"OMCODE
 OMRUN",present,AGD,Yes,,
-1158,V12B1,AGD,AGD,C.Kees' AGD Ports,Stripping Penelope 18+,Game,Kees van Oss,AGD/PENELOP,8200,"CH.""PERUN""",Test,"PECODE
+1158,V12B1,AGD,AGD,C.Kees' AGD Ports,Stripping Penelope 18+,Game,Kees van Oss,AGD/PENELOP,8200,"CH.""PERUN""",Works,"PECODE
 PERUN",present,AGD,Yes,,
-1159,V12B1,AGD,AGD,C.Kees' AGD Ports,Quest for Elements,Game,Kees van Oss,AGD/QUEST,8200,"CH.""QFERUN""",Test,"QFECODE
+1159,V12B1,AGD,AGD,C.Kees' AGD Ports,Quest for Elements,Game,Kees van Oss,AGD/QUEST,8200,"CH.""QFERUN""",Works,"QFECODE
 QFERUN
 QFESCR",present,AGD,Yes,,
-1160,V12B1,AGD,AGD,C.Kees' AGD Ports,The Shining,Game,Kees van Oss,AGD/SHINING,8200,"CH.""SHRUN""",Test,"SHCODE
+1160,V12B1,AGD,AGD,C.Kees' AGD Ports,The Shining,Game,Kees van Oss,AGD/SHINING,8200,"CH.""SHRUN""",Works,"SHCODE
 SHRUN
 SHSCR",present,AGD,Yes,,
-1161,V12B1,AGD,AGD,C.Kees' AGD Ports,Castle of Sorrow,Game,Kees van Oss,AGD/SORROW,8200,"CH.""CSRUN""",Test,"CSCODE
+1161,V12B1,AGD,AGD,C.Kees' AGD Ports,Castle of Sorrow,Game,Kees van Oss,AGD/SORROW,8200,"CH.""CSRUN""",Works,"CSCODE
 CSRUN
 CSSCR",present,AGD,Yes,,
-1162,V12B1,AGD,AGD,C.Kees' AGD Ports,Springbot,Game,Kees van Oss,AGD/SPRINGB,8200,"CH.""SBRUN""",Test,"SBCODE
+1162,V12B1,AGD,AGD,C.Kees' AGD Ports,Springbot,Game,Kees van Oss,AGD/SPRINGB,8200,"CH.""SBRUN""",Works,"SBCODE
 SBRUN
 SBSCR",present,AGD,Yes,,
-1163,V12B1,AGD,AGD,C.Kees' AGD Ports,Sprouty,Game,Kees van Oss,AGD/SPROUTY,8200,"CH.""SPRUN""",Test,"SPCODE
+1163,V12B1,AGD,AGD,C.Kees' AGD Ports,Sprouty,Game,Kees van Oss,AGD/SPROUTY,8200,"CH.""SPRUN""",Works,"SPCODE
 SPRUN
 SPSCR",present,AGD,Yes,,
-1164,V12B1,AGD,AGD,C.Kees' AGD Ports,Moritz the Striker,Game,Kees van Oss,AGD/STRIKER,8200,"CH.""STRUN""",Test,"STCODE
+1164,V12B1,AGD,AGD,C.Kees' AGD Ports,Moritz the Striker,Game,Kees van Oss,AGD/STRIKER,8200,"CH.""STRUN""",Works,"STCODE
 STRUN
 STSCR",present,AGD,Yes,,
-1165,V12B1,AGD,AGD,C.Kees' AGD Ports,Tank,Game,Kees van Oss,AGD/TANK,8200,"CH.""TARUN""",Test,"TACODE
+1165,V12B1,AGD,AGD,C.Kees' AGD Ports,Tank,Game,Kees van Oss,AGD/TANK,8200,"CH.""TARUN""",Works,"TACODE
 TARUN
 TASCR",present,AGD,Yes,,
-1166,V12B1,AGD,AGD,C.Kees' AGD Ports,Toofys Nutty Nightmare,Game,Kees van Oss,AGD/TOOFY3,8200,"CH.""TO3RUN""",Test,"TO3CODE
+1166,V12B1,AGD,AGD,C.Kees' AGD Ports,Toofys Nutty Nightmare,Game,Kees van Oss,AGD/TOOFY3,8200,"CH.""TO3RUN""",Works,"TO3CODE
 TO3RUN
 TO3SCR",present,AGD,Yes,,
-1167,V12B1,AGD,AGD,C.Kees' AGD Ports,Trasmoz,Game,Kees van Oss,AGD/TRASMOZ,8200,"CH.""TRRUN""",Test,"TRCODE
+1167,V12B1,AGD,AGD,C.Kees' AGD Ports,Trasmoz,Game,Kees van Oss,AGD/TRASMOZ,8200,"CH.""TRRUN""",Works,"TRCODE
 TRRUN
 TRSCR",present,AGD,Yes,,
-1168,V12B1,AGD,AGD,C.Kees' AGD Ports,UFO,Game,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""",Test,"UFOCODE
+1168,V12B1,AGD,AGD,C.Kees' AGD Ports,UFO,Game,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""",Works,"UFOCODE
 UFORUN
 UFOSCR",present,AGD,Yes,,
-1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Test,"menu
+1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Works,"menu
 VVCODE
 VVRUN
 VVSCR",present,AGD,Yes,,
+1170,V1202,OZM,OZMOO,B.Modern Creations,Adventure,Adventure,,OZMOO/ADVENT,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1171,V1202,OZM,OZMOO,B.Modern Creations,Alien Research Centre 3,Adventure,,OZMOO/ARC3,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1172,V1202,OZM,OZMOO,B.Modern Creations,Behind Closed Doors 9,Adventure,,OZMOO/BCD9,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1173,V1202,OZM,OZMOO,B.Modern Creations,Beyond Zork,Adventure,,OZMOO/BEYZORK,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1174,V1202,OZM,OZMOO,B.Modern Creations,Calypso,Adventure,,OZMOO/CALYPSO,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1175,V1202,OZM,OZMOO,B.Modern Creations,Hibernated 1 - Dirs Cut,Adventure,,OZMOO/HIBER1,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1176,V1202,OZM,OZMOO,B.Modern Creations,Hitchhiker's Guide,Adventure,,OZMOO/HITCH,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1177,V1202,OZM,OZMOO,B.Modern Creations,Hollywood Hijinx,Adventure,,OZMOO/HOLLY,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1178,V1202,OZM,OZMOO,B.Modern Creations,The Job R5,Adventure,,OZMOO/THEJOB,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1179,V1202,OZM,OZMOO,B.Modern Creations,Leather Goddesses,Adventure,,OZMOO/LEATHER,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1180,V1202,OZM,OZMOO,B.Modern Creations,Planetfall,Adventure,,OZMOO/PLANET,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1181,V1202,OZM,OZMOO,B.Modern Creations,Wishbringer,Adventure,,OZMOO/WISH,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1182,V1202,OZM,OZMOO,B.Modern Creations,Zork1,Adventure,,OZMOO/ZORK1,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1182,V1202,OZM,OZMOO,B.Modern Creations,Zork2,Adventure,,OZMOO/ZORK2,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
+1182,V1202,OZM,OZMOO,B.Modern Creations,Zork3,Adventure,,OZMOO/ZORK3,8200,*RUN BOOT,Test,"BOOT
+GAME.DSK
+LOADER
+OZMOO2P",present,OZMOO,Yes,,
