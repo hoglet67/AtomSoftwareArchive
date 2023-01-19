@@ -1,6 +1,4 @@
 asm/BOOT
-asm/BOOT40
-asm/BOOT80
 asm/LOADER
 build/
 ozmoo/

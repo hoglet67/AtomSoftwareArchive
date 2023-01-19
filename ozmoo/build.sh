@@ -132,8 +132,6 @@ rm -f temp/*
 
 cd ../asm
 beebasm -i boot.asm
-beebasm -i boot40.asm
-beebasm -i boot80.asm
 beebasm -i loader.asm
 
 cd ../disks
@@ -155,7 +153,7 @@ do
     mkdir ${build}/${name}
     cp tmp/${name}/OZMOO2P ${build}/${name}
     cp $i ${build}/${name}/GAME.dsk
-    cp ../asm/BOOT ../asm/BOOT40 ../asm/BOOT80 ../asm/LOADER ${build}/${name}
+    cp ../asm/BOOT ../asm/LOADER ${build}/${name}
     rm -rf tmp
 done
 
@@ -171,6 +169,6 @@ do
     mkdir ${build}/${name}
     cp tmp/${name}/OZMOO2P ${build}/${name}
     cp $i ${build}/${name}/GAME.dsk
-    cp ../asm/BOOT ../asm/BOOT40 ../asm/BOOT80 ../asm/LOADER ${build}/${name}
+    cp ../asm/BOOT ../asm/LOADER ${build}/${name}
     rm -rf tmp
 done
