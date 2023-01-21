@@ -73,7 +73,8 @@ ENDMACRO
    EQUS "DISPLAY TYPE:",10,13
    EQUS " (A) 32*16 ATOM",10,13
    EQUS " (B) 40*24 VDU2440",10,13
-   EQUS " (C) 80*40 VGA80",10,13
+   EQUS " (C) 42*24 SCREEN ROM",10,13
+   EQUS " (D) 80*40 VGA80",10,13
    EQUS "ENTER CHOICE: "
    NOP
 
@@ -85,7 +86,7 @@ ENDMACRO
 
    CMP #'A'
    BCC loop
-   CMP #'C'+1
+   CMP #'D'+1
    BCS loop
 
    JSR OSWRCH
@@ -94,6 +95,9 @@ ENDMACRO
    BEQ vdu2440
 
    CMP #'C'
+   BEQ screenrom
+
+   CMP #'D'
    BEQ vga80
 
 .run
@@ -104,20 +108,47 @@ ENDMACRO
 
 .vdu2440
    oscli_command command_vdu2440
+   ; Patch the TUBE command with the VDU type
+   LDA #'1'
+   STA command_vdu_type
+   JMP run
+
+.screenrom
+   ; Enable the #A000 RAM Bank in YARRB
+   LDA $bffe
+   ORA #$01
+   STA $bffe
+   ; ROM 0 (lock ROM 0 in place)
+   LDA #&40
+   STA $bfff
+   STA $fd
+   ; Start the screen ROM
+   oscli_command command_screen
+   ; Patch the TUBE command with the VDU type
+   LDA #'2'
+   STA command_vdu_type
    JMP run
 
 .vga80
    oscli_command command_oswrch80
+   ; Patch the TUBE command with the VDU type
+   LDA #'3'
+   STA command_vdu_type
    JMP run
 
 .command_vdu2440
    EQUS "/LIB/VDU2440", 13
 
+.command_screen
+   EQUS "/LIB/SCREEN", 13
+
 .command_oswrch80
    EQUS "/LIB/OSWRCH80", 13
 
 .command_run
-   EQUS "/TUBE/TUBE 0 RUN LOADER", 13
+   EQUS "/TUBE/TUBE -V"
+.command_vdu_type
+   EQUS "0 RUN LOADER", 13
 
 .end
 

@@ -151,7 +151,7 @@ do
     name=${i%.ssd}
     mkdir -p tmp
     java -jar ../../java/atomtape/atomtape.jar -a $i tmp
-    mkdir ${build}/${name}
+    mkdir -p ${build}/${name}
     cp tmp/${name}/OZMOO2P ${build}/${name}
     cp $i ${build}/${name}/GAME.DSK
     cp ../asm/BOOT ../asm/LOADER ${build}/${name}
