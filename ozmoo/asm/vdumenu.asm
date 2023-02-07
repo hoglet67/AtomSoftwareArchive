@@ -152,4 +152,4 @@ ENDMACRO
 
 .end
 
-SAVE "BOOT", header, end
+SAVE "VDUMENU", header, end
