@@ -2484,6 +2484,7 @@ ZORUN
 ZOSCR",present,AGD,Yes,,
 1120,V11B7,AGD,AGD,C.Kees' AGD Ports,*** AGD Demo Carousel ***,Game,Kees van Oss,AGD,8200,"CH.""SHOW1""",Works,"SHOW1
 SHOW2
+SHOW2E
 SHOW3
 SHOW3E
 DISOLV",present,AGD,Yes,,
@@ -2629,8 +2630,7 @@ TRSCR",present,AGD,Yes,,
 1168,V12B1,AGD,AGD,C.Kees' AGD Ports,UFO,Game,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""",Works,"UFOCODE
 UFORUN
 UFOSCR",present,AGD,Yes,,
-1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Works,"menu
-VVCODE
+1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Works,"VVCODE
 VVRUN
 VVSCR",present,AGD,Yes,,
 1170,V1202,NC,Non Comm,B.Modern Creations,Adventure,Adventure,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN BOOT,Test,"BOOT
