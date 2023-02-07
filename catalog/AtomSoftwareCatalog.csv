@@ -2633,63 +2633,63 @@ UFOSCR",present,AGD,Yes,,
 1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Works,"VVCODE
 VVRUN
 VVSCR",present,AGD,Yes,,
-1170,V1202,NC,Non Comm,B.Modern Creations,Adventure,Adventure,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN BOOT,Test,"BOOT
+1170,V1202,NC,Non Comm,B.Modern Creations,Adventure,Adventure,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1171,V1202,NC,Non Comm,B.Modern Creations,Alien Research Centre 3,Adventure,John Wilson,OZMOO/ARC3,8200,*RUN BOOT,Test,"BOOT
+1171,V1202,NC,Non Comm,B.Modern Creations,Alien Research Centre 3,Adventure,John Wilson,OZMOO/ARC3,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1172,V1202,NC,Non Comm,B.Modern Creations,Behind Closed Doors 9,Adventure,John Wilson,OZMOO/BCD9,8200,*RUN BOOT,Test,"BOOT
+1172,V1202,NC,Non Comm,B.Modern Creations,Behind Closed Doors 9,Adventure,John Wilson,OZMOO/BCD9,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1173,V1202,OZM,Infocom,B.Modern Creations,Beyond Zork,Adventure,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN BOOT,Test,"BOOT
+1173,V1202,OZM,Infocom,B.Modern Creations,Beyond Zork,Adventure,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1174,V1202,NC,Non Comm,B.Modern Creations,Calypso,Adventure,Dave Footitt,OZMOO/CALYPSO,8200,*RUN BOOT,Test,"BOOT
+1174,V1202,NC,Non Comm,B.Modern Creations,Calypso,Adventure,Dave Footitt,OZMOO/CALYPSO,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1175,V1202,NC,Non Comm,B.Modern Creations,Hibernated 1 - Dir's Cut,Adventure,Stefan Vogt,OZMOO/HIBER1,8200,*RUN BOOT,Test,"BOOT
+1175,V1202,NC,Non Comm,B.Modern Creations,Hibernated 1 - Dir's Cut,Adventure,Stefan Vogt,OZMOO/HIBER1,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1176,V1202,INF,Infocom,B.Modern Creations,Hitchhiker's Guide,Adventure,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN BOOT,Test,"BOOT
+1176,V1202,INF,Infocom,B.Modern Creations,Hitchhiker's Guide,Adventure,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1177,V1202,INF,Infocom,B.Modern Creations,Hollywood Hijinx,Adventure,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN BOOT,Test,"BOOT
+1177,V1202,INF,Infocom,B.Modern Creations,Hollywood Hijinx,Adventure,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1178,V1202,NC,Non Comm,B.Modern Creations,The Job R5,Adventure,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN BOOT,Test,"BOOT
+1178,V1202,NC,Non Comm,B.Modern Creations,The Job R5,Adventure,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1179,V1202,INF,Infocom,B.Modern Creations,Leather Goddesses,Adventure,Steve Meretzky,OZMOO/LEATHER,8200,*RUN BOOT,Test,"BOOT
+1179,V1202,INF,Infocom,B.Modern Creations,Leather Goddesses,Adventure,Steve Meretzky,OZMOO/LEATHER,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1180,V1202,INF,Infocom,B.Modern Creations,Planetfall,Adventure,Steve Meretzky,OZMOO/PLANET,8200,*RUN BOOT,Test,"BOOT
+1180,V1202,INF,Infocom,B.Modern Creations,Planetfall,Adventure,Steve Meretzky,OZMOO/PLANET,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1181,V1202,INF,Infocom,B.Modern Creations,Wishbringer,Adventure,Brian Moriarty,OZMOO/WISH,8200,*RUN BOOT,Test,"BOOT
+1181,V1202,INF,Infocom,B.Modern Creations,Wishbringer,Adventure,Brian Moriarty,OZMOO/WISH,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1182,V1202,INF,Infocom,B.Modern Creations,Zork1,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN BOOT,Test,"BOOT
+1182,V1202,INF,Infocom,B.Modern Creations,Zork1,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1183,V1202,INF,Infocom,B.Modern Creations,Zork2,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN BOOT,Test,"BOOT
+1183,V1202,INF,Infocom,B.Modern Creations,Zork2,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1184,V1202,INF,Infocom,B.Modern Creations,Zork3,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN BOOT,Test,"BOOT
+1184,V1202,INF,Infocom,B.Modern Creations,Zork3,Adventure,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
