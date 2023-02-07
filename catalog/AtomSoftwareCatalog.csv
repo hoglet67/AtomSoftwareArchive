@@ -2550,8 +2550,7 @@ F22SCR",present,AGD,Yes,,
 1142,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 3,Game,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""",Works,"F23CODE
 F23PAN
 F23RUN
-F23SCR
-menu",present,AGD,Yes,,
+F23SCR",present,AGD,Yes,,
 1143,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 4,Game,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""",Works,"F24CODE
 F24PAN
 F24RUN
