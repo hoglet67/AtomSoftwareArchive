@@ -124,6 +124,14 @@ ${PYTHON} make-acorn.py $OPTIONS --title "Zork2: The Wizard of Frobozz" ../downl
 echo Building Zork3: The Dungeon Master...
 ${PYTHON} make-acorn.py $OPTIONS --title "Zork3: The Dungeon Master" ../downloads/zork3-r17-s840727.z3 ../disks/ZORK3.ssd
 
+if [ -f ../games/DuckMe.z3 ]
+then
+    echo Building Duck\! Me\?...
+    ${PYTHON} make-acorn.py  $OPTIONS --title "Duck Me" ../games/DuckMe.z3 ../disks/DUCKME.ssd
+else
+    echo Skipping Duck\! Me?
+fi
+
 #########################################################
 # Cleanup
 #########################################################
