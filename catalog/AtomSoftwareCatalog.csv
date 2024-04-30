@@ -2692,3 +2692,92 @@ OZMOO2P",present,OZMOO,Yes,,
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
+1185,V13B1,AGD,AGD,C.Kees' AGD Ports,Aunt Rose,Game,Kees van Oss,AGD/AUNTROS,8200,"CH.""ARRUN""",Test,"ARCODE
+ARRUN
+ARSCR",present,AGD,Yes,,
+1186,V13B1,AGD,AGD,C.Kees' AGD Ports,Bandito,Game,Kees van Oss,AGD/BANDITO,8200,"CH.""BARUN""",Test,"BACODE
+BARUN
+BASCR",present,AGD,Yes,,
+1187,V13B1,AGD,AGD,C.Kees' AGD Ports,Beef,Game,Kees van Oss,AGD/BEEF,8200,"CH.""BERUN""",Test,"BECODE
+BERUN
+BESCR",present,AGD,Yes,,
+1188,V13B1,AGD,AGD,C.Kees' AGD Ports,Bola ke Ase,Game,Kees van Oss,AGD/BOLA,8200,"CH.""BORUN""",Test,"BOCODE
+BORUN
+BOSCR",present,AGD,Yes,,
+1189,V13B1,AGD,AGD,C.Kees' AGD Ports,Bomb Bomb Buster,Game,Kees van Oss,AGD/BOMBBOM,8200,"CH.""BBRUN""",Test,"BBCODE
+BBRUN
+BBSCR",present,AGD,Yes,,
+1190,V13B1,AGD,AGD,C.Kees' AGD Ports,Bunny vs Fox,Game,Kees van Oss,AGD/BUNNY,8200,"CH.""BURUN""",Test,"BUCODE
+BURUN
+BUSCR",present,AGD,Yes,,
+1191,V13B1,AGD,AGD,C.Kees' AGD Ports,Chopper Defense,Game,Kees van Oss,AGD/CHOPDEF,8200,"CH.""CDRUN""",Test,"CDCODE
+CDRUN
+CDSCR
+CDSCR2",present,AGD,Yes,,
+1192,V13B1,AGD,AGD,C.Kees' AGD Ports,Bunnys Big Adventure,Game,Kees van Oss,AGD/CHUBBY,8200,"CH.""CBRUN""",Test,"CBCODE
+CBRUN
+CBSCR",present,AGD,Yes,,
+1193,V13B1,AGD,AGD,C.Kees' AGD Ports,Combat Wombat,Game,Kees van Oss,AGD/COMBAT,8200,"CH.""CORUN""",Test,"COCODE
+CORUN
+COSCR",present,AGD,Yes,,
+1194,V13B1,AGD,AGD,C.Kees' AGD Ports,Dark Castle,Game,Kees van Oss,AGD/DARKCAS,8200,"CH.""DCRUN""",Test,"DCCODE
+DCRUN
+DCSCR",present,AGD,Yes,,
+1195,V13B1,AGD,AGD,C.Kees' AGD Ports,Defeat the Devil,Game,Kees van Oss,AGD/DEFEATD,8200,"CH.""DDRUN""",Test,"DDCODE
+DDRUN
+DDSCR",present,AGD,Yes,,
+1196,V13B1,AGD,AGD,C.Kees' AGD Ports,Dirty Dozer 2,Game,Kees van Oss,AGD/DIRTYD2,8200,"CH.""DD2RUN""",Test,"DD2CODE
+DD2PAN
+DD2RUN
+DD2SCR",present,AGD,Yes,,
+1197,V13B1,AGD,AGD,C.Kees' AGD Ports,Forward to the Past,Game,Kees van Oss,AGD/FORWARD,8200,"CH.""FWRUN""",Test,"FWCODE
+FWRUN
+FWSCR",present,AGD,Yes,,
+1198,V13B1,AGD,AGD,C.Kees' AGD Ports,Gherbert Groundhog Save th,Game,Kees van Oss,AGD/GHERBER,8200,"CH.""GGRUN""",Test,"GGCODE
+GGRUN
+GGSCR",present,AGD,Yes,,
+1199,V13B1,AGD,AGD,C.Kees' AGD Ports,GhoSte's Grunge,Game,Kees van Oss,AGD/GRUNGE,8200,"CH.""GRRUN""",Test,"GRCODE
+GRRUN",present,AGD,Yes,,
+1200,V13B1,AGD,AGD,C.Kees' AGD Ports,The Man with the Golden JS,Game,Kees van Oss,AGD/HITCH,8200,"CH.""HIRUN""",Test,"HICODE
+HIRUN
+HISCR",present,AGD,Yes,,
+1201,V13B1,AGD,AGD,C.Kees' AGD Ports,Janky Joe in Retro Hell,Game,Kees van Oss,AGD/JANKYJO,8200,"CH.""JJRUN""",Test,"JJCODE
+JJDAT
+JJRUN
+JJSCR",present,AGD,Yes,,
+1202,V13B1,AGD,AGD,C.Kees' AGD Ports, Javi Pomez,Game,Kees van Oss,AGD/JAVIPOM,8200,"CH.""JPRUN""",Test,"JPCODE
+JPRUN
+JPSCR",present,AGD,Yes,,
+1203,V13B1,AGD,AGD,C.Kees' AGD Ports, Jet Pack Neo,Game,Kees van Oss,AGD/JETPACK,8200,"CH.""JPNRUN""",Test,"JPNCODE
+JPNRUN
+JPNSCR",present,AGD,Yes,,
+1204,V13B1,AGD,AGD,C.Kees' AGD Ports,Last Escape,Game,Kees van Oss,AGD/LASTESC,8200,"CH.""LERUN""",Test,"LECODE
+LERUN
+LESCR",present,AGD,Yes,,
+1205,V13B1,AGD,AGD,C.Kees' AGD Ports,Mabus Mania,Game,Kees van Oss,AGD/MABUS,8200,"CH.""MMRUN""",Test,"MMCODE
+MMRUN
+MMSCR",present,AGD,Yes,,
+1206,V13B1,AGD,AGD,C.Kees' AGD Ports,Manic Mulholland,Game,Kees van Oss,AGD/MANIC,8200,"CH.""MMRUN""",Test,"MMCODE
+MMRUN
+MMSCR",present,AGD,Yes,,
+1207,V13B1,AGD,AGD,C.Kees' AGD Ports,Mojoni in the Sewer World,Game,Kees van Oss,AGD/MOJONI,8200,"CH.""MORUN""",Test,"MOCODE
+MORUN
+MOSCR",present,AGD,Yes,,
+1208,V13B1,AGD,AGD,C.Kees' AGD Ports,Nevermore,Game,Kees van Oss,AGD/NEVERMO,8200,"CH.""NMRUN""",Test,"NMCODE
+NMRUN
+NMSCR",present,AGD,Yes,,
+1209,V13B1,AGD,AGD,C.Kees' AGD Ports, Ninja Poison1,Game,Kees van Oss,AGD/NINJA1,8200,"CH.""NP1RUN""",Test,"NP1CODE
+NP1RUN
+NP1SCR",present,AGD,Yes,,
+1210,V13B1,AGD,AGD,C.Kees' AGD Ports, Papyrus,Game,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""",Test,"PACODE
+PARUN
+PASCR
+user.inc",present,AGD,Yes,,
+1211,V13B1,AGD,AGD,C.Kees' AGD Ports, Psycho Santa,Game,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""",Test,"PSCODE
+PSRUN
+PSSCR
+user.inc",present,AGD,Yes,,
+1212,V13B1,AGD,AGD,C.Kees' AGD Ports,Unicylcle,Game,Kees van Oss,AGD/UNICYCL,8200,"CH.""UCRUN""",Test,"UCCODE
+uccode.csw
+UCRUN
+UCSCR",present,AGD,Yes,,
