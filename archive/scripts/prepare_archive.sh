@@ -131,20 +131,20 @@ java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$
 ##############################################################
 
 mkdir -p $ARCHIVE/$PCW
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/QUEST.bas $ARCHIVE/$PCW/QUEST
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/MISDODG.bas $ARCHIVE/$PCW/MISDODG
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/BACKGAM.bas $ARCHIVE/$PCW/BACKGAM
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/GHOST.bas $ARCHIVE/$PCW/GHOST
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/TURBO.bas $ARCHIVE/$PCW/TURBO
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/CAKES.bas $ARCHIVE/$PCW/CAKES
-java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/4STROKE.bas $ARCHIVE/$PCW/4STROKE
+pushd ../magazines/PCW
+for SRC in `find . -name '*.bas' | cut -c3- | sort`
+do
+DST=../../archive/$ARCHIVE/$PCW/`basename $SRC .bas`
+java -jar ../../java/atombasic/atombasic.jar $SRC $DST
+done
+popd
 
 ##############################################################
 # Books
 ##############################################################
 
 pushd ../books
-for SRC in `find . -name *.bas | cut -c3- | sort`
+for SRC in `find . -name '*.bas' | cut -c3- | sort`
 do
 DST=../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
 java -jar ../java/atombasic/atombasic.jar $SRC $DST
@@ -374,7 +374,7 @@ package "atms/dd-21/SENTD" "$ARCHIVE/$AS/WORDTUT"
 package "atms/Acl1-15/747" "$ARCHIVE/$BB"
 # package "atms/Acl1-06/BREAKOU" "$ARCHIVE/$BB" # not bugbyte
 # package "atms/Acl1-15/INVADBB" "$ARCHIVE/$BB" # manually fixed
-package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # not sure this is bug byte, but could be
+# package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # this is actually a PCW type-in
 # package "atms/Acl1-21/BATSHIP" "$ARCHIVE/$BB" # this is actually a program called space battle that need FP Rom
 package "atms/Acl2-19/BIORYTH" "$ARCHIVE/$BB"
 #package "atms/bugbyte__chess_disk/*" "$ARCHIVE/$BB"
