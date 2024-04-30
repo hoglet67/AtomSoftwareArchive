@@ -233,7 +233,8 @@ BKOUTINS",present,,,,
 *RUN 2-12",Works,"CHESSBB
 PROG
 2-12",present,,Yes*,,
-147,,BB,Bug Byte,A.Commercial Software,Disassembler,Utility,,BB,,,,,missing,,,,
+147,V13B1,BB,Bug Byte,A.Commercial Software,Disassembler,Utility,,BB/DISASS,8200,"CH.""BBDIS""",Test,"BBDIS
+BBDISINS",present,,,,
 148,V1,BB,Bug Byte,A.Commercial Software,Fruit Machine,Game,,BB,8200,"CH.""FRUITBB""",Works,FRUITBB,present,,,,
 149,V1,BB,Bug Byte,A.Commercial Software,Galaxian,Game,,BB,8200,"CH.""GALAXBB""",Works,GALAXBB,present,,,,
 150,V1,BB,Bug Byte,A.Commercial Software,Golf,Game,,BB,8200,"CH.""GOLFBB""",Works,GOLFBB,present,,,Yes,
