@@ -2772,14 +2772,11 @@ NP1RUN
 NP1SCR",present,AGD,Yes,,
 1210,V13B1,AGD,AGD,C.Kees' AGD Ports, Papyrus,Game,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""",Test,"PACODE
 PARUN
-PASCR
-user.inc",present,AGD,Yes,,
+PASCR",present,AGD,Yes,,
 1211,V13B1,AGD,AGD,C.Kees' AGD Ports, Psycho Santa,Game,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""",Test,"PSCODE
 PSRUN
-PSSCR
-user.inc",present,AGD,Yes,,
+PSSCR",present,AGD,Yes,,
 1212,V13B1,AGD,AGD,C.Kees' AGD Ports,Unicylcle,Game,Kees van Oss,AGD/UNICYCL,8200,"CH.""UCRUN""",Test,"UCCODE
-uccode.csw
 UCRUN
 UCSCR",present,AGD,Yes,,
 1213,V13B1,INU,Inufuto,D.Non Commercial Software,AERIAL,Game,Inufuto,INU,8200,*RUN AERIAL,Test,AERIAL,present,INUFUTO,Yes,,
@@ -2800,11 +2797,11 @@ PRINT FOR HELP: SEE FORUM
 1226,V13B1,NC,Non Comm,D.Non Commercial Software,Pie Chart Generator,Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,,,
 1227,V13B1,NC,Non Comm,D.Non Commercial Software,KAARTEN,Game,,NC,8200,"CH.""KAARTEN""",Test,KAARTEN,present,,,,
 1228,V13B1,NC,Non Comm,D.Non Commercial Software,K-TRUUK,Game,,NC,8200,"CH.""K-TRUUK""",Test,K-TRUUK,present,,,,
-1229,V13B1,NC,Non Comm,D.Non Commercial Software,GAGS Demo 2,Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,,,
+1229,V13B1,NC,Non Comm,D.Non Commercial Software,GAGS Demo 2 (R),Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,,,
 1230,V13B1,NC,Non Comm,D.Non Commercial Software,Piet Heim (Reversi),Game,,NC,8200,"CH.""P-HEIN""",Test,P-HEIN,present,,,,
-1231,V13B1,PCW,PCW,E.Books and Magazines,Four-Stroke Cycle,Graphics,Jonathan Empson,PCW,8200,"CH.""4STROKE""",Test,4STROKE,present,Magazines,,,
+1231,V13B1,PCW,PCW,E.Books and Magazines,Four-Stroke Cycle (R),Graphics,Jonathan Empson,PCW,8200,"CH.""4STROKE""",Test,4STROKE,present,Magazines,,,
 1232,V13B1,PCW,PCW,E.Books and Magazines,Backgammon,Game,Peter Robinson,PCW,8200,"CH.""BACKGAM""",Test,BACKGAM,present,Magazines,,,
-1233,V13B1,PCW,PCW,E.Books and Magazines,Missile Dodge,Game,Stuart Johnson,PCW,8200,"CH.""MISDODG""",Test,MISDOSG,present,Magazines,,,
+1233,V13B1,PCW,PCW,E.Books and Magazines,Missile Dodge,Game,Stuart Johnson,PCW,8200,"CH.""MISDODG""",Test,MISDODG,present,Magazines,,,
 1234,V13B1,PCW,PCW,E.Books and Magazines,Ghost Maze,Game,A S Whittington,PCW,8200,"CH.""GHOST""",Test,GHOST,present,Magazines,,,
 1235,V13B1,PCW,PCW,E.Books and Magazines,Turbo,Game,Russell Wheeler,PCW,8200,"CH.""TURBO""",Test,TURBO,present,Magazines,,,
 1236,V13B1,PCW,PCW,E.Books and Magazines,Cakes,Game,Russell Wheeler,PCW,8200,"CH.""CAKES""",Test,CAKES,present,Magazines,,,
