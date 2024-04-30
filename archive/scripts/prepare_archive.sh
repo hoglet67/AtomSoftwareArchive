@@ -127,7 +127,7 @@ mkdir -p $ARCHIVE/$ASP
 java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$ASP/WHITEBA
 
 ##############################################################
-# Atom Quest
+# PCW
 ##############################################################
 
 mkdir -p $ARCHIVE/$PCW
@@ -137,6 +137,7 @@ java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/BACKGAM.bas $ARCHIVE/
 java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/GHOST.bas $ARCHIVE/$PCW/GHOST
 java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/TURBO.bas $ARCHIVE/$PCW/TURBO
 java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/CAKES.bas $ARCHIVE/$PCW/CAKES
+java -jar ../java/atombasic/atombasic.jar ../magazines/PCW/4STROKE.bas $ARCHIVE/$PCW/4STROKE
 
 ##############################################################
 # Books
