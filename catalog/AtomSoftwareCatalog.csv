@@ -225,7 +225,7 @@ TUNEIN2",present,2K Programs 2,,,
 141,V2,BB,Bug Byte,A.Commercial Software,Atom Breakout,Game,,BB,8200,"CH.""BKOUT""",Works,"BKOUT
 BKOUTINS",present,,,,
 142,V10B5,BB,Bug Byte,A.Commercial Software,Atom Invaders,Game,,BB,8200,"CH.""INVADBB""",Works,INVADBB,present,,,,
-143,V1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,BACKGAM,present,,,,
+143,V1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,BACKGAM,missing,,,,
 144,V5,BB,Bug Byte,A.Commercial Software,Battleships,Game,,BB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 145,V1,BB,Bug Byte,A.Commercial Software,Bio-Rhythms,Simulation,,BB,8200,"CH.""BIORYTH""",Works,BIORYTH,present,,,,
 146,V3,BB,Bug Byte,A.Commercial Software,Chess (16K),Game,,BB,0300,"?18=40
@@ -1811,8 +1811,8 @@ UGOT2LE
 WHATISL
 WHATTIM
 ",present,SID,Yes,,
-902,V10B5,TA,The Atom,E.Books and Magazines,Racer,Game,,OTHER,8200,"CH.""RACER""",Works,RACER,present,,,,
-903,V10B5,TA,The Atom,E.Books and Magazines,Breakout,Game,,OTHER,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
+902,V10B5,TA,The Atom,E.Books and Magazines,Racer,Game,,TA,8200,"CH.""RACER""",Works,RACER,present,,,,
+903,V10B5,TA,The Atom,E.Books and Magazines,Breakout,Game,,TA,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
 904,V10B5,NC,Non Comm,B.Modern Creations,Bad Apple (Clear 0),Music,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""",Works,"MOVIE0
 MUSIC
 PLAYER0
@@ -2808,4 +2808,10 @@ PRINT FOR HELP: SEE FORUM
 1234,V13B1,PCW,PCW,E.Books and Magazines,Ghost Maze,Game,A S Whittington,PCW,8200,"CH.""GHOST""",Test,GHOST,present,Magazines,,,
 1235,V13B1,PCW,PCW,E.Books and Magazines,Turbo,Game,Russell Wheeler,PCW,8200,"CH.""TURBO""",Test,TURBO,present,Magazines,,,
 1236,V13B1,PCW,PCW,E.Books and Magazines,Cakes,Game,Russell Wheeler,PCW,8200,"CH.""CAKES""",Test,CAKES,present,Magazines,,,
-1236,V13B1,PCW,PCW,E.Books and Magazines,Footprints,Game,Peter Robinson,PCW,8200,"CH.""FOOTPRI""",Test,FOOTPRI,present,Magazines,,,
+1237,V13B1,PCW,PCW,E.Books and Magazines,Footprints,Game,Peter Robinson,PCW,8200,"CH.""FOOTPRI""",Test,FOOTPRI,missing,Magazines,,,
+1238,V13B1,PCT,PCT,E.Books and Magazines,Calendar,Utility,Barry Pickles,PCT,8200,"CH.""CALENDR""",Test,CALENDR,present,Magazines,,,
+1239,V13B1,PCT,PCT,E.Books and Magazines,Double Speed Saver,Utility,P J Sadler,PCT,8200,"CH.""DSAVE""",Test,DSAVE,present,Magazines,,,
+1240,V13B1,PCT,PCT,E.Books and Magazines,Gas/Electric Estimator,Utility,D Tyler,PCT,8200,"CH.""GASELEC""",Test,GASELEC,present,Magazines,,,
+1241,V13B1,PCT,PCT,E.Books and Magazines,Inverse Video,Utility,N Tonks,PCT,8200,"CH.""INVERT""",Test,INVERT,present,Magazines,,,
+1242,V13B1,PCT,PCT,E.Books and Magazines,Trang,Game,S Drayper,PCT,8200,"CH.""TRANG""",Test,TRANG,present,Magazines,,,
+1243,V13B1,PCT,PCT,E.Books and Magazines,Worm,Game,A P Morris,PCT,8200,"CH.""WORM""",Test,WORM,present,Magazines,,,
