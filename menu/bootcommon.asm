@@ -1,7 +1,6 @@
 	Base = $3300
 
 
-	KnownRTS = $ff37
 	Oscli = $fff7
 	Oswrch = $fff4
 	OsWriteString = $f7d1
@@ -33,15 +32,21 @@
 
 	; Determine where the boot loader is running from
 	SEI
-	JSR KnownRTS
+	; John Kortinkt asked for a tweak to support his Atom version of GoSDC
+	; (KnownRTS was $ff37 but John has changed this in his GoSDC Kernal ROM)
+	; JSR KnownRTS
+	LDA #$60 ; RTS
+	STA Tmp
+.MYJSR
+	JSR Tmp
 	TSX
 	DEX
 	CLC
 	LDA Stack,X
-	ADC #<(ENDOF - STARTOF - 3)
+	ADC #<(ENDOF - MYJSR - 2)
 	STA Tmp
 	LDA Stack + 1,X
-	ADC #>(ENDOF - STARTOF - 3)
+	ADC #>(ENDOF - MYJSR - 2)
 	STA Tmp + 1
 	CLI
 	; Tmp,Tmp + 1 now Contain the address of the command block following the boot loader
