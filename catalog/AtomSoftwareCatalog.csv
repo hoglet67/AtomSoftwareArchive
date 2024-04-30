@@ -2793,3 +2793,7 @@ UCSCR",present,AGD,Yes,,
 1222,V13B1,INU,Inufuto,D.Non Commercial Software,LIFT,Game,Inufuto,INU,8200,*RUN LIFT,Test,LIFT,present,INUFUTO,Yes,,
 1223,V13B1,INU,Inufuto,D.Non Commercial Software,NEURAS,Game,Inufuto,INU,8200,*RUN NEURAS,Test,NEURAS,present,INUFUTO,Yes,,
 1224,V13B1,INU,Inufuto,D.Non Commercial Software,YEWDOW,Game,Inufuto,INU,8200,*RUN YEWDOW,Test,YEWDOW,present,INUFUTO,Yes,,
+1225,V13B1,PES,Pearce Electronic Signs,F.ROMS,ATOM SIGN ROM,Utility,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
+PRINT FOR HELP: SEE FORUM
+*LOAD 1E13 8800",Test,1E13,present,ROMs,,,
+,,,,,,,,,,,,,,,,,
