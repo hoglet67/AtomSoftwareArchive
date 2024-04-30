@@ -1395,7 +1395,7 @@ MSDISP",present,Mainwaring,,,
 742,V7B3,YC,Your Computer,E.Books and Magazines,Atom Squash,Game,,YC,8200,"CH.""SQUASH""",Works,SQUASH,present,Magazines,,,
 743,V7B3,YC,Your Computer,E.Books and Magazines,Acorn Pilot,Game,,YC,8200,"CH.""PILOTX""",Works,PILOTX,present,Magazines,,,
 744,V7B3,YC,Your Computer,E.Books and Magazines,Forth Connection,Game,,YC,8200,"CH.""CONNECT""",Broken,CONNECT,present,Magazines,,,
-745,V7B3,YC,Your Computer,E.Books and Magazines,Rally Racer,Game,,YC,8200,"CH.""RALLY""",Works,RALLY,present,Magazines,,,
+745,V13B1,YC,Your Computer,E.Books and Magazines,Rally Racer,Game,,YC,8200,"CH.""RALLY""",Test,RALLY,present,Magazines,,,
 746,V7B3,NC,Non Comm,F.ROMS,RX Box,Graphics,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",Works,46E8,present,ROMs,,,
 747,V7B3,AU,Acorn User,E.Books and Magazines,Screen Dump,Utility,,AU,8200,"CH.""SCRDUMP""",Works,SCRDUMP,present,Magazines,,,
@@ -2797,4 +2797,8 @@ UCSCR",present,AGD,Yes,,
 1225,V13B1,PES,Pearce Electronic Signs,F.ROMS,ATOM SIGN ROM,Utility,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",Test,1E13,present,ROMs,,,
-,,,,,,,,,,,,,,,,,
+1226,V13B1,NC,Non Comm,D.Non Commercial Software,Pie Chart Generator,Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,,,
+1227,V13B1,NC,Non Comm,D.Non Commercial Software,KAARTEN,Game,,NC,8200,"CH.""KAARTEN""",Test,KAARTEN,present,,,,
+1228,V13B1,NC,Non Comm,D.Non Commercial Software,K-TRUUK,Game,,NC,8200,"CH.""K-TRUUK""",Test,K-TRUUK,present,,,,
+1229,V13B1,NC,Non Comm,D.Non Commercial Software,GAGS Demo 2,Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,,,
+1230,V13B1,NC,Non Comm,D.Non Commercial Software,Piet Heim (Reversi),Game,,NC,8200,"CH.""P-HEIN""",Test,P-HEIN,present,,,,
