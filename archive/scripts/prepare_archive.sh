@@ -48,8 +48,6 @@ SID=SID
 QUILL=QUILL
 # ASP Software
 ASP=ASP
-# PCW
-PCW=PCW
 
 BEEBASM=beebasm
 
@@ -127,15 +125,14 @@ mkdir -p $ARCHIVE/$ASP
 java -jar ../java/atombasic/atombasic.jar ../whitebarrows/WHITEBA.bas $ARCHIVE/$ASP/WHITEBA
 
 ##############################################################
-# PCW
+# Magazines
 ##############################################################
 
-mkdir -p $ARCHIVE/$PCW
-pushd ../magazines/PCW
+pushd ../magazines
 for SRC in `find . -name '*.bas' | cut -c3- | sort`
 do
-DST=../../archive/$ARCHIVE/$PCW/`basename $SRC .bas`
-java -jar ../../java/atombasic/atombasic.jar $SRC $DST
+DST=../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
+java -jar ../java/atombasic/atombasic.jar $SRC $DST
 done
 popd
 
@@ -159,12 +156,6 @@ popd
 
 mkdir -p $ARCHIVE/$OTHER
 cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
-
-java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/RACER.bas $ARCHIVE/$OTHER/RACER
-
-# A binary version was included instead, as there is a patch in issue 2
-#java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKBA.bas $ARCHIVE/$OTHER/BREAKBA 2900
-#java -jar ../java/atombasic/atombasic.jar ../magazines/TheAtom/BREAKMC.bas $ARCHIVE/$OTHER/BREAKMC 2B00
 
 for i in SHOW1 SHOW2 SHOW2E SHOW3 SHOW3E
 do
