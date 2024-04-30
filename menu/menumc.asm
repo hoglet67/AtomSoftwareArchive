@@ -25,7 +25,7 @@ include "renderer_header.asm"
 
 	EQUB    <Base
 	EQUB    >Base
-	
+
 	EQUB    <Base
 	EQUB    >Base
 
@@ -38,7 +38,7 @@ include "renderer_header.asm"
 	JMP HighlightRow
 	JMP Search
 	JMP UpdateTotalPages
-		
+
 include "renderer_body.asm"
 
 

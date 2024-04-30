@@ -7,11 +7,11 @@
 	OsWriteString = $f7d1
 	OsWriteHex = $f802
 	OsCrLf = $ffed
-	
+
 	DirectModeExit = $c2cf
 	DirectMode = $c2d5
 	UpdateTop = $cdbc
-	
+
 	OscliBuffer = $100
 	DirectModeBuffer = $100
 	Stack = $100
@@ -19,14 +19,14 @@
 	RomSrc = $82
 	RomDst = $84
 	Return = $0d
-	
+
 	Top = $0d
 	Page = $12
 
 	; TODO somehow determine this dynamically
 	ShadowL1 = $FD
 	ShadowL2 = $23F
-	
+
 	org     Base
 
 .STARTOF
@@ -61,7 +61,7 @@
 	CMP #$04
 	BEQ CmdDirect
 
-IF (rom = 1)	
+IF (rom = 1)
 	CMP #$05
 	BEQ CmdPrint
 	CMP #$06
@@ -69,7 +69,7 @@ IF (rom = 1)
 ENDIF
 
 	; Implement the default command: Pass to Oscli
-.CmdDefault	
+.CmdDefault
 	LDX #$0
 .CopyOscliLoop
 	LDA (Tmp),Y
@@ -78,10 +78,10 @@ ENDIF
 	INX
 	CMP #Return
 	BNE CopyOscliLoop
-	
+
 	; Work around for the SYN? 135 error in AtomMMC
 	STA OscliBuffer,X
-	
+
 	; Call Oscli, preserving Y
 	TYA
 	PHA
@@ -167,9 +167,9 @@ ENDIF
 	JMP DirectMode
 
 IF (rom = 1)
-	
+
 .CmdRomCopy
-	
+
 	; Handle Phill's RAMROM board by remapping the RAM at 7000-7FFF to A000
 	LDA #1
 	STA $BFFE
@@ -177,12 +177,12 @@ IF (rom = 1)
 	; Save the old ROM Latch Shadow Register
 	LDA ShadowL1
 	PHA
-	
-	; Search for the first RAM bank	
+
+	; Search for the first RAM bank
 	LDX #0
 
 .RamSearch
-	; Now select ROM0 
+	; Now select ROM0
 	STX $BFFF
 	STA ShadowL1
 	STA ShadowL2
@@ -196,33 +196,33 @@ IF (rom = 1)
 	STA $A000
 	CMP $A000
 	BEQ RamFound
-	
+
 .RamNotFound
 	INX
 	CPX #$10
 	BNE RamSearch
 
-	JSR OsWriteString	
-	EQUS "NO RAM BANKS FOUND AT #A000", 10, 13	
+	JSR OsWriteString
+	EQUS "NO RAM BANKS FOUND AT #A000", 10, 13
 	NOP
-	
+
 	PLA
 	STA ShadowL1
 	STA ShadowL2
 	STA $BFFF
 
 	JMP DirectModeExit
-	
-.RamFound	
+
+.RamFound
 
 	; Discard saved ROM Latch Value
 	PLA
-	
-	JSR OsWriteString	
-	EQUS "RAM FOUND AT #A000 BANK "	
+
+	JSR OsWriteString
+	EQUS "RAM FOUND AT #A000 BANK "
 	NOP
 	TXA
-	
+
 	PHA
 	JSR OsWriteHex
 	JSR OsCrLf
@@ -252,7 +252,7 @@ IF (rom = 1)
 	DEX
 	BNE RamCopy
 
-	JSR OsWriteString	
+	JSR OsWriteString
 	EQUS "ROM COPIED TO #A000", 10, 13
 	NOP
 
@@ -276,15 +276,15 @@ IF (rom = 1)
 	DEX
 	BNE RamVerify
 
-	JSR OsWriteString	
-	EQUS "ROM VERIFY AT #A000 SUCCEEDED", 10, 13	
+	JSR OsWriteString
+	EQUS "ROM VERIFY AT #A000 SUCCEEDED", 10, 13
 	NOP
 
 	JMP DirectModeExit
 
 .RamVerifyFailed
 
-	JSR OsWriteString	
+	JSR OsWriteString
 	EQUS "ROM VERIFY AT #A000 FAILED", 10, 13
 	NOP
 
