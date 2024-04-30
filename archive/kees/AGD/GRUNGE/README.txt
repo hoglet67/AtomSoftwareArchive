@@ -1,0 +1,88 @@
+GhoSte's Grunge:
+----------------
+
+GhoSte's Grunge
+Help GhoSte find his lost music in order for him to find eternal rest.
+
+Make your way through 14 screens and collect all of GhoSte's music and instruments while avoiding the hazardous objects and animals in your way. With amazing music from KUVO and classic Spectrum gameplay.
+
+Use the arrow keys to move little GhoSte around, and the space bar for passing menus.
+
+Controls:
+
+ O  - Left
+ P  - Right
+ Q  - Up
+ A  - Down
+SPC - Pass menu's
+
+Creators:
+- Buck
+- Kuvo
+
+Atom version done by Kees van Oss.
+
+===================================================================
+System requirements:
+===================================================================
+
+- Standard Acorn Atom
+- 32 KB RAM
+- 8 KB video RAM (#8000-#9FFF)
+- Joystick connected to keyboard matrix (Optional)
+- Joystick connected to PORTB AtoMMC interface (Optional)
+
+===================================================================
+Joystick (optional JOYMMC):
+===================================================================
+
+The joystick is connected to PORTB of the AtoMMC interface with 
+softwareversion 2.9. The connections are like this:
+
+AtoMMC  Joystick
+-----------------
+ PB0  -  Right
+ PB1  -  Left
+ PB2  -  Down
+ PB3  -  Up
+ PB4  -  Jump
+ PB5  -  nc
+ PB6  -  nc
+ PB7  -  nc
+
+ GND  -  GND
+
+If direction is active, bit = 1
+
+===================================================================
+Joystick (optional JOYKEY):
+===================================================================
+
+The joystick is connected parallel to row 1 of the keyboard matrix.
+
+    nokey - fire
+	G - Right
+	3 - Left
+	- - Down
+	Q - Up
+
+===================================================================
+Tape/Disk and AtoMMC version:
+===================================================================
+
+Tape version:
+
+  GRUNGE.CSW, Tapefile for Atomulator, to start the game, type: *RUN"AGD"
+
+Disk version:
+
+  GRUNGE.DSK, Diskfile for emulators, to start the game, type *RUN"GRRUN"
+
+AtoMMC version:
+
+  GRRUN  = Basic introscreen
+  GRSCR  = Titlescreen
+  GRCODE = Gamecode
+
+  To start the game, type: *GRRUN
+
