@@ -220,12 +220,13 @@ CH.""TUNE""",Works,"TUNE
 TUNEIN1
 TUNEIN2",present,2K Programs 2,,,
 138,,BB,Bug Byte,A.Commercial Software,Atom Invasion,Game,,BB,,,,,missing,2K Programs 3,,,
-139,,BB,Bug Byte,A.Commercial Software,Mini Breakout,Game,,BB,,,,,missing,2K Programs 3,,,
+139,V13B1,BB,Bug Byte,A.Commercial Software,Mini Breakout,Game,,BB/2KPRGS3,2900,"?18=130
+CH.""MINIBRK""",Test,MINIBRK,present,2K Programs 3,,,
 140,V5,BB,Bug Byte,A.Commercial Software,Alien Destroy,Game,,BB,8200,"CH.""ALIEN""",Works,ALIEN,present,,,,
 141,V2,BB,Bug Byte,A.Commercial Software,Atom Breakout,Game,,BB,8200,"CH.""BKOUT""",Works,"BKOUT
 BKOUTINS",present,,,,
 142,V10B5,BB,Bug Byte,A.Commercial Software,Atom Invaders,Game,,BB,8200,"CH.""INVADBB""",Works,INVADBB,present,,,,
-143,V13B1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,"BACKGAM
+143,V13B1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Test,"BACKGAM
 BACKINS",present,,,,
 144,V5,BB,Bug Byte,A.Commercial Software,Battleships,Game,,BB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 145,V1,BB,Bug Byte,A.Commercial Software,Bio-Rhythms,Simulation,,BB,8200,"CH.""BIORYTH""",Works,BIORYTH,present,,,,
@@ -593,7 +594,7 @@ REDMOON",present,Time and Magik,Yes,,
 342,V4,NC,Non Comm,D.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
 345,V4,NC,Non Comm,D.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
 346,,NC,Non Comm,D.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,duplicate,,,,
-347,V13B1,GA,Getting Acquainted,E.Books and Magazines,Dodgem,Game,???,GA,8200,"CH.""DODGEM""",Works,DODGEM,present,,,,
+347,V13B1,GA,Getting Acquainted,E.Books and Magazines,Dodgem,Game,???,GA,8200,"CH.""DODGEM""",Test,DODGEM,present,,,,
 349,V4,NC,Non Comm,D.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
 350,,NC,Non Comm,D.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,duplicate,,,,
 351,V4,NC,Non Comm,D.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
@@ -2792,10 +2793,10 @@ UCSCR",present,AGD,Yes,,
 1222,V13B1,INU,Inufuto,D.Non Commercial Software,LIFT,Game,Inufuto,INU,8200,*RUN LIFT,Test,LIFT,present,INUFUTO,Yes,,
 1223,V13B1,INU,Inufuto,D.Non Commercial Software,NEURAS,Game,Inufuto,INU,8200,*RUN NEURAS,Test,NEURAS,present,INUFUTO,Yes,,
 1224,V13B1,INU,Inufuto,D.Non Commercial Software,YEWDOW,Game,Inufuto,INU,8200,*RUN YEWDOW,Test,YEWDOW,present,INUFUTO,Yes,,
-1225,V13B1,PES,Pearce Electronic Signs,F.ROMS,ATOM SIGN ROM,Utility,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
+1225,V13B1,PES,Pearce,F.ROMS,ATOM SIGN ROM,Utility,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",Test,1E13,present,ROMs,,,
-1226,V13B1,NC,Non Comm,D.Non Commercial Software,Pie Chart Generator,Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,,,
+1226,V13B1,NC,Non Comm,D.Non Commercial Software,Pie Chart Generator (R),Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,,,
 1227,V13B1,NC,Non Comm,D.Non Commercial Software,KAARTEN,Game,,NC,8200,"CH.""KAARTEN""",Test,KAARTEN,present,,,,
 1228,V13B1,NC,Non Comm,D.Non Commercial Software,K-TRUUK,Game,,NC,8200,"CH.""K-TRUUK""",Test,K-TRUUK,present,,,,
 1229,V13B1,NC,Non Comm,D.Non Commercial Software,GAGS Demo 2 (R),Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,,,
