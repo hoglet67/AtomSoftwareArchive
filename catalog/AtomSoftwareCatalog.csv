@@ -225,7 +225,8 @@ TUNEIN2",present,2K Programs 2,,,
 141,V2,BB,Bug Byte,A.Commercial Software,Atom Breakout,Game,,BB,8200,"CH.""BKOUT""",Works,"BKOUT
 BKOUTINS",present,,,,
 142,V10B5,BB,Bug Byte,A.Commercial Software,Atom Invaders,Game,,BB,8200,"CH.""INVADBB""",Works,INVADBB,present,,,,
-143,V1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,BACKGAM,missing,,,,
+143,V13B1,BB,Bug Byte,A.Commercial Software,Backgammon,Game,,BB,8200,"CH.""BACKGAM""",Works,"BACKGAM
+BACKINS",present,,,,
 144,V5,BB,Bug Byte,A.Commercial Software,Battleships,Game,,BB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 145,V1,BB,Bug Byte,A.Commercial Software,Bio-Rhythms,Simulation,,BB,8200,"CH.""BIORYTH""",Works,BIORYTH,present,,,,
 146,V3,BB,Bug Byte,A.Commercial Software,Chess (16K),Game,,BB,0300,"?18=40
@@ -581,7 +582,7 @@ REDMOON",present,Time and Magik,Yes,,
 330,V4,NC,Non Comm,D.Non Commercial Software,Atomica Spacewar (R),Game,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",Works,ATOMICA,present,,,,
 331,V7B2,YC,Your Computer,E.Books and Magazines,Bit Bandit,Game,S.P.Elliot,YC,8200,"CH.""BANDIT""",Works,BANDIT,present,Magazines,,,
 332,V4,NC,Non Comm,D.Non Commercial Software,Space Battle (R),Game,???,NC/TB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
-333,V4,NC,Non Comm,D.Non Commercial Software,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,present,,,,
+333,V4,NC,Non Comm,D.Non Commercial Software,Backgammon,Game,???,NC,8200,"CH.""BCKGAM""",Works,BCKGAM,duplicate,,,,This is actually Bug Byte Backgammon!
 334,V4,NC,Non Comm,D.Non Commercial Software,Beetle,Game,???,NC,8200,"CH.""BEETLE""",Works,BEETLE,duplicate,,,,
 335,V7B2,YC,Your Computer,E.Books and Magazines,Blitzkrieg,Game,???,YC,8200,"CH.""BLITZ""",Works,BLITZ,present,Magazines,,,
 336,V4,C&VG,C&VG,E.Books and Magazines,Blockbuster,Game,Chris Cytera,CVG,8200,"CH.""BLOBUST""",Works,BLOBUST,present,Magazines,,,
