@@ -157,11 +157,6 @@ popd
 mkdir -p $ARCHIVE/$OTHER
 cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
 
-for i in SHOW1 SHOW2 SHOW2E SHOW3 SHOW3E
-do
-    java -jar ../java/atombasic/atombasic.jar ../agdzips/$i.bas $ARCHIVE/AGD/$i 2900 ce86
-done
-
 ##############################################################
 # Magnus Olsson
 ##############################################################

@@ -3,6 +3,39 @@
 ARCHIVE=archive
 
 ##############################################################
+# Update the AGD Carousel
+##############################################################
+
+# Note we need to do this at package time as the econet screen paths
+# are based on the title id which is quite fluid.
+
+./scripts/agd_screen_paths.sh
+
+java -jar ../java/atombasic/atombasic.jar ../agdzips/SHOW1.bas $ARCHIVE/AGD/SHOW1 2900 ce86
+
+n=`wc -l <list.atommc`
+n=$((n - 1))
+for i in SHOW2 SHOW3
+do
+    cat ../agdzips/$i.bas list.atommc | sed "s/NNNNN/$n/" > $i.bas
+    java -jar ../java/atombasic/atombasic.jar $i.bas $ARCHIVE/AGD/$i 2900 ce86
+    rm -f $i.bas
+done
+
+rm -f list.atommc
+
+n=`wc -l <list.econet`
+n=$((n - 1))
+for i in SHOW2E SHOW3E
+do
+    cat ../agdzips/$i.bas list.econet | sed "s/NNNNN/$n/" > $i.bas
+    java -jar ../java/atombasic/atombasic.jar $i.bas $ARCHIVE/AGD/$i 2900 ce86
+    rm -f $i.bas
+done
+
+rm -f list.econet
+
+##############################################################
 # Compile the java
 ##############################################################
 
@@ -77,4 +110,3 @@ else
     echo "Skipping copy to Atomulator"
 fi
 popd
-
