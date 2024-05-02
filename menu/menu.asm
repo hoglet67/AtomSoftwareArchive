@@ -9,7 +9,6 @@ include "renderer_header.asm"
 	RDCVEC       = $20a
 
 IF (sddos = 1)
-	RowReturnBuf = $3200         ; A temporary work around as SDDOS uses $22B,$22C
 
 	TmpPtr       = $78
 	DerefTmp     = $7a
@@ -26,8 +25,6 @@ IF (sddos = 1)
 
 ELIF (econet = 1)
 
-	RowReturnBuf = $3200
-
 	TmpPtr       = $78
 	DerefTmp     = $7a
 	SortTablePtr = $7c
@@ -42,7 +39,6 @@ ELIF (econet = 1)
 	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
 
 ELSE
-	RowReturnBuf = $021c
 
 	TmpPtr       = $70
 	DerefTmp     = $72
@@ -1144,5 +1140,8 @@ IF (econet = 1)
 	PLA
 	JMP WriteHex1
 ENDIF
+
+.RowReturnBuf
+   SKIP LinesPerPage * 2
 
 .ENDOF

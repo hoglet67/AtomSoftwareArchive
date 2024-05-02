@@ -164,17 +164,18 @@ public class GenerateMenuFiles extends GenerateBase {
         int startOfUpperText;
         int lengthOfUpperText;
 
+        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all (AtoMMC/Econet/SDDOS) cases
+        // MENU    094C 2800->314C
+        // MENUSD  0983 2800->3183
+        // MENUECO 0976 2800->3176
         if (allChunk) {
             // swap the lower and upper text spaces
             lengthOfLowerText = 0x1600;
             endOfLowerText = 0x9800;
-            startOfUpperText = 0x3300;
-            lengthOfUpperText = 0x4d00;
+            startOfUpperText = 0x3200;
+            lengthOfUpperText = 0x4e00;
         } else {
-            // Note: SDDOS/Econet use 3200 as the RowReturnBuffer
-            // MENU 2800 2800 979
-            // MENU 2800 2800 98c
-            lengthOfLowerText = 0x0900;
+            lengthOfLowerText = 0x0A00;
             endOfLowerText = 0x3c00;
             startOfUpperText = 0x8200;
             lengthOfUpperText = 0x1600;
@@ -299,7 +300,7 @@ public class GenerateMenuFiles extends GenerateBase {
         writeTable(menuDir, "SORT1", sortTableAddr, publisherSortTable);
         writeTable(menuDir, "SORT2", sortTableAddr, genreSortTable);
         writeTable(menuDir, "SORT3", sortTableAddr, collectionSortTable);
- 
+
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
     }
 
