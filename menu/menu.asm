@@ -1,4 +1,4 @@
-   Base = $2800
+	Base = $2800
 
 include "renderer_header.asm"
 
@@ -56,9 +56,9 @@ ELSE
 ENDIF
 
 IF (econet = 1)
-   DirSep = '.'
+	DirSep = '.'
 ELSE
-   DirSep = '/'
+	DirSep = '/'
 ENDIF
 
 	AutoRepeat1  = -$200
@@ -148,7 +148,7 @@ ENDIF
 	BMI MemTestDone
 
 .MemTestFail
-   INC SplashNum
+	INC SplashNum
 	DEC MenuMaxKey + 1
 
 .MemTestDone
@@ -214,17 +214,16 @@ IF (sddos = 1)
 	JSR OscliString
 	EQUS "DRIVE 1", Return
 ELSE
-   STA MenuDirChunk
+	STA MenuDirChunk
 	JSR OscliString
-   IF (econet = 1)
-	   EQUS "DIR MNU"
-   ELSE
-	   EQUS "CWD MNU"
-   ENDIF
-   .MenuDirChunk
-   EQUS " ", Return
+        IF (econet = 1)
+	EQUS "DIR MNU"
+	ELSE
+	EQUS "CWD MNU"
+	ENDIF
+.MenuDirChunk
+	EQUS " ", Return
 ENDIF
-
 	; 90 CLEAR 0
 	LDY #0
 	JSR Clear
@@ -387,34 +386,34 @@ ENDIF
 	; 510 LINK (B+3)
 	JSR Inkey
 
-    ; // No key pressed
-    ; 520 IF ?Q=255 G.c
+	; // No key pressed
+	; 520 IF ?Q=255 G.c
 	CPY #$FF
 	BNE TestForPrevPage
 	JMP LabelC
 
 .TestForPrevPage
-    ; // < key pressed (previous page)
-    ; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
-    CPY #28
-    BNE TestForNextPage
-    LDA NumPages
-    CMP #1
-    BEQ TestForNextPage
-    DEC Page
-    BNE PrevPageNoWrap
+	; // < key pressed (previous page)
+	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
+	CPY #28
+	BNE TestForNextPage
+	LDA NumPages
+	CMP #1
+	BEQ TestForNextPage
+	DEC Page
+	BNE PrevPageNoWrap
  	STA Page
 .PrevPageNoWrap
  	JMP SetItemToZero
 
 .TestForNextPage
-    ; // > key pressed (next page)
+	; // > key pressed (next page)
 	; 610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
 	CPY #30
 	BNE TestForHelp
-    LDA NumPages
-    CMP #1
-    BEQ TestForHelp
+	LDA NumPages
+	CMP #1
+	BEQ TestForHelp
 	INC Page
 	LDA NumPages
 	CMP Page
@@ -433,7 +432,7 @@ ENDIF
 	JMP LabelA
 
 .TestForChangeSort
-    ; // 1..4 key pressed (change sort)
+	; // 1..4 key pressed (change sort)
 	; 620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
 	CPY #17
 	BCC TestForClearFilter
@@ -455,7 +454,7 @@ ENDIF
 	JMP LabelA
 
 .TestForClearFilter
-    ; // 5 key pressed (clear filter>
+	; // 5 key pressed (clear filter>
 	; 630 IF ?Q=21 F=0;G=0;A=A&127;G.a
 	CPY #21
 	BNE TestForChangeFilter
@@ -464,7 +463,7 @@ ENDIF
 	BEQ PageStateZero
 
 .TestForChangeFilter
-    ; // 6..8 key pressed (filter by publisher, genre or connection)
+	; // 6..8 key pressed (filter by publisher, genre or connection)
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	CPY #22
 	BCC TestForSelect
@@ -481,14 +480,14 @@ ENDIF
 	JMP LabelA
 
 .TestForSelect
-    ; // <Return> or <Space> pressed (select current item)
+	; // <Return> or <Space> pressed (select current item)
 	; 650 IF ?Q=0 OR ?Q=13 G.f
 	CPY #0
 	BEQ LabelF
 	CPY #Return
 	BEQ LabelF
 
-    ; // S key pressed (start search)
+	; // S key pressed (start search)
 	; 655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);G.a
 	CPY #51
 	BNE TestForAtoM
@@ -506,14 +505,14 @@ ENDIF
 	JMP LabelC
 
 .TestForAtoM
-    ; // A..M key pressed (select an item)
+	; // A..M key pressed (select an item)
 	; 660 IF ?Q<33 OR ?Q>45 G.c
 	CPY #32
 	BCC JumpToLabelC
 	CPY #46
 	BCS JumpToLabelC
 
-    ; // Make sure that the row is not blank
+	; // Make sure that the row is not blank
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 	TYA
 	SBC #32
@@ -525,7 +524,7 @@ ENDIF
 
 .LabelF
 
-    ; // Get the address of the record selected
+	; // Get the address of the record selected
 	; 680fI=R!(Y*2 + 2)
 	LDA Item
 	ASL A
@@ -543,7 +542,7 @@ ENDIF
 	PLA
 	STA TmpPtr
 
-    ; // Handle selection of a filter item
+	; // Handle selection of a filter item
 	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
 	LDA PageState
 	BEQ BootProgram
@@ -572,7 +571,7 @@ ENDIF
 
 .BootProgram
 
-    ; // Handle *RUN of a title - K is the title index
+	; // Handle *RUN of a title - K is the title index
 	; 800 K=(!I)&#7FF
 	LDX #TmpPtr
 	JSR Dereference
@@ -664,9 +663,9 @@ ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to show the help
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelH
 
@@ -682,9 +681,9 @@ ENDIF
 	JSR Oswrch
 	RTS
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to invert line 2+Y on the screen
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelI
 
@@ -696,9 +695,9 @@ ENDIF
 	STY Row
 	JMP HighlightRow
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to set the zero page locations prior to calling machine code
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelJ
 
@@ -756,9 +755,9 @@ ENDIF
 	RTS
 
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; Subroutine to update the page header
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	; Subroutine to update the page header
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 	; 1000xP.$30'"                                "$30
@@ -880,10 +879,10 @@ ENDIF
 .LabelXString3
 	EQUS "  PAGE   /  ", 0
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; Subroutine to print the filter name padded with spaces to 10 chars
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	; Subroutine to print the filter name padded with spaces to 10 chars
 	; I is passed in as the accumulator
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelY
 
@@ -911,10 +910,10 @@ ENDIF
 .LabelYNumSpaces
 	EQUB 0, 1, 5, 0
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to print the filter name not padded at all
 	; I is passed in as the accumulator
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 .LabelZ
@@ -1142,6 +1141,6 @@ IF (econet = 1)
 ENDIF
 
 .RowReturnBuf
-   SKIP LinesPerPage * 2
+	SKIP LinesPerPage * 2
 
 .ENDOF
