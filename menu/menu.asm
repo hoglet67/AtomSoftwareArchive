@@ -10,46 +10,43 @@ include "renderer_header.asm"
 
 IF (sddos = 1)
 
-	TmpPtr       = $78
-	DerefTmp     = $7a
-	SortTablePtr = $7c
-	PageState    = $7e
-	NumPages     = $7f
-	Item         = $97
-	SortType     = $8c
-	FilterType   = $8d
-	FilterString = $8e
-	AutoRepeat   = $8f
+	TmpPtr       = $78 ; 2 bytes
+	SortTablePtr = $7a ; 2 bytes
+	PageState    = $7c ; 1 byte
+	NumPages     = $7d ; 1 byte
+	Item         = $7e ; 1 byte
+	SortType     = $7f ; 1 byte
+	FilterType   = $8c ; 1 byte
+	FilterString = $8d ; 2 bytes
+	AutoRepeat   = $8f ; 1 byte
 
 	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
 
 ELIF (econet = 1)
 
-	TmpPtr       = $78
-	DerefTmp     = $7a
-	SortTablePtr = $7c
-	PageState    = $7e
-	NumPages     = $7f
-	Item         = $97
-	SortType     = $8c
-	FilterType   = $8d
-	FilterString = $8e
-	AutoRepeat   = $8f
+	TmpPtr       = $78 ; 2 bytes
+	SortTablePtr = $7a ; 2 bytes
+	PageState    = $7c ; 1 byte
+	NumPages     = $7d ; 1 byte
+	Item         = $7e ; 1 byte
+	SortType     = $7f ; 1 byte
+	FilterType   = $8c ; 1 byte
+	FilterString = $8d ; 2 bytes
+	AutoRepeat   = $8f ; 1 byte
 
 	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
 
 ELSE
 
-	TmpPtr       = $70
-	DerefTmp     = $72
-	SortTablePtr = $74
-	PageState    = $76
-	NumPages     = $77
-	Item         = $78
-	SortType     = $79
-	FilterType   = $7a
-	FilterString = $7b
-	AutoRepeat   = $7d
+	TmpPtr       = $70 ; 2 bytes
+	SortTablePtr = $72 ; 2 bytes
+	PageState    = $74 ; 1 byte
+	NumPages     = $75 ; 1 byte
+	Item         = $76 ; 1 byte
+	SortType     = $77 ; 1 byte
+	FilterType   = $78 ; 1 byte
+	FilterString = $79 ; 2 bytes
+	AutoRepeat   = $7b ; 1 byte
 
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
 
@@ -1048,17 +1045,19 @@ ENDIF
 
 	; Dereferences the pointer at zero page location X,X+1
 .Dereference
-	LDA 0,X
-	STA DerefTmp
-	LDA 1,X
-	STA DerefTmp + 1
-	LDY #0
-	LDA (DerefTmp),Y
-	STA 0,X
-	INY
-	LDA (DerefTmp),Y
+{
+	LDA (0,X)
+	PHA
+	INC 0,X
+	BNE skip
+	INC 1,X
+.skip
+	LDA (0,X)
 	STA 1,X
+	PLA
+	STA 0,X
 	RTS
+}
 
 .HandleAutoRepeat
 	LDA AutoRepeat
