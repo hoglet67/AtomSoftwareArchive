@@ -229,11 +229,20 @@ public class BeebSIDtoAtomSID {
 
 		// Move SID Registers
 		for (int i = 0; i < sid.length - 2; i++) {
-			if ((sid[i] == (byte) 0x8c) || // STY Absolute
+			if (
+					(sid[i] == (byte) 0x8c) || // STY Absolute
 					(sid[i] == (byte) 0x8d) || // STA Absolute
 					(sid[i] == (byte) 0x8e) || // STX Absolute
 					(sid[i] == (byte) 0x99) || // STA Absolute,Y
-					(sid[i] == (byte) 0x9d)) // STA Absolute,X
+					(sid[i] == (byte) 0x9d)    // STA Absolute,X
+
+               // || (sid[i] == (byte) 0xac) // LDY Absolute
+					// || (sid[i] == (byte) 0xad) // LDA Absolute
+					// || (sid[i] == (byte) 0xae) // LDX Absolute
+					// || (sid[i] == (byte) 0xb9) // LDA Absolute,Y
+					// || (sid[i] == (byte) 0xbd) // LDA Absolute,X
+
+             )
 			{
 				if (sid[i + 1] >= (byte) (oldSidBaseLo) && sid[i + 1] < (byte) (oldSidBaseLo + 0x20)
 						&& sid[i + 2] == (byte) oldSidBaseHi) {
@@ -243,6 +252,23 @@ public class BeebSIDtoAtomSID {
 					sid[i + 2] = (byte) (((int) sid[i + 2]) + ((sidBase - oldSidBase) >> 8) & 0xff);
 					System.out.println("    to     " + i + " " + Integer.toHexString(sid[i] & 0xff) + " "
 							+ Integer.toHexString(sid[i + 1] & 0xff) + " " + Integer.toHexString(sid[i + 2] & 0xff));
+				}
+			}
+		}
+
+		// Move any embedded SID data (<AddrLo> <AddrHi> <Data> [ <AddrLo> <AddrHi> <Data> ... ] <FF> <FF> )
+		if (srcFile.toString().equals("BEEBSID16" + File.separator + "1977THA")) {
+			for (int i = 0; i < sid.length - 5; i++) {
+				if (sid[i] >= (byte) (oldSidBaseLo) && sid[i] < (byte) (oldSidBaseLo + 0x20) && sid[i + 1] == (byte) oldSidBaseHi
+					 && ((sid[i + 3] >= (byte) (oldSidBaseLo) && sid[i + 3] < (byte) (oldSidBaseLo + 0x20) && sid[i + 4] == (byte) oldSidBaseHi) ||
+						  (sid[i + 3] == (byte) 0xff && sid[i + 4] == (byte) 0xff))) {
+					System.out.println("Relocating run of embedded SID Data at " + i);
+					while (i < sid.length - 2 && sid[i] >= (byte) (oldSidBaseLo) && sid[i] < (byte) (oldSidBaseLo + 0x20) && sid[i + 1] == (byte) oldSidBaseHi) {
+						System.out.println("..." + Integer.toHexString(sid[i+1] & 0xff) + Integer.toHexString(sid[i] & 0xff) + " = " + Integer.toHexString(sid[i+2] & 0xff));
+						sid[i] = (byte) (((int) sid[i]) + ((sidBase - oldSidBase) & 0xff));
+						sid[i + 1] = (byte) (((int) sid[i + 1]) + ((sidBase - oldSidBase) >> 8) & 0xff);
+						i += 3;
+					}
 				}
 			}
 		}
