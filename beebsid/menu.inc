@@ -153,6 +153,7 @@ sid_reg         = $9700
 
 .end_prog
 	jsr restore_irq		; Restore IRQ vec
+	lda #$00                ; volume 0
 	jsr resetSID		; Reset SID sound
 
 	jsr restore_zero	; Restore the original page zero
@@ -171,6 +172,7 @@ sid_reg         = $9700
 
 .play_song			; SPACE pressed
 
+	lda #$0f                ; volume max (in case SID doesn't do this, e.g. A Kind of Magic)
 	jsr resetSID
 	jsr restore_irq		; Restore IRQ vec
 
@@ -574,15 +576,17 @@ irqtime	= 20000
 ;RESETSID
 ;
 ; Reset SID registers so there will be no sound
+; On Entry:
+;    A = value to store in reg $18; all other regs cleared
 ;--------------------------------------------------
 
 SID	= $bdc0
 
 .resetSID
-      ldx #$1F               ; Reg pointer
-      lda #$00
+      ldx #$18               ; Reg pointer, starting with filter mode and main volume control
 .L30B5
       sta SID,X              ; Clear reg
+      lda #$00
       dex
       bpl L30B5
       rts
