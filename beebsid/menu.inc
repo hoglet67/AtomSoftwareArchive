@@ -62,6 +62,8 @@ sid_reg         = $9700
 	sta line_ptr
 	sta highlight
 	sta cursor
+	sta $4c6		; ABBA SOS and Knowing Me Knowing You use
+				; 4c6 b2..0 as channel disable
 
 				; Determine the number of titles at run time
 	tay
