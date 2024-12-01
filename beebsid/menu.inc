@@ -40,7 +40,7 @@ sid_reg         = $9700
 
 ;--------------------------------------------
 ; MAIN
-; 
+;
 ; Main entry program
 ;--------------------------------------------
 
@@ -181,7 +181,7 @@ sid_reg         = $9700
 	sta timer+1
 	sta timer+3
 	sta timer+4
-	
+
 	lda highlight		; Set pointer to songdata
 	asl a
 	tay
@@ -245,7 +245,7 @@ sid_reg         = $9700
 
 ;--------------------------------------------
 ; PRINT_MENU
-; 
+;
 ; Print menu and invert selected line
 ;--------------------------------------------
 
@@ -299,14 +299,14 @@ sid_reg         = $9700
 .print_end
 	lda #0			; Reset invert flag
 	sta invert
-	rts 
+	rts
 
 .empty_line
 	EQUS "                              ",0
 
 ;--------------------------------------------
 ; PRINT_SLIDER A
-; 
+;
 ; Print play slider, 25 ticks/sec
 ;--------------------------------------------
 
@@ -481,7 +481,7 @@ irqtime	= 20000
 	tay
 
 .init_ptr
-	jsr prt_end		; SID init 
+	jsr prt_end		; SID init
 
 	jsr save_zero_sid
 	cli
@@ -581,7 +581,7 @@ SID	= $bdc0
       lda #$00
 .L30B5
       sta SID,X              ; Clear reg
-      dex 
+      dex
       bpl L30B5
       rts
 
@@ -685,7 +685,7 @@ SID	= $bdc0
 	lda sid_reg,y
 	and #1
 	beq vu_decay
-	lda #9		; Gatebit=1 -> max value 
+	lda #9		; Gatebit=1 -> max value
 	sta vu_val,x
 	jmp end_vu
 .vu_decay
@@ -727,7 +727,7 @@ SID	= $bdc0
 	ldy #0
 .loop1
 	lda scr_data,y
-	sta $8000,y		; Display upper half 
+	sta $8000,y		; Display upper half
 	lda scr_data+$100,y
 	sta $8100,y		; Display lower half
 	iny
@@ -826,12 +826,12 @@ SID	= $bdc0
 
 .txt_ptr
 
-; 
+;
 ; 	EQUW line1,line2,line3,line4
 ; 	EQUW line5,line6,line7,line8
 ; 	EQUW line9,line10,line11,line12
 ; 	EQUW line13,line14,$0
-; 
+;
 ; .line1
 ; 	EQUS "A. AXEL-F                     ",0
 ; 	EQUW $1800,$1800,$1806
