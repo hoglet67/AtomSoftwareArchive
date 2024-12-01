@@ -273,12 +273,20 @@ public class BeebSIDtoAtomSID {
 			}
 		}
 
-		int addr = loadAddr + sid.length;
+		// In some cases we need to pad the SID, as it uses RAM
+		// straight after the code for data
+		int pad = 0;
+		if (srcFile.toString().equals("BEEBSID17" + File.separator + "08RENTA")) {
+			pad = 0x400;
+			System.out.println("Padding " + srcFile + " by " + pad + " bytes");
+		}
+
+		int addr = loadAddr + pad + sid.length;
 
 		// Append the vu code
-		byte[] sidVu = new byte[sid.length + vu.length];
+		byte[] sidVu = new byte[sid.length + pad + vu.length];
 		System.arraycopy(sid, 0, sidVu, 0, sid.length);
-		System.arraycopy(vu, 0, sidVu, sid.length, vu.length);
+		System.arraycopy(vu, 0, sidVu, pad + sid.length, vu.length);
 		sid = sidVu;
 
 		// Patch in VU Meter
