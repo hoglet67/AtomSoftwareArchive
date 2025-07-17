@@ -520,9 +520,17 @@ cp -a roland/* $ARCHIVE
 cp -a wim/* $ARCHIVE
 
 ##############################################################
+# Manpages directory
+##############################################################
+
+rm -rf MANPAGES
+mv $ARCHIVE/MANPAGES .
+
+##############################################################
 # Library directory
 ##############################################################
 
-mkdir -p $ARCHIVE/LIB
-cp ../quill/VDU2440 $ARCHIVE/LIB
-cp dave/GODIL/OSWRCH80 $ARCHIVE/LIB
+rm -rf LIB
+mv $ARCHIVE/LIB .
+cp ../quill/VDU2440 LIB
+cp dave/GODIL/OSWRCH80 LIB

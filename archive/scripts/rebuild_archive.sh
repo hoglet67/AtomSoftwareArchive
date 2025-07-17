@@ -58,7 +58,7 @@ popd
 # Zip up the archive
 ##############################################################
 
-zip -qr $ARCHIVE.zip MENU $ARCHIVE
+zip -qr $ARCHIVE.zip MENU LIB MANPAGES $ARCHIVE
 
 zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
 
