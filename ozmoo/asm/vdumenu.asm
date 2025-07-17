@@ -146,7 +146,7 @@ ENDMACRO
    EQUS "/LIB/OSWRCH80", 13
 
 .command_run
-   EQUS "/TUBE/TUBE -V"
+   EQUS "/LIB/TUBE -V"
 .command_vdu_type
    EQUS "0 RUN LOADER", 13
 
