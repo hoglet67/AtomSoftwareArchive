@@ -13,7 +13,7 @@ function package() {
 }
 
 
-ARCHIVE=archive
+ARCHIVE=ASA
 
 # Define top level directories
 # Nice and short for easy navigation

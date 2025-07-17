@@ -156,6 +156,10 @@ IF (econet = 1)
 	;JSR OscliString
 	;EQUS "LIB $.ATOMLIB", Return
 ELSE
+IF (sddos = 0)
+	JSR OscliString
+	EQUS "CWD ASA", Return
+ENDIF
 	; 10 *NOMON
 	JSR OscliString
 	EQUS "NOMON", Return

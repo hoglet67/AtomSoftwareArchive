@@ -40,9 +40,10 @@ java/afsutils/bin/
 # beebsid/ATMSID*/
 beebsid/BEEBSID*/
 
-archive/archive.js
-archive/archive.img
-archive/archive/
+archive/MENU
+archive/ASA.js
+archive/ASA.img
+archive/ASA/
 archive/releases/
 
 bbcbasic/BBCBASIC2
@@ -61,5 +62,3 @@ menu/disks/
 
 java/afsutils/scsi0.*
 java/afsutils/test.zip
-
-

@@ -5,7 +5,7 @@
     20CLEAR4
     30DO
     40FOR N=0 TO NNNNN
-    45*CWD /AGD
+    45*CWD /ASA/AGD
     50GOSUB (1000+N)
     60X=0;DO X=X+1;U.P?X=47
     70$C="CWD "

@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-ARCHIVE=archive
+ARCHIVE=ASA
 
 ##############################################################
 # Update the AGD Carousel
@@ -58,9 +58,7 @@ popd
 # Zip up the archive
 ##############################################################
 
-pushd $ARCHIVE
-find . -type f | sort | zip -@ ../$ARCHIVE.zip
-popd
+zip -qr $ARCHIVE.zip MENU $ARCHIVE
 
 zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
 
@@ -102,11 +100,9 @@ ls -l ${NAME}*
 # Deploy to Atomulator for testing
 ##############################################################
 
-pushd $ARCHIVE
-MMC=../../../Atomulator/mmc
+MMC=../../Atomulator/mmc
 if [ -d "$MMC" ]; then
-    cp -a * $MMC
+    cp -a MENU ASA $MMC
 else
     echo "Skipping copy to Atomulator"
 fi
-popd

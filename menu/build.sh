@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-ARCHIVE=../archive/archive
+ARCHIVE=../archive/ASA
 
 DIR=MNU
 
@@ -28,7 +28,7 @@ cp splash/HELP.ATM $ARCHIVE/HELP
 
 # Compile the Standalone Menu (for AtomMMC)
 $BEEBASM -i menu_atommc.asm
-mv MENU $ARCHIVE
+mv MENU $ARCHIVE/..
 
 # Compile the Standalone Menu (for SDDOS)
 $BEEBASM -i menu_sddos.asm
@@ -48,16 +48,3 @@ java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCH
 # Remove unnecessary files from the root directory
 rm -f $ARCHIVE/HELP
 rm -f $ARCHIVE/MENUECO
-
-# Also copy to Atomulator
-MMC=../../Atomulator/mmc
-if [ -d "$MMC" ]; then
-    cp -a $ARCHIVE/MENU $ARCHIVE/$DIR[A-Z] $MMC
-else
-    echo "Skipping copy to Atomulator"
-fi
-
-
-
-# Zip everything up somewhere nice
-# zip -qr $HOME/$DIR.zip $ARCHIVE/MENU $ARCHIVE/HELP $ARCHIVE/$DIR[A-Z]
