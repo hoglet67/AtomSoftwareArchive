@@ -64,3 +64,6 @@ menu/disks/
 
 java/afsutils/scsi0.*
 java/afsutils/test.zip
+
+#MACOSX
+.DS_Store
