@@ -2,7 +2,7 @@
 
 Software relating to the Acorn Atom Software Archive of stardot.org.uk
 
-# Dependencies
+## Dependencies
 
 Dependencies for building the archive:
 * `ant`
