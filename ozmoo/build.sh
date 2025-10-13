@@ -30,8 +30,7 @@ fi
 
 if [ ! -d downloads ]
 then
-    mkdir -p downloadsI have just acquired a book of Atom programmes called 39 Tested Programs for the Acorn Atom.
-
+    mkdir -p downloads
 
     cd downloads
     # Alien Research Centre 3 and Behind Closed Doors 9 were posted to stardot
