@@ -1,7 +1,14 @@
 #!/bin/bash
 
 # Make a list of unique screens
+# Check for macOS and use gmd5sum if available, otherwise fallback to md5
+if [[ "$(uname)" == "Darwin" ]]; then
+    # macOS: use md5 and adjust output format to match md5sum
+    find ../archive/kees/AGD/ -type f -name '*SCR' -exec md5 -r {} \; | sort | uniq -u | awk '{print $2}' | cut -d/ -f2-3 | sort > list
+else
+    # Linux: use md5sum
 md5sum ../archive/kees/AGD/*/*SCR | sort | uniq -u -w33 | cut -d/ -f5-6 | sort > list
+fi
 
 rm -f  list.atommc
 rm -f  list.econet

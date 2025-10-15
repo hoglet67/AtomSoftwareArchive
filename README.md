@@ -5,16 +5,22 @@ Software relating to the Acorn Atom Software Archive of stardot.org.uk
 ## Dependencies
 
 Dependencies for building the archive:
-* ant
-* java
-* javac
-* beebasm
-* git
+* `ant`
+* `java`
+* `javac`
+* `beebasm`
+* `git`
+* `wget`
+* `acme`
+* `LZSA`
 
-These executables must all be on the current PATH
+On MacOS (or Linux), you will also need [homebrew](https://brew.sh)
+
+These executables must all be on the current `PATH`.
 
 ## Installing Dependencies
 
+### Linux
 ```
 sudo apt-get install openjdk-7-jdk ant git
 git clone https://github.com/stardot/beebasm.git
@@ -23,6 +29,38 @@ make clean
 make code
 sudo cp ../beebasm /usr/local/bin
 ```
+
+### MacOS
+
+Assuming you followed the instructions already for *Homebrew*
+
+```
+brew install ant acme lzsa openjdk@25
+```
+
+> Versions tested
+> * ant 1.10.15_1 
+> * acme 0.97
+> * lzsa 1.4.1
+> * openjdk 25
+
+After installation of JAVA, update your `PATH` environment variables to point to the JDK, and `beebasm`
+
+ $ `echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> $HOME/.zshrc`
+ $ `source $HOME/.zshrc`
+
+Install beebasm locally.  You can change directory to a suitable build or binaries directory first.
+
+```
+git clone https://github.com/stardot/beebasm.git beebasm_bin
+cd beebasm_bin/src
+make clean
+make code
+cd ..
+echo 'export PATH="'$(pwd)':$PATH"' >> $HOME/.zshrc
+source $HOME/.zshrc
+``` 
+
 
 ## Building the Archive
 
