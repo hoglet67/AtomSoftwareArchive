@@ -36,6 +36,20 @@ ELIF (econet = 1)
 
 	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
 
+ELIF (gosdc = 1)
+
+	TmpPtr       = $70 ; 2 bytes
+	SortTablePtr = $72 ; 2 bytes
+	PageState    = $74 ; 1 byte
+	NumPages     = $75 ; 1 byte
+	Item         = $76 ; 1 byte
+	SortType     = $77 ; 1 byte
+	FilterType   = $78 ; 1 byte
+	FilterString = $79 ; 2 bytes
+	AutoRepeat   = $7b ; 1 byte
+
+	ExecAddr     = $d2 ; don't change this, it's what GOSDC uses
+
 ELSE
 
 	TmpPtr       = $70 ; 2 bytes
@@ -52,7 +66,7 @@ ELSE
 
 ENDIF
 
-IF (econet = 1)
+IF (econet = 1 OR gosdc = 1)
 	DirSep = '.'
 ELSE
 	DirSep = '/'
@@ -150,7 +164,7 @@ ENDIF
 
 .MemTestDone
 
-IF (econet = 1)
+IF (econet = 1 OR gosdc = 1)
 	JSR OscliString
 	EQUS "DIR $.ASA", Return
 	;JSR OscliString
@@ -192,7 +206,7 @@ ENDIF
 	LDY #0
 	JSR Clear
 	JSR OscliString
-IF (econet = 1)
+IF (econet = 1 OR gosdc = 1)
 	EQUS "DIR SYS", Return
 ELSE
 	EQUS "CWD SYS", Return
@@ -217,7 +231,7 @@ IF (sddos = 1)
 ELSE
 	STA MenuDirChunk
 	JSR OscliString
-        IF (econet = 1)
+        IF (econet = 1 OR gosdc = 1)
 	EQUS "DIR MNU"
 	ELSE
 	EQUS "CWD MNU"
@@ -619,6 +633,15 @@ ELIF (econet = 1)
 
 .ChangeDirectory
 
+ELIF (gosdc = 1)
+
+	JSR ChangeDirectory
+
+	JSR OscliString
+	EQUS "RUN BOOT", Return
+
+.ChangeDirectory
+
 ENDIF
 
 .RunCommand0
@@ -630,7 +653,7 @@ ENDIF
 	INX
 	BNE RunCommand1
 .RunCommand2
-IF (econet = 1)
+IF (econet = 1 OR gosdc = 1)
 	JSR WritePath
 ELSE
 	JSR WriteDecimal
@@ -646,7 +669,7 @@ IF (sddos = 1)
 .RunCommand
 	EQUS "DIN  ,",0
 
-ELIF (econet = 1)
+ELIF (econet = 1 OR gosdc = 1)
 
 .RunCommand
 	EQUS "DIR $.ASA.",0
@@ -1139,6 +1162,25 @@ IF (econet = 1)
 	LDA #DirSep
 	STA OscliBuffer, X
 	INX
+	PLA
+	JMP WriteHex1
+
+ELIF (gosdc = 1)
+.WritePath
+	SEC
+	ROR SuppressFlag
+	LDA #'E'
+	STA OscliBuffer, X
+	INX
+	LDA BinBuffer + 1
+	JSR WriteHex1
+	LDA BinBuffer
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR WriteHex1
 	PLA
 	JMP WriteHex1
 ENDIF

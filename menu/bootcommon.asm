@@ -175,6 +175,152 @@ IF (rom = 1)
 
 .CmdRomCopy
 
+	LDX #$80
+	STX $BFFF
+
+	LDA $A000
+	EOR #$FF
+	STA $A000
+	EOR $A000
+
+	LDX #$81
+	STX $BFFF
+
+	CMP #$00
+	BNE UEATryOSR
+
+	JSR OsWriteString
+	EQUS "GOSDC PRO #AXXX : SEEN"
+	NOP
+
+	LDY #$00
+
+	LDA #$88
+	STY RomSrc
+	STA RomSrc + 1
+
+	LDA #$A0
+	STY RomDst
+	STA RomDst + 1
+
+	LDA #$80
+	STA $BFFF
+
+	LDX #$10
+
+.UEABytePRO
+
+	LDA (RomSrc),Y
+	STA (RomDst),Y
+	INY
+	BNE UEABytePRO
+
+	INC RomSrc + 1
+	INC RomDst + 1
+	DEX
+	BNE UEABytePRO
+
+	LDA #$81
+	STA $BFFF
+
+	JSR OsWriteString
+	EQUS ", WRITTEN", 10, 13
+	NOP
+
+	JMP DirectModeExit
+
+.UEATryOSR
+
+	BIT $FBAA
+	BIT $F880
+
+	BIT $FB1C
+	BIT $F980
+
+	LDA $A000
+	EOR #$FF
+	TAY
+	CMP $FB00,Y
+	BIT $F400
+	EOR $A000
+
+	BIT $FB14
+	BIT $F980
+
+	BIT $FBAA
+	BIT $F800
+
+	CMP #$00
+	BNE UEANotFound
+
+	JSR OsWriteString
+	EQUS "GOSDC OSR #AXXX : SEEN"
+	NOP
+
+	BIT $FBAA
+	BIT $F880
+
+	LDX #$00
+
+	LDA #$88
+	STX RomSrc
+	STA RomSrc + 1
+
+	LDA #$F0
+	STX RomDst
+	STA RomDst + 1
+
+.UEAPageOSR
+
+	LDA RomDst + 1
+	PHA
+	PHA
+
+	AND #$0C
+	LSR A
+	LSR A
+	ORA #$1C
+	TAY
+	CMP $FB00,Y
+	BIT $F980
+
+	PLA
+	AND #$03
+	ORA #$F4
+	STA RomDst + 1
+
+	LDY #$00
+
+.UEAByteOSR
+
+	LDA (RomSrc),Y
+	TAX
+	CMP $FB00,X
+	CMP (RomDst),Y
+	INY
+	BNE UEAByteOSR
+
+	PLA
+	STA RomDst + 1
+
+	INC RomSrc + 1
+	INC RomDst + 1
+	BNE UEAPageOSR
+
+	BIT $FB14
+	BIT $F980
+
+	BIT $FBAA
+	BIT $F800
+
+	JSR OsWriteString
+	EQUS ", WRITTEN", 10, 13
+	NOP
+
+	JMP DirectModeExit
+
+.UEANotFound
+
 	; Handle Phill's RAMROM board by remapping the RAM at 7000-7FFF to A000
 	LDA #1
 	STA $BFFE

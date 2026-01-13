@@ -7,7 +7,7 @@ public interface IFileGenerator {
     
     // The various build targets we support
     public enum Target {
-        SDDOS, JS, ECONET, ATOMMC
+        SDDOS, JS, ECONET, GOSDC, ATOMMC
     }
 
     void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;

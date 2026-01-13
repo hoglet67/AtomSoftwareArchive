@@ -38,6 +38,10 @@ mv MENUSD $ARCHIVE
 $BEEBASM -i menu_econet.asm
 mv MENUECO $ARCHIVE
 
+# Compile the Standalone Menu (for GoSDC)
+$BEEBASM -i menu_gosdc.asm
+mv MENUGOS $ARCHIVE
+
 # Translate the Help from text to ATM
 #java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
 #mv HELPGEN $DIR

@@ -137,6 +137,14 @@ public class GenerateAll {
                     econetGenerator.close();
                     new File(archiveDir, "MENUSD").delete();
                 }
+                
+                if (target == Target.GOSDC) {
+                    GenerateGoSDCFiles gosdcGenerator = new GenerateGoSDCFiles(archiveDir, menuBase, chunks.size(),
+                            new File(archiveDir + ".gosdc"));
+                    gosdcGenerator.generateFiles(items, target);
+                    gosdcGenerator.close();
+                    new File(archiveDir, "MENUSD").delete();
+                }
 
             }
         } catch (IOException e) {

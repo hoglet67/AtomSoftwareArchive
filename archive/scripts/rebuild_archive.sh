@@ -60,7 +60,7 @@ popd
 
 zip -qr $ARCHIVE.zip MENU LIB MANPAGES $ARCHIVE
 
-zip -qr ~/$ARCHIVE_SDDOS.zip $ARCHIVE.img
+zip -qr ~/${ARCHIVE}_SDDOS.zip $ARCHIVE.img
 
 ##############################################################
 # Rename the archive files
@@ -75,6 +75,7 @@ zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
 pushd ../menu
 zip -qr ../archive/${NAME}_SDDOS3.zip disks
 popd
+zip -qr ${NAME}_GoSDC.zip ${ARCHIVE}.gosdc
 
 ##############################################################
 # Generate the AFS0 File Server Disk Image

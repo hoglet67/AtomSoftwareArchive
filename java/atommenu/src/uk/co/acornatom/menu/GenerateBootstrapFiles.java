@@ -93,7 +93,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
                 } else {
                     cmd = parts[0] + " " + filename;
                 }
-                if (target == Target.SDDOS || target == Target.JS || target == Target.ECONET) {
+                if (target == Target.SDDOS || target == Target.JS || target == Target.ECONET || target == Target.GOSDC) {
                     item.getLoadables().add(filename);
                     if (cmd.startsWith("*RUN")) {
                         // Add to list of runnables, so we can later check the
