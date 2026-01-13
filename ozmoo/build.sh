@@ -33,14 +33,11 @@ then
     mkdir -p downloads
 
     cd downloads
-    # Alien Research Centre 3 and Behind Closed Doors 9 were posted to stardot
-    wget -O balrog.zip https://stardot.org.uk/forums/download/file.php?id=60993
-    unzip balrog.zip
-    rm -f balrog.zip
-    # Calypso was poster to stardot
-    wget -O calypso.zip https://stardot.org.uk/forums/download/file.php?id=59155
-    unzip calypso.zip
-    rm -f calypso.zip
+
+    # Alien Research Centre 3 and Behind Closed Doors 9 and Calypso
+    # are local copies of build posted to stardot (which no longer
+    # allows anonymous downloads). We now have local copies of these.
+    cp ../archive/* .
     # Classic Adventure
     wget https://raw.githubusercontent.com/sugarlabs/Frotz/master/Advent.z5
     # Infocom
