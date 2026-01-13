@@ -86,6 +86,30 @@ public class GenerateGoSDCFiles extends GenerateBase {
         }
     }
 
+    private void patch_atommc_joystick(ATMFile atmFile, SpreadsheetTitle item) {
+        byte[] bytes = atmFile.getData();
+        for (int i = 0; i < bytes.length - 6; i++) {
+            // .loop LDA &B400
+            //       BMI loop   // Patch replaces this with NOP
+            //       RTS
+           if (bytes[i  ] == (byte) 0xAD &&
+               bytes[i+1] == (byte) 0x00 &&
+               bytes[i+2] == (byte) 0xB4 &&
+               bytes[i+3] == (byte) 0x30 &&
+               bytes[i+4] == (byte) 0xFB &&
+               bytes[i+5] == (byte) 0x60) {
+                   System.out.println(String.format("Patching AtoMMC joystick code in %s %s file %s offset %d",
+                                                    item.getPublisher(),
+                                                    item.getTitle(),
+                                                    atmFile.getTitle(),
+                                                    i));
+                   bytes[i + 3] = (byte) 0xEA;
+                   bytes[i + 4] = (byte) 0xEA;
+            }
+        }
+    }
+
+
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         for (SpreadsheetTitle item : items) {
@@ -113,6 +137,7 @@ public class GenerateGoSDCFiles extends GenerateBase {
                         File file = new File(new File(archiveDir, item.getDir()), filename);
                         ATMFile atmFile = new ATMFile(file);
                         missing.remove(filename);
+                        patch_atommc_joystick(atmFile, item);
                         atmFile.setTitle(filename);
                         addFile(dir, atmFile);
                         if (item.getRunnables().contains(filename)) {
