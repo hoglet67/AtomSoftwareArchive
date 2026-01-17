@@ -254,7 +254,7 @@ public class GenerateEconetFiles extends GenerateBase {
 
    private void patch_nomon(ATMFile atmFile, SpreadsheetTitle item) {
         byte[] bytes = atmFile.getData();
-        String[] matches= {"N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\t"};
+        String[] matches= {"N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\r"};
         for (String match : matches) {
            byte[] ref = match.getBytes();
            for (int i = 0; i < bytes.length - ref.length - 2; i++) {
