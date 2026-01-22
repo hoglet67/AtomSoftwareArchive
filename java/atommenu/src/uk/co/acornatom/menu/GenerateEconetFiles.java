@@ -328,6 +328,7 @@ public class GenerateEconetFiles extends GenerateBase {
                         atmFile.setTitle(filename);
                         patch_interupt_vector(atmFile);
                         patch_nomon(atmFile, item);
+                        patch_atommc_joystick(atmFile, item);
                         addFile(dir, atmFile);
                         if (item.getRunnables().contains(filename)) {
                             if (atmFile.getExecAddr() == (0xc2b2)) {
