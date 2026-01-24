@@ -34,10 +34,6 @@ then
 
     cd downloads
 
-    # Alien Research Centre 3 and Behind Closed Doors 9 and Calypso
-    # are local copies of build posted to stardot (which no longer
-    # allows anonymous downloads). We now have local copies of these.
-    cp ../archive/* .
     # Classic Adventure
     wget https://raw.githubusercontent.com/sugarlabs/Frotz/master/Advent.z5
     # Infocom
@@ -52,6 +48,11 @@ then
     wget https://eblong.com/infocom/gamefiles/zork3-r17-s840727.z3
     cd ..
 fi
+
+# Alien Research Centre 3 and Behind Closed Doors 9 and Calypso
+# are local copies of build posted to stardot (which no longer
+# allows anonymous downloads). We now have local copies of these.
+cp archive/* downloads
 
 #########################################################
 # Build Games
