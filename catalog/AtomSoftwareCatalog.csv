@@ -287,7 +287,7 @@ DATA",present,,,,
 178,V1,PP,Prog Power,A.Commercial Software,3D Asteroids,Game,J. Millar,PP,8200,"CH.""3DASTERO""",Works,3DASTERO,present,,,,
 179,V7B1,PP,Prog Power,A.Commercial Software,3D OXO,Game,R.M.P. Hanson,PP,8200,"CH.""3DOXO""",Works,"3DOXO
 3DOXOIN",present,,,,
-180,V1,PP,Prog Power,A.Commercial Software,Adventure,Adventure,J. Spilsbury,PP,0300,"*LOAD ADVCODE 
+180,V1,PP,Prog Power,A.Commercial Software,Adventure,Adventure,J. Spilsbury,PP,0300,"*LOAD ADVCODE
 *LOAD ADVDATA
 RUN",Works,"ADVCODE
 ADVDATA",present,,,,
@@ -1225,7 +1225,7 @@ PRINT FOR HELP: SEE MANUAL
 *LOAD 2BBB 8800",Works,2BBB,present,ROMs,,,
 654,V6,NC,Non Comm,F.ROMS,Gags,Utility,Gerrit Hillebrand,ROMS/NC/GAGS,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: GAGS
-PRINT FOR HELP: SEE MANUAL 
+PRINT FOR HELP: SEE MANUAL
 *LOAD 9F4C 8800",Works,9F4C,present,ROMs,,,
 655,V6,NC,Non Comm,F.ROMS,JosBox,Utility,Jos Horsmeijer,ROMS/NC/JOSBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR HELP: SEE MANUAL
