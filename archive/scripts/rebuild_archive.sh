@@ -102,8 +102,9 @@ ls -l ${NAME}*
 ##############################################################
 
 MMC=../../Atomulator/mmc
-if [ -d "$MMC" ]; then
-    cp -a MENU ASA $MMC
+if [ -d "${MMC}" ]; then
+    rm -rf ${MMC}/ASA
+    unzip -o -q -d ${MMC} ${NAME}.zip
 else
     echo "Skipping copy to Atomulator"
 fi

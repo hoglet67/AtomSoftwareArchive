@@ -13,7 +13,7 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
     private static final int NUM_SECS_PER_TRACK = 10;
     private static final int NUM_SECS = NUM_TRACKS * NUM_SECS_PER_TRACK;
     private static final int SEC_SIZE = 256;
-    
+
     private int sectorNum;
     private File archiveDir;
     private String menuBase;
@@ -23,7 +23,7 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
         super();
         this.archiveDir = archiveDir;
         this.menuBase = menuBase;
-        this.numChunks = numChunks;     
+        this.numChunks = numChunks;
     }
 
     abstract protected void addDisk(byte[] image, int diskNum) throws IOException;
@@ -41,7 +41,7 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
             System.out.println(i + " = " + file_start_sec + " " + file_len + " " + file_end_sec);
             if (file_end_sec > lastUsedSector)
                 lastUsedSector = file_end_sec;
-    
+
         }
         return (lastUsedSector + 1) << 8;
     }
@@ -69,22 +69,22 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
 
     private void addFile(byte[] image, ATMFile atmFile) {
         int filePtr = image[0x105] & 0xFF;
-    
+
         filePtr += 8;
         if (filePtr > 255) {
             throw new RuntimeException("Too many files in title: " + atmFile.getTitle());
         }
         image[0x105] = (byte) filePtr;
-    
+
         // Move all the files down to make room
         for (int i = filePtr + 7; i >= 16; i--) {
             image[i] = image[i - 8];
             image[i + 0x100] = image[i + 0x100 - 8];
         }
-    
+
         // Always the new file in the first position
         filePtr = 8;
-    
+
         String filename = atmFile.getTitle();
         if (filename.length() > 7) {
             throw new RuntimeException("Filename too long: " + filename);
@@ -95,11 +95,11 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
         for (int i = 0; i < 7; i++) {
             image[filePtr + i] = (byte) filename.charAt(i);
         }
-    
+
         // This is the file qualifier (a one character directory)
         // Bit 7 set if the file is locked
         image[filePtr + 7] = 32;
-    
+
         image[filePtr + 0x100] = (byte) (atmFile.getLoadAddr() & 0xff);
         image[filePtr + 0x101] = (byte) ((atmFile.getLoadAddr() >> 8) & 0xff);
         image[filePtr + 0x102] = (byte) (atmFile.getExecAddr() & 0xff);
@@ -108,36 +108,36 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
         image[filePtr + 0x105] = (byte) ((atmFile.getLength() >> 8) & 0xff);
         image[filePtr + 0x106] = (byte) (((atmFile.getLength() >> 12) & 0xf0) | ((sectorNum >> 8) & 0x0f));
         image[filePtr + 0x107] = (byte) (sectorNum & 0xff);
-    
+
         int lengthInSecs = (atmFile.getLength() + 255) / SEC_SIZE;
-    
+
         if (sectorNum + lengthInSecs >= NUM_SECS) {
             throw new RuntimeException("Disk full is title: " + atmFile.getTitle());
         }
         System.arraycopy(atmFile.getData(), 0, image, sectorNum * SEC_SIZE, atmFile.getLength());
         sectorNum += lengthInSecs;
-    
+
     }
 
     public void createMenuDisk(int bootDiskNum, int chapterDiskBase) throws IOException {
         // Disk 0 is just the menu disk
         byte[] image = createBlankDiskImage("MENU");
-    
+
         // MENU
         ATMFile menuFile = new ATMFile(new File(archiveDir, "MENUSD"));
         menuFile.setTitle("MENU");
         addFile(image, menuFile);
-    
+
         // Splash files
         // In AtoMMC these are present in the root directory, but in SDDOS they are needed in the MENU disk (disk 0)
         ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
         addFile(image, splashFile1);
         ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
         addFile(image, splashFile2);
-    
-        
+
+
         addDisk(image, bootDiskNum);
-        
+
         for (int chunk = 0; chunk < numChunks; chunk++) {
             char chunkLetter = (char) ('A' + chunk);
             byte[] chunkImage = createBlankDiskImage("MENU" + chunkLetter);
@@ -145,25 +145,28 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
                 addFile(chunkImage, atmFile);
             }
+            ATMFile chapFile = new ATMFile(new File(archiveDir, "CHAPSD"));
+            menuFile.setTitle("CHAP");
+            addFile(chunkImage, chapFile);
             int num = chapterDiskBase + chunk;
             addDisk(chunkImage, num);
         }
     }
 
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
-    
+
         for (SpreadsheetTitle item : items) {
             try {
                 if (item.isPresent()) {
                     System.out.println(item.getTitle());
                     byte[] image = createBlankDiskImage(item.getTitle());
-    
+
                     File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
                             "" + item.getIdentifier());
                     ATMFile bootAtmFile = new ATMFile(bootfile);
                     bootAtmFile.setTitle("BOOT");
                     addFile(image, bootAtmFile);
-    
+
                     Set<String> missing = new HashSet<String>(item.getLoadables());
                     for (String filename : item.getFilenames()) {
                         System.out.println("    >" + filename + "<");
@@ -197,5 +200,5 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
                 e.printStackTrace();
             }
         }
-    }    
+    }
 }

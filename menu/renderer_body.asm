@@ -518,44 +518,6 @@ ENDIF
 	TAX
 	RTS
 
-.WriteDecimal:
-	JSR BinToDecimal16
-	; Set the flag to support suppression of leading zeros
-	STY SuppressFlag
-	LDY #2
-	; Output the BcdBuffer digits, MS first
-.DecLoop
-	LDA BcdBuffer,Y
-	JSR WriteHex
-	DEY
-	BPL DecLoop
-	RTS
-
-.BinToDecimal16
-	LDA #0
-	STA BcdBuffer
-	STA BcdBuffer+1
-	STA BcdBuffer+2
-	SED
-	LDY #16
-.BinToDecimal16Loop:
-	; Handle the binary bits one at a time
-	ASL BinBuffer
-	ROL BinBuffer+1
-	; Add into the BCD accumulator
-	LDA BcdBuffer
-	ADC BcdBuffer
-	STA BcdBuffer
-	LDA BcdBuffer+1
-	ADC BcdBuffer+1
-	STA BcdBuffer+1
-	LDA BcdBuffer+2
-	ADC BcdBuffer+2
-	STA BcdBuffer+2
-	DEY
-	BNE BinToDecimal16Loop
-	CLD
-	RTS
 
 .BinToDecimal8
 	LDA #0
@@ -580,33 +542,6 @@ ENDIF
 	RTS
 
 
-.WriteHex
-	PHA
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR WriteHex1
-	PLA
-.WriteHex1
-	AND #$0f
-	BNE WriteHex2
-	; Suppress leading zero
-	BIT SuppressFlag
-	BPL WriteHex4
-.WriteHex2
-	; Make sure bit 7 of SuppressFlag is set, so we don't suppress further zeros
-	SEC
-	ROR	SuppressFlag
-	CMP #$0a
-	BCC WriteHex3
-	ADC #$06
-.WriteHex3
-	ADC #$30
-	STA CountString,X
-	INX
-.WriteHex4
-	RTS
 
 .Search
 

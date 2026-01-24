@@ -302,6 +302,7 @@ public class GenerateMenuFiles extends GenerateBase {
         writeTable(menuDir, "SORT3", sortTableAddr, collectionSortTable);
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
+        ATMFile.copy(new File(archiveDir, "CHAP"), new File(menuDir, "CHAP"));
     }
 
     private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {
