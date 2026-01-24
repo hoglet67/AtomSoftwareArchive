@@ -172,8 +172,8 @@ public class GenerateMenuFiles extends GenerateBase {
             // swap the lower and upper text spaces
             lengthOfLowerText = 0x1600;
             endOfLowerText = 0x9800;
-            startOfUpperText = 0x3200;
-            lengthOfUpperText = 0x4e00;
+            startOfUpperText = 0x1000;
+            lengthOfUpperText = 0x7000;
         } else {
             lengthOfLowerText = 0x0A00;
             endOfLowerText = 0x3c00;
