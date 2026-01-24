@@ -146,8 +146,13 @@ public class GenerateEconetFiles extends GenerateBase {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
                 addFile(dir, atmFile);
             }
-            ATMFile chapFile = new ATMFile(new File(archiveDir, "CHAPECO"));
-            menuFile.setTitle("CHAP");
+            ATMFile chapFile;
+            if (chunk == numChunks - 1) {
+               chapFile = new ATMFile(new File(archiveDir, "ALLECO"));
+            } else {
+               chapFile = new ATMFile(new File(archiveDir, "CHAPECO"));
+            }
+            chapFile.setTitle("CHAP");
             addFile(dir, chapFile);
         }
     }

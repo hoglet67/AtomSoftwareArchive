@@ -27,36 +27,40 @@ $BEEBASM -i bootrom.asm
 cp splash/HELP.ATM $ARCHIVE/HELP
 
 # Compile the Splash Menu (for AtomMMC)
-$BEEBASM -i menu_atommc.asm
-mv MENU $ARCHIVE/..
+$BEEBASM -i menu.asm -o $ARCHIVE/../MENU
 
 # Compile the Splash Menu (for SDDOS)
-$BEEBASM -i menu_sddos.asm
-mv MENUSD $ARCHIVE
+$BEEBASM -i menu.asm -o $ARCHIVE/MENUSD -D sddos=1
 
 # Compile the Splash Menu (for Econet)
-$BEEBASM -i menu_econet.asm
-mv MENUECO $ARCHIVE
+$BEEBASM -i menu.asm -o $ARCHIVE/MENUECO -D econet=1
 
 # Compile the Splash Menu (for GoSDC)
-$BEEBASM -i menu_gosdc.asm
-mv MENUGOS $ARCHIVE
+$BEEBASM -i menu.asm -o $ARCHIVE/MENUGOS -D gosdc=1
 
-# Compile the Splash Menu (for AtomMMC)
-$BEEBASM -i chapter_atommc.asm
-mv CHAP $ARCHIVE
+# Compile the Chapter Menu (for AtomMMC)
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAP
 
-# Compile the Splash Menu (for SDDOS)
-$BEEBASM -i chapter_sddos.asm
-mv CHAPSD $ARCHIVE
+# Compile the Chapter Menu (for SDDOS)
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPSD -D sddos=1
 
-# Compile the Splash Menu (for Econet)
-$BEEBASM -i chapter_econet.asm
-mv CHAPECO $ARCHIVE
+# Compile the Chapter Menu (for Econet)
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPECO -D econet=1
 
-# Compile the Splash Menu (for GoSDC)
-$BEEBASM -i chapter_gosdc.asm
-mv CHAPGOS $ARCHIVE
+# Compile the Chapter Menu (for GoSDC)
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPGOS -D gosdc=1
+
+# Compile the All Menu (for AtomMMC)
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALL -D Base=1024
+
+# Compile the All Menu (for SDDOS)
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLSD  -D Base=1024 -D sddos=1
+
+# Compile the All Menu (for Econet)
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLECO -D Base=1024 -D econet=1
+
+# Compile the All Menu (for GoSDC)
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=1024 -D gosdc=1
 
 # Translate the Help from text to ATM
 #java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
@@ -67,10 +71,6 @@ java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCH
 
 # Remove unnecessary files from the root directory
 rm -f $ARCHIVE/HELP
-rm -f $ARCHIVE/CHAP
-rm -f $ARCHIVE/MENUECO
-rm -f $ARCHIVE/MENUSD
-rm -f $ARCHIVE/MENUGOS
-rm -f $ARCHIVE/CHAPECO
-rm -f $ARCHIVE/CHAPSD
-rm -f $ARCHIVE/CHAPGOS
+rm -f $ARCHIVE/CHAP*
+rm -f $ARCHIVE/ALL*
+rm -f $ARCHIVE/MENU[A-Z]*

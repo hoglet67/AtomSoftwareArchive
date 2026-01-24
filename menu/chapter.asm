@@ -1,4 +1,4 @@
-	Base = $2800
+	Base =? $2800
 
 include "sysvars.asm"
 
@@ -963,3 +963,5 @@ ENDIF
 	SKIP LinesPerPage * 2
 
 .ENDOF
+
+SAVE STARTOFHEADER, ENDOF

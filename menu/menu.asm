@@ -1,7 +1,7 @@
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
-	Base = $2800
+	Base =? $2800
 
 include "sysvars.asm"
 
@@ -217,3 +217,5 @@ ENDIF
 include "common.asm"
 
 .ENDOF
+
+SAVE STARTOFHEADER, ENDOF

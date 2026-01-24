@@ -83,8 +83,13 @@ public class GenerateGoSDCFiles extends GenerateBase {
                 ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
                 addFile(dir, atmFile);
             }
-            ATMFile chapFile = new ATMFile(new File(archiveDir, "CHAPGOS"));
-            menuFile.setTitle("CHAP");
+            ATMFile chapFile;
+            if (chunk == numChunks - 1) {
+               chapFile = new ATMFile(new File(archiveDir, "ALLGOS"));
+            } else {
+               chapFile = new ATMFile(new File(archiveDir, "CHAPGOS"));
+            }
+            chapFile.setTitle("CHAP");
             addFile(dir, chapFile);
         }
     }
