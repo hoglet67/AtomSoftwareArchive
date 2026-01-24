@@ -2829,3 +2829,91 @@ PRINT FOR HELP: SEE FORUM
 1245,V13B1,GA,Getting Acquainted,E.Books and Magazines,Breakout,Game,???,GA,8200,"CH.""BREAKOU""",Works,BREAKOU,present,,,,
 1246,V13B1,GA,Getting Acquainted,E.Books and Magazines,Labyrinth,Game,???,GA,8200,"CH.""LABYRIN""",Works,LABYRIN,present,,,,
 1247,V13B1,GA,Getting Acquainted,E.Books and Magazines,Swappo,Game,???,GA,8200,"CH.""SWAPPO""",Works,SWAPPO,present,,,,
+1248,V14B1,AGD,AGD,C.Kees' AGD Ports,The 8 Bit Wars,Game,Kees van Oss,AGD/8BITWAR,8200,CH."8BWRUN",Test,"8BWCODE
+8BWPAN
+8BWRUN
+8BWSCR",present,AGD,Yes
+1249,V14B1,AGD,AGD,C.Kees' AGD Ports,AI Made me do it,Game,Kees van Oss,AGD/AI,8200,CH."AIRUN",Test,"AICODE
+AIRUN
+AISCR",present,AGD,Yes
+1250,V14B1,AGD,AGD,C.Kees' AGD Ports,Blocktor Woot,Game,Kees van Oss,AGD/BLOCKTO,8200,CH."BWRUN",Test,"BWCODE
+BWRUN
+BWSCR",present,AGD,Yes
+1251,V14B1,AGD,AGD,C.Kees' AGD Ports,Bubble Trouble,Game,Kees van Oss,AGD/BUBBLET,8200,CH."BTRUN",Test,"BTCODE
+BTRUN
+BTSCR",present,AGD,Yes
+1252,V14B1,AGD,AGD,C.Kees' AGD Ports,Chispy,Game,Kees van Oss,AGD/CHISPY,8200,CH."CHRUN",Test,"CHCODE
+CHRUN
+CHSCR",present,AGD,Yes
+1253,V14B1,AGD,AGD,C.Kees' AGD Ports, e in King Chrums Gold Min,Game,Kees van Oss,AGD/CHRUMA,8200,CH."CHRUN",Test,"CHCODE
+CHRUN
+CHSCR",present,AGD,Yes
+1254,V14B1,AGD,AGD,C.Kees' AGD Ports, Cocaine Bear,Game,Kees van Oss,AGD/COCAINE,8200,CH."CBRUN",Test,"CBCODE
+CBRUN",present,AGD,Yes
+1255,V14B1,AGD,AGD,C.Kees' AGD Ports,Corey Coolbrew,Game,Kees van Oss,AGD/COREY,8200,CH."CCRUN",Test,"CCCODE
+CCRUN
+CCSCR",present,AGD,Yes
+1256,V14B1,AGD,AGD,C.Kees' AGD Ports, Cyclus1,Game,Kees van Oss,AGD/CYCLUS1,8200,CH."CY1RUN",Test,"CY1CODE
+CY1PAN
+CY1RUN
+CY1SCR",present,AGD,Yes
+1257,V14B1,AGD,AGD,C.Kees' AGD Ports, Cyclus2,Game,Kees van Oss,AGD/CYCLUS2,8200,CH."CY2RUN",Test,"CY2CODE
+CY2RUN
+CY2SCR",present,AGD,Yes
+1258,V14B1,AGD,AGD,C.Kees' AGD Ports, Dark Knight 2,Game,Kees van Oss,AGD/DARKKNI,8200,CH."DN2RUN",Test,"DN2CODE
+DN2PAN
+DN2RUN
+DN2SCR
+DN2SCR2",present,AGD,Yes
+1259,V14B1,AGD,AGD,C.Kees' AGD Ports,Driar,Game,Kees van Oss,AGD/DRIAR,8200,CH."DRRUN",Test,"DRCODE
+DRRUN
+DRSCR",present,AGD,Yes
+1260,V14B1,AGD,AGD,C.Kees' AGD Ports, The day before the day th,Game,Kees van Oss,AGD/EARTHST,8200,CH."DERUN",Test,"DECODE
+DERUN
+DESCR",present,AGD,Yes
+1261,V14B1,AGD,AGD,C.Kees' AGD Ports, Frankee goes home,Game,Kees van Oss,AGD/FRANKEE,8200,CH."FRRUN",Test,"FRCODE
+FRRUN
+FRSCR",present,AGD,Yes
+1262,V14B1,AGD,AGD,C.Kees' AGD Ports, Franky Lost his Body,Game,Kees van Oss,AGD/FRANKY,8200,CH."FRRUN",Test,"FRCODE
+FRRUN
+FRSCR",present,AGD,Yes
+1263,V14B1,AGD,AGD,C.Kees' AGD Ports,The Goblin,Game,Kees van Oss,AGD/GOBLIN,8200,CH."GORUN",Test,"GOCODE
+GORUN
+GOSCR",present,AGD,Yes
+1264,V14B1,AGD,AGD,C.Kees' AGD Ports,The Hairy Fly,Game,Kees van Oss,AGD/HAIRFLY,8200,CH."HFRUN",Test,"HFCODE
+HFRUN
+HFSCR",present,AGD,Yes
+1265,V14B1,AGD,AGD,C.Kees' AGD Ports, Mr Hair and the Kitty Kat,Game,Kees van Oss,AGD/HAIRKIT,8200,CH."KKRUN",Test,"KKCODE
+KKRUN
+KKSCR",present,AGD,Yes
+1266,V14B1,AGD,AGD,C.Kees' AGD Ports, Mr Hair a very hairy Remi,Game,Kees van Oss,AGD/HAIRREM,8200,CH."HRRUN",Test,"HRCODE
+HRRUN
+HRSCR",present,AGD,Yes
+1267,V14B1,AGD,AGD,C.Kees' AGD Ports,Herbie wants to be a Milli,Game,Kees van Oss,AGD/HERBIE,8200,CH."HMRUN",Test,"HMCODE
+HMRUN
+HMSCR",present,AGD,Yes
+1268,V14B1,AGD,AGD,C.Kees' AGD Ports, Enter the Prilel,Game,Kees van Oss,AGD/PRILEL,8200,CH."EPRUN",Test,"EPCODE
+EPPAN
+EPRUN
+EPSCR",present,AGD,Yes
+1269,V14B1,AGD,AGD,C.Kees' AGD Ports, Restless Andre,Game,Kees van Oss,AGD/RESTLES,8200,CH."RARUN",Test,"RACODE
+RARUN
+RASCR",present,AGD,Yes
+1270,V14B1,AGD,AGD,C.Kees' AGD Ports, Roasty,Game,Kees van Oss,AGD/ROASTY,8200,CH."RORUN",Test,"ROCODE
+RORUN
+ROSCR",present,AGD,Yes
+1271,V14B1,AGD,AGD,C.Kees' AGD Ports,Spider Mami,Game,Kees van Oss,AGD/SPIDERM,8200,CH."SMRUN",Test,"SMCODE
+SMRUN
+SMSCR",present,AGD,Yes
+1272,V14B1,AGD,AGD,C.Kees' AGD Ports, Jet Set Steamboat Willie,Game,Kees van Oss,AGD/WILLIE,8200,CH."SWRUN",Test,"SWCODE
+SWRUN
+SWSCR",present,AGD,Yes
+1273,V14B1,AGD,AGD,C.Kees' AGD Ports, The Witch,Game,Kees van Oss,AGD/WITCH,8200,CH."TWRUN",Test,"TWCODE
+TWRUN
+TWSCR",present,AGD,Yes
+1274,V14B1,AGD,AGD,C.Kees' AGD Ports, Yokai Monk,Game,Kees van Oss,AGD/YOKAI,8200,CH."YMRUN",Test,"YMCODE
+YMRUN
+YMSCR",present,AGD,Yes
+1275,V14B1,AGD,AGD,C.Kees' AGD Ports, Ziona Quest,Game,Kees van Oss,AGD/ZIONA,8200,CH."ZIRUN",Test,"ZICODE
+ZIRUN
+ZISCR",present,AGD,Yes
