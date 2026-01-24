@@ -264,7 +264,7 @@ DATA
 STARIN",present,,,Yes,
 164,V8B1,BB,Bug Byte,A.Commercial Software,Typist,Educational,,BB,8200,"CH.""TYPIST""",Works,TYPIST,present,,,,
 165,V1,BB,Bug Byte,A.Commercial Software,UFO Bomber,Game,,BB,8200,"CH.""UFO""",Works,UFO,present,,,,
-166,V1,BB,Bug Byte,A.Commercial Software,Wiggle,Game,,BB,8200,"CH.""WIGGEL""",Works,WIGGEL,present,,, ,
+166,V1,BB,Bug Byte,A.Commercial Software,Wiggle,Game,,BB,8200,"CH.""WIGGEL""",Works,WIGGEL,present,,,,
 167,V5,HS,Hopesoft,A.Commercial Software,PS1A Atom Adventure,Adventure,,HS,8200,"*LOAD ADV
 *RUN A1",Works,"ADV
 A1",present,,,,
@@ -343,7 +343,7 @@ CH.""VDUAS""",Works,VDUAS,present,,,,
 214,V7B2,CS,Computersmith,A.Commercial Software,Detective,Game,,CS,8200,"CH.""DETECT""",Works,DETECT,present,,,,
 215,V2,PP,Prog Power,A.Commercial Software,Music Box,Music,R.M.P. Hanson,PP,8200,"CH.""MUBOX""",Works,MUBOX,present,,,,
 216,,PP,Prog Power,A.Commercial Software,Ravine,Game,S. Draper,PP,,,,,missing,,,,
-217,V3,PP,Prog Power,A.Commercial Software,Reversi (Othello) ,Game,D. Thompson,PP,8200,"?18=40
+217,V3,PP,Prog Power,A.Commercial Software,Reversi (Othello),Game,D. Thompson,PP,8200,"?18=40
 CH.""OTHELLO""",Works,"OTHELLO
 OTHINST",present,,,,
 218,,PP,Prog Power,A.Commercial Software,Sheepdog Trial,Game,R.M.P. Hanson,PP,,,,,missing,,,,
@@ -1201,7 +1201,7 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR COMMANDS: SALFAA
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9F75 8800",Works,9F75,present,ROMs,,,
-647,V6,NC,Non Comm,F.ROMS,Combox,Utility,Bram Poot ,ROMS/NC/COMBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
+647,V6,NC,Non Comm,F.ROMS,Combox,Utility,Bram Poot,ROMS/NC/COMBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR COMMANDS: COMBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 54D4 8800",Works,54D4,present,ROMs,,,
@@ -1365,8 +1365,8 @@ MSDISP",present,Mainwaring,,,
 710,V9B1,AF,A&F S/W,A.Commercial Software,Missile Command,Game,,AF,8200,"CH.""MISSILE""",Works,MISSILE,present,,,,
 711,V7B2,AF,A&F S/W,A.Commercial Software,Polaris,Game,,AF,8200,"CH.""POLARIS""",Works,POLARIS,present,,,,
 712,,AF,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
-713,,CS,Computersmith,A.Commercial Software,Financial Year,Game,, , ,,,,missing,,,,
-714,,CS,Computersmith,A.Commercial Software,Stock Market,Game,, , ,,,,missing,,,,
+713,,CS,Computersmith,A.Commercial Software,Financial Year,Game,,,,,,,missing,,,,
+714,,CS,Computersmith,A.Commercial Software,Stock Market,Game,,,,,,,missing,,,,
 715,V7B2,YC,Your Computer,E.Books and Magazines,Real-Time Clock,Utility,Kamal Jabbour,YC,8200,"CH.""CLOCK""",Works,CLOCK,present,Magazines,,,
 716,V7B2,YC,Your Computer,E.Books and Magazines,Graph Char,Utility,A. F. Burgin,YC,8200,"CH.""GRAPHCH""",Works,GRAPHCH,present,Magazines,,,
 717,V7B2,CT,Comp Today,E.Books and Magazines,GRAF-RITE,Utility,Bruce F. Smith,CT,8200,"CH.""GRAFRITE""",Works,GRAFRITE,present,Magazines,,,
@@ -1655,30 +1655,30 @@ SIDMENU
 850,V9B1,HB,Hobbit,E.Books and Magazines,Valtinet (R),Game,,HB,8200,"CH.""VALINET""",Works,VALINET,present,,,,
 851,V9B1,NC,Non Comm,D.Non Commercial Software,VDG FS Time,Utility,David Banks,NC/TEST,8200,"CH.""VDCTIME""",Works,VDCTIME,present,,,,
 852,V9B1,PCW,PCW,E.Books and Magazines,Atom Quest,Game,Nick Foale,PCW,8200,"CH.""QUEST""",Works,QUEST,present,Magazines,,,
-853,V9B1,NC,Non Comm,D.Non Commercial Software,Co-Ord.                  ,Game, ??,GB,8200,"CH.""028""",Works,028,present,GameBase,,,
-854,V9B1,NC,Non Comm,D.Non Commercial Software,Shape edit (R),Utility, ??,GB,8200,"CH.""057""",Works,057,present,GameBase,,, requires AXR1
-855,V9B1,NC,Non Comm,D.Non Commercial Software,Asteroid,Game, Erik Agrell,GB,8200,"CH.""069""",Works,069,present,GameBase,,,
-856,V9B1,NC,Non Comm,D.Non Commercial Software,Disassembler,Utility, ??,GB,8200,"CH.""072""",Works,072,present,GameBase,,,
-857,V9B1,NC,Non Comm,D.Non Commercial Software,Heathrow,Game, ??,GB,8200,"CH.""073""",Works,073,present,GameBase,,,
-858,V9B1,NC,Non Comm,D.Non Commercial Software,Labyrinth,Game, Erik Agrell,GB,8200,"CH.""074""",Works,074,present,GameBase,,,
-859,V9B1,NC,Non Comm,D.Non Commercial Software,Life,Simulation, Erik Agrell,GB,8200,"CH.""075""",Works,075,present,GameBase,,,
-860,V9B1,NC,Non Comm,D.Non Commercial Software,Nim,Game, Erik Agrell,GB,8200,"CH.""078""",Works,078,present,GameBase,,,
-861,V9B1,NC,Non Comm,D.Non Commercial Software,Orm,Game, Erik Agrell,GB,8200,"CH.""079""",Works,079,present,GameBase,,,
-862,V9B1,NC,Non Comm,D.Non Commercial Software,Atom Pilot,Language, acc-nl,GB,8200,*RUN 098,Works,098,present,GameBase,,,
-863,V9B1,NC,Non Comm,D.Non Commercial Software,Maze Game,Game, ??,GB,8200,"CH.""134""",Works,134,present,GameBase,,,
-864,V9B1,NC,Non Comm,D.Non Commercial Software,Flight Simulator,Game, Acorn user,GB,8200,"CH.""144""",Works,144,present,GameBase,,,
-865,V9B1,NC,Non Comm,D.Non Commercial Software,Super Zombie,Game, Magnus Olssen,GB,8200,"CH.""155""",Works,155,present,GameBase,,,
-866,V9B1,NC,Non Comm,D.Non Commercial Software,Megalife (R)                ,Simulation, Magnus Olssen,GB,8200,*RUN 158,Works,158,present,GameBase,,, requires WE-ROM
-867,V9B1,NC,Non Comm,D.Non Commercial Software,Condot,Game, Creative Computing,GB,8200,"CH.""159""",Works,159,present,GameBase,,,
-868,V9B1,NC,Non Comm,D.Non Commercial Software,Madlib,Game, Creative Computing,GB,8200,"CH.""165""",Works,165,present,GameBase,,,
+853,V9B1,NC,Non Comm,D.Non Commercial Software,Co-Ord.,Game,??,GB,8200,"CH.""028""",Works,028,present,GameBase,,,
+854,V9B1,NC,Non Comm,D.Non Commercial Software,Shape edit (R),Utility,??,GB,8200,"CH.""057""",Works,057,present,GameBase,,,requires AXR1
+855,V9B1,NC,Non Comm,D.Non Commercial Software,Asteroid,Game,Erik Agrell,GB,8200,"CH.""069""",Works,069,present,GameBase,,,
+856,V9B1,NC,Non Comm,D.Non Commercial Software,Disassembler,Utility,??,GB,8200,"CH.""072""",Works,072,present,GameBase,,,
+857,V9B1,NC,Non Comm,D.Non Commercial Software,Heathrow,Game,??,GB,8200,"CH.""073""",Works,073,present,GameBase,,,
+858,V9B1,NC,Non Comm,D.Non Commercial Software,Labyrinth,Game,Erik Agrell,GB,8200,"CH.""074""",Works,074,present,GameBase,,,
+859,V9B1,NC,Non Comm,D.Non Commercial Software,Life,Simulation,Erik Agrell,GB,8200,"CH.""075""",Works,075,present,GameBase,,,
+860,V9B1,NC,Non Comm,D.Non Commercial Software,Nim,Game,Erik Agrell,GB,8200,"CH.""078""",Works,078,present,GameBase,,,
+861,V9B1,NC,Non Comm,D.Non Commercial Software,Orm,Game,Erik Agrell,GB,8200,"CH.""079""",Works,079,present,GameBase,,,
+862,V9B1,NC,Non Comm,D.Non Commercial Software,Atom Pilot,Language,acc-nl,GB,8200,*RUN 098,Works,098,present,GameBase,,,
+863,V9B1,NC,Non Comm,D.Non Commercial Software,Maze Game,Game,??,GB,8200,"CH.""134""",Works,134,present,GameBase,,,
+864,V9B1,NC,Non Comm,D.Non Commercial Software,Flight Simulator,Game,Acorn user,GB,8200,"CH.""144""",Works,144,present,GameBase,,,
+865,V9B1,NC,Non Comm,D.Non Commercial Software,Super Zombie,Game,Magnus Olssen,GB,8200,"CH.""155""",Works,155,present,GameBase,,,
+866,V9B1,NC,Non Comm,D.Non Commercial Software,Megalife (R),Simulation,Magnus Olssen,GB,8200,*RUN 158,Works,158,present,GameBase,,,requires WE-ROM
+867,V9B1,NC,Non Comm,D.Non Commercial Software,Condot,Game,Creative Computing,GB,8200,"CH.""159""",Works,159,present,GameBase,,,
+868,V9B1,NC,Non Comm,D.Non Commercial Software,Madlib,Game,Creative Computing,GB,8200,"CH.""165""",Works,165,present,GameBase,,,
 869,V9B1,PCW,PCW,E.Books and Magazines,Acorn Scramble,Game,Nick Foale,PCW,8200,*RUN SCRMBLE,Works,SCRMBLE,present,Magazines,,,
-870,V9B1,NC,Non Comm,D.Non Commercial Software,Check-Mate,Game, Magnus Olsson,GB,8200,"CH.""168""",Works,168,present,GameBase,,,
-871,V9B1,NC,Non Comm,D.Non Commercial Software,DFC 700 (R),Game, Magnus Olssen,GB,8200,"CH.""169""",Works,169,present,GameBase,,,requires WE-ROM
-872,V9B1,NC,Non Comm,D.Non Commercial Software,Lunar Lander,Game, Magnus Olssen,GB,8200,"CH.""172""",Works,172,present,GameBase,,,
-873,V9B1,NC,Non Comm,D.Non Commercial Software,Q-bert (R),Game, ??,GB,8200,"CH.""185""",Works,185,present,GameBase,,,requires AXR1
-874,V9B1,NC,Non Comm,D.Non Commercial Software,The Nudger,Game, Steve Webster,GB,8200,"CH.""197""",Works,197,present,GameBase,,,
-875,V9B1,NC,Non Comm,D.Non Commercial Software,Cubic,Utility, Steve Webster,GB,8200,"CH.""199""",Works,199,present,GameBase,,,
-876,V9B1,NC,Non Comm,D.Non Commercial Software,Starship Manna,Game, ??,GB,8200,"CH.""226""",Works,226,present,GameBase,,,
+870,V9B1,NC,Non Comm,D.Non Commercial Software,Check-Mate,Game,Magnus Olsson,GB,8200,"CH.""168""",Works,168,present,GameBase,,,
+871,V9B1,NC,Non Comm,D.Non Commercial Software,DFC 700 (R),Game,Magnus Olssen,GB,8200,"CH.""169""",Works,169,present,GameBase,,,requires WE-ROM
+872,V9B1,NC,Non Comm,D.Non Commercial Software,Lunar Lander,Game,Magnus Olssen,GB,8200,"CH.""172""",Works,172,present,GameBase,,,
+873,V9B1,NC,Non Comm,D.Non Commercial Software,Q-bert (R),Game,??,GB,8200,"CH.""185""",Works,185,present,GameBase,,,requires AXR1
+874,V9B1,NC,Non Comm,D.Non Commercial Software,The Nudger,Game,Steve Webster,GB,8200,"CH.""197""",Works,197,present,GameBase,,,
+875,V9B1,NC,Non Comm,D.Non Commercial Software,Cubic,Utility,Steve Webster,GB,8200,"CH.""199""",Works,199,present,GameBase,,,
+876,V9B1,NC,Non Comm,D.Non Commercial Software,Starship Manna,Game,??,GB,8200,"CH.""226""",Works,226,present,GameBase,,,
 877,V9B1,NC,Non Comm,D.Non Commercial Software,Cement (JS),Game,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",Works,CEMENT,present,"Joystick
 Joystick Kbd",,,
@@ -2009,7 +2009,7 @@ J1SCR",present,AGD,Yes,,
 967,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Hot Marmelade,Game,Kees van Oss,AGD/JANE2,8200,"CH.""J2RUN""",Works,"J2CODE
 J2RUN
 J2SCR",present,AGD,Yes,,
-968,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Treasure of Zedin ,Game,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""",Works,"J3CODE
+968,V11B2,AGD,AGD,C.Kees' AGD Ports,Jane Jelly Treasure of Zedin,Game,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""",Works,"J3CODE
 J3RUN
 J3SCR",present,AGD,Yes,,
 969,V11B2,AGD,AGD,C.Kees' AGD Ports,Jump Collision,Game,Kees van Oss,AGD/JUMPCOL,8200,"CH.""JCRUN""",Works,"JCCODE
@@ -2126,7 +2126,7 @@ SOPSCR",present,AGD,Yes,,
 1005,V11B2,AGD,AGD,C.Kees' AGD Ports,Sorceress,Game,Kees van Oss,AGD/SORCE,8200,"CH.""SO1RUN""",Works,"SO1CODE
 SO1RUN
 SO1SCR",present,AGD,Yes,,
-1006,V11B2,AGD,AGD,C.Kees' AGD Ports,Sorceress2 ,Game,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""",Works,"SO2CODE
+1006,V11B2,AGD,AGD,C.Kees' AGD Ports,Sorceress2,Game,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""",Works,"SO2CODE
 SO2RUN
 SO2SCR",present,AGD,Yes,,
 1007,V11B2,AGD,AGD,C.Kees' AGD Ports,pace Junk,Game,Kees van Oss,AGD/SPACEJU,8200,"CH.""SJRUN""",Works,"SJCODE
@@ -2748,10 +2748,10 @@ HISCR",present,AGD,Yes,,
 JJDAT
 JJRUN
 JJSCR",present,AGD,Yes,,
-1202,V13B1,AGD,AGD,C.Kees' AGD Ports, Javi Pomez,Game,Kees van Oss,AGD/JAVIPOM,8200,"CH.""JPRUN""",Test,"JPCODE
+1202,V13B1,AGD,AGD,C.Kees' AGD Ports,Javi Pomez,Game,Kees van Oss,AGD/JAVIPOM,8200,"CH.""JPRUN""",Test,"JPCODE
 JPRUN
 JPSCR",present,AGD,Yes,,
-1203,V13B1,AGD,AGD,C.Kees' AGD Ports, Jet Pack Neo,Game,Kees van Oss,AGD/JETPACK,8200,"CH.""JPNRUN""",Test,"JPNCODE
+1203,V13B1,AGD,AGD,C.Kees' AGD Ports,Jet Pack Neo,Game,Kees van Oss,AGD/JETPACK,8200,"CH.""JPNRUN""",Test,"JPNCODE
 JPNRUN
 JPNSCR",present,AGD,Yes,,
 1204,V13B1,AGD,AGD,C.Kees' AGD Ports,Last Escape,Game,Kees van Oss,AGD/LASTESC,8200,"CH.""LERUN""",Test,"LECODE
@@ -2769,13 +2769,13 @@ MOSCR",present,AGD,Yes,,
 1208,V13B1,AGD,AGD,C.Kees' AGD Ports,Nevermore,Game,Kees van Oss,AGD/NEVERMO,8200,"CH.""NMRUN""",Test,"NMCODE
 NMRUN
 NMSCR",present,AGD,Yes,,
-1209,V13B1,AGD,AGD,C.Kees' AGD Ports, Ninja Poison1,Game,Kees van Oss,AGD/NINJA1,8200,"CH.""NP1RUN""",Test,"NP1CODE
+1209,V13B1,AGD,AGD,C.Kees' AGD Ports,Ninja Poison1,Game,Kees van Oss,AGD/NINJA1,8200,"CH.""NP1RUN""",Test,"NP1CODE
 NP1RUN
 NP1SCR",present,AGD,Yes,,
-1210,V13B1,AGD,AGD,C.Kees' AGD Ports, Papyrus,Game,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""",Test,"PACODE
+1210,V13B1,AGD,AGD,C.Kees' AGD Ports,Papyrus,Game,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""",Test,"PACODE
 PARUN
 PASCR",present,AGD,Yes,,
-1211,V13B1,AGD,AGD,C.Kees' AGD Ports, Psycho Santa,Game,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""",Test,"PSCODE
+1211,V13B1,AGD,AGD,C.Kees' AGD Ports,Psycho Santa,Game,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""",Test,"PSCODE
 PSRUN
 PSSCR",present,AGD,Yes,,
 1212,V13B1,AGD,AGD,C.Kees' AGD Ports,Unicylcle,Game,Kees van Oss,AGD/UNICYCL,8200,"CH.""UCRUN""",Test,"UCCODE
