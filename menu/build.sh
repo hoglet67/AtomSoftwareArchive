@@ -51,16 +51,16 @@ $BEEBASM -i chapter.asm -o $ARCHIVE/CHAPECO -D econet=1
 $BEEBASM -i chapter.asm -o $ARCHIVE/CHAPGOS -D gosdc=1
 
 # Compile the All Menu (for AtomMMC)
-$BEEBASM -i chapter.asm -o $ARCHIVE/ALL -D Base=1024
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALL -D Base=0x7600
 
 # Compile the All Menu (for SDDOS)
-$BEEBASM -i chapter.asm -o $ARCHIVE/ALLSD  -D Base=1024 -D sddos=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLSD  -D Base=0x7600 -D sddos=1
 
 # Compile the All Menu (for Econet)
-$BEEBASM -i chapter.asm -o $ARCHIVE/ALLECO -D Base=1024 -D econet=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLECO -D Base=0x7600 -D econet=1
 
 # Compile the All Menu (for GoSDC)
-$BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=1024 -D gosdc=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=0x7600 -D gosdc=1
 
 # Translate the Help from text to ATM
 #java -jar ../java/atombasic/atombasic.jar helpgen.bas HELPGEN 2900 ce86
