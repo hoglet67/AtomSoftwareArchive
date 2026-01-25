@@ -103,6 +103,8 @@ ENDIF
 
 .MenuMain
 	JSR Osrdch
+	CMP #&1B
+	BEQ MenuExit
 	CMP #'A'
 	BCC MenuMain
 .MenuMaxKey
@@ -124,6 +126,20 @@ ENDIF
 	EQUS "INIT", Return
 
 	; Don't expect to return, but just in case....
+	JMP $c2b2
+
+.MenuExit
+IF (econet = 1 OR gosdc = 1)
+	JSR OscliString
+	EQUS "DIR $", Return
+ELSE
+IF (sddos = 0)
+	JSR OscliString
+	EQUS "CWD /", Return
+ENDIF
+ENDIF
+	LDA #&0C
+	JSR Oswrch
 	JMP $c2b2
 
 .MenuNext
