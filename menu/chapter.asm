@@ -230,8 +230,27 @@ ENDIF
 	; // No key pressed
 	; 520 IF ?Q=255 G.c
 	CPY #$FF
-	BNE TestForPrevPage
+	BNE TestForEscape
 	JMP LabelC
+
+.TestForEscape
+   CPY #&3B
+   BNE TestForPrevPage
+
+   ; Escape pressed; change back to the "root" directory
+	JSR OscliString
+IF (sddos = 1)
+	EQUS "DRIVE 0", Return
+ELSE
+IF (econet = 1 OR gosdc = 1)
+	EQUS "DIR $", Return
+ELSE
+	EQUS "CWD /", Return
+ENDIF
+ENDIF
+	JSR OscliString
+	EQUS "RUN MENU", Return
+   ; never returns
 
 .TestForPrevPage
 	; // < key pressed (previous page)
