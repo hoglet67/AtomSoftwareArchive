@@ -175,6 +175,12 @@ IF (rom = 1)
 
 .CmdRomCopy
 
+   ;; Unmap any YARRB/RAMROM #A000 RAM
+   ;; Otherwise there is a false positive match for GoSDC PRO
+   ;; TODO: Revisit whether there is a better solution
+	LDA #0
+	STA $BFFE
+
 	LDX #$80
 	STX $BFFF
 
