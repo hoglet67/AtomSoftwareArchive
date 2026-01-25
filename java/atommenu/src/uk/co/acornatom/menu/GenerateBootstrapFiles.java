@@ -141,7 +141,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
         for (SpreadsheetTitle item : items) {
             if (item.isPresent()) {
-                boolean rom = item.getChunk().equals("F");
+                boolean rom = item.getChunk().equals("E");
                 generateMachineCodeBootstrap(item, rom);
             }
         }

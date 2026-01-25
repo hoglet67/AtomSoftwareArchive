@@ -72,28 +72,32 @@ public class GenerateAll {
             }
             char startChunkId = 'A';
             String chunkAll = "" + (char)(startChunkId + chunks.size());
+            String chunkAGD = "" + (char)(startChunkId + chunks.size() - 1);
             chunks.put(chunkAll, total);
 
             System.out.println("Found " + chunks.size() + " chunks");
-            
+
             // Each menu chapter will be a separate disk
             for (Target target : Target.values()) {
 
                 System.out.println("*******************************");
-                System.out.println("Generating " + target.name());                
+                System.out.println("Generating " + target.name());
                 System.out.println("*******************************");
-                
+
                 System.out.println(" menu files version " + version);
 
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
                 splashGen.generateFiles(null, target);
-                
+
                 char chunkId = startChunkId;
 
                 for (String chunk : chunks.keySet()) {
 
                     // true if this is the last chunk containing all titles
                     boolean allChunk = chunk.equals(chunkAll);
+
+                    // true if this is the last but one chunk containing the AGD titles
+                    boolean agdChunk = chunk.equals(chunkAGD);
 
                     File menuDir = new File(archiveDir, menuBase + chunkId);
                     menuDir.mkdirs();
@@ -106,7 +110,7 @@ public class GenerateAll {
                     }
                     List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
-                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, allChunk));
+                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, agdChunk, allChunk));
                     for (IFileGenerator generator : generators) {
                         generator.generateFiles(chunkItems, target);
                     }
@@ -116,20 +120,20 @@ public class GenerateAll {
 
                 if (target == Target.SDDOS) {
                     GenerateSDDOSFiles sdGenerator = new GenerateSDDOSFiles(archiveDir, menuBase, chunks.size(),
-                            new File(archiveDir + ".img"));                    
+                            new File(archiveDir + ".img"));
                     sdGenerator.generateFiles(items, target);
                     sdGenerator.writeImage();
                     new File(archiveDir, "MENUSD").delete();
                 }
-                
+
                 if (target == Target.JS) {
                     GenerateJSFiles jsGenerator = new GenerateJSFiles(archiveDir, menuBase, chunks.size(),
                             new File(archiveDir + ".js"));
                     jsGenerator.generateFiles(items, target);
                     jsGenerator.writeImage();
-                    new File(archiveDir, "MENUSD").delete();                  
+                    new File(archiveDir, "MENUSD").delete();
                 }
-                
+
                 if (target == Target.ECONET) {
                     GenerateEconetFiles econetGenerator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"),
                             menuBase, chunks.size());
@@ -137,7 +141,7 @@ public class GenerateAll {
                     econetGenerator.close();
                     new File(archiveDir, "MENUSD").delete();
                 }
-                
+
                 if (target == Target.GOSDC) {
                     GenerateGoSDCFiles gosdcGenerator = new GenerateGoSDCFiles(archiveDir, menuBase, chunks.size(),
                             new File(archiveDir + ".gosdc"));

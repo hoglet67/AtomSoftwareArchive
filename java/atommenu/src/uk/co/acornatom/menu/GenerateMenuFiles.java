@@ -31,12 +31,14 @@ public class GenerateMenuFiles extends GenerateBase {
     int maxCollectionLen;
     File archiveDir;
     File menuDir;
+    boolean agdChunk;
     boolean allChunk;
 
-    public GenerateMenuFiles(File archiveDir, File menuDir, boolean allChunk) {
+    public GenerateMenuFiles(File archiveDir, File menuDir, boolean agdChunk, boolean allChunk) {
         this.archiveDir = archiveDir;
         this.menuDir = menuDir;
         this.allChunk = allChunk;
+        this.agdChunk = agdChunk;
     }
 
     private void dumpIndexes(String type, Map<String, Integer> map) {
@@ -174,6 +176,12 @@ public class GenerateMenuFiles extends GenerateBase {
             endOfLowerText = 0x9800;
             startOfUpperText = 0x0B00;
             lengthOfUpperText = 0x7600 - startOfUpperText; // ALL Chapter menu 7600-7Exx
+        } else if (agdChunk) {
+            // swap the lower and upper text spaces
+            lengthOfLowerText = 0x1600;
+            endOfLowerText = 0x9800;
+            startOfUpperText = 0x3200;
+            lengthOfUpperText = 0x7000 - startOfUpperText; // Some RAM/ROM boards use the #7xxx for the RAM slot
         } else {
             lengthOfLowerText = 0x0A00;
             endOfLowerText = 0x3c00;

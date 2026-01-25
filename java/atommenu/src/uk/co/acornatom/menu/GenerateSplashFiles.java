@@ -243,7 +243,7 @@ public class GenerateSplashFiles extends GenerateBase {
             }
         }
     }
-    
+
     private void drawLine(byte[] screen, int x1, int x2, int y) {
         for (int x = x1; x <= x2; x++) {
             int addr = y * 32 + (x >> 3);
@@ -257,7 +257,7 @@ public class GenerateSplashFiles extends GenerateBase {
         int linex = 9;
 
         for (int pass = 1; pass <= 2; pass++) {
-            boolean includeAll = (pass == 1);
+            boolean limitedRAM = (pass == 2);
 
             // Create an grey image
             byte[] screen = new byte[0x1800];
@@ -276,7 +276,7 @@ public class GenerateSplashFiles extends GenerateBase {
             y += 2;
 
             for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
-                if (!includeAll && chunk.getKey().charAt(0) == 'G') {
+                if (limitedRAM && chunk.getKey().charAt(0) >= 'F') {
                     continue;
                 }
                 // Re-write the chunk titles
@@ -289,16 +289,16 @@ public class GenerateSplashFiles extends GenerateBase {
                     title = "Modern Creations";
                     break;
                 case 'C':
-                    title = "Arcade Game Designer";
-                    break;
-                case 'D':
                     title = "Non Commercial";
                     break;
-                case 'E':
+                case 'D':
                     title = "Books and Magazines";
                     break;
-                case 'F':
+                case 'E':
                     title = "Utility ROMS";
+                    break;
+                case 'F':
+                    title = "Arcade Game Designer";
                     break;
                 case 'G':
                     title = "All Titles";
@@ -317,16 +317,21 @@ public class GenerateSplashFiles extends GenerateBase {
                 writeAtomString(screen, chunk.getKey(), 14, y, false);
                 writeAtomString(screen, ")", 20, y, false);
                 writeAtomString(screen, title, 30, y, true);
-                if (includeAll) {
-                    y += 12;
-                } else {
-                    y += 14;
-                }
+                y += 12;
             }
 
             y += 2;
 
             drawLine(screen, linex, 255 - linex, y);
+
+            if (limitedRAM) {
+               y += 1;
+               writeAtomString(screen, "Limited RAM:", 8, y, false);
+               y += 10;
+               writeAtomString(screen, "AGD and ALL chapters disabled", 8, y, false);
+               y += 13;
+               drawLine(screen, linex, 255 - linex, y);
+            }
 
             // Overlay the status line
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");

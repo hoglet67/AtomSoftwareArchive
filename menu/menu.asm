@@ -69,6 +69,7 @@ include "sysvars.asm"
 .MemTestFail
 	INC SplashNum
 	DEC MenuMaxKey + 1
+	DEC MenuMaxKey + 1
 
 .MemTestDone
 
