@@ -30,6 +30,8 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
 
     abstract protected void addDisk(byte[] image, SpreadsheetTitle item) throws IOException;
 
+    @Override
+    abstract public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;
 
     static protected int getImageLen(byte[] image) {
         int lastUsedSector = -1;
@@ -46,7 +48,7 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
         return (lastUsedSector + 1) << 8;
     }
 
-    private byte[] createBlankDiskImage(String title) {
+    protected byte[] createBlankDiskImage(String title) {
         byte[] image = new byte[SEC_SIZE * NUM_SECS];
         Arrays.fill(image, (byte) 0);
         // Prepare a 13 character title (padded with spaces)
@@ -158,52 +160,41 @@ public abstract class GenerateDiskImageFiles extends GenerateBase {
         }
     }
 
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    protected void addTitle(byte[] image, SpreadsheetTitle item, String bootName) throws IOException {
+        System.out.println(item.getTitle());
+        File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
+                                 "" + item.getIdentifier());
+        ATMFile bootAtmFile = new ATMFile(bootfile);
+        bootAtmFile.setTitle(bootName);
+        addFile(image, bootAtmFile);
 
-        for (SpreadsheetTitle item : items) {
-            try {
-                if (item.isPresent()) {
-                    System.out.println(item.getTitle());
-                    byte[] image = createBlankDiskImage(item.getTitle());
-
-                    File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                            "" + item.getIdentifier());
-                    ATMFile bootAtmFile = new ATMFile(bootfile);
-                    bootAtmFile.setTitle("BOOT");
-                    addFile(image, bootAtmFile);
-
-                    Set<String> missing = new HashSet<String>(item.getLoadables());
-                    for (String filename : item.getFilenames()) {
-                        System.out.println("    >" + filename + "<");
-                        File file = new File(new File(archiveDir, item.getDir()), filename);
-                        // Some of the ATM files still contain the original long
-                        // tape titles
-                        if (filename.length() > 7) {
-                            filename = filename.substring(0, 7);
-                        }
-                        ATMFile atmFile = new ATMFile(file);
-                        missing.remove(filename);
-                        atmFile.setTitle(filename);
-                        addFile(image, atmFile);
-                        if (item.getRunnables().contains(filename)) {
-                            if (atmFile.getExecAddr() == (0xc2b2)) {
-                                System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
-                                        + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
-                                        + Integer.toHexString(atmFile.getExecAddr()));
-                            }
-                        }
-                    }
-                    if (!missing.isEmpty()) {
-                        for (String m : missing) {
-                            System.out.println("WARNING: " + item.getTitle() + ": missing in SDDOS build : " + m);
-                        }
-                    }
-                    addDisk(image, item);
+        Set<String> missing = new HashSet<String>(item.getLoadables());
+        for (String filename : item.getFilenames()) {
+            System.out.println("    >" + filename + "<");
+            File file = new File(new File(archiveDir, item.getDir()), filename);
+            // Some of the ATM files still contain the original long
+            // tape titles
+            if (filename.length() > 7) {
+                filename = filename.substring(0, 7);
+            }
+            ATMFile atmFile = new ATMFile(file);
+            missing.remove(filename);
+            atmFile.setTitle(filename);
+            patch_atommc_joystick(atmFile, item);
+            addFile(image, atmFile);
+            if (item.getRunnables().contains(filename)) {
+                if (atmFile.getExecAddr() == (0xc2b2)) {
+                    System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
+                                       + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
+                                       + Integer.toHexString(atmFile.getExecAddr()));
                 }
-            } catch (Exception e) {
-                System.out.println("Problem SDDOS files for title " + item.getTitle());
-                e.printStackTrace();
+            }
+        }
+        if (!missing.isEmpty()) {
+            for (String m : missing) {
+                System.out.println("WARNING: " + item.getTitle() + ": missing in SDDOS build : " + m);
             }
         }
     }
+
 }

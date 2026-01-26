@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
@@ -14,7 +15,7 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
     private File sdImageFile;
     byte[] SDimage;
-    
+
     public GenerateSDDOSFiles(File archiveDir, String menuBase, int numChunks, File imageFile)
             throws IOException {
         super(archiveDir, menuBase, numChunks);
@@ -73,12 +74,12 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         // In the SDDOS image we use the compressed index identifier
         addDisk(image, item.getIndex());
     }
-    
+
     @Override
     protected void addDisk(byte[] image, int diskNum) throws IOException {
         if (diskNum > 1022) {
             throw new RuntimeException("diskNum of " + diskNum + " too large");
-        }        
+        }
         // *** RAW SD IMAGE FILE ***
         // Copy the disk title
         for (int i = 0; i < 13; i++) {
@@ -91,11 +92,43 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         SDimage[16 + diskNum * 16 + 15] = 15;
         // Copy the disk data
         System.arraycopy(image, 0, SDimage, SD_SEC_SIZE * (32 + diskNum * 200), image.length);
-        
+
         // Also write the disk to the file system
         writeDiskFile(new File("disks/" + diskNum), image);
     }
-    
+
+    @Override
+    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+        byte[] image = null;
+        Integer index = null;
+        for (SpreadsheetTitle item : items) {
+            try {
+                if (item.isPresent()) {
+                    if ((item.getIndex() & 1) == 0) {
+                        if (index != null) {
+                            addDisk(image, index >> 1);
+                        }
+                        index = item.getIndex();
+                        image = createBlankDiskImage(item.getTitle());
+                        addTitle(image, item, "BOOT0");
+                    } else {
+                        addTitle(image, item, "BOOT1");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Problem DiskImage files for title " + item.getTitle());
+                e.printStackTrace();
+            }
+        }
+        try {
+            if (index != null) {
+                addDisk(image, index >> 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem DiskImage files for last title");
+            e.printStackTrace();
+        }
+    }
 
     public void writeImage() throws IOException {
         System.out.println("Writing SDDOS SD Card Image: " + sdImageFile);
@@ -103,14 +136,14 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         fos.write(SDimage);
         fos.close();
     }
-    
+
     private void writeDiskFile(File file, byte[] image) throws IOException {
         System.out.println("Writing DSK Image: " + file);
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(image);
         fos.close();
     }
-    
 
-    
+
+
 }

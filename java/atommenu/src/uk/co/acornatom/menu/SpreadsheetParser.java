@@ -13,9 +13,9 @@ import java.util.TreeMap;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class SpreadsheetParser {
-    
+
     private static final String STATUS_PRESENT = "present";
-    
+
     private static final String GENRE = "genre";
     private static final String COLLECTION = "collection";
     private static final String PUBLISHER = "publisher";
@@ -31,7 +31,7 @@ public class SpreadsheetParser {
     private static final String UPDATED = "updated";
 
     private File file;
-    private int index;
+    //    private int index;
 
     private Set<String> filesPaths = new HashSet<String>();
 
@@ -41,7 +41,7 @@ public class SpreadsheetParser {
 
     public SpreadsheetParser(File file) {
         this.file = file;
-        this.index = 1;
+        //        this.index = 1;
     }
 
     public List<SpreadsheetTitle> parseSpreadSheet() {
@@ -118,7 +118,7 @@ public class SpreadsheetParser {
                 }
                 String identifier = program[identifier_column].trim();
                 item.setIdentifier(Integer.parseInt(identifier));
-                item.setIndex(index++);
+                //                item.setIndex(index++);
                 String chunk = program[chunk_column].trim();
                 item.setChunk(chunk.substring(0,  1)); // Only use first character of chunk
                 String title = program[title_column].trim().toUpperCase();

@@ -435,12 +435,23 @@ ENDIF
 	; 800 K=(!I)&#7FF
 	LDX #TmpPtr
 	JSR Dereference
-	LDA TmpPtr
-	STA BinBuffer
+   ; For SDDOS we pack two games per disk
 	LDA TmpPtr + 1
 	AND #$7
+IF (sddos = 1)
+	LSR A
+ENDIF
 	STA BinBuffer + 1
-
+	LDA TmpPtr
+IF (sddos = 1)
+	ROR A
+ENDIF
+	STA BinBuffer
+IF (sddos = 1)
+        LDA #'0'
+	ADC #0
+	STA bootnum
+ENDIF
 	; 810 P=#100
 	; 820 $P="RUN MNU/"
 	; 830 P=P+LEN(P)
@@ -464,7 +475,9 @@ IF (sddos = 1)
 	EQUS "DRIVE 0", Return
 
 	JSR OscliString
-	EQUS "RUN BOOT", Return
+	EQUS "RUN BOOT"
+.bootnum
+	EQUS "0", Return
 
 .LoadDisk
 	STA RunCommand + 4
