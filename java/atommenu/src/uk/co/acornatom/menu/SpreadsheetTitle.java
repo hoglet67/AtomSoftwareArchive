@@ -7,7 +7,7 @@ import java.util.Set;
 public class SpreadsheetTitle {
 
     private int identifier;
-    private int index;
+    private Integer diskNo;
     private String chunk;
     private String title;
     private String dir;
@@ -21,6 +21,9 @@ public class SpreadsheetTitle {
     private Set<String> runnables = new HashSet<String>();
     private Set<String> loadables = new HashSet<String>();
 
+    public SpreadsheetTitle() {
+        diskNo = null;
+    }
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
@@ -30,13 +33,13 @@ public class SpreadsheetTitle {
         return identifier;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setDiskNo(Integer diskNo) {
+        this.diskNo = diskNo;
     }
 
-    /* Index is a simple sequence number, with no holes */
-    public int getIndex() {
-        return index;
+    /* DiskNo can be used by a generate to indicate the disk number on which the title has been mapped */
+    public Integer getDiskNo() {
+        return diskNo;
     }
 
     public void setChunk(String chunk) {

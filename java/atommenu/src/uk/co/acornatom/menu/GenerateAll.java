@@ -12,48 +12,6 @@ import uk.co.acornatom.menu.IFileGenerator.Target;
 
 public class GenerateAll {
 
-    private static int calcFileSpace(File archiveDir, SpreadsheetTitle item) {
-        int total = 0;
-        for (String filename : item.getFilenames()) {
-            File file = new File(new File(archiveDir, item.getDir()), filename);
-            total += (file.length() + 0xFF) & 0xFFFF00;
-        }
-        // Account for boot file
-        total += 0x100;
-        return total;
-    }
-
-    private static boolean areItemsCombinable(File archiveDir, SpreadsheetTitle item1, SpreadsheetTitle item2) {
-
-        int item1_numFiles = item1.getFilenames().size();
-        int item2_numFiles = item2.getFilenames().size();
-
-        // 29 allows two free catalog entries for the boot files
-        if (item1_numFiles + item2_numFiles > 29) {
-            System.out.println("Not combinable due to number of files:" + item1.getTitle() + " and " + item2.getTitle());
-            return false;
-        }
-
-        int cat_space = 0x200;
-        int item1_space = calcFileSpace(archiveDir, item1) + 0x100; // + 0x100 to allow for boot file
-        int item2_space = calcFileSpace(archiveDir, item2) + 0x100;
-
-        if (cat_space + item1_space + item2_space > 40 * 10 * 0x100) {
-            System.out.println("Not combinable due to space:" + item1.getTitle() + " and " + item2.getTitle());
-            return false;
-        }
-
-        HashSet<String> filenames = new HashSet<String>();
-        filenames.addAll(item1.getFilenames());
-        filenames.addAll(item2.getFilenames());
-        if (filenames.size() != item1_numFiles + item2_numFiles) {
-            System.out.println("Not combinable due to name conflicts:" + item1.getTitle() + " and " + item2.getTitle());
-            return false;
-        }
-
-        return true;
-    }
-
     public static final void main(String[] args) {
         try {
             if (args.length != 5) {
@@ -98,27 +56,6 @@ public class GenerateAll {
             SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
             List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
-            // Generate disk numbers up front, combining pairs of titles if possible
-            // (this is just used by SDDOS)
-            int diskNo = 0;
-            SpreadsheetTitle lastItem = null;
-            for (SpreadsheetTitle item : items) {
-                if (!item.isPresent()) {
-                    continue;
-                }
-                // Test if two items are combinable
-                if (lastItem != null && areItemsCombinable(archiveDir, item, lastItem)) {
-                    // Append the item to the current disk
-                    item.setIndex(diskNo * 2 + 1);
-                    lastItem = null;
-                } else {
-                    // Start a new disk for this item
-                    diskNo++;
-                    item.setIndex(diskNo * 2);
-                    lastItem = item;
-                }
-            }
-
             // Count the number of titles in each chunk
             Map<String, Integer> chunks = new TreeMap<String, Integer>();
             int total = 0;
@@ -148,6 +85,31 @@ public class GenerateAll {
                 System.out.println("Generating " + target.name());
                 System.out.println("*******************************");
 
+                IArchiveGenerator generator = null;
+
+                if (target == Target.SDDOS) {
+                    generator = new GenerateSDDOSFiles(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".img"));
+                }
+
+                if (target == Target.JS) {
+                    generator = new GenerateJSFiles(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".js"));
+                }
+
+                if (target == Target.ECONET) {
+                    generator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"), menuBase, chunks.size());
+                }
+
+                if (target == Target.GOSDC) {
+                    generator = new GenerateGoSDCFiles(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".gosdc"));
+                }
+
+                if (target == Target.ATOMMC) {
+                    generator = new GenerateAtoMMCFiles();
+                }
+
+                // Give the generator the opportunity to map titles to disk images
+                generator.allocateDisks(items);
+
                 System.out.println(" menu files version " + version);
 
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
@@ -175,45 +137,16 @@ public class GenerateAll {
                     List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
                     generators.add(new GenerateMenuFiles(archiveDir, menuDir, agdChunk, allChunk));
-                    for (IFileGenerator generator : generators) {
-                        generator.generateFiles(chunkItems, target);
+                    for (IFileGenerator g : generators) {
+                        g.generateFiles(chunkItems, target);
                     }
 
                     chunkId++;
                 }
 
-                if (target == Target.SDDOS) {
-                    GenerateSDDOSFiles sdGenerator = new GenerateSDDOSFiles(archiveDir, menuBase, chunks.size(),
-                            new File(archiveDir + ".img"));
-                    sdGenerator.generateFiles(items, target);
-                    sdGenerator.writeImage();
-                    new File(archiveDir, "MENUSD").delete();
-                }
-
-                if (target == Target.JS) {
-                    GenerateJSFiles jsGenerator = new GenerateJSFiles(archiveDir, menuBase, chunks.size(),
-                            new File(archiveDir + ".js"));
-                    jsGenerator.generateFiles(items, target);
-                    jsGenerator.writeImage();
-                    new File(archiveDir, "MENUSD").delete();
-                }
-
-                if (target == Target.ECONET) {
-                    GenerateEconetFiles econetGenerator = new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"),
-                            menuBase, chunks.size());
-                    econetGenerator.generateFiles(items, target);
-                    econetGenerator.close();
-                    new File(archiveDir, "MENUSD").delete();
-                }
-
-                if (target == Target.GOSDC) {
-                    GenerateGoSDCFiles gosdcGenerator = new GenerateGoSDCFiles(archiveDir, menuBase, chunks.size(),
-                            new File(archiveDir + ".gosdc"));
-                    gosdcGenerator.generateFiles(items, target);
-                    gosdcGenerator.close();
-                    new File(archiveDir, "MENUSD").delete();
-                }
-
+                generator.generateFiles(items, target);
+                generator.writeImage();
+                generator.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

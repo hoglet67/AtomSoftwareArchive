@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Formatter;
 
-public class GenerateGoSDCFiles extends GenerateBase {
+public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
 
     public static final String DIRSEP = "/";
 
@@ -30,9 +30,9 @@ public class GenerateGoSDCFiles extends GenerateBase {
         gosdcFilesDir.mkdir();
         scriptStream = new FileOutputStream(new File(gosdcFilesDir, "script"));
         scriptCounter = 0;
-        createMenus();
     }
 
+    @Override
     public void close() throws IOException {
         scriptStream.close();
     }
@@ -96,6 +96,7 @@ public class GenerateGoSDCFiles extends GenerateBase {
 
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
+        createMenus();
         for (SpreadsheetTitle item : items) {
             try {
                 if (item.isPresent()) {

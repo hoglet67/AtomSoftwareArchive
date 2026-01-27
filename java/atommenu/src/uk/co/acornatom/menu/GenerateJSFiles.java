@@ -16,7 +16,6 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
             throws IOException {
         super(archiveDir, menuBase, numChunks);
         this.jsImageFile = jsImageFile;
-        createJSImage();
     }
 
     private void createJSImage() throws IOException {
@@ -47,6 +46,7 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
 
     @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+        createJSImage();
         for (SpreadsheetTitle item : items) {
             try {
                 if (item.isPresent()) {
@@ -61,8 +61,14 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
         }
     }
 
+    @Override
     public void writeImage() throws IOException {
         JSwriter.println("]");
+    }
+
+    @Override
+    public void close() throws IOException {
         JSwriter.close();
     }
+
 }

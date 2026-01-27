@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashSet;
 
 public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
@@ -20,7 +21,6 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
             throws IOException {
         super(archiveDir, menuBase, numChunks);
         this.sdImageFile = imageFile;
-        createSDImage();
     }
 
     // ;=================================================================
@@ -60,6 +60,13 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
     int[] diskTable = { 0, 0, 1, 0, 2, 0, 3, 0, 'S', 'D', 'D', 'O', 'S', ' ', ' ', ' ' };
 
+    private void writeDiskFile(File file, byte[] image) throws IOException {
+        System.out.println("Writing DSK Image: " + file);
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(image);
+        fos.close();
+    }
+
     protected void createSDImage() throws IOException {
         byte[] SDimage = new byte[SDCARD_SIZE];
         Arrays.fill(SDimage, (byte) 0xFF);
@@ -72,7 +79,73 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
     protected void addDisk(byte[] image, SpreadsheetTitle item) throws IOException {
         // In the SDDOS image we use the compressed index identifier
-        addDisk(image, item.getIndex());
+        addDisk(image, item.getDiskNo());
+    }
+
+    protected int calcFileSpace(File archiveDir, SpreadsheetTitle item) {
+        int total = 0;
+        for (String filename : item.getFilenames()) {
+            File file = new File(new File(archiveDir, item.getDir()), filename);
+            total += (file.length() + 0xFF) & 0xFFFF00;
+        }
+        // Account for boot file
+        total += 0x100;
+        return total;
+    }
+
+    protected boolean areItemsCombinable(File archiveDir, SpreadsheetTitle item1, SpreadsheetTitle item2) {
+
+        int item1_numFiles = item1.getFilenames().size();
+        int item2_numFiles = item2.getFilenames().size();
+
+        // 29 allows two free catalog entries for the boot files
+        if (item1_numFiles + item2_numFiles > 29) {
+            System.out.println("Not combinable due to number of files:" + item1.getTitle() + " and " + item2.getTitle());
+            return false;
+        }
+
+        int cat_space = 0x200;
+        int item1_space = calcFileSpace(archiveDir, item1) + 0x100; // + 0x100 to allow for boot file
+        int item2_space = calcFileSpace(archiveDir, item2) + 0x100;
+
+        if (cat_space + item1_space + item2_space > 40 * 10 * 0x100) {
+            System.out.println("Not combinable due to space:" + item1.getTitle() + " and " + item2.getTitle());
+            return false;
+        }
+
+        HashSet<String> filenames = new HashSet<String>();
+        filenames.addAll(item1.getFilenames());
+        filenames.addAll(item2.getFilenames());
+        if (filenames.size() != item1_numFiles + item2_numFiles) {
+            System.out.println("Not combinable due to name conflicts:" + item1.getTitle() + " and " + item2.getTitle());
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+        // Generate disk numbers up front, combining pairs of titles if possible
+        // (this is just used by SDDOS)
+        int diskNo = 0;
+        SpreadsheetTitle lastItem = null;
+        for (SpreadsheetTitle item : items) {
+            if (!item.isPresent()) {
+                continue;
+            }
+            // Test if two items are combinable
+            if (lastItem != null && areItemsCombinable(archiveDir, item, lastItem)) {
+                // Append the item to the current disk
+                item.setDiskNo(diskNo * 2 + 1);
+                lastItem = null;
+            } else {
+                // Start a new disk for this item
+                diskNo++;
+                item.setDiskNo(diskNo * 2);
+                lastItem = item;
+            }
+        }
     }
 
     @Override
@@ -99,16 +172,17 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
     @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+        createSDImage();
         byte[] image = null;
-        Integer index = null;
+        Integer diskNo = null;
         for (SpreadsheetTitle item : items) {
             try {
                 if (item.isPresent()) {
-                    if ((item.getIndex() & 1) == 0) {
-                        if (index != null) {
-                            addDisk(image, index >> 1);
+                    if ((item.getDiskNo() & 1) == 0) {
+                        if (diskNo != null) {
+                            addDisk(image, diskNo >> 1);
                         }
-                        index = item.getIndex();
+                        diskNo = item.getDiskNo();
                         image = createBlankDiskImage(item.getTitle());
                         addTitle(image, item, "BOOT0");
                     } else {
@@ -121,8 +195,8 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
             }
         }
         try {
-            if (index != null) {
-                addDisk(image, index >> 1);
+            if (diskNo != null) {
+                addDisk(image, diskNo >> 1);
             }
         } catch (Exception e) {
             System.out.println("Problem DiskImage files for last title");
@@ -130,20 +204,12 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         }
     }
 
+    @Override
     public void writeImage() throws IOException {
         System.out.println("Writing SDDOS SD Card Image: " + sdImageFile);
         FileOutputStream fos = new FileOutputStream(sdImageFile);
         fos.write(SDimage);
         fos.close();
     }
-
-    private void writeDiskFile(File file, byte[] image) throws IOException {
-        System.out.println("Writing DSK Image: " + file);
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(image);
-        fos.close();
-    }
-
-
 
 }

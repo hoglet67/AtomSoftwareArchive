@@ -134,8 +134,8 @@ public class GenerateMenuFiles extends GenerateBase {
             if (item.isPresent()) {
                 AtomTitle atomTitle = new AtomTitle();
                 atomTitle.setTitle(item.getTitle());
-                if (target == Target.SDDOS) {
-                    atomTitle.setIndex(item.getIndex()); // Use compressed identifier to overcome 1023 disk limit
+                if (item.getDiskNo() != null) {
+                    atomTitle.setIndex(item.getDiskNo()); // Use the disk number if it's been set by the generator
                 } else {
                     atomTitle.setIndex(item.getIdentifier()); // Use persistent identifier everywhere else
                 }

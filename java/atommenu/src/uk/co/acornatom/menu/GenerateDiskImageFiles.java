@@ -7,17 +7,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class GenerateDiskImageFiles extends GenerateBase {
+public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     private static final int NUM_TRACKS = 40;
     private static final int NUM_SECS_PER_TRACK = 10;
     private static final int NUM_SECS = NUM_TRACKS * NUM_SECS_PER_TRACK;
     private static final int SEC_SIZE = 256;
 
-    private int sectorNum;
-    private File archiveDir;
+    protected File archiveDir;
     private String menuBase;
     private int numChunks;
+    private int sectorNum;
 
     public GenerateDiskImageFiles(File archiveDir, String menuBase, int numChunks) {
         super();

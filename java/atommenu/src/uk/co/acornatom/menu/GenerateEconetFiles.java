@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class GenerateEconetFiles extends GenerateBase {
+public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
     public static final String DIRSEP = "/";
 
@@ -39,9 +39,9 @@ public class GenerateEconetFiles extends GenerateBase {
             public void write(int b) throws IOException {
             }
         });
-        createMenus();
     }
 
+    @Override
     public void close() throws IOException {
         zipStream.close();
     }
@@ -306,6 +306,8 @@ public class GenerateEconetFiles extends GenerateBase {
     }
 
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+
+        createMenus();
 
         // This needs more work to deal with long fine names
         //
