@@ -26,36 +26,36 @@ public class GenerateGoSDCFiles extends GenerateBase {
         this.archiveDir = archiveDir;
         this.menuBase = menuBase;
         this.numChunks = numChunks;
-	this.gosdcFilesDir = gosdcFilesDir;
-	gosdcFilesDir.mkdir();
-	scriptStream = new FileOutputStream(new File(gosdcFilesDir, "script"));
-	scriptCounter = 0;
+        this.gosdcFilesDir = gosdcFilesDir;
+        gosdcFilesDir.mkdir();
+        scriptStream = new FileOutputStream(new File(gosdcFilesDir, "script"));
+        scriptCounter = 0;
         createMenus();
     }
 
     public void close() throws IOException {
-	scriptStream.close();
+        scriptStream.close();
     }
 
     public void addFile(String dir, ATMFile atmFile) throws IOException {
         String objectName = dir + atmFile.getTitle();
-	objectName = objectName.replace('/', '.');
+        objectName = objectName.replace('/', '.');
 
-	String madeupName = "0000000" + Integer.toString(scriptCounter++);
-	madeupName = madeupName.substring(madeupName.length() - 8);
+        String madeupName = "0000000" + Integer.toString(scriptCounter++);
+        madeupName = madeupName.substring(madeupName.length() - 8);
 
-	StringBuilder scriptLine = new StringBuilder();
-	Formatter formatter = new Formatter(scriptLine);
-	formatter.format("ADD FILE %s %04x %04x %s\n", objectName, atmFile.getLoadAddr(), atmFile.getExecAddr(), madeupName);
-	scriptStream.write(scriptLine.toString().getBytes());
+        StringBuilder scriptLine = new StringBuilder();
+        Formatter formatter = new Formatter(scriptLine);
+        formatter.format("ADD FILE %s %04x %04x %s\n", objectName, atmFile.getLoadAddr(), atmFile.getExecAddr(), madeupName);
+        scriptStream.write(scriptLine.toString().getBytes());
 
-	FileOutputStream file = new FileOutputStream(new File(gosdcFilesDir, madeupName));
-	file.write(atmFile.getData());
-	file.close();
+        FileOutputStream file = new FileOutputStream(new File(gosdcFilesDir, madeupName));
+        file.write(atmFile.getData());
+        file.close();
     }
 
     private void createMenus() throws IOException {
-	scriptStream.write("# Atom Software Archive menu\n".getBytes());
+        scriptStream.write("# Atom Software Archive menu\n".getBytes());
 
         // !BOOT
         ATMFile bootFile = new ATMFile("!BOOT", 0, 0, "*RUN MENU\r".getBytes());
@@ -85,9 +85,9 @@ public class GenerateGoSDCFiles extends GenerateBase {
             }
             ATMFile chapFile;
             if (chunk == numChunks - 1) {
-               chapFile = new ATMFile(new File(archiveDir, "ALLGOS"));
+                chapFile = new ATMFile(new File(archiveDir, "ALLGOS"));
             } else {
-               chapFile = new ATMFile(new File(archiveDir, "CHAPGOS"));
+                chapFile = new ATMFile(new File(archiveDir, "CHAPGOS"));
             }
             chapFile.setTitle("CHAP");
             addFile(dir, chapFile);
@@ -101,16 +101,16 @@ public class GenerateGoSDCFiles extends GenerateBase {
                 if (item.isPresent()) {
                     System.out.println(item.getTitle());
 
-		    String comment = "# " + item.getTitle() + " | " + item.getPublisher() + "\n";
-		    scriptStream.write(comment.getBytes());
+                    String comment = "# " + item.getTitle() + " | " + item.getPublisher() + "\n";
+                    scriptStream.write(comment.getBytes());
 
-		    StringBuilder dirname = new StringBuilder();
-		    Formatter formatter = new Formatter(dirname);
-		    formatter.format("%sE%03X%s", BASEDIR, item.getIdentifier(), DIRSEP);
-		    String dir = dirname.toString();
+                    StringBuilder dirname = new StringBuilder();
+                    Formatter formatter = new Formatter(dirname);
+                    formatter.format("%sE%03X%s", BASEDIR, item.getIdentifier(), DIRSEP);
+                    String dir = dirname.toString();
 
                     File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                            "" + item.getIdentifier());
+                                             "" + item.getIdentifier());
                     ATMFile bootAtmFile = new ATMFile(bootfile);
                     bootAtmFile.setTitle("BOOT");
                     addFile(dir, bootAtmFile);
@@ -127,8 +127,8 @@ public class GenerateGoSDCFiles extends GenerateBase {
                         if (item.getRunnables().contains(filename)) {
                             if (atmFile.getExecAddr() == (0xc2b2)) {
                                 System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
-                                        + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
-                                        + Integer.toHexString(atmFile.getExecAddr()));
+                                                   + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
+                                                   + Integer.toHexString(atmFile.getExecAddr()));
                             }
                         }
                     }
