@@ -457,11 +457,11 @@ ENDIF
 
 IF (sddos = 1)
 
-	LDA #'2'
+	LDA #'0'
 	JSR LoadDisk
 
 	JSR OscliString
-	EQUS "DRIVE 2", Return
+	EQUS "DRIVE 0", Return
 
 	JSR OscliString
 	EQUS "RUN BOOT", Return
