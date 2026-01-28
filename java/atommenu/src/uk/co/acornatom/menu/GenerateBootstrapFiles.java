@@ -93,7 +93,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
                 } else {
                     cmd = parts[0] + " " + filename;
                 }
-                if (target == Target.SDDOS || target == Target.JS || target == Target.ECONET || target == Target.GOSDC) {
+                if (target == Target.SDDOS2 || target == Target.SDDOS3 || target == Target.JS || target == Target.ECONET || target == Target.GOSDC) {
                     item.getLoadables().add(filename);
                     if (cmd.startsWith("*RUN")) {
                         // Add to list of runnables, so we can later check the
@@ -131,13 +131,14 @@ public class GenerateBootstrapFiles extends GenerateBase {
     }
 
     private String trunc(String filename) {
-        if ((target == Target.SDDOS || target == Target.JS) && filename.length() > 7) {
+        if ((target == Target.SDDOS2 || target == Target.SDDOS3 || target == Target.JS) && filename.length() > 7) {
             return filename.substring(0, 7);
         } else {
             return filename;
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
         for (SpreadsheetTitle item : items) {
             if (item.isPresent()) {

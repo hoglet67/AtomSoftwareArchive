@@ -234,23 +234,21 @@ ENDIF
 	JMP LabelC
 
 .TestForEscape
-   CPY #&3B
-   BNE TestForPrevPage
+	CPY #&3B
+	BNE TestForPrevPage
 
    ; Escape pressed; change back to the "root" directory
 	JSR OscliString
-IF (sddos = 1)
+IF (sddos2 = 1 OR sddos3 = 1)
 	EQUS "DRIVE 0", Return
-ELSE
-IF (econet = 1 OR gosdc = 1)
+ELIF (econet = 1 OR gosdc = 1)
 	EQUS "DIR $", Return
 ELSE
 	EQUS "CWD /", Return
 ENDIF
-ENDIF
 	JSR OscliString
 	EQUS "RUN MENU", Return
-   ; never returns
+	; never returns
 
 .TestForPrevPage
 	; // < key pressed (previous page)
@@ -435,20 +433,20 @@ ENDIF
 	; 800 K=(!I)&#7FF
 	LDX #TmpPtr
 	JSR Dereference
-   ; For SDDOS we pack two games per disk
+	; For SDDOS we pack two games per disk
 	LDA TmpPtr + 1
 	AND #$7
-IF (sddos = 1)
+IF (sddos2 = 1)
 	LSR A
 ENDIF
 	STA BinBuffer + 1
 	LDA TmpPtr
-IF (sddos = 1)
+IF (sddos2 = 1)
 	ROR A
 ENDIF
 	STA BinBuffer
-IF (sddos = 1)
-        LDA #'0'
+IF (sddos2 = 1)
+	LDA #'0'
 	ADC #0
 	STA bootnum
 ENDIF
@@ -466,7 +464,10 @@ ENDIF
 	LDA #12
 	JSR Oswrch
 
-IF (sddos = 1)
+IF (sddos2 = 1 )
+
+	; SDDOS2 has a *RUNME bug, where only drive 0 is
+        ; searched for the file RUNME
 
 	LDA #'0'
 	JSR LoadDisk
@@ -478,6 +479,21 @@ IF (sddos = 1)
 	EQUS "RUN BOOT"
 .bootnum
 	EQUS "0", Return
+
+.LoadDisk
+	STA RunCommand + 4
+
+ELIF (sddos3 = 1)
+
+	; SDDOS3 is less messy if we use three different drives
+	LDA #'2'
+	JSR LoadDisk
+
+	JSR OscliString
+	EQUS "DRIVE 2", Return
+
+	JSR OscliString
+	EQUS "RUN BOOT", Return
 
 .LoadDisk
 	STA RunCommand + 4
@@ -516,13 +532,26 @@ IF (econet = 1 OR gosdc = 1)
 ELSE
 	JSR WriteDecimal
 ENDIF
+IF (sddos3 = 1)
+	LDY #0
+.RunCommand3
+	LDA DskSuffix, Y
+	BEQ RunCommand4
+	STA OscliBuffer, X
+	INX
+	INY
+	BNE RunCommand3
+.DskSuffix
+	EQUS ".DSK", 0
+.RunCommand4
+ENDIF
 	LDA #Return
 	STA OscliBuffer, X
 	INX
 	STA OscliBuffer, X
 	JMP Oscli
 
-IF (sddos = 1)
+IF (sddos2 = 1 OR sddos3 = 1)
 
 .RunCommand
 	EQUS "DIN  ,",0

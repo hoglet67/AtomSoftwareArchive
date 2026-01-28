@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import uk.co.acornatom.menu.IFileGenerator.Target;
 
 public class GenerateAll {
@@ -85,8 +86,12 @@ public class GenerateAll {
 
                 IArchiveGenerator generator = null;
 
-                if (target == Target.SDDOS) {
-                    generator = new GenerateSDDOSFiles(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".img"));
+                if (target == Target.SDDOS2) {
+                    generator = new GenerateSDDOS2Files(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".img"));
+                }
+
+                if (target == Target.SDDOS3) {
+                    generator = new GenerateSDDOS3Files(archiveDir, menuBase, chunks.size(), new File(archiveDir + "_SDDOS3.zip"));
                 }
 
                 if (target == Target.JS) {

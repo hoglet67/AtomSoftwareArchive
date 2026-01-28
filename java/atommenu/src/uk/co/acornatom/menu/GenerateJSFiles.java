@@ -11,11 +11,13 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
 
     private File jsImageFile;
     PrintWriter JSwriter;
+    boolean first;
 
     public GenerateJSFiles(File archiveDir, String menuBase, int numChunks, File jsImageFile)
             throws IOException {
         super(archiveDir, menuBase, numChunks);
         this.jsImageFile = jsImageFile;
+        this.first = true;
     }
 
     private void createJSImage() throws IOException {
@@ -25,23 +27,29 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
         JSwriter.println("[");
     }
 
-    protected void addDisk(byte[] image, SpreadsheetTitle item) {
-        // In Javascript image we use the stable persistent identifier
-        addDisk(image, item.getIdentifier());
+    @Override
+    protected String getMenuDiskName() {
+        return "BOOT";
     }
 
     @Override
-    protected void addDisk(byte[] image, int diskNum) {
+    protected String getChapterDiskName(int chunk) {
+        return "MNU" + (char)('A' + chunk);
+    }
+
+    @Override
+    protected void addDisk(byte[] image, String name) {
         // *** JS IMAGE FILE ***
-        if (diskNum > 0) {
+        if (!first) {
             JSwriter.println(",");
         }
         int len = getImageLen(image);
         byte[] strippedImage = new byte[len];
         System.arraycopy(image, 0, strippedImage, 0, len);
-        JSwriter.print("fDiskRead(\"" + diskNum + "\", D64(\"");
+        JSwriter.print("fDiskRead(\"" + name + "\", D64(\"");
         JSwriter.print(Base64.encodeBase64String(strippedImage));
         JSwriter.print("\"))");
+        first = false;
     }
 
     @Override
@@ -52,7 +60,7 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
                 if (item.isPresent()) {
                    byte[] image = createBlankDiskImage(item.getTitle());
                    addTitle(image, item, "BOOT");
-                   addDisk(image, item);
+                   addDisk(image, "" + item.getIdentifier());
                 }
             } catch (Exception e) {
                 System.out.println("Problem DiskImage files for title " + item.getTitle());

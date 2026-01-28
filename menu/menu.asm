@@ -79,7 +79,7 @@ IF (econet = 1 OR gosdc = 1)
 	;JSR OscliString
 	;EQUS "LIB $.ATOMLIB", Return
 ELSE
-IF (sddos = 0)
+IF (atommc = 1)
 	JSR OscliString
 	EQUS "CWD ASA", Return
 ENDIF
@@ -132,11 +132,9 @@ ENDIF
 IF (econet = 1 OR gosdc = 1)
 	JSR OscliString
 	EQUS "DIR $", Return
-ELSE
-IF (sddos = 0)
+ELIF (atommc = 1)
 	JSR OscliString
 	EQUS "CWD /", Return
-ENDIF
 ENDIF
 	LDA #&0C
 	JSR Oswrch
@@ -144,13 +142,21 @@ ENDIF
 
 .MenuNext
 
-IF (sddos = 1)
+IF (sddos2 = 1)
 	ADC #<(1016 - 'A')
 	STA BinBuffer
 	LDA #>(1016 - 'A')
 	STA BinBuffer + 1
 	LDA #'1'
 	JSR LoadDisk
+	JSR OscliString
+	EQUS "DRIVE 1", Return
+ELIF (sddos3 = 1)
+	STA chunk
+	JSR OscliString
+	EQUS "DIN 1,MNU"
+.chunk
+	EQUS "X.DSK", Return
 	JSR OscliString
 	EQUS "DRIVE 1", Return
 ELSE
@@ -206,7 +212,7 @@ ENDIF
 .GraphicsLastPage
 	EQUB $82, $84, $86, $8c, $98
 
-IF (sddos = 1)
+IF (sddos2 = 1)
 
 .LoadDisk
 	STA LoadDiskString + 4

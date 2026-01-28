@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 
-public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
+public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
 
     public static final int SD_SEC_SIZE = 512;
     public static final int SD_NUM_SECS = 204632;
@@ -17,7 +17,7 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
     private File sdImageFile;
     byte[] SDimage;
 
-    public GenerateSDDOSFiles(File archiveDir, String menuBase, int numChunks, File imageFile)
+    public GenerateSDDOS2Files(File archiveDir, String menuBase, int numChunks, File imageFile)
             throws IOException {
         super(archiveDir, menuBase, numChunks);
         this.sdImageFile = imageFile;
@@ -60,26 +60,24 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
 
     int[] diskTable = { 0, 0, 1, 0, 2, 0, 3, 0, 'S', 'D', 'D', 'O', 'S', ' ', ' ', ' ' };
 
-    private void writeDiskFile(File file, byte[] image) throws IOException {
-        System.out.println("Writing DSK Image: " + file);
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(image);
-        fos.close();
-    }
-
-    protected void createSDImage() throws IOException {
+    protected void createSDImage(Target target) throws IOException {
         byte[] SDimage = new byte[SDCARD_SIZE];
         Arrays.fill(SDimage, (byte) 0xFF);
         for (int i = 0; i < diskTable.length; i++) {
             SDimage[i] = (byte) diskTable[i];
         }
         this.SDimage = SDimage;
-        createMenuDisk(0, 1016);
+        createMenuDisks(target);
     }
 
-    protected void addDisk(byte[] image, SpreadsheetTitle item) throws IOException {
-        // In the SDDOS image we use the compressed index identifier
-        addDisk(image, item.getDiskNo());
+    @Override
+    protected String getMenuDiskName() {
+        return "0";
+    }
+
+    @Override
+    protected String getChapterDiskName(int chunk) {
+        return "" + (1016 + chunk);
     }
 
     protected int calcFileSpace(File archiveDir, SpreadsheetTitle item) {
@@ -149,7 +147,12 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
     }
 
     @Override
-    protected void addDisk(byte[] image, int diskNum) throws IOException {
+    protected void addDisk(byte[] image, String name) throws IOException {
+        int diskNum = Integer.parseInt(name);
+        addDisk(image, diskNum);
+    }
+
+    private void addDisk(byte[] image, int diskNum) throws IOException {
         if (diskNum > 1022) {
             throw new RuntimeException("diskNum of " + diskNum + " too large");
         }
@@ -165,14 +168,11 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         SDimage[16 + diskNum * 16 + 15] = 15;
         // Copy the disk data
         System.arraycopy(image, 0, SDimage, SD_SEC_SIZE * (32 + diskNum * 200), image.length);
-
-        // Also write the disk to the file system
-        writeDiskFile(new File("disks/" + diskNum), image);
     }
 
     @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
-        createSDImage();
+        createSDImage(target);
         byte[] image = null;
         Integer diskNo = null;
         for (SpreadsheetTitle item : items) {
@@ -211,5 +211,4 @@ public class GenerateSDDOSFiles extends GenerateDiskImageFiles {
         fos.write(SDimage);
         fos.close();
     }
-
 }

@@ -74,9 +74,9 @@ zip -qr ${NAME}_JS.zip $ARCHIVE.js
 zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
 
 # SDDOS3 version
-pushd ../menu
-zip -qr ../archive/${NAME}_SDDOS3.zip disks
-popd
+mv ${ARCHIVE}_SDDOS3.zip ${NAME}_SDDOS3.zip
+
+# GOSDC version
 zip -qr ${NAME}_GoSDC.zip ${ARCHIVE}.gosdc
 
 ##############################################################

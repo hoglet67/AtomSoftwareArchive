@@ -1,4 +1,6 @@
-sddos =? 0
+atommc =? 0
+sddos2 =? 0
+sddos3 =? 0
 econet =? 0
 gosdc =? 0
 
@@ -30,7 +32,7 @@ gosdc =? 0
 	; Zero page
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-IF (sddos = 1)
+IF (sddos2 = 1 OR sddos3 = 1)
 
 	TmpPtr       = $78 ; 2 bytes
 	SortTablePtr = $7a ; 2 bytes
@@ -92,7 +94,7 @@ ENDIF
 	; Shouldn't be any side effect of borrowing Basic's Integer Workspace
    ; Oops, there were, because SDDOS also uses Basic's Integer Workspace
    ;
-IF (sddos = 1 OR econet = 1)
+IF (sddos2 = 1 OR sddos3 == 1 OR econet = 1)
 	ZeroBase = $52
 ELSE
 	ZeroBase = $80
