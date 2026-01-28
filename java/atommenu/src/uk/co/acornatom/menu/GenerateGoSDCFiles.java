@@ -3,10 +3,10 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Formatter;
 
 public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
 
@@ -46,6 +46,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
         StringBuilder scriptLine = new StringBuilder();
         Formatter formatter = new Formatter(scriptLine);
         formatter.format("ADD FILE %s %04x %04x %s\n", objectName, atmFile.getLoadAddr(), atmFile.getExecAddr(), madeupName);
+        formatter.close();
         scriptStream.write(scriptLine.toString().getBytes());
 
         FileOutputStream file = new FileOutputStream(new File(gosdcFilesDir, madeupName));
@@ -93,6 +94,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         createMenus();
@@ -107,6 +109,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
                     StringBuilder dirname = new StringBuilder();
                     Formatter formatter = new Formatter(dirname);
                     formatter.format("%sE%03X%s", BASEDIR, item.getIdentifier(), DIRSEP);
+                    formatter.close();
                     String dir = dirname.toString();
 
                     File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
