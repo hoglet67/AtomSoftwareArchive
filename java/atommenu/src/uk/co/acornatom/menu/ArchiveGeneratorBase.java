@@ -1,7 +1,6 @@
 package uk.co.acornatom.menu;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 abstract public class ArchiveGeneratorBase extends GenerateBase implements IArchiveGenerator {
