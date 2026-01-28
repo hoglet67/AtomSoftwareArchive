@@ -51,6 +51,7 @@ popd
 ##############################################################
 pushd ../menu
 mkdir -p disks
+rm -f disks/*
 ./build.sh "$*"
 popd
 
@@ -58,20 +59,21 @@ popd
 # Zip up the archive
 ##############################################################
 
-zip -qr $ARCHIVE.zip MENU LIB MANPAGES $ARCHIVE
-
-zip -qr ~/${ARCHIVE}_SDDOS.zip $ARCHIVE.img
-
-##############################################################
-# Rename the archive files
-##############################################################
-
 NAME=AtomSoftwareArchive_$(date +"%Y%m%d_%H%M")_$1
 
-mv $ARCHIVE.zip $NAME.zip
+# AtoMMC version
+zip -qr $NAME.zip MENU LIB MANPAGES $ARCHIVE
+
+# Econet version
 mv ${ARCHIVE}_ECONET.zip ${NAME}_ECONET.zip
+
+# Javascript version
 zip -qr ${NAME}_JS.zip $ARCHIVE.js
+
+# SDDOS2 version
 zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
+
+# SDDOS3 version
 pushd ../menu
 zip -qr ../archive/${NAME}_SDDOS3.zip disks
 popd
