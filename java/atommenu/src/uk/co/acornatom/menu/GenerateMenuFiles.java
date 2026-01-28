@@ -174,8 +174,8 @@ public class GenerateMenuFiles extends GenerateBase {
             // swap the lower and upper text spaces
             lengthOfLowerText = 0x1600;
             endOfLowerText = 0x9800;
-            startOfUpperText = 0x0B00;
-            lengthOfUpperText = 0x7600 - startOfUpperText; // ALL Chapter menu 7600-7Exx
+            startOfUpperText = 0x2200; // Avoid the DOS/SDDOS disk buffers
+            lengthOfUpperText = 0x8000 - startOfUpperText; // ALL Chapter menu 1000
         } else if (agdChunk) {
             // swap the lower and upper text spaces
             lengthOfLowerText = 0x1600;
