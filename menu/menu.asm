@@ -143,12 +143,14 @@ ENDIF
 .MenuNext
 
 IF (sddos2 = 1)
-	ADC #<(1016 - 'A')
-	STA BinBuffer
-	LDA #>(1016 - 'A')
-	STA BinBuffer + 1
-	LDA #'1'
-	JSR LoadDisk
+	; A-H -> Disks 1->N
+	AND #&0F
+	ORA #'0'
+	STA chunk
+	JSR OscliString
+	EQUS "DIN 1,"
+.chunk
+	EQUS "X", Return
 	JSR OscliString
 	EQUS "DRIVE 1", Return
 ELIF (sddos3 = 1)
@@ -176,8 +178,8 @@ ENDIF
 	LDA #12
 	JSR Oswrch
 
-   ; Load/run the chapter menu
-   JSR OscliString
+	; Load/run the chapter menu
+	JSR OscliString
 	EQUS "RUN CHAP", Return
 
 .Clear
@@ -212,30 +214,6 @@ ENDIF
 .GraphicsLastPage
 	EQUB $82, $84, $86, $8c, $98
 
-IF (sddos2 = 1)
-
-.LoadDisk
-	STA LoadDiskString + 4
-.LoadDisk0
-	LDX #0
-.LoadDisk1
-	LDA LoadDiskString, X
-	BEQ LoadDisk2
-	STA OscliBuffer, X
-	INX
-	BNE LoadDisk1
-.LoadDisk2
-	JSR WriteDecimal
-	LDA #Return
-	STA OscliBuffer, X
-	INX
-	STA OscliBuffer, X
-	JMP Oscli
-
-.LoadDiskString
-	EQUS "DIN  ,",0
-
-ENDIF
 
 include "common.asm"
 

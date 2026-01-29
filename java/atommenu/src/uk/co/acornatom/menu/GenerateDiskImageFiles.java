@@ -15,9 +15,9 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     private static final int SEC_SIZE = 256;
 
     protected File archiveDir;
-    private String menuBase;
-    private int numChunks;
-    private int sectorNum;
+    protected String menuBase;
+    protected int numChunks;
+    protected int sectorNum;
 
     public GenerateDiskImageFiles(File archiveDir, String menuBase, int numChunks) {
         super();

@@ -77,7 +77,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
 
     @Override
     protected String getChapterDiskName(int chunk) {
-        return "" + (1016 + chunk);
+        return "" + (1 + chunk);
     }
 
     protected int calcFileSpace(File archiveDir, SpreadsheetTitle item) {
@@ -126,7 +126,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
         // Generate disk numbers up front, combining pairs of titles if possible
         // (this is just used by SDDOS)
-        int diskNo = 0;
+        int diskNo = numChunks; // Skip the menu disks
         SpreadsheetTitle lastItem = null;
         for (SpreadsheetTitle item : items) {
             if (!item.isPresent()) {
