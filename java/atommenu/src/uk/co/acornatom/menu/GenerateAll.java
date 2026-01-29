@@ -13,9 +13,9 @@ public class GenerateAll {
 
     public static final void main(String[] args) {
         try {
-            if (args.length != 5) {
+            if (args.length != 3) {
                 System.err.println(
-                        "usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Boot Loader Binary>  <ROM Boot Loader Binary> <Version>");
+                        "usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Version>");
                 System.exit(1);
             }
 
@@ -24,9 +24,7 @@ public class GenerateAll {
 
             File catalogCSV = new File(args[0]);
             File archiveDir = new File(args[1]);
-            File bootLoaderBinary = new File(args[2]);
-            File romBootLoaderBinary = new File(args[3]);
-            String version = args[4];
+            String version = args[2];
 
             if (!catalogCSV.exists() || !catalogCSV.isFile()) {
                 System.err.println("CatalogCSV: " + catalogCSV + " does not exist");
@@ -35,16 +33,6 @@ public class GenerateAll {
 
             if (!archiveDir.exists() || !archiveDir.isDirectory()) {
                 System.err.println("Archive Directory: " + archiveDir + " does not exist");
-                System.exit(1);
-            }
-
-            if (!bootLoaderBinary.exists() || !bootLoaderBinary.isFile()) {
-                System.err.println("Boot Loader Binary: " + bootLoaderBinary + " does not exist");
-                System.exit(1);
-            }
-
-            if (!romBootLoaderBinary.exists() || !romBootLoaderBinary.isFile()) {
-                System.err.println("ROM Boot Loader Binary: " + romBootLoaderBinary + " does not exist");
                 System.exit(1);
             }
 
@@ -86,6 +74,9 @@ public class GenerateAll {
 
                 IArchiveGenerator generator = null;
 
+                File bootLoaderBinary = new File(archiveDir, "BOOT.bin");
+                File romBootLoaderBinary = new File(archiveDir, "BOOTROM.bin");
+
                 if (target == Target.SDDOS2) {
                     generator = new GenerateSDDOS2Files(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".img"));
                 }
@@ -104,6 +95,8 @@ public class GenerateAll {
 
                 if (target == Target.GOSDC) {
                     generator = new GenerateGoSDCFiles(archiveDir, menuBase, chunks.size(), new File(archiveDir + ".gosdc"));
+                    // GoSDC needs a different ROM bootloader
+                    romBootLoaderBinary = new File(archiveDir, "BOOTROMGOSDC.bin");
                 }
 
                 if (target == Target.ATOMMC) {

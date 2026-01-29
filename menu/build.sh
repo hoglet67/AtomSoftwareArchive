@@ -18,10 +18,13 @@ rm -rf $ARCHIVE/$DIR[A-Z]
 # rm -rf $HOME/$DIR.zip
 
 # Compile the Boot Loader
-$BEEBASM -i boot.asm
+$BEEBASM -i boot.asm -o $ARCHIVE/BOOT.bin
 
-# Compile the ROM Boot Loader
-$BEEBASM -i bootrom.asm
+# Compile the Normal ROM Boot Loader
+$BEEBASM -i boot.asm -o $ARCHIVE/BOOTROM.bin -D rom=1
+
+# Compile the GoSDC ROM Boot Loader
+$BEEBASM -i boot.asm -o $ARCHIVE/BOOTROMGOSDC.bin -D rom=1 -D gosdc=1
 
 # Add in help screens
 cp splash/HELP.ATM $ARCHIVE/HELP
@@ -76,10 +79,11 @@ $BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=0x1000 -D gosdc=1
 #mv HELPGEN $DIR
 
 # Compile the menu data and boostrap files
-java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE BOOT.bin BOOTROM.bin "$VERSION"
+java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE "$VERSION"
 
 # Remove unnecessary files from the root directory
 rm -f $ARCHIVE/HELP
+rm -f $ARCHIVE/BOOT*
 rm -f $ARCHIVE/CHAP*
 rm -f $ARCHIVE/ALL*
 rm -f $ARCHIVE/MENU[A-Z]*
