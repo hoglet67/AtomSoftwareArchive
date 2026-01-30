@@ -154,10 +154,10 @@ ENDIF
 	CMP #&80            ; All enabled, AGD disabled
 	BNE DontStrikeAGD
 	LDA #0
-	LDY #19
+	LDY #22
 .StrikeAGD
-	STA ScreenStart + 32 * 130 + 4, Y
-	STA ScreenStart + 32 * 131 + 4, Y
+	STA ScreenStart + 32 * 130 + 1, Y
+	STA ScreenStart + 32 * 131 + 1, Y
 	DEY
 	BPL StrikeAGD
 .DontStrikeAGD
