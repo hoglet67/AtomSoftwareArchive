@@ -54,13 +54,14 @@ public class GenerateAll {
             SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
             List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
-            // Count the number of titles in each chunk
+            // Gather some additional metadata on the titles
             Map<String, Integer> chunks = new TreeMap<String, Integer>();
             int total = 0;
             for (SpreadsheetTitle item : items) {
                 if (!item.isPresent()) {
                     continue;
                 }
+                // Count the number of titles in each chunk
                 String chunk = item.getChunk();
                 Integer count = chunks.get(chunk);
                 if (count == null) {
@@ -68,6 +69,34 @@ public class GenerateAll {
                 }
                 chunks.put(chunk, count + 1);
                 total++;
+                // Decide if the title will fit in 32KB
+                boolean ok = true;
+                for (String filename : item.getFilenames()) {
+                    File file = new File(new File(archiveDir, item.getDir()), filename);
+                    try {
+                        ATMFile atm = new ATMFile(file);
+                        int start = atm.getLoadAddr();
+                        int end = atm.getLoadAddr() + atm.getLength();
+                        if (!((start >= 0x2800 && end <= 0x3C00) ||
+                              (start >= 0x8000 && end <= 0x9800) ||
+                              (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals("E")))) {
+                            if (item.isCompatible12K()) {
+                                if (ok) {
+                                    System.out.println("Compatibility warning: should be marked at 32K: " + item.getIdentifier()
+                                            + " " + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle());
+                                }
+                                System.out.println("    " + atm);
+                            }
+                            ok = false;
+                        }
+                    } catch (IOException e) {
+                        System.out.print("Missing:" + file);
+                    }
+                }
+                // There are a very small number of these
+                if (!item.isCompatible12K() && ok) {
+                    System.out.println("Compatibility warning: wrongly marked as 32K " + item.getIdentifier() + " " + item.getTitle());
+                }
             }
             char startChunkId = 'A';
             String chunkAll = "" + (char)(startChunkId + chunks.size());

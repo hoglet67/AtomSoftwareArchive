@@ -15,6 +15,7 @@ public class SpreadsheetTitle {
     private String boot;
     private String publisher;
     private String shortPublisher;
+    private boolean compatible12K;
     private List<String> collections;
     private String genre;
     private List<String> filenames;
@@ -138,6 +139,14 @@ public class SpreadsheetTitle {
 
     public Set<String> getLoadables() {
         return loadables;
+    }
+
+    public boolean isCompatible12K() {
+        return compatible12K;
+    }
+
+    public void setCompatible12K(boolean compatible12K) {
+        this.compatible12K = compatible12K;
     }
 
 }

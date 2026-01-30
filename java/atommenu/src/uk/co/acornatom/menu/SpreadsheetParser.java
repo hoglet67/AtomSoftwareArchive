@@ -29,6 +29,7 @@ public class SpreadsheetParser {
     private static final String CHUNK = "chunk";
     private static final String FILENAMES = "filenames";
     private static final String UPDATED = "updated";
+    private static final String RAM32K = "32k";
 
     private File file;
 
@@ -66,6 +67,8 @@ public class SpreadsheetParser {
             int genre_column = -1;
             int filenames_column = -1;
             int updated_column = -1;
+            int ram32k_column = -1;
+
             for (int i = 0; i < headers.length; i++) {
                 if (headers[i].toLowerCase().contains(IDENTIFIER)) {
                     identifier_column = i;
@@ -105,6 +108,9 @@ public class SpreadsheetParser {
                 }
                 if (headers[i].toLowerCase().contains(UPDATED)) {
                     updated_column = i;
+                }
+                if (headers[i].toLowerCase().contains(RAM32K)) {
+                    ram32k_column = i;
                 }
             }
 
@@ -149,12 +155,14 @@ public class SpreadsheetParser {
                     if (item.isPresent()) {
                         String path = dir + "/" + filename;
                         if (!filesPaths.add(path)) {
-                            System.out.println("WARNING: " + path + " already in archive");
+                            System.out.println("WARNING: " + path + " shared between titles");
                         }
                     }
 
                 }
                 item.setFilenames(filesnamesList);
+                String ram32K = program[ram32k_column].trim().toUpperCase();
+                item.setCompatible12K(!ram32K.startsWith("YES"));
                 // Define an implicit collection for each archive version, from
                 // the updated column
                 String updated = program[updated_column].trim().toUpperCase();

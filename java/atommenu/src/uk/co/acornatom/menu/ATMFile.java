@@ -40,14 +40,16 @@ public class ATMFile {
             }
         } finally {
             try {
-                if (ous != null)
+                if (ous != null) {
                     ous.close();
+                }
             } catch (IOException e) {
             }
 
             try {
-                if (ios != null)
+                if (ios != null) {
                     ios.close();
+                }
             } catch (IOException e) {
             }
         }
@@ -61,16 +63,13 @@ public class ATMFile {
         loadAddr = readShort(fileWithAtmHeader, 16);
         execAddr = readShort(fileWithAtmHeader, 18);
         int length = readShort(fileWithAtmHeader, 20);
-        ;
         if (length != fileWithAtmHeader.length - 22) {
             System.out.println(
-                    "WARNING: Length mismatch in ATM file: expected = " + length + "; actual = " + (fileWithAtmHeader.length - 22));
+                    "WARNING: Length mismatch in ATM file: " + file + ": expected = " + length + "; actual = " + (fileWithAtmHeader.length - 22));
             length = fileWithAtmHeader.length - 22;
         }
         data = new byte[length];
         System.arraycopy(fileWithAtmHeader, 22, data, 0, length);
-        System.out.println(title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(execAddr) + " "
-                + Integer.toHexString(length));
     }
 
     public byte[] getData() {
@@ -99,6 +98,11 @@ public class ATMFile {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(execAddr) + " " + Integer.toHexString(data.length);
     }
 
     public void writeATMFile(OutputStream out) throws IOException {
