@@ -3,6 +3,7 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -13,9 +14,9 @@ public class GenerateAll {
 
     public static final void main(String[] args) {
         try {
-            if (args.length != 3) {
+            if (args.length < 3 || args.length > 4) {
                 System.err.println(
-                        "usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Version>");
+                        "usage: java -jar atommenu.jar <AtomSoftwareCatalog.csv file> <Archive Dir> <Version String> [ <Target>,... ]");
                 System.exit(1);
             }
 
@@ -38,6 +39,16 @@ public class GenerateAll {
 
             if (version.isEmpty()) {
                 throw new RuntimeException("Missing version");
+            }
+
+            List<Target> targets = new ArrayList<Target>();
+            if (args.length == 4) {
+                for (String target : args[3].split(",")) {
+                    // Throws a IllegalArgumentException exception if not found which is fine
+                    targets.add(Target.valueOf(target.strip().toUpperCase()));
+                }
+            } else {
+                targets = Arrays.asList(Target.values());
             }
 
             SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
@@ -66,7 +77,7 @@ public class GenerateAll {
             System.out.println("Found " + chunks.size() + " chunks");
 
             // Each menu chapter will be a separate disk
-            for (Target target : Target.values()) {
+            for (Target target : targets) {
 
                 System.out.println("*******************************");
                 System.out.println("Generating " + target.name());

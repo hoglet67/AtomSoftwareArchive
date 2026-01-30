@@ -4,7 +4,7 @@ ARCHIVE=../archive/ASA
 
 DIR=MNU
 
-VERSION=$*
+VERSION=$1
 
 BEEBASM=beebasm
 
@@ -79,7 +79,7 @@ $BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=0x1000 -D gosdc=1
 #mv HELPGEN $DIR
 
 # Compile the menu data and boostrap files
-java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE "$VERSION"
+java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE $*
 
 # Remove unnecessary files from the root directory
 rm -f $ARCHIVE/HELP

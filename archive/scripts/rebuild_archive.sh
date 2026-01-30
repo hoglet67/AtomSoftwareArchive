@@ -52,61 +52,88 @@ popd
 pushd ../menu
 mkdir -p disks
 rm -f disks/*
-./build.sh "$*"
+./build.sh $*
 popd
 
 ##############################################################
-# Zip up the archive
+# Name the archive
 ##############################################################
 
 NAME=AtomSoftwareArchive_$(date +"%Y%m%d_%H%M")_$1
 
-# AtoMMC version
-zip -qr $NAME.zip MENU LIB MANPAGES $ARCHIVE
-
-# Econet version
-mv ${ARCHIVE}_ECONET.zip ${NAME}_ECONET.zip
-
-# Javascript version
-zip -qr ${NAME}_JS.zip $ARCHIVE.js
-
-# SDDOS2 version
-zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
-
-# SDDOS3 version
-mv ${ARCHIVE}_SDDOS3.zip ${NAME}_SDDOS3.zip
-
-# GOSDC version
-zip -qr ${NAME}_GoSDC.zip ${ARCHIVE}.gosdc
+shopt -s nocasematch
 
 ##############################################################
-# Generate the AFS0 File Server Disk Image
+# Package ECONET version
 ##############################################################
 
-SCSIDIR=BeebSCSI0
-mkdir -p ${SCSIDIR}
-unzip -d ${SCSIDIR} -o ../econet/scsi0.dat.zip
-cp -a ../econet/scsi0.dsc ${SCSIDIR}
-java -jar ../java/afsutils/afsutils.jar ${SCSIDIR}/scsi0.dat ${NAME}_ECONET.zip
-zip -r ${NAME}_BEEBSCSI0.zip ${SCSIDIR}
-rm -f ${SCSIDIR}/*
-rmdir ${SCSIDIR}
+if [[ $# -lt 2 ]] || [[ "$2" =~ "ECONET" ]]; then
+    # Rename the generated ZIP file
+    mv ${ARCHIVE}_ECONET.zip ${NAME}_ECONET.zip
+    # Generate the AFS0 File Server Disk Image
+    SCSIDIR=BeebSCSI0
+    mkdir -p ${SCSIDIR}
+    unzip -d ${SCSIDIR} -o ../econet/scsi0.dat.zip
+    cp -a ../econet/scsi0.dsc ${SCSIDIR}
+    java -jar ../java/afsutils/afsutils.jar ${SCSIDIR}/scsi0.dat ${NAME}_ECONET.zip
+    zip -r ${NAME}_BEEBSCSI0.zip ${SCSIDIR}
+    rm -f ${SCSIDIR}/*
+    rmdir ${SCSIDIR}
+fi
+
+##############################################################
+# Package JS version
+##############################################################
+
+if [[ $# -lt 2 ]] || [[ "$2" =~ "JS" ]]; then
+    zip -qr ${NAME}_JS.zip $ARCHIVE.js
+fi
+
+##############################################################
+# Package SDDOS2 version
+##############################################################
+
+if [[ $# -lt 2 ]] || [[ "$2" =~ "SDDOS2" ]]; then
+    zip -qr ${NAME}_SDDOS2.zip $ARCHIVE.img
+fi
+
+##############################################################
+# Package SDDOS3 version
+##############################################################
+
+if [[ $# -lt 2 ]] || [[ "$2" =~ "SDDOS3" ]]; then
+    mv ${ARCHIVE}_SDDOS3.zip ${NAME}_SDDOS3.zip
+fi
+
+##############################################################
+# Package GOSDC version
+##############################################################
+
+if [[ $# -lt 2 ]] || [[ "$2" =~ "GOSDC" ]]; then
+    zip -qr ${NAME}_GoSDC.zip ${ARCHIVE}.gosdc
+fi
+
+
+##############################################################
+# Package ATOMMC version
+##############################################################
+
+if [[ $# -lt 2 ]] || [[ "$2" =~ "ATOMMC" ]]; then
+    zip -qr $NAME.zip MENU LIB MANPAGES $ARCHIVE
+
+    # Deploy to Atomulator for testing
+    MMC=../../Atomulator/mmc
+    if [ -d "${MMC}" ]; then
+        rm -rf ${MMC}/ASA
+        unzip -o -q -d ${MMC} ${NAME}.zip
+    else
+        echo "Skipping copy to Atomulator"
+    fi
+
+fi
 
 ##############################################################
 # List the files created
 ##############################################################
 
 ls -l ${NAME}*
-
-
-##############################################################
-# Deploy to Atomulator for testing
-##############################################################
-
-MMC=../../Atomulator/mmc
-if [ -d "${MMC}" ]; then
-    rm -rf ${MMC}/ASA
-    unzip -o -q -d ${MMC} ${NAME}.zip
-else
-    echo "Skipping copy to Atomulator"
-fi
