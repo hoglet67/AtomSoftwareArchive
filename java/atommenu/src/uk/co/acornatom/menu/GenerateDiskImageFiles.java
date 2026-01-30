@@ -18,6 +18,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     protected String menuBase;
     protected int numChunks;
     protected int sectorNum;
+    protected String title;
 
     public GenerateDiskImageFiles(File archiveDir, String menuBase, int numChunks) {
         super();
@@ -52,6 +53,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     }
 
     protected byte[] createBlankDiskImage(String title) {
+        this.title = title;
         byte[] image = new byte[SEC_SIZE * NUM_SECS];
         Arrays.fill(image, (byte) 0);
         // Prepare a 13 character title (padded with spaces)
@@ -117,7 +119,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
         int lengthInSecs = (atmFile.getLength() + 255) / SEC_SIZE;
 
         if (sectorNum + lengthInSecs >= NUM_SECS) {
-            throw new RuntimeException("Disk full is title: " + atmFile.getTitle());
+            throw new RuntimeException("Disk full - title: " + title + " file: " + atmFile.getTitle());
         }
         System.arraycopy(atmFile.getData(), 0, image, sectorNum * SEC_SIZE, atmFile.getLength());
         sectorNum += lengthInSecs;

@@ -155,7 +155,7 @@ public class SpreadsheetParser {
                     if (item.isPresent()) {
                         String path = dir + "/" + filename;
                         if (!filesPaths.add(path)) {
-                            System.out.println("WARNING: " + path + " shared between titles");
+                            System.out.println("WARNING: File shared between titles: " + path);
                         }
                     }
 

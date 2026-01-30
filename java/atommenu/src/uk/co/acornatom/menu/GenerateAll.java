@@ -75,27 +75,30 @@ public class GenerateAll {
                     File file = new File(new File(archiveDir, item.getDir()), filename);
                     try {
                         ATMFile atm = new ATMFile(file);
-                        int start = atm.getLoadAddr();
-                        int end = atm.getLoadAddr() + atm.getLength();
-                        if (!((start >= 0x2800 && end <= 0x3C00) ||
-                              (start >= 0x8000 && end <= 0x9800) ||
-                              (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals("E")))) {
-                            if (item.isCompatible12K()) {
-                                if (ok) {
-                                    System.out.println("Compatibility warning: should be marked at 32K: " + item.getIdentifier()
-                                            + " " + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle());
+                        if (atm.isAtm()) {
+                            int start = atm.getLoadAddr();
+                            int end = atm.getLoadAddr() + atm.getLength();
+                            if (!((start >= 0x2800 && end <= 0x3C00) ||
+                                  (start >= 0x8000 && end <= 0x9800) ||
+                                  (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals("E")))) {
+                                if (item.isCompatible12K()) {
+                                    if (ok) {
+                                        System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: "
+                                                + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle() + " "
+                                                + item.getIdentifier());
+                                    }
+                                    System.out.println("    " + atm);
                                 }
-                                System.out.println("    " + atm);
+                                ok = false;
                             }
-                            ok = false;
                         }
                     } catch (IOException e) {
-                        System.out.print("Missing:" + file);
+                        System.out.print("WARNING: Missing file: " + file);
                     }
                 }
                 // There are a very small number of these
                 if (!item.isCompatible12K() && ok) {
-                    System.out.println("Compatibility warning: wrongly marked as 32K " + item.getIdentifier() + " " + item.getTitle());
+                    System.out.println("WARNING: Compatibility: Title probably wrongly marked as 32K: " + item.getIdentifier() + " " + item.getTitle());
                 }
             }
             char startChunkId = 'A';

@@ -15,12 +15,14 @@ public class ATMFile {
     private int loadAddr;
     private int execAddr;
     private String title;
+    private boolean atm;
 
     public ATMFile(String title, int loadAddr, int execAddr, byte[] data) {
         this.title = title;
         this.loadAddr = loadAddr;
         this.execAddr = execAddr;
         this.data = data;
+        this.atm = true;
     }
 
     public static void copy(File src, File dst) throws IOException {
@@ -53,23 +55,36 @@ public class ATMFile {
             } catch (IOException e) {
             }
         }
-        byte[] fileWithAtmHeader = ous.toByteArray();
-        title = "";
-        for (int i = 0; i < 16; i++) {
-            if (fileWithAtmHeader[i] != 0) {
-                title += (char) fileWithAtmHeader[i];
+        byte[] bytes = ous.toByteArray();
+        int length = readShort(bytes, 20);
+        if (bytes.length < 0x10000 && length == bytes.length - 22) {
+            // Handle as an ATM file
+            title = "";
+            for (int i = 0; i < 16; i++) {
+                if (bytes[i] != 0) {
+                    title += (char) bytes[i];
+                }
             }
+            loadAddr = readShort(bytes, 16);
+            execAddr = readShort(bytes, 18);
+            // Remove the header
+            data = new byte[length];
+            System.arraycopy(bytes, 22, data, 0, length);
+            // Mark as ATM
+            atm = true;
+        } else {
+            // Handle as a data file
+            if (bytes.length < 0x10000) {
+                System.out.println("WARNING: Length mismatch possible in ATM file: " + file + " (expected=" + length + "; actual="
+                        + (bytes.length - 22) + ")");
+            }
+            title = file.getName();
+            loadAddr = 0;
+            execAddr = 0;
+            data = bytes;
+            // Mark as BINARY DATA
+            atm = false;
         }
-        loadAddr = readShort(fileWithAtmHeader, 16);
-        execAddr = readShort(fileWithAtmHeader, 18);
-        int length = readShort(fileWithAtmHeader, 20);
-        if (length != fileWithAtmHeader.length - 22) {
-            System.out.println(
-                    "WARNING: Length mismatch in ATM file: " + file + ": expected = " + length + "; actual = " + (fileWithAtmHeader.length - 22));
-            length = fileWithAtmHeader.length - 22;
-        }
-        data = new byte[length];
-        System.arraycopy(fileWithAtmHeader, 22, data, 0, length);
     }
 
     public byte[] getData() {
@@ -100,12 +115,23 @@ public class ATMFile {
         this.title = title;
     }
 
+    public boolean isAtm() {
+        return atm;
+    }
+
+    public void setAtm(boolean atm) {
+        this.atm = atm;
+    }
+
     @Override
     public String toString() {
         return title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(execAddr) + " " + Integer.toHexString(data.length);
     }
 
     public void writeATMFile(OutputStream out) throws IOException {
+        if (!atm) {
+            throw new IOException("Not an ATM File: " + title);
+        }
         writeString(out, title);
         for (int i = 0; i < 16 - title.length(); i++) {
             out.write(0);
