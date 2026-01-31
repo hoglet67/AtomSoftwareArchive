@@ -9,6 +9,8 @@ public interface IFileGenerator {
     public static final String ROMS_CHUNK   = "F";
     public static final String ALL_CHUNK    = "G";
 
+    public static final String SPLASH_NAME  = "SPLASH";
+
     // The various build targets we support
     public enum Target {
         SDDOS2, SDDOS3, JS, ECONET, GOSDC, ATOMMC

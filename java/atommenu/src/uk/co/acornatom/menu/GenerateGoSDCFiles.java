@@ -67,10 +67,8 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
         addFile(BASEDIR, menuFile);
 
         // Splash files
-        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
-        addFile(BASEDIR, splashFile1);
-        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
-        addFile(BASEDIR, splashFile2);
+        ATMFile splashFile = new ATMFile(new File(archiveDir, SPLASH_NAME));
+        addFile(BASEDIR, splashFile);
 
         // MNU[A-F]/...
         if (numChunks > 8) {

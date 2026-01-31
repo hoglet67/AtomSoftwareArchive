@@ -130,10 +130,8 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         addFile(LIBDIR2, menuFile);
 
         // Splash files
-        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
-        addFile(BASEDIR, splashFile1);
-        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
-        addFile(BASEDIR, splashFile2);
+        ATMFile splashFile = new ATMFile(new File(archiveDir, SPLASH_NAME));
+        addFile(BASEDIR, splashFile);
 
         // MNU[A-F]/...
         if (numChunks > 8) {
@@ -305,6 +303,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         createMenus();

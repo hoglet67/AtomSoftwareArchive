@@ -137,10 +137,8 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
         // Splash files
         // In AtoMMC these are present in the root directory, but in SDDOS they are needed in the MENU disk (disk 0)
-        ATMFile splashFile1 = new ATMFile(new File(archiveDir, "SPLASH1"));
-        addFile(image, splashFile1);
-        ATMFile splashFile2 = new ATMFile(new File(archiveDir, "SPLASH2"));
-        addFile(image, splashFile2);
+        ATMFile splashFile = new ATMFile(new File(archiveDir, SPLASH_NAME));
+        addFile(image, splashFile);
 
         addDisk(image, getMenuDiskName());
 

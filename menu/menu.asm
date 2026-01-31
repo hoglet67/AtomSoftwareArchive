@@ -124,7 +124,6 @@ ChapterLineWidth = 12	; Y pixels between adjacent text lines
 	BNE ChecksDone
 
 .DisableAllChapter
-;	INC SplashNum
 	LDA #(1<<AGDChapter + 1<<ALLChapter)
 	STA KeyFlag
 
@@ -153,10 +152,7 @@ ENDIF
 
 	; 30 *LOAD SPLASH
 	JSR OscliString
-	EQUS "LOAD SPLASH"
-
-.SplashNum
-	EQUB '1', Return
+	EQUS "LOAD SPLASH", Return
 
 	; Visibly strike out disabled chapters
 	; This is a bit of a hack, as it depends on hard coded line lengths
