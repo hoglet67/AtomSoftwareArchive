@@ -3,6 +3,8 @@
 
 	Base =? $2800
 
+	BannerScroll =? 0
+
 include "sysvars.asm"
 
 ; Some local variables
@@ -163,6 +165,14 @@ ENDIF
 .DontStrikeAGD
 
 .MenuMain
+IF (BannerScroll = 1)
+	JSR &FE66
+	LDY #&07
+	JSR Scroll
+	JSR &FE71
+	CPY #&FF
+	BEQ MenuMain
+ENDIF
 	JSR Osrdch
 	CMP #&1B
 	BEQ MenuExit
@@ -336,6 +346,38 @@ ENDIF
 .MemTestFail
 	SEC
 	RTS
+
+IF (BannerScroll = 1)
+.Scroll
+{
+	LDX #&00
+	LDA #&81
+	STA loop2+2
+.loop1
+	LDA loop2+2
+FOR I, 0, 29
+    	STA unroll + I * 3 + 2
+NEXT
+.loop2
+	LDA &8001, X
+	ROL A
+.unroll
+FOR I, 0, 29
+	ROL &801E - I, X
+NEXT
+	TXA
+	CLC
+	ADC #&20
+	TAX
+	BNE loop2
+	INC loop2+2
+	DEY
+	BEQ exit
+	JMP loop1
+.exit
+	RTS
+}
+ENDIF
 
 include "common.asm"
 
