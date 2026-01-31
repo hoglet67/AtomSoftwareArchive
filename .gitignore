@@ -59,8 +59,7 @@ bbcbasic/roms/
 
 menu/BOOT.bin
 menu/BOOTROM.bin
-menu/Splash1.png
-menu/Splash2.png
+menu/SPLASH.png
 menu/disks/
 
 java/afsutils/scsi0.*
