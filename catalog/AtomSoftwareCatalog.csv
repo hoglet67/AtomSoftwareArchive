@@ -525,16 +525,10 @@ SCORE",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
 307,V3,RS,Retro S/W,B.Modern Creations,Hyper Viper (M),Game,,RS/HYPERV,8200,*RUN MHYPER,Works,"CHYPER
-LOA-ASM
 LOADER
-LOA-FNT
-LOA-SCR
 MHYPER",present,RS Mono,,,
 308,V3,RS,Retro S/W,B.Modern Creations,Hyper Viper (C),Game,,RS/HYPERV,8200,*RUN CHYPER,Works,"CHYPER
-LOA-ASM
 LOADER
-LOA-FNT
-LOA-SCR
 MHYPER",present,RS Colour,,,
 309,V3,RS,Retro S/W,B.Modern Creations,Jet Set Miner (M),Game,,RS/MINER,8200,*RUN MMINER,Works,"CMINER
 DAT0
