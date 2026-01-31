@@ -592,10 +592,10 @@ REDMOON",present,Time and Magik,Yes,,
 340,V4,C&VG,C&VG,D.Books and Magazines,Bug Battle,Game,G. Dunnett,CVG,8200,"CH.""BUGBATT""",Works,BUGBATT,present,Magazines,,,
 341,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-H""",Works,CARDS-H,present,,,,
 342,V4,NC,Non Comm,C.Non Commercial Software,Cards Bridge? (R),Game,???,NC/TB,8200,"CH.""CARDS-V""",Works,CARDS-V,present,,,,
-345,V4,NC,Non Comm,C.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,,,
+345,V4,NC,Non Comm,C.Non Commercial Software,City Bomber (R),Game,R.Boers,NC/TB,8200,"CH.""CITYBOM""",Works,CITYBOM,present,,Yes,,
 346,,NC,Non Comm,C.Non Commercial Software,Gobi Woestijn,Game,???,NC,8200,"CH.""DESERT""",,DESERT,duplicate,,,,
 347,V13B1,GA,Getting Acquainted,D.Books and Magazines,Dodgem,Game,???,GA,8200,"CH.""DODGEM""",Test,DODGEM,present,,,,
-349,V4,NC,Non Comm,C.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,,,
+349,V4,NC,Non Comm,C.Non Commercial Software,Draw Poker (R),Game,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",Works,DRAWPOK,present,,Yes,,
 350,,NC,Non Comm,C.Non Commercial Software,Drive,Game,D.Dini,NC,8200,*RUN DRIVE,,DRIVE,duplicate,,,,
 351,V4,NC,Non Comm,C.Non Commercial Software,Fourrow,Game,???,NC,8200,"CH.""FOURROW""",Works,FOURROW,present,,,,
 352,V4,NC,Non Comm,C.Non Commercial Software,Golf,Game,???,NC,8200,"CH.""GOLF""",Works,GOLF,present,,,,
@@ -624,8 +624,8 @@ CH.""OTHEL1""",Works,OTHEL1,duplicate,,,,
 378,V4,NC,Non Comm,C.Non Commercial Software,Plakoto,Game,???,NC,8200,"CH.""PLAKOTO""",Works,PLAKOTO,present,,,,
 379,V4,NC,Non Comm,C.Non Commercial Software,Persuit Plane,Game,JC-ADM,NC,8200,*RUN PLANE,Works,PLANE,present,,,,
 380,V4,NC,Non Comm,C.Non Commercial Software,Plane,Game,???,NC,8200,"CH.""PLANES""",Works,PLANES,present,,,,
-381,V4,NC,Non Comm,C.Non Commercial Software,POGO (R),Game,Hamburgersoft,NC/TB,8200,"CH.""POGO""",Works,POGO,present,,,,
-382,V4,NC,Non Comm,C.Non Commercial Software,Pointer,Game,???,NC,8200,*RUN POINTER,Works,POINTER,present,,,,
+381,V4,NC,Non Comm,C.Non Commercial Software,POGO (R),Game,Hamburgersoft,NC/TB,8200,"CH.""POGO""",Works,POGO,present,,Yes,,
+382,V4,NC,Non Comm,C.Non Commercial Software,Pointer,Game,???,NC,8200,*RUN POINTER,Works,POINTER,present,,Yes,,
 383,V4,NC,Non Comm,C.Non Commercial Software,Prinses (R),Game,G.T.H.,NC,8200,"CH.""PRINSES""",Works,PRINSES,present,,,,
 384,V4,NC,Non Comm,C.Non Commercial Software,Puzzel (R),Game,Frans,NC/TB,8200,"CH.""PUZZEL""",Works,PUZZEL,present,,,,
 385,V4,NC,Non Comm,C.Non Commercial Software,Race,Game,A.Clarke,NC,8200,"CH.""RACE""",Works,RACE,present,,,,
@@ -895,7 +895,7 @@ REPSCR
 REPTON",present,"RS Colour
 Joystick
 Joystick AtoMMC",Yes,,
-616,V5,NC,Non Comm,C.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,,,
+616,V5,NC,Non Comm,C.Non Commercial Software,Lost Gold (32K)(R),Adventure,,OTHER,8200,"CH.""ADVLDG""",Works,ADVLDG,present,,Yes,,
 617,V6,NC,Non Comm,B.Modern Creations,Reptune (#BDC0),Music,,SID/ATOMSID,8200,*RUN REPTUNE,Works,REPTUNE,present,SID,,,
 618,V6,NC,Non Comm,B.Modern Creations,SidTest (#BDC0),Music,,SID/ATOMSID,8200,"CH.""SIDTEST""",Works,SIDTEST,present,SID,,,
 619,V6,NC,Non Comm,B.Modern Creations,AtomSID (#BDC0) (32K),Music,,SID/ATOMSID,2900,*RUN SIDMENU,Works,"AXELF
@@ -1337,12 +1337,12 @@ QLLC40",present,Quill,Yes,,
 699,V7B1,PP,Prog Power,A.Commercial Software,Invasion,Game,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""",Works,"INVAS
 INVASIN",present,,,,
-700,V11B5,NC,Non Comm,B.Modern Creations,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,,,
+700,V11B5,NC,Non Comm,B.Modern Creations,GODIL OSWRCH80,Graphics,David Banks,GODIL,8200,*RUN OSWRCH80,Works,OSWRCH80,present,GODIL,Yes,,
 701,V7B2,ASP,ASP S/W,A.Commercial Software,The White Barrows,Adventure,,ASP,8200,"CH.""WHITEBA""",Works,WHITEBA,present,,,,
 702,V7B2,NC,Non Comm,B.Modern Creations,Kraftwerk (SID) (32k),Music,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""",Works,"KRFTWRK
 CMPWRLD
 SIDPLAY
-LOADER",present,Mainwaring,,,
+LOADER",present,Mainwaring,Yes,,
 703,V7B2,NC,Non Comm,B.Modern Creations,Mandelbrot,Graphics,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""",Works,"MSC3A
 MSC3AD
 MSC3AL
@@ -1454,7 +1454,7 @@ MACH-T
 PICTURE
 PUNTEN
 SCHERM
-VDU",present,,,,
+VDU",present,,Yes,,
 775,V8B1,NC,Non Comm,C.Non Commercial Software,Gokkast 2,Game,,NC/GOKKAST2,8200,"CH.""GKKST2""",Works,"2BASC28
 2BASC65
 2BASC98
@@ -1465,7 +1465,7 @@ VDU",present,,,,
 2PUNTEN
 2SCHM80
 GKKST2
-VDU",present,,,,
+VDU",present,,Yes,,
 776,V8B1,NC,Non Comm,C.Non Commercial Software,Smileys Fruit Machine,Game,,NC/SMILEYS,8200,"CH.""FRUITMA""",Works,"2440VDU
 CONTROL
 DRAAI
@@ -1473,7 +1473,7 @@ FRUITMA
 OMKEER
 PUNTEN
 SCHERM
-SYMBOOL",present,,,,
+SYMBOOL",present,,Yes,,
 777,V8B1,NC,Non Comm,C.Non Commercial Software,Charon (Fn Keys),Utility,,NC,8200,"CH.""CHARON""",Works,CHARON,present,,,,
 778,V8B1,NC,Non Comm,C.Non Commercial Software,Speed Boat,Game,,NC,8200,"CH.""SPEBOAT""",Works,SPEBOAT,present,,,,
 779,V8B1,NC,Non Comm,B.Modern Creations,Star Wars Asciimation,Graphics,,GODIL/SW,8200,"*LOAD PLAY800
@@ -1544,7 +1544,7 @@ DATA",present,"Joystick
 Joystick Kbd",,,
 802,V8B3,NC,Non Comm,C.Non Commercial Software,Pointer (JS),Game,,JS/KEES,8200,"*LOAD POINTER
 RUN",Works,POINTER,present,"Joystick
-Joystick Kbd",,,
+Joystick Kbd",Yes,,
 803,V8B3,AS,Acornsoft,A.Commercial Software,Rat Trap (JS),Game,,JS/KEES,8200,*RUN RATTRAP,Works,RATTRAP,present,"Joystick
 Joystick Kbd",,,
 804,V8B3,AS,Acornsoft,A.Commercial Software,Robots (JS),Game,,JS/KEES,8200,"CH.""ROBOTS""",Works,ROBOTS,present,"Joystick
@@ -1604,7 +1604,7 @@ Joystick Kbd",,,
 831,V8B3,NC,Non Comm,C.Non Commercial Software,Space Zap (JS),Game,,JS/WIM,8200,"CH.""SPACZAP""",Works,SPACZAP,present,"Joystick
 Joystick Kbd",,,
 832,V8B3,NC,Non Comm,C.Non Commercial Software,Space Robots (R) (JS),Game,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",Works,SPAROBS,present,"Joystick
-Joystick Kbd",,,
+Joystick Kbd",Yes,,
 833,V8B3,PP,Prog Power,A.Commercial Software,Swarm (JS),Game,,JS/WIM,8200,"CH.""SWARM""",Works,SWARM,present,"Joystick
 Joystick Kbd",,,
 834,V8B3,NC,Non Comm,C.Non Commercial Software,Stowaway (JS),Game,,JS/WIM,8200,"CH.""VERSTE1""",Works,VERSTE1,present,"Joystick
@@ -1630,7 +1630,7 @@ DARTS2",present,,,,
 844,V9B1,NC,Non Comm,C.Non Commercial Software,Pacman (JS),Game,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",Works,PACMAN,present,"Joystick
 Joystick Kbd",,,
 845,V9B1,NC,Non Comm,C.Non Commercial Software,Burger Time (JS) (R),Game,,JS/KEES,8200,"CH.""BTIME""",Works,BTIME,present,"Joystick
-Joystick Kbd",,,
+Joystick Kbd",Yes,,
 846,V9B1,NC,Non Comm,C.Non Commercial Software,Egg Catcher (JS) (R),Game,,JS/KEES,8200,"CH.""KIP""",Works,KIP,present,"Joystick
 Joystick Kbd",,,
 847,V9B1,NC,Non Comm,C.Non Commercial Software,Helicopter Lander (JS),Game,,JS/KEES,8200,"CH.""JHELI""",Works,JHELI,present,"Joystick
@@ -1677,7 +1677,7 @@ SIDMENU
 862,V9B1,NC,Non Comm,C.Non Commercial Software,Atom Pilot,Language,acc-nl,GB,8200,*RUN 098,Works,"098
 ",present,GameBase,,,
 863,V9B1,NC,Non Comm,C.Non Commercial Software,Maze Game,Game,??,GB,8200,"CH.""134""",Works,134,present,GameBase,,,
-864,V9B1,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game,Acorn user,GB,8200,"CH.""144""",Works,144,present,GameBase,,,
+864,V9B1,NC,Non Comm,C.Non Commercial Software,Flight Simulator,Game,Acorn user,GB,8200,"CH.""144""",Works,144,present,GameBase,Yes,,
 865,V9B1,NC,Non Comm,C.Non Commercial Software,Super Zombie,Game,Magnus Olssen,GB,8200,"CH.""155""",Works,155,present,GameBase,,,
 866,V9B1,NC,Non Comm,C.Non Commercial Software,Megalife (R),Simulation,Magnus Olssen,GB,8200,*RUN 158,Works,158,present,GameBase,,,requires WE-ROM
 867,V9B1,NC,Non Comm,C.Non Commercial Software,Condot,Game,Creative Computing,GB,8200,"CH.""159""",Works,159,present,GameBase,,,
@@ -1763,7 +1763,7 @@ BASIC2
 CLOCKSP
 HIBASIC
 COLOSS
-BOOT6502",present,,,,
+BOOT6502",present,,Yes,,
 896,V10B1,NC,Non Comm,C.Non Commercial Software,Squirrel Tree,Adventure,Unknown,NC,8200,"CH.""SQUIRL1""",Works,"SQUIRL1
 SQUIRL2",present,,,,
 897,V10B2,RS,Retro S/W,B.Modern Creations,Tetris,Game,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""",Works,"SIDCODE
@@ -2807,10 +2807,10 @@ UCSCR",present,AGD,Yes,,
 1225,V13B1,PES,Pearce,E.ROMS,ATOM SIGN ROM,Utility,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",Test,1E13,present,ROMs,,,
-1226,V13B1,NC,Non Comm,C.Non Commercial Software,Pie Chart Generator (R),Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,,,
+1226,V13B1,NC,Non Comm,C.Non Commercial Software,Pie Chart Generator (R),Graphics,,NC,8200,"CH.""PIE-CHA""",Test,PIE-CHA,present,,Yes,,
 1227,V13B1,NC,Non Comm,C.Non Commercial Software,KAARTEN,Game,,NC,8200,"CH.""KAARTEN""",Test,KAARTEN,present,,,,
 1228,V13B1,NC,Non Comm,C.Non Commercial Software,K-TRUUK,Game,,NC,8200,"CH.""K-TRUUK""",Test,K-TRUUK,present,,,,
-1229,V13B1,NC,Non Comm,C.Non Commercial Software,GAGS Demo 2 (R),Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,,,
+1229,V13B1,NC,Non Comm,C.Non Commercial Software,GAGS Demo 2 (R),Graphics,,NC,8200,"CH.""GAGDEM2""",Test,GAGDEM2,present,,Yes,,
 1230,V13B1,NC,Non Comm,C.Non Commercial Software,Piet Heim (Reversi),Game,,NC,8200,"CH.""P-HEIN""",Test,P-HEIN,present,,,,
 1231,V13B1,PCW,PCW,D.Books and Magazines,Four-Stroke Cycle (R),Graphics,Jonathan Empson,PCW,8200,"CH.""4STROKE""",Test,4STROKE,present,Magazines,,,
 1232,V13B1,PCW,PCW,D.Books and Magazines,Backgammon,Game,Peter Robinson,PCW,8200,"CH.""BACKGAM""",Test,BACKGAM,present,Magazines,,,
