@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -69,7 +70,34 @@ public class GenerateAll {
                 }
                 chunks.put(chunk, count + 1);
                 total++;
-                // Decide if the title will fit in 32KB
+            }
+            char startChunkId = 'A';
+            String chunkAll = "" + (char)(startChunkId + chunks.size());
+            String chunkAGD = "" + (char)(startChunkId + chunks.size() - 1);
+            chunks.put(chunkAll, total);
+            System.out.println("Found " + chunks.size() + " chunks");
+
+            Comparator<SpreadsheetTitle> custumComparator = new Comparator<SpreadsheetTitle>() {
+                @Override
+                public int compare(SpreadsheetTitle o1, SpreadsheetTitle o2) {
+                    if (!o1.getChunk().equals(o2.getChunk())) {
+                        return o1.getChunk().compareTo(o2.getChunk());
+                    } else if (!o1.getPublisher().equals(o2.getPublisher())) {
+                        return o1.getPublisher().compareTo(o2.getPublisher());
+                    } else {
+                        return o1.getTitle().compareTo(o2.getTitle());
+                    }
+                };
+            };
+
+            List<SpreadsheetTitle> sortedItems = new ArrayList<SpreadsheetTitle>(items);
+            sortedItems.sort(custumComparator);
+
+            // Check 12K compatibility
+            for (SpreadsheetTitle item : sortedItems) {
+                if (!item.isPresent()) {
+                    continue;
+                }
                 boolean ok = true;
                 for (String filename : item.getFilenames()) {
                     File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -78,16 +106,18 @@ public class GenerateAll {
                         if (atm.isAtm()) {
                             int start = atm.getLoadAddr();
                             int end = atm.getLoadAddr() + atm.getLength();
-                            if (!((start >= 0x2800 && end <= 0x3C00) ||
+                            if (!((start >= 0x0000 && end <= 0x0400) ||
+                                  (start >= 0x2800 && end <= 0x3C00) ||
                                   (start >= 0x8000 && end <= 0x9800) ||
                                   (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals("E")))) {
                                 if (item.isCompatible12K()) {
                                     if (ok) {
+                                        System.out.println();
                                         System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: "
                                                 + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle() + " "
                                                 + item.getIdentifier());
                                     }
-                                    System.out.println("    " + atm);
+                                    System.out.println("    " + atm.toStringDetailed());
                                 }
                                 ok = false;
                             }
@@ -101,12 +131,25 @@ public class GenerateAll {
                     System.out.println("WARNING: Compatibility: Title probably wrongly marked as 32K: " + item.getIdentifier() + " " + item.getTitle());
                 }
             }
-            char startChunkId = 'A';
-            String chunkAll = "" + (char)(startChunkId + chunks.size());
-            String chunkAGD = "" + (char)(startChunkId + chunks.size() - 1);
-            chunks.put(chunkAll, total);
 
-            System.out.println("Found " + chunks.size() + " chunks");
+            // Check for garbage signature
+            for (SpreadsheetTitle item : sortedItems) {
+                if (!item.isPresent()) {
+                    continue;
+                }
+                for (String filename : item.getFilenames()) {
+                    File file = new File(new File(archiveDir, item.getDir()), filename);
+                    try {
+                        ATMFile atm = new ATMFile(file);
+                        if (atm.isGarbageSignature()) {
+                            System.out.println("WARNING: Garbage signature detected: " + atm.toStringDetailed() + " "
+                                    + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle());
+                        }
+                    } catch (IOException e) {
+                        System.out.print("WARNING: Missing file: " + file);
+                    }
+                }
+            }
 
             // Each menu chapter will be a separate disk
             for (Target target : targets) {

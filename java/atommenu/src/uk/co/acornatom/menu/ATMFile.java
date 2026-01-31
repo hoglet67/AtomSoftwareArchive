@@ -123,10 +123,39 @@ public class ATMFile {
         this.atm = atm;
     }
 
+    private static String hex4(int n) {
+        return String.format("%4s", Integer.toHexString(n)).replace(' ', '0').toUpperCase();
+    }
+
     @Override
     public String toString() {
-        return title + " " + Integer.toHexString(loadAddr) + " " + Integer.toHexString(execAddr) + " " + Integer.toHexString(data.length);
+        return String.format("%13s", title) + " " + hex4(loadAddr) + " " + hex4(execAddr) + " " + hex4(data.length);
     }
+
+    public boolean isGarbageSignature() {
+        return isAtm() &&  (data.length % 256 == 255 - data.length / 256);
+    }
+
+    public String toStringDetailed() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(toString());
+        int basicLen = 0;
+        if (data[0] == 13 && data[1] == 0) {
+            for (int i = 0; i < data.length - 1; i++) {
+                if (data[i] == 13 && data[i + 1] < 0) {
+                    basicLen = i + 2;
+                    break;
+                }
+            }
+        }
+        builder.append(" [ ");
+        builder.append(hex4(basicLen));
+        builder.append(" BASIC; ");
+        builder.append(hex4(data.length - basicLen));
+        builder.append(" DATA ]");
+        return builder.toString();
+    }
+
 
     public void writeATMFile(OutputStream out) throws IOException {
         if (!atm) {
