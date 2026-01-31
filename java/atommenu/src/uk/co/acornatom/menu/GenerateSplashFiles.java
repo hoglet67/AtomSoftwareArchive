@@ -252,6 +252,7 @@ public class GenerateSplashFiles extends GenerateBase {
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         int linex = 9;
@@ -289,16 +290,16 @@ public class GenerateSplashFiles extends GenerateBase {
                     title = "Modern Creations";
                     break;
                 case 'C':
-                    title = "Non Commercial";
+                    title = "Arcade Game Designer";
                     break;
                 case 'D':
-                    title = "Books and Magazines";
+                    title = "Non Commercial";
                     break;
                 case 'E':
-                    title = "Utility ROMS";
+                    title = "Books and Magazines";
                     break;
                 case 'F':
-                    title = "Arcade Game Designer";
+                    title = "Utility ROMS";
                     break;
                 case 'G':
                     title = "All Titles";
@@ -359,7 +360,7 @@ public class GenerateSplashFiles extends GenerateBase {
             int s = 3;
             int b = 32;
             BufferedImage save = new BufferedImage(s * (256 + b + b), s * (192 + b + b), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2 = (Graphics2D) save.createGraphics();
+            Graphics2D g2 = save.createGraphics();
             g2.setColor(Color.GREEN);
             g2.fillRect(0, 0, s * (256 + b + b), s * (192 + b + b));
             g2.setColor(Color.BLACK);

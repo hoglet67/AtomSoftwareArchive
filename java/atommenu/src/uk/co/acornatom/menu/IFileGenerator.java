@@ -5,6 +5,10 @@ import java.util.List;
 
 public interface IFileGenerator {
 
+    public static final String AGD_CHUNK    = "C";
+    public static final String ROMS_CHUNK   = "F";
+    public static final String ALL_CHUNK    = "G";
+
     // The various build targets we support
     public enum Target {
         SDDOS2, SDDOS3, JS, ECONET, GOSDC, ATOMMC

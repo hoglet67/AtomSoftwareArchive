@@ -12,6 +12,14 @@ include "sysvars.asm"
 EndPage = TmpPtr + 2
 KeyFlag = TmpPtr + 3
 
+MinChapter = 0		; A
+MaxChapter = 6		; G
+AGDChapter = 2		; C
+ALLChapter = 6		; G
+
+ChapterLineStart = 70	; Y pixel row to strike in Chapter A
+ChapterLineWidth = 12	; Y pixels between adjacent text lines
+
 	org Base - 22
 
 .STARTOFHEADER
@@ -80,7 +88,7 @@ KeyFlag = TmpPtr + 3
 	LDA #>KernelOsrdch
 	STA RDCVEC + 1
 
-	LDA #&C0                ; Bit 6 = AGD; Bit 7 = ALL
+	LDA #0			; All chapters enabled
 	STA KeyFlag
 
 	LDX #&10                ; Test 1000-1FFF
@@ -111,13 +119,13 @@ KeyFlag = TmpPtr + 3
 	BCC ChecksDone
 
 .DisableAGDChapter
-	LDA #&80
+	LDA #(1<<AGDChapter)
 	STA KeyFlag             ; Disable AGD chapter
 	BNE ChecksDone
 
 .DisableAllChapter
-	INC SplashNum
-	LDA #0
+;	INC SplashNum
+	LDA #(1<<AGDChapter + 1<<ALLChapter)
 	STA KeyFlag
 
 .ChecksDone
@@ -150,19 +158,51 @@ ENDIF
 .SplashNum
 	EQUB '1', Return
 
-	; Visibly strike out the AGD chapter
-	; This is a bit of a hack, but saves another SPLASH screen
- 	LDA KeyFlag
-	CMP #&80            ; All enabled, AGD disabled
-	BNE DontStrikeAGD
+	; Visibly strike out disabled chapters
+	; This is a bit of a hack, as it depends on hard coded line lengths
+	LDX #MaxChapter
+	LDA #<(ScreenStart + (ChapterLineStart + MaxChapter * ChapterLineWidth) * 32)
+	STA TmpPtr
+	LDA #>(ScreenStart + (ChapterLineStart + MaxChapter * ChapterLineWidth) * 32)
+	STA TmpPtr+1
+.StrikeLoop1
+	LDA KeyMask, X
+	AND KeyFlag
+	BEQ StrikeNext
+	LDY StrikeLenTable, X
+.StrikeLoop2
+	TYA
+	ORA #&20
+	TAY
 	LDA #0
-	LDY #22
-.StrikeAGD
-	STA ScreenStart + 32 * 130 + 1, Y
-	STA ScreenStart + 32 * 131 + 1, Y
+	STA (TmpPtr), Y
+	TYA
+	AND #&DF
+	TAY
+	LDA #0
+	STA (TmpPtr), Y
 	DEY
-	BPL StrikeAGD
-.DontStrikeAGD
+	BNE StrikeLoop2
+.StrikeNext
+	LDA TmpPtr
+	SEC
+	SBC #<(ChapterLineWidth * 32)
+	STA TmpPtr
+	LDA TmpPtr + 1
+	SBC #>(ChapterLineWidth * 32)
+	STA TmpPtr + 1
+	DEX
+	BPL StrikeLoop1
+
+.StrikeLenTable
+	EQUB 13
+	EQUB 19
+	EQUB 23
+	EQUB 17
+	EQUB 22
+	EQUB 15
+	EQUB 13
+	EQUB 0
 
 .MenuMain
 IF (BannerScroll = 1)
@@ -176,30 +216,48 @@ ENDIF
 	JSR Osrdch
 	CMP #&1B
 	BEQ MenuExit
-	CMP #'A'
-	BCC MenuMain
-.MenuMaxKey
-	CMP #'E' + 1
-	BCC MenuNext
-	; Check for Shift F (Override checks)
-	CMP #'f'
-	BEQ MenuNext
-	; Check for F (AGD chapter)
-	CMP #'F'
-	BNE KeyNotF
-	BIT KeyFlag
-	BVS MenuNext
-	LDA #7
-	JSR Oswrch
-	JMP MenuMain
 
-.KeyNotF
-	; Check for G (All chapter)
-	CMP #'G'
-	BNE KeyNotG
-	BIT KeyFlag
-	BMI MenuNext
-.KeyNotG
+	; Shifted A-G bypass all checks, buyer beware!
+	CMP #MinChapter + 'a'
+	BCC KeyNotShiftedAtoG
+	CMP #MaxChapter + 'a' + 1
+	BCC MenuNext
+
+.KeyNotShiftedAtoG
+	; Unshifed A-G subject to mask in KegFLag
+	CMP #MinChapter + 'A'
+	BCC MenuMain
+	CMP #MaxChapter + 'A' + 1
+	BCS KeyNotAtoG
+
+	; Test appropriate mask bit
+	PHA
+	AND #&F			; A = 1, B = 2, C = 3, ...
+	TAX
+	DEX			; A = 0; B = 1, C = 2, ...
+	LDA KeyMask, X
+	AND KeyFlag
+	BEQ ChaptedEnabled
+	PLA
+	LDA #7			; Beep
+	JSR Oswrch
+	BNE MenuMain		; Branch always
+
+.ChaptedEnabled
+	PLA
+	BNE MenuNext		; Branch alwats
+
+.KeyMask
+	EQUB &01
+	EQUB &02
+	EQUB &04
+	EQUB &08
+	EQUB &10
+	EQUB &20
+	EQUB &40
+	EQUB &80
+
+.KeyNotAtoG
 	; Check for special system key for Rolands system
 	CMP #'R'
 	BNE MenuMain
@@ -233,7 +291,7 @@ ENDIF
 .MenuNext
 	AND #&DF                ; force lower case
 IF (sddos2 = 1)
-	; A-H -> Disks 1->N
+	; A-G -> Disks 1->N
 	AND #&0F
 	ORA #'0'
 	STA chunk

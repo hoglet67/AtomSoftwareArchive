@@ -71,10 +71,7 @@ public class GenerateAll {
                 chunks.put(chunk, count + 1);
                 total++;
             }
-            char startChunkId = 'A';
-            String chunkAll = "" + (char)(startChunkId + chunks.size());
-            String chunkAGD = "" + (char)(startChunkId + chunks.size() - 1);
-            chunks.put(chunkAll, total);
+            chunks.put(IFileGenerator.ALL_CHUNK, total);
             System.out.println("Found " + chunks.size() + " chunks");
 
             Comparator<SpreadsheetTitle> custumComparator = new Comparator<SpreadsheetTitle>() {
@@ -109,7 +106,7 @@ public class GenerateAll {
                             if (!((start >= 0x0000 && end <= 0x0400) ||
                                   (start >= 0x2800 && end <= 0x3C00) ||
                                   (start >= 0x8000 && end <= 0x9800) ||
-                                  (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals("E")))) {
+                                  (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals(IFileGenerator.ROMS_CHUNK)))) {
                                 if (item.isCompatible12K()) {
                                     if (ok) {
                                         System.out.println();
@@ -197,33 +194,24 @@ public class GenerateAll {
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
                 splashGen.generateFiles(null, target);
 
-                char chunkId = startChunkId;
-
                 for (String chunk : chunks.keySet()) {
 
-                    // true if this is the last chunk containing all titles
-                    boolean allChunk = chunk.equals(chunkAll);
-
-                    // true if this is the last but one chunk containing the AGD titles
-                    boolean agdChunk = chunk.equals(chunkAGD);
-
-                    File menuDir = new File(archiveDir, menuBase + chunkId);
+                    File menuDir = new File(archiveDir, menuBase + chunk);
                     menuDir.mkdirs();
 
                     List<SpreadsheetTitle> chunkItems = new ArrayList<SpreadsheetTitle>();
                     for (SpreadsheetTitle item : items) {
-                        if (item.getChunk().equals(chunk) | allChunk) {
+                        if (item.getChunk().equals(chunk) || chunk.equals(IFileGenerator.ALL_CHUNK)) {
                             chunkItems.add(item);
                         }
                     }
                     List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
-                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, agdChunk, allChunk));
+                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, chunk));
                     for (IFileGenerator g : generators) {
                         g.generateFiles(chunkItems, target);
                     }
 
-                    chunkId++;
                 }
 
                 generator.generateFiles(items, target);

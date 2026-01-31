@@ -34,11 +34,11 @@ public class GenerateMenuFiles extends GenerateBase {
     boolean agdChunk;
     boolean allChunk;
 
-    public GenerateMenuFiles(File archiveDir, File menuDir, boolean agdChunk, boolean allChunk) {
+    public GenerateMenuFiles(File archiveDir, File menuDir, String chunk) {
         this.archiveDir = archiveDir;
         this.menuDir = menuDir;
-        this.allChunk = allChunk;
-        this.agdChunk = agdChunk;
+        this.agdChunk = chunk.equals(IFileGenerator.AGD_CHUNK);
+        this.allChunk = chunk.equals(IFileGenerator.ALL_CHUNK);
     }
 
     private void dumpIndexes(String type, Map<String, Integer> map) {
@@ -67,6 +67,7 @@ public class GenerateMenuFiles extends GenerateBase {
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
 
         // ------------------------------------------------------------------------------------
