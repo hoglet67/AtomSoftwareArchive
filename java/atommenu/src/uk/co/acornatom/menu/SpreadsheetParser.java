@@ -163,6 +163,13 @@ public class SpreadsheetParser {
                 item.setFilenames(filesnamesList);
                 String ram32K = program[ram32k_column].trim().toUpperCase();
                 item.setCompatible12K(!ram32K.startsWith("YES"));
+                if (item.isCompatible12K()) {
+                    collectionsList.add("12K COMPATIBLE: YES");
+                } else {
+                    // TODO: This is for testing only, it's not that important for end users
+                    collectionsList.add("12K COMPATIBLE: NO");
+                }
+
                 // Define an implicit collection for each archive version, from
                 // the updated column
                 String updated = program[updated_column].trim().toUpperCase();
