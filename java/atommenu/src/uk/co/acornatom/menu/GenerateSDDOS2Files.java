@@ -124,6 +124,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
 
     @Override
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+        super.allocateDisks(items);
         // Generate disk numbers up front, combining pairs of titles if possible
         // (this is just used by SDDOS)
         int diskNo = numChunks; // Skip the menu disks

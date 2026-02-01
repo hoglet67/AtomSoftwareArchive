@@ -47,6 +47,7 @@ public class GenerateAll {
         Iterator<SpreadsheetTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             SpreadsheetTitle item  = itemIterator.next();
+            long numSectors = 0;
             boolean ok = true;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -59,9 +60,15 @@ public class GenerateAll {
                 } else if (!file.canRead()) {
                     System.out.println("WARNING: Unreadable file: " + file);
                     ok = false;
+                } else {
+                    // Assume the file is an ATM file, so subtract the 22 byte header,
+                    // then round up to sectors
+                    numSectors += ((file.length() - 22) + 255) / 256;
                 }
             }
-            if (!ok) {
+            if (ok) {
+                item.setEstimatedDiskSectors(numSectors);
+            } else {
                 System.out.println("WARNING: Dropping title: " + item);
                 itemIterator.remove();
             }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     private static final int NUM_TRACKS = 40;
     private static final int NUM_SECS_PER_TRACK = 10;
     private static final int NUM_SECS = NUM_TRACKS * NUM_SECS_PER_TRACK;
+    private static final int CATALOG_SECS = 2;
     private static final int SEC_SIZE = 256;
 
     protected File archiveDir;
@@ -35,6 +37,22 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     @Override
     abstract public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;
+
+    @Override
+    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+        super.allocateDisks(items);
+        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+        while (itemIterator.hasNext()) {
+            SpreadsheetTitle item = itemIterator.next();
+            if (item.getEstimatedDiskSectors() > NUM_SECS - CATALOG_SECS) {
+                System.out.println("WARNING: dropping title because it's too large: " + item);
+                itemIterator.remove();
+            } else if (item.getFilenames().size() > 29) {
+                System.out.println("WARNING: dropping title because it has too many files: " + item);
+                itemIterator.remove();
+            }
+        }
+    }
 
     static protected int getImageLen(byte[] image) {
         int lastUsedSector = -1;

@@ -31,6 +31,7 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
         }
     }
 
+    @Override
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
         // Items are shared between targets, so reset any allocation from earlier targets
         for (SpreadsheetTitle item : items) {
@@ -38,12 +39,15 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
         }
     }
 
+    @Override
     public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
     }
 
+    @Override
     public void writeImage() throws IOException {
     }
 
+    @Override
     public void close() throws IOException {
     }
 
