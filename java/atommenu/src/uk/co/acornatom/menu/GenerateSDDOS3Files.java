@@ -37,8 +37,8 @@ public class GenerateSDDOS3Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
-        createMenuDisks(target);
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+        createMenuDisks();
         for (SpreadsheetTitle item : items) {
             try {
                 byte[] image = createBlankDiskImage(item.getTitle());
@@ -54,6 +54,11 @@ public class GenerateSDDOS3Files extends GenerateDiskImageFiles {
     @Override
     public void close() throws IOException {
         zipStream.close();
+    }
+
+    @Override
+    public Target getTarget() {
+        return Target.SDDOS3;
     }
 
 }

@@ -301,7 +301,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         createMenus();
 
@@ -353,5 +353,10 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public Target getTarget() {
+        return Target.ECONET;
     }
 }

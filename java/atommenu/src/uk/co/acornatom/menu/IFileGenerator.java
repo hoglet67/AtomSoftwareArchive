@@ -16,5 +16,9 @@ public interface IFileGenerator {
         SDDOS2, SDDOS3, JS, ECONET, GOSDC, ATOMMC
     }
 
-    void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;
+    void generateFiles(List<SpreadsheetTitle> items) throws IOException;
+
+    abstract public Target getTarget();
+
+
 }

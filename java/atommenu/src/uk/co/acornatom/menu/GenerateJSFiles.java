@@ -53,7 +53,7 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
         createJSImage();
         for (SpreadsheetTitle item : items) {
             try {
@@ -75,6 +75,11 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
     @Override
     public void close() throws IOException {
         JSwriter.close();
+    }
+
+    @Override
+    public Target getTarget() {
+        return Target.JS;
     }
 
 }

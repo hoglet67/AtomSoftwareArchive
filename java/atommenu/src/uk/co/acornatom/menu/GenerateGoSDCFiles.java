@@ -93,7 +93,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         createMenus();
         for (SpreadsheetTitle item : items) {
@@ -142,5 +142,10 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public Target getTarget() {
+        return Target.GOSDC;
     }
 }

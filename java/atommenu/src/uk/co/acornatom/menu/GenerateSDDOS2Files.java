@@ -60,14 +60,14 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
 
     int[] diskTable = { 0, 0, 1, 0, 2, 0, 3, 0, 'S', 'D', 'D', 'O', 'S', ' ', ' ', ' ' };
 
-    protected void createSDImage(Target target) throws IOException {
+    protected void createSDImage() throws IOException {
         byte[] SDimage = new byte[SDCARD_SIZE];
         Arrays.fill(SDimage, (byte) 0xFF);
         for (int i = 0; i < diskTable.length; i++) {
             SDimage[i] = (byte) diskTable[i];
         }
         this.SDimage = SDimage;
-        createMenuDisks(target);
+        createMenuDisks();
     }
 
     @Override
@@ -80,33 +80,21 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         return "" + (1 + chunk);
     }
 
-    protected int calcFileSpace(File archiveDir, SpreadsheetTitle item) {
-        int total = 0;
-        for (String filename : item.getFilenames()) {
-            File file = new File(new File(archiveDir, item.getDir()), filename);
-            total += (file.length() + 0xFF) & 0xFFFF00;
-        }
-        // Account for boot file
-        total += 0x100;
-        return total;
-    }
-
     protected boolean areItemsCombinable(File archiveDir, SpreadsheetTitle item1, SpreadsheetTitle item2) {
 
         int item1_numFiles = item1.getFilenames().size();
         int item2_numFiles = item2.getFilenames().size();
 
-        // 29 allows two free catalog entries for the boot files
-        if (item1_numFiles + item2_numFiles > 29) {
+        // allow two free catalog entries for the boot files
+        if (item1_numFiles + item2_numFiles > CAT_FILES - 2) {
             System.out.println("Not combinable due to number of files:" + item1.getTitle() + " and " + item2.getTitle());
             return false;
         }
 
-        int cat_space = 0x200;
-        int item1_space = calcFileSpace(archiveDir, item1) + 0x100; // + 0x100 to allow for boot file
-        int item2_space = calcFileSpace(archiveDir, item2) + 0x100;
+        int item1_sectors = item1.getEstimatedDiskSectors();
+        int item2_sectors = item2.getEstimatedDiskSectors();
 
-        if (cat_space + item1_space + item2_space > 40 * 10 * 0x100) {
+        if (item1_sectors + item2_sectors > NUM_SECS - CAT_SECS) {
             System.out.println("Not combinable due to space:" + item1.getTitle() + " and " + item2.getTitle());
             return false;
         }
@@ -131,7 +119,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         SpreadsheetTitle lastItem = null;
         for (SpreadsheetTitle item : items) {
             // Test if two items are combinable
-            if (lastItem != null && areItemsCombinable(archiveDir, item, lastItem)) {
+            if (lastItem != null && areItemsCombinable(archiveDir, lastItem, item)) {
                 // Append the item to the current disk
                 item.setDiskNo(diskNo * 2 + 1);
                 lastItem = null;
@@ -169,8 +157,8 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
-        createSDImage(target);
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+        createSDImage();
         byte[] image = null;
         Integer diskNo = null;
         for (SpreadsheetTitle item : items) {
@@ -206,5 +194,10 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         FileOutputStream fos = new FileOutputStream(sdImageFile);
         fos.write(SDimage);
         fos.close();
+    }
+
+    @Override
+    public Target getTarget() {
+        return Target.SDDOS2;
     }
 }

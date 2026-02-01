@@ -8,4 +8,9 @@ public class GenerateAtoMMCFiles extends ArchiveGeneratorBase {
         super();
     }
 
+    @Override
+    public Target getTarget() {
+        return Target.ATOMMC;
+    }
+
 }

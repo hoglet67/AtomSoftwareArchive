@@ -10,11 +10,12 @@ import java.util.Set;
 
 public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
-    private static final int NUM_TRACKS = 40;
-    private static final int NUM_SECS_PER_TRACK = 10;
-    private static final int NUM_SECS = NUM_TRACKS * NUM_SECS_PER_TRACK;
-    private static final int CATALOG_SECS = 2;
-    private static final int SEC_SIZE = 256;
+    protected static final int NUM_TRACKS = 40;
+    protected static final int NUM_SECS_PER_TRACK = 10;
+    protected static final int NUM_SECS = NUM_TRACKS * NUM_SECS_PER_TRACK;
+    protected static final int CAT_SECS = 2;
+    protected static final int CAT_FILES = 31;
+    protected static final int SEC_SIZE = 256;
 
     protected File archiveDir;
     protected String menuBase;
@@ -36,7 +37,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     abstract protected void addDisk(byte[] image, String name) throws IOException;
 
     @Override
-    abstract public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException;
+    abstract public void generateFiles(List<SpreadsheetTitle> items) throws IOException;
 
     @Override
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
@@ -44,11 +45,11 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
         Iterator<SpreadsheetTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             SpreadsheetTitle item = itemIterator.next();
-            if (item.getEstimatedDiskSectors() > NUM_SECS - CATALOG_SECS) {
-                System.out.println("WARNING: dropping title because it's too large: " + item);
+            if (item.getEstimatedDiskSectors() > NUM_SECS - CAT_SECS) {
+                System.out.println("WARNING: dropping title from " + getTarget().name() + " because it's too large: " + item);
                 itemIterator.remove();
-            } else if (item.getFilenames().size() > 29) {
-                System.out.println("WARNING: dropping title because it has too many files: " + item);
+            } else if (item.getFilenames().size() > CAT_FILES - 1) {
+                System.out.println("WARNING: dropping title from " + getTarget().name() + " because it has too many files: " + item);
                 itemIterator.remove();
             }
         }
@@ -56,7 +57,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     static protected int getImageLen(byte[] image) {
         int lastUsedSector = -1;
-        for (int i = 0; i < 31; i++) {
+        for (int i = 0; i < CAT_FILES; i++) {
             int dir = 256 + (i << 3) + 8;
             int file_start_sec = (image[7 + dir] & 0xff) + ((image[6 + dir] & 0x03) << 8);
             int file_len = (image[4 + dir] & 0xff) + ((image[5 + dir] & 0xff) << 8) + ((image[6 + dir] & 0x30) << 12);
@@ -144,12 +145,12 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     }
 
-    protected void createMenuDisks(Target target) throws IOException {
+    protected void createMenuDisks() throws IOException {
         // Disk 0 is just the menu disk
         byte[] image = createBlankDiskImage("MENU");
 
         // MENU
-        ATMFile menuFile = new ATMFile(new File(archiveDir, "MENU" + target.name()));
+        ATMFile menuFile = new ATMFile(new File(archiveDir, "MENU" + getTarget().name()));
         menuFile.setTitle("MENU");
         addFile(image, menuFile);
 
@@ -169,9 +170,9 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
             }
             ATMFile chapFile;
             if (chunk == numChunks - 1) {
-                chapFile = new ATMFile(new File(archiveDir, "ALL" + target.name()));
+                chapFile = new ATMFile(new File(archiveDir, "ALL" + getTarget().name()));
             } else {
-                chapFile = new ATMFile(new File(archiveDir, "CHAP" + target.name()));
+                chapFile = new ATMFile(new File(archiveDir, "CHAP" + getTarget().name()));
             }
             chapFile.setTitle("CHAP");
             addFile(chunkImage, chapFile);

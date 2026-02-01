@@ -207,11 +207,13 @@ public class GenerateSplashFiles extends GenerateBase {
     private String version;
     private Map<String, Integer> chapterStats;
     private File menuDir;
+    private Target target;
 
-    public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chapterStats) {
+    public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chapterStats, Target target) {
         this.menuDir = menuDir;
         this.version = version;
         this.chapterStats = chapterStats;
+        this.target = target;
     }
 
     private void writeAtomString(byte[] screen, String s, int x, int y, boolean forceUpper) {
@@ -253,7 +255,7 @@ public class GenerateSplashFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         int linex = 9;
 
@@ -397,6 +399,11 @@ public class GenerateSplashFiles extends GenerateBase {
 
     public static final void main(String[] args) throws IOException {
         readSplashTemplate("../../menu/" + SPASH_TEMPLATE, new byte[256 * 192]);
+    }
+
+    @Override
+    public Target getTarget() {
+        return target;
     }
 
 }

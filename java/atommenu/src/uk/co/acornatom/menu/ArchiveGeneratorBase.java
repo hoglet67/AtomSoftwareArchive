@@ -40,7 +40,7 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
     }
 
     @Override
@@ -50,5 +50,4 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
     @Override
     public void close() throws IOException {
     }
-
 }

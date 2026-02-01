@@ -47,7 +47,7 @@ public class GenerateAll {
         Iterator<SpreadsheetTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             SpreadsheetTitle item  = itemIterator.next();
-            long numSectors = 0;
+            int numSectors = 1; // For boot file
             boolean ok = true;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -63,13 +63,13 @@ public class GenerateAll {
                 } else {
                     // Assume the file is an ATM file, so subtract the 22 byte header,
                     // then round up to sectors
-                    numSectors += ((file.length() - 22) + 255) / 256;
+                    numSectors += ((file.length() - 22) + 0xFF) >> 8;
                 }
             }
             if (ok) {
                 item.setEstimatedDiskSectors(numSectors);
             } else {
-                System.out.println("WARNING: Dropping title: " + item);
+                System.out.println("WARNING: Dropping title from all builds because it's incomplete: " + item);
                 itemIterator.remove();
             }
         }
@@ -225,8 +225,8 @@ public class GenerateAll {
                 // Recalculate sizes of each chunks
                 Map<String, Integer> chunkStats = calculateChunkStats(targetItems);
 
-                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunkStats);
-                splashGen.generateFiles(null, target);
+                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunkStats, target);
+                splashGen.generateFiles(null);
 
                 // Each menu chapter will be a separate disk
                 for (String chunk : chunkNames) {
@@ -240,13 +240,13 @@ public class GenerateAll {
                     }
                     List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
                     generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
-                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, chunk));
+                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, chunk, target));
                     for (IFileGenerator g : generators) {
-                        g.generateFiles(chunkItems, target);
+                        g.generateFiles(chunkItems);
                     }
                 }
 
-                generator.generateFiles(targetItems, target);
+                generator.generateFiles(targetItems);
                 generator.writeImage();
                 generator.close();
             } catch (IOException e) {

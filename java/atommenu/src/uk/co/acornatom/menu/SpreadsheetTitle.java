@@ -19,7 +19,7 @@ public class SpreadsheetTitle {
     private List<String> collections;
     private String genre;
     private List<String> filenames;
-    private long estimatedDiskSectors;
+    private int estimatedDiskSectors;
     private Set<String> runnables = new HashSet<String>();
     private Set<String> loadables = new HashSet<String>();
 
@@ -152,11 +152,11 @@ public class SpreadsheetTitle {
         return this.chunk + " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
     }
 
-    public long getEstimatedDiskSectors() {
+    public int getEstimatedDiskSectors() {
         return estimatedDiskSectors;
     }
 
-    public void setEstimatedDiskSectors(long estimatedDiskSectors) {
+    public void setEstimatedDiskSectors(int estimatedDiskSectors) {
         this.estimatedDiskSectors = estimatedDiskSectors;
     }
 

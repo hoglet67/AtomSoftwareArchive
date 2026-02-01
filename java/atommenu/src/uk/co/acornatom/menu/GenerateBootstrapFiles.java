@@ -139,10 +139,15 @@ public class GenerateBootstrapFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
         for (SpreadsheetTitle item : items) {
             boolean rom = item.getChunk().equals(ROMS_CHUNK);
             generateMachineCodeBootstrap(item, rom);
         }
+    }
+
+    @Override
+    public Target getTarget() {
+        return target;
     }
 }

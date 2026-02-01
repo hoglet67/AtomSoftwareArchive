@@ -33,12 +33,14 @@ public class GenerateMenuFiles extends GenerateBase {
     File menuDir;
     boolean agdChunk;
     boolean allChunk;
+    Target target;
 
-    public GenerateMenuFiles(File archiveDir, File menuDir, String chunk) {
+    public GenerateMenuFiles(File archiveDir, File menuDir, String chunk, Target target) {
         this.archiveDir = archiveDir;
         this.menuDir = menuDir;
         this.agdChunk = chunk.equals(IFileGenerator.AGD_CHUNK);
         this.allChunk = chunk.equals(IFileGenerator.ALL_CHUNK);
+        this.target = target;
     }
 
     private void dumpIndexes(String type, Map<String, Integer> map) {
@@ -68,7 +70,7 @@ public class GenerateMenuFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items, Target target) throws IOException {
+    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
 
         // ------------------------------------------------------------------------------------
         // Process the spreadsheet items to generate IDs for Publishers, Genres
@@ -519,5 +521,10 @@ public class GenerateMenuFiles extends GenerateBase {
             int ret = o1.getPublisherId() - o2.getPublisherId();
             return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
         }
+    }
+
+    @Override
+    public Target getTarget() {
+        return target;
     }
 }
