@@ -73,10 +73,10 @@ if [[ $# -lt 2 ]] || [[ "$2" =~ "ECONET" ]]; then
     # Generate the AFS0 File Server Disk Image
     SCSIDIR=BeebSCSI0
     mkdir -p ${SCSIDIR}
-    unzip -d ${SCSIDIR} -o ../econet/scsi0.dat.zip
+    unzip -qd ${SCSIDIR} -o ../econet/scsi0.dat.zip
     cp -a ../econet/scsi0.dsc ${SCSIDIR}
-    java -jar ../java/afsutils/afsutils.jar ${SCSIDIR}/scsi0.dat ${NAME}_ECONET.zip
-    zip -r ${NAME}_BEEBSCSI0.zip ${SCSIDIR}
+    java -jar ../java/afsutils/afsutils.jar ${SCSIDIR}/scsi0.dat ${NAME}_ECONET.zip > BeebSCSI0.log
+    zip -qr ${NAME}_BEEBSCSI0.zip ${SCSIDIR}
     rm -f ${SCSIDIR}/*
     rmdir ${SCSIDIR}
 fi

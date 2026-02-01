@@ -50,4 +50,5 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
     @Override
     public void close() throws IOException {
     }
+
 }

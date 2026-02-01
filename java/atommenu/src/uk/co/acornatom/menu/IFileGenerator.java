@@ -20,5 +20,5 @@ public interface IFileGenerator {
 
     abstract public Target getTarget();
 
-
+    public void setDebug(boolean debug);
 }

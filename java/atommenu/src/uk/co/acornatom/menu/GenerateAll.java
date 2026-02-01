@@ -43,11 +43,7 @@ public class GenerateAll {
     }
 
     private void banner(String message) {
-        System.out.println();
-        System.out.println("**********************************************************************");
-        System.out.println(message);
-        System.out.println("**********************************************************************");
-        System.out.println();
+        GenerateBase.banner(message);
     }
 
     // Check all files needed for each title are present
@@ -167,7 +163,7 @@ public class GenerateAll {
 
     public void generateAll(File catalogCSV, Set<Target> userTargets, String version) {
 
-        banner("Building Atom Software Archive " + version);
+        banner("Building Atom Software Menus " + version);
 
         banner("Parsing catalog CSV file");
         SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
@@ -261,6 +257,8 @@ public class GenerateAll {
                     }
                 }
 
+                banner("Generating Files for " + target.name());
+
                 generator.generateFiles(targetItems);
                 generator.writeImage();
                 generator.close();
@@ -268,6 +266,8 @@ public class GenerateAll {
                 e.printStackTrace();
             }
         }
+
+        banner("Building Atom Software Menus Complete");
     }
 
     public static final void main(String[] args) {

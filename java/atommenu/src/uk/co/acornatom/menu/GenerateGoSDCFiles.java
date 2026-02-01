@@ -98,7 +98,9 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
         createMenus();
         for (SpreadsheetTitle item : items) {
             try {
-                System.out.println(item.getTitle());
+                if (debug) {
+                    System.out.println(item.getTitle());
+                }
 
                 String comment = "# " + item.getTitle() + " | " + item.getPublisher() + "\n";
                 scriptStream.write(comment.getBytes());
@@ -117,7 +119,9 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
 
                 Set<String> missing = new HashSet<String>(item.getLoadables());
                 for (String filename : item.getFilenames()) {
-                    System.out.println("    >" + filename + "<");
+                    if (debug) {
+                        System.out.println("    >" + filename + "<");
+                    }
                     File file = new File(new File(archiveDir, item.getDir()), filename);
                     ATMFile atmFile = new ATMFile(file);
                     missing.remove(filename);

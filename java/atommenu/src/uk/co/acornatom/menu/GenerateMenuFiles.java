@@ -17,23 +17,23 @@ import java.util.TreeMap;
 
 public class GenerateMenuFiles extends GenerateBase {
 
-    Comparator<String> intuitiveStringComparator = new IntuitiveStringComparator<String>();
+    private Comparator<String> intuitiveStringComparator = new IntuitiveStringComparator<String>();
 
-    Map<String, Integer> shortPublishers = new LinkedHashMap<String, Integer>();
-
-    Map<String, Integer> publishers = new TreeMap<String, Integer>();
-    Map<String, Integer> genres = new TreeMap<String, Integer>();
-    Map<String, Integer> collections = new TreeMap<String, Integer>(intuitiveStringComparator);
-    int maxTitleLen;
-    int maxGenreLen;
-    int maxShortPublisherLen;
-    int maxPublisherLen;
-    int maxCollectionLen;
-    File archiveDir;
-    File menuDir;
+    private Map<String, Integer> shortPublishers = new LinkedHashMap<String, Integer>();
+    private Map<String, Integer> publishers = new TreeMap<String, Integer>();
+    private Map<String, Integer> genres = new TreeMap<String, Integer>();
+    private Map<String, Integer> collections = new TreeMap<String, Integer>(intuitiveStringComparator);
+    private int maxTitleLen;
+    private int maxGenreLen;
+    private int maxShortPublisherLen;
+    private int maxPublisherLen;
+    private int maxCollectionLen;
+    private File archiveDir;
+    private File menuDir;
     boolean agdChunk;
-    boolean allChunk;
-    Target target;
+    private boolean allChunk;
+    private Target target;
+    private String chunk;
 
     public GenerateMenuFiles(File archiveDir, File menuDir, String chunk, Target target) {
         this.archiveDir = archiveDir;
@@ -41,6 +41,7 @@ public class GenerateMenuFiles extends GenerateBase {
         this.agdChunk = chunk.equals(IFileGenerator.AGD_CHUNK);
         this.allChunk = chunk.equals(IFileGenerator.ALL_CHUNK);
         this.target = target;
+        this.chunk = chunk;
     }
 
     private void dumpIndexes(String type, Map<String, Integer> map) {
@@ -125,10 +126,12 @@ public class GenerateMenuFiles extends GenerateBase {
             }
         }
 
-        dumpIndexes("ShortPublishers", shortPublishers);
-        dumpIndexes("Publishers", publishers);
-        dumpIndexes("Genres", genres);
-        dumpIndexes("Collections", collections);
+        if (debug) {
+            dumpIndexes("ShortPublishers", shortPublishers);
+            dumpIndexes("Publishers", publishers);
+            dumpIndexes("Genres", genres);
+            dumpIndexes("Collections", collections);
+        }
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
         for (SpreadsheetTitle item : items) {
@@ -153,7 +156,10 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         Collections.sort(atomTitles, new TitleOrderSort());
-        dumpTitles("TitleOrderSort", atomTitles);
+        if (debug) {
+            dumpTitles("Chunk " + chunk + " in title sort order", atomTitles);
+        }
+
         // ------------------------------------------------------------------------------------
         // Generate the data for the main table
         //
@@ -319,7 +325,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {
         System.out.println("----------------------------------------");
-        System.out.println("Atom file: " + name);
+        System.out.println("Chunk " + chunk + ": Atom file: " + name);
         System.out.println("----------------------------------------");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         int addr = loadAddr + 2 * tables.length;
@@ -347,7 +353,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private void writeTable(File menuDir, String name, int loadAddr, byte[] table) throws IOException {
         System.out.println("----------------------------------------");
-        System.out.println("Atom file: " + name);
+        System.out.println("Chunk " + chunk + ": Atom file: " + name);
         System.out.println("----------------------------------------");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bos.write(table);
@@ -360,10 +366,12 @@ public class GenerateMenuFiles extends GenerateBase {
     }
 
     private byte[] createTitleTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
-        System.out.println("----------------------------------------");
-        System.out.println("Title Table");
-        System.out.println("----------------------------------------");
-        System.out.println("address " + Integer.toHexString(absoluteAddress));
+        if (debug) {
+            System.out.println("----------------------------------------");
+            System.out.println("Title Table");
+            System.out.println("----------------------------------------");
+            System.out.println("address " + Integer.toHexString(absoluteAddress));
+        }
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         for (AtomTitle item : items) {
             item.setAbsoluteAddress(absoluteAddress + bos.size());
@@ -375,16 +383,20 @@ public class GenerateMenuFiles extends GenerateBase {
             writeString(bos, item.getTitle());
             writeByte(bos, 0);
         }
-        System.out.println("length " + bos.size() + " bytes");
+        if (debug) {
+            System.out.println("length " + bos.size() + " bytes");
+        }
         return bos.toByteArray();
     }
 
     private byte[] createSecondaryTable(String tableName, int absoluteAddress, Map<String, Integer> map, List<AtomTitle> sort,
             IFieldSelector fieldSelector) throws IOException {
-        System.out.println("----------------------------------------");
-        System.out.println("Secondary Table: " + tableName);
-        System.out.println("----------------------------------------");
-        System.out.println("address " + Integer.toHexString(absoluteAddress));
+        if (debug) {
+            System.out.println("----------------------------------------");
+            System.out.println("Secondary Table: " + tableName);
+            System.out.println("----------------------------------------");
+            System.out.println("address " + Integer.toHexString(absoluteAddress));
+        }
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         absoluteAddress += map.size() * 2 + 4; // Skip over the pointers plus
                                                // the length and terminator
@@ -410,15 +422,19 @@ public class GenerateMenuFiles extends GenerateBase {
             writeString(bos, entry.getKey());
             writeByte(bos, 0);
         }
-        System.out.println("length " + bos.size() + " bytes");
+        if (debug) {
+            System.out.println("length " + bos.size() + " bytes");
+        }
         return bos.toByteArray();
     }
 
     private byte[] createSortTable(String tableName, List<AtomTitle> items, Comparator<AtomTitle> comparator,
             Map<String, Integer> map) throws IOException {
-        System.out.println("----------------------------------------");
-        System.out.println("Sort Table: " + tableName);
-        System.out.println("----------------------------------------");
+        if (debug) {
+            System.out.println("----------------------------------------");
+            System.out.println("Sort Table: " + tableName);
+            System.out.println("----------------------------------------");
+        }
         // Sort items using the supplier comparator
         Collections.sort(items, comparator);
         // Build the data for the table
@@ -428,7 +444,9 @@ public class GenerateMenuFiles extends GenerateBase {
             writeShort(bos, item.getAbsoluteAddress());
         }
         writeShort(bos, 0x0000);
-        System.out.println("length " + bos.size() + " bytes");
+        if (debug) {
+            System.out.println("length " + bos.size() + " bytes");
+        }
         return bos.toByteArray();
     }
 

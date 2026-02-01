@@ -3,6 +3,8 @@ not_in_git/
 *.class
 *~
 
+*.log
+
 java/arcpartition/arcpartition.jar
 java/arcpartition/bin/
 

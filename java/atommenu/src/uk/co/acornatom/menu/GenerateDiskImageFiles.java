@@ -55,14 +55,16 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
         }
     }
 
-    static protected int getImageLen(byte[] image) {
+    protected int getImageLen(byte[] image) {
         int lastUsedSector = -1;
         for (int i = 0; i < CAT_FILES; i++) {
             int dir = 256 + (i << 3) + 8;
             int file_start_sec = (image[7 + dir] & 0xff) + ((image[6 + dir] & 0x03) << 8);
             int file_len = (image[4 + dir] & 0xff) + ((image[5 + dir] & 0xff) << 8) + ((image[6 + dir] & 0x30) << 12);
             int file_end_sec = file_start_sec + (file_len >> 8);
-            System.out.println(i + " = " + file_start_sec + " " + file_len + " " + file_end_sec);
+            if (debug) {
+                System.out.println(i + " = " + file_start_sec + " " + file_len + " " + file_end_sec);
+            }
             if (file_end_sec > lastUsedSector) {
                 lastUsedSector = file_end_sec;
             }
@@ -181,7 +183,9 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     }
 
     protected void addTitle(byte[] image, SpreadsheetTitle item, String bootName) throws IOException {
-        System.out.println(item.getTitle());
+        if (debug) {
+            System.out.println(item.getTitle());
+        }
         File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
                                  "" + item.getIdentifier());
         ATMFile bootAtmFile = new ATMFile(bootfile);
@@ -190,7 +194,9 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
         Set<String> missing = new HashSet<String>(item.getLoadables());
         for (String filename : item.getFilenames()) {
-            System.out.println("    >" + filename + "<");
+            if (debug) {
+                System.out.println("    >" + filename + "<");
+            }
             File file = new File(new File(archiveDir, item.getDir()), filename);
             // Some of the ATM files still contain the original long
             // tape titles

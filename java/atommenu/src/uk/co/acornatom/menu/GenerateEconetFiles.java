@@ -314,7 +314,9 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
         for (SpreadsheetTitle item : items) {
             try {
-                System.out.println(item.getTitle());
+                if (debug) {
+                    System.out.println(item.getTitle());
+                }
 
                 String dir = getDir(item.getIdentifier());
 
@@ -326,7 +328,9 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
                 Set<String> missing = new HashSet<String>(item.getLoadables());
                 for (String filename : item.getFilenames()) {
-                    // System.out.println("    >" + filename + "<");
+                    if (debug) {
+                        System.out.println("    >" + filename + "<");
+                    }
                     File file = new File(new File(archiveDir, item.getDir()), filename);
                     ATMFile atmFile = new ATMFile(file);
                     missing.remove(filename);
