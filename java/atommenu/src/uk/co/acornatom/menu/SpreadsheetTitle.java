@@ -25,6 +25,7 @@ public class SpreadsheetTitle {
     public SpreadsheetTitle() {
         diskNo = null;
     }
+
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
@@ -113,10 +114,6 @@ public class SpreadsheetTitle {
         return genre;
     }
 
-    public boolean isPresent() {
-        return true;
-    }
-
     public void setShortPublisher(String shortPublisher) {
         this.shortPublisher = shortPublisher;
     }
@@ -147,6 +144,11 @@ public class SpreadsheetTitle {
 
     public void setCompatible12K(boolean compatible12K) {
         this.compatible12K = compatible12K;
+    }
+
+    @Override
+    public String toString() {
+        return this.chunk + " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
     }
 
 }

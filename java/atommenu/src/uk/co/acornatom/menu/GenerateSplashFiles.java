@@ -205,13 +205,13 @@ public class GenerateSplashFiles extends GenerateBase {
     int[][] fonts = new int[][] { fontdataSoftVdu, fontdata6847, fontdata6847t1 };
 
     private String version;
-    private Map<String, Integer> chunks;
+    private Map<String, Integer> chapterStats;
     private File menuDir;
 
-    public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chunks) {
+    public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chapterStats) {
         this.menuDir = menuDir;
         this.version = version;
-        this.chunks = chunks;
+        this.chapterStats = chapterStats;
     }
 
     private void writeAtomString(byte[] screen, String s, int x, int y, boolean forceUpper) {
@@ -273,10 +273,10 @@ public class GenerateSplashFiles extends GenerateBase {
 
         y += 2;
 
-        for (Map.Entry<String, Integer> chunk : chunks.entrySet()) {
+        for (Map.Entry<String, Integer> chapter : chapterStats.entrySet()) {
             // Re-write the chunk titles
             String title;
-            switch (chunk.getKey().charAt(0)) {
+            switch (chapter.getKey().charAt(0)) {
             case 'A':
                 title = "Commercial";
                 break;
@@ -302,14 +302,14 @@ public class GenerateSplashFiles extends GenerateBase {
                 title = "* Unknown Chapter *";
                 break;
             }
-            String count = "" + chunk.getValue();
+            String count = "" + chapter.getValue();
             while (title.length() < 27 - count.length()) {
                 title += " ";
             }
             title += count;
             // Nasty hack to get proportionally spaced brackets
             writeAtomString(screen, "(", 8, y, false);
-            writeAtomString(screen, chunk.getKey(), 14, y, false);
+            writeAtomString(screen, chapter.getKey(), 14, y, false);
             writeAtomString(screen, ")", 20, y, false);
             writeAtomString(screen, title, 30, y, true);
             y += 12;

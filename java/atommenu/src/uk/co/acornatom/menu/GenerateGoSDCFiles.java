@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
+public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
 
     public static final String DIRSEP = "/";
 
@@ -98,45 +98,43 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase  {
         createMenus();
         for (SpreadsheetTitle item : items) {
             try {
-                if (item.isPresent()) {
-                    System.out.println(item.getTitle());
+                System.out.println(item.getTitle());
 
-                    String comment = "# " + item.getTitle() + " | " + item.getPublisher() + "\n";
-                    scriptStream.write(comment.getBytes());
+                String comment = "# " + item.getTitle() + " | " + item.getPublisher() + "\n";
+                scriptStream.write(comment.getBytes());
 
-                    StringBuilder dirname = new StringBuilder();
-                    Formatter formatter = new Formatter(dirname);
-                    formatter.format("%sE%03X%s", BASEDIR, item.getIdentifier(), DIRSEP);
-                    formatter.close();
-                    String dir = dirname.toString();
+                StringBuilder dirname = new StringBuilder();
+                Formatter formatter = new Formatter(dirname);
+                formatter.format("%sE%03X%s", BASEDIR, item.getIdentifier(), DIRSEP);
+                formatter.close();
+                String dir = dirname.toString();
 
-                    File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                                             "" + item.getIdentifier());
-                    ATMFile bootAtmFile = new ATMFile(bootfile);
-                    bootAtmFile.setTitle("BOOT");
-                    addFile(dir, bootAtmFile);
+                File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
+                        "" + item.getIdentifier());
+                ATMFile bootAtmFile = new ATMFile(bootfile);
+                bootAtmFile.setTitle("BOOT");
+                addFile(dir, bootAtmFile);
 
-                    Set<String> missing = new HashSet<String>(item.getLoadables());
-                    for (String filename : item.getFilenames()) {
-                        System.out.println("    >" + filename + "<");
-                        File file = new File(new File(archiveDir, item.getDir()), filename);
-                        ATMFile atmFile = new ATMFile(file);
-                        missing.remove(filename);
-                        patch_atommc_joystick(atmFile, item);
-                        atmFile.setTitle(filename);
-                        addFile(dir, atmFile);
-                        if (item.getRunnables().contains(filename)) {
-                            if (atmFile.getExecAddr() == (0xc2b2)) {
-                                System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
-                                                   + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
-                                                   + Integer.toHexString(atmFile.getExecAddr()));
-                            }
+                Set<String> missing = new HashSet<String>(item.getLoadables());
+                for (String filename : item.getFilenames()) {
+                    System.out.println("    >" + filename + "<");
+                    File file = new File(new File(archiveDir, item.getDir()), filename);
+                    ATMFile atmFile = new ATMFile(file);
+                    missing.remove(filename);
+                    patch_atommc_joystick(atmFile, item);
+                    atmFile.setTitle(filename);
+                    addFile(dir, atmFile);
+                    if (item.getRunnables().contains(filename)) {
+                        if (atmFile.getExecAddr() == (0xc2b2)) {
+                            System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
+                                    + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
+                                    + Integer.toHexString(atmFile.getExecAddr()));
                         }
                     }
-                    if (!missing.isEmpty()) {
-                        for (String m : missing) {
-                            System.out.println("WARNING: " + item.getTitle() + ": missing in GoSDC build : " + m);
-                        }
+                }
+                if (!missing.isEmpty()) {
+                    for (String m : missing) {
+                        System.out.println("WARNING: " + item.getTitle() + ": missing in GoSDC build : " + m);
                     }
                 }
             } catch (Exception e) {

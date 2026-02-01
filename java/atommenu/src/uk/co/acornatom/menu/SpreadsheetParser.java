@@ -152,13 +152,10 @@ public class SpreadsheetParser {
                 for (String filename : filenames) {
                     filename = filename.trim();
                     filesnamesList.add(filename);
-                    if (item.isPresent()) {
-                        String path = dir + "/" + filename;
-                        if (!filesPaths.add(path)) {
-                            System.out.println("WARNING: File shared between titles: " + path);
-                        }
+                    String path = dir + "/" + filename;
+                    if (!filesPaths.add(path)) {
+                        System.out.println("WARNING: File shared between titles: " + path);
                     }
-
                 }
                 item.setFilenames(filesnamesList);
                 String ram32K = program[ram32k_column].trim().toUpperCase();

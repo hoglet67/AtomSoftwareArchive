@@ -129,9 +129,6 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         int diskNo = numChunks; // Skip the menu disks
         SpreadsheetTitle lastItem = null;
         for (SpreadsheetTitle item : items) {
-            if (!item.isPresent()) {
-                continue;
-            }
             // Test if two items are combinable
             if (lastItem != null && areItemsCombinable(archiveDir, item, lastItem)) {
                 // Append the item to the current disk
@@ -177,17 +174,15 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         Integer diskNo = null;
         for (SpreadsheetTitle item : items) {
             try {
-                if (item.isPresent()) {
-                    if ((item.getDiskNo() & 1) == 0) {
-                        if (diskNo != null) {
-                            addDisk(image, diskNo >> 1);
-                        }
-                        diskNo = item.getDiskNo();
-                        image = createBlankDiskImage(item.getTitle());
-                        addTitle(image, item, "BOOT0");
-                    } else {
-                        addTitle(image, item, "BOOT1");
+                if ((item.getDiskNo() & 1) == 0) {
+                    if (diskNo != null) {
+                        addDisk(image, diskNo >> 1);
                     }
+                    diskNo = item.getDiskNo();
+                    image = createBlankDiskImage(item.getTitle());
+                    addTitle(image, item, "BOOT0");
+                } else {
+                    addTitle(image, item, "BOOT1");
                 }
             } catch (Exception e) {
                 System.out.println("Problem DiskImage files for title " + item.getTitle());

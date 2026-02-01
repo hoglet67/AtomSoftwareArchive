@@ -3,10 +3,13 @@ package uk.co.acornatom.menu;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import uk.co.acornatom.menu.IFileGenerator.Target;
@@ -20,7 +23,6 @@ public class GenerateAll {
         this.archiveDir = archiveDir;
         this.menuBase = menuBase;
     }
-
 
     private IArchiveGenerator archiveGeneratorFactory(Target target, int numChunks) throws IOException {
         switch (target) {
@@ -40,34 +42,34 @@ public class GenerateAll {
         return null;
     }
 
-    private Map<String, Integer> chapterStats(List<SpreadsheetTitle> items) {
-        // Gather some additional metadata on the titles
-        Map<String, Integer> chunks = new TreeMap<String, Integer>();
-        int total = 0;
-        for (SpreadsheetTitle item : items) {
-            if (!item.isPresent()) {
-                continue;
+    // Check all files needed for each title are present
+    private void checkFiles(List<SpreadsheetTitle> items) {
+        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+        while (itemIterator.hasNext()) {
+            SpreadsheetTitle item  = itemIterator.next();
+            boolean ok = true;
+            for (String filename : item.getFilenames()) {
+                File file = new File(new File(archiveDir, item.getDir()), filename);
+                if (!file.exists()) {
+                    System.out.println("WARNING: Missing file: " + file);
+                    ok = false;
+                } else if (!file.isFile()) {
+                    System.out.println("WARNING: Not a file: " + file);
+                    ok = false;
+                } else if (!file.canRead()) {
+                    System.out.println("WARNING: Unreadable file: " + file);
+                    ok = false;
+                }
             }
-            // Count the number of titles in each chunk
-            String chunk = item.getChunk();
-            Integer count = chunks.get(chunk);
-            if (count == null) {
-                count = 0;
+            if (!ok) {
+                System.out.println("WARNING: Dropping title: " + item);
+                itemIterator.remove();
             }
-            chunks.put(chunk, count + 1);
-            total++;
         }
-        chunks.put(IFileGenerator.ALL_CHUNK, total);
-        System.out.println("Found " + chunks.size() + " chunks");
-        return chunks;
     }
-
     // Check 12K compatibility
     private void check12KCompatibility(List<SpreadsheetTitle> items) {
         for (SpreadsheetTitle item : items) {
-            if (!item.isPresent()) {
-                continue;
-            }
             boolean ok = true;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -93,7 +95,7 @@ public class GenerateAll {
                         }
                     }
                 } catch (IOException e) {
-                    System.out.print("WARNING: Missing file: " + file);
+                    System.out.println("WARNING: Missing file: " + file);
                 }
             }
             // There are a very small number of these
@@ -106,9 +108,6 @@ public class GenerateAll {
     private void checkGarbageSignature(List<SpreadsheetTitle> items) {
         // Check for garbage signature
         for (SpreadsheetTitle item : items) {
-            if (!item.isPresent()) {
-                continue;
-            }
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
                 try {
@@ -118,17 +117,37 @@ public class GenerateAll {
                                 + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle());
                     }
                 } catch (IOException e) {
-                    System.out.print("WARNING: Missing file: " + file);
+                    System.out.println("WARNING: Missing file: " + file);
                 }
             }
         }
     }
 
-    public void generateAll(File catalogCSV, List<Target> targets, String version) {
+    // Count the number of titles remaining in each chunk
+    // (and also create the All chunk)
+    private Map<String, Integer> calculateChunkStats(List<SpreadsheetTitle> items) {
+        Map<String, Integer> chunks = new TreeMap<String, Integer>();
+        int total = 0;
+        for (SpreadsheetTitle item : items) {
+            // Count the number of titles in each chunk
+            String chunk = item.getChunk();
+            Integer count = chunks.get(chunk);
+            if (count == null) {
+                count = 0;
+            }
+            chunks.put(chunk, count + 1);
+            total++;
+        }
+        chunks.put(IFileGenerator.ALL_CHUNK, total);
+        return chunks;
+    }
+
+    public void generateAll(File catalogCSV, Set<Target> userTargets, String version) {
         SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
         List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
-        Map<String, Integer> chunks = chapterStats(items);
+        // Drop incomplete titles (where files are missing)
+        checkFiles(items);
 
         Comparator<SpreadsheetTitle> customComparator = new Comparator<SpreadsheetTitle>() {
             @Override
@@ -147,21 +166,39 @@ public class GenerateAll {
         sortedItems.sort(customComparator);
 
         // Produce WARNINGs for titles are missing 32K Ram = YES tags in the spreadsheet
-        check12KCompatibility(sortedItems);
+        check12KCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
         // Produce WARNINGs for titles that might have garbage on the end
-        checkGarbageSignature(sortedItems);
+        checkGarbageSignature(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
-        // Each menu chapter will be a separate disk
-        for (Target target : targets) {
+        // Compute initial stats of sizes of each chunks
+        Map<String, Integer> initialChunkStats = calculateChunkStats(items);
+
+        // Names of the chunks A, B, C, D, ....
+        Collection<String> chunkNames = initialChunkStats.keySet();
+
+        // Number of chunks
+        int numChunks = chunkNames.size();
+        System.out.println("Found " + numChunks + " chunks");
+
+        // Iterate through the targets
+        for (Target target : Target.values()) {
+
+            // Build the user specified targets
+            if (!userTargets.isEmpty() && !userTargets.contains(target)) {
+                continue;
+            }
 
             try {
+
+                // Copy the master list, as the target may drop items
+                List<SpreadsheetTitle> targetItems = new ArrayList<SpreadsheetTitle>(items);
 
                 System.out.println("*******************************");
                 System.out.println("Generating " + target.name());
                 System.out.println("*******************************");
 
-                IArchiveGenerator generator = archiveGeneratorFactory(target, chunks.size());
+                IArchiveGenerator generator = archiveGeneratorFactory(target, numChunks);
 
                 File bootLoaderBinary = new File(archiveDir, "BOOT.bin");
 
@@ -174,18 +211,22 @@ public class GenerateAll {
                 }
 
                 // Give the generator the opportunity to map titles to disk images
-                generator.allocateDisks(items);
+                generator.allocateDisks(targetItems);
 
                 System.out.println(" menu files version " + version);
 
-                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunks);
+                // Recalculate sizes of each chunks
+                Map<String, Integer> chunkStats = calculateChunkStats(targetItems);
+
+                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunkStats);
                 splashGen.generateFiles(null, target);
 
-                for (String chunk : chunks.keySet()) {
+                // Each menu chapter will be a separate disk
+                for (String chunk : chunkNames) {
                     File menuDir = new File(archiveDir, menuBase + chunk);
                     menuDir.mkdirs();
                     List<SpreadsheetTitle> chunkItems = new ArrayList<SpreadsheetTitle>();
-                    for (SpreadsheetTitle item : items) {
+                    for (SpreadsheetTitle item : targetItems) {
                         if (item.getChunk().equals(chunk) || chunk.equals(IFileGenerator.ALL_CHUNK)) {
                             chunkItems.add(item);
                         }
@@ -198,7 +239,7 @@ public class GenerateAll {
                     }
                 }
 
-                generator.generateFiles(items, target);
+                generator.generateFiles(targetItems, target);
                 generator.writeImage();
                 generator.close();
             } catch (IOException e) {
@@ -235,19 +276,17 @@ public class GenerateAll {
             throw new RuntimeException("Missing version");
         }
 
-        List<Target> targets = new ArrayList<Target>();
+        Set<Target> userTargets = new HashSet<Target>();
         if (args.length == 4) {
             for (String target : args[3].split(",")) {
                 // Throws a IllegalArgumentException exception if not found which is fine
-                targets.add(Target.valueOf(target.strip().toUpperCase()));
+                userTargets.add(Target.valueOf(target.strip().toUpperCase()));
             }
-        } else {
-            targets = Arrays.asList(Target.values());
         }
 
         GenerateAll top = new GenerateAll(archiveDir, menuBase);
 
-        top.generateAll(catalogCSV, targets, version);
+        top.generateAll(catalogCSV, userTargets, version);
 
     }
 

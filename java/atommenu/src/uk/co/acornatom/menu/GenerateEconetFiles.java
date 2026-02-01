@@ -146,9 +146,9 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
             }
             ATMFile chapFile;
             if (chunk == numChunks - 1) {
-               chapFile = new ATMFile(new File(archiveDir, "ALLECO"));
+                chapFile = new ATMFile(new File(archiveDir, "ALLECO"));
             } else {
-               chapFile = new ATMFile(new File(archiveDir, "CHAPECO"));
+                chapFile = new ATMFile(new File(archiveDir, "CHAPECO"));
             }
             chapFile.setTitle("CHAP");
             addFile(dir, chapFile);
@@ -156,7 +156,8 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     }
 
     //
-    // There are address changes from the original v2.40 to the original v3.50 at #A000
+    // There are address changes from the original v2.40 to the original v3.50 at
+    // #A000
     //
     static HashMap<Integer, Integer> eco350APatches() {
         HashMap<Integer, Integer> patch = new HashMap<>();
@@ -183,7 +184,8 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     }
 
     //
-    // There are address changes from the original v2.40 to the original v3.50 at #E000 with *MENU added
+    // There are address changes from the original v2.40 to the original v3.50 at
+    // #E000 with *MENU added
     //
     static HashMap<Integer, Integer> eco350EPatches() {
         HashMap<Integer, Integer> patch = new HashMap<>();
@@ -258,23 +260,24 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         return dir.toString();
     }
 
-   private void patch_nomon(ATMFile atmFile, SpreadsheetTitle item) {
+    private void patch_nomon(ATMFile atmFile, SpreadsheetTitle item) {
         byte[] bytes = atmFile.getData();
-        String[] matches= {"N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\r"};
+        String[] matches = { "N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\r" };
         for (String match : matches) {
-           byte[] ref = match.getBytes();
-           for (int i = 0; i < bytes.length - ref.length - 2; i++) {
-              if (bytes[i] != 13 && bytes[i + 2] == '*' && bytes[i + 3] == 'N') {
-                 for (int j = 0; j < ref.length && bytes[i + 3 + j] == ref[j]; j++) {
-                    if (ref[j] == 13) {
-                       System.out.println("Patching *" + match.substring(0, match.length() - 1) + " in " + item.getPublisher() + " " + item.getTitle() + " file " + atmFile.getTitle());
-                       bytes[i + 2] = 'R';
-                       bytes[i + 3] = 'E';
-                       bytes[i + 4] = 'M';
+            byte[] ref = match.getBytes();
+            for (int i = 0; i < bytes.length - ref.length - 2; i++) {
+                if (bytes[i] != 13 && bytes[i + 2] == '*' && bytes[i + 3] == 'N') {
+                    for (int j = 0; j < ref.length && bytes[i + 3 + j] == ref[j]; j++) {
+                        if (ref[j] == 13) {
+                            System.out.println("Patching *" + match.substring(0, match.length() - 1) + " in " + item.getPublisher()
+                                    + " " + item.getTitle() + " file " + atmFile.getTitle());
+                            bytes[i + 2] = 'R';
+                            bytes[i + 3] = 'E';
+                            bytes[i + 4] = 'M';
+                        }
                     }
-                 }
-              }
-           }
+                }
+            }
         }
     }
 
@@ -286,16 +289,10 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
                 int addrlo = (bytes[i + 1] & 0xff);
                 if (addrlo == 0x04 || addrlo == 0x05) {
                     int opcode = bytes[i] & 0xff;
-                    if (opcode == 0x8D || opcode == 0x8E || opcode == 0x8C ||    // LDA/X/Y absolute
-                        opcode == 0xAD || opcode == 0xAE || opcode == 0xAC) {    // STA/X/Y absolute
-                        System.out.println(String.format("Patching %s %04x %04x at %04X : %02X %02X %02X",
-                                        atmFile.getTitle(),
-                                        atmFile.getLoadAddr(),
-                                        i,
-                                        atmFile.getLoadAddr() + i,
-                                        opcode,
-                                        addrlo,
-                                        addrhi));
+                    if (opcode == 0x8D || opcode == 0x8E || opcode == 0x8C || // LDA/X/Y absolute
+                            opcode == 0xAD || opcode == 0xAE || opcode == 0xAC) { // STA/X/Y absolute
+                        System.out.println(String.format("Patching %s %04x %04x at %04X : %02X %02X %02X", atmFile.getTitle(),
+                                atmFile.getLoadAddr(), i, atmFile.getLoadAddr() + i, opcode, addrlo, addrhi));
                         bytes[i + 1] += (0x21c - 0x204);
                     }
                 }
@@ -317,40 +314,38 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
         for (SpreadsheetTitle item : items) {
             try {
-                if (item.isPresent()) {
-                    System.out.println(item.getTitle());
+                System.out.println(item.getTitle());
 
-                    String dir = getDir(item.getIdentifier());
+                String dir = getDir(item.getIdentifier());
 
-                    File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
-                            "" + item.getIdentifier());
-                    ATMFile bootAtmFile = new ATMFile(bootfile);
-                    bootAtmFile.setTitle("BOOT");
-                    addFile(dir, bootAtmFile);
+                File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
+                        "" + item.getIdentifier());
+                ATMFile bootAtmFile = new ATMFile(bootfile);
+                bootAtmFile.setTitle("BOOT");
+                addFile(dir, bootAtmFile);
 
-                    Set<String> missing = new HashSet<String>(item.getLoadables());
-                    for (String filename : item.getFilenames()) {
-                        System.out.println("    >" + filename + "<");
-                        File file = new File(new File(archiveDir, item.getDir()), filename);
-                        ATMFile atmFile = new ATMFile(file);
-                        missing.remove(filename);
-                        atmFile.setTitle(filename);
-                        patch_interupt_vector(atmFile);
-                        patch_nomon(atmFile, item);
-                        patch_atommc_joystick(atmFile, item);
-                        addFile(dir, atmFile);
-                        if (item.getRunnables().contains(filename)) {
-                            if (atmFile.getExecAddr() == (0xc2b2)) {
-                                System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
-                                        + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
-                                        + Integer.toHexString(atmFile.getExecAddr()));
-                            }
+                Set<String> missing = new HashSet<String>(item.getLoadables());
+                for (String filename : item.getFilenames()) {
+                    System.out.println("    >" + filename + "<");
+                    File file = new File(new File(archiveDir, item.getDir()), filename);
+                    ATMFile atmFile = new ATMFile(file);
+                    missing.remove(filename);
+                    atmFile.setTitle(filename);
+                    patch_interupt_vector(atmFile);
+                    patch_nomon(atmFile, item);
+                    patch_atommc_joystick(atmFile, item);
+                    addFile(dir, atmFile);
+                    if (item.getRunnables().contains(filename)) {
+                        if (atmFile.getExecAddr() == (0xc2b2)) {
+                            System.out.println("WARNING: " + item.getTitle() + ": " + filename + " load:"
+                                    + Integer.toHexString(atmFile.getLoadAddr()) + " exec:"
+                                    + Integer.toHexString(atmFile.getExecAddr()));
                         }
                     }
-                    if (!missing.isEmpty()) {
-                        for (String m : missing) {
-                            System.out.println("WARNING: " + item.getTitle() + ": missing in Econet build : " + m);
-                        }
+                }
+                if (!missing.isEmpty()) {
+                    for (String m : missing) {
+                        System.out.println("WARNING: " + item.getTitle() + ": missing in Econet build : " + m);
                     }
                 }
             } catch (Exception e) {

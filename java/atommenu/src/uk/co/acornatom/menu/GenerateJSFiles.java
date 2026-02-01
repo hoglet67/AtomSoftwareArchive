@@ -57,11 +57,9 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
         createJSImage();
         for (SpreadsheetTitle item : items) {
             try {
-                if (item.isPresent()) {
-                   byte[] image = createBlankDiskImage(item.getTitle());
-                   addTitle(image, item, "BOOT");
-                   addDisk(image, "" + item.getIdentifier());
-                }
+                byte[] image = createBlankDiskImage(item.getTitle());
+                addTitle(image, item, "BOOT");
+                addDisk(image, "" + item.getIdentifier());
             } catch (Exception e) {
                 System.out.println("Problem DiskImage files for title " + item.getTitle());
                 e.printStackTrace();

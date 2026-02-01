@@ -41,11 +41,9 @@ public class GenerateSDDOS3Files extends GenerateDiskImageFiles {
         createMenuDisks(target);
         for (SpreadsheetTitle item : items) {
             try {
-                if (item.isPresent()) {
-                    byte[] image = createBlankDiskImage(item.getTitle());
-                    addTitle(image, item, "BOOT");
-                    addDisk(image, "" + item.getIdentifier() + ".DSK");
-                }
+                byte[] image = createBlankDiskImage(item.getTitle());
+                addTitle(image, item, "BOOT");
+                addDisk(image, "" + item.getIdentifier() + ".DSK");
             } catch (Exception e) {
                 System.out.println("Problem DiskImage files for title " + item.getTitle());
                 e.printStackTrace();

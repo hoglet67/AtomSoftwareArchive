@@ -88,29 +88,27 @@ public class GenerateMenuFiles extends GenerateBase {
         maxTitleLen = 0;
 
         for (SpreadsheetTitle item : items) {
-            if (item.isPresent()) {
-                if (item.getTitle().length() > maxTitleLen) {
-                    maxTitleLen = item.getTitle().length();
-                }
-                if (item.getPublisher().length() > maxPublisherLen) {
-                    maxPublisherLen = item.getPublisher().length();
-                }
-                if (item.getShortPublisher().length() > maxShortPublisherLen) {
-                    maxShortPublisherLen = item.getShortPublisher().length();
-                }
-                if (item.getGenre().length() > maxGenreLen) {
-                    maxGenreLen = item.getGenre().length();
-                }
-                for (String collection : item.getCollections()) {
-                    if (collection.length() > maxCollectionLen) {
-                        maxCollectionLen = collection.length();
-                    }
-                }
-                addToIndex(item.getPublisher(), publishers);
-                addToIndex(item.getGenre(), genres);
-                addToIndex(item.getCollections(), collections);
-                longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
+            if (item.getTitle().length() > maxTitleLen) {
+                maxTitleLen = item.getTitle().length();
             }
+            if (item.getPublisher().length() > maxPublisherLen) {
+                maxPublisherLen = item.getPublisher().length();
+            }
+            if (item.getShortPublisher().length() > maxShortPublisherLen) {
+                maxShortPublisherLen = item.getShortPublisher().length();
+            }
+            if (item.getGenre().length() > maxGenreLen) {
+                maxGenreLen = item.getGenre().length();
+            }
+            for (String collection : item.getCollections()) {
+                if (collection.length() > maxCollectionLen) {
+                    maxCollectionLen = collection.length();
+                }
+            }
+            addToIndex(item.getPublisher(), publishers);
+            addToIndex(item.getGenre(), genres);
+            addToIndex(item.getCollections(), collections);
+            longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
         }
         assignIndexes(publishers);
         assignIndexes(genres);
@@ -132,22 +130,20 @@ public class GenerateMenuFiles extends GenerateBase {
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
         for (SpreadsheetTitle item : items) {
-            if (item.isPresent()) {
-                AtomTitle atomTitle = new AtomTitle();
-                atomTitle.setTitle(item.getTitle());
-                if (item.getDiskNo() != null) {
-                    atomTitle.setIndex(item.getDiskNo()); // Use the disk number if it's been set by the generator
-                } else {
-                    atomTitle.setIndex(item.getIdentifier()); // Use persistent identifier everywhere else
-                }
-                atomTitle.setShortPublisher(item.getShortPublisher());
-                atomTitle.setPublisher(item.getPublisher());
-                atomTitle.setPublisherId(publishers.get(item.getPublisher()));
-                atomTitle.setGenre(item.getGenre());
-                atomTitle.setGenreId(genres.get(item.getGenre()));
-                atomTitle.setCollections(item.getCollections(), collections);
-                atomTitles.add(atomTitle);
+            AtomTitle atomTitle = new AtomTitle();
+            atomTitle.setTitle(item.getTitle());
+            if (item.getDiskNo() != null) {
+                atomTitle.setIndex(item.getDiskNo()); // Use the disk number if it's been set by the generator
+            } else {
+                atomTitle.setIndex(item.getIdentifier()); // Use persistent identifier everywhere else
             }
+            atomTitle.setShortPublisher(item.getShortPublisher());
+            atomTitle.setPublisher(item.getPublisher());
+            atomTitle.setPublisherId(publishers.get(item.getPublisher()));
+            atomTitle.setGenre(item.getGenre());
+            atomTitle.setGenreId(genres.get(item.getGenre()));
+            atomTitle.setCollections(item.getCollections(), collections);
+            atomTitles.add(atomTitle);
         }
 
         // ------------------------------------------------------------------------------------
@@ -167,9 +163,10 @@ public class GenerateMenuFiles extends GenerateBase {
         int startOfUpperText;
         int lengthOfUpperText;
 
-        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all (AtoMMC/Econet/SDDOS) cases
-        // MENU    094C 2800->314C
-        // MENUSD  0983 2800->3183
+        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all
+        // (AtoMMC/Econet/SDDOS) cases
+        // MENU 094C 2800->314C
+        // MENUSD 0983 2800->3183
         // MENUECO 0976 2800->3176
         if (allChunk) {
             // swap the lower and upper text spaces
@@ -312,9 +309,9 @@ public class GenerateMenuFiles extends GenerateBase {
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
         if (allChunk) {
-           ATMFile.copy(new File(archiveDir, "ALL"), new File(menuDir, "CHAP"));
+            ATMFile.copy(new File(archiveDir, "ALL"), new File(menuDir, "CHAP"));
         } else {
-           ATMFile.copy(new File(archiveDir, "CHAP"), new File(menuDir, "CHAP"));
+            ATMFile.copy(new File(archiveDir, "CHAP"), new File(menuDir, "CHAP"));
         }
     }
 
