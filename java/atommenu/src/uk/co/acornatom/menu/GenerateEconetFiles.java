@@ -326,7 +326,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
                 Set<String> missing = new HashSet<String>(item.getLoadables());
                 for (String filename : item.getFilenames()) {
-                    System.out.println("    >" + filename + "<");
+                    // System.out.println("    >" + filename + "<");
                     File file = new File(new File(archiveDir, item.getDir()), filename);
                     ATMFile atmFile = new ATMFile(file);
                     missing.remove(filename);

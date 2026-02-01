@@ -42,8 +42,17 @@ public class GenerateAll {
         return null;
     }
 
+    private void banner(String message) {
+        System.out.println();
+        System.out.println("**********************************************************************");
+        System.out.println(message);
+        System.out.println("**********************************************************************");
+        System.out.println();
+    }
+
     // Check all files needed for each title are present
     private void checkFiles(List<SpreadsheetTitle> items) {
+        banner("Checking the files of each title exist");
         Iterator<SpreadsheetTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             SpreadsheetTitle item  = itemIterator.next();
@@ -76,6 +85,7 @@ public class GenerateAll {
     }
     // Check 12K compatibility
     private void check12KCompatibility(List<SpreadsheetTitle> items) {
+        banner("Checking 12K Compatibility");
         for (SpreadsheetTitle item : items) {
             boolean ok = true;
             for (String filename : item.getFilenames()) {
@@ -112,8 +122,9 @@ public class GenerateAll {
         }
     }
 
+    // Check for garbage signature
     private void checkGarbageSignature(List<SpreadsheetTitle> items) {
-        // Check for garbage signature
+        banner("Checking files for trailing garbage");
         for (SpreadsheetTitle item : items) {
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -132,7 +143,7 @@ public class GenerateAll {
 
     // Count the number of titles remaining in each chunk
     // (and also create the All chunk)
-    private Map<String, Integer> calculateChunkStats(List<SpreadsheetTitle> items) {
+    private Map<String, Integer> calculateChunkStats(List<SpreadsheetTitle> items, String message) {
         Map<String, Integer> chunks = new TreeMap<String, Integer>();
         int total = 0;
         for (SpreadsheetTitle item : items) {
@@ -146,10 +157,19 @@ public class GenerateAll {
             total++;
         }
         chunks.put(IFileGenerator.ALL_CHUNK, total);
+        banner(message);
+        for (String chunk : chunks.keySet()) {
+            System.out.println(    "Chunk " + chunk + " has " + chunks.get(chunk) + " titles");
+        }
+        System.out.println(    "Total " + total + " titles");
         return chunks;
     }
 
     public void generateAll(File catalogCSV, Set<Target> userTargets, String version) {
+
+        banner("Building Atom Software Archive " + version);
+
+        banner("Parsing catalog CSV file");
         SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
         List<SpreadsheetTitle> items = parser.parseSpreadSheet();
 
@@ -179,14 +199,13 @@ public class GenerateAll {
         checkGarbageSignature(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
         // Compute initial stats of sizes of each chunks
-        Map<String, Integer> initialChunkStats = calculateChunkStats(items);
+        Map<String, Integer> initialChunkStats = calculateChunkStats(items, "Master stats");
 
         // Names of the chunks A, B, C, D, ....
         Collection<String> chunkNames = initialChunkStats.keySet();
 
         // Number of chunks
         int numChunks = chunkNames.size();
-        System.out.println("Found " + numChunks + " chunks");
 
         // Iterate through the targets
         for (Target target : Target.values()) {
@@ -201,9 +220,7 @@ public class GenerateAll {
                 // Copy the master list, as the target may drop items
                 List<SpreadsheetTitle> targetItems = new ArrayList<SpreadsheetTitle>(items);
 
-                System.out.println("*******************************");
-                System.out.println("Generating " + target.name());
-                System.out.println("*******************************");
+                banner("Generating " + target.name());
 
                 IArchiveGenerator generator = archiveGeneratorFactory(target, numChunks);
 
@@ -220,10 +237,8 @@ public class GenerateAll {
                 // Give the generator the opportunity to map titles to disk images
                 generator.allocateDisks(targetItems);
 
-                System.out.println(" menu files version " + version);
-
                 // Recalculate sizes of each chunks
-                Map<String, Integer> chunkStats = calculateChunkStats(targetItems);
+                Map<String, Integer> chunkStats = calculateChunkStats(targetItems, target.name() + " stats");
 
                 IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunkStats, target);
                 splashGen.generateFiles(null);

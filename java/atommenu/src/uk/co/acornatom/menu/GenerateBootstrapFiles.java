@@ -66,7 +66,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
         item.getLoadables().clear();
         for (int i = 0; i < cmds.length; i++) {
             String cmd = cmds[i].trim();
-            System.out.println(">>" + cmd + "<<");
+            // System.out.println(">>" + cmd + "<<");
             if (cmd.equals("RUN")) {
                 bos.write((byte) CMD_UPDATE_TOP_AND_RUN);
             } else if (cmd.startsWith("CH.")) {
