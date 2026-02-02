@@ -4,7 +4,7 @@ Index,Updated,ShortPub,Publisher,Chunk,Title,Genre,Author (if known),Directory,B
 *RUN ADV1D",Works,"ADV1P
 ADV1D",present,,,,
 3,V1,A&F,A&F S/W,A.Commercial Software,Early Warning,Game,,AF,8200,"CH.""EARLYWAR""",Works,EARLYWAR,present,,,,
-4,V1,A&F,A&F S/W,A.Commercial Software,Painter (16K),Game,,AF,8200,*RUN PAINTER,Works,PAINTER,present,,Yes*,,
+4,V14B1,A&F,A&F S/W,A.Commercial Software,Painter,Game,,AF,8200,*RUN PAINTER,Test,PAINTER,present,,,,
 5,V1,A&F,A&F S/W,A.Commercial Software,Polecat,Game,,AF,8200,"CH.""POLECAT""",Works,POLECAT,present,,,,
 6,V1,A&F,A&F S/W,A.Commercial Software,Space Panic (16K),Game,,AF,8200,*RUN PANIC,Works,PANIC,present,,Yes*,,
 7,,A&F,A&F S/W,A.Commercial Software,Starburst,Game,,AF,,,,,missing,,,,
@@ -1581,7 +1581,7 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 823,V8B3,NC,Non Comm,D.Non Commercial Software,Navigator (R) (JS),Game,,JS/WIM,8200,"CH.""NAVIGAT""",Works,NAVIGAT,present,"Joystick
 Joystick Kbd",,,
-824,V8B3,A&F,A&F S/W,A.Commercial Software,Painter (JS),Game,,JS/WIM,8200,"CH.""PAINTER""",Works,PAINTER,present,"Joystick
+824,V14B1,A&F,A&F S/W,A.Commercial Software,Painter (JS),Game,,JS/DAVE,8200,*RUN PAINTER,Test,PAINTER,present,"Joystick
 Joystick Kbd",,,
 825,V8B3,MM,Micro Mania,A.Commercial Software,Puckman (JS),Game,,JS/WIM,8200,"CH.""PUCKMA""",Works,PUCKMA,present,"Joystick
 Joystick Kbd",,,

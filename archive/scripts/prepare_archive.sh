@@ -466,7 +466,6 @@ package "atms/Leendert/CYLONATT" "$ARCHIVE/$AF"
 package "atms/Leendert/EARLYWAR" "$ARCHIVE/$AF"
 package "atms/Leendert/TORPEDOR" "$ARCHIVE/$AF"
 package "atms/Acl1-11/PANIC" "$ARCHIVE/$AF"
-package "atms/Acl1-11/PAINTER" "$ARCHIVE/$AF"
 package "atms/Acl1-11/POLECAT" "$ARCHIVE/$AF"
 
 # Now getting these from DAVE
