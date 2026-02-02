@@ -203,7 +203,8 @@ ENDIF
 .MenuMain
 IF (BannerScroll = 1)
 	JSR &FE66
-	LDY #&07
+	LDX #8		; Scroll window starts on line 8
+	LDY #52	   	; Scroll window is 52 line high block
 	JSR Scroll
 	JSR ScanKeyboard
 	BCS MenuMain
@@ -403,31 +404,45 @@ ENDIF
 
 IF (BannerScroll = 1)
 
+; X = start line
+; Y = number of lines
+
 .Scroll
 {
-	LDX #&00
-	LDA #&81
+	TXA		; bits 7..3 indicate the PAGE
+	LSR A		; ADD to
+	LSR A
+	LSR A
+	CLC
+	ADC #>ScreenStart
 	STA loop2+2
+	TXA		; bits 2..0 are the line
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	TAX
 .loop1
 	LDA loop2+2
 FOR I, 0, 29
     	STA unroll + I * 3 + 2
 NEXT
 .loop2
-	LDA &8001, X
+	LDA ScreenStart + &01, X
 	ROL A
 .unroll
 FOR I, 0, 29
-	ROL &801E - I, X
+	ROL ScreenStart + &1E - I, X
 NEXT
+	DEY
+	BEQ exit
 	TXA
 	CLC
 	ADC #&20
 	TAX
 	BNE loop2
 	INC loop2+2
-	DEY
-	BEQ exit
 	JMP loop1
 .exit
 	RTS
