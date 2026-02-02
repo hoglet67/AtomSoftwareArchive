@@ -2,6 +2,8 @@ package uk.co.acornatom.menu;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -11,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import uk.co.acornatom.menu.IFileGenerator.Target;
 
@@ -46,37 +51,58 @@ public class GenerateAll {
         GenerateBase.banner(message);
     }
 
+    // list all files from this path
+    public static Set<Path> listFiles(Path path) throws IOException {
+        Set<Path> result;
+        try (Stream<Path> walk = Files.walk(path)) {
+            result = walk.filter(Files::isRegularFile)
+                    .collect(Collectors.toSet());
+        }
+        return result;
+    }
+
     // Check all files needed for each title are present
     private void checkFiles(List<SpreadsheetTitle> items) {
-        banner("Checking the files of each title exist");
-        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
-        while (itemIterator.hasNext()) {
-            SpreadsheetTitle item  = itemIterator.next();
-            int numSectors = 1; // For boot file
-            boolean ok = true;
-            for (String filename : item.getFilenames()) {
-                File file = new File(new File(archiveDir, item.getDir()), filename);
-                if (!file.exists()) {
-                    System.out.println("WARNING: Missing file: " + file);
-                    ok = false;
-                } else if (!file.isFile()) {
-                    System.out.println("WARNING: Not a file: " + file);
-                    ok = false;
-                } else if (!file.canRead()) {
-                    System.out.println("WARNING: Unreadable file: " + file);
-                    ok = false;
+        try {
+            banner("Checking the files of each title exist");
+            Set<Path> paths = new TreeSet<Path>();
+            paths.addAll(listFiles(archiveDir.toPath()));
+            Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+            while (itemIterator.hasNext()) {
+                SpreadsheetTitle item  = itemIterator.next();
+                int numSectors = 1; // For boot file
+                boolean ok = true;
+                for (String filename : item.getFilenames()) {
+                    File file = new File(new File(archiveDir, item.getDir()), filename);
+                    if (!file.exists()) {
+                        System.out.println("WARNING: Missing file: " + file);
+                        ok = false;
+                    } else if (!file.isFile()) {
+                        System.out.println("WARNING: Not a file: " + file);
+                        ok = false;
+                    } else if (!file.canRead()) {
+                        System.out.println("WARNING: Unreadable file: " + file);
+                        ok = false;
+                    } else {
+                        // Assume the file is an ATM file, so subtract the 22 byte header,
+                        // then round up to sectors
+                        numSectors += ((file.length() - 22) + 0xFF) >> 8;
+                        paths.remove(file.toPath());
+                    }
+                }
+                if (ok) {
+                    item.setEstimatedDiskSectors(numSectors);
                 } else {
-                    // Assume the file is an ATM file, so subtract the 22 byte header,
-                    // then round up to sectors
-                    numSectors += ((file.length() - 22) + 0xFF) >> 8;
+                    System.out.println("WARNING: Dropping title from all builds because it's incomplete: " + item);
+                    itemIterator.remove();
                 }
             }
-            if (ok) {
-                item.setEstimatedDiskSectors(numSectors);
-            } else {
-                System.out.println("WARNING: Dropping title from all builds because it's incomplete: " + item);
-                itemIterator.remove();
+            banner("Checking the for unreferenced files");
+            for (Path path : paths) {
+                System.out.println(path.toString().substring(archiveDir.getPath().toString().length() + 1));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     // Check 12K compatibility
