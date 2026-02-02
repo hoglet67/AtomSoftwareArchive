@@ -3,7 +3,7 @@
 
 	Base =? $2800
 
-	BannerScroll =? 0
+	BannerScroll =? 1
 
 include "sysvars.asm"
 
@@ -78,6 +78,16 @@ ChapterLineWidth = 12	; Y pixels between adjacent text lines
 	EQUB 12
 	EQUS "THE ATOM SOFTWARE ARCHIVE NEEDS "
 	EQUS "A MINIMUM OF 12K OF RAM TO RUN! "
+	EQUB 0
+
+.StrikeLenTable
+	EQUB 13
+	EQUB 19
+	EQUB 23
+	EQUB 17
+	EQUB 22
+	EQUB 15
+	EQUB 13
 	EQUB 0
 
 .MeetsMinimum
@@ -190,26 +200,16 @@ ENDIF
 	DEX
 	BPL StrikeLoop1
 
-.StrikeLenTable
-	EQUB 13
-	EQUB 19
-	EQUB 23
-	EQUB 17
-	EQUB 22
-	EQUB 15
-	EQUB 13
-	EQUB 0
-
 .MenuMain
 IF (BannerScroll = 1)
 	JSR &FE66
 	LDY #&07
 	JSR Scroll
-	JSR &FE71
-	CPY #&FF
-	BEQ MenuMain
-ENDIF
+	JSR ScanKeyboard
+	BCS MenuMain
+ELSE
 	JSR Osrdch
+ENDIF
 	CMP #&1B
 	BEQ MenuExit
 
@@ -402,6 +402,7 @@ ENDIF
 	RTS
 
 IF (BannerScroll = 1)
+
 .Scroll
 {
 	LDX #&00
@@ -431,6 +432,19 @@ NEXT
 .exit
 	RTS
 }
+.ScanKeyboard
+{
+	JSR &FE71
+	BCS return
+	JSR convert
+	CLC
+.return
+	RTS
+.convert
+	PHP
+	JMP &FEB1
+}
+
 ENDIF
 
 include "common.asm"

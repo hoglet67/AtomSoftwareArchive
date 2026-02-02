@@ -30,7 +30,7 @@ $BEEBASM -i boot.asm -o $ARCHIVE/BOOTROMGOSDC.bin -D rom=1 -D gosdc=1
 cp splash/HELP.ATM $ARCHIVE/HELP
 
 # Compile the Splash Menu (for AtomMMC)
-$BEEBASM -i menu.asm -o $ARCHIVE/../MENU -D atommc=1
+$BEEBASM -i menu.asm -o $ARCHIVE/../MENU -D atommc=1 -v > menu.log
 
 # Compile the Splash Menu (for SDDOS2)
 $BEEBASM -i menu.asm -o $ARCHIVE/MENUSDDOS2 -D sddos2=1
