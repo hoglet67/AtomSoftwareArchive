@@ -1519,8 +1519,10 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 792,V8B3,AS,Acornsoft,A.Commercial Software,Amoeba (JS),Game,,JS/DAVE,8200,"CH.""AMOEBA""",Works,AMOEBA,present,"Joystick
 Joystick Kbd",,,
-793,V8,HS,Hopesoft,A.Commercial Software,Atom Man (16K) (JS),Game,,JS/DAVE,8200,*RUN AMAN,Works,AMAN,present,"Joystick
-Joystick Kbd",Yes*,,
+793,V14B1,HS,Hopesoft,A.Commercial Software,Atom Man (JS),Game,,JS/DAVE,8200,"*LOAD AMAN
+*RUN AMANRUN",Test,"AMAN
+AMANRUN",present,"Joystick
+Joystick Kbd",,,
 794,V8B3,PP,Prog Power,A.Commercial Software,Astrobirds (JS),Game,,JS/KEES,8200,*RUN ASTROBI,Works,ASTROBI,present,"Joystick
 Joystick Kbd",,,
 795,V8B3,AS,Acornsoft,A.Commercial Software,Babies (JS),Game,,JS/KEES,8200,"CH.""BABIES""",Works,BABIES,present,"Joystick
