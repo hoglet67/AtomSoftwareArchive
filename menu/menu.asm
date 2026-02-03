@@ -1,5 +1,3 @@
-; TODO - Make RAM Test None-Destructive (!!!!!)
-
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
@@ -72,12 +70,12 @@ ScrollWindowHeight = 20
 .Menu
 	; Minimum checks for a 12K Atom
 	LDX #>TextBuffer        ; Test 3000 to 3BFF
-	LDY #&3B+1
+	LDY #&3B
 	JSR MemTest
 	BCS Bail
 
 	LDX #&80                ; Test 8000 to 97FF
-	LDY #&97+1
+	LDY #&97
 	JSR MemTest
 	BCC MeetsMinimum
 
@@ -123,22 +121,22 @@ ScrollWindowHeight = 20
 	STA HiMemBot
 
 	LDX #&80                ; Test 8000 to AFFF
-	LDY #&AF+1
+	LDY #&AF
 	JSR MemTest
 	STA HiMemTop
 
 	LDX #>TextBuffer        ; Test 3000 to 7FFF
-	LDY #&7F+1
+	LDY #&7F
 	JSR MemTest
 	STA LoMemTop
 
 	LDX #&27                ; Test 27FF downto 2200
-	LDY #&22-1
+	LDY #&22
 	JSR MemTest
 	STA LoMemBot
 	BCS SkipVeryLowRam
-	LDX #&1F                ; Test 1FFF downto 0300
-	LDY #&03-1
+	LDX #&1F                ; Test 1FFF downto 0000
+	LDY #&00
 	JSR MemTest
 	STA LoMemBot
 
@@ -166,7 +164,7 @@ ENDIF
 	; The AGD chapter needs Main RAM down to 0300
 	LDA #LoMemBot
 	CMP #&03
-	BCS EnableAGDChapter
+	BCC EnableAGDChapter
 
 .DisableAGDChapter
 	LDA KeyFlag
@@ -434,14 +432,25 @@ ENDIF
 .SetDir
 	STA Dir
 
-	; Y never changes
-	LDY #0
-	STY TmpPtr
+	; "Increment" the end page so it's the first page not to test
+	CLC
+	ADC EndPage
+	STA EndPage
 
-; write the first byte of page with the page number EOR 255
-	STX TmpPtr + 1
+	; Y never changes; the last byte of each page
+	LDY #&FF
+
+  	TXA			; Save the start page
+	PHA
+
+; First pass writes the value read EOR &FF
+  	STA TmpPtr + 1
+	LDX #0
+	STX TmpPtr
 .WrLoop
-	LDA TmpPtr + 1
+	LDA (TmpPtr),Y
+	STA TextBuffer, X	; Save original values in TextBuffer
+	INX
 	EOR #$FF
 	STA (TmpPtr),Y
 	LDA TmpPtr + 1
@@ -451,14 +460,20 @@ ENDIF
 	CMP EndPage
 	BNE WrLoop
 
-; test the first byte of page with the page number EOR 255
-	STX TmpPtr + 1
+	PLA			; Restore the start page
+
+; Second pass reads back the value, checks it, then restores the original
+	STA TmpPtr + 1
+	LDX #0
 .RdLoop
-	LDA TmpPtr + 1
-	EOR #$FF
+	LDA TextBuffer, X
+	INX
+	EOR #&FF
 	CMP (TmpPtr),Y
 	BNE Fail
-	LDA TmpPtr + 1
+	EOR #&FF
+	STA (TmpPtr),Y	; restore the original value
+ 	LDA TmpPtr + 1
 	CLC
 	ADC Dir
 	STA TmpPtr + 1
@@ -466,13 +481,29 @@ ENDIF
 	BNE RdLoop
 	SEC
 	SBC Dir
-	CLC
+	CLC		; C = 0 indicates success, with A being last good page
 	RTS
+
 .Fail
-	LDA TmpPtr + 1
+	LDA TmpPtr + 1	; Save the page where there first fail happened
+	PHA
+
+; Third pass restores the remaing values after a failure
+
+.RestoreLoop
+	LDA TextBuffer, X
+	INX
+	STA (TmpPtr),Y	; restore the original value
+ 	LDA TmpPtr + 1
+	CLC
+	ADC Dir
+	STA TmpPtr + 1
+	CMP EndPage
+	BNE RestoreLoop
+	PLA		; Result the
 	SEC
 	SBC Dir
-	SEC
+	SEC		; C = 1 indicates failure, with A being last good page
 	RTS
 }
 
