@@ -9,16 +9,23 @@ include "sysvars.asm"
 
 ; Some local variables
 
-EndPage = TmpPtr + 2
-KeyFlag = TmpPtr + 3
+EndPage  = TmpPtr + 2
+KeyFlag  = TmpPtr + 3
+NumLines = TmpPtr + 4
+Cycle    = TmpPtr + 5
+TxtPtr   = TmpPtr + 7
+FontPtr  = TmpPtr + 9
 
-MinChapter = 0		; A
-MaxChapter = 6		; G
-AGDChapter = 2		; C
-ALLChapter = 6		; G
+MinChapter = 0			; A
+MaxChapter = 6			; G
+AGDChapter = 2			; C
+ALLChapter = 6			; G
 
-ChapterLineStart = 70	; Y pixel row to strike in Chapter A
-ChapterLineWidth = 12	; Y pixels between adjacent text lines
+ChapterLineStart = 70		; Y pixel row to strike in Chapter A
+ChapterLineWidth = 12		; Y pixels between adjacent text lines
+
+ScrollWindowStart  = 150	; for now needs to be a multiple of 8
+ScrollWindowHeight = 24
 
 	org Base - 22
 
@@ -53,7 +60,7 @@ ChapterLineWidth = 12	; Y pixels between adjacent text lines
 
 .Menu
 	; Minimum checks for a 12K Atom
-	LDX #&2C                ; Test 2C00-3BFF
+	LDX #>TextBuffer        ; Test 2C00-3BFF
 	LDY #&3B+1
 	JSR MemTest
 	BCS Bail
@@ -154,8 +161,6 @@ ENDIF
 	EQUS "NOMON", Return
 ENDIF
 
-.MenuSplash
-
 	; 20 CLEAR 4
 	LDY #4
 	JSR Clear
@@ -200,11 +205,18 @@ ENDIF
 	DEX
 	BPL StrikeLoop1
 
+IF (BannerScroll = 1)
+	LDA #0
+	STA Cycle
+	STA Cycle+1
+	JSR PrintRamTest
+ENDIF
+
 .MenuMain
 IF (BannerScroll = 1)
 	JSR &FE66
-	LDX #8		; Scroll window starts on line 8
-	LDY #52	   	; Scroll window is 52 line high block
+	LDX #ScrollWindowStart
+	LDY #ScrollWindowHeight
 	JSR Scroll
 	JSR ScanKeyboard
 	BCS MenuMain
@@ -402,6 +414,8 @@ ENDIF
 	SEC
 	RTS
 
+include "common.asm"
+
 IF (BannerScroll = 1)
 
 ; X = start line
@@ -409,13 +423,24 @@ IF (BannerScroll = 1)
 
 .Scroll
 {
+	STY NumLines	;
+	LDA Cycle+1
+	AND #&01
+	BNE active
+	JMP exit
+.active
+	LDA Cycle
+	LSR A
+	LSR A
+	LSR A
+	TAY
 	TXA		; bits 7..3 indicate the PAGE
 	LSR A		; ADD to
 	LSR A
 	LSR A
 	CLC
 	ADC #>ScreenStart
-	STA loop2+2
+	STA unroll+2
 	TXA		; bits 2..0 are the line
 	ASL A
 	ASL A
@@ -423,30 +448,54 @@ IF (BannerScroll = 1)
 	ASL A
 	ASL A
 	TAX
+	LDA #<TextBuffer
+	STA TmpPtr
+	LDA #>TextBuffer
+	STA TmpPtr+1
 .loop1
-	LDA loop2+2
-FOR I, 0, 29
+	LDA unroll + 2
+FOR I, 1, 29
     	STA unroll + I * 3 + 2
 NEXT
 .loop2
-	LDA ScreenStart + &01, X
+	LDA (TmpPtr),Y
 	ROL A
 .unroll
 FOR I, 0, 29
 	ROL ScreenStart + &1E - I, X
 NEXT
-	DEY
+	LDA (TmpPtr),Y
+	ROL A
+	STA (TmpPtr),Y
+	DEC NumLines
 	BEQ exit
 	TXA
 	CLC
 	ADC #&20
 	TAX
-	BNE loop2
-	INC loop2+2
+	BNE next
+	INC unroll + 2
+.next
+	LDA TmpPtr
+	CLC
+	ADC #&20
+	STA TmpPtr
+	LDA TmpPtr + 1
+	ADC #&00
+	STA TmpPtr + 1
 	JMP loop1
 .exit
+	INC Cycle
+	LDA Cycle
+	CMP #30*8
+	BNE exit2
+	LDA #0
+	STA Cycle
+	INC Cycle+1
+.exit2
 	RTS
 }
+
 .ScanKeyboard
 {
 	JSR &FE71
@@ -460,10 +509,265 @@ NEXT
 	JMP &FEB1
 }
 
+
+.PrintRamTest
+{
+	JSR ClearTextBuffer
+
+	LDX #&00
+.loop
+	LDA RamTestString, X
+	BEQ exit
+	JSR TextPrintChar
+	INX
+	BNE loop
+.exit
+	RTS
+
+.RamTestString
+	EQUS "Lower Text RAM: 0000-0000       "
+	EQUS "Upper Text RAM: 0000-0000       "
+	EQUB 0
+}
+
+.ClearTextBuffer
+{
+	JSR HomeTxtPtr
+
+	LDX #ScrollWindowHeight
+.loop1
+	LDY #&1F
+	LDA #&FF
+.loop2
+	STA (TxtPtr),Y
+	DEY
+	BPL loop2
+	LDA TxtPtr
+	CLC
+	ADC #&20
+	STA TxtPtr
+	LDA TxtPtr + 1
+	ADC #&00
+	STA TxtPtr + 1
+	DEX
+	BNE loop1
+}
+
+.HomeTxtPtr
+{
+	LDA #<TextBuffer
+	STA TxtPtr
+	LDA #>TextBuffer
+	STA TxtPtr+1
+	RTS
+}
+
+
+.AddTmpPtrToFontPtr
+	LDA FontPtr	; FontPrtr += TmpPtr
+	CLC
+	ADC TmpPtr
+	STA FontPtr
+	LDA FontPtr+1
+	ADC TmpPtr+1
+	STA FontPtr+1
+	RTS
+
+.TextPrintChar
+{
+	PHA
+	TXA
+	PHA
+	TYA
+	PHA
+
+	; FontPtr = FontData + ((A-32) & 127)*12
+
+	LDA #<FontData
+	STA FontPtr
+	LDA #>FontData
+	STA FontPtr+1
+
+	LDA #0
+	STA TmpPtr+1
+
+	TSX
+	LDA &103, X
+
+	SEC
+	SBC #&20
+	AND #&7F
+
+	ASL A
+	ROL TmpPtr+1
+	ASL A
+	ROL TmpPtr+1
+	STA TmpPtr
+
+	JSR AddTmpPtrToFontPtr
+
+	ASL TmpPtr
+	ROL TmpPtr+1
+
+	JSR AddTmpPtrToFontPtr
+
+	LDA TxtPtr
+	PHA
+	LDA TxtPtr+1
+	PHA
+
+	LDX #0
+	LDY #0
+.loop
+	LDA (FontPtr), Y
+	EOR #&FF
+	STA (TxtPtr, X)
+	LDA TxtPtr
+	CLC
+	ADC #&20
+	STA TxtPtr
+	LDA TxtPtr + 1
+	ADC #&00
+	STA TxtPtr + 1
+	INY
+	CPY #12
+	BNE loop
+
+	LDA TxtPtr
+	AND #&1F
+	CMP #&1F
+	BEQ endofline
+
+	PLA
+	STA TxtPtr+1
+	PLA
+	CLC
+	ADC #1
+	STA TxtPtr
+	JMP exit
+
+.endofline
+	PLA
+	PLA
+	LDA TxtPtr
+	AND #&E0
+	STA TxtPtr
+
+.exit
+	PLA
+	TAY
+	PLA
+	TAX
+	PLA
+	RTS
+}
+
+
+.FontData
+	EQUB &00, &00, &00, &00, &00, &00, &00, &00, &00, &00, &00, &00		; &20
+	EQUB &00, &00, &00, &08, &08, &08, &08, &08, &00, &08, &00, &00
+	EQUB &00, &00, &00, &14, &14, &00, &00, &00, &00, &00, &00, &00
+	EQUB &00, &00, &00, &14, &14, &3E, &14, &3E, &14, &14, &00, &00
+	EQUB &00, &00, &00, &08, &1E, &20, &1C, &02, &3C, &08, &00, &00
+	EQUB &00, &00, &00, &32, &32, &04, &08, &10, &26, &26, &00, &00
+	EQUB &00, &00, &00, &10, &28, &28, &10, &2A, &24, &1A, &00, &00
+	EQUB &00, &00, &00, &0C, &0C, &0C, &00, &00, &00, &00, &00, &00
+	EQUB &00, &00, &00, &04, &08, &10, &10, &10, &08, &04, &00, &00
+	EQUB &00, &00, &00, &10, &08, &04, &04, &04, &08, &10, &00, &00
+	EQUB &00, &00, &00, &00, &08, &2A, &1C, &2A, &08, &00, &00, &00
+	EQUB &00, &00, &00, &00, &08, &08, &3E, &08, &08, &00, &00, &00
+	EQUB &00, &00, &00, &00, &00, &00, &0C, &0C, &04, &08, &00, &00
+	EQUB &00, &00, &00, &00, &00, &00, &3E, &00, &00, &00, &00, &00
+	EQUB &00, &00, &00, &00, &00, &00, &00, &00, &0C, &0C, &00, &00
+	EQUB &00, &00, &00, &02, &02, &04, &08, &10, &20, &20, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &26, &2A, &32, &22, &1C, &00, &00		; &30
+	EQUB &00, &00, &00, &08, &18, &08, &08, &08, &08, &1C, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &02, &1C, &20, &20, &3E, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &02, &0C, &02, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &04, &0C, &14, &3E, &04, &04, &04, &00, &00
+	EQUB &00, &00, &00, &3E, &20, &3C, &02, &02, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &1C, &20, &20, &3C, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &3E, &02, &04, &08, &10, &20, &20, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &22, &1C, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &22, &1E, &02, &02, &1C, &00, &00
+	EQUB &00, &00, &00, &00, &0C, &0C, &00, &0C, &0C, &00, &00, &00
+	EQUB &00, &00, &00, &0C, &0C, &00, &0C, &0C, &04, &08, &00, &00
+	EQUB &00, &00, &00, &04, &08, &10, &20, &10, &08, &04, &00, &00
+	EQUB &00, &00, &00, &00, &00, &3E, &00, &3E, &00, &00, &00, &00
+	EQUB &00, &00, &00, &20, &10, &08, &04, &08, &10, &20, &00, &00
+	EQUB &00, &00, &00, &18, &24, &04, &08, &08, &00, &08, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &2E, &2A, &2E, &20, &1C, &00, &00		; &40
+	EQUB &00, &00, &00, &08, &14, &22, &22, &3E, &22, &22, &00, &00
+	EQUB &00, &00, &00, &3C, &12, &12, &1C, &12, &12, &3C, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &20, &20, &20, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &3C, &12, &12, &12, &12, &12, &3C, &00, &00
+	EQUB &00, &00, &00, &3E, &20, &20, &38, &20, &20, &3E, &00, &00
+	EQUB &00, &00, &00, &3E, &20, &20, &3C, &20, &20, &20, &00, &00
+	EQUB &00, &00, &00, &1E, &20, &20, &26, &22, &22, &1E, &00, &00
+	EQUB &00, &00, &00, &22, &22, &22, &3E, &22, &22, &22, &00, &00
+	EQUB &00, &00, &00, &1C, &08, &08, &08, &08, &08, &1C, &00, &00
+	EQUB &00, &00, &00, &02, &02, &02, &02, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &22, &24, &28, &30, &28, &24, &22, &00, &00
+	EQUB &00, &00, &00, &20, &20, &20, &20, &20, &20, &3E, &00, &00
+	EQUB &00, &00, &00, &22, &36, &2A, &2A, &22, &22, &22, &00, &00
+	EQUB &00, &00, &00, &22, &32, &2A, &26, &22, &22, &22, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &22, &22, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &3C, &22, &22, &3C, &20, &20, &20, &00, &00		; &50
+	EQUB &00, &00, &00, &1C, &22, &22, &22, &2A, &24, &1A, &00, &00
+	EQUB &00, &00, &00, &3C, &22, &22, &3C, &28, &24, &22, &00, &00
+	EQUB &00, &00, &00, &1C, &22, &10, &08, &04, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &3E, &08, &08, &08, &08, &08, &08, &00, &00
+	EQUB &00, &00, &00, &22, &22, &22, &22, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &22, &22, &22, &22, &14, &14, &08, &00, &00
+	EQUB &00, &00, &00, &22, &22, &22, &2A, &2A, &36, &22, &00, &00
+	EQUB &00, &00, &00, &22, &22, &14, &08, &14, &22, &22, &00, &00
+	EQUB &00, &00, &00, &22, &22, &14, &08, &08, &08, &08, &00, &00
+	EQUB &00, &00, &00, &3E, &02, &04, &08, &10, &20, &3E, &00, &00
+	EQUB &00, &00, &00, &1C, &10, &10, &10, &10, &10, &1C, &00, &00
+	EQUB &00, &00, &00, &20, &20, &10, &08, &04, &02, &02, &00, &00
+	EQUB &00, &00, &00, &1C, &04, &04, &04, &04, &04, &1C, &00, &00
+	EQUB &00, &00, &00, &08, &14, &22, &00, &00, &00, &00, &00, &00
+	EQUB &00, &00, &00, &00, &00, &00, &00, &00, &00, &FF, &00, &00
+	EQUB &00, &00, &00, &10, &08, &00, &00, &00, &00, &00, &00, &00		; &60
+	EQUB &00, &00, &00, &00, &00, &1C, &02, &3E, &22, &1E, &00, &00
+	EQUB &00, &00, &00, &20, &20, &3C, &22, &22, &22, &3C, &00, &00
+	EQUB &00, &00, &00, &00, &00, &1C, &20, &20, &20, &1C, &00, &00
+	EQUB &00, &00, &00, &02, &02, &0E, &12, &12, &12, &0E, &00, &00
+	EQUB &00, &00, &00, &00, &00, &1C, &22, &3E, &20, &1C, &00, &00
+	EQUB &00, &00, &00, &1C, &20, &20, &3C, &20, &20, &20, &00, &00
+	EQUB &00, &00, &00, &00, &00, &1E, &22, &22, &22, &1E, &02, &1C
+	EQUB &00, &00, &00, &20, &20, &3C, &22, &22, &22, &22, &00, &00
+	EQUB &00, &00, &00, &08, &00, &18, &08, &08, &08, &1C, &00, &00
+	EQUB &00, &00, &00, &00, &04, &00, &04, &04, &04, &04, &14, &08
+	EQUB &00, &00, &00, &20, &20, &24, &28, &30, &28, &22, &00, &00
+	EQUB &00, &00, &00, &18, &08, &08, &08, &08, &08, &1C, &00, &00
+	EQUB &00, &00, &00, &00, &00, &34, &2A, &2A, &2A, &2A, &00, &00
+	EQUB &00, &00, &00, &00, &00, &3C, &22, &22, &22, &22, &00, &00
+	EQUB &00, &00, &00, &00, &00, &1C, &22, &22, &22, &1C, &00, &00
+	EQUB &00, &00, &00, &00, &00, &3C, &22, &22, &22, &3C, &20, &20		; &70
+	EQUB &00, &00, &00, &00, &00, &1C, &22, &22, &22, &1E, &02, &02
+	EQUB &00, &00, &00, &00, &00, &2C, &32, &20, &20, &20, &00, &00
+	EQUB &00, &00, &00, &00, &00, &1C, &20, &1C, &02, &1C, &00, &00
+	EQUB &00, &00, &00, &00, &10, &38, &10, &10, &14, &08, &00, &00
+	EQUB &00, &00, &00, &00, &00, &22, &22, &22, &22, &1E, &00, &00
+	EQUB &00, &00, &00, &00, &00, &22, &22, &14, &14, &08, &00, &00
+	EQUB &00, &00, &00, &00, &00, &2A, &2A, &2A, &2A, &14, &00, &00
+	EQUB &00, &00, &00, &00, &00, &22, &14, &08, &14, &22, &00, &00
+	EQUB &00, &00, &00, &00, &00, &22, &22, &22, &22, &1E, &02, &1C
+	EQUB &00, &00, &00, &00, &00, &3E, &04, &08, &10, &3E, &00, &00
+	EQUB &00, &00, &00, &04, &08, &08, &10, &08, &08, &04, &00, &00
+	EQUB &00, &00, &00, &08, &08, &08, &08, &08, &08, &08, &00, &00
+	EQUB &00, &00, &00, &10, &08, &08, &04, &08, &08, &10, &00, &00
+	EQUB &00, &00, &00, &00, &00, &0A, &14, &00, &00, &00, &00, &00
+	EQUB &00, &00, &00, &3E, &3E, &3E, &3E, &3E, &3E, &3E, &00, &00
 ENDIF
 
-include "common.asm"
+align &100
+
+.TextBuffer
 
 .ENDOF
+
+
 
 SAVE STARTOFHEADER, ENDOF
