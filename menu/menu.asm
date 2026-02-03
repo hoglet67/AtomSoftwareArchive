@@ -582,13 +582,6 @@ NEXT
 .skip
 	DEC NumLines
 	BEQ exit
-	TXA
-	CLC
-	ADC #&20
-	TAX
-	BNE next
-	INC unroll + 2
-.next
 	LDA TmpPtr
 	CLC
 	ADC #&20
@@ -596,6 +589,14 @@ NEXT
 	LDA TmpPtr + 1
 	ADC #&00
 	STA TmpPtr + 1
+	TXA
+	CLC
+	ADC #&20
+	TAX
+	BEQ next1
+	JMP loop2
+.next1
+	INC unroll + 2
 	JMP loop1
 .exit
 	INC Cycle
