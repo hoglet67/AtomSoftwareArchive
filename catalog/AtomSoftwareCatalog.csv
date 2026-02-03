@@ -268,7 +268,9 @@ STARIN",present,,,Yes,
 167,V5,HS,Hopesoft,A.Commercial Software,PS1A Atom Adventure,Adventure,,HS,8200,"*LOAD ADV
 *RUN A1",Works,"ADV
 A1",present,,,,
-168,V2,HS,Hopesoft,A.Commercial Software,Atom Man (16K),Game,,HS,8200,*RUN AMAN,Works,AMAN,present,,Yes*,,
+168,V14B1,HS,Hopesoft,A.Commercial Software,Atom Man,Game,,HS,8200,"*LOAD AMAN
+*RUN AMANRUN",Test,"AMAN
+AMANRUN",present,,,,
 169,V7B1,HS,Hopesoft,A.Commercial Software,Chaser,Game,,HS,8200,"CH.""CHASER""",Works,CHASER,present,,,,
 170,,HS,Hopesoft,A.Commercial Software,Disassembler,Utility,,HS,,,,,missing,,,,
 171,V5,HS,Hopesoft,A.Commercial Software,PS3A Pirate Island,Adventure,,HS,8200,*RUN PIA,Works,"PIA
