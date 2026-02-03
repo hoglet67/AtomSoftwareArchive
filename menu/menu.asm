@@ -33,8 +33,10 @@ LinePitch        = 10		; pixel spacing of text lines
 ChapterLineStart = 70		; Y pixel row to strike in Chapter A
 ChapterLineWidth = 12		; Y pixels between adjacent text lines
 
-ScrollWindowStart  = 154
-ScrollWindowHeight = 20
+TopWindowStart     = 10
+TopWindowHeight    = 52
+BottomWindowStart  = 154
+BottomWindowHeight = 20
 
 	org Base - 22
 
@@ -252,8 +254,6 @@ ENDIF
 .MenuMain
 IF (BannerScroll = 1)
 	JSR &FE66
-	LDX #ScrollWindowStart
-	LDY #ScrollWindowHeight
 	JSR Scroll
 	JSR ScanKeyboard
 	BCS MenuMain
@@ -511,24 +511,44 @@ include "common.asm"
 
 IF (BannerScroll = 1)
 
-; X = start line
-; Y = number of lines
-
 .Scroll
 {
-	STY NumLines	;
-	LDA Cycle+1
-	AND #&01
-	BNE active
+	LDA Cycle + 1
+	ROR A
+	BCS active
 	JMP exit
 .active
+	ROR A
+	BCC scroll_bottom
+
+.scroll_top
+	LDX #TopWindowStart
+	LDA #TopWindowHeight
+	STA NumLines
+	LDA #<(ScreenStart + 32 * TopWindowStart)
+	STA TmpPtr
+	LDA #>(ScreenStart + 32 * TopWindowStart)
+	STA TmpPtr+1
+	LDY #1		; Fixing Y wraps the visible part back onto itself
+	BNE window_calculated
+
+.scroll_bottom
+	LDX #BottomWindowStart
+	LDA #BottomWindowHeight
+	STA NumLines
+	LDA #<TextBuffer
+	STA TmpPtr
+	LDA #>TextBuffer
+	STA TmpPtr+1
 	LDA Cycle
 	LSR A
 	LSR A
 	LSR A
 	TAY
+
+.window_calculated
 	TXA		; bits 7..3 indicate the PAGE
-	LSR A		; ADD to
+	LSR A
 	LSR A
 	LSR A
 	CLC
@@ -541,10 +561,6 @@ IF (BannerScroll = 1)
 	ASL A
 	ASL A
 	TAX
-	LDA #<TextBuffer
-	STA TmpPtr
-	LDA #>TextBuffer
-	STA TmpPtr+1
 .loop1
 	LDA unroll + 2
 FOR I, 1, 29
@@ -557,9 +573,13 @@ NEXT
 FOR I, 0, 29
 	ROL ScreenStart + &1E - I, X
 NEXT
+	LDA Cycle + 1
+	AND #&02
+	BNE skip
 	LDA (TmpPtr),Y
 	ROL A
 	STA (TmpPtr),Y
+.skip
 	DEC NumLines
 	BEQ exit
 	TXA
@@ -584,7 +604,7 @@ NEXT
 	BNE exit2
 	LDA #0
 	STA Cycle
-	INC Cycle+1
+	INC Cycle + 1
 .exit2
 	RTS
 }
@@ -642,7 +662,7 @@ NEXT
 {
 	JSR HomeTxtPtr
 
-	LDX #ScrollWindowHeight
+	LDX #BottomWindowHeight
 .loop1
 	LDY #&1F
 	LDA #&FF
