@@ -1,3 +1,5 @@
+; TODO - Make RAM Test None-Destructive (!!!!!)
+
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
@@ -10,16 +12,25 @@ include "sysvars.asm"
 ; Some local variables
 
 EndPage  = TmpPtr + 2
-KeyFlag  = TmpPtr + 3
-NumLines = TmpPtr + 4
-Cycle    = TmpPtr + 5
-TxtPtr   = TmpPtr + 7
-FontPtr  = TmpPtr + 9
+Dir      = TmpPtr + 3
+KeyFlag  = TmpPtr + 4
+NumLines = TmpPtr + 5
+Cycle    = TmpPtr + 6
+TxtPtr   = TmpPtr + 8
+FontPtr  = TmpPtr + 10
+
+LoMemBot = TmpPtr + 12
+LoMemTop = TmpPtr + 13
+HiMemBot = TmpPtr + 14
+HiMemTop = TmpPtr + 15
 
 MinChapter = 0			; A
 MaxChapter = 6			; G
 AGDChapter = 2			; C
 ALLChapter = 6			; G
+
+FontHeight       = 9		; height of font
+LinePitch        = 10		; pixel spacing of text lines
 
 ChapterLineStart = 70		; Y pixel row to strike in Chapter A
 ChapterLineWidth = 12		; Y pixels between adjacent text lines
@@ -60,12 +71,12 @@ ScrollWindowHeight = 20
 
 .Menu
 	; Minimum checks for a 12K Atom
-	LDX #>TextBuffer        ; Test 2C00-3BFF
+	LDX #>TextBuffer        ; Test 3000 to 3BFF
 	LDY #&3B+1
 	JSR MemTest
 	BCS Bail
 
-	LDX #&80                ; Test 8000-97FF
+	LDX #&80                ; Test 8000 to 97FF
 	LDY #&97+1
 	JSR MemTest
 	BCC MeetsMinimum
@@ -108,43 +119,78 @@ ScrollWindowHeight = 20
 	LDA #0			; All chapters enabled
 	STA KeyFlag
 
-	LDX #&10                ; Test 1000-1FFF
-	LDY #&1F+1
-	JSR MemTest
-	BCS DisableAllChapter
+	LDA #&80		; Assume the screen is present
+	STA HiMemBot
 
-	LDX #&22                ; Test 2200-27FF
-	LDY #&27+1
+	LDX #&80                ; Test 8000 to AFFF
+	LDY #&AF+1
 	JSR MemTest
-	BCS DisableAllChapter
+	STA HiMemTop
 
-	LDX #&3C                ; Test 7C00-7FFF
+	LDX #>TextBuffer        ; Test 3000 to 7FFF
 	LDY #&7F+1
 	JSR MemTest
-	BCS DisableAllChapter
+	STA LoMemTop
 
-	; Enough memory for ALL chapter, now test for AGD
-
-	LDX #&03                ; Test 0300-0FFF
-	LDY #&0F+1
+	LDX #&27                ; Test 27FF downto 2200
+	LDY #&22-1
 	JSR MemTest
-	BCS DisableAGDChapter
-
-	LDX #&98                ; Test 9800-9FFF
-	LDY #&9F+1
+	STA LoMemBot
+	BCS SkipVeryLowRam
+	LDX #&1F                ; Test 1FFF downto 0300
+	LDY #&03-1
 	JSR MemTest
-	BCC ChecksDone
+	STA LoMemBot
+
+.SkipVeryLowRam
+
+	; Render the test results text panel
+
+IF (BannerScroll = 1)
+	LDA #0
+	STA Cycle
+	STA Cycle+1
+	JSR PrintRamTest
+ENDIF
+
+	; The AGD chapter needs Video RAM up to 9FFF
+	LDA HiMemTop
+	CMP #&9F
+	BCC DisableAGDChapter
+
+	; The AGD chapter needs Main RAM up to 7FFF
+	LDA LoMemTop
+	CMP #&7F
+	BCC DisableAGDChapter
+
+	; The AGD chapter needs Main RAM down to 0300
+	LDA #LoMemBot
+	CMP #&03
+	BCS EnableAGDChapter
 
 .DisableAGDChapter
-	LDA #(1<<AGDChapter)
-	STA KeyFlag             ; Disable AGD chapter
-	BNE ChecksDone
-
-.DisableAllChapter
-	LDA #(1<<AGDChapter + 1<<ALLChapter)
+	LDA KeyFlag
+	ORA #(1<<AGDChapter)
 	STA KeyFlag
 
-.ChecksDone
+.EnableAGDChapter
+
+	; The ALL chapter needs Main RAM up to 7FFF
+	LDA LoMemTop
+	CMP #&7F
+	BCC DisableALLChapter
+
+	; The All chapter needs Main RAM down to 1000
+	LDA #LoMemBot
+	CMP #&10
+	BCS EnableALLChapter
+
+.DisableALLChapter
+	LDA KeyFlag
+	ORA #(1<<ALLChapter)
+	STA KeyFlag
+
+.EnableALLChapter
 
 IF (econet = 1 OR gosdc = 1)
 	JSR OscliString
@@ -204,13 +250,6 @@ ENDIF
 	STA TmpPtr + 1
 	DEX
 	BPL StrikeLoop1
-
-IF (BannerScroll = 1)
-	LDA #0
-	STA Cycle
-	STA Cycle+1
-	JSR PrintRamTest
-ENDIF
 
 .MenuMain
 IF (BannerScroll = 1)
@@ -375,9 +414,25 @@ ENDIF
 
 ; X = Start Page
 ; Y = End Page + 1
+;
+; On exit:
+;     If test passes, C = 0
+;     If test fails,  C = 1
+;     In both cases, A = the last good page
+
+; Exits with A = End P
 
 .MemTest
+{
 	STY EndPage
+
+	; If X (Start> < Y (End) then Dir=1 else Dir=-1
+	LDA #1
+	CPX EndPage
+	BCC SetDir
+	LDA #&FF	; Test backwards
+.SetDir
+	STA Dir
 
 	; Y never changes
 	LDY #0
@@ -385,34 +440,41 @@ ENDIF
 
 ; write the first byte of page with the page number EOR 255
 	STX TmpPtr + 1
-.MemWrLoop
+.WrLoop
 	LDA TmpPtr + 1
 	EOR #$FF
 	STA (TmpPtr),Y
-	INC TmpPtr + 1
 	LDA TmpPtr + 1
+	CLC
+	ADC Dir
+	STA TmpPtr + 1
 	CMP EndPage
-	BNE MemWrLoop
+	BNE WrLoop
 
 ; test the first byte of page with the page number EOR 255
 	STX TmpPtr + 1
-.MemRdLoop
+.RdLoop
 	LDA TmpPtr + 1
 	EOR #$FF
 	CMP (TmpPtr),Y
-	BNE MemTestFail
-	INC TmpPtr + 1
+	BNE Fail
 	LDA TmpPtr + 1
+	CLC
+	ADC Dir
+	STA TmpPtr + 1
 	CMP EndPage
-	BNE MemRdLoop
-
-.MemTestDone
+	BNE RdLoop
+	SEC
+	SBC Dir
 	CLC
 	RTS
-
-.MemTestFail
+.Fail
+	LDA TmpPtr + 1
+	SEC
+	SBC Dir
 	SEC
 	RTS
+}
 
 include "common.asm"
 
@@ -515,18 +577,33 @@ NEXT
 	JSR ClearTextBuffer
 
 	LDX #&00
-.loop
-	LDA RamTestString, X
-	BEQ exit
+.loop1
+	LDA LowerRAMString, X
+	BEQ done1
 	JSR TextPrintChar
 	INX
-	BNE loop
-.exit
-	RTS
+	BNE loop1
+.done1
+	LDX #LoMemBot
+	JSR PrintBounds
 
-.RamTestString
-	EQUS "Lower Text RAM: 0000-0000       "
-	EQUS "Upper Text RAM: 0000-0000       "
+	LDX #&00
+.loop2
+	LDA UpperRAMString, X
+	BEQ done2
+	JSR TextPrintChar
+	INX
+	BNE loop2
+.done2
+	LDX #HiMemBot
+	JMP PrintBounds
+
+.LowerRAMString
+	EQUS "Lower Text RAM: "
+	EQUB 0
+
+.UpperRAMString
+	EQUS "Upper Text RAM: "
 	EQUB 0
 }
 
@@ -562,6 +639,47 @@ NEXT
 	RTS
 }
 
+; Print memory bounds
+; A = ZP locations
+.PrintBounds
+{
+	LDA 0, X
+	JSR TextPrintHex2
+	LDA #&00
+	JSR TextPrintHex2
+	LDA #'-'
+	JSR TextPrintChar
+	LDA 1, X
+	JSR TextPrintHex2
+	LDA #&FF
+	JSR TextPrintHex2
+	LDA #&0D
+	JMP TextPrintChar
+}
+
+.TextPrintHex2
+{
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR TextPrintHex1
+	PLA
+	; fall through to
+}
+
+.TextPrintHex1
+{
+	AND #&0F
+	CMP #&0A
+	BCC nocarry
+	ADC #&06
+.nocarry
+	ADC #'0'
+	; Fall through to
+}
+
 .TextPrintChar
 {
 	PHA
@@ -577,6 +695,20 @@ NEXT
 
 	TSX
 	LDA &103, X
+
+	; Handle carriage return
+	CMP #&0D
+	BNE not_carriage_return
+	LDA TxtPtr
+	AND #&E0
+	CLC
+	ADC #<(LinePitch * 32)
+	STA TxtPtr
+	LDA TxtPtr+1
+	ADC #>(LinePitch * 32)
+	STA TxtPtr+1
+	JMP exit
+.not_carriage_return
 
 	; Index into font table is either 0 or 1
 	LDY #0
@@ -629,13 +761,13 @@ NEXT
 	ADC #&00
 	STA TxtPtr + 1
 	INY
-	CPY #9
+	CPY #FontHeight
 	BNE loop
 
 	LDA TxtPtr
 	AND #&1F
 	CMP #&1F
-	BEQ endofline
+	BEQ wrapline
 
 	PLA
 	STA TxtPtr+1
@@ -645,16 +777,16 @@ NEXT
 	STA TxtPtr
 	JMP exit
 
-.endofline
+.wrapline
 	PLA
 	PLA
 	LDA TxtPtr
 	AND #&E0
 	CLC
-	ADC #&20
+	ADC #<((LinePitch - FontHeight) * 32)
 	STA TxtPtr
 	LDA TxtPtr+1
-	ADC #&00
+	ADC #>((LinePitch - FontHeight) * 32)
 	STA TxtPtr+1
 
 .exit
