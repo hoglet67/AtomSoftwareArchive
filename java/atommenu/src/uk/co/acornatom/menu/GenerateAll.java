@@ -110,6 +110,7 @@ public class GenerateAll {
         banner("Checking 12K Compatibility");
         for (SpreadsheetTitle item : items) {
             boolean ok = true;
+            boolean warn = true;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
                 try {
@@ -121,16 +122,17 @@ public class GenerateAll {
                               (start >= 0x2800 && end <= 0x3C00) ||
                               (start >= 0x8000 && end <= 0x9800) ||
                               (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals(IFileGenerator.ROMS_CHUNK)))) {
-                            if (item.isCompatible12K()) {
-                                if (ok) {
+                            if (item.isCompatible12K() && !atm.isGarbageSignature()) {
+                                if (warn) {
                                     System.out.println();
                                     System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: "
                                             + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle() + " "
                                             + item.getIdentifier());
                                 }
                                 System.out.println("    " + atm.toStringDetailed());
+                                warn = false; // don't output further warnings about ths title
                             }
-                            ok = false;
+                            ok = false; // title is not OK for 12K Atom
                         }
                     }
                 } catch (IOException e) {
@@ -139,6 +141,7 @@ public class GenerateAll {
             }
             // There are a very small number of these
             if (!item.isCompatible12K() && ok) {
+                System.out.println();
                 System.out.println("WARNING: Compatibility: Title probably wrongly marked as 32K: " + item.getIdentifier() + " " + item.getTitle());
             }
         }
