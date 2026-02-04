@@ -6,7 +6,7 @@ ADV1D",present,,,,
 3,V1,A&F,A&F S/W,A.Commercial Software,Early Warning,Game,,AF,8200,"CH.""EARLYWAR""",Works,EARLYWAR,present,,,,
 4,V14B1,A&F,A&F S/W,A.Commercial Software,Painter,Game,,AF,8200,*RUN PAINTER,Test,PAINTER,present,,,,
 5,V1,A&F,A&F S/W,A.Commercial Software,Polecat,Game,,AF,8200,"CH.""POLECAT""",Works,POLECAT,present,,,,
-6,V1,A&F,A&F S/W,A.Commercial Software,Space Panic (16K),Game,,AF,8200,*RUN PANIC,Works,PANIC,present,,Yes*,,
+6,V14B1,A&F,A&F S/W,A.Commercial Software,Space Panic,Game,,AF,8200,*RUN PANIC,Test,PANIC,present,,,,
 7,,A&F,A&F S/W,A.Commercial Software,Starburst,Game,,AF,,,,,missing,,,,
 8,V1,A&F,A&F S/W,A.Commercial Software,Torpedo Run,Game,,AF,8200,*RUN TORPEDOR,Works,TORPEDOR,present,,,,
 9,V2,A&F,A&F S/W,A.Commercial Software,Zodiac,Adventure,,AF,8200,"*LOAD ADV2P
@@ -1506,8 +1506,8 @@ Joystick Kbd",,,
 786,V8B3,AS,Acornsoft,A.Commercial Software,Dog Fight (JS),Game,,JS/DAVE,8200,"CH. ""DOGFIGHT""",Works,DOGFIGHT,present,"Joystick
 Joystick Kbd
 Joystick Twin",,,
-787,V8B3,A&F,A&F S/W,A.Commercial Software,Space Panic (16K) (JS),Game,,JS/DAVE,8200,*RUN PANIC,Works,PANIC,present,"Joystick
-Joystick Kbd",Yes*,,
+787,V14B1,A&F,A&F S/W,A.Commercial Software,Space Panic (JS),Game,,JS/DAVE,8200,*RUN PANIC,Test,PANIC,present,"Joystick
+Joystick Kbd",,,
 788,V8B3,PP,Prog Power,A.Commercial Software,Stock Car (JS),Game,,JS/DAVE,8200,"CH.""STOCKCAR""",Works,STOCKCAR,present,"Joystick
 Joystick Kbd
 Joystick Twin",,,

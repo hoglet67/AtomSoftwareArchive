@@ -465,8 +465,12 @@ package "atms/Acl1-14/WAMPUS" "$ARCHIVE/$PP"
 package "atms/Leendert/CYLONATT" "$ARCHIVE/$AF"
 package "atms/Leendert/EARLYWAR" "$ARCHIVE/$AF"
 package "atms/Leendert/TORPEDOR" "$ARCHIVE/$AF"
-package "atms/Acl1-11/PANIC" "$ARCHIVE/$AF"
 package "atms/Acl1-11/POLECAT" "$ARCHIVE/$AF"
+
+# This version of panic strays into page 3C
+# so I've done a reconversion
+# package "atms/Acl1-11/PANIC" "$ARCHIVE/$AF"
+
 
 # Now getting these from DAVE
 # Origin was arcadian's tape, converted to ATM by me
