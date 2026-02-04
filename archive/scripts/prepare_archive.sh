@@ -150,6 +150,24 @@ done
 java -jar ../java/atombasic/atombasic.jar PPBA/COMPILER.bas  ../archive/$ARCHIVE/PPBA/COMPILER 8200
 popd
 
+
+##############################################################
+# Other submissions in source form
+##############################################################
+
+pushd ../submissions
+for CONTRIBUTOR in `ls`
+do
+pushd $CONTRIBUTOR
+for SRC in `find . -name '*.bas' | cut -c3- | sort`
+do
+DST=../../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
+java -jar ../../java/atombasic/atombasic.jar $SRC $DST
+done
+popd
+done
+popd
+
 ##############################################################
 # Other
 ##############################################################
