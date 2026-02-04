@@ -164,7 +164,7 @@ ENDIF
 	BCC DisableAGDChapter
 
 	; The AGD chapter needs Main RAM down to 0300
-	LDA #LoMemBot
+	LDA LoMemBot
 	CMP #&03
 	BCC EnableAGDChapter
 
