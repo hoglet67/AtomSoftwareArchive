@@ -40,8 +40,8 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     abstract public void generateFiles(List<SpreadsheetTitle> items) throws IOException;
 
     @Override
-    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
-        super.allocateDisks(items);
+    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+        filterOZMOOTitles(items);
         Iterator<SpreadsheetTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             SpreadsheetTitle item = itemIterator.next();
@@ -53,6 +53,11 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
                 itemIterator.remove();
             }
         }
+    }
+
+    @Override
+    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+        super.allocateDisks(items);
     }
 
     protected int getImageLen(byte[] image) {

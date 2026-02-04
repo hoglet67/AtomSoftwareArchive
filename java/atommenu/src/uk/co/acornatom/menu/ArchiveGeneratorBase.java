@@ -1,6 +1,7 @@
 package uk.co.acornatom.menu;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 abstract public class ArchiveGeneratorBase extends GenerateBase implements IArchiveGenerator {
@@ -30,6 +31,20 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
             }
         }
     }
+
+    protected void filterOZMOOTitles(List<SpreadsheetTitle> items) throws IOException {
+        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+        while (itemIterator.hasNext()) {
+            SpreadsheetTitle item = itemIterator.next();
+            if (item.getCollections().contains("OZMOO") ) {
+                System.out.println("WARNING: dropping title from " + getTarget().name() + " because it's not supported: " + item);
+                itemIterator.remove();
+            }
+        }
+    }
+
+    @Override
+    abstract public void filterTitles(List<SpreadsheetTitle> items) throws IOException;
 
     @Override
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {

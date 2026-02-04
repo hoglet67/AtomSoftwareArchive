@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface IArchiveGenerator extends IFileGenerator {
 
+    public void filterTitles(List<SpreadsheetTitle> items) throws IOException;
+
     public void allocateDisks(List<SpreadsheetTitle> items) throws IOException;
 
     public void writeImage() throws IOException;

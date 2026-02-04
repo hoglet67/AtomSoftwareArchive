@@ -259,6 +259,9 @@ public class GenerateAll {
                     romBootLoaderBinary = new File(archiveDir, "BOOTROM.bin");
                 }
 
+                // Give the generator the opportunity to drop titles it deems are unsupported
+                generator.filterTitles(targetItems);
+
                 // Give the generator the opportunity to map titles to disk images
                 generator.allocateDisks(targetItems);
 

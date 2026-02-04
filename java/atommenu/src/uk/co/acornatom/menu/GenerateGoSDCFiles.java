@@ -32,6 +32,11 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
     }
 
     @Override
+    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+        filterOZMOOTitles(items);
+    }
+
+    @Override
     public void close() throws IOException {
         scriptStream.close();
     }
