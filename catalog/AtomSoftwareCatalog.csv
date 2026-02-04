@@ -24,7 +24,7 @@ DUNGEON",present,Atom Adventures,,No,https://acornatom.nl/atom_handleidingen/pdf
 15,V1,AS,Acornsoft,A.Commercial Software,Intergalactic,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN INTERGAL",Works,"ADVENTUR
 INTERGAL",present,Atom Adventures,,No,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-16,V1,AS,Acornsoft,A.Commercial Software,Sphinx Adv (32K),Adventure,,AS/ADVENT,8200,*RUN SPHINX,Works,"SPHINX
+16,V1,AS,Acornsoft,B.Modern Creations,Sphinx Adv (40K),Adventure,,AS/ADVENT,8200,*RUN SPHINX,Works,"SPHINX
 SPHINX1
 SPHINX2
 SPHINXIN",present,Atom Adventures,Yes,No,
@@ -172,7 +172,7 @@ PICNIC",present,,,No,
 110,V3,AS,Acornsoft,A.Commercial Software,Fast Cassette OS,Utility,,AS/UTILS1,9700,"?18=130
 CH.""FASTCOS""",Works,FASTCOS,present,Utility Pack 1,,No,
 111,V1,AS,Acornsoft,A.Commercial Software,Renumber,Utility,,AS/UTILS1,8200,*RUN RENUM,Works,RENUM,present,Utility Pack 1,,No,
-112,V1,AS,Acornsoft,A.Commercial Software,Wordpack (32K),Business,,AS/WORDPACK,8200,*RUN ED64,Works,ED64,present,,Yes,,
+112,V1,AS,Acornsoft,B.Modern Creations,Wordpack (32K),Business,,AS/WORDPACK,8200,*RUN ED64,Works,ED64,present,,Yes,,
 113,V1,AS,Acornsoft,A.Commercial Software,Pairs,Educational,,AS/WORDTUT,3B00,"*LOAD PAIRSD
 CH.""PAIRS""",Works,"PAIRS
 PAIRSD",present,Atom Word Tutor,,No,
@@ -1267,7 +1267,7 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR COMMANDS: MDBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9496 8800","Broken - commands work, but crash/corrupt",9496,present,ROMs,,,
-668,V6,AS,Acornsoft,A.Commercial Software,BBC Basic II (32K),Language,,BBC,8200,*RUN ATBASIC2,Works,ATBASIC2,present,,Yes,,
+668,V6,AS,Acornsoft,B.Modern Creations,BBC Basic II (32K),Language,,BBC,8200,*RUN ATBASIC2,Works,ATBASIC2,present,,Yes,,
 669,V6,NC,Non Comm,F.ROMS,Atomic Windows 1.2 BD,Graphics,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL

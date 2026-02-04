@@ -1,0 +1,90 @@
+Feb 04, 2026 9:52:05 AM org.apache.aries.spifly.BaseActivator log
+INFO: Registered provider ch.qos.logback.classic.spi.LogbackServiceProvider of service org.slf4j.spi.SLF4JServiceProvider in bundle ch.qos.logback.classic
+09:52:07.407 [Start Level: Equinox Container: fdfc019f-5a73-489a-9efa-2be4d3d7fa3b] DEBUG org.eclipse.jgit.internal.util.ShutdownHook -- register org.eclipse.jgit.util.FS$FileStoreAttributes$$Lambda/0x0000739e1c221500@318274ae with shutdown hook
+09:52:07.407 [Start Level: Equinox Container: fdfc019f-5a73-489a-9efa-2be4d3d7fa3b] DEBUG org.eclipse.jgit.internal.util.ShutdownHook -- register org.eclipse.jgit.util.FS$FileStoreAttributes$$Lambda/0x0000739e1c221500@318274ae with shutdown hook
+09:52:08.386 [main] DEBUG org.eclipse.m2e.core.internal.project.registry.ProjectRegistryRefreshJob -- Queued refresh request: [/afsutils/pom.xml, /arcpartition/pom.xml, /asciiart/pom.xml, /atombasic/pom.xml, /atommenu/pom.xml, /atomquill/pom.xml, /atomsid/pom.xml, /atomtape/pom.xml, /atomwavtoatm/pom.xml, /makeatm/pom.xml]
+09:52:08.386 [main] DEBUG org.eclipse.m2e.core.internal.project.registry.ProjectRegistryRefreshJob -- Queued refresh request: [/afsutils/pom.xml, /arcpartition/pom.xml, /asciiart/pom.xml, /atombasic/pom.xml, /atommenu/pom.xml, /atomquill/pom.xml, /atomsid/pom.xml, /atomtape/pom.xml, /atomwavtoatm/pom.xml, /makeatm/pom.xml]
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:52:15.733: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:53:38.869: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:53:38.944: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:53:39.008: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:53:39.074: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.281: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.371: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.404: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.436: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.465: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.482: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.500: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.514: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:01.531: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:02.784: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:02.861: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:02.934: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 09:59:03.001: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.530: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.595: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.627: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.657: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.695: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.726: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.756: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.808: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+
+(Eclipse:14335): Gtk-CRITICAL **: 10:05:24.842: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkScrollbar
+pci id for fd 151: 10de:0ffe, driver (null)
+pci id for fd 152: 10de:0ffe, driver (null)
+pci id for fd 153: 10de:0ffe, driver (null)
+pci id for fd 152: 10de:0ffe, driver (null)
+pci id for fd 153: 10de:0ffe, driver (null)
+pci id for fd 137: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 137: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 137: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 137: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 137: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
+pci id for fd 147: 10de:0ffe, driver (null)
+pci id for fd 148: 10de:0ffe, driver (null)
