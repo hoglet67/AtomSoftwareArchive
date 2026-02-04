@@ -208,15 +208,26 @@ public class GenerateSplashFiles extends GenerateBase {
     private Map<String, Integer> chapterStats;
     private File menuDir;
     private Target target;
+    private String targetName;
 
     public GenerateSplashFiles(File menuDir, String version, Map<String, Integer> chapterStats, Target target) {
         this.menuDir = menuDir;
         this.version = version;
         this.chapterStats = chapterStats;
         this.target = target;
+        if (target == Target.ATOMMC) {
+            this.targetName = "AtoMMC";
+        } else if (target == Target.GOSDC) {
+            this.targetName = "GoSDC";
+        } else if (target == Target.ECONET) {
+            this.targetName = "Econet";
+        } else {
+            this.targetName = target.name();
+        }
+
     }
 
-    private void writeAtomString(byte[] screen, String s, int x, int y, boolean forceUpper) {
+    private void writeAtomString(byte[] screen, String s, int x, int y, int spacing, boolean forceUpper) {
         for (int i = 0; i < s.length(); i++) {
             int c = s.charAt(i);
             if (forceUpper) {
@@ -235,7 +246,7 @@ public class GenerateSplashFiles extends GenerateBase {
                 int b = fonts[font.ordinal()][c * 12 + j];
                 for (int k = 7; k >= 0; k--) {
                     if ((b & (1 << k)) != 0) {
-                        int xb = x + 8 * i + (7 - k);
+                        int xb = x + spacing * i + (7 - k);
                         int yb = (y + j);
                         int addr = 32 * yb + (xb >> 3);
                         int bit = 1 << (7 - (xb & 7));
@@ -259,6 +270,18 @@ public class GenerateSplashFiles extends GenerateBase {
 
         int linex = 9;
 
+        // Spacing for maintained by
+        int spacing1 = 7;
+        int width1 = 240 / spacing1;
+
+        // Spacing for chapter titles
+        int spacing2 = 8;
+        int width2 = 240 / spacing2;
+
+        // Spacing for status bar
+        int spacing3 = 7;
+        int width3 = 240 / spacing3;
+
         // Create an grey image
         byte[] screen = new byte[0x1800];
         fill(screen, 0, 0, 256, 192, 0);
@@ -268,7 +291,8 @@ public class GenerateSplashFiles extends GenerateBase {
 
         // Overlay the menu items
         int y = 48;
-        writeAtomString(screen, "maintained by Hoglet", 46, y, false);
+        String maintained = "maintained by Hoglet";
+        writeAtomString(screen, maintained, 206 - maintained.length() * spacing1, y, spacing1, false);
         y += 14;
 
         drawLine(screen, linex, 255 - linex, y);
@@ -305,15 +329,17 @@ public class GenerateSplashFiles extends GenerateBase {
                 break;
             }
             String count = "" + chapter.getValue();
-            while (title.length() < 27 - count.length()) {
+            while (title.length() < width2 - 3 - count.length()) {
                 title += " ";
             }
             title += count;
             // Nasty hack to get proportionally spaced brackets
-            writeAtomString(screen, "(", 8, y, false);
-            writeAtomString(screen, chapter.getKey(), 14, y, false);
-            writeAtomString(screen, ")", 20, y, false);
-            writeAtomString(screen, title, 30, y, true);
+            // Original values (spacing 8) were: 8, 14, 20, 30
+            //   Target values (spacing 7)  are: 8, 13, 18, 28
+            writeAtomString(screen, "(",              8,                    y, spacing2, false);
+            writeAtomString(screen, chapter.getKey(), 8 + spacing2 - 2,     y, spacing2, false);
+            writeAtomString(screen, ")",              8 + spacing2 * 2 - 4, y, spacing2, false);
+            writeAtomString(screen, title,            8 + spacing2 * 2 + 6, y, spacing2, true);
             y += 12;
         }
 
@@ -324,18 +350,18 @@ public class GenerateSplashFiles extends GenerateBase {
         // Overlay the status line
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
         String date = sdf.format(new Date());
-        String line = "Release " + version;
-        while (line.length() < 19) {
+        String line = targetName + " build " + version;
+        while (line.length() < width3 - date.length()) {
             line += " ";
         }
         line += date;
-        if (line.length() != 30) {
-            throw new RuntimeException("Expected footer to be 30 chars long: >>>" + line + "<<<");
+        if (line.length() != width3) {
+            throw new RuntimeException("Expected footer to be " + width3 + " chars ; it's actually  " + line.length() + " chars >>>" + line + "<<<");
         }
         y = 192 - 18;
         drawLine(screen, linex, 255 - linex, y);
 
-        writeAtomString(screen, line, 8, y, false);
+        writeAtomString(screen, line, spacing3, y, spacing3, false);
 
         // Save the file
         FileOutputStream fosSplash = new FileOutputStream(new File(menuDir, SPLASH_NAME));
