@@ -230,11 +230,10 @@ BKOUTINS",present,,,,
 BACKINS",present,,,,
 144,V5,BB,Bug Byte,A.Commercial Software,Battleships,Game,,BB,8200,"CH.""BATSHIP""",Works,BATSHIP,present,,,,
 145,V1,BB,Bug Byte,A.Commercial Software,Bio-Rhythms,Simulation,,BB,8200,"CH.""BIORYTH""",Works,BIORYTH,present,,,,
-146,V3,BB,Bug Byte,A.Commercial Software,Chess (16K),Game,,BB,300,"?18=40
-*LOAD PROG
-*RUN 2-12",Works,"CHESSBB
+146,V14B1,BB,Bug Byte,A.Commercial Software,Chess,Game,,BB/CHESS,8200,"CH.""CHESSBB""",Test,"RUNNER
+CHESSBB
 PROG
-2-12",present,,Yes*,,
+2-12",present,,,,
 147,V13B1,BB,Bug Byte,A.Commercial Software,Disassembler,Utility,,BB/DISASS,8200,"CH.""BBDIS""",Test,"BBDIS
 BBDISINS",present,,,,
 148,V1,BB,Bug Byte,A.Commercial Software,Fruit Machine,Game,,BB,8200,"CH.""FRUITBB""",Works,FRUITBB,present,,,,
