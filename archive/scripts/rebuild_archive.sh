@@ -36,13 +36,10 @@ done
 rm -f list.econet
 
 ##############################################################
-# Compile the java
+# Compile the menu java
 ##############################################################
 
 pushd ../java/atommenu
-ant clean jar
-popd
-pushd ../java/afsutils
 ant clean jar
 popd
 
@@ -68,6 +65,10 @@ shopt -s nocasematch
 ##############################################################
 
 if [[ $# -lt 2 ]] || [[ "$2" =~ "ECONET" ]]; then
+    # Compile the AFSUtils java
+    pushd ../java/afsutils
+    ant clean jar
+    popd
     # Rename the generated ZIP file
     mv ${ARCHIVE}_ECONET.zip ${NAME}_ECONET.zip
     # Generate the AFS0 File Server Disk Image
