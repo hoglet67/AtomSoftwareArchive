@@ -35,6 +35,7 @@ ChapterLineWidth = 12		; Y pixels between adjacent text lines
 
 TopWindowStart     = 10
 TopWindowHeight    = 52
+
 BottomWindowStart  = 154
 BottomWindowHeight = 20
 
@@ -149,7 +150,7 @@ BottomWindowHeight = 20
 IF (BannerScroll = 1)
 	LDA #0
 	STA Cycle
-	STA Cycle+1
+	STA Cycle + 1
 	JSR PrintRamTest
 ENDIF
 
@@ -606,8 +607,32 @@ NEXT
 	LDA #0
 	STA Cycle
 	INC Cycle + 1
+	; Cycle + 1 controls the scrolling as follows:
+	; - Bit 0   = Paused
+	; - Bit 1   = Bottom (0) vs Top (1)
+	; - Bit 2   = Bottom panel scrollimg in (0) vs out (1)
+	; - Bit 4,3 = 00 = RamTestInfo, 01 = Help1, 10 = Help2, 11 = Help3
+	; the total sequence takes 4 * 32 = 128s to repeat
+	LDA Cycle + 1
+	AND #&07
+	BNE exit2	; xxxxx000 indicates we need to render the next help panel
+	LDA Cycle + 1
+	AND #&18
+	LSR A
+	LSR A
+	TAX
+	LDA table+1, X
+	PHA
+	LDA table, X
+	PHA
 .exit2
 	RTS
+
+.table
+	EQUW PrintRamTest - 1
+	EQUW PrintHelp1 - 1
+	EQUW PrintHelp2 - 1
+	EQUW PrintHelp3 - 1
 }
 
 .ScanKeyboard
@@ -623,32 +648,53 @@ NEXT
 	JMP &FEB1
 }
 
+.PrintHelp1
+{
+	JSR ClearTextBuffer
+	LDX #(Help1String - HelpStrings)
+	BNE PrintString		; Branch always
+}
+
+.PrintHelp2
+{
+	JSR ClearTextBuffer
+	LDX #(Help2String - HelpStrings)
+	BNE PrintString		; Branch always
+}
+
+.PrintHelp3
+{
+	JSR ClearTextBuffer
+	LDX #(Help3String - HelpStrings)
+	BNE PrintString		; Branch always
+}
 
 .PrintRamTest
 {
 	JSR ClearTextBuffer
-
-	LDX #&00
-.loop1
-	LDA LowerRAMString, X
-	BEQ done1
-	JSR TextPrintChar
-	INX
-	BNE loop1
-.done1
+	LDX #(LowerRAMString - HelpStrings)
+	JSR PrintString
 	LDX #LoMemBot
 	JSR PrintBounds
-
-	LDX #&00
-.loop2
-	LDA UpperRAMString, X
-	BEQ done2
-	JSR TextPrintChar
-	INX
-	BNE loop2
-.done2
+	LDX #(UpperRAMString - HelpStrings)
+	JSR PrintString
 	LDX #HiMemBot
 	JMP PrintBounds
+}
+
+.PrintString
+{
+.loop
+	LDA HelpStrings, X
+	BEQ done
+	JSR TextPrintChar
+	INX
+	BNE loop
+.done
+	RTS
+}
+
+.HelpStrings
 
 .LowerRAMString
 	EQUS "Lower Text RAM: "
@@ -657,7 +703,24 @@ NEXT
 .UpperRAMString
 	EQUS "Upper Text RAM: "
 	EQUB 0
-}
+
+.Help1String
+	EQUS "Press R to load ROMS into a"
+	EQUB 13
+	EQUS "YARRB/Atom2015 RAMROM board."
+	EQUB 0
+
+.Help2String
+	EQUS "Press Shift+Chapter to enter"
+	EQUB 13
+	EQUS "a chapter that is disabled."
+	EQUB 0
+
+.Help3String
+	EQUS "Press ESC to exit to BASIC."
+	EQUB 13
+	EQUS "In a chapter press / for HELP."
+	EQUB 0
 
 .ClearTextBuffer
 {
