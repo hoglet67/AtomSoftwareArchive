@@ -150,6 +150,7 @@ BottomWindowHeight = 20
 IF (BannerScroll = 1)
 	LDA #0
 	STA Cycle
+	LDA #&FF	; Make this more negtive to delay panel startup
 	STA Cycle + 1
 	JSR PrintRamTest
 ENDIF
@@ -515,8 +516,7 @@ IF (BannerScroll = 1)
 .Scroll
 {
 	LDA Cycle + 1
-	ROR A
-	BCS active
+	BPL active
 	JMP exit
 .active
 	ROR A
@@ -575,7 +575,7 @@ FOR I, 0, 29
 	ROL ScreenStart + &1E - I, X
 NEXT
 	LDA Cycle + 1
-	AND #&02
+	AND #&01
 	BNE skip
 	LDA (TmpPtr),Y
 	ROL A
@@ -606,19 +606,22 @@ NEXT
 	BNE exit2
 	LDA #0
 	STA Cycle
-	INC Cycle + 1
 	; Cycle + 1 controls the scrolling as follows:
-	; - Bit 0   = Paused
-	; - Bit 1   = Bottom (0) vs Top (1)
-	; - Bit 2   = Bottom panel scrollimg in (0) vs out (1)
-	; - Bit 4,3 = 00 = RamTestInfo, 01 = Help1, 10 = Help2, 11 = Help3
+	; - Bit 0   = Bottom (0) vs Top (1)
+	; - Bit 1   = Bottom panel scrollimg in (0) vs out (1)
+	; - Bit 3,2 = 00 = RamTestInfo, 01 = Help1, 10 = Help2, 11 = Help3
 	; the total sequence takes 4 * 32 = 128s to repeat
 	LDA Cycle + 1
-	AND #&07
-	BNE exit2	; xxxxx000 indicates we need to render the next help panel
+	CLC
+	ADC #&01
+	STA Cycle + 1
+	BMI exit2
+	AND #&7F
+	STA Cycle + 1
+	AND #&03
+	BNE exit2	; xxxxxx00 indicates we need to render the next help panel
 	LDA Cycle + 1
-	AND #&18
-	LSR A
+	AND #&0C
 	LSR A
 	TAX
 	LDA table+1, X
