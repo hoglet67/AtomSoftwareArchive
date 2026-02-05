@@ -358,7 +358,7 @@ package "atms/forth/*" "$ARCHIVE/$AS/FORTH"
 
 package "atms/Applic1/LISP*" "$ARCHIVE/$AS/LISP"
 
-package "atms/dd-18/PASCAL" "$ARCHIVE/$AS/PASCAL"
+package "atms/dd-18/PASCAL" "$ARCHIVE/$OTHER"
 
 package "atms/Friso/ATOMCALC" "$ARCHIVE/$AS/ATOMCALC"
 

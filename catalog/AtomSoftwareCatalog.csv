@@ -154,7 +154,7 @@ LISP2",present,,,No,https://site.acornatom.nl/boeken/lisp-theory-and-practice.pd
 100,V1,AS,Acornsoft,A.Commercial Software,Rational,Utility,,AS/MATHS2,8200,"CH.""RATIONAL""",Works,RATIONAL,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 101,V3,AS,Acornsoft,A.Commercial Software,Triginometry,Utility,,AS/MATHS2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 102,V1,AS,Acornsoft,A.Commercial Software,Fourier,Utility,,AS/MATHS2,8200,"CH.""FOURIER""",Works,FOURIER,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
-103,V1,AS,Acornsoft,A.Commercial Software,Pascal (16K),Language,,AS/PASCAL,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
+103,V1,NC,Non Comm,D.Non Commercial Software,Pascal (16K),Language,Mel Conway,OTHER,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
 104,V1,AS,Acornsoft,A.Commercial Software,Peeko Computer,Educational,,AS/PEEKO,8200,"CH.""PEEKO""",Works,"PEEKO
 ADD
 COPY
