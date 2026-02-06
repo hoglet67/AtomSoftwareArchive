@@ -559,7 +559,15 @@ ENDIF
 	; Read a character
 	JSR Osrdch
 
-	; Return terminates the search
+	; Return cancels the search
+	CMP #&1B
+	BNE NotEscape
+	LDY #0
+	STY SearchBuffer
+	JMP SearchExit
+
+.NotEscape
+	; Return returns with the seach in place
 	CMP #Return
 	BEQ SearchExit
 
