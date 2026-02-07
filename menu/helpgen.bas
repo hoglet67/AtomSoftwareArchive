@@ -4,16 +4,16 @@
 120 ?#E1=0
 130 I=128
 140 P."   a-m OR RETURN TO RUN TITLE"''
-150 P." "$I$I$I$I$I$I$I$I$I$I"navigation"$I$I$I$I$I$I$I$I$I$I'
+150 P."  "$I$I$I$I$I$I$I$I$I"navigation"$I$I$I$I$I$I$I$I$I'
 160 P."  < PREV PAGE    CTRL UP"'
 170 P."  > NEXT PAGE   SHIFT DOWN"'
 180 P."  S SEARCH       REPT METADATA"'
 190 P."  / HELP          ESC EXIT"'
-200 P." "$I$I$I"sorting"$I$I$I$I"  "$I$I$I"filtering"$I$I'
-210 P."  1 TITLE         5 CLEAR"'
-220 P."  2 PUBLISHER     6 PUBLISHER"'
-230 P."  3 GENRE         7 GENRE"'
-240 P."  4 COLLECTION    8 COLLECTION"'
+200 P."  "$I$I$I"filtering"$I"and"$I"sorting"$I$I$I$I'
+210 P."  1 CLEAR         4 COMPATIBLE"'
+220 P."  2 PUBLISHER     5 VERSION"'
+230 P."  3 GENRE         6 COLLECTION"'
+240 P."  [ PREV SORT     ] NEXT SORT"'
 250 P.'
 260P."    PRESS ANY KEY TO RETURN"$30
 270 Y=13;GOS.i
