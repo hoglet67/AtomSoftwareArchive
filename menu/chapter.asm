@@ -23,8 +23,8 @@ ENDIF
 ; C -> SortTablePtr    - the load address of the SORT data file
 ; D -> MenuTablePtr    - the load address of the MENU data file
 ; E -> FilterString    - current filter record address
-; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3 showing the filter selection pages)
-; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Collection)
+; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3,4,5 showing the filter selection pages)
+; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Compatile, 4=Version, 5=Collection)
 ; H -> FilterVal       - current filter value (as an integer)
 ; I -> TmpI            - A temporary variable
 ; K                    - The index number of the program about to be *RUN
@@ -218,7 +218,10 @@ ENDIF
 	BNE CallInkey
 	INC Annotation
 	LDA Annotation
-	AND #3
+	CMP #6
+   BCC NoAnnWrap
+   LDA #0
+.NoAnnWrap
 	STA Annotation
 	JMP SetItemToZero
 
@@ -237,7 +240,7 @@ ENDIF
 	CPY #&3B
 	BNE TestForPrevPage
 
-   ; Escape pressed; change back to the "root" directory
+	; Escape pressed; change back to the "root" directory
 	JSR OscliString
 IF (sddos2 = 1 OR sddos3 = 1)
 	EQUS "DRIVE 0", Return
@@ -323,9 +326,13 @@ ENDIF
 .TestForChangeFilter
 	; // 6..8 key pressed (filter by publisher, genre or connection)
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
-	CPY #22
+  	CPY #16	; 0
+	BNE not16
+   LDY #26
+.not16
+	CPY #22	; 6
 	BCC TestForSelect
-	CPY #25
+	CPY #27	; 9+1
 	BCS TestForSelect
 	TYA
 	SBC #20
@@ -644,13 +651,8 @@ ENDIF
 	;not needed as these are collapsed
 
 	;954 ?#87=(G&1)*2+(G&2)/2
-	LDA #0
-	STA Filter
 	LDA FilterType
-	LSR A
-	ROL Filter
-	LSR A
-	ROL Filter
+	STA Filter
 
 	;955 ?#88=H
 	;not needed as these are collapsed
@@ -819,13 +821,12 @@ ENDIF
 	RTS
 
 .LabelYNumSpaces
-	EQUB 0, 1, 5, 0
+	EQUB 0, 1, 5, 0, 3, 0
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to print the filter name not padded at all
 	; I is passed in as the accumulator
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 .LabelZ
 
@@ -835,7 +836,6 @@ ENDIF
 	;1530 IF I=3 P."COLLECTION"
 	;1540 R.
 
-	CLC
 	ASL A
 	ADC #<LabelZJumpTable
 	STA TmpPtr
@@ -851,6 +851,10 @@ ENDIF
 	EQUW LabelZ1
 	EQUW LabelZ2
 	EQUW LabelZ3
+	EQUW LabelZ4
+	EQUW LabelZ5
+
+; TODO: Why are sone of these padded?
 
 .LabelZ0
 	EQUS "TITLE     ", 0
@@ -862,8 +866,13 @@ ENDIF
 	EQUS "GENRE", 0
 
 .LabelZ3
-	EQUS "COLLECTION", 0
+	EQUS "COMPATIBLE", 0
 
+.LabelZ4
+	EQUS "VERSION", 0
+
+.LabelZ5
+	EQUS "COLLECTION", 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Machine Code Subroutines

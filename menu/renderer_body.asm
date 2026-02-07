@@ -1,15 +1,3 @@
-.AnnotationIdMap
-	EQUB 	2 ; Short Publisher
-	EQUB 	2 ; Publisher
-	EQUB 	1 ; Genre
-	EQUB 	3 ; Collection
-
-.AnnotationOffset
-	EQUB 	0 ; Short Publisher
-	EQUB 	4 ; Publisher
-	EQUB 	4 ; Genre
-	EQUB 	4 ; Collection
-
 .WritePage
 
 IF properAnnotationCounts
@@ -94,7 +82,7 @@ ENDIF
 	BNE FilterCompare
 
 	; Find the offset to the title, by skipping over all the categories
-	LDY #2
+	LDY #3
 .FindTitle
 	INY
 	LDA (Title),Y
@@ -124,6 +112,21 @@ ENDIF
 	LDY TmpY
 	BNE SearchCompare1
 
+; 5 = Collecton (byte 4 onwards)
+; If the filter is catgory, there are is a list to try to match against
+; This list is terminated by a non-negative value (the first char of the title name)
+
+.CatFilter
+	LDY #4
+.CatFilterLoop
+	LDA (Title), Y
+	BPL NextRow
+	AND #$7F
+	CMP FilterVal
+	BEQ MatchingRow
+	INY
+	BNE CatFilterLoop   ; Branch always
+
 .SearchMatch
 
 IF properAnnotationCounts
@@ -131,38 +134,18 @@ IF properAnnotationCounts
 ENDIF
 
 .FilterCompare
-	; If there is no filter, we move on to compare the search (if there is one)
+	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Category
 	LDY Filter
+
+	; If there is no filter, we move on to compare the search (if there is one)
 	BEQ MatchingRow
+	CPY #5
+	BEQ CatFilter
 
-	; Filter type 3 is the category filter
-	CPY #3
-	BNE NotCategoryFilter
-
-	; If the filter is catgory, there are is a list to try to match against
-	; This list is terminated by a non-negative value (the first char of the title name)
-.CategoryFilter
-	LDA (Title), Y
-	BPL NextRow
-	AND #$7F
-	CMP FilterVal
-	BEQ MatchingRow
-	INY
-	BNE CategoryFilter
-
-.NotCategoryFilter
-	; Otherwise compare what's the the title record with the filter value
-	LDA (Title), Y
-
-	; Genre is packed into byte 1 with index, so we need to shift by two places
-	CPY #1
-	BNE CompareFilterValue
-	LSR A
-	LSR A
-	LSR A
+	;; Extract and normalize the ID value from the table
+	JSR ExtractTableValue
 
 	;; Do the filter comparison, skip to next row if no match
-.CompareFilterValue
 	CMP FilterVal
 	BNE NextRow
 
@@ -188,7 +171,6 @@ ENDIF
 	; Found a row that matches all filter and search
 
 .FoundRow
-
 	; Have we displayed the requested number of rows
 	LDA RowCount
 	CMP #LinesPerPage
@@ -196,7 +178,6 @@ ENDIF
 	JMP NextRow
 
 .FoundRow1
-
 	; Increment the count of the number of rows displayed
 	INC RowCount
 
@@ -271,16 +252,45 @@ ENDIF
 
 	JMP LengthOfAnnotation
 
+
+;; Maps annotation to Table ID type
+
+; 0 = Short Publisher -> 1
+; 1 = Publisher       -> 1
+; 2 = Genre           -> 2
+; 3 = Compatible      -> 3
+; 4 = Version         -> 4
+; 5 = Collection      -> 5
+
+.AnnotationIdMap
+	EQUB 	1 ; Short Publisher
+	EQUB 	1 ; Publisher
+	EQUB 	2 ; Genre
+	EQUB 	3 ; Compatible
+	EQUB 	4 ; Version
+	EQUB 	5 ; Collection
+
+; Offset of first record in the annotation
+; (depends on whether the table was build against a sort index)
+; Always 0 or 4
+
+.AnnotationOffset
+	EQUB 	0 ; Short Publisher
+	EQUB 	4 ; Publisher
+	EQUB 	4 ; Genre
+	EQUB 	4 ; Compatible
+	EQUB 	4 ; Version
+	EQUB 	4 ; Collection
+
 .NormalAnnotation
 	LDY Annotation
 	LDA AnnotationOffset,Y
 	PHA
 	LDA AnnotationIdMap,Y
 	TAY
-	LDA (Title),Y
-	BMI NotNullCollection
-	CPY #3
-	BNE NotNullCollection
+	JSR ExtractTableValue
+
+	BPL NotNullCollection
 
 	; CollectionIDs always have bit 7 set
 	; If bit 7 is clear, there is no collection
@@ -296,12 +306,6 @@ ENDIF
 	EQUB 0
 
 .NotNullCollection
-	CPY #1
-	BNE NotGenre
-	LSR A
-	LSR A
-	LSR A
-.NotGenre
 	; Currently the MSB of the annotation is lost, which limits secondary tables to 7 bit values
 	ASL A
 	TAY
@@ -473,6 +477,58 @@ ENDIF
 	DEY
 	BPL	HighlightRow3
 	RTS
+
+;; Extract Filter/Annotation ID from title table and nomalize
+;; 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Category
+
+.ExtractTableValue
+{
+; 1 = Publisher (byte 2)
+.Filter1
+	CPY #1
+	BNE Filter2
+   INY
+	LDA (Title), Y
+	RTS
+
+; 2 = Genre (encoded within bits 7..5 of byte 1)
+.Filter2
+	CPY #2
+	BNE Filter3
+   DEY
+	LDA (Title), Y
+	LSR A
+	LSR A
+	LSR A
+	RTS
+
+; 3 = Compatible (encoded within bits 7..6 of byte 3)
+.Filter3
+	CPY #3
+	BNE Filter4
+	LDA (Title), Y
+	ROL A
+	ROL A
+	ROL A
+	AND #&03
+	RTS
+
+; 4 = Version (encoded within bits 5..0 of byte 3)
+.Filter4
+	CPY #4
+	BNE Filter5
+	DEY
+	LDA (Title), Y
+	AND #&3F
+	RTS
+
+; 5 = Collecton (byte 4 onwards)
+.Filter5
+	DEY
+	LDA (Title), Y
+	EOR #&80
+	RTS
+}
 
 .WriteToScreen
 	PHA

@@ -281,12 +281,11 @@ public class GenerateAll {
                             chunkItems.add(item);
                         }
                     }
-                    List<IFileGenerator> generators = new ArrayList<IFileGenerator>();
-                    generators.add(new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target));
-                    generators.add(new GenerateMenuFiles(archiveDir, menuDir, chunk, target));
-                    for (IFileGenerator g : generators) {
-                        g.generateFiles(chunkItems);
-                    }
+                    IFileGenerator bootstrapGen = new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target);
+                    bootstrapGen.generateFiles(chunkItems);
+                    IFileGenerator menuGen = new GenerateMenuFiles(archiveDir, menuDir, chunk, target);
+                    menuGen.setDebug(true);
+                    menuGen.generateFiles(chunkItems);
                 }
 
                 banner("Generating Files for " + target.name());

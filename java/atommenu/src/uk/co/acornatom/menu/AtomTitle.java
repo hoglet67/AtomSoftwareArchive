@@ -12,12 +12,16 @@ public class AtomTitle {
 
     private String title;
     private int index;
-    private int genreId;
     private int publisherId;
+    private int genreId;
+    private int compatibleId;
+    private int versionId;
     private List<Integer> collectionIds;
-    private String genre;
     private String publisher;
     private String shortPublisher;
+    private String genre;
+    private String compatible;
+    private String version;
     private List<String> collections;
     private int absoluteAddress;
 
@@ -45,14 +49,6 @@ public class AtomTitle {
         return genreId;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public int getPublisherId() {
-        return publisherId;
-    }
-
     public void setGenre(String genre) {
         this.genre = genre;
     }
@@ -61,12 +57,52 @@ public class AtomTitle {
         return genre;
     }
 
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public int getPublisherId() {
+        return publisherId;
+    }
+
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
     public String getPublisher() {
         return publisher;
+    }
+
+    public void setCompatibleId(int compatibleId) {
+        this.compatibleId = compatibleId;
+    }
+
+    public int getCompatibleId() {
+        return compatibleId;
+    }
+
+    public void setCompatible(String compatible) {
+        this.compatible = compatible;
+    }
+
+    public String getCompatible() {
+        return compatible;
+    }
+
+    public void setVersionId(int versionId) {
+        this.versionId = versionId;
+    }
+
+    public int getVersionId() {
+        return versionId;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
     }
 
     public void setCollections(List<String> collections, Map<String, Integer> collectionMap) {

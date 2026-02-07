@@ -16,6 +16,7 @@ public class SpreadsheetTitle {
     private String publisher;
     private String shortPublisher;
     private boolean compatible12K;
+    private String version;
     private List<String> collections;
     private String genre;
     private List<String> filenames;
@@ -115,6 +116,17 @@ public class SpreadsheetTitle {
         return genre;
     }
 
+    public void setVersion(String version) {
+        if (version.isEmpty()) {
+            version = "???";
+        }
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
     public void setShortPublisher(String shortPublisher) {
         this.shortPublisher = shortPublisher;
     }
@@ -145,6 +157,10 @@ public class SpreadsheetTitle {
 
     public void setCompatible12K(boolean compatible12K) {
         this.compatible12K = compatible12K;
+    }
+
+    public String getCompatible() {
+        return compatible12K ? "12K:YES" : "12K:NO";
     }
 
     @Override
