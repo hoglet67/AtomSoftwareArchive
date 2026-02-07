@@ -288,43 +288,21 @@ ENDIF
 	; // ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
-	BNE TestForChangeSortOrFilter
+	BNE TestForFilter
 	JSR LabelH
 	JMP LabelA
 
-.TestForChangeSortOrFilter
+.TestForFilter
 	; // 1..6 key pressed (change sort or filter)
 	; 620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
 	CPY #16+1
-	BCC TestForSelect
+	BCC TestForPrevSort
 	CPY #16+6+1
-	BCS TestForSelect
+	BCS TestForPrevSort
 	TYA
 	SBC #16
 	; At the point A=0..5
 
-	; Shift indicates change filter
-	BIT $B001
-	BMI TestForClearFilter
-
-	; Change sort
-	STA SortType
-
-	; Change the default annotation to match
-	STA Annotation
-
-	; Page in the appropriate sort table
-	JSR LoadSortTable
-
-.PageStateZero
-	LDA #0
-	STA PageState
-	LDA Annotation
-	AND #$7f
-	STA Annotation
-	JMP LabelA
-
-.TestForClearFilter
 	; Filter 0 = clear filters
 	; 630 IF ?Q=21 F=0;G=0;A=A&127;G.a
 	CMP #0
@@ -341,6 +319,40 @@ ENDIF
 	STA FilterType
 	LDA Annotation
 	ORA #$80
+	STA Annotation
+	JMP LabelA
+
+.TestForPrevSort
+	LDX SortType
+
+	CPY #1	; [
+	BNE TestForNextSort
+
+	DEX
+	BPL ChangeSort
+	LDX #5
+	BNE ChangeSort
+
+.TestForNextSort
+	CPY #3	; ]
+	BNE TestForSelect
+
+	INX
+	CPX #5+1
+	BNE ChangeSort
+	LDX #0
+
+.ChangeSort
+	STX SortType
+
+	; Page in the appropriate sort table
+	JSR LoadSortTable
+
+.PageStateZero
+	LDA #0
+	STA PageState
+	LDA Annotation
+	AND #$7f
 	STA Annotation
 	JMP LabelA
 
