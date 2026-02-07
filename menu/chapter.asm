@@ -219,8 +219,8 @@ ENDIF
 	INC Annotation
 	LDA Annotation
 	CMP #6
-   BCC NoAnnWrap
-   LDA #0
+	BCC NoAnnWrap
+	LDA #0
 .NoAnnWrap
 	STA Annotation
 	JMP SetItemToZero
@@ -288,20 +288,30 @@ ENDIF
 	; // ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
-	BNE	TestForChangeSort
+	BNE TestForChangeSortOrFilter
 	JSR LabelH
 	JMP LabelA
 
-.TestForChangeSort
-	; // 1..4 key pressed (change sort)
+.TestForChangeSortOrFilter
+	; // 1..6 key pressed (change sort or filter)
 	; 620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
-	CPY #17
-	BCC TestForClearFilter
-	CPY #21
-	BCS TestForClearFilter
+	CPY #16+1
+	BCC TestForSelect
+	CPY #16+6+1
+	BCS TestForSelect
 	TYA
 	SBC #16
+	; At the point A=0..5
+
+	; Shift indicates change filter
+	BIT $B001
+	BMI TestForClearFilter
+
+	; Change sort
 	STA SortType
+
+	; Change the default annotation to match
+	STA Annotation
 
 	; Page in the appropriate sort table
 	JSR LoadSortTable
@@ -315,27 +325,17 @@ ENDIF
 	JMP LabelA
 
 .TestForClearFilter
-	; // 5 key pressed (clear filter>
+	; Filter 0 = clear filters
 	; 630 IF ?Q=21 F=0;G=0;A=A&127;G.a
-	CPY #21
-	BNE TestForChangeFilter
-	LDA #0
+	CMP #0
+	BNE ChangeFilter
 	STA FilterType
 	BEQ PageStateZero
 
-.TestForChangeFilter
+.ChangeFilter
+	; Filter 1..5 = (publisher, genre,  compatible, version, category)
 	; // 6..8 key pressed (filter by publisher, genre or connection)
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
-  	CPY #16	; 0
-	BNE not16
-   LDY #26
-.not16
-	CPY #22	; 6
-	BCC TestForSelect
-	CPY #27	; 9+1
-	BCS TestForSelect
-	TYA
-	SBC #20
 	STA PageState
 	LDA #0
 	STA FilterType
@@ -474,7 +474,7 @@ ENDIF
 IF (sddos2 = 1 )
 
 	; SDDOS2 has a *RUNME bug, where only drive 0 is
-        ; searched for the file RUNME
+	; searched for the file RUNME
 
 	LDA #'0'
 	JSR LoadDisk
