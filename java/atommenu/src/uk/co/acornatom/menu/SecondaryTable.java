@@ -17,6 +17,7 @@ public abstract class SecondaryTable extends TableBase {
 
     private int maxLen;
     private boolean debug = false;
+    private int calculatedSize;
 
     protected SecondaryTable (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
@@ -73,6 +74,18 @@ public abstract class SecondaryTable extends TableBase {
         return createTable(absoluteAddress, null);
     }
 
+    public int calculateSize(boolean includeCounts) {
+          calculatedSize = map.size() * 2 + 4;
+          for (Map.Entry<String, Integer> entry : map.entrySet()) {
+              String key = entry.getKey();
+              calculatedSize += key.length() + 1;
+              if (includeCounts) {
+                  calculatedSize += 4; // Space for the counts
+              }
+          }
+          return calculatedSize;
+    }
+
     public byte[] createTable(int absoluteAddress, List<AtomTitle> titles) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
@@ -109,7 +122,11 @@ public abstract class SecondaryTable extends TableBase {
         if (debug) {
             System.out.println("length " + bos.size() + " bytes");
         }
-        return bos.toByteArray();
+        byte[] bytes = bos.toByteArray();
+        if (bytes.length != calculatedSize) {
+            System.out.println("WARNING: calculated and actual sizes differ for " + name);
+        }
+        return bytes;
     }
 
     // WARNING: this is expensive and should only be used sparingly
@@ -128,6 +145,7 @@ public abstract class SecondaryTable extends TableBase {
     // Some methods that operate on the underlying map
     public void clear() {
         map.clear();
+        calculatedSize = 0;
     }
 
     public Integer put(String key, Integer value) {

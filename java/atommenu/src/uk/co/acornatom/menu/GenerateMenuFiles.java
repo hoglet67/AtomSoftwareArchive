@@ -51,7 +51,16 @@ public class GenerateMenuFiles extends GenerateBase {
             AtomTitle::getCollectionFirst,
             SpreadsheetTitle::getCollections,
             AtomTitle::getCollections,
-            intuitiveStringComparator);
+            Comparator.nullsLast(intuitiveStringComparator));
+
+    private SecondaryTable[] secondardTables = new SecondaryTable[] {
+            shortPublishers,
+            publishers,
+            genres,
+            compatibles,
+            versions,
+            collections
+    };
 
     private int maxTitleLen;
     private File archiveDir;
@@ -73,16 +82,42 @@ public class GenerateMenuFiles extends GenerateBase {
     @Override
     public void setDebug(boolean debug) {
         super.setDebug(debug);
-        shortPublishers.setDebug(debug);
-        genres.setDebug(debug);
-        publishers.setDebug(debug);
-        compatibles.setDebug(debug);
-        versions.setDebug(debug);
-        collections.setDebug(debug);
+        for (int i = 0; i < secondardTables.length; i++) { // All tables
+            secondardTables[i].setDebug(debug);
+        }
     }
 
     @Override
     public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+
+        int endOfLowerText;
+        int lengthOfLowerText;
+        int startOfUpperText;
+        int lengthOfUpperText;
+
+        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all
+        // (AtoMMC/Econet/SDDOS) cases
+        // MENU 094C 2800->314C
+        // MENUSD 0983 2800->3183
+        // MENUECO 0976 2800->3176
+        if (allChunk) {
+            // swap the lower and upper text spaces
+            lengthOfLowerText = 0x1600;
+            endOfLowerText = 0x9800;
+            startOfUpperText = 0x2200; // Avoid the DOS/SDDOS disk buffers
+            lengthOfUpperText = 0x8000 - startOfUpperText; // ALL Chapter menu 1000
+        } else if (agdChunk) {
+            // swap the lower and upper text spaces
+            lengthOfLowerText = 0x1600;
+            endOfLowerText = 0x9800;
+            startOfUpperText = 0x3200;
+            lengthOfUpperText = 0x7000 - startOfUpperText; // Some RAM/ROM boards use the #7xxx for the RAM slot
+        } else {
+            lengthOfLowerText = 0x0A00;
+            endOfLowerText = 0x3c00;
+            startOfUpperText = 0x8200;
+            lengthOfUpperText = 0x1600;
+        }
 
         // ------------------------------------------------------------------------------------
         // Process the spreadsheet items to generate IDs for Publishers, Genres
@@ -91,11 +126,9 @@ public class GenerateMenuFiles extends GenerateBase {
 
         Map<String, String> longPubShortPub = new HashMap<String, String>();
 
-        publishers.clear();
-        genres.clear();
-        compatibles.clear();
-        versions.clear();
-        collections.clear();
+        for (int i = 0; i < secondardTables.length; i++) { // All tables
+            secondardTables[i].clear();
+        }
 
         maxTitleLen = 0;
 
@@ -103,20 +136,16 @@ public class GenerateMenuFiles extends GenerateBase {
             if (item.getTitle().length() > maxTitleLen) {
                 maxTitleLen = item.getTitle().length();
             }
-            publishers.addToIndex(item);
-            genres.addToIndex(item);
-            compatibles.addToIndex(item);
-            versions.addToIndex(item);
-            collections.addToIndex(item);
+            for (int i = 1; i < secondardTables.length; i++) { // Skip first table (short pub)
+                secondardTables[i].addToIndex(item);
+            }
             // Special cases
             longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
         }
 
-        publishers.assignIndexes();
-        genres.assignIndexes();
-        compatibles.assignIndexes();
-        versions.assignIndexes();
-        collections.assignIndexes();
+        for (int i = 1; i < secondardTables.length; i++) { // Skip first table (short pub)
+            secondardTables[i].assignIndexes();;
+        }
 
         // Build the short publisher map so the key order is the same as the
         // long publisher
@@ -128,12 +157,9 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         if (debug) {
-            shortPublishers.dumpIndexes();
-            publishers.dumpIndexes();
-            genres.dumpIndexes();
-            compatibles.dumpIndexes();
-            versions.dumpIndexes();
-            collections.dumpIndexes();
+            for (int i = 0; i < secondardTables.length; i++) { // All tables
+                secondardTables[i].dumpIndexes();
+            }
         }
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
@@ -167,43 +193,7 @@ public class GenerateMenuFiles extends GenerateBase {
             dumpTitles("Chunk " + chunk + " in title sort order", atomTitles);
         }
 
-        // ------------------------------------------------------------------------------------
-        // Generate the data for the main table
-        //
-        // This resides in the upper text space
-        // ------------------------------------------------------------------------------------
-
-        int endOfLowerText;
-        int lengthOfLowerText;
-        int startOfUpperText;
-        int lengthOfUpperText;
-
-        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all
-        // (AtoMMC/Econet/SDDOS) cases
-        // MENU 094C 2800->314C
-        // MENUSD 0983 2800->3183
-        // MENUECO 0976 2800->3176
-        if (allChunk) {
-            // swap the lower and upper text spaces
-            lengthOfLowerText = 0x1600;
-            endOfLowerText = 0x9800;
-            startOfUpperText = 0x2200; // Avoid the DOS/SDDOS disk buffers
-            lengthOfUpperText = 0x8000 - startOfUpperText; // ALL Chapter menu 1000
-        } else if (agdChunk) {
-            // swap the lower and upper text spaces
-            lengthOfLowerText = 0x1600;
-            endOfLowerText = 0x9800;
-            startOfUpperText = 0x3200;
-            lengthOfUpperText = 0x7000 - startOfUpperText; // Some RAM/ROM boards use the #7xxx for the RAM slot
-        } else {
-            lengthOfLowerText = 0x0A00;
-            endOfLowerText = 0x3c00;
-            startOfUpperText = 0x8200;
-            lengthOfUpperText = 0x1600;
-        }
-
         int titleTableAddr = startOfUpperText;
-
         byte[] titleTableBytes = new TitleTable(debug).createTable(titleTableAddr, atomTitles);
 
         // ------------------------------------------------------------------------------------
@@ -220,77 +210,45 @@ public class GenerateMenuFiles extends GenerateBase {
 
         byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 
-        byte[] publisherSortTable = publishers.createSortTable(atomTitles);
-
-        byte[] genreSortTable = genres.createSortTable(atomTitles);
-
-        byte[] compatibleSortTable = compatibles.createSortTable(atomTitles);
-
-        byte[] versionSortTable = versions.createSortTable(atomTitles);
-
-        byte[] collectionSortTable = new SortTable("Collection Sort", debug, new CollectionOrderSort()).createTable(atomTitles);
-
-        // ------------------------------------------------------------------------------------
-        // Generate the Secondary Tables (Publisher, Genre, Compatible, Version Collections)
-        //
-        // these reside in the Atom higher text space
-        // ------------------------------------------------------------------------------------
-
-        // We want to place the other tables as high as possible in the lower
-        // text space
-        // Do a "two pass" assembly were on the second pass the addresss will be
-        // correct
-
-        byte[] shortPublisherTable = null;
-        byte[] publisherTable = null;
-        byte[] genreTable = null;
-        byte[] compatibleTable = null;
-        byte[] versionTable = null;
-        byte[] collectionsTable = null;
-
-        int menuTableAddr = 0;
         int sortTableAddr = endOfLowerText - titleSortTable.length;
 
-        for (int pass = 0; pass < 2; pass++) {
 
-            int menuAddr = menuTableAddr + 14;
-
-            shortPublisherTable = shortPublishers.createTable(menuAddr);
-            menuAddr += shortPublisherTable.length;
-
-            publisherTable = publishers.createTable(menuAddr, atomTitles);
-            menuAddr += publisherTable.length;
-
-            genreTable = genres.createTable(menuAddr, atomTitles);
-            menuAddr += genreTable.length;
-
-            compatibleTable = compatibles.createTable(menuAddr, atomTitles);
-            menuAddr += compatibleTable.length;
-
-            versionTable = versions.createTable(menuAddr, atomTitles);
-            menuAddr += versionTable.length;
-
-            collectionsTable = collections.createTable(menuAddr, atomTitles);
-            menuAddr += collectionsTable.length;
+        // ------------------------------------------------------------------------------------
+        // Generate the Secondary Tables (Publisher, Genre, Compatible, Version, Collections,...)
+        // ------------------------------------------------------------------------------------
 
 
-            // At the end of pass, calculate the menu base address property
-            if (pass == 0) {
-                menuTableAddr = sortTableAddr;
-                menuTableAddr -= shortPublisherTable.length;
-                menuTableAddr -= publisherTable.length;
-                menuTableAddr -= genreTable.length;
-                menuTableAddr -= compatibleTable.length;
-                menuTableAddr -= versionTable.length;
-                menuTableAddr -= collectionsTable.length;
-                menuTableAddr -= 14; // two bytes for each table: title, short
-                                     // pub, pub, genre, compatible, version, collections
-            }
+        // The header contains a pointer to each table (title and all secondaries)
+        int menuTableHeaderSize = 2 * (1 + secondardTables.length);
+
+        // Calculate where to place the secondary tables so they end at the sort table
+        int menuTableAddr = sortTableAddr - menuTableHeaderSize;
+        for (int i = 0; i < secondardTables.length; i++) { // All tables
+            menuTableAddr -= secondardTables[i].calculateSize(i > 0);
+        }
+
+        int tmpAddr = menuTableAddr + menuTableHeaderSize;
+
+        // The first entry points to the title table (now a separate file)
+        byte[][] tableDatas = new byte[1 + secondardTables.length][];
+        int[] tableLoads = new int[1 + secondardTables.length];
+        tableDatas[0] = null;
+        tableLoads[0] = titleTableAddr;
+        for (int i = 0; i < secondardTables.length; i++) {
+            byte[] tableData = secondardTables[i].createTable(tmpAddr, i > 0 ? atomTitles : null);
+            tableDatas[i + 1] = tableData;
+            tableLoads[i + 1] = 0;
+            tmpAddr += tableData.length;
         }
 
         // ------------------------------------------------------------------------------------
         // Sanity check the end addresses
         // ------------------------------------------------------------------------------------
+
+        if (tmpAddr != sortTableAddr) {
+            throw new RuntimeException("Bug in table space calculation: " +
+                    Integer.toHexString(tmpAddr) + " != " + Integer.toHexString(sortTableAddr));
+        }
 
         if (menuTableAddr < endOfLowerText - lengthOfLowerText) {
             throw new RuntimeException("Lower Text Space is full");
@@ -305,15 +263,13 @@ public class GenerateMenuFiles extends GenerateBase {
         // Write the tables as Atom Files
         // ------------------------------------------------------------------------------------
 
-        writeTables(menuDir, "MENU1", menuTableAddr, new int[] { titleTableAddr, 0, 0, 0, 0 },
-                    new byte[][] { null, shortPublisherTable, publisherTable, genreTable, compatibleTable, versionTable, collectionsTable });
+        writeTables(menuDir, "MENU1", menuTableAddr, tableLoads, tableDatas);
         writeTable(menuDir, "MENU2", titleTableAddr, titleTableBytes);
         writeTable(menuDir, "SORT0", sortTableAddr, titleSortTable);
-        writeTable(menuDir, "SORT1", sortTableAddr, publisherSortTable);
-        writeTable(menuDir, "SORT2", sortTableAddr, genreSortTable);
-        writeTable(menuDir, "SORT3", sortTableAddr, compatibleSortTable);
-        writeTable(menuDir, "SORT4", sortTableAddr, versionSortTable);
-        writeTable(menuDir, "SORT5", sortTableAddr, collectionSortTable);
+        for (int i = 1; i < secondardTables.length; i++) {
+            byte[] sortTable = secondardTables[i].createSortTable(atomTitles);
+            writeTable(menuDir, "SORT" + i, sortTableAddr, sortTable);
+        }
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
         if (allChunk) {

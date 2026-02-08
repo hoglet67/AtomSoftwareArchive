@@ -123,7 +123,7 @@ public class AtomTitle {
 
     public String getCollectionFirst() {
         if (collections.isEmpty()) {
-            return "";
+            return null;
         } else {
             return collections.getFirst();
         }
