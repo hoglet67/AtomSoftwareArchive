@@ -53,7 +53,7 @@ public class GenerateMenuFiles extends GenerateBase {
             AtomTitle::getCollections,
             Comparator.nullsLast(intuitiveStringComparator));
 
-    private SecondaryTable[] secondardTables = new SecondaryTable[] {
+    private SecondaryTable[] secondaryTables = new SecondaryTable[] {
             shortPublishers,
             publishers,
             genres,
@@ -62,7 +62,6 @@ public class GenerateMenuFiles extends GenerateBase {
             collections
     };
 
-    private int maxTitleLen;
     private File archiveDir;
     private File menuDir;
     boolean agdChunk;
@@ -82,8 +81,8 @@ public class GenerateMenuFiles extends GenerateBase {
     @Override
     public void setDebug(boolean debug) {
         super.setDebug(debug);
-        for (int i = 0; i < secondardTables.length; i++) { // All tables
-            secondardTables[i].setDebug(debug);
+        for (int i = 0; i < secondaryTables.length; i++) { // All tables
+            secondaryTables[i].setDebug(debug);
         }
     }
 
@@ -94,6 +93,10 @@ public class GenerateMenuFiles extends GenerateBase {
         int lengthOfLowerText;
         int startOfUpperText;
         int lengthOfUpperText;
+
+        // ------------------------------------------------------------------------------------
+        // Decide where to place the various menu data segments
+        // ------------------------------------------------------------------------------------
 
         // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all
         // (AtoMMC/Econet/SDDOS) cases
@@ -119,36 +122,40 @@ public class GenerateMenuFiles extends GenerateBase {
             lengthOfUpperText = 0x1600;
         }
 
+        int titleTableAddr = startOfUpperText;
+
         // ------------------------------------------------------------------------------------
-        // Process the spreadsheet items to generate IDs for Publishers, Genres
-        // and Collections
+        // Reset the secondary tables
         // ------------------------------------------------------------------------------------
 
         Map<String, String> longPubShortPub = new HashMap<String, String>();
-
-        for (int i = 0; i < secondardTables.length; i++) { // All tables
-            secondardTables[i].clear();
+        for (int i = 0; i < secondaryTables.length; i++) { // All tables
+            secondaryTables[i].clear();
         }
 
-        maxTitleLen = 0;
+        // ------------------------------------------------------------------------------------
+        // Add the item metadata into the secondary tables
+        // ------------------------------------------------------------------------------------
 
         for (SpreadsheetTitle item : items) {
-            if (item.getTitle().length() > maxTitleLen) {
-                maxTitleLen = item.getTitle().length();
+            for (int i = 1; i < secondaryTables.length; i++) { // Skip first table (short pub)
+                secondaryTables[i].addToIndex(item);
             }
-            for (int i = 1; i < secondardTables.length; i++) { // Skip first table (short pub)
-                secondardTables[i].addToIndex(item);
-            }
-            // Special cases
             longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
         }
 
-        for (int i = 1; i < secondardTables.length; i++) { // Skip first table (short pub)
-            secondardTables[i].assignIndexes();;
+        // ------------------------------------------------------------------------------------
+        // Add sequential IDs to each of the secondary table entries
+        // ------------------------------------------------------------------------------------
+
+        for (int i = 1; i < secondaryTables.length; i++) { // Skip first table (short pub)
+            secondaryTables[i].assignIndexes();
         }
 
-        // Build the short publisher map so the key order is the same as the
-        // long publisher
+        // ------------------------------------------------------------------------------------
+        // Build the short publisher table so the key order is the same as the publisher table
+        // ------------------------------------------------------------------------------------
+
         shortPublishers.clear();
         for (String key : publishers.keySet()) {
             if (longPubShortPub.containsKey(key)) {
@@ -156,11 +163,21 @@ public class GenerateMenuFiles extends GenerateBase {
             }
         }
 
+        // ------------------------------------------------------------------------------------
+        // Log table contents for debug purposes
+        // ------------------------------------------------------------------------------------
+
         if (debug) {
-            for (int i = 0; i < secondardTables.length; i++) { // All tables
-                secondardTables[i].dumpIndexes();
+            for (int i = 0; i < secondaryTables.length; i++) { // All tables
+                secondaryTables[i].dumpIndexes();
             }
         }
+
+        // ------------------------------------------------------------------------------------
+        // Build the list of Atom Titles
+        // TODO: AtomTitle could be an interface implemented by spreadsheet item
+        // TODO: This code is not get generic, so needs changing when the facets change
+        // ------------------------------------------------------------------------------------
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
         for (SpreadsheetTitle item : items) {
@@ -185,7 +202,7 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         // ------------------------------------------------------------------------------------
-        // Sort by title for the main table
+        // Generate the Title Table and Title Sort Table (MENU2)
         // ------------------------------------------------------------------------------------
 
         Collections.sort(atomTitles, Comparator.comparing(AtomTitle::getTitle));
@@ -193,49 +210,34 @@ public class GenerateMenuFiles extends GenerateBase {
             dumpTitles("Chunk " + chunk + " in title sort order", atomTitles);
         }
 
-        int titleTableAddr = startOfUpperText;
+        // TODO: The title table is also not generic and depends on the facets
         byte[] titleTableBytes = new TitleTable(debug).createTable(titleTableAddr, atomTitles);
-
-        // ------------------------------------------------------------------------------------
-        // Generate the data for the sort tables
-        //
-        // these reside right at the end in the Atom lower text space
-        //
-        // a side effect of generating these is that the
-        // publisher/genres/collections maps are
-        // updated with the address in the sort table of the first occurrence of
-        // the each
-        // publisher/genre/collection
-        // ------------------------------------------------------------------------------------
 
         byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 
         int sortTableAddr = endOfLowerText - titleSortTable.length;
 
-
         // ------------------------------------------------------------------------------------
-        // Generate the Secondary Tables (Publisher, Genre, Compatible, Version, Collections,...)
+        // Generate the Secondary Tables (Shot Publisher, Publisher, ... (MENU1)
         // ------------------------------------------------------------------------------------
 
+        // The MENU1 header contains a pointer to each table (title and all secondaries)
+        int menuTableHeaderSize = 2 * (1 + secondaryTables.length);
 
-        // The header contains a pointer to each table (title and all secondaries)
-        int menuTableHeaderSize = 2 * (1 + secondardTables.length);
-
-        // Calculate where to place the secondary tables so they end at the sort table
+        // Calculate where to place the Secondary tables so they end at the sort table
         int menuTableAddr = sortTableAddr - menuTableHeaderSize;
-        for (int i = 0; i < secondardTables.length; i++) { // All tables
-            menuTableAddr -= secondardTables[i].calculateSize(i > 0);
+        for (int i = 0; i < secondaryTables.length; i++) { // All tables
+            menuTableAddr -= secondaryTables[i].calculateSize(i > 0);
         }
-
         int tmpAddr = menuTableAddr + menuTableHeaderSize;
 
         // The first entry points to the title table (now a separate file)
-        byte[][] tableDatas = new byte[1 + secondardTables.length][];
-        int[] tableLoads = new int[1 + secondardTables.length];
+        byte[][] tableDatas = new byte[1 + secondaryTables.length][];
+        int[] tableLoads = new int[1 + secondaryTables.length];
         tableDatas[0] = null;
         tableLoads[0] = titleTableAddr;
-        for (int i = 0; i < secondardTables.length; i++) {
-            byte[] tableData = secondardTables[i].createTable(tmpAddr, i > 0 ? atomTitles : null);
+        for (int i = 0; i < secondaryTables.length; i++) {
+            byte[] tableData = secondaryTables[i].createTable(tmpAddr, i > 0 ? atomTitles : null);
             tableDatas[i + 1] = tableData;
             tableLoads[i + 1] = 0;
             tmpAddr += tableData.length;
@@ -266,10 +268,14 @@ public class GenerateMenuFiles extends GenerateBase {
         writeTables(menuDir, "MENU1", menuTableAddr, tableLoads, tableDatas);
         writeTable(menuDir, "MENU2", titleTableAddr, titleTableBytes);
         writeTable(menuDir, "SORT0", sortTableAddr, titleSortTable);
-        for (int i = 1; i < secondardTables.length; i++) {
-            byte[] sortTable = secondardTables[i].createSortTable(atomTitles);
+        for (int i = 1; i < secondaryTables.length; i++) {
+            byte[] sortTable = secondaryTables[i].createSortTable(atomTitles);
             writeTable(menuDir, "SORT" + i, sortTableAddr, sortTable);
         }
+
+        // ------------------------------------------------------------------------------------
+        // Cope the CHAP menu program and HELP screen
+        // ------------------------------------------------------------------------------------
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
         if (allChunk) {
@@ -366,6 +372,13 @@ public class GenerateMenuFiles extends GenerateBase {
         int maxCompatibleLen = compatibles.getMaxLen();
         int maxVersionLen = versions.getMaxLen();
         int maxCollectionLen = collections.getMaxLen();
+
+        int maxTitleLen = 0;
+        for (AtomTitle item : items) {
+            if (item.getTitle().length() > maxTitleLen) {
+                maxTitleLen = item.getTitle().length();
+            }
+        }
 
         System.out.println("==========================================================");
         System.out.println(type);
