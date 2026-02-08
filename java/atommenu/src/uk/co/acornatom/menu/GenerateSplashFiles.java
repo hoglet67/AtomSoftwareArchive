@@ -272,7 +272,6 @@ public class GenerateSplashFiles extends GenerateBase {
 
         // Spacing for maintained by
         int spacing1 = 7;
-        int width1 = 240 / spacing1;
 
         // Spacing for chapter titles
         int spacing2 = 8;
