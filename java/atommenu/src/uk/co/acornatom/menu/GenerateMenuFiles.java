@@ -44,7 +44,7 @@ public class GenerateMenuFiles extends GenerateBase {
             "Version",
             AtomTitle::getVersion,
             SpreadsheetTitle::getVersion,
-            intuitiveStringComparator);
+            intuitiveStringComparator.reversed());
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
