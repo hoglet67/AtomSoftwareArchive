@@ -4,6 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -380,6 +383,17 @@ public class GenerateMenuFiles extends GenerateBase {
         }
     }
 
+    private String md5sum(byte[] bytes) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(bytes, 0, bytes.length);
+            BigInteger i = new BigInteger(1, md.digest());
+            return String.format("%1$032X", i);
+        } catch (NoSuchAlgorithmException e) {
+            return "No MD5 Digest Available";
+        }
+    }
+
     private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {
         System.out.println("----------------------------------------");
         System.out.println("Chunk " + chunk + ": Atom file: " + name);
@@ -406,6 +420,7 @@ public class GenerateMenuFiles extends GenerateBase {
         System.out.println("start address " + Integer.toHexString(loadAddr));
         System.out.println("  end address " + Integer.toHexString(loadAddr + bos.size()));
         System.out.println("       length " + bos.size() + " bytes");
+        System.out.println("       md5sum " + md5sum(bos.toByteArray()));
     }
 
     private void writeTable(File menuDir, String name, int loadAddr, byte[] table) throws IOException {
@@ -420,6 +435,7 @@ public class GenerateMenuFiles extends GenerateBase {
         System.out.println("start address " + Integer.toHexString(loadAddr));
         System.out.println("  end address " + Integer.toHexString(loadAddr + bos.size()));
         System.out.println("       length " + bos.size() + " bytes");
+        System.out.println("       md5sum " + md5sum(bos.toByteArray()));
     }
 
     private byte[] createTitleTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
