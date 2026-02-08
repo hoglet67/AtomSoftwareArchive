@@ -10,51 +10,29 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 
-public class SecondaryTable extends TableBase {
+public class SecondaryTableMultiValue extends TableBase {
 
     private String name;
     private Map<String, Integer> map;
     private int maxLen;
     private boolean debug = false;
-    private Function<? super SpreadsheetTitle, ? extends String> spreadsheetFieldExtractor;
-    private Function<? super AtomTitle, ? extends String> atomFieldMatcher;
+    private Function<? super SpreadsheetTitle, ? extends Collection<String>> spreadsheetFieldExtractor; // Extracts a collection field
+    private Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
+    private Function<? super AtomTitle, ? extends Collection<String>> atomFieldMatcher;
     private Comparator<String> comparator;
 
-    public SecondaryTable (
-            String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher
-            ) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, new TreeMap<String, Integer>());
-    }
-
-    public SecondaryTable (
-            String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
-            Map<String, Integer> map
-            ) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, Comparator.naturalOrder(), map);
-    }
-
-    public SecondaryTable (String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
+    public SecondaryTableMultiValue (String name,
+            Function<? super SpreadsheetTitle, ? extends List<String>> spreadsheetItemExtractor,
+            Function<? super AtomTitle, ? extends String> atomFieldExtractor,
+            Function<? super AtomTitle, ? extends List<String>> atomFieldMatcher,
             Comparator<String> comparator) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, comparator, new TreeMap<String, Integer>(comparator));
-    }
-
-    private SecondaryTable (String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
-            Comparator<String> comparator,
-            Map<String, Integer> map) {
         this.name = name;
-        this.map = map;
+        this.map = new TreeMap<String, Integer>(comparator);
         this.comparator = comparator;
         this.maxLen = 0;
         this.debug = false;
         this.spreadsheetFieldExtractor = spreadsheetItemExtractor;
+        this.atomFieldExtractor = atomFieldExtractor;
         this.atomFieldMatcher = atomFieldMatcher;
         for (String key : this.map.keySet()) {
             if (key.length() > this.maxLen) {
@@ -88,7 +66,7 @@ public class SecondaryTable extends TableBase {
     }
 
     public byte[] createSortTable(List<AtomTitle> items) throws IOException {
-        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomFieldMatcher, comparator));
+        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomFieldExtractor, comparator));
         return sortTable.createTable(items);
     }
 
@@ -119,7 +97,7 @@ public class SecondaryTable extends TableBase {
                 // Count the number of occurrences of this secondary key in the
                 // specified sort table
                 for (AtomTitle title : titles) {
-                    if (atomFieldMatcher.apply(title).equals(key)) {
+                    if (atomFieldMatcher.apply(title).contains(key)) {
                         count++;
                     }
                 }
@@ -148,8 +126,10 @@ public class SecondaryTable extends TableBase {
 
 
     public void addToIndex(SpreadsheetTitle item) {
-        String value = spreadsheetFieldExtractor.apply(item);
-        put(value, -1);
+        Collection<String> values = spreadsheetFieldExtractor.apply(item);
+        for (String value : values) {
+            put(value, -1);
+        }
     }
 
     public void addToIndex(Collection<String> values) {

@@ -11,12 +11,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class GenerateMenuFiles extends GenerateBase {
 
@@ -30,24 +29,33 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable publishers = new SecondaryTable(
             "Publisher",
-            SpreadsheetTitle::getPublisher, AtomTitle::getPublisher);
+            SpreadsheetTitle::getPublisher,
+            AtomTitle::getPublisher);
 
     private SecondaryTable genres = new SecondaryTable(
             "Genre",
-            SpreadsheetTitle::getGenre, AtomTitle::getGenre);
+            SpreadsheetTitle::getGenre,
+            AtomTitle::getGenre);
 
     private SecondaryTable compatibles = new SecondaryTable(
             "Compatible",
-            SpreadsheetTitle::getCompatible, AtomTitle::getCompatible);
+            SpreadsheetTitle::getCompatible,
+            AtomTitle::getCompatible);
 
     private SecondaryTable versions = new SecondaryTable(
             "Version",
-            SpreadsheetTitle::getVersion, AtomTitle::getVersion,
+            SpreadsheetTitle::getVersion,
+            AtomTitle::getVersion,
             intuitiveStringComparator);
 
-    private Map<String, Integer> collections = new TreeMap<String, Integer>(intuitiveStringComparator);
+    private SecondaryTableMultiValue collections = new SecondaryTableMultiValue (
+            "Collection",
+            SpreadsheetTitle::getCollections,
+            AtomTitle::getCollectionFirst,
+            AtomTitle::getCollections,
+            intuitiveStringComparator);
+
     private int maxTitleLen;
-    private int maxCollectionLen;
     private File archiveDir;
     private File menuDir;
     boolean agdChunk;
@@ -64,32 +72,6 @@ public class GenerateMenuFiles extends GenerateBase {
         this.chunk = chunk;
     }
 
-    private void dumpIndexes(String type, Map<String, Integer> map) {
-        System.out.println("==========================================================");
-        System.out.println(type);
-        System.out.println("==========================================================");
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getValue() + "\t" + entry.getKey());
-        }
-    }
-
-    private void addToIndex(String value, Map<String, Integer> map) {
-        map.put(value, -1);
-    }
-
-    private void addToIndex(List<String> values, Map<String, Integer> map) {
-        for (String value : values) {
-            addToIndex(value, map);
-        }
-    }
-
-    private void assignIndexes(Map<String, Integer> map) {
-        int index = 0;
-        for (String key : map.keySet()) {
-            map.put(key, index++);
-        }
-    }
-
     @Override
     public void setDebug(boolean debug) {
         super.setDebug(debug);
@@ -98,6 +80,7 @@ public class GenerateMenuFiles extends GenerateBase {
         publishers.setDebug(debug);
         compatibles.setDebug(debug);
         versions.setDebug(debug);
+        collections.setDebug(debug);
     }
 
     @Override
@@ -108,7 +91,8 @@ public class GenerateMenuFiles extends GenerateBase {
         // and Collections
         // ------------------------------------------------------------------------------------
 
-        HashMap<String, String> longPubShortPub = new HashMap<String, String>();
+        Map<String, String> longPubShortPub = new HashMap<String, String>();
+        Set<String> collectionsSet= new TreeSet<String>(intuitiveStringComparator);
 
         publishers.clear();
         genres.clear();
@@ -117,29 +101,26 @@ public class GenerateMenuFiles extends GenerateBase {
         collections.clear();
 
         maxTitleLen = 0;
-        maxCollectionLen = 0;
 
         for (SpreadsheetTitle item : items) {
             if (item.getTitle().length() > maxTitleLen) {
                 maxTitleLen = item.getTitle().length();
             }
-            for (String collection : item.getCollections()) {
-                if (collection.length() > maxCollectionLen) {
-                    maxCollectionLen = collection.length();
-                }
-            }
             publishers.addToIndex(item);
             genres.addToIndex(item);
             compatibles.addToIndex(item);
             versions.addToIndex(item);
-            addToIndex(item.getCollections(), collections);
+            // Special cases
             longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
+            collectionsSet.addAll(item.getCollections());
         }
+        collections.addToIndex(collectionsSet);
+
         publishers.assignIndexes();
         genres.assignIndexes();
         compatibles.assignIndexes();
         versions.assignIndexes();
-        assignIndexes(collections);
+        collections.assignIndexes();
 
         // Build the short publisher map so the key order is the same as the
         // long publisher
@@ -156,7 +137,7 @@ public class GenerateMenuFiles extends GenerateBase {
             genres.dumpIndexes();
             compatibles.dumpIndexes();
             versions.dumpIndexes();
-            dumpIndexes("Collection", collections);
+            collections.dumpIndexes();
         }
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
@@ -177,7 +158,7 @@ public class GenerateMenuFiles extends GenerateBase {
             atomTitle.setCompatibleId(compatibles.get(item.getCompatible()));
             atomTitle.setVersion(item.getVersion());
             atomTitle.setVersionId(versions.get(item.getVersion()));
-            atomTitle.setCollections(item.getCollections(), collections);
+            atomTitle.setCollections(item.getCollections(), collections.getMap());
             atomTitles.add(atomTitle);
         }
 
@@ -293,15 +274,9 @@ public class GenerateMenuFiles extends GenerateBase {
             versionTable = versions.createTable(menuAddr, atomTitles);
             menuAddr += versionTable.length;
 
-            collectionsTable = createSecondaryTable("Collection", menuAddr, collections, atomTitles, new IFieldSelector() {
-                @Override
-                public Set<String> getField(AtomTitle title) {
-                    Set<String> fields = new HashSet<String>();
-                    fields.addAll(title.getCollections());
-                    return fields;
-                }
-            });
+            collectionsTable = collections.createTable(menuAddr, atomTitles);
             menuAddr += collectionsTable.length;
+
 
             // At the end of pass, calculate the menu base address property
             if (pass == 0) {
@@ -407,46 +382,6 @@ public class GenerateMenuFiles extends GenerateBase {
         System.out.println("       md5sum " + md5sum(bos.toByteArray()));
     }
 
-
-    private byte[] createSecondaryTable(String tableName, int absoluteAddress, Map<String, Integer> map, List<AtomTitle> sort,
-            IFieldSelector fieldSelector) throws IOException {
-        if (debug) {
-            System.out.println("----------------------------------------");
-            System.out.println("Secondary Table: " + tableName);
-            System.out.println("----------------------------------------");
-            System.out.println("address " + Integer.toHexString(absoluteAddress));
-        }
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        absoluteAddress += map.size() * 2 + 4; // Skip over the pointers plus
-                                               // the length and terminator
-        writeShort(bos, map.size());
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            writeShort(bos, absoluteAddress);
-            absoluteAddress += (sort != null ? 4 : 0) + entry.getKey().length() + 1;
-        }
-        writeShort(bos, 0x0000);
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (sort != null) {
-                int count = 0;
-                // Count the number of occurrences of this secondary key in the
-                // specified sort table
-                for (int i = 0; i < sort.size(); i++) {
-                    if (fieldSelector.getField(sort.get(i)).contains(entry.getKey())) {
-                        count++;
-                    }
-                }
-                writeShort(bos, count);
-                writeShort(bos, 0);
-            }
-            writeString(bos, entry.getKey());
-            writeByte(bos, 0);
-        }
-        if (debug) {
-            System.out.println("length " + bos.size() + " bytes");
-        }
-        return bos.toByteArray();
-    }
-
     private String getKey(int value, Map<String, Integer> map) {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             if (entry.getValue().equals(value)) {
@@ -478,6 +413,7 @@ public class GenerateMenuFiles extends GenerateBase {
         int maxPublisherLen = publishers.getMaxLen();
         int maxCompatibleLen = compatibles.getMaxLen();
         int maxVersionLen = versions.getMaxLen();
+        int maxCollectionLen = collections.getMaxLen();
 
         System.out.println("==========================================================");
         System.out.println(type);
@@ -492,7 +428,7 @@ public class GenerateMenuFiles extends GenerateBase {
             if (item.getCollectionIds().size() > 0) {
                 for (Integer collectionId : item.getCollectionIds()) {
                     System.out.print(pad(Integer.toString(collectionId), 4));
-                    System.out.print(pad(getKey(collectionId, collections), maxCollectionLen + 4));
+                    System.out.print(pad(getKey(collectionId, collections.getMap()), maxCollectionLen + 4));
                 }
             } else {
                 System.out.println(pad("NO COLLECTIONS", maxCollectionLen + 4));

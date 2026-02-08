@@ -121,6 +121,14 @@ public class AtomTitle {
         return collectionIds;
     }
 
+    public String getCollectionFirst() {
+        if (collections.isEmpty()) {
+            return "";
+        } else {
+            return collections.getFirst();
+        }
+    }
+
     public void setAbsoluteAddress(int absoluteAddress) {
         this.absoluteAddress = absoluteAddress;
     }
