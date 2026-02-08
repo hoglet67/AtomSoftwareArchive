@@ -14,44 +14,42 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class GenerateMenuFiles extends GenerateBase {
 
     private Comparator<String> intuitiveStringComparator = new IntuitiveStringComparator<String>();
 
-    private SecondaryTable shortPublishers = new SecondaryTable(
+    private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
-            SpreadsheetTitle::getPublisher,
             AtomTitle::getPublisher,
+            SpreadsheetTitle::getPublisher,
             new LinkedHashMap<String, Integer>());
 
-    private SecondaryTable publishers = new SecondaryTable(
+    private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
-            SpreadsheetTitle::getPublisher,
-            AtomTitle::getPublisher);
+            AtomTitle::getPublisher,
+            SpreadsheetTitle::getPublisher);
 
-    private SecondaryTable genres = new SecondaryTable(
+    private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
-            SpreadsheetTitle::getGenre,
-            AtomTitle::getGenre);
+            AtomTitle::getGenre,
+            SpreadsheetTitle::getGenre);
 
-    private SecondaryTable compatibles = new SecondaryTable(
+    private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
-            SpreadsheetTitle::getCompatible,
-            AtomTitle::getCompatible);
+            AtomTitle::getCompatible,
+            SpreadsheetTitle::getCompatible);
 
-    private SecondaryTable versions = new SecondaryTable(
+    private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
-            SpreadsheetTitle::getVersion,
             AtomTitle::getVersion,
+            SpreadsheetTitle::getVersion,
             intuitiveStringComparator);
 
-    private SecondaryTableMultiValue collections = new SecondaryTableMultiValue (
+    private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
-            SpreadsheetTitle::getCollections,
             AtomTitle::getCollectionFirst,
+            SpreadsheetTitle::getCollections,
             AtomTitle::getCollections,
             intuitiveStringComparator);
 
@@ -92,7 +90,6 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         Map<String, String> longPubShortPub = new HashMap<String, String>();
-        Set<String> collectionsSet= new TreeSet<String>(intuitiveStringComparator);
 
         publishers.clear();
         genres.clear();
@@ -110,11 +107,10 @@ public class GenerateMenuFiles extends GenerateBase {
             genres.addToIndex(item);
             compatibles.addToIndex(item);
             versions.addToIndex(item);
+            collections.addToIndex(item);
             // Special cases
             longPubShortPub.put(item.getPublisher(), item.getShortPublisher());
-            collectionsSet.addAll(item.getCollections());
         }
-        collections.addToIndex(collectionsSet);
 
         publishers.assignIndexes();
         genres.assignIndexes();

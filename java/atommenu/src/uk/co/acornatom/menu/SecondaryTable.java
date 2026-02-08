@@ -2,66 +2,43 @@ package uk.co.acornatom.menu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.function.Function;
 
-public class SecondaryTable extends TableBase {
+public abstract class SecondaryTable extends TableBase {
 
     private String name;
+    protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
+    private Comparator<String> comparator;
     private Map<String, Integer> map;
+
     private int maxLen;
     private boolean debug = false;
-    private Function<? super SpreadsheetTitle, ? extends String> spreadsheetFieldExtractor;
-    private Function<? super AtomTitle, ? extends String> atomFieldMatcher;
-    private Comparator<String> comparator;
 
-    public SecondaryTable (
-            String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher
-            ) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, new TreeMap<String, Integer>());
-    }
-
-    public SecondaryTable (
-            String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
+    protected SecondaryTable (String name,
+            Function<? super AtomTitle, ? extends String> atomFieldExtractor,
+            Comparator<String> comparator,
             Map<String, Integer> map
             ) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, Comparator.naturalOrder(), map);
-    }
-
-    public SecondaryTable (String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
-            Comparator<String> comparator) {
-        this(name, spreadsheetItemExtractor, atomFieldMatcher, comparator, new TreeMap<String, Integer>(comparator));
-    }
-
-    private SecondaryTable (String name,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
-            Function<? super AtomTitle, ? extends String> atomFieldMatcher,
-            Comparator<String> comparator,
-            Map<String, Integer> map) {
         this.name = name;
         this.map = map;
         this.comparator = comparator;
         this.maxLen = 0;
         this.debug = false;
-        this.spreadsheetFieldExtractor = spreadsheetItemExtractor;
-        this.atomFieldMatcher = atomFieldMatcher;
+        this.atomFieldExtractor = atomFieldExtractor;
         for (String key : this.map.keySet()) {
             if (key.length() > this.maxLen) {
                 maxLen = key.length();
             }
         }
     }
+
+    public abstract void addToIndex(SpreadsheetTitle item);
+
+    public abstract boolean match(AtomTitle title, String value);
 
     public void assignIndexes() {
         int index = 0;
@@ -88,7 +65,7 @@ public class SecondaryTable extends TableBase {
     }
 
     public byte[] createSortTable(List<AtomTitle> items) throws IOException {
-        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomFieldMatcher, comparator));
+        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomFieldExtractor, comparator));
         return sortTable.createTable(items);
     }
 
@@ -119,7 +96,7 @@ public class SecondaryTable extends TableBase {
                 // Count the number of occurrences of this secondary key in the
                 // specified sort table
                 for (AtomTitle title : titles) {
-                    if (atomFieldMatcher.apply(title).equals(key)) {
+                    if (match(title, key)) {
                         count++;
                     }
                 }
@@ -147,16 +124,6 @@ public class SecondaryTable extends TableBase {
     }
 
 
-    public void addToIndex(SpreadsheetTitle item) {
-        String value = spreadsheetFieldExtractor.apply(item);
-        put(value, -1);
-    }
-
-    public void addToIndex(Collection<String> values) {
-        for (String value : values) {
-            put(value, -1);
-        }
-    }
 
     // Some methods that operate on the underlying map
     public void clear() {
