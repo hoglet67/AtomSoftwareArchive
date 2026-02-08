@@ -185,7 +185,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // Sort by title for the main table
         // ------------------------------------------------------------------------------------
 
-        Collections.sort(atomTitles, new TitleOrderSort());
+        Collections.sort(atomTitles, Comparator.comparing(AtomTitle::getTitle));
         if (debug) {
             dumpTitles("Chunk " + chunk + " in title sort order", atomTitles);
         }
@@ -227,7 +227,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
         int titleTableAddr = startOfUpperText;
 
-        byte[] titleTable = createTitleTable(titleTableAddr, atomTitles);
+        byte[] titleTableBytes = new TitleTable(debug).createTable(titleTableAddr, atomTitles);
 
         // ------------------------------------------------------------------------------------
         // Generate the data for the sort tables
@@ -241,7 +241,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // publisher/genre/collection
         // ------------------------------------------------------------------------------------
 
-        byte[] titleSortTable = createSortTable("Title Sort", atomTitles, new TitleOrderSort(), null);
+        byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 
         byte[] publisherSortTable = publishers.createSortTable(atomTitles);
 
@@ -251,9 +251,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
         byte[] versionSortTable = versions.createSortTable(atomTitles);
 
-        List<AtomTitle> collectionSortList = new ArrayList<AtomTitle>(atomTitles);
-        byte[] collectionSortTable = createSortTable("Collection Sort", collectionSortList, new CollectionOrderSort(), collections);
-
+        byte[] collectionSortTable = new SortTable("Collection Sort", debug, new CollectionOrderSort()).createTable(atomTitles);
 
         // ------------------------------------------------------------------------------------
         // Generate the Secondary Tables (Publisher, Genre, Compatible, Version Collections)
@@ -280,22 +278,22 @@ public class GenerateMenuFiles extends GenerateBase {
 
             int menuAddr = menuTableAddr + 14;
 
-            shortPublisherTable = shortPublishers.createSecondaryTable(menuAddr);
+            shortPublisherTable = shortPublishers.createTable(menuAddr);
             menuAddr += shortPublisherTable.length;
 
-            publisherTable = publishers.createSecondaryTable(menuAddr, atomTitles);
+            publisherTable = publishers.createTable(menuAddr, atomTitles);
             menuAddr += publisherTable.length;
 
-            genreTable = genres.createSecondaryTable(menuAddr, atomTitles);
+            genreTable = genres.createTable(menuAddr, atomTitles);
             menuAddr += genreTable.length;
 
-            compatibleTable = compatibles.createSecondaryTable(menuAddr, atomTitles);
+            compatibleTable = compatibles.createTable(menuAddr, atomTitles);
             menuAddr += compatibleTable.length;
 
-            versionTable = versions.createSecondaryTable(menuAddr, atomTitles);
+            versionTable = versions.createTable(menuAddr, atomTitles);
             menuAddr += versionTable.length;
 
-            collectionsTable = createSecondaryTable("Collection", menuAddr, collections, collectionSortList, new IFieldSelector() {
+            collectionsTable = createSecondaryTable("Collection", menuAddr, collections, atomTitles, new IFieldSelector() {
                 @Override
                 public Set<String> getField(AtomTitle title) {
                     Set<String> fields = new HashSet<String>();
@@ -327,9 +325,9 @@ public class GenerateMenuFiles extends GenerateBase {
             throw new RuntimeException("Lower Text Space is full");
         }
 
-        if (titleTable.length > lengthOfUpperText) {
+        if (titleTableBytes.length > lengthOfUpperText) {
             throw new RuntimeException(
-                    "Upper Text Space is full: length = " + titleTable.length + "; space = " + lengthOfUpperText);
+                    "Upper Text Space is full: length = " + titleTableBytes.length + "; space = " + lengthOfUpperText);
         }
 
         // ------------------------------------------------------------------------------------
@@ -338,7 +336,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
         writeTables(menuDir, "MENU1", menuTableAddr, new int[] { titleTableAddr, 0, 0, 0, 0 },
                     new byte[][] { null, shortPublisherTable, publisherTable, genreTable, compatibleTable, versionTable, collectionsTable });
-        writeTable(menuDir, "MENU2", titleTableAddr, titleTable);
+        writeTable(menuDir, "MENU2", titleTableAddr, titleTableBytes);
         writeTable(menuDir, "SORT0", sortTableAddr, titleSortTable);
         writeTable(menuDir, "SORT1", sortTableAddr, publisherSortTable);
         writeTable(menuDir, "SORT2", sortTableAddr, genreSortTable);
@@ -409,30 +407,6 @@ public class GenerateMenuFiles extends GenerateBase {
         System.out.println("       md5sum " + md5sum(bos.toByteArray()));
     }
 
-    private byte[] createTitleTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
-        if (debug) {
-            System.out.println("----------------------------------------");
-            System.out.println("Title Table");
-            System.out.println("----------------------------------------");
-            System.out.println("address " + Integer.toHexString(absoluteAddress));
-        }
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        for (AtomTitle item : items) {
-            item.setAbsoluteAddress(absoluteAddress + bos.size());
-            writeShort(bos, item.getIndex() + (item.getGenreId() << 11));
-            writeByte(bos, item.getPublisherId());
-            writeByte(bos, (item.getCompatibleId() << 6) + item.getVersionId());
-            for (Integer collectionId : item.getCollectionIds()) {
-                writeByte(bos, 128 + collectionId);
-            }
-            writeString(bos, item.getTitle());
-            writeByte(bos, 0);
-        }
-        if (debug) {
-            System.out.println("length " + bos.size() + " bytes");
-        }
-        return bos.toByteArray();
-    }
 
     private byte[] createSecondaryTable(String tableName, int absoluteAddress, Map<String, Integer> map, List<AtomTitle> sort,
             IFieldSelector fieldSelector) throws IOException {
@@ -467,28 +441,6 @@ public class GenerateMenuFiles extends GenerateBase {
             writeString(bos, entry.getKey());
             writeByte(bos, 0);
         }
-        if (debug) {
-            System.out.println("length " + bos.size() + " bytes");
-        }
-        return bos.toByteArray();
-    }
-
-    private byte[] createSortTable(String tableName, List<AtomTitle> items, Comparator<AtomTitle> comparator,
-            Map<String, Integer> map) throws IOException {
-        if (debug) {
-            System.out.println("----------------------------------------");
-            System.out.println("Sort Table: " + tableName);
-            System.out.println("----------------------------------------");
-        }
-        // Sort items using the supplier comparator
-        Collections.sort(items, comparator);
-        // Build the data for the table
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        writeShort(bos, items.size());
-        for (AtomTitle item : items) {
-            writeShort(bos, item.getAbsoluteAddress());
-        }
-        writeShort(bos, 0x0000);
         if (debug) {
             System.out.println("length " + bos.size() + " bytes");
         }

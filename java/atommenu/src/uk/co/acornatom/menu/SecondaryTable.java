@@ -2,9 +2,6 @@ package uk.co.acornatom.menu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +9,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 
-public class SecondaryTable {
+public class SecondaryTable extends TableBase {
 
     private String name;
     private Map<String, Integer> map;
@@ -89,47 +86,16 @@ public class SecondaryTable {
         return maxLen;
     }
 
-    public static void writeString(OutputStream out, String value) throws IOException {
-        out.write(value.getBytes());
-    }
-    protected void writeShort(OutputStream out, int value) throws IOException {
-        out.write(value & 0xff);
-        out.write((value >> 8) & 0xff);
-    }
-
-    protected void writeByte(OutputStream out, int value) throws IOException {
-        out.write(value & 0xff);
-    }
-
     public byte[] createSortTable(List<AtomTitle> items) throws IOException {
-        if (debug) {
-            System.out.println("----------------------------------------");
-            System.out.println("Sort Table: " + name + " Sort");
-            System.out.println("----------------------------------------");
-        }
-        // Create a new list so the order of the original list remains unchanged
-        items = new ArrayList<AtomTitle>(items);
-        // Sort items using the same comparator as the Map uses
-        Comparator<AtomTitle> titleComparator = Comparator.comparing(atomTitleExtractor, comparator);
-        Collections.sort(items, titleComparator);
-        // Build the data for the table
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        writeShort(bos, items.size());
-        for (AtomTitle item : items) {
-            writeShort(bos, item.getAbsoluteAddress());
-        }
-        writeShort(bos, 0x0000);
-        if (debug) {
-            System.out.println("length " + bos.size() + " bytes");
-        }
-        return bos.toByteArray();
+        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomTitleExtractor, comparator));
+        return sortTable.createTable(items);
     }
 
-    public byte[] createSecondaryTable(int absoluteAddress) throws IOException {
-        return createSecondaryTable(absoluteAddress, null);
+    public byte[] createTable(int absoluteAddress) throws IOException {
+        return createTable(absoluteAddress, null);
     }
 
-    public byte[] createSecondaryTable(int absoluteAddress, List<AtomTitle> titles) throws IOException {
+    public byte[] createTable(int absoluteAddress, List<AtomTitle> titles) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
             System.out.println("Secondary Table: " + name);
