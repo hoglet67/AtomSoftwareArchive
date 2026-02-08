@@ -148,12 +148,12 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         if (debug) {
-            dumpIndexes("ShortPublishers", shortPublishers);
-            dumpIndexes("Publishers", publishers);
-            dumpIndexes("Genres", genres);
-            dumpIndexes("Compatibles", compatibles);
-            dumpIndexes("Versions", versions);
-            dumpIndexes("Collections", collections);
+            dumpIndexes("ShortPublisher", shortPublishers);
+            dumpIndexes("Publisher", publishers);
+            dumpIndexes("Genre", genres);
+            dumpIndexes("Compatible", compatibles);
+            dumpIndexes("Version", versions);
+            dumpIndexes("Collection", collections);
         }
 
         List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
