@@ -793,13 +793,14 @@ IF properAnnotationCounts
 
 .AccumulateAnnotationCounts
 
-	LDX #3
+	LDX #5
 .AnnotationTypeLoop
 	LDA AnnotationIdMap,X
 	TAY
-	CPY #3
+	CPY #5
 	BNE AnnotationNotCategory
 
+	LDY #4
 .AnnotationNextCategory
 	LDA (Title),Y
 	BPL AnnotationNextType
@@ -811,13 +812,7 @@ IF properAnnotationCounts
 	BNE AnnotationNextCategory
 
 .AnnotationNotCategory
-	LDA (Title),Y
-	CPY #1
-	BNE AnnotationNotGenre
-	LSR A
-	LSR A
-	LSR A
-.AnnotationNotGenre
+	JSR ExtractTableValue
 	JSR IncAnnotationCounts
 .AnnotationNextType
 	DEX
