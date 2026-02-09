@@ -504,7 +504,7 @@ ENDIF
 	LSR A
 	RTS
 
-; 3 = Compatible (encoded within bits 7..6 of byte 3)
+; 3 = Compatible (encoded within bits 7..5 of byte 3)
 .Filter3
 	CPY #CompatibleFilterNum
 	BNE Filter4
@@ -513,16 +513,17 @@ ENDIF
 	ROL A
 	ROL A
 	ROL A
+	ROL A
 	AND #&03
 	RTS
 
-; 4 = Version (encoded within bits 5..0 of byte 3)
+; 4 = Version (encoded within bits 4..0 of byte 3)
 .Filter4
 	CPY #VersionFilterNum
 	BNE Filter5
 	LDY #VersionIdOffset
 	LDA (Title), Y
-	AND #&3F
+	AND #&1F
 	RTS
 
 ; 5 = Collecton (byte 4 onwards)

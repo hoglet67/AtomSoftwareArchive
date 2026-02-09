@@ -177,7 +177,6 @@ public class AtomTitle {
 
     public void setCompatible12K(boolean compatible12K) {
         this.compatible12K = compatible12K;
-        this.compatible = compatible12K ? "12K:YES" : "12K:NO";
     }
 
     @Override

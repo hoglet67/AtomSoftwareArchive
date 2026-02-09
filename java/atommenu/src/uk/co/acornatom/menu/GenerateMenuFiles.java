@@ -38,12 +38,13 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
-            new BitField(3, 6, 2),
-            AtomTitle::getCompatible);
+            new BitField(3, 5, 3),
+            AtomTitle::getCompatible,
+            Comparator.nullsLast(intuitiveStringComparator));
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
-            new BitField(3 ,0, 6),
+            new BitField(3 ,0, 5),
             AtomTitle::getVersion,
             intuitiveStringComparator.reversed());
 

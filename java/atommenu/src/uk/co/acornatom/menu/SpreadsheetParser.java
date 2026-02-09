@@ -160,6 +160,29 @@ public class SpreadsheetParser {
                 item.setFilenames(filesnamesList);
                 String ram32K = program[ram32k_column].trim().toUpperCase();
                 item.setCompatible12K(!ram32K.startsWith("YES"));
+
+                if (item.getChunk().equals("C")) {
+                    item.setCompatible("32K+8K");
+                } else if (item.isCompatible12K()) {
+                    if (item.getTitle().contains("(R)")) {
+                        item.setCompatible("6K+6K+ROMS");
+                    } else {
+                        item.setCompatible("6K+6K");
+                    }
+                } else if (item.getTitle().contains("16K")) {
+                    if (item.getTitle().contains("(R)")) {
+                        item.setCompatible("16K+6K+ROMS");
+                    } else {
+                        item.setCompatible("16K+6K");
+                    }
+                } else {
+                    if (item.getTitle().contains("(R)")) {
+                        item.setCompatible("32K+6K+ROMS");
+                    } else {
+                        item.setCompatible("32K+6K");
+                    }
+                }
+
                 // if (item.isCompatible12K()) {
                 //     collectionsList.add("12K:YES");
                 // } else {
