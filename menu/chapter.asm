@@ -32,7 +32,7 @@ ENDIF
 ; M -> NumPages        - The current number of pages
 ; P -> Page            - The current page (1..M)
 ; Q -> n/a             - The constant #8f
-; R -> RowReturnBuf - (CONSTANT) The address of a buffer into which the machine code stores the rendered row addresses
+; R -> RowReturnBuf    - (CONSTANT) The address of a buffer into which the machine code stores the rendered row addresses
 ; S -> SortType        - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
 ; Y -> Item            - The currently highlighted row (0..L-1)
 ; Z -> Sort            - The currently base address of the current sort index or filter pointer table)
@@ -218,7 +218,7 @@ ENDIF
 	BNE CallInkey
 	INC Annotation
 	LDA Annotation
-	CMP #6
+	CMP #NumFacets + 1
 	BCC NoAnnWrap
 	LDA #0
 .NoAnnWrap
@@ -297,7 +297,7 @@ ENDIF
 	; 620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
 	CPY #16+1
 	BCC TestForPrevSort
-	CPY #16+6+1
+	CPY #16+NumFacets+1+1
 	BCS TestForPrevSort
 	TYA
 	SBC #16
@@ -330,7 +330,7 @@ ENDIF
 
 	DEX
 	BPL ChangeSort
-	LDX #5
+	LDX #NumFacets
 	BNE ChangeSort
 
 .TestForNextSort
@@ -338,7 +338,7 @@ ENDIF
 	BNE TestForSelect
 
 	INX
-	CPX #5+1
+	CPX #NumFacets+1
 	BNE ChangeSort
 	LDX #0
 

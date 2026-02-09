@@ -5,6 +5,27 @@
 	properAnnotationCounts=1
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	; Table Structure Offsets
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	NumFacets       	= 5
+
+	CountOffset		= 0
+
+	GenreIdOffset           = 1
+	PubIdOffset     	= 2
+	CompatibleIdOffset     	= 3
+	VersionIdOffset     	= 3
+	CategoriesIdOffset  	= 4
+
+
+	PubFilterNum		= 1
+	GenreFilterNum		= 2
+	CompatibleFilterNum	= 3
+	VersionFilterNum	= 4
+	CategoriesFilterNum 	= 5
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Operating System Subroutines
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -20,8 +41,6 @@ ENDIF
 	; Miscellaneous constants
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	CountOffset     = 0
-	PubIdOffset     = 2
 	Space           = $20
 	Dot             = $2e
 	CharsPerLine    = 32
@@ -29,7 +48,7 @@ ENDIF
 	LinesPerPage    = 13
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; Zero Page Locations
+	; Zero Page Locations
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	; (Immutable) This should point to the first row in the sort index

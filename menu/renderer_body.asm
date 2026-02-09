@@ -3,7 +3,7 @@
 IF properAnnotationCounts
 
 	LDA SearchMode
-	AND #3
+	AND #7
 	BNE WritePage1
 	JSR ClearAnnotationCounts
 .WritePage1
@@ -43,8 +43,8 @@ ENDIF
 	STA CurrentRow
 	STA CurrentRow + 1
 
-	; Default the Title Name Offset to 4
-	LDA #4
+	; Default the Title Name Offset to no categories
+	LDA #CategoriesIdOffset
 	STA TitleNameOffset
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -78,11 +78,11 @@ ENDIF
 
 	; Do the search comparison
 	LDA SearchMode
-	AND #3
+	AND #7
 	BNE FilterCompare
 
 	; Find the offset to the title, by skipping over all the categories
-	LDY #3
+	LDY #CategoriesIdOffset - 1
 .FindTitle
 	INY
 	LDA (Title),Y
@@ -117,7 +117,7 @@ ENDIF
 ; This list is terminated by a non-negative value (the first char of the title name)
 
 .CatFilter
-	LDY #4
+	LDY #CategoriesIdOffset
 .CatFilterLoop
 	LDA (Title), Y
 	BPL NextRow
@@ -134,12 +134,12 @@ IF properAnnotationCounts
 ENDIF
 
 .FilterCompare
-	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Category
+	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Collection
 	LDY Filter
 
 	; If there is no filter, we move on to compare the search (if there is one)
 	BEQ MatchingRow
-	CPY #5
+	CPY #CategoriesFilterNum
 	BEQ CatFilter
 
 	;; Extract and normalize the ID value from the table
@@ -481,21 +481,23 @@ ENDIF
 ;; Extract Filter/Annotation ID from title table and nomalize
 ;; 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Category
 
+;; TODO Optimise this
+
 .ExtractTableValue
 {
 ; 1 = Publisher (byte 2)
 .Filter1
-	CPY #1
+	CPY #PubFilterNum
 	BNE Filter2
-   INY
+	LDY #PubIdOffset
 	LDA (Title), Y
 	RTS
 
 ; 2 = Genre (encoded within bits 7..5 of byte 1)
 .Filter2
-	CPY #2
+	CPY #GenreFilterNum
 	BNE Filter3
-   DEY
+	LDY #GenreIdOffset
 	LDA (Title), Y
 	LSR A
 	LSR A
@@ -504,8 +506,9 @@ ENDIF
 
 ; 3 = Compatible (encoded within bits 7..6 of byte 3)
 .Filter3
-	CPY #3
+	CPY #CompatibleFilterNum
 	BNE Filter4
+	LDY #CompatibleIdOffset
 	LDA (Title), Y
 	ROL A
 	ROL A
@@ -515,16 +518,16 @@ ENDIF
 
 ; 4 = Version (encoded within bits 5..0 of byte 3)
 .Filter4
-	CPY #4
+	CPY #VersionFilterNum
 	BNE Filter5
-	DEY
+	LDY #VersionIdOffset
 	LDA (Title), Y
 	AND #&3F
 	RTS
 
 ; 5 = Collecton (byte 4 onwards)
 .Filter5
-	DEY
+	LDY #CategoriesIdOffset
 	LDA (Title), Y
 	EOR #&80
 	RTS
@@ -718,7 +721,7 @@ ENDIF
 	LDX #0
 
 	; Make sure that we don't suppress zeros
-	LDY	#$FF
+	LDY #$FF
 	STY SuppressFlag
 
 	JSR WriteHex
@@ -793,14 +796,14 @@ IF properAnnotationCounts
 
 .AccumulateAnnotationCounts
 
-	LDX #5
+	LDX #NumFacets
 .AnnotationTypeLoop
 	LDA AnnotationIdMap,X
 	TAY
-	CPY #5
+	CPY #CategoriesFilterNum
 	BNE AnnotationNotCategory
 
-	LDY #4
+	LDY #CategoriesIdOffset
 .AnnotationNextCategory
 	LDA (Title),Y
 	BPL AnnotationNextType
@@ -855,11 +858,10 @@ IF properAnnotationCounts
 	STA (AnnotationString),Y
 	RTS
 
-
 	; Clear the 2nd and 3rd byte of each annotation record
 	; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
-	LDY #4
+	LDY #4		;  skip over title and short pub tables
 .ClearAnnotationCounts1
 	CLC
 	LDA (MenuTablePtr),Y
@@ -871,7 +873,7 @@ IF properAnnotationCounts
 	STA Tmp + 1
 	JSR ClearAnnotationCounts2
 	INY
-	CPY #10
+	CPY #4 + NumFacets * 2
 	BNE ClearAnnotationCounts1
 	RTS
 .ClearAnnotationCounts2
