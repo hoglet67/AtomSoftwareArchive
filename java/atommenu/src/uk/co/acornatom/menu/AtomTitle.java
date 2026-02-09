@@ -125,7 +125,7 @@ public class AtomTitle {
         if (collections.isEmpty()) {
             return null;
         } else {
-            return collections.getFirst();
+            return collections.get(0);
         }
     }
 
