@@ -27,10 +27,6 @@ public class AtomTitle {
 
     // These are part of AtomTitle and and filled in as the indexes are built
     private int absoluteAddress;
-    private int publisherId;
-    private int genreId;
-    private int compatibleId;
-    private int versionId;
     private List<Integer> collectionIds;
 
 
@@ -205,37 +201,6 @@ public class AtomTitle {
         }
     }
 
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
-
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public int getPublisherId() {
-        return publisherId;
-    }
-
-    public void setCompatibleId(int compatibleId) {
-        this.compatibleId = compatibleId;
-    }
-
-    public int getCompatibleId() {
-        return compatibleId;
-    }
-
-    public void setVersionId(int versionId) {
-        this.versionId = versionId;
-    }
-
-    public int getVersionId() {
-        return versionId;
-    }
 
     public void setCollectionIds(Map<String, Integer> collectionMap) {
         this.collectionIds = new ArrayList<Integer>();

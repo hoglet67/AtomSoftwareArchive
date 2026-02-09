@@ -22,8 +22,8 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
-            null, // Make this null to be sure it's never actually called
-            null, // Make this null to be sure it's never actually called
+            null, // This reuses the same BitField as the Publisher
+            AtomTitle::getShortPublisher,
             new LinkedHashMap<String, Integer>());
 
     private SecondaryTable publishers = new SecondaryTableSingleValue(
@@ -183,10 +183,6 @@ public class GenerateMenuFiles extends GenerateBase {
         List<AtomTitle> atomTitles = items;
 
         for (AtomTitle atomTitle : atomTitles) {
-            atomTitle.setPublisherId(publishers.get(atomTitle.getPublisher()));
-            atomTitle.setGenreId(genres.get(atomTitle.getGenre()));
-            atomTitle.setCompatibleId(compatibles.get(atomTitle.getCompatible()));
-            atomTitle.setVersionId(versions.get(atomTitle.getVersion()));
             atomTitle.setCollectionIds(collections.getMap());
         }
 
@@ -355,12 +351,6 @@ public class GenerateMenuFiles extends GenerateBase {
     }
 
     public void dumpTitles(String type, List<AtomTitle> items) {
-        int maxShortPublisherLen = shortPublishers.getMaxLen();
-        int maxGenreLen = genres.getMaxLen();
-        int maxPublisherLen = publishers.getMaxLen();
-        int maxCompatibleLen = compatibles.getMaxLen();
-        int maxVersionLen = versions.getMaxLen();
-        int maxCollectionLen = collections.getMaxLen();
 
         int maxTitleLen = 0;
         for (AtomTitle item : items) {
@@ -369,25 +359,27 @@ public class GenerateMenuFiles extends GenerateBase {
             }
         }
 
+        int maxCollectionLen = collections.getMaxLen();
+
         System.out.println("==========================================================");
         System.out.println(type);
         System.out.println("==========================================================");
         for (AtomTitle item : items) {
-            System.out.print(pad(item.getTitle(), maxTitleLen + 4) + " "
-                    + pad(shortPublishers.getKey(item.getPublisherId()), maxShortPublisherLen + 4) + " "
-                    + pad(publishers.getKey(item.getPublisherId()), maxPublisherLen + 4) + " "
-                    + pad(genres.getKey(item.getGenreId()), maxGenreLen + 4) + " "
-                    + pad(compatibles.getKey(item.getCompatibleId()), maxCompatibleLen + 4) + " "
-                    + pad(versions.getKey(item.getVersionId()), maxVersionLen + 4) + " ");
+            StringBuffer sb = new StringBuffer();
+            sb.append(pad(item.getTitle(), maxTitleLen + 4) + " ");
+            for (int i = 0; i < secondaryTables.length - 1; i++) {
+                SecondaryTable table = secondaryTables[i];
+                sb.append(pad(table.testIndex(item), table.getMaxLen() + 4) + " ");
+            }
             if (item.getCollectionIds().size() > 0) {
                 for (Integer collectionId : item.getCollectionIds()) {
-                    System.out.print(pad(Integer.toString(collectionId), 4));
-                    System.out.print(pad(getKey(collectionId, collections.getMap()), maxCollectionLen + 4));
+                    sb.append(pad(Integer.toString(collectionId), 4));
+                    sb.append(pad(getKey(collectionId, collections.getMap()), maxCollectionLen + 4));
                 }
             } else {
-                System.out.print(pad("NO COLLECTIONS", maxCollectionLen + 4));
+                sb.append(pad("NO COLLECTIONS", maxCollectionLen + 4));
             }
-            System.out.println();
+            System.out.println(sb);
         }
     }
 

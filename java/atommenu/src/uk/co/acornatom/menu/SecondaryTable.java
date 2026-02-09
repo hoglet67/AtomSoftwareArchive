@@ -185,4 +185,13 @@ public abstract class SecondaryTable extends TableBase {
         header[def.getByteOffset()] |= (val << def.getBitOffset());
     }
 
+    public String testIndex(AtomTitle title) {
+        String val = atomFieldExtractor.apply(title);
+        Integer id = map.get(val);
+        if (id == null) {
+            return null;
+        } else {
+            return val;
+        }
+    }
 }
