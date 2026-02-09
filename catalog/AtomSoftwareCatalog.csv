@@ -152,7 +152,7 @@ LISP2",present,,,No,https://site.acornatom.nl/boeken/lisp-theory-and-practice.pd
 98,V1,AS,Acornsoft,A.Commercial Software,Linear Regression,Utility,,AS/MATHS1,8200,"CH.""REGRESSI""",Works,REGRESSI,present,Maths Pack 1,,No,
 99,V1,AS,Acornsoft,A.Commercial Software,Polynomial,Utility,,AS/MATHS2,8200,"CH.""POLYNOM""",Works,POLYNOM,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 100,V1,AS,Acornsoft,A.Commercial Software,Rational,Utility,,AS/MATHS2,8200,"CH.""RATIONAL""",Works,RATIONAL,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
-101,V3,AS,Acornsoft,A.Commercial Software,Triginometry,Utility,,AS/MATHS2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
+101,V3,AS,Acornsoft,A.Commercial Software,Triginometry,Utility,,AS/MATHS2,8200,"CH.""TRIGONOM""",Works,TRIGONOM,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 102,V1,AS,Acornsoft,A.Commercial Software,Fourier,Utility,,AS/MATHS2,8200,"CH.""FOURIER""",Works,FOURIER,present,Maths Pack 2,,Yes,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 103,V1,NC,Non Comm,D.Non Commercial Software,Pascal (16K),Language,Mel Conway,OTHER,8200,*RUN PASCAL,Works,PASCAL,present,,Yes,No,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
 104,V1,AS,Acornsoft,A.Commercial Software,Peeko Computer,Educational,,AS/PEEKO,8200,"CH.""PEEKO""",Works,"PEEKO
@@ -2919,19 +2919,19 @@ ZISCR",present,AGD,Yes,,
 1278,V14B1,INU,Inufuto,D.Non Commercial Software,MAZY2,Game,Inufuto,INU,8200,*RUN MAZY2,Test,MAZY2,present,INUFUTO,Yes,,
 1279,V14B1,INU,Inufuto,D.Non Commercial Software,SVELLAS,Game,Inufuto,INU,8200,*RUN SVELLAS,Test,SVELLAS,present,INUFUTO,Yes,,
 1280,V14B1,INU,Inufuto,D.Non Commercial Software,AWASS,Game,Inufuto,INU,8200,*RUN AWASS,Test,AWASS,present,INUFUTO,Yes,,
-1281,V14B1,NC,Non Comm,B.Modern Creations,"RAM Test 00-03,28-3B",Utility,David Banks,NC/TEST,9200,*RUN RAM060,Test,RAM060,present,,,
-1282,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 00-3F,Utility,David Banks,NC/TEST,9200,*RUN RAM160,Test,RAM160,present,,,
-1283,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 00-7F,Utility,David Banks,NC/TEST,9200,*RUN RAM320,Test,RAM320,present,,,
-1284,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 82-97,Utility,David Banks,NC/TEST,8200,*RUN RAM006,Test,RAM006,present,,,
-1285,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 82-9F,Utility,David Banks,NC/TEST,8200,*RUN RAM008,Test,RAM008,present,,,
+1281,V14B1,NC,Non Comm,B.Modern Creations,"RAM Test 00-03,28-3B",Utility,David Banks,NC/TEST,9200,*RUN RAM060,Test,RAM060,present,,,,
+1282,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 00-3F,Utility,David Banks,NC/TEST,9200,*RUN RAM160,Test,RAM160,present,,,,
+1283,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 00-7F,Utility,David Banks,NC/TEST,9200,*RUN RAM320,Test,RAM320,present,,,,
+1284,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 82-97,Utility,David Banks,NC/TEST,8200,*RUN RAM006,Test,RAM006,present,,,,
+1285,V14B1,NC,Non Comm,B.Modern Creations,RAM Test 82-9F,Utility,David Banks,NC/TEST,8200,*RUN RAM008,Test,RAM008,present,,,,
 1286,V14B1,NC,Non Comm,F.ROMS,"RAM Test 28-3B,82-97",Utility,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM066 8800",Test,AROM066,present,ROMs,,,
 1287,V14B1,NC,Non Comm,F.ROMS,"RAM Test 28-3B,82-9F",Utility,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM068 8800",Test,AROM068,present,ROMs,,,
 1288,V14B1,NC,Non Comm,F.ROMS,RAM Test 00-6F,Utility,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM280 8800",Test,AROM280,present,ROMs,,,
-1289,V14B1,NC,Non Comm,B.Modern Creations,"Atomic RAM Test",Utility,Kees vas Oss,NC/TEST,8200,"CH.""RAMTEST""",Test,RAMTEST,present,,,
-1290,V14B1,NC,Non Comm,D.Non Commercial Software,"Mandelbrot",Graphics,Matalog,NC,8200,"CH.""MANDEL""",Test,MANDEL,present,,,
+1289,V14B1,NC,Non Comm,B.Modern Creations,Atomic RAM Test,Utility,Kees vas Oss,NC/TEST,8200,"CH.""RAMTEST""",Test,RAMTEST,present,,,,
+1290,V14B1,NC,Non Comm,D.Non Commercial Software,Mandelbrot,Graphics,Matalog,NC,8200,"CH.""MANDEL""",Test,MANDEL,present,,,,
 1291,V14B1,TA,The Atom,E.Books and Magazines,Life,Simulation,,TA,8200,"CH.""LIFE""",Test,LIFE,present,,,,
 1292,V14B1,PE,PE,E.Books and Magazines,Fascimile,Utility,,PE,8200,"CH.""DIGIFAX""",Test,DIGIFAX,present,,,,
 1293,V14B1,PE,PE,E.Books and Magazines,Morse Tutor,Utility,,PE,8200,"CH.""MORSE""",Test,MORSE,present,,,,
