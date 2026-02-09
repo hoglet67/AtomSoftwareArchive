@@ -383,35 +383,6 @@ public class GenerateMenuFiles extends GenerateBase {
         }
     }
 
-    public class TitleOrderSort implements Comparator<AtomTitle> {
-        @Override
-        public int compare(AtomTitle o1, AtomTitle o2) {
-            return o1.getTitle().compareTo(o2.getTitle());
-        }
-    }
-
-    public abstract class ComparatorBase implements Comparator<AtomTitle> {
-        public int compareWithZeroLast(int o1, int o2) {
-            if (o1 < 0) {
-                o1 = Integer.MAX_VALUE;
-            }
-            if (o2 < 0) {
-                o2 = Integer.MAX_VALUE;
-            }
-            return o1 - o2;
-        }
-    }
-
-    public class CollectionOrderSort extends ComparatorBase {
-        @Override
-        public int compare(AtomTitle o1, AtomTitle o2) {
-            int col1 = o1.getCollectionIds().size() > 0 ? o1.getCollectionIds().get(0) : Integer.MAX_VALUE;
-            int col2 = o2.getCollectionIds().size() > 0 ? o2.getCollectionIds().get(0) : Integer.MAX_VALUE;
-            int ret = compareWithZeroLast(col1, col2);
-            return ret != 0 ? ret : o1.getTitle().compareTo(o2.getTitle());
-        }
-    }
-
     @Override
     public Target getTarget() {
         return target;
