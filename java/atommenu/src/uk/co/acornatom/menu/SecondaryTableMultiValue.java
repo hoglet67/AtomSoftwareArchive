@@ -8,22 +8,19 @@ import java.util.function.Function;
 
 public class SecondaryTableMultiValue extends SecondaryTable {
 
-    private Function<? super AtomTitle, ? extends Collection<String>> spreadsheetFieldExtractor; // Extracts a collection field
     private Function<? super AtomTitle, ? extends Collection<String>> atomFieldMatcher;
 
     public SecondaryTableMultiValue (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super AtomTitle, ? extends List<String>> spreadsheetItemExtractor,
             Function<? super AtomTitle, ? extends List<String>> atomFieldMatcher,
             Comparator<String> comparator) {
         super(name, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
-        this.spreadsheetFieldExtractor = spreadsheetItemExtractor;
         this.atomFieldMatcher = atomFieldMatcher;
     }
 
     @Override
     public void addToIndex(AtomTitle item) {
-        Collection<String> values = spreadsheetFieldExtractor.apply(item);
+        Collection<String> values = atomFieldMatcher.apply(item);
         for (String value : values) {
             put(value, -1);
         }

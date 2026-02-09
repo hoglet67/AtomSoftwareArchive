@@ -7,44 +7,38 @@ import java.util.function.Function;
 
 public class SecondaryTableSingleValue extends SecondaryTable {
 
-    private Function<? super AtomTitle, ? extends String> spreadsheetFieldExtractor;
 
     public SecondaryTableSingleValue (
             String name,
-            Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor
+            Function<? super AtomTitle, ? extends String> atomFieldExtractor
             ) {
-        this(name, atomFieldExtractor, spreadsheetItemExtractor, new TreeMap<String, Integer>());
+        this(name, atomFieldExtractor, new TreeMap<String, Integer>());
     }
 
     public SecondaryTableSingleValue (
             String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Map<String, Integer> map
             ) {
-        this(name, atomFieldExtractor, spreadsheetItemExtractor, Comparator.naturalOrder(), map);
+        this(name, atomFieldExtractor, Comparator.naturalOrder(), map);
     }
 
     public SecondaryTableSingleValue (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Comparator<String> comparator) {
-        this(name, atomFieldExtractor, spreadsheetItemExtractor, comparator, new TreeMap<String, Integer>(comparator));
+        this(name, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
     }
 
     public SecondaryTableSingleValue (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Comparator<String> comparator,
             Map<String, Integer> map) {
         super(name, atomFieldExtractor, comparator, map);
-        this.spreadsheetFieldExtractor = spreadsheetItemExtractor;
     }
 
     @Override
     public void addToIndex(AtomTitle item) {
-        String value = spreadsheetFieldExtractor.apply(item);
+        String value = atomFieldExtractor.apply(item);
         put(value, -1);
     }
 

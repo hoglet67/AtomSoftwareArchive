@@ -21,36 +21,30 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
-            AtomTitle::getPublisher,
-            AtomTitle::getPublisher,
+            null, // Make this null to be sure it's never actually called
             new LinkedHashMap<String, Integer>());
 
     private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
-            AtomTitle::getPublisher,
             AtomTitle::getPublisher);
 
     private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
-            AtomTitle::getGenre,
             AtomTitle::getGenre);
 
     private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
-            AtomTitle::getCompatible,
             AtomTitle::getCompatible);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
             AtomTitle::getVersion,
-            AtomTitle::getVersion,
             intuitiveStringComparator.reversed());
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
-            AtomTitle::getCollectionFirst,
-            AtomTitle::getCollections,
-            AtomTitle::getCollections,
+            AtomTitle::getCollectionFirst, // for sorting (based on the first collection)
+            AtomTitle::getCollections,     // for indexing
             Comparator.nullsLast(intuitiveStringComparator));
 
     private SecondaryTable[] secondaryTables = new SecondaryTable[] {
