@@ -179,26 +179,14 @@ public class GenerateMenuFiles extends GenerateBase {
         // TODO: This code is not get generic, so needs changing when the facets change
         // ------------------------------------------------------------------------------------
 
-        List<AtomTitle> atomTitles = new ArrayList<AtomTitle>();
-        for (SpreadsheetTitle item : items) {
-            AtomTitle atomTitle = new AtomTitle();
-            atomTitle.setTitle(item.getTitle());
-            if (item.getDiskNo() != null) {
-                atomTitle.setIndex(item.getDiskNo()); // Use the disk number if it's been set by the generator
-            } else {
-                atomTitle.setIndex(item.getIdentifier()); // Use persistent identifier everywhere else
-            }
-            atomTitle.setShortPublisher(item.getShortPublisher());
-            atomTitle.setPublisher(item.getPublisher());
-            atomTitle.setPublisherId(publishers.get(item.getPublisher()));
-            atomTitle.setGenre(item.getGenre());
-            atomTitle.setGenreId(genres.get(item.getGenre()));
-            atomTitle.setCompatible(item.getCompatible());
-            atomTitle.setCompatibleId(compatibles.get(item.getCompatible()));
-            atomTitle.setVersion(item.getVersion());
-            atomTitle.setVersionId(versions.get(item.getVersion()));
-            atomTitle.setCollections(item.getCollections(), collections.getMap());
-            atomTitles.add(atomTitle);
+        List<AtomTitle> atomTitles = new ArrayList<AtomTitle>(items);
+
+        for (AtomTitle atomTitle : atomTitles) {
+            atomTitle.setPublisherId(publishers.get(atomTitle.getPublisher()));
+            atomTitle.setGenreId(genres.get(atomTitle.getGenre()));
+            atomTitle.setCompatibleId(compatibles.get(atomTitle.getCompatible()));
+            atomTitle.setVersionId(versions.get(atomTitle.getVersion()));
+            atomTitle.setCollectionIds(collections.getMap());
         }
 
         // ------------------------------------------------------------------------------------

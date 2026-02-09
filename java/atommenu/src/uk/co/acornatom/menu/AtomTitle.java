@@ -1,147 +1,62 @@
 package uk.co.acornatom.menu;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AtomTitle {
+public interface AtomTitle {
 
-    public static int TYPE_NORMAL = 0;
-    public static int TYPE_GROUP = 1;
-    public static int TYPE_CHILD = 2; // Not sure this is necessary
+    void setTitle(String title);
 
-    private String title;
-    private int index;
-    private int publisherId;
-    private int genreId;
-    private int compatibleId;
-    private int versionId;
-    private List<Integer> collectionIds;
-    private String publisher;
-    private String shortPublisher;
-    private String genre;
-    private String compatible;
-    private String version;
-    private List<String> collections;
-    private int absoluteAddress;
+    String getTitle();
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    int getIndex();
 
-    public String getTitle() {
-        return title;
-    }
+    void setGenreId(int genreId);
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
+    int getGenreId();
 
-    public int getIndex() {
-        return index;
-    }
+    void setGenre(String genre);
 
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
+    String getGenre();
 
-    public int getGenreId() {
-        return genreId;
-    }
+    void setPublisherId(int publisherId);
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+    int getPublisherId();
 
-    public String getGenre() {
-        return genre;
-    }
+    void setPublisher(String publisher);
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
-    }
+    String getPublisher();
 
-    public int getPublisherId() {
-        return publisherId;
-    }
+    void setCompatibleId(int compatibleId);
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+    int getCompatibleId();
 
-    public String getPublisher() {
-        return publisher;
-    }
+    void setCompatible(String compatible);
 
-    public void setCompatibleId(int compatibleId) {
-        this.compatibleId = compatibleId;
-    }
+    String getCompatible();
 
-    public int getCompatibleId() {
-        return compatibleId;
-    }
+    void setVersionId(int versionId);
 
-    public void setCompatible(String compatible) {
-        this.compatible = compatible;
-    }
+    int getVersionId();
 
-    public String getCompatible() {
-        return compatible;
-    }
+    void setVersion(String version);
 
-    public void setVersionId(int versionId) {
-        this.versionId = versionId;
-    }
+    String getVersion();
 
-    public int getVersionId() {
-        return versionId;
-    }
+    void setCollectionIds(Map<String, Integer> collectionMap);
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
+    List<String> getCollections();
 
-    public String getVersion() {
-        return version;
-    }
+    List<Integer> getCollectionIds();
 
-    public void setCollections(List<String> collections, Map<String, Integer> collectionMap) {
-        this.collections = collections;
-        this.collectionIds = new ArrayList<Integer>();
-        for (String collection : collections) {
-            this.collectionIds.add(collectionMap.get(collection));
-        }
-    }
+    String getCollectionFirst();
 
-    public List<String> getCollections() {
-        return collections;
-    }
+    void setAbsoluteAddress(int absoluteAddress);
 
-    public List<Integer> getCollectionIds() {
-        return collectionIds;
-    }
+    int getAbsoluteAddress();
 
-    public String getCollectionFirst() {
-        if (collections.isEmpty()) {
-            return null;
-        } else {
-            return collections.get(0);
-        }
-    }
+    void setShortPublisher(String shortPublisher);
 
-    public void setAbsoluteAddress(int absoluteAddress) {
-        this.absoluteAddress = absoluteAddress;
-    }
+    String getShortPublisher();
 
-    public int getAbsoluteAddress() {
-        return absoluteAddress;
-    }
-
-    public void setShortPublisher(String shortPublisher) {
-        this.shortPublisher = shortPublisher;
-    }
-
-    public String getShortPublisher() {
-        return shortPublisher;
-    }
 }
