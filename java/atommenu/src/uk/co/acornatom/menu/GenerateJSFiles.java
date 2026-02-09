@@ -53,9 +53,9 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
         createJSImage();
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             try {
                 byte[] image = createBlankDiskImage(item.getTitle());
                 addTitle(image, item, "BOOT");

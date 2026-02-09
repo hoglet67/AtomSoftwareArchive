@@ -43,8 +43,8 @@ public class SpreadsheetParser {
         this.file = file;
     }
 
-    public List<SpreadsheetTitle> parseSpreadSheet() {
-        List<SpreadsheetTitle> items = new ArrayList<SpreadsheetTitle>();
+    public List<AtomTitle> parseSpreadSheet() {
+        List<AtomTitle> items = new ArrayList<AtomTitle>();
         CSVReader csvReader = null;
         try {
             resetStats();
@@ -115,7 +115,7 @@ public class SpreadsheetParser {
             }
 
             for (String[] program : programs) {
-                SpreadsheetTitle item = new SpreadsheetTitle();
+                AtomTitle item = new AtomTitle();
                 String status = program[status_column].trim();
                 if (!status.equalsIgnoreCase(STATUS_PRESENT)) {
                     continue;
@@ -201,7 +201,7 @@ public class SpreadsheetParser {
         countsByPublisher = new TreeMap<String, Integer>();
     }
 
-    public void accumulateStats(SpreadsheetTitle item) {
+    public void accumulateStats(AtomTitle item) {
 
         numTitles++;
         titleTotalChars += item.getTitle().length();

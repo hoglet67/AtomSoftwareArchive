@@ -1,62 +1,268 @@
 package uk.co.acornatom.menu;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public interface AtomTitle {
+public class AtomTitle {
 
-    void setTitle(String title);
+    // These all come from the spreadsheet
+    private int identifier;
+    private String chunk;
+    private String title;
+    private String dir;
+    private String run;
+    private String boot;
+    private String publisher;
+    private String shortPublisher;
+    private String version;
+    private String compatible;
+    private List<String> collections;
+    private String genre;
+    private List<String> filenames;
+    private Set<String> runnables = new HashSet<String>();
+    private Set<String> loadables = new HashSet<String>();
 
-    String getTitle();
+    // These are part of AtomTitle and and filled in as the indexes are built
+    private int absoluteAddress;
+    private int publisherId;
+    private int genreId;
+    private int compatibleId;
+    private int versionId;
+    private List<Integer> collectionIds;
 
-    int getIndex();
 
-    void setGenreId(int genreId);
+    // These other computed things
+    private boolean compatible12K;
+    private int estimatedDiskSectors;
+    private Integer diskNo;
 
-    int getGenreId();
 
-    void setGenre(String genre);
+    public AtomTitle() {
+        diskNo = null;
+    }
 
-    String getGenre();
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
 
-    void setPublisherId(int publisherId);
+    /* Identifier is a persistent ID, taken from the first column of the spreadsheet */
+    public int getIdentifier() {
+        return identifier;
+    }
 
-    int getPublisherId();
+    public void setDiskNo(Integer diskNo) {
+        this.diskNo = diskNo;
+    }
 
-    void setPublisher(String publisher);
+    /* DiskNo can be used by a generate to indicate the disk number on which the title has been mapped */
+    public Integer getDiskNo() {
+        return diskNo;
+    }
 
-    String getPublisher();
+    public void setChunk(String chunk) {
+        this.chunk = chunk;
+    }
 
-    void setCompatibleId(int compatibleId);
+    public String getChunk() {
+        return chunk;
+    }
 
-    int getCompatibleId();
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    void setCompatible(String compatible);
+    public String getTitle() {
+        return title;
+    }
 
-    String getCompatible();
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
 
-    void setVersionId(int versionId);
+    public String getDir() {
+        return dir;
+    }
 
-    int getVersionId();
+    public void setRun(String run) {
+        this.run = run;
+    }
 
-    void setVersion(String version);
+    public String getRun() {
+        return run;
+    }
 
-    String getVersion();
+    public void setBoot(String boot) {
+        this.boot = boot;
+    }
 
-    void setCollectionIds(Map<String, Integer> collectionMap);
+    public String getBoot() {
+        return boot;
+    }
 
-    List<String> getCollections();
+    public void setPublisher(String publisher) {
+        if (publisher.isEmpty()) {
+            publisher = "???";
+        }
+        this.publisher = publisher;
+    }
 
-    List<Integer> getCollectionIds();
+    public String getPublisher() {
+        return publisher;
+    }
 
-    String getCollectionFirst();
+    public void setCollections(List<String> collections) {
+        this.collections = collections;
+    }
 
-    void setAbsoluteAddress(int absoluteAddress);
+    public List<String> getCollections() {
+        return collections;
+    }
 
-    int getAbsoluteAddress();
+    public void setGenre(String genre) {
+        if (genre.isEmpty()) {
+            genre = "???";
+        }
+        this.genre = genre;
+    }
 
-    void setShortPublisher(String shortPublisher);
+    public String getGenre() {
+        return genre;
+    }
 
-    String getShortPublisher();
+    public void setVersion(String version) {
+        if (version.isEmpty()) {
+            version = "???";
+        }
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setCompatible(String compatible) {
+        this.compatible = compatible;
+    }
+
+    public String getCompatible() {
+        return compatible;
+    }
+
+    public void setShortPublisher(String shortPublisher) {
+        this.shortPublisher = shortPublisher;
+    }
+
+    public String getShortPublisher() {
+        return shortPublisher;
+    }
+
+    public List<String> getFilenames() {
+        return filenames;
+    }
+
+    public void setFilenames(List<String> filenames) {
+        this.filenames = filenames;
+    }
+
+    public Set<String> getRunnables() {
+        return runnables;
+    }
+
+    public Set<String> getLoadables() {
+        return loadables;
+    }
+
+    public boolean isCompatible12K() {
+        return compatible12K;
+    }
+
+    public void setCompatible12K(boolean compatible12K) {
+        this.compatible12K = compatible12K;
+        this.compatible = compatible12K ? "12K:YES" : "12K:NO";
+    }
+
+    @Override
+    public String toString() {
+        return this.chunk + " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
+    }
+
+    public int getEstimatedDiskSectors() {
+        return estimatedDiskSectors;
+    }
+
+    public void setEstimatedDiskSectors(int estimatedDiskSectors) {
+        this.estimatedDiskSectors = estimatedDiskSectors;
+    }
+
+    public int getIndex() {
+        if (diskNo != null) {
+            return diskNo;     // Use the disk number if it's been set by the generator
+        } else {
+            return identifier; // Use persistent identifier everywhere else
+        }
+    }
+
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
+    }
+
+    public int getGenreId() {
+        return genreId;
+    }
+
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public int getPublisherId() {
+        return publisherId;
+    }
+
+    public void setCompatibleId(int compatibleId) {
+        this.compatibleId = compatibleId;
+    }
+
+    public int getCompatibleId() {
+        return compatibleId;
+    }
+
+    public void setVersionId(int versionId) {
+        this.versionId = versionId;
+    }
+
+    public int getVersionId() {
+        return versionId;
+    }
+
+    public void setCollectionIds(Map<String, Integer> collectionMap) {
+        this.collectionIds = new ArrayList<Integer>();
+        for (String collection : collections) {
+            this.collectionIds.add(collectionMap.get(collection));
+        }
+    }
+
+    public List<Integer> getCollectionIds() {
+        return collectionIds;
+    }
+
+    public String getCollectionFirst() {
+        if (collections.isEmpty()) {
+            return null;
+        } else {
+            return collections.get(0);
+        }
+    }
+
+    public void setAbsoluteAddress(int absoluteAddress) {
+        this.absoluteAddress = absoluteAddress;
+    }
+
+    public int getAbsoluteAddress() {
+        return absoluteAddress;
+    }
+
 
 }

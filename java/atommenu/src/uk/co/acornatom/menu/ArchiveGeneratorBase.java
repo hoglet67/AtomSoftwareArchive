@@ -9,7 +9,7 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
     // Files to copy into each MNU folder
     public static String[] ATOMMC_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3", "HELP"};
 
-    protected void patch_atommc_joystick(ATMFile atmFile, SpreadsheetTitle item) {
+    protected void patch_atommc_joystick(ATMFile atmFile, AtomTitle item) {
         byte[] bytes = atmFile.getData();
         for (int i = 0; i < bytes.length - 6; i++) {
             // .loop LDA &B400
@@ -32,10 +32,10 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
         }
     }
 
-    protected void filterOZMOOTitles(List<SpreadsheetTitle> items) throws IOException {
-        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+    protected void filterOZMOOTitles(List<AtomTitle> items) throws IOException {
+        Iterator<AtomTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
-            SpreadsheetTitle item = itemIterator.next();
+            AtomTitle item = itemIterator.next();
             if (item.getCollections().contains("OZMOO") ) {
                 System.out.println("WARNING: dropping title from " + getTarget().name() + " because it's not supported: " + item);
                 itemIterator.remove();
@@ -44,18 +44,18 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
     }
 
     @Override
-    abstract public void filterTitles(List<SpreadsheetTitle> items) throws IOException;
+    abstract public void filterTitles(List<AtomTitle> items) throws IOException;
 
     @Override
-    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+    public void allocateDisks(List<AtomTitle> items) throws IOException {
         // Items are shared between targets, so reset any allocation from earlier targets
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             item.setDiskNo(null);
         }
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
     }
 
     @Override

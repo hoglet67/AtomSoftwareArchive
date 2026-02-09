@@ -29,7 +29,7 @@ public class GenerateBootstrapFiles extends GenerateBase {
         this.target = target;
     }
 
-    private void generateMachineCodeBootstrap(SpreadsheetTitle item, boolean rom) throws IOException {
+    private void generateMachineCodeBootstrap(AtomTitle item, boolean rom) throws IOException {
 
         int identifier = item.getIdentifier();
         String directory = item.getDir();
@@ -139,8 +139,8 @@ public class GenerateBootstrapFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
-        for (SpreadsheetTitle item : items) {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
+        for (AtomTitle item : items) {
             boolean rom = item.getChunk().equals(ROMS_CHUNK);
             generateMachineCodeBootstrap(item, rom);
         }

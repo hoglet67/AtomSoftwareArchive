@@ -10,7 +10,7 @@ public class GenerateAtoMMCFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+    public void filterTitles(List<AtomTitle> items) throws IOException {
     }
 
     @Override

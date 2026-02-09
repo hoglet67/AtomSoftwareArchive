@@ -266,7 +266,7 @@ public class GenerateSplashFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
 
         int linex = 9;
 

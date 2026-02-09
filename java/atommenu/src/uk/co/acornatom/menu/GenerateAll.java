@@ -62,14 +62,14 @@ public class GenerateAll {
     }
 
     // Check all files needed for each title are present
-    private void checkFiles(List<SpreadsheetTitle> items) {
+    private void checkFiles(List<AtomTitle> items) {
         try {
             banner("Checking the files of each title exist");
             Set<Path> paths = new TreeSet<Path>();
             paths.addAll(listFiles(archiveDir.toPath()));
-            Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+            Iterator<AtomTitle> itemIterator = items.iterator();
             while (itemIterator.hasNext()) {
-                SpreadsheetTitle item  = itemIterator.next();
+                AtomTitle item  = itemIterator.next();
                 int numSectors = 1; // For boot file
                 boolean ok = true;
                 for (String filename : item.getFilenames()) {
@@ -106,9 +106,9 @@ public class GenerateAll {
         }
     }
     // Check 12K compatibility
-    private void check12KCompatibility(List<SpreadsheetTitle> items) {
+    private void check12KCompatibility(List<AtomTitle> items) {
         banner("Checking 12K Compatibility");
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             boolean ok = true;
             boolean warn = true;
             for (String filename : item.getFilenames()) {
@@ -148,9 +148,9 @@ public class GenerateAll {
     }
 
     // Check for garbage signature
-    private void checkGarbageSignature(List<SpreadsheetTitle> items) {
+    private void checkGarbageSignature(List<AtomTitle> items) {
         banner("Checking files for trailing garbage");
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
                 try {
@@ -168,10 +168,10 @@ public class GenerateAll {
 
     // Count the number of titles remaining in each chunk
     // (and also create the All chunk)
-    private Map<String, Integer> calculateChunkStats(List<SpreadsheetTitle> items, String message) {
+    private Map<String, Integer> calculateChunkStats(List<AtomTitle> items, String message) {
         Map<String, Integer> chunks = new TreeMap<String, Integer>();
         int total = 0;
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             // Count the number of titles in each chunk
             String chunk = item.getChunk();
             Integer count = chunks.get(chunk);
@@ -196,14 +196,14 @@ public class GenerateAll {
 
         banner("Parsing catalog CSV file");
         SpreadsheetParser parser = new SpreadsheetParser(catalogCSV);
-        List<SpreadsheetTitle> items = parser.parseSpreadSheet();
+        List<AtomTitle> items = parser.parseSpreadSheet();
 
         // Drop incomplete titles (where files are missing)
         checkFiles(items);
 
-        Comparator<SpreadsheetTitle> customComparator = new Comparator<SpreadsheetTitle>() {
+        Comparator<AtomTitle> customComparator = new Comparator<AtomTitle>() {
             @Override
-            public int compare(SpreadsheetTitle o1, SpreadsheetTitle o2) {
+            public int compare(AtomTitle o1, AtomTitle o2) {
                 if (!o1.getChunk().equals(o2.getChunk())) {
                     return o1.getChunk().compareTo(o2.getChunk());
                 } else if (!o1.getPublisher().equals(o2.getPublisher())) {
@@ -214,7 +214,7 @@ public class GenerateAll {
             };
         };
 
-        List<SpreadsheetTitle> sortedItems = new ArrayList<SpreadsheetTitle>(items);
+        List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
         sortedItems.sort(customComparator);
 
         // Produce WARNINGs for titles are missing 32K Ram = YES tags in the spreadsheet
@@ -243,7 +243,7 @@ public class GenerateAll {
             try {
 
                 // Copy the master list, as the target may drop items
-                List<SpreadsheetTitle> targetItems = new ArrayList<SpreadsheetTitle>(items);
+                List<AtomTitle> targetItems = new ArrayList<AtomTitle>(items);
 
                 banner("Generating " + target.name());
 
@@ -275,8 +275,8 @@ public class GenerateAll {
                 for (String chunk : chunkNames) {
                     File menuDir = new File(archiveDir, menuBase + chunk);
                     menuDir.mkdirs();
-                    List<SpreadsheetTitle> chunkItems = new ArrayList<SpreadsheetTitle>();
-                    for (SpreadsheetTitle item : targetItems) {
+                    List<AtomTitle> chunkItems = new ArrayList<AtomTitle>();
+                    for (AtomTitle item : targetItems) {
                         if (item.getChunk().equals(chunk) || chunk.equals(IFileGenerator.ALL_CHUNK)) {
                             chunkItems.add(item);
                         }

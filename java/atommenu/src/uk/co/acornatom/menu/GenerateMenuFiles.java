@@ -22,34 +22,34 @@ public class GenerateMenuFiles extends GenerateBase {
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
             AtomTitle::getPublisher,
-            SpreadsheetTitle::getPublisher,
+            AtomTitle::getPublisher,
             new LinkedHashMap<String, Integer>());
 
     private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
             AtomTitle::getPublisher,
-            SpreadsheetTitle::getPublisher);
+            AtomTitle::getPublisher);
 
     private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
             AtomTitle::getGenre,
-            SpreadsheetTitle::getGenre);
+            AtomTitle::getGenre);
 
     private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
             AtomTitle::getCompatible,
-            SpreadsheetTitle::getCompatible);
+            AtomTitle::getCompatible);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
             AtomTitle::getVersion,
-            SpreadsheetTitle::getVersion,
+            AtomTitle::getVersion,
             intuitiveStringComparator.reversed());
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
             AtomTitle::getCollectionFirst,
-            SpreadsheetTitle::getCollections,
+            AtomTitle::getCollections,
             AtomTitle::getCollections,
             Comparator.nullsLast(intuitiveStringComparator));
 
@@ -87,7 +87,7 @@ public class GenerateMenuFiles extends GenerateBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
 
         int endOfLowerText;
         int lengthOfLowerText;
@@ -137,7 +137,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // Add the item metadata into the secondary tables
         // ------------------------------------------------------------------------------------
 
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             for (int i = 1; i < secondaryTables.length; i++) { // Skip first table (short pub)
                 secondaryTables[i].addToIndex(item);
             }

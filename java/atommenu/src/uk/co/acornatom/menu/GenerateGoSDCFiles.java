@@ -32,7 +32,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+    public void filterTitles(List<AtomTitle> items) throws IOException {
         filterOZMOOTitles(items);
     }
 
@@ -98,10 +98,10 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
 
         createMenus();
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             try {
                 if (debug) {
                     System.out.println(item.getTitle());

@@ -37,14 +37,14 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     abstract protected void addDisk(byte[] image, String name) throws IOException;
 
     @Override
-    abstract public void generateFiles(List<SpreadsheetTitle> items) throws IOException;
+    abstract public void generateFiles(List<AtomTitle> items) throws IOException;
 
     @Override
-    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+    public void filterTitles(List<AtomTitle> items) throws IOException {
         filterOZMOOTitles(items);
-        Iterator<SpreadsheetTitle> itemIterator = items.iterator();
+        Iterator<AtomTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
-            SpreadsheetTitle item = itemIterator.next();
+            AtomTitle item = itemIterator.next();
             if (item.getEstimatedDiskSectors() > NUM_SECS - CAT_SECS) {
                 System.out.println("WARNING: dropping title from " + getTarget().name() + " because it's too large: " + item);
                 itemIterator.remove();
@@ -56,7 +56,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+    public void allocateDisks(List<AtomTitle> items) throws IOException {
         super.allocateDisks(items);
     }
 
@@ -187,7 +187,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
         }
     }
 
-    protected void addTitle(byte[] image, SpreadsheetTitle item, String bootName) throws IOException {
+    protected void addTitle(byte[] image, AtomTitle item, String bootName) throws IOException {
         if (debug) {
             System.out.println(item.getTitle());
         }

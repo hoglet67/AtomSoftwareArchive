@@ -7,12 +7,12 @@ import java.util.function.Function;
 
 public class SecondaryTableSingleValue extends SecondaryTable {
 
-    private Function<? super SpreadsheetTitle, ? extends String> spreadsheetFieldExtractor;
+    private Function<? super AtomTitle, ? extends String> spreadsheetFieldExtractor;
 
     public SecondaryTableSingleValue (
             String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor
+            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor
             ) {
         this(name, atomFieldExtractor, spreadsheetItemExtractor, new TreeMap<String, Integer>());
     }
@@ -20,7 +20,7 @@ public class SecondaryTableSingleValue extends SecondaryTable {
     public SecondaryTableSingleValue (
             String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
+            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Map<String, Integer> map
             ) {
         this(name, atomFieldExtractor, spreadsheetItemExtractor, Comparator.naturalOrder(), map);
@@ -28,14 +28,14 @@ public class SecondaryTableSingleValue extends SecondaryTable {
 
     public SecondaryTableSingleValue (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
+            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Comparator<String> comparator) {
         this(name, atomFieldExtractor, spreadsheetItemExtractor, comparator, new TreeMap<String, Integer>(comparator));
     }
 
     public SecondaryTableSingleValue (String name,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Function<? super SpreadsheetTitle, ? extends String> spreadsheetItemExtractor,
+            Function<? super AtomTitle, ? extends String> spreadsheetItemExtractor,
             Comparator<String> comparator,
             Map<String, Integer> map) {
         super(name, atomFieldExtractor, comparator, map);
@@ -43,7 +43,7 @@ public class SecondaryTableSingleValue extends SecondaryTable {
     }
 
     @Override
-    public void addToIndex(SpreadsheetTitle item) {
+    public void addToIndex(AtomTitle item) {
         String value = spreadsheetFieldExtractor.apply(item);
         put(value, -1);
     }

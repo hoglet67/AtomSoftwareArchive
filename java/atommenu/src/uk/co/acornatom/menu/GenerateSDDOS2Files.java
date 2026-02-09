@@ -80,7 +80,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         return "" + (1 + chunk);
     }
 
-    protected boolean areItemsCombinable(File archiveDir, SpreadsheetTitle item1, SpreadsheetTitle item2) {
+    protected boolean areItemsCombinable(File archiveDir, AtomTitle item1, AtomTitle item2) {
 
         int item1_numFiles = item1.getFilenames().size();
         int item2_numFiles = item2.getFilenames().size();
@@ -111,13 +111,13 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void allocateDisks(List<SpreadsheetTitle> items) throws IOException {
+    public void allocateDisks(List<AtomTitle> items) throws IOException {
         super.allocateDisks(items);
         // Generate disk numbers up front, combining pairs of titles if possible
         // (this is just used by SDDOS)
         int diskNo = numChunks; // Skip the menu disks
-        SpreadsheetTitle lastItem = null;
-        for (SpreadsheetTitle item : items) {
+        AtomTitle lastItem = null;
+        for (AtomTitle item : items) {
             // Test if two items are combinable
             if (lastItem != null && areItemsCombinable(archiveDir, lastItem, item)) {
                 // Append the item to the current disk
@@ -157,11 +157,11 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
         createSDImage();
         byte[] image = null;
         Integer diskNo = null;
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             try {
                 if ((item.getDiskNo() & 1) == 0) {
                     if (diskNo != null) {

@@ -37,7 +37,7 @@ public abstract class SecondaryTable extends TableBase {
         }
     }
 
-    public abstract void addToIndex(SpreadsheetTitle item);
+    public abstract void addToIndex(AtomTitle item);
 
     public abstract boolean match(AtomTitle title, String value);
 

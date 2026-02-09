@@ -42,7 +42,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void filterTitles(List<SpreadsheetTitle> items) throws IOException {
+    public void filterTitles(List<AtomTitle> items) throws IOException {
         filterOZMOOTitles(items);
     }
 
@@ -265,7 +265,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         return dir.toString();
     }
 
-    private void patch_nomon(ATMFile atmFile, SpreadsheetTitle item) {
+    private void patch_nomon(ATMFile atmFile, AtomTitle item) {
         byte[] bytes = atmFile.getData();
         String[] matches = { "N.\r", "NO.\r", "NOM.\r", "NOMO.\r", "NOMON\r" };
         for (String match : matches) {
@@ -306,7 +306,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     }
 
     @Override
-    public void generateFiles(List<SpreadsheetTitle> items) throws IOException {
+    public void generateFiles(List<AtomTitle> items) throws IOException {
 
         createMenus();
 
@@ -317,7 +317,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         addLibFolder(LIBDIR, eco350APatches());
         addLibFolder(LIBDIR2, eco350EPatches());
 
-        for (SpreadsheetTitle item : items) {
+        for (AtomTitle item : items) {
             try {
                 if (debug) {
                     System.out.println(item.getTitle());
