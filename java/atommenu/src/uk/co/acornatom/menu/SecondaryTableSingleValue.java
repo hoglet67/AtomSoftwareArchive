@@ -10,30 +10,34 @@ public class SecondaryTableSingleValue extends SecondaryTable {
 
     public SecondaryTableSingleValue (
             String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor
             ) {
-        this(name, atomFieldExtractor, new TreeMap<String, Integer>());
+        this(name, def, atomFieldExtractor, new TreeMap<String, Integer>());
     }
 
     public SecondaryTableSingleValue (
             String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Map<String, Integer> map
             ) {
-        this(name, atomFieldExtractor, Comparator.naturalOrder(), map);
+        this(name, def, atomFieldExtractor, Comparator.naturalOrder(), map);
     }
 
     public SecondaryTableSingleValue (String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Comparator<String> comparator) {
-        this(name, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
+        this(name, def, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
     }
 
     public SecondaryTableSingleValue (String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Comparator<String> comparator,
             Map<String, Integer> map) {
-        super(name, atomFieldExtractor, comparator, map);
+        super(name, def, atomFieldExtractor, comparator, map);
     }
 
     @Override

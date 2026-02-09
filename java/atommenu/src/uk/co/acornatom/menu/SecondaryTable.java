@@ -11,6 +11,8 @@ import java.util.function.Function;
 public abstract class SecondaryTable extends TableBase {
 
     private String name;
+    private BitField def;
+
     protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
     private Comparator<String> comparator;
     private Map<String, Integer> map;
@@ -20,11 +22,13 @@ public abstract class SecondaryTable extends TableBase {
     private int calculatedSize;
 
     protected SecondaryTable (String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Comparator<String> comparator,
             Map<String, Integer> map
             ) {
         this.name = name;
+        this.def = def;
         this.map = map;
         this.comparator = comparator;
         this.maxLen = 0;
@@ -35,6 +39,10 @@ public abstract class SecondaryTable extends TableBase {
                 maxLen = key.length();
             }
         }
+    }
+
+    public BitField getDef() {
+        return def;
     }
 
     public abstract void addToIndex(AtomTitle item);
@@ -166,4 +174,15 @@ public abstract class SecondaryTable extends TableBase {
     public Map<String, Integer> getMap() {
         return map;
     }
+
+    public void setBitfield(byte[] header, AtomTitle title) {
+        int mask = (1 << def.getSize()) - 1;
+        int val = map.get(atomFieldExtractor.apply(title));
+        if (val >= mask) {
+            throw new RuntimeException("Value " + val + " too large for " + name);
+        }
+        header[def.getByteOffset()] &= ~(mask << def.getBitOffset());
+        header[def.getByteOffset()] |= (val << def.getBitOffset());
+    }
+
 }

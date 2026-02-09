@@ -11,10 +11,11 @@ public class SecondaryTableMultiValue extends SecondaryTable {
     private Function<? super AtomTitle, ? extends Collection<String>> atomFieldMatcher;
 
     public SecondaryTableMultiValue (String name,
+            BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Function<? super AtomTitle, ? extends List<String>> atomFieldMatcher,
             Comparator<String> comparator) {
-        super(name, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
+        super(name, def, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
         this.atomFieldMatcher = atomFieldMatcher;
     }
 

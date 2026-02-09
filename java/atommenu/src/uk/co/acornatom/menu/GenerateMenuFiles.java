@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -19,30 +18,38 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private Comparator<String> intuitiveStringComparator = new IntuitiveStringComparator<String>();
 
+    private int titleHeaderSize = 4;
+
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
+            null, // Make this null to be sure it's never actually called
             null, // Make this null to be sure it's never actually called
             new LinkedHashMap<String, Integer>());
 
     private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
+            new BitField(2, 0, 8),
             AtomTitle::getPublisher);
 
     private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
+            new BitField(1, 3, 5),
             AtomTitle::getGenre);
 
     private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
+            new BitField(3, 6, 2),
             AtomTitle::getCompatible);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
+            new BitField(3 ,0, 6),
             AtomTitle::getVersion,
             intuitiveStringComparator.reversed());
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
+            new BitField(4, 0, 8),
             AtomTitle::getCollectionFirst, // for sorting (based on the first collection)
             AtomTitle::getCollections,     // for indexing
             Comparator.nullsLast(intuitiveStringComparator));
@@ -173,7 +180,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // TODO: This code is not get generic, so needs changing when the facets change
         // ------------------------------------------------------------------------------------
 
-        List<AtomTitle> atomTitles = new ArrayList<AtomTitle>(items);
+        List<AtomTitle> atomTitles = items;
 
         for (AtomTitle atomTitle : atomTitles) {
             atomTitle.setPublisherId(publishers.get(atomTitle.getPublisher()));
@@ -193,7 +200,7 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         // TODO: The title table is also not generic and depends on the facets
-        byte[] titleTableBytes = new TitleTable(debug).createTable(titleTableAddr, atomTitles);
+        byte[] titleTableBytes = new TitleTable(debug, titleHeaderSize).createTable(titleTableAddr, atomTitles, secondaryTables);
 
         byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 

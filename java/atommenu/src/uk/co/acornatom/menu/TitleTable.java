@@ -7,12 +7,14 @@ import java.util.List;
 public class TitleTable extends TableBase {
 
     private boolean debug;
+    private int titleHeaderSize;
 
-    public TitleTable(boolean debug) {
+    public TitleTable(boolean debug, int titleHeaderSize) {
         this.debug = debug;
+        this.titleHeaderSize = titleHeaderSize;
     }
 
-    public byte[] createTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
+    public byte[] createTable(int absoluteAddress, List<AtomTitle> items, SecondaryTable[] secondaryTables) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
             System.out.println("Title Table");
@@ -22,9 +24,13 @@ public class TitleTable extends TableBase {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         for (AtomTitle item : items) {
             item.setAbsoluteAddress(absoluteAddress + bos.size());
-            writeShort(bos, item.getIndex() + (item.getGenreId() << 11));
-            writeByte(bos, item.getPublisherId());
-            writeByte(bos, (item.getCompatibleId() << 6) + item.getVersionId());
+            byte[] header = new byte[titleHeaderSize];
+            header[0] = (byte) (item.getIndex() & 0xff);
+            header[1] = (byte) ((item.getIndex() >> 8) & 0x07);
+            for (int i = 1; i < secondaryTables.length - 1; i++) {
+                secondaryTables[i].setBitfield(header, item);
+            }
+            bos.write(header);
             for (Integer collectionId : item.getCollectionIds()) {
                 writeByte(bos, 128 + collectionId);
             }
