@@ -2396,7 +2396,7 @@ ZBSCR",present,AGD Pack 47,,Yes,,
 1119,V11B7,AGD,AGD,C.Kees' AGD Ports,Zombo,Game,Kees van Oss,AGD/ZOMBO,8200,"CH.""ZORUN""",Works,"ZOCODE
 ZOPAN
 ZORUN
-ZOSCR",present,,,Yes,,
+ZOSCR",present,AGD Pack 47,,Yes,,
 1120,V11B7,AGD,AGD,C.Kees' AGD Ports,*** AGD Demo Carousel ***,Game,Kees van Oss,AGD,8200,"CH.""SHOW1""",Works,"SHOW1
 SHOW2
 SHOW2E
@@ -2412,141 +2412,141 @@ J-SHAPE",present,,,Yes,,
 1125,,CC,Computer Concepts,A.Commercial Software,Sound Effects,Utility,,,,,Advert in Computing Today March 82,,missing,,,,,
 1126,V12B1,AGD,AGD,C.Kees' AGD Ports,Alchemist II,Game,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""",Works,"AL2CODE
 AL2RUN
-AL2SCR",present,,,Yes,,
+AL2SCR",present,AGD Pack 52,,Yes,,
 1127,V12B1,AGD,AGD,C.Kees' AGD Ports,Amongbad,Game,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""",Works,"ABCODE
 ABRUN
-ABSCR",present,,,Yes,,
+ABSCR",present,AGD Pack 52,,Yes,,
 1128,V12B1,AGD,AGD,C.Kees' AGD Ports,Apulija-13,Game,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""",Works,"APCODE
 APPAN
 APRUN
-APSCR",present,,,Yes,,
+APSCR",present,AGD Pack 52,,Yes,,
 1129,V12B1,AGD,AGD,C.Kees' AGD Ports,Blimpgeddon,Game,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""",Works,"BGCODE
 BGRUN
-BGSCR",present,,,Yes,,
+BGSCR",present,AGD Pack 52,,Yes,,
 1130,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Daytime,Game,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""",Works,"BLDCODE
 BLDRUN
-BLDSCR",present,,,Yes,,
+BLDSCR",present,AGD Pack 53,,Yes,,
 1131,V12B1,AGD,AGD,C.Kees' AGD Ports,Agent Blue Nighttime,Game,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""",Works,"BLNCODE
 BLNRUN
-BLNSCR",present,,,Yes,,
+BLNSCR",present,AGD Pack 53,,Yes,,
 1132,V12B1,AGD,AGD,C.Kees' AGD Ports,Bulletstorm,Game,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""",Works,"BSCODE
 BSRUN
-BSSCR",present,,,Yes,,
+BSSCR",present,AGD Pack 53,,Yes,,
 1133,V12B1,AGD,AGD,C.Kees' AGD Ports,Chiquito,Game,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""",Works,"CHCODE
 CHRUN
-CHSCR",present,,,Yes,,
+CHSCR",present,AGD Pack 53,,Yes,,
 1134,V12B1,AGD,AGD,C.Kees' AGD Ports,Code112,Game,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""",Works,"112CODE
 112PAN
 112RUN
-112SCR",present,,,Yes,,
+112SCR",present,AGD Pack 54,,Yes,,
 1135,V12B1,AGD,AGD,C.Kees' AGD Ports,Deepcore Raider,Game,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""",Works,"DCCODE
 DCRUN
-DCSCR",present,,,Yes,,
+DCSCR",present,AGD Pack 54,,Yes,,
 1136,V12B1,AGD,AGD,C.Kees' AGD Ports,Dirty Dozer,Game,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""",Works,"DDCODE
 DDPAN
 DDRUN
-DDSCR",present,,,Yes,,
+DDSCR",present,AGD Pack 54,,Yes,,
 1137,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong jr2,Game,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""",Works,"JR2CODE
-JR2RUN",present,,,Yes,,
+JR2RUN",present,AGD Pack 54,,Yes,,
 1138,V12B1,AGD,AGD,C.Kees' AGD Ports,Donkey Kong Reloaded,Game,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""",Works,"DKRCODE
 DKRRUN
-DKRSCR",present,,,Yes,,
+DKRSCR",present,AGD Pack 55,,Yes,,
 1139,V12B1,AGD,AGD,C.Kees' AGD Ports,Flype,Game,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""",Works,"FLCODE
 FLRUN
-FLSCR",present,,,Yes,,
+FLSCR",present,AGD Pack 55,,Yes,,
 1140,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 1,Game,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""",Works,"F21CODE
 F21PAN
 F21RUN
-F21SCR",present,,,Yes,,
+F21SCR",present,AGD Pack 56,,Yes,,
 1141,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 2,Game,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""",Works,"F22CODE
 F22PAN
 F22RUN
-F22SCR",present,,,Yes,,
+F22SCR",present,AGD Pack 56,,Yes,,
 1142,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 3,Game,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""",Works,"F23CODE
 F23PAN
 F23RUN
-F23SCR",present,,,Yes,,
+F23SCR",present,AGD Pack 56,,Yes,,
 1143,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded 4,Game,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""",Works,"F24CODE
 F24PAN
 F24RUN
-F24SCR",present,,,Yes,,
+F24SCR",present,AGD Pack 56,,Yes,,
 1144,V12B1,AGD,AGD,C.Kees' AGD Ports,Fungus Reloaded Boss,Game,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""",Works,"F25CODE
 F25PAN
 F25RUN
-F25SCR",present,,,Yes,,
+F25SCR",present,AGD Pack 56,,Yes,,
 1145,V12B1,AGD,AGD,C.Kees' AGD Ports,Gherkins Christmas Carnage,Game,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""",Works,"GXCODE
 GXRUN
-GXSCR",present,,,Yes,,
+GXSCR",present,AGD Pack 55,,Yes,,
 1146,V12B1,AGD,AGD,C.Kees' AGD Ports,Gnoni 2020,Game,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""",Works,"GNCODE
 GNRUN
-GNSCR",present,,,Yes,,
+GNSCR",present,AGD Pack 57,,Yes,,
 1147,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 1,Game,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""",Works,"L1CODE
 L1RUN
-L1SCR",present,,,Yes,,
+L1SCR",present,AGD Pack 58,,Yes,,
 1148,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 2,Game,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""",Works,"L2CODE
 L2RUN
-L2SCR",present,,,Yes,,
+L2SCR",present,AGD Pack 58,,Yes,,
 1149,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 3,Game,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""",Works,"L3CODE
 L3RUN
-L3SCR",present,,,Yes,,
+L3SCR",present,AGD Pack 58,,Yes,,
 1150,V12B1,AGD,AGD,C.Kees' AGD Ports,Laetitia 4,Game,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""",Works,"L4CODE
 L4RUN
-L4SCR",present,,,Yes,,
+L4SCR",present,AGD Pack 58,,Yes,,
 1151,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Cavern,Game,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""",Works,"LCCODE
 LCRUN
-LCSCR",present,,,Yes,,
+LCSCR",present,AGD Pack 57,,Yes,,
 1152,V12B1,AGD,AGD,C.Kees' AGD Ports,Lost Island,Game,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""",Works,"LICODE
 LIRUN
-LISCR",present,,,Yes,,
+LISCR",present,AGD Pack 57,,Yes,,
 1153,V12B1,AGD,AGD,C.Kees' AGD Ports,Magicable,Game,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""",Works,"MACODE
 MARUN
-MASCR",present,,,Yes,,
+MASCR",present,AGD Pack 57,,Yes,,
 1154,V12B1,AGD,AGD,C.Kees' AGD Ports,Akane,Game,Kees van Oss,AGD/AKANE,8200,"CH.""AKRUN""",Works,"AKCODE
 AKRUN
-AKSCR",present,,,Yes,,
+AKSCR",present,AGD Pack 62,,Yes,,
 1155,V12B1,AGD,AGD,C.Kees' AGD Ports,Monty Mole and The Lost So,Game,Kees van Oss,AGD/MONTYTL,8200,"CH.""MTLRUN""",Works,"MTLCODE
 MTLRUN
-MTLSCR",present,,,Yes,,
+MTLSCR",present,AGD Pack 59,,Yes,,
 1156,V12B1,AGD,AGD,C.Kees' AGD Ports,Mr Hair Adventure,Game,Kees van Oss,AGD/MRHAIRA,8200,"CH.""MHARUN""",Works,"MHACODE
 MHARUN
-MHASCR",present,,,Yes,,
+MHASCR",present,AGD Pack 59,,Yes,,
 1157,V12B1,AGD,AGD,C.Kees' AGD Ports,Omelettes for breakfast,Game,Kees van Oss,AGD/OMELETT,8200,"CH.""OMRUN""",Works,"OMCODE
-OMRUN",present,,,Yes,,
+OMRUN",present,AGD Pack 59,,Yes,,
 1158,V12B1,AGD,AGD,C.Kees' AGD Ports,Stripping Penelope 18+,Game,Kees van Oss,AGD/PENELOP,8200,"CH.""PERUN""",Works,"PECODE
-PERUN",present,,,Yes,,
+PERUN",present,AGD Pack 59,,Yes,,
 1159,V12B1,AGD,AGD,C.Kees' AGD Ports,Quest for Elements,Game,Kees van Oss,AGD/QUEST,8200,"CH.""QFERUN""",Works,"QFECODE
 QFERUN
-QFESCR",present,,,Yes,,
+QFESCR",present,AGD Pack 60,,Yes,,
 1160,V12B1,AGD,AGD,C.Kees' AGD Ports,The Shining,Game,Kees van Oss,AGD/SHINING,8200,"CH.""SHRUN""",Works,"SHCODE
 SHRUN
-SHSCR",present,,,Yes,,
+SHSCR",present,AGD Pack 60,,Yes,,
 1161,V12B1,AGD,AGD,C.Kees' AGD Ports,Castle of Sorrow,Game,Kees van Oss,AGD/SORROW,8200,"CH.""CSRUN""",Works,"CSCODE
 CSRUN
-CSSCR",present,,,Yes,,
+CSSCR",present,AGD Pack 60,,Yes,,
 1162,V12B1,AGD,AGD,C.Kees' AGD Ports,Springbot,Game,Kees van Oss,AGD/SPRINGB,8200,"CH.""SBRUN""",Works,"SBCODE
 SBRUN
-SBSCR",present,,,Yes,,
+SBSCR",present,AGD Pack 60,,Yes,,
 1163,V12B1,AGD,AGD,C.Kees' AGD Ports,Sprouty,Game,Kees van Oss,AGD/SPROUTY,8200,"CH.""SPRUN""",Works,"SPCODE
 SPRUN
-SPSCR",present,,,Yes,,
+SPSCR",present,AGD Pack 61,,Yes,,
 1164,V12B1,AGD,AGD,C.Kees' AGD Ports,Moritz the Striker,Game,Kees van Oss,AGD/STRIKER,8200,"CH.""STRUN""",Works,"STCODE
 STRUN
-STSCR",present,,,Yes,,
+STSCR",present,AGD Pack 61,,Yes,,
 1165,V12B1,AGD,AGD,C.Kees' AGD Ports,Tank,Game,Kees van Oss,AGD/TANK,8200,"CH.""TARUN""",Works,"TACODE
 TARUN
-TASCR",present,,,Yes,,
+TASCR",present,AGD Pack 61,,Yes,,
 1166,V12B1,AGD,AGD,C.Kees' AGD Ports,Toofys Nutty Nightmare,Game,Kees van Oss,AGD/TOOFY3,8200,"CH.""TO3RUN""",Works,"TO3CODE
 TO3RUN
-TO3SCR",present,,,Yes,,
+TO3SCR",present,AGD Pack 61,,Yes,,
 1167,V12B1,AGD,AGD,C.Kees' AGD Ports,Trasmoz,Game,Kees van Oss,AGD/TRASMOZ,8200,"CH.""TRRUN""",Works,"TRCODE
 TRRUN
-TRSCR",present,,,Yes,,
+TRSCR",present,AGD Pack 62,,Yes,,
 1168,V12B1,AGD,AGD,C.Kees' AGD Ports,UFO,Game,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""",Works,"UFOCODE
 UFORUN
-UFOSCR",present,,,Yes,,
+UFOSCR",present,AGD Pack 62,,Yes,,
 1169,V12B1,AGD,AGD,C.Kees' AGD Ports,Vampire Vengeance,Game,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""",Works,"VVCODE
 VVRUN
-VVSCR",present,,,Yes,,
+VVSCR",present,AGD Pack 62,,Yes,,
 1170,V1202,NC,Non Comm,B.Modern Creations,Adventure,Adventure,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
