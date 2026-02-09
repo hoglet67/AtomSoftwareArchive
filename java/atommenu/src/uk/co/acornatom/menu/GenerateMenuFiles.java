@@ -104,26 +104,53 @@ public class GenerateMenuFiles extends GenerateBase {
         // MENU 094C 2800->314C
         // MENUSD 0983 2800->3183
         // MENUECO 0976 2800->3176
-        if (allChunk) {
-            // swap the lower and upper text spaces
-            lengthOfLowerText = 0x1600;
-            endOfLowerText = 0x9800;
-            startOfUpperText = 0x2200; // Avoid the DOS/SDDOS disk buffers
-            lengthOfUpperText = 0x8000 - startOfUpperText; // ALL Chapter menu 1000
-        } else if (agdChunk) {
-            // swap the lower and upper text spaces
-            lengthOfLowerText = 0x1600;
-            endOfLowerText = 0x9800;
-            startOfUpperText = 0x3200;
-            lengthOfUpperText = 0x7000 - startOfUpperText; // Some RAM/ROM boards use the #7xxx for the RAM slot
-        } else {
-            lengthOfLowerText = 0x0A00;
-            endOfLowerText = 0x3c00;
-            startOfUpperText = 0x8200;
-            lengthOfUpperText = 0x1600;
+
+        // TODO: push the size calculation down into each table
+
+        // If needed we could precalculate the size of the title table
+        int titleTableAddr;
+        int titleTableSpace;
+
+        int sortTableAddr;
+        int sortTableLen = items.size() * 2 + 4; // NumTitles + 0000 terminator
+
+        int menuTableAddr;
+        int menuTableSpace;
+        int menuTableHeader = 2 * (1 + secondaryTables.length); // pointers to title table and all secondary indexes
+        int menuTableLen = menuTableHeader;
+        for (int i = 0; i < secondaryTables.length; i++) { // All tables
+            menuTableLen += secondaryTables[i].calculateSize(i > 0);
         }
 
-        int titleTableAddr = startOfUpperText;
+        if (allChunk) {
+            // Avoid 0A00-0AFF (Disk Controller Window)
+            // Avoid 1000-19FF (CHAPTER MENU)
+            // Avoid 2000-2FFF (SDDOS Catalog Buffer)
+            sortTableAddr   = 0x8000 - sortTableLen;
+            titleTableAddr  = 0x2200;
+            titleTableSpace = sortTableAddr - titleTableAddr;
+            menuTableAddr   = 0x8200;
+            menuTableSpace  = 0x9800 - menuTableAddr;
+        } else if (agdChunk) {
+            // Avoid 2800-31FF (CHAPTER MENU)
+            // Avoid 2000-2FFF (SDDOS Catalog Buffer)
+            sortTableAddr   = 0x9800 - sortTableLen;
+            titleTableAddr  = 0x3200;
+            titleTableSpace = 0x7000 - 0x3200;
+            menuTableAddr   = 0x8200;
+            menuTableSpace  = sortTableAddr - menuTableAddr;
+        } else {
+            // Avoid 2800-31FF (CHAPTER MENU)
+            sortTableAddr   = 0x3C00 - sortTableLen;
+            titleTableAddr  = 0x8200;
+            titleTableSpace = 0x9800 - titleTableAddr;
+            menuTableAddr   = 0x3200;
+            menuTableSpace  = sortTableAddr - menuTableAddr;
+        }
+
+        if (menuTableLen > menuTableSpace) {
+            throw new RuntimeException("Menu Table too large: length = " + menuTableLen + "; space = " + menuTableSpace);
+        }
 
         // ------------------------------------------------------------------------------------
         // Reset the secondary tables
@@ -197,25 +224,20 @@ public class GenerateMenuFiles extends GenerateBase {
 
         // TODO: The title table is also not generic and depends on the facets
         byte[] titleTableBytes = new TitleTable(debug, titleHeaderSize).createTable(titleTableAddr, atomTitles, secondaryTables);
+        int titleTableLen = titleTableBytes.length;
 
         byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 
-        int sortTableAddr = endOfLowerText - titleSortTable.length;
+        if (titleTableLen > titleTableSpace) {
+            throw new RuntimeException(
+                    "Title Table too large: length = " + titleTableBytes.length + "; space = " + titleTableSpace);
+        }
 
         // ------------------------------------------------------------------------------------
         // Generate the Secondary Tables (Shot Publisher, Publisher, ... (MENU1)
         // ------------------------------------------------------------------------------------
 
-        // The MENU1 header contains a pointer to each table (title and all secondaries)
-        int menuTableHeaderSize = 2 * (1 + secondaryTables.length);
-
-        // Calculate where to place the Secondary tables so they end at the sort table
-        int menuTableAddr = sortTableAddr - menuTableHeaderSize;
-        for (int i = 0; i < secondaryTables.length; i++) { // All tables
-            menuTableAddr -= secondaryTables[i].calculateSize(i > 0);
-        }
-        int tmpAddr = menuTableAddr + menuTableHeaderSize;
-
+        int tmpAddr = menuTableAddr + menuTableHeader;
         // The first entry points to the title table (now a separate file)
         byte[][] tableDatas = new byte[1 + secondaryTables.length][];
         int[] tableLoads = new int[1 + secondaryTables.length];
@@ -229,24 +251,6 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         // ------------------------------------------------------------------------------------
-        // Sanity check the end addresses
-        // ------------------------------------------------------------------------------------
-
-        if (tmpAddr != sortTableAddr) {
-            throw new RuntimeException("Bug in table space calculation: " +
-                    Integer.toHexString(tmpAddr) + " != " + Integer.toHexString(sortTableAddr));
-        }
-
-        if (menuTableAddr < endOfLowerText - lengthOfLowerText) {
-            throw new RuntimeException("Lower Text Space is full");
-        }
-
-        if (titleTableBytes.length > lengthOfUpperText) {
-            throw new RuntimeException(
-                    "Upper Text Space is full: length = " + titleTableBytes.length + "; space = " + lengthOfUpperText);
-        }
-
-        // ------------------------------------------------------------------------------------
         // Write the tables as Atom Files
         // ------------------------------------------------------------------------------------
 
@@ -257,6 +261,15 @@ public class GenerateMenuFiles extends GenerateBase {
             byte[] sortTable = secondaryTables[i].createSortTable(atomTitles);
             writeTable(menuDir, "SORT" + i, sortTableAddr, sortTable);
         }
+
+        // ------------------------------------------------------------------------------------
+        // Report the Free Space
+        // ------------------------------------------------------------------------------------
+
+        System.out.println("----------------------------------------");
+        System.out.println("Chunk " + chunk + ": Title Table Free Space: " + (titleTableSpace - titleTableLen) + " bytes");
+        System.out.println("Chunk " + chunk + ": Menu  Table Free Space: " + (menuTableSpace - menuTableLen) + " bytes");
+        System.out.println("----------------------------------------");
 
         // ------------------------------------------------------------------------------------
         // Cope the CHAP menu program and HELP screen
