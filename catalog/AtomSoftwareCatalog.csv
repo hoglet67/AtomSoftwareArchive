@@ -12,7 +12,7 @@ ADV1D",present,,,,
 9,V2,A&F,A&F S/W,A.Commercial Software,Zodiac,Adventure,,AF,8200,"*LOAD ADV2P
 *RUN ADV2D",Works,"ADV2P
 ADV2D",present,,,,
-10,V1,A&R,A&R S/W,A.Commercial Software,Trap,Game,,AR,8200,*RUN TRAP,Works,TRAP,present,,,,
+10,V1,AR,A&R S/W,A.Commercial Software,Trap,Game,,AR,8200,*RUN TRAP,Works,TRAP,present,,,,
 11,,AA,Aardvark,A.Commercial Software,Hedgehog,Game,Nick Pelling (aka Orlando M Pilchard),AA,,,,,missing,,,,
 12,V11B7,AA,Aardvark,A.Commercial Software,Invaders,Game,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN INVADER,,INVADER,present,,,,
 13,V1,AS,Acornsoft,A.Commercial Software,House,Adventure,,AS/ADVENT,8200,"*LOAD ADVENTUR
@@ -1253,7 +1253,7 @@ PRINT NO MANUAL EXISTS
 PRINT TO RUN: EDIT
 PRINT NO MANUAL EXISTS
 *LOAD 129F 8800",Works,129F,present,ROMs,,,
-664,V6,RS,Ross S/W,F.ROMS,Ross Utility,Utility,,ROMS/ROSS/UTILITY,8200,"PRINT TO INITIALIZE: LINK 44992
+664,V6,ROSS,Ross S/W,F.ROMS,Ross Utility,Utility,,ROMS/ROSS/UTILITY,8200,"PRINT TO INITIALIZE: LINK 44992
 PRINT FOR HELP: SEE MANUAL
 *LOAD 4B99 8800",Works,4B99,present,ROMs,,,
 665,V6,WE,Watford Elec,F.ROMS,WE-ROM,Utility,,ROMS/WATFORD/WEROM,8200,"PRINT INITIALIZATION: AUTOMATIC
@@ -1352,15 +1352,15 @@ MSC4MS
 MSC4MSD
 MSCYCLE
 MSDISP",present,Mainwaring,,,
-704,,AF,A&F S/W,A.Commercial Software,Atomic Cube,,,,,,,,missing,,,,
-705,,AF,A&F S/W,A.Commercial Software,Escape,,,,,,,,missing,,,,
+704,,A&F,A&F S/W,A.Commercial Software,Atomic Cube,,,,,,,,missing,,,,
+705,,A&F,A&F S/W,A.Commercial Software,Escape,,,,,,,,missing,,,,
 706,,BB,Bug Byte,A.Commercial Software,Dodgems,,,,,,,,missing,,,,
 707,,BB,Bug Byte,A.Commercial Software,Snake,,,,,,,,missing,,,,
 708,,BB,Bug Byte,A.Commercial Software,1-Key Basic,,,,,,,,missing,,,,
 709,,BB,Bug Byte,A.Commercial Software,Stock Market,,,,,,,,missing,,,,
-710,V9B1,AF,A&F S/W,A.Commercial Software,Missile Command,Game,,AF,8200,"CH.""MISSILE""",Works,MISSILE,present,,,,
-711,V7B2,AF,A&F S/W,A.Commercial Software,Polaris,Game,,AF,8200,"CH.""POLARIS""",Works,POLARIS,present,,,,
-712,,AF,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
+710,V9B1,A&F,A&F S/W,A.Commercial Software,Missile Command,Game,,AF,8200,"CH.""MISSILE""",Works,MISSILE,present,,,,
+711,V7B2,A&F,A&F S/W,A.Commercial Software,Polaris,Game,,AF,8200,"CH.""POLARIS""",Works,POLARIS,present,,,,
+712,,A&F,A&F S/W,A.Commercial Software,Pontoon,,,,,,,,missing,,,,
 713,,CS,Computersmith,A.Commercial Software,Financial Year,Game,,,,,,,missing,,,,
 714,,CS,Computersmith,A.Commercial Software,Stock Market,Game,,,,,,,missing,,,,
 715,V7B2,YC,Your Computer,E.Books and Magazines,Real-Time Clock,Utility,Kamal Jabbour,YC,8200,"CH.""CLOCK""",Works,CLOCK,present,Magazines,,,
@@ -1550,7 +1550,7 @@ Joystick Kbd",,,
 Joystick Kbd",,,
 806,V8B3,AS,Acornsoft,A.Commercial Software,Star Gate (JS),Game,,JS/KEES,8200,*RUN STARGAT,Works,STARGAT,present,"Joystick
 Joystick Kbd",,,
-807,V8B3,AF,A&F S/W,A.Commercial Software,Torpedo Run (JS),Game,,JS/KEES,8200,*RUN TORP,Works,TORP,present,"Joystick
+807,V8B3,A&F,A&F S/W,A.Commercial Software,Torpedo Run (JS),Game,,JS/KEES,8200,*RUN TORP,Works,TORP,present,"Joystick
 Joystick Kbd",,,
 808,V8B3,AR,A&R S/W,A.Commercial Software,Trap (JS),Game,,JS/KEES,8200,*RUN TRAP,Works,TRAP,present,"Joystick
 Joystick Kbd",,,
@@ -2655,7 +2655,7 @@ OZMOO2P",present,OZMOO,Yes,,
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
-1173,V1202,OZM,Infocom,B.Modern Creations,Beyond Zork,Adventure,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,Test,"VDUMENU
+1173,V1202,INF,Infocom,B.Modern Creations,Beyond Zork,Adventure,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,Test,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",present,OZMOO,Yes,,
