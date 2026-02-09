@@ -385,7 +385,7 @@ public class GenerateMenuFiles extends GenerateBase {
                     System.out.print(pad(getKey(collectionId, collections.getMap()), maxCollectionLen + 4));
                 }
             } else {
-                System.out.println(pad("NO COLLECTIONS", maxCollectionLen + 4));
+                System.out.print(pad("NO COLLECTIONS", maxCollectionLen + 4));
             }
             System.out.println();
         }
