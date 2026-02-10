@@ -74,7 +74,7 @@ public class ATMFile {
             atm = true;
         } else {
             // Handle as a data file
-            if (bytes.length < 0x10000) {
+            if (bytes.length < 0x10000 && !file.toString().toLowerCase().endsWith(".txt")) {
                 System.out.println("WARNING: Length mismatch possible in ATM file: " + file + " (expected=" + length + "; actual="
                         + (bytes.length - 22) + ")");
             }
