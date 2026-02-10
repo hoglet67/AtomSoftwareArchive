@@ -518,7 +518,7 @@ ENDIF
 	ROL A
 	ROL A
 	ROL A
-	AND #&03
+	AND #&07
 	RTS
 
 ; 4 = Version (encoded within bits 4..0 of byte 3)
