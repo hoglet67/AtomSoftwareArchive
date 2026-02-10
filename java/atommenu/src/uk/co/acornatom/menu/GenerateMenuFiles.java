@@ -64,7 +64,6 @@ public class GenerateMenuFiles extends GenerateBase {
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
             new BitField(4, 0, 8),
-            AtomTitle::getCollectionFirst, // for sorting (based on the first collection)
             AtomTitle::getCollections,     // for indexing
             collectionComparator);
 
@@ -194,14 +193,6 @@ public class GenerateMenuFiles extends GenerateBase {
                 secondaryTables[i].dumpIndexes();
             }
         }
-
-        // ------------------------------------------------------------------------------------
-        // Calculate the collection IDs
-        // TODO: Make this step go away
-        // ------------------------------------------------------------------------------------
-        for (AtomTitle atomTitle : atomTitles) {
-            atomTitle.setCollectionIds(collections.getMap());
-        }
     }
 
     @Override
@@ -216,12 +207,6 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
         // Decide where to place the various menu data segments
         // ------------------------------------------------------------------------------------
-
-        // Note: RowReturnBuffer (2x13 bytes) now included in MENU in all
-        // (AtoMMC/Econet/SDDOS) cases
-        // MENU 094C 2800->314C
-        // MENUSD 0983 2800->3183
-        // MENUECO 0976 2800->3176
 
         int titleTableAddr;
         int titleTableSpace;
@@ -403,15 +388,6 @@ public class GenerateMenuFiles extends GenerateBase {
         System.out.println("       md5sum " + md5sum(bos.toByteArray()));
     }
 
-    private String getKey(int value, Map<String, Integer> map) {
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
     private String pad(String s, int width) {
         if (s == null) {
             s = "*NULL*";
@@ -429,33 +405,25 @@ public class GenerateMenuFiles extends GenerateBase {
     }
 
     public void dumpTitles(String type, List<AtomTitle> items) {
-
         int maxTitleLen = 0;
         for (AtomTitle item : items) {
             if (item.getTitle().length() > maxTitleLen) {
                 maxTitleLen = item.getTitle().length();
             }
         }
-
-        int maxCollectionLen = collections.getMaxLen();
-
         System.out.println("==========================================================");
         System.out.println(type);
         System.out.println("==========================================================");
         for (AtomTitle item : items) {
             StringBuffer sb = new StringBuffer();
             sb.append(pad(item.getTitle(), maxTitleLen + 4) + " ");
-            for (int i = 0; i < secondaryTables.length - 1; i++) {
+            for (int i = 0; i < secondaryTables.length; i++) {
                 SecondaryTable table = secondaryTables[i];
-                sb.append(pad(table.testIndex(item), table.getMaxLen() + 4) + " ");
-            }
-            if (item.getCollectionIds().size() > 0) {
-                for (Integer collectionId : item.getCollectionIds()) {
-                    sb.append(pad(Integer.toString(collectionId), 4));
-                    sb.append(pad(getKey(collectionId, collections.getMap()), maxCollectionLen + 4));
+                if (table.isMultiValue()) {
+                    sb.append(table.testIndex(item)); // max len is the max size of an element, not the list
+                } else {
+                    sb.append(pad(table.testIndex(item), table.getMaxLen() + 4) + " ");
                 }
-            } else {
-                sb.append(pad("NO COLLECTIONS", maxCollectionLen + 4));
             }
             System.out.println(sb);
         }

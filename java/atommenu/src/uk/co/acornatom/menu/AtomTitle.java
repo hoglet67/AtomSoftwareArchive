@@ -1,9 +1,7 @@
 package uk.co.acornatom.menu;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class AtomTitle {
@@ -27,7 +25,6 @@ public class AtomTitle {
 
     // These are part of AtomTitle and and filled in as the indexes are built
     private int absoluteAddress;
-    private List<Integer> collectionIds;
 
 
     // These other computed things
@@ -198,18 +195,6 @@ public class AtomTitle {
         } else {
             return identifier; // Use persistent identifier everywhere else
         }
-    }
-
-
-    public void setCollectionIds(Map<String, Integer> collectionMap) {
-        this.collectionIds = new ArrayList<Integer>();
-        for (String collection : collections) {
-            this.collectionIds.add(collectionMap.get(collection));
-        }
-    }
-
-    public List<Integer> getCollectionIds() {
-        return collectionIds;
     }
 
     public String getCollectionFirst() {

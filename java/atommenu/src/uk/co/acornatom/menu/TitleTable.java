@@ -36,16 +36,13 @@ public class TitleTable extends TableBase {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         for (AtomTitle item : items) {
             item.setAbsoluteAddress(absoluteAddress + bos.size());
-            byte[] header = new byte[titleHeaderSize];
+            byte[] header = new byte[titleHeaderSize + item.getCollections().size()];
             header[0] = (byte) (item.getIndex() & 0xff);
             header[1] = (byte) ((item.getIndex() >> 8) & 0x07);
-            for (int i = 1; i < secondaryTables.length - 1; i++) {
+            for (int i = 1; i < secondaryTables.length; i++) {
                 secondaryTables[i].setBitfield(header, item);
             }
             bos.write(header);
-            for (Integer collectionId : item.getCollectionIds()) {
-                writeByte(bos, 128 + collectionId);
-            }
             writeString(bos, item.getTitle());
             writeByte(bos, 0);
         }
@@ -60,7 +57,7 @@ public class TitleTable extends TableBase {
         int size = 0;
         for (AtomTitle title : titles) {
             size += titleHeaderSize;
-            size += title.getCollectionIds().size();
+            size += title.getCollections().size();
             size += title.getTitle().length() + 1;
         }
         return size;

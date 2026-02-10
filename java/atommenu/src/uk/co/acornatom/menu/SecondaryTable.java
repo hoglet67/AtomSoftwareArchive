@@ -5,26 +5,22 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 public abstract class SecondaryTable extends TableBase {
 
-    private BitField def;
-    private Map<String, Integer> map;
-    protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
-    private boolean includeCounts = true;
+    protected BitField def;
+    protected Map<String, Integer> map;
+    protected boolean includeCounts = true;
 
     private int maxLen;
 
     protected SecondaryTable (String name,
             BitField def,
-            Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Map<String, Integer> map
             ) {
         super(name);
         this.def = def;
         this.map = map;
-        this.atomFieldExtractor = atomFieldExtractor;
         this.maxLen = 0;
         this.debug = false;
         for (String key : this.map.keySet()) {
@@ -41,6 +37,12 @@ public abstract class SecondaryTable extends TableBase {
     public abstract void addToIndex(AtomTitle item);
 
     public abstract boolean match(AtomTitle title, String value);
+
+    public abstract void setBitfield(byte[] header, AtomTitle title);
+
+    public abstract String testIndex(AtomTitle title);
+
+    public abstract boolean isMultiValue();
 
     public SecondaryTable excludeCounts() {
         this.includeCounts = false;
@@ -154,23 +156,4 @@ public abstract class SecondaryTable extends TableBase {
         return map;
     }
 
-    public void setBitfield(byte[] header, AtomTitle title) {
-        int mask = (1 << def.getSize()) - 1;
-        int val = map.get(atomFieldExtractor.apply(title));
-        if (val >= mask) {
-            throw new RuntimeException("Value " + val + " too large for " + name);
-        }
-        header[def.getByteOffset()] &= ~(mask << def.getBitOffset());
-        header[def.getByteOffset()] |= (val << def.getBitOffset());
-    }
-
-    public String testIndex(AtomTitle title) {
-        String val = atomFieldExtractor.apply(title);
-        Integer id = map.get(val);
-        if (id == null) {
-            return null;
-        } else {
-            return val;
-        }
-    }
 }
