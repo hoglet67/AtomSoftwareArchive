@@ -171,16 +171,19 @@ public class GenerateAll {
 
     public RomDef[] roms = new RomDef[] {
 
-            new RomDef("ROM_PCHARME",
-                    new String[] { "BEEP", "CASE", "CONT", "FUNCTION", "FEND", "INKEY", "INSTR", "PROC", "PEND", "PROGRAM", "HTAB",
-                            "VTAB", "WHILE", "WEND", "XIF" }),
+       new RomDef("PCHARME", new String[] { "BEEP", "CASE", "CONT", "FUNCTION", "FEND", "INKEY", "INSTR", "PROC", "PEND", "PROGRAM", "HTAB",
+                                            "VTAB", "WHILE", "WEND", "XIF", "READ", "DATA", "RESTORE" }),
 
-            new RomDef("ROM_FP", new String[] { "%", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
+            new RomDef("FP", new String[] { "%", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
 
-            new RomDef("ROM_GAGS",
+            new RomDef("ATOMIC WINDOWS", new String[] { "DLG" }),
+
+            new RomDef("AXR1", new String[] { "GRMOD", "GRMO.", "GRM.", "GR.", "TXMOD", "TXMO.", "TXM.", "TX.", "SHAPE", "SHAP.", "SHA.", "SH."  }),
+
+            new RomDef("GAGS",
                     new String[] { "CLS", "ATKEY", "JOYSTK", "INV", "BORDER", "PAINT", "CUBE", "CIRCLE", "PIXEL", "WINDOW", "WOFF",
-                            "FILL", "SCROLL", "HLINE", "VLINE", "INK", "PAPER", "MODE", "BLOCK", "SOUND", "PAUSE", "CREATE", "DEF",
-                            "BASE"
+                                   "FILL", "SCROLL", "HLINE", "VLINE", "INK", "PAPER", "MODE", "BLOCK", "SOUND", "PAUSE", "CREATE", "DEF",
+                                   "BASE"
                     // lots more
                     })
     };
@@ -209,10 +212,11 @@ public class GenerateAll {
 
                         // Scan for basic
                         int i = offset;
-
+                        int lastLine = -1;
                         while (i < data.length - 4) {
                             // Test for a valid start of line
                             if (data[i] == ((byte) 0x0D) && data[i + 1] >= 0) {
+                                int line = ((data[i + 1] & 0xff) << 8) + (data[i + 2] & 0xff);
                                 i += 3; // Skip <CR> <Line Number>
                                 if ((data[i] >= ((byte) 'a')) && (data[i] <= ((byte) 'z'))) {
                                     i++; // Skip label
@@ -222,7 +226,7 @@ public class GenerateAll {
                                 while (i < data.length && data[i] != ((byte) 0x0d)) {
                                     i++;
                                 }
-                                if (i < data.length) {
+                                if (i < data.length && line > lastLine)  {
                                     // Test line for signature statements
                                     int end = i;
                                     String basic = new String(data, start, end - start);
@@ -242,10 +246,13 @@ public class GenerateAll {
 
                                         }
                                     }
+                                    lastLine = line;
                                 } else {
                                     // Skip to next page
                                     i = ((i + 0x100) & 0xff00) + offset;
+                                    lastLine = -1;
                                 }
+
                             } else {
                                 i += 0x100; // Skip to next page
                             }
@@ -257,7 +264,10 @@ public class GenerateAll {
             }
             for (RomDef rom : roms) {
                 Set<String> commands = found.get(rom);
-                if (rom.getName().equals("ROM_FP")) {
+                if (!commands.isEmpty() && !item.getCollections().contains(rom.getName())) {
+                   item.getCollections().add(rom.getName());
+                }
+                if (rom.getName().equals("FP")) {
                     if (commands.isEmpty() && item.isFpROM()) {
                         System.out.println("WARNING: Compatibility: Title probably wrongly marked as " + rom + ": " + item);
                     } else if (!commands.isEmpty() && !item.isFpROM()) {
