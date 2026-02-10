@@ -796,7 +796,7 @@ ENDIF
 	RTS
 
 .LabelXString1
-	EQUS "ATOMMC BY ", 0
+	EQUS "SORTED BY ", 0
 
 .LabelXString2
 	EQUS "FILTER BY ", 0
