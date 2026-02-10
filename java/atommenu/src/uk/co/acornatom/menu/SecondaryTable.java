@@ -2,7 +2,6 @@ package uk.co.acornatom.menu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +13,6 @@ public abstract class SecondaryTable extends TableBase {
     private BitField def;
 
     protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
-    private Comparator<String> comparator;
     private Map<String, Integer> map;
 
     private int maxLen;
@@ -24,13 +22,11 @@ public abstract class SecondaryTable extends TableBase {
     protected SecondaryTable (String name,
             BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Comparator<String> comparator,
             Map<String, Integer> map
             ) {
         this.name = name;
         this.def = def;
         this.map = map;
-        this.comparator = comparator;
         this.maxLen = 0;
         this.debug = false;
         this.atomFieldExtractor = atomFieldExtractor;
@@ -56,6 +52,7 @@ public abstract class SecondaryTable extends TableBase {
         }
     }
 
+    @Override
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
@@ -71,11 +68,6 @@ public abstract class SecondaryTable extends TableBase {
 
     public int getMaxLen() {
         return maxLen;
-    }
-
-    public byte[] createSortTable(List<AtomTitle> items) throws IOException {
-        SortTable sortTable = new SortTable(name + " Sort", debug, Comparator.comparing(atomFieldExtractor, comparator));
-        return sortTable.createTable(items);
     }
 
     public byte[] createTable(int absoluteAddress) throws IOException {

@@ -2,16 +2,19 @@ package uk.co.acornatom.menu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TitleTable extends TableBase {
 
-    private boolean debug;
     private int titleHeaderSize;
+    private Comparator<AtomTitle> comparator;
 
-    public TitleTable(boolean debug, int titleHeaderSize) {
-        this.debug = debug;
+    public TitleTable(int titleHeaderSize, Comparator<AtomTitle> comparator) {
         this.titleHeaderSize = titleHeaderSize;
+        this.comparator = comparator;
     }
 
     public byte[] createTable(int absoluteAddress, List<AtomTitle> items, SecondaryTable[] secondaryTables) throws IOException {
@@ -21,6 +24,11 @@ public class TitleTable extends TableBase {
             System.out.println("----------------------------------------");
             System.out.println("address " + Integer.toHexString(absoluteAddress));
         }
+        // Create a new list so the order of the original list remains unchanged
+        items = new ArrayList<AtomTitle>(items);
+        // Sort items using the specified
+        Collections.sort(items, comparator);
+        // Build the data for the table
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         for (AtomTitle item : items) {
             item.setAbsoluteAddress(absoluteAddress + bos.size());

@@ -10,12 +10,10 @@ import java.util.List;
 public class SortTable extends TableBase {
 
     private String name;
-    private boolean debug;
     Comparator<AtomTitle> comparator;
 
-    public SortTable(String name, boolean debug, Comparator<AtomTitle> comparator) {
+    public SortTable(String name, Comparator<AtomTitle> comparator) {
         this.name = name;
-        this.debug = debug;
         this.comparator = comparator;
     }
 

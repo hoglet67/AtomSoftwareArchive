@@ -22,22 +22,14 @@ public class SecondaryTableSingleValue extends SecondaryTable {
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Map<String, Integer> map
             ) {
-        this(name, def, atomFieldExtractor, Comparator.naturalOrder(), map);
+        super(name, def, atomFieldExtractor, map);
     }
 
     public SecondaryTableSingleValue (String name,
             BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Comparator<String> comparator) {
-        this(name, def, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
-    }
-
-    public SecondaryTableSingleValue (String name,
-            BitField def,
-            Function<? super AtomTitle, ? extends String> atomFieldExtractor,
-            Comparator<String> comparator,
-            Map<String, Integer> map) {
-        super(name, def, atomFieldExtractor, comparator, map);
+        this(name, def, atomFieldExtractor, new TreeMap<String, Integer>(comparator));
     }
 
     @Override

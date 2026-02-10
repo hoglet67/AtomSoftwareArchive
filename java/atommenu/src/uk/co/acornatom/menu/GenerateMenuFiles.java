@@ -16,9 +16,27 @@ import java.util.Map;
 
 public class GenerateMenuFiles extends GenerateBase {
 
+//     TODO: Move table definitions into a separate class, as a step
+//     towards being able to customize for a given chapter.
+
+    // Define ordering of each field type
+
     private Comparator<String> intuitiveStringComparator = new IntuitiveStringComparator<String>();
+    private Comparator<String> titleComparator      = Comparator.naturalOrder();
+    private Comparator<String> publisherComparator  = Comparator.naturalOrder();
+    private Comparator<String> genreComparator      = Comparator.naturalOrder();
+    private Comparator<String> compatibleComparator = Comparator.nullsLast(intuitiveStringComparator);
+    private Comparator<String> versionComparator    = intuitiveStringComparator.reversed();
+    private Comparator<String> collectionComparator = Comparator.nullsLast(intuitiveStringComparator);
+
+    // Define the title table
 
     private int titleHeaderSize = 4;
+
+    // The ordering of this table doesn't actually make any difference, as it's always accessed via a sort table
+    private TitleTable titleTable = new TitleTable(titleHeaderSize, Comparator.comparing(AtomTitle::getTitle, titleComparator));
+
+    // Define secondary tables
 
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
@@ -29,31 +47,33 @@ public class GenerateMenuFiles extends GenerateBase {
     private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
             new BitField(2, 0, 8),
-            AtomTitle::getPublisher);
+            AtomTitle::getPublisher,
+            publisherComparator);
 
     private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
             new BitField(1, 3, 5),
-            AtomTitle::getGenre);
+            AtomTitle::getGenre,
+            genreComparator);
 
     private SecondaryTable compatibles = new SecondaryTableSingleValue(
             "Compatible",
             new BitField(3, 5, 3),
             AtomTitle::getCompatible,
-            Comparator.nullsLast(intuitiveStringComparator));
+            compatibleComparator);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
             new BitField(3 ,0, 5),
             AtomTitle::getVersion,
-            intuitiveStringComparator.reversed());
+            versionComparator);
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
             new BitField(4, 0, 8),
             AtomTitle::getCollectionFirst, // for sorting (based on the first collection)
             AtomTitle::getCollections,     // for indexing
-            Comparator.nullsLast(intuitiveStringComparator));
+            collectionComparator);
 
     private SecondaryTable[] secondaryTables = new SecondaryTable[] {
             shortPublishers,
@@ -62,6 +82,34 @@ public class GenerateMenuFiles extends GenerateBase {
             compatibles,
             versions,
             collections
+    };
+
+    // Define sort tables
+
+    private SortTable[] sortTables = new SortTable[] {
+
+            new SortTable("Title",
+                    Comparator.comparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Publisher",
+                    Comparator.comparing(AtomTitle::getPublisher, publisherComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Genre",
+                    Comparator.comparing(AtomTitle::getGenre, genreComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Compatible",
+                    Comparator.comparing(AtomTitle::getCompatible, compatibleComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Version",
+                    Comparator.comparing(AtomTitle::getVersion, versionComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Collection",
+                    Comparator.comparing(AtomTitle::getCollectionFirst, collectionComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
     };
 
     private File archiveDir;
@@ -83,18 +131,17 @@ public class GenerateMenuFiles extends GenerateBase {
     @Override
     public void setDebug(boolean debug) {
         super.setDebug(debug);
+        titleTable.setDebug(debug);
         for (int i = 0; i < secondaryTables.length; i++) { // All tables
             secondaryTables[i].setDebug(debug);
+        }
+        for (int i = 0; i < sortTables.length; i++) { // All tables
+            sortTables[i].setDebug(debug);
         }
     }
 
     @Override
     public void generateFiles(List<AtomTitle> items) throws IOException {
-
-        int endOfLowerText;
-        int lengthOfLowerText;
-        int startOfUpperText;
-        int lengthOfUpperText;
 
         // ------------------------------------------------------------------------------------
         // Decide where to place the various menu data segments
@@ -224,22 +271,22 @@ public class GenerateMenuFiles extends GenerateBase {
         }
 
         // TODO: The title table is also not generic and depends on the facets
-        byte[] titleTableBytes = new TitleTable(debug, titleHeaderSize).createTable(titleTableAddr, atomTitles, secondaryTables);
+        byte[] titleTableBytes = titleTable.createTable(titleTableAddr, atomTitles, secondaryTables);
         int titleTableLen = titleTableBytes.length;
-
-        byte[] titleSortTable = new SortTable("Title Sort", debug, Comparator.comparing(AtomTitle::getTitle)).createTable(atomTitles);
 
         if (titleTableLen > titleTableSpace) {
             throw new RuntimeException(
                     "Title Table too large: length = " + titleTableBytes.length + "; space = " + titleTableSpace);
         }
 
+        writeTable(menuDir, "MENU2", titleTableAddr, titleTableBytes);
+
         // ------------------------------------------------------------------------------------
-        // Generate the Secondary Tables (Shot Publisher, Publisher, ... (MENU1)
+        // Generate the Secondary Tables (Shot Publisher, Publisher, ...
         // ------------------------------------------------------------------------------------
 
-        int tmpAddr = menuTableAddr + menuTableHeader;
         // The first entry points to the title table (now a separate file)
+        int tmpAddr = menuTableAddr + menuTableHeader;
         byte[][] tableDatas = new byte[1 + secondaryTables.length][];
         int[] tableLoads = new int[1 + secondaryTables.length];
         tableDatas[0] = null;
@@ -250,17 +297,15 @@ public class GenerateMenuFiles extends GenerateBase {
             tableLoads[i + 1] = 0;
             tmpAddr += tableData.length;
         }
-
-        // ------------------------------------------------------------------------------------
-        // Write the tables as Atom Files
-        // ------------------------------------------------------------------------------------
-
         writeTables(menuDir, "MENU1", menuTableAddr, tableLoads, tableDatas);
-        writeTable(menuDir, "MENU2", titleTableAddr, titleTableBytes);
-        writeTable(menuDir, "SORT0", sortTableAddr, titleSortTable);
-        for (int i = 1; i < secondaryTables.length; i++) {
-            byte[] sortTable = secondaryTables[i].createSortTable(atomTitles);
-            writeTable(menuDir, "SORT" + i, sortTableAddr, sortTable);
+
+        // ------------------------------------------------------------------------------------
+        // Generate the Sort Tables
+        // ------------------------------------------------------------------------------------
+
+        for (int i = 0; i < sortTables.length; i++) {
+            byte[] bytes = sortTables[i].createTable(items);
+            writeTable(menuDir, "SORT" + i, sortTableAddr, bytes);
         }
 
         // ------------------------------------------------------------------------------------

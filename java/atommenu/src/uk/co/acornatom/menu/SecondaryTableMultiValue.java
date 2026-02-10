@@ -15,7 +15,7 @@ public class SecondaryTableMultiValue extends SecondaryTable {
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Function<? super AtomTitle, ? extends List<String>> atomFieldMatcher,
             Comparator<String> comparator) {
-        super(name, def, atomFieldExtractor, comparator, new TreeMap<String, Integer>(comparator));
+        super(name, def, atomFieldExtractor, new TreeMap<String, Integer>(comparator));
         this.atomFieldMatcher = atomFieldMatcher;
     }
 

@@ -5,6 +5,16 @@ import java.io.OutputStream;
 
 public abstract class TableBase {
 
+    protected boolean debug;
+
+    public TableBase() {
+        this.debug = false;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = true;
+    }
+
     protected void writeString(OutputStream out, String value) throws IOException {
         out.write(value.getBytes());
     }
