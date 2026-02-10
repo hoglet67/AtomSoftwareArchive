@@ -478,7 +478,7 @@ ENDIF
 	EOR #$80
 	STA (Screen),Y
 	DEY
-	BPL	HighlightRow3
+	BPL HighlightRow3
 	RTS
 
 ;; Extract Filter/Annotation ID from title table and nomalize
@@ -494,7 +494,7 @@ ENDIF
 	BNE Filter2
 	LDY #PubIdOffset
 	LDA (Title), Y
-    AND #&3F
+	AND #&3F
 	RTS
 
 ; 2 = Genre (encoded within bits 7..5 of byte 1)
@@ -533,12 +533,12 @@ ENDIF
 ; 5 = Joystick (encoded within bits 7..6 of byte 3)
 .Filter5
 	CPY #JoystickFilterNum
-	BNE Filter5
+	BNE Filter6
 	LDY #JoystickIdOffset
 	LDA (Title), Y
-    ROL A
-    ROL A
-    ROL A
+	ROL A
+	ROL A
+	ROL A
 	AND #&03
 	RTS
 ; 6 = Collecton (byte 4 onwards)
