@@ -34,7 +34,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable shortPublishers = new SecondaryTableSingleValue(
             "ShortPublisher",
-            null, // This reuses the same BitField as the Publisher
+            new BitField(-1, 0, 6), // This is only used for size logging
             AtomTitle::getShortPublisher,
             new LinkedHashMap<String, Integer>()).excludeCounts();
 
@@ -70,7 +70,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
-            new BitField(4, 0, 8),
+            new BitField(4, 0, 7),
             AtomTitle::getCollections,     // for indexing
             collectionComparator);
 

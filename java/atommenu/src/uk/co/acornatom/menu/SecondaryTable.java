@@ -68,6 +68,7 @@ public abstract class SecondaryTable extends TableBase {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getValue() + "\t" + entry.getKey());
         }
+        System.out.println(String.format("Index %16s uses %3d entries; max is %3d", name, map.size(), (1 << def.getSize())));
     }
 
     public int getMaxLen() {

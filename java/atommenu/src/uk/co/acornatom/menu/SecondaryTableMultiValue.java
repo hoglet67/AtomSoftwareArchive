@@ -35,10 +35,10 @@ public class SecondaryTableMultiValue extends SecondaryTable {
 
     @Override
     public void setBitfield(byte[] header, AtomTitle title) {
-        if (def.getSize() != 8) {
-            throw new RuntimeException("MultiValue secondary tables only support 8-bit IDs");
+        if (def.getSize() != 7) {
+            throw new RuntimeException("MultiValue secondary tables only support 7-bit IDs");
         }
-        int mask = 0x7F;
+        int mask = (1 << def.getSize()) - 1;
         int offset = def.getByteOffset();
         Collection<String> values = atomFieldExtractor.apply(title);
         for (String value : values) {
