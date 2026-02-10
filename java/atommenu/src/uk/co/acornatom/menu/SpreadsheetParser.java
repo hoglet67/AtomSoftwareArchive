@@ -30,6 +30,7 @@ public class SpreadsheetParser {
     private static final String FILENAMES = "filenames";
     private static final String UPDATED = "updated";
     private static final String RAM32K = "32k";
+    private static final String JOYSTICK = "joystick";
 
     private File file;
 
@@ -68,6 +69,7 @@ public class SpreadsheetParser {
             int filenames_column = -1;
             int updated_column = -1;
             int ram32k_column = -1;
+            int joystick_column = -1;
 
             for (int i = 0; i < headers.length; i++) {
                 if (headers[i].toLowerCase().contains(IDENTIFIER)) {
@@ -111,6 +113,9 @@ public class SpreadsheetParser {
                 }
                 if (headers[i].toLowerCase().contains(RAM32K)) {
                     ram32k_column = i;
+                }
+                if (headers[i].toLowerCase().contains(JOYSTICK)) {
+                    joystick_column = i;
                 }
             }
 
@@ -182,23 +187,19 @@ public class SpreadsheetParser {
                         item.setCompatible("32K+6K");
                     }
                 }
-
-                // if (item.isCompatible12K()) {
-                //     collectionsList.add("12K:YES");
-                // } else {
-                //     // TODO: This is for testing only, it's not that important for end users
-                //     collectionsList.add("12K:NO");
-                // }
-                // Define an implicit collection for each archive version, from
-                // the updated column
-                String updated = program[updated_column].trim().toUpperCase();
+                String version = program[updated_column].trim().toUpperCase();
                 // Collapse V8, V8B1, V8B2, etc down to V8
-                if (updated.length() > 3) {
+                if (version.length() > 3) {
                     // This is a bit fragile!
-                    updated = updated.substring(0, updated.length() - 2);
+                    version = version.substring(0, version.length() - 2);
                 }
-                // collectionsList.add("#" + updated);
-                item.setVersion(updated);
+                item.setVersion(version);
+                String joystick = program[joystick_column].trim().toUpperCase();
+                if (joystick.isBlank()) {
+                    item.setJoystick("NONE");
+                } else {
+                    item.setJoystick(joystick);
+                }
                 items.add(item);
                 accumulateStats(item);
             }

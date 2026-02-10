@@ -53,7 +53,7 @@ public class SecondaryTableSingleValue extends SecondaryTable {
         int mask = (1 << def.getSize()) - 1;
         int offset = def.getByteOffset();
         int val = map.get(atomFieldExtractor.apply(title));
-        if (val >= mask) {
+        if (val > mask) {
             throw new RuntimeException("Value " + val + " too large for " + name);
         }
         header[offset] &= ~(mask << def.getBitOffset());

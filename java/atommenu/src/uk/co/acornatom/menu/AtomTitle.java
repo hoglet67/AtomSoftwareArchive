@@ -17,6 +17,7 @@ public class AtomTitle {
     private String shortPublisher;
     private String version;
     private String compatible;
+    private String joystick;
     private List<String> collections;
     private String genre;
     private List<String> filenames;
@@ -211,6 +212,14 @@ public class AtomTitle {
 
     public int getAbsoluteAddress() {
         return absoluteAddress;
+    }
+
+    public String getJoystick() {
+        return joystick;
+    }
+
+    public void setJoystick(String joystick) {
+        this.joystick = joystick;
     }
 
 

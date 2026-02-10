@@ -8,7 +8,7 @@
 	; Table Structure Offsets
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	NumFacets       	= 5
+	NumFacets       	= 6
 
 	CountOffset		= 0
 
@@ -16,14 +16,15 @@
 	PubIdOffset     	= 2
 	CompatibleIdOffset     	= 3
 	VersionIdOffset     	= 3
+	JoystickIdOffset  	= 2
 	CategoriesIdOffset  	= 4
-
 
 	PubFilterNum		= 1
 	GenreFilterNum		= 2
 	CompatibleFilterNum	= 3
 	VersionFilterNum	= 4
-	CategoriesFilterNum 	= 5
+	JoystickFilterNum	= 5
+	CategoriesFilterNum 	= 6
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Operating System Subroutines

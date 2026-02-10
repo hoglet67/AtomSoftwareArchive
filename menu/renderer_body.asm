@@ -260,7 +260,8 @@ ENDIF
 ; 2 = Genre           -> 2
 ; 3 = Compatible      -> 3
 ; 4 = Version         -> 4
-; 5 = Collection      -> 5
+; 5 = Joystick       -> 5
+; 5 = Collection      -> 6
 
 .AnnotationIdMap
 	EQUB 	1 ; Short Publisher
@@ -268,7 +269,8 @@ ENDIF
 	EQUB 	2 ; Genre
 	EQUB 	3 ; Compatible
 	EQUB 	4 ; Version
-	EQUB 	5 ; Collection
+	EQUB 	5 ; Joyctick
+	EQUB 	6 ; Collection
 
 ; Offset of first record in the annotation
 ; (depends on whether the table was build against a sort index)
@@ -280,6 +282,7 @@ ENDIF
 	EQUB 	4 ; Genre
 	EQUB 	4 ; Compatible
 	EQUB 	4 ; Version
+	EQUB 	4 ; Joystick
 	EQUB 	4 ; Collection
 
 .NormalAnnotation
@@ -485,12 +488,13 @@ ENDIF
 
 .ExtractTableValue
 {
-; 1 = Publisher (byte 2)
+; 1 = Publisher (encoded within bits 5..0 of byte 2)
 .Filter1
 	CPY #PubFilterNum
 	BNE Filter2
 	LDY #PubIdOffset
 	LDA (Title), Y
+    AND #&3F
 	RTS
 
 ; 2 = Genre (encoded within bits 7..5 of byte 1)
@@ -526,8 +530,19 @@ ENDIF
 	AND #&1F
 	RTS
 
-; 5 = Collecton (byte 4 onwards)
+; 5 = Joystick (encoded within bits 7..6 of byte 3)
 .Filter5
+	CPY #JoystickFilterNum
+	BNE Filter5
+	LDY #JoystickIdOffset
+	LDA (Title), Y
+    ROL A
+    ROL A
+    ROL A
+	AND #&03
+	RTS
+; 6 = Collecton (byte 4 onwards)
+.Filter6
 	LDY #CategoriesIdOffset
 	LDA (Title), Y
 	EOR #&80

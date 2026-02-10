@@ -833,7 +833,7 @@ ENDIF
 	RTS
 
 .LabelYNumSpaces
-	EQUB 0, 1, 5, 0, 3, 0
+	EQUB 0, 1, 5, 0, 3, 2, 0
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to print the filter name not padded at all
@@ -865,6 +865,7 @@ ENDIF
 	EQUW LabelZ3
 	EQUW LabelZ4
 	EQUW LabelZ5
+	EQUW LabelZ6
 
 ; TODO: Why are sone of these padded?
 
@@ -884,6 +885,9 @@ ENDIF
 	EQUS "VERSION", 0
 
 .LabelZ5
+	EQUS "JOYSTICK", 0
+
+.LabelZ6
 	EQUS "COLLECTION", 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

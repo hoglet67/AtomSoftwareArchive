@@ -27,6 +27,7 @@ public class GenerateMenuFiles extends GenerateBase {
     private Comparator<String> genreComparator      = Comparator.naturalOrder();
     private Comparator<String> compatibleComparator = Comparator.nullsLast(intuitiveStringComparator);
     private Comparator<String> versionComparator    = intuitiveStringComparator.reversed();
+    private Comparator<String> joystickComparator    = Comparator.naturalOrder();
     private Comparator<String> collectionComparator = Comparator.nullsLast(intuitiveStringComparator);
 
     // Define secondary tables
@@ -39,7 +40,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable publishers = new SecondaryTableSingleValue(
             "Publisher",
-            new BitField(2, 0, 8),
+            new BitField(2, 0, 6),
             AtomTitle::getPublisher,
             publisherComparator);
 
@@ -61,6 +62,12 @@ public class GenerateMenuFiles extends GenerateBase {
             AtomTitle::getVersion,
             versionComparator);
 
+    private SecondaryTable joysticks = new SecondaryTableSingleValue(
+            "Joystick",
+            new BitField(2 ,6, 2),
+            AtomTitle::getJoystick,
+            joystickComparator);
+
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
             new BitField(4, 0, 8),
@@ -73,6 +80,7 @@ public class GenerateMenuFiles extends GenerateBase {
             genres,
             compatibles,
             versions,
+            joysticks,
             collections
     };
 
@@ -109,6 +117,11 @@ public class GenerateMenuFiles extends GenerateBase {
             new SortTable("Version",
                     Comparator.comparing(AtomTitle::getVersion, versionComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Joystick",
+                    Comparator.comparing(AtomTitle::getJoystick, joystickComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
 
             new SortTable("Collection",
                     Comparator.comparing(AtomTitle::getCollectionFirst, collectionComparator).
