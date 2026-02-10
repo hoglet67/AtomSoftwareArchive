@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -105,6 +106,7 @@ public class GenerateAll {
             e.printStackTrace();
         }
     }
+
     // Check 12K compatibility
     private void check12KCompatibility(List<AtomTitle> items) {
         banner("Checking 12K Compatibility");
@@ -166,6 +168,110 @@ public class GenerateAll {
         }
     }
 
+
+    public RomDef[] roms = new RomDef[] {
+
+            new RomDef("ROM_PCHARME",
+                    new String[] { "BEEP", "CASE", "CONT", "FUNCTION", "FEND", "INKEY", "INSTR", "PROC", "PEND", "PROGRAM", "HTAB",
+                            "VTAB", "WHILE", "WEND", "XIF" }),
+
+            new RomDef("ROM_FP", new String[] { "%", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
+
+            new RomDef("ROM_GAGS",
+                    new String[] { "CLS", "ATKEY", "JOYSTK", "INV", "BORDER", "PAINT", "CUBE", "CIRCLE", "PIXEL", "WINDOW", "WOFF",
+                            "FILL", "SCROLL", "HLINE", "VLINE", "INK", "PAPER", "MODE", "BLOCK", "SOUND", "PAUSE", "CREATE", "DEF",
+                            "BASE"
+                    // lots more
+                    })
+    };
+
+    // Check for ROM signatures
+    private void checkUtilityRomSignatures(List<AtomTitle> items) {
+        banner("Checking files for Utility ROMs");
+        for (AtomTitle item : items) {
+            boolean debug = false; //item.getIdentifier() == 162;
+            Map<RomDef, Set<String>> found = new HashMap<RomDef, Set<String>>();
+            for (RomDef rom : roms) {
+                found.put(rom,  new HashSet<String>());
+            }
+            for (String filename : item.getFilenames()) {
+                File file = new File(new File(archiveDir, item.getDir()), filename);
+                try {
+                    ATMFile atm = new ATMFile(file);
+                    if (atm.isAtm()) {
+                        byte[] data = atm.getData();
+
+                        // Determine the first page boundary
+                        int offset = atm.getLoadAddr() & 0xff;
+                        if (offset > 0) {
+                            offset = 0x100 - offset;
+                        }
+
+                        // Scan for basic
+                        int i = offset;
+
+                        while (i < data.length - 4) {
+                            // Test for a valid start of line
+                            if (data[i] == ((byte) 0x0D) && data[i + 1] >= 0) {
+                                i += 3; // Skip <CR> <Line Number>
+                                if ((data[i] >= ((byte) 'a')) && (data[i] <= ((byte) 'z'))) {
+                                    i++; // Skip label
+                                }
+                                // Search for the end of the line
+                                int start = i;
+                                while (i < data.length && data[i] != ((byte) 0x0d)) {
+                                    i++;
+                                }
+                                if (i < data.length) {
+                                    // Test line for signature statements
+                                    int end = i;
+                                    String basic = new String(data, start, end - start);
+                                    String[] statements = basic.split(";");
+                                    for (String statement : statements) {
+                                        statement = statement.strip();
+                                        if (debug) {
+                                            System.out.println(statement);
+                                        }
+                                        for (RomDef rom : roms) {
+                                            for (String command : rom.getCommands()) {
+                                                if (statement.startsWith(command)) {
+                                                    found.get(rom).add(command);
+                                                    break;
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                } else {
+                                    // Skip to next page
+                                    i = ((i + 0x100) & 0xff00) + offset;
+                                }
+                            } else {
+                                i += 0x100; // Skip to next page
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("WARNING: Missing file: " + file);
+                }
+            }
+            for (RomDef rom : roms) {
+                Set<String> commands = found.get(rom);
+                if (rom.getName().equals("ROM_FP")) {
+                    if (commands.isEmpty() && item.isFpROM()) {
+                        System.out.println("WARNING: Compatibility: Title probably wrongly marked as " + rom + ": " + item);
+                    } else if (!commands.isEmpty() && !item.isFpROM()) {
+                        System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
+                    }
+                } else {
+                    if (!commands.isEmpty() && !item.getTitle().contains("(R)")) {
+                        System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
+                    }
+                }
+            }
+        }
+    }
+
     // Count the number of titles remaining in each chunk
     // (and also create the All chunk)
     private Map<String, Integer> calculateChunkStats(List<AtomTitle> items, String message) {
@@ -222,6 +328,9 @@ public class GenerateAll {
 
         // Produce WARNINGs for titles that might have garbage on the end
         checkGarbageSignature(sortedItems); // Use SortedItems so WARNINGs in sensible order
+
+        // Test for various Utility ROM signatures
+        checkUtilityRomSignatures(sortedItems);
 
         // Compute initial stats of sizes of each chunks
         Map<String, Integer> initialChunkStats = calculateChunkStats(items, "Master stats");

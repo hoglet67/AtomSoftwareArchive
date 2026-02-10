@@ -30,6 +30,7 @@ public class SpreadsheetParser {
     private static final String FILENAMES = "filenames";
     private static final String UPDATED = "updated";
     private static final String RAM32K = "32k";
+    private static final String FPROM = "fp";
     private static final String JOYSTICK = "joystick";
 
     private File file;
@@ -70,6 +71,7 @@ public class SpreadsheetParser {
             int updated_column = -1;
             int ram32k_column = -1;
             int joystick_column = -1;
+            int fprom_column = -1;
 
             for (int i = 0; i < headers.length; i++) {
                 if (headers[i].toLowerCase().contains(IDENTIFIER)) {
@@ -116,6 +118,9 @@ public class SpreadsheetParser {
                 }
                 if (headers[i].toLowerCase().contains(JOYSTICK)) {
                     joystick_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(FPROM)) {
+                    fprom_column = i;
                 }
             }
 
@@ -200,6 +205,8 @@ public class SpreadsheetParser {
                 } else {
                     item.setJoystick(joystick);
                 }
+                String fprom = program[fprom_column].trim().toUpperCase();
+                item.setFpROM(fprom.equals("YES"));
                 items.add(item);
                 accumulateStats(item);
             }

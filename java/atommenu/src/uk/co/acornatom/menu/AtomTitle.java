@@ -20,6 +20,7 @@ public class AtomTitle {
     private String joystick;
     private List<String> collections;
     private String genre;
+
     private List<String> filenames;
     private Set<String> runnables = new HashSet<String>();
     private Set<String> loadables = new HashSet<String>();
@@ -30,6 +31,7 @@ public class AtomTitle {
 
     // These other computed things
     private boolean compatible12K;
+    private boolean fpROM;
     private int estimatedDiskSectors;
     private Integer diskNo;
 
@@ -220,6 +222,14 @@ public class AtomTitle {
 
     public void setJoystick(String joystick) {
         this.joystick = joystick;
+    }
+
+    public boolean isFpROM() {
+        return fpROM;
+    }
+
+    public void setFpROM(boolean fpROM) {
+        this.fpROM = fpROM;
     }
 
 
