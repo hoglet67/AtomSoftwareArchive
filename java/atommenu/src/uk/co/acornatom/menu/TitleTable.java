@@ -10,14 +10,18 @@ import java.util.List;
 public class TitleTable extends TableBase {
 
     private int titleHeaderSize;
+    private SecondaryTable[] secondaryTables;
     private Comparator<AtomTitle> comparator;
 
-    public TitleTable(int titleHeaderSize, Comparator<AtomTitle> comparator) {
+    public TitleTable(String name, int titleHeaderSize, SecondaryTable[] secondaryTables, Comparator<AtomTitle> comparator) {
+        super(name);
         this.titleHeaderSize = titleHeaderSize;
+        this.secondaryTables = secondaryTables;
         this.comparator = comparator;
     }
 
-    public byte[] createTable(int absoluteAddress, List<AtomTitle> items, SecondaryTable[] secondaryTables) throws IOException {
+    @Override
+    public byte[] createTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
             System.out.println("Title Table");
@@ -49,6 +53,17 @@ public class TitleTable extends TableBase {
             System.out.println("length " + bos.size() + " bytes");
         }
         return bos.toByteArray();
+    }
+
+    @Override
+    public int calculateSize(List<AtomTitle> titles) {
+        int size = 0;
+        for (AtomTitle title : titles) {
+            size += titleHeaderSize;
+            size += title.getCollectionIds().size();
+            size += title.getTitle().length() + 1;
+        }
+        return size;
     }
 
 }

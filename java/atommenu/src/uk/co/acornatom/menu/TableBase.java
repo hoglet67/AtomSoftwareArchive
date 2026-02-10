@@ -2,12 +2,15 @@ package uk.co.acornatom.menu;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public abstract class TableBase {
 
     protected boolean debug;
+    protected String name;
 
-    public TableBase() {
+    protected TableBase(String name) {
+        this.name = name;
         this.debug = false;
     }
 
@@ -27,4 +30,13 @@ public abstract class TableBase {
     protected void writeByte(OutputStream out, int value) throws IOException {
         out.write(value & 0xff);
     }
+
+    public abstract byte[] createTable(int absoluteAddress, List<AtomTitle> titles) throws IOException;
+
+    public abstract int calculateSize(List<AtomTitle> titles);
+
+    public String getName() {
+        return name;
+    }
+
 }

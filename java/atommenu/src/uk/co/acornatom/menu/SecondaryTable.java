@@ -9,27 +9,24 @@ import java.util.function.Function;
 
 public abstract class SecondaryTable extends TableBase {
 
-    private String name;
     private BitField def;
-
-    protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
     private Map<String, Integer> map;
+    protected Function<? super AtomTitle, ? extends String> atomFieldExtractor; // Extracts a single field for sorting
+    private boolean includeCounts = true;
 
     private int maxLen;
-    private boolean debug = false;
-    private int calculatedSize;
 
     protected SecondaryTable (String name,
             BitField def,
             Function<? super AtomTitle, ? extends String> atomFieldExtractor,
             Map<String, Integer> map
             ) {
-        this.name = name;
+        super(name);
         this.def = def;
         this.map = map;
+        this.atomFieldExtractor = atomFieldExtractor;
         this.maxLen = 0;
         this.debug = false;
-        this.atomFieldExtractor = atomFieldExtractor;
         for (String key : this.map.keySet()) {
             if (key.length() > this.maxLen) {
                 maxLen = key.length();
@@ -45,16 +42,21 @@ public abstract class SecondaryTable extends TableBase {
 
     public abstract boolean match(AtomTitle title, String value);
 
+    public SecondaryTable excludeCounts() {
+        this.includeCounts = false;
+        return this;
+    }
+
+    public SecondaryTable includeCounts() {
+        this.includeCounts = true;
+        return this;
+    }
+
     public void assignIndexes() {
         int index = 0;
         for (String key : map.keySet()) {
             map.replace(key, index++);
         }
-    }
-
-    @Override
-    public void setDebug(boolean debug) {
-        this.debug = debug;
     }
 
     public void dumpIndexes() {
@@ -74,8 +76,9 @@ public abstract class SecondaryTable extends TableBase {
         return createTable(absoluteAddress, null);
     }
 
-    public int calculateSize(boolean includeCounts) {
-          calculatedSize = map.size() * 2 + 4;
+    @Override
+    public int calculateSize(List<AtomTitle> titles) {
+          int calculatedSize = map.size() * 2 + 4;
           for (Map.Entry<String, Integer> entry : map.entrySet()) {
               String key = entry.getKey();
               calculatedSize += key.length() + 1;
@@ -86,6 +89,7 @@ public abstract class SecondaryTable extends TableBase {
           return calculatedSize;
     }
 
+    @Override
     public byte[] createTable(int absoluteAddress, List<AtomTitle> titles) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
@@ -123,29 +127,12 @@ public abstract class SecondaryTable extends TableBase {
             System.out.println("length " + bos.size() + " bytes");
         }
         byte[] bytes = bos.toByteArray();
-        if (bytes.length != calculatedSize) {
-            System.out.println("WARNING: calculated and actual sizes differ for " + name);
-        }
         return bytes;
     }
-
-    // WARNING: this is expensive and should only be used sparingly
-    // It's needed to support some logging code
-    public String getKey(int value) {
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
-
 
     // Some methods that operate on the underlying map
     public void clear() {
         map.clear();
-        calculatedSize = 0;
     }
 
     public Integer put(String key, Integer value) {

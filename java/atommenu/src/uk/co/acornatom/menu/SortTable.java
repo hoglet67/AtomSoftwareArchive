@@ -9,15 +9,15 @@ import java.util.List;
 
 public class SortTable extends TableBase {
 
-    private String name;
     Comparator<AtomTitle> comparator;
 
     public SortTable(String name, Comparator<AtomTitle> comparator) {
-        this.name = name;
+        super(name);
         this.comparator = comparator;
     }
 
-    public byte[] createTable(List<AtomTitle> items) throws IOException {
+    @Override
+    public byte[] createTable(int absoluteAddress, List<AtomTitle> items) throws IOException {
         if (debug) {
             System.out.println("----------------------------------------");
             System.out.println("Sort Table: " + name);
@@ -38,5 +38,11 @@ public class SortTable extends TableBase {
             System.out.println("length " + bos.size() + " bytes");
         }
         return bos.toByteArray();
+    }
+
+    @Override
+    public int calculateSize(List<AtomTitle> titles) {
+        // <NumTitles> <Pointer 0> ... <Pointer N-1> <0000>
+        return 2 + titles.size() * 2 + 2;
     }
 }

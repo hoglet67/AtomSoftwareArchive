@@ -7,7 +7,6 @@ import java.util.function.Function;
 
 public class SecondaryTableSingleValue extends SecondaryTable {
 
-
     public SecondaryTableSingleValue (
             String name,
             BitField def,
@@ -43,7 +42,4 @@ public class SecondaryTableSingleValue extends SecondaryTable {
         String titleValue = atomFieldExtractor.apply(title);
         return titleValue.equals(value);
     }
-
-
-
 }
