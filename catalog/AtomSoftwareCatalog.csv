@@ -15,38 +15,38 @@ ADV2D",,Works,
 10,V1,Comm,A&R S/W,Trap,Game,,,,,,,,present,,AR,8200,*RUN TRAP,TRAP,,Works,
 11,,Comm,Aardvark,Hedgehog,Game,,,,,,,,missing,Nick Pelling (aka Orlando M Pilchard),AA,,,,,,
 12,V11B7,Comm,Aardvark,Invaders,Game,,,,,,,,present,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN INVADER,INVADER,,,
-13,V1,Comm,Acornsoft,House,Adventure,Atom Adventures,,No,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
+13,V1,Comm,Acornsoft,House,Adventure,Atom Adventures,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN HOUSE","ADVENTUR
 HOUSE",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-14,V1,Comm,Acornsoft,Dungeon,Adventure,Atom Adventures,,No,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
+14,V1,Comm,Acornsoft,Dungeon,Adventure,Atom Adventures,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN DUNGEON","ADVENTUR
 DUNGEON",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-15,V1,Comm,Acornsoft,Intergalactic,Adventure,Atom Adventures,,No,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
+15,V1,Comm,Acornsoft,Intergalactic,Adventure,Atom Adventures,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN INTERGAL","ADVENTUR
 INTERGAL",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-16,V1,Modern,Acornsoft,Sphinx Adv (40K),Adventure,Atom Adventures,Yes,No,,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
+16,V1,Modern,Acornsoft,Sphinx Adv (40K),Adventure,Atom Adventures,Yes,,,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
 SPHINX1
 SPHINX2
 SPHINXIN",,Works,
 17,V1,Comm,Acornsoft,AtomCalc,Business,,,Yes,,,,,present,,AS/ATOMCALC,8200,*RUN ATOMCALC,ATOMCALC,,Works,https://acornatom.nl/atom_handleidingen/pdf/AtomCalc.pdf
-18,V1,Comm,Acornsoft,ADDUP,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""ADDUP""",ADDUP,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-19,V1,Comm,Acornsoft,LABEL,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""LABEL""",LABEL,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-20,V1,Comm,Acornsoft,WTMS,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""WTMS""",WTMS,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-21,V1,Comm,Acornsoft,DCF,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""DCF""",DCF,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-22,V1,Comm,Acornsoft,SALES,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""SALES""",SALES,,"Broken - Uses FOUT, SPUT, FPUT so won't work with AtomMMC",https://site.acornatom.nl/boeken/atom-business-book.pdf
-23,V1,Comm,Acornsoft,GRAPH,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""GRAPH""",GRAPH,,"Broken - Uses FIN, SGET, FGET so won't work with AtomMMC",https://site.acornatom.nl/boeken/atom-business-book.pdf
-24,V1,Comm,Acornsoft,NOM,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""NOM""",NOM,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-25,V1,Comm,Acornsoft,BUDG,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""BUDG""",BUDG,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-26,V1,Comm,Acornsoft,EXS,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""EXS""",EXS,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-27,V1,Comm,Acornsoft,STD,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""STD""",STD,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-28,V1,Comm,Acornsoft,QUE,Business,Atom Business,,No,,,,,present,,AS/BUSINESS,8200,"CH.""QUE""",QUE,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
-29,V2,Comm,Acornsoft,Chess,Game,,,No,,,,,present,,AS/CHESS,8200,*RUN CHESS,CHESS,,Works - Keys: [ ] history; X reset; moves e.g. A2 A4; R - let computer move.,
-30,V2,Comm,Acornsoft,Database,Business,,,No,,,,,present,,AS/DATABASE,2800,"*LOAD WINELIST
+18,V1,Comm,Acornsoft,ADDUP,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""ADDUP""",ADDUP,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+19,V1,Comm,Acornsoft,LABEL,Business,Atom Business,,,,,,,present,,AS/BUSINESS,8200,"CH.""LABEL""",LABEL,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+20,V1,Comm,Acornsoft,WTMS,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""WTMS""",WTMS,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+21,V1,Comm,Acornsoft,DCF,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""DCF""",DCF,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+22,V1,Comm,Acornsoft,SALES,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""SALES""",SALES,,"Broken - Uses FOUT, SPUT, FPUT so won't work with AtomMMC",https://site.acornatom.nl/boeken/atom-business-book.pdf
+23,V1,Comm,Acornsoft,GRAPH,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""GRAPH""",GRAPH,,"Broken - Uses FIN, SGET, FGET so won't work with AtomMMC",https://site.acornatom.nl/boeken/atom-business-book.pdf
+24,V1,Comm,Acornsoft,NOM,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""NOM""",NOM,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+25,V1,Comm,Acornsoft,BUDG,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""BUDG""",BUDG,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+26,V1,Comm,Acornsoft,EXS,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""EXS""",EXS,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+27,V1,Comm,Acornsoft,STD,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""STD""",STD,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+28,V1,Comm,Acornsoft,QUE,Business,Atom Business,,Yes,,,,,present,,AS/BUSINESS,8200,"CH.""QUE""",QUE,,Works,https://site.acornatom.nl/boeken/atom-business-book.pdf
+29,V2,Comm,Acornsoft,Chess,Game,,,,,,,,present,,AS/CHESS,8200,*RUN CHESS,CHESS,,Works - Keys: [ ] history; X reset; moves e.g. A2 A4; R - let computer move.,
+30,V2,Comm,Acornsoft,Database,Business,,,,,,,,present,,AS/DATABASE,2800,"*LOAD WINELIST
 CH.""DATABASE""","DATABASE
 WINELIST",,"Works - slow to start; seems to be scanning all memory in basic and getting confused by 32K RAM. If you have 32K RAM, *LOAD WINELIST 4000 will speed things up. Loads to command prompt after a minute. ",https://acornatom.nl/atom_handleidingen/dbase/dbase01.htm
-31,V3,Comm,Acornsoft,Address Book,Business,Atom Desk Diary,,No,,,,,present,,AS/DIARY,8200,"CH.""ADRBOOK""",ADRBOOK,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
-32,V1,Comm,Acornsoft,Planner,Business,Atom Desk Diary,,No,,,,,present,,AS/DIARY,8200,"CH.""PLANNER""",PLANNER,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
-33,V3,Comm,Acornsoft,Forth,Language,,,No,,,,,present,,AS/FORTH,8200,"*LOAD FORTH-D
+31,V3,Comm,Acornsoft,Address Book,Business,Atom Desk Diary,,,,,,,present,,AS/DIARY,8200,"CH.""ADRBOOK""",ADRBOOK,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
+32,V1,Comm,Acornsoft,Planner,Business,Atom Desk Diary,,,,,,,present,,AS/DIARY,8200,"CH.""PLANNER""",PLANNER,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
+33,V3,Comm,Acornsoft,Forth,Language,,,,,,,,present,,AS/FORTH,8200,"*LOAD FORTH-D
 *RUN FORTH-C","FORTH
 FORTH-C
 FORTH-D
@@ -65,121 +65,121 @@ DEMO3
 DEMO4
 DEMO5
 PROTOVDU",,Works,https://site.acornatom.nl/boeken/forth-theory-and-practice.pdf
-34,V1,Comm,Acornsoft,Asteroids,Game,Games Pack 1,,No,,,,,present,,AS/GAMES01,8200,"CH.""ASTEROID""",ASTEROID,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2001.pdf
+34,V1,Comm,Acornsoft,Asteroids,Game,Games Pack 1,,,,,,,present,,AS/GAMES01,8200,"CH.""ASTEROID""",ASTEROID,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2001.pdf
 35,V1,Comm,Acornsoft,Sub Hunt,Game,Games Pack 1,,Yes,,,,,present,,AS/GAMES01,8200,"CH.""SUBHUNT""",SUBHUNT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2001.pdf
-36,V1,Comm,Acornsoft,Breakout,Game,Games Pack 1,,No,,,,,present,,AS/GAMES01,8200,"CH.""BREAKOUT""",BREAKOUT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2001.pdf
-37,V1,Comm,Acornsoft,Dog Fight,Game,Games Pack 2,,No,,,,,present,,AS/GAMES02,8200,"CH. ""DOGFIGHT""",DOGFIGHT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
-38,V1,Comm,Acornsoft,Mastermind,Game,Games Pack 2,,No,,,,,present,,AS/GAMES02,8200,"CH. ""MASTERMI""",MASTERMI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
-39,V1,Comm,Acornsoft,Zombie,Game,Games Pack 2,,No,,,,,present,,AS/GAMES02,8200,"CH. ""ZOMBIE""",ZOMBIE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
-40,V1,Comm,Acornsoft,Rat Trap,Game,Games Pack 3,,No,,,,,present,,AS/GAMES03,8200,"CH.""RATTRAP""",RATTRAP,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
-41,V1,Comm,Acornsoft,Lunar Lander,Game,Games Pack 3,,No,,,,,present,,AS/GAMES03,8200,"CH.""LANDER""",LANDER,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
-42,V1,Comm,Acornsoft,Black Box,Game,Games Pack 3,,No,,,,,present,,AS/GAMES03,8200,"CH.""BLACKBOX""",BLACKBOX,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
-43,V1,Comm,Acornsoft,Star Trek,Game,Games Pack 4,,No,,,,,present,,AS/GAMES04,8200,"CH.""STARTREK""",STARTREK,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
-44,V1,Comm,Acornsoft,Four Row,Game,Games Pack 4,,No,,,,,present,,AS/GAMES04,8200,"CH.""FOURROW""",FOURROW,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
-45,V1,Comm,Acornsoft,Space Attack,Game,Games Pack 4,,No,,,,,present,,AS/GAMES04,8200,"CH.""ATTACK""",ATTACK,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
-46,V1,Comm,Acornsoft,Invaders,Game,Games Pack 5,,No,,,,,present,,AS/GAMES05,8200,"CH.""INVADERS""",INVADERS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
-47,V1,Comm,Acornsoft,Wumpus,Game,Games Pack 5,,No,,,,,present,,AS/GAMES05,8200,"CH.""WUMPUS""",WUMPUS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
-48,V1,Comm,Acornsoft,Reverse,Game,Games Pack 5,,No,,,,,present,,AS/GAMES05,8200,"CH.""REVERSI""",REVERSI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
-49,V1,Comm,Acornsoft,Dodgems,Game,Games Pack 6,,No,,,,,present,,AS/GAMES06,8200,"CH.""DODGEMS""",DODGEMS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
-50,V1,Comm,Acornsoft,Simon,Game,Games Pack 6,,No,,,,,present,,AS/GAMES06,8200,"CH.""SIMON""",SIMON,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
-51,V1,Comm,Acornsoft,Amoeba,Game,Games Pack 6,,No,,,,,present,,AS/GAMES06,8200,"CH.""AMOEBA""",AMOEBA,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
-52,V1,Comm,Acornsoft,Green Things,Game,Games Pack 7,,No,,,,,present,,AS/GAMES07,8200,"CH.""GREENTHI""",GREENTHI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
-53,V1,Comm,Acornsoft,Balistics,Game,Games Pack 7,,No,,,,,present,,AS/GAMES07,8200,"CH.""BALLISTI""",BALLISTI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
-54,V1,Comm,Acornsoft,Snake,Game,Games Pack 7,,No,,,,,present,,AS/GAMES07,8200,"CH.""SNAKE""",SNAKE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
-55,V1,Comm,Acornsoft,Star Gate,Game,Games Pack 8,,No,,,,,present,,AS/GAMES08,8200,"CH.""STARGATE""",STARGATE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
-56,V1,Comm,Acornsoft,Go Moku,Game,Games Pack 8,,No,,,,,present,,AS/GAMES08,8200,"CH.""GOMOKU""",GOMOKU,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
-57,V1,Comm,Acornsoft,Robots,Game,Games Pack 8,,No,,,,,present,,AS/GAMES08,8200,"CH.""ROBOTS""",ROBOTS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
-58,V1,Comm,Acornsoft,Snapper,Game,Games Pack 9,,No,,,,,present,,AS/GAMES09,8200,"CH.""SNAPPER""",SNAPPER,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
-59,V1,Comm,Acornsoft,Minotaur,Game,Games Pack 9,,No,,,,,present,,AS/GAMES09,8200,"CH.""MINOTAUR""",MINOTAUR,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
-60,V1,Comm,Acornsoft,Babies,Game,Games Pack 9,,No,,,,,present,,AS/GAMES09,8200,"CH.""BABIES""",BABIES,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
-61,V2,Comm,Acornsoft,Bombs Away,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+36,V1,Comm,Acornsoft,Breakout,Game,Games Pack 1,,,,,,,present,,AS/GAMES01,8200,"CH.""BREAKOUT""",BREAKOUT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2001.pdf
+37,V1,Comm,Acornsoft,Dog Fight,Game,Games Pack 2,,,,,,,present,,AS/GAMES02,8200,"CH. ""DOGFIGHT""",DOGFIGHT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
+38,V1,Comm,Acornsoft,Mastermind,Game,Games Pack 2,,,,,,,present,,AS/GAMES02,8200,"CH. ""MASTERMI""",MASTERMI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
+39,V1,Comm,Acornsoft,Zombie,Game,Games Pack 2,,,,,,,present,,AS/GAMES02,8200,"CH. ""ZOMBIE""",ZOMBIE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2002.pdf
+40,V1,Comm,Acornsoft,Rat Trap,Game,Games Pack 3,,,,,,,present,,AS/GAMES03,8200,"CH.""RATTRAP""",RATTRAP,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
+41,V1,Comm,Acornsoft,Lunar Lander,Game,Games Pack 3,,,,,,,present,,AS/GAMES03,8200,"CH.""LANDER""",LANDER,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
+42,V1,Comm,Acornsoft,Black Box,Game,Games Pack 3,,,,,,,present,,AS/GAMES03,8200,"CH.""BLACKBOX""",BLACKBOX,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2003.pdf
+43,V1,Comm,Acornsoft,Star Trek,Game,Games Pack 4,,,,,,,present,,AS/GAMES04,8200,"CH.""STARTREK""",STARTREK,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
+44,V1,Comm,Acornsoft,Four Row,Game,Games Pack 4,,,,,,,present,,AS/GAMES04,8200,"CH.""FOURROW""",FOURROW,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
+45,V1,Comm,Acornsoft,Space Attack,Game,Games Pack 4,,,,,,,present,,AS/GAMES04,8200,"CH.""ATTACK""",ATTACK,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2004.pdf
+46,V1,Comm,Acornsoft,Invaders,Game,Games Pack 5,,,,,,,present,,AS/GAMES05,8200,"CH.""INVADERS""",INVADERS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
+47,V1,Comm,Acornsoft,Wumpus,Game,Games Pack 5,,,,,,,present,,AS/GAMES05,8200,"CH.""WUMPUS""",WUMPUS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
+48,V1,Comm,Acornsoft,Reverse,Game,Games Pack 5,,,,,,,present,,AS/GAMES05,8200,"CH.""REVERSI""",REVERSI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2005.pdf
+49,V1,Comm,Acornsoft,Dodgems,Game,Games Pack 6,,,,,,,present,,AS/GAMES06,8200,"CH.""DODGEMS""",DODGEMS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
+50,V1,Comm,Acornsoft,Simon,Game,Games Pack 6,,,,,,,present,,AS/GAMES06,8200,"CH.""SIMON""",SIMON,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
+51,V1,Comm,Acornsoft,Amoeba,Game,Games Pack 6,,,,,,,present,,AS/GAMES06,8200,"CH.""AMOEBA""",AMOEBA,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
+52,V1,Comm,Acornsoft,Green Things,Game,Games Pack 7,,,,,,,present,,AS/GAMES07,8200,"CH.""GREENTHI""",GREENTHI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
+53,V1,Comm,Acornsoft,Balistics,Game,Games Pack 7,,,,,,,present,,AS/GAMES07,8200,"CH.""BALLISTI""",BALLISTI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
+54,V1,Comm,Acornsoft,Snake,Game,Games Pack 7,,,,,,,present,,AS/GAMES07,8200,"CH.""SNAKE""",SNAKE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
+55,V1,Comm,Acornsoft,Star Gate,Game,Games Pack 8,,,,,,,present,,AS/GAMES08,8200,"CH.""STARGATE""",STARGATE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
+56,V1,Comm,Acornsoft,Go Moku,Game,Games Pack 8,,,,,,,present,,AS/GAMES08,8200,"CH.""GOMOKU""",GOMOKU,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
+57,V1,Comm,Acornsoft,Robots,Game,Games Pack 8,,,,,,,present,,AS/GAMES08,8200,"CH.""ROBOTS""",ROBOTS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
+58,V1,Comm,Acornsoft,Snapper,Game,Games Pack 9,,,,,,,present,,AS/GAMES09,8200,"CH.""SNAPPER""",SNAPPER,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
+59,V1,Comm,Acornsoft,Minotaur,Game,Games Pack 9,,,,,,,present,,AS/GAMES09,8200,"CH.""MINOTAUR""",MINOTAUR,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
+60,V1,Comm,Acornsoft,Babies,Game,Games Pack 9,,,,,,,present,,AS/GAMES09,8200,"CH.""BABIES""",BABIES,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
+61,V2,Comm,Acornsoft,Bombs Away,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN BOMBSAW",BOMBSAW,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-62,V2,Comm,Acornsoft,Breakout,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+62,V2,Comm,Acornsoft,Breakout,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN BREAKOUT",BREAKOUT,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-63,V2,Comm,Acornsoft,Hectic,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+63,V2,Comm,Acornsoft,Hectic,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN HECTIC",HECTIC,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-64,V2,Comm,Acornsoft,Mastermind,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+64,V2,Comm,Acornsoft,Mastermind,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN MASTERMI",MASTERMI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-65,V2,Comm,Acornsoft,Moon,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+65,V2,Comm,Acornsoft,Moon,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN MOON",MOON,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-66,V2,Comm,Acornsoft,Simon,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+66,V2,Comm,Acornsoft,Simon,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN SIMON",SIMON,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-67,V2,Comm,Acornsoft,Ski Run,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+67,V2,Comm,Acornsoft,Ski Run,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN SKIRUN",SKIRUN,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-68,V2,Comm,Acornsoft,Snake,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+68,V2,Comm,Acornsoft,Snake,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN SNAKE",SNAKE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-69,V2,Comm,Acornsoft,Squash,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+69,V2,Comm,Acornsoft,Squash,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN SQUASH",SQUASH,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-70,V2,Comm,Acornsoft,Track,Game,Games Pack 10,,No,,,,,present,,AS/GAMES10,2800,"?18=130
+70,V2,Comm,Acornsoft,Track,Game,Games Pack 10,,,,,,,present,,AS/GAMES10,2800,"?18=130
 *RUN TRACK",TRACK,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2010.pdf
-71,V3,Comm,Acornsoft,Missile Base,Game,Games Pack 11,,No,,,,,present,,AS/GAMES11,8200,"*LOAD PART2
+71,V3,Comm,Acornsoft,Missile Base,Game,Games Pack 11,,,,,,,present,,AS/GAMES11,8200,"*LOAD PART2
 *RUN MISSILE","MISSILE
 PART2",,Works,https://acornatom.nl/atom_handleidingen/misc/gp11.html
-72,V1,Comm,Acornsoft,Snooker,Game,Games Pack 11,,No,,,,,present,,AS/GAMES11,8200,"CH.""SNOOKER""",SNOOKER,,Works,https://acornatom.nl/atom_handleidingen/misc/gp11.html
-73,V1,Comm,Acornsoft,Dominoes,Game,Games Pack 11,,No,,,,,present,,AS/GAMES11,8200,"CH.""DOMINO""",DOMINO,,Works,https://acornatom.nl/atom_handleidingen/misc/gp11.html
-74,V1,Comm,Acornsoft,Introduction,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN INTRODUC,INTRODUC,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-75,V1,Comm,Acornsoft,Numbers,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN NUMBERS,NUMBERS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-76,V1,Comm,Acornsoft,Text,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN TEXT,TEXT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-77,V1,Comm,Acornsoft,Programs,Educational,Intro Pack 1,,No,No,,,,present,,AS/INTRO1,8200,*RUN PROGRAMS,PROGRAMS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-78,V1,Comm,Acornsoft,Functions,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN FUNCTION,FUNCTION,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-79,V1,Comm,Acornsoft,Input,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN INPUT,INPUT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-80,V1,Comm,Acornsoft,Jumps,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN JUMPS,JUMPS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-81,V1,Comm,Acornsoft,Tests,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN TESTS,TESTS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-82,V1,Comm,Acornsoft,Loops,Educational,Intro Pack 1,,No,,,,,present,,AS/INTRO1,8200,*RUN LOOPS,LOOPS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-83,V1,Comm,Acornsoft,Graphics,Educational,Intro Pack 1,,No,No,,,,present,,AS/INTRO1,8200,*RUN GRAPHICS,GRAPHICS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-84,V1,Comm,Acornsoft,MiniCalc,Business,Intro Pack 2,,No,,,,,present,,AS/INTRO2,8200,*RUN MINICALC,MINICALC,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-85,V1,Comm,Acornsoft,Sales,Business,Intro Pack 2,,No,,,,,present,,AS/INTRO2,8200,*RUN SALES,SALES,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-86,V1,Comm,Acornsoft,Telephone Book,Business,Intro Pack 3,,No,,,,,present,,AS/INTRO3,8200,*RUN TBOOK,"TBOOK
+72,V1,Comm,Acornsoft,Snooker,Game,Games Pack 11,,,,,,,present,,AS/GAMES11,8200,"CH.""SNOOKER""",SNOOKER,,Works,https://acornatom.nl/atom_handleidingen/misc/gp11.html
+73,V1,Comm,Acornsoft,Dominoes,Game,Games Pack 11,,,,,,,present,,AS/GAMES11,8200,"CH.""DOMINO""",DOMINO,,Works,https://acornatom.nl/atom_handleidingen/misc/gp11.html
+74,V1,Comm,Acornsoft,Introduction,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN INTRODUC,INTRODUC,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+75,V1,Comm,Acornsoft,Numbers,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN NUMBERS,NUMBERS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+76,V1,Comm,Acornsoft,Text,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN TEXT,TEXT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+77,V1,Comm,Acornsoft,Programs,Educational,Intro Pack 1,,,No,,,,present,,AS/INTRO1,8200,*RUN PROGRAMS,PROGRAMS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+78,V1,Comm,Acornsoft,Functions,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN FUNCTION,FUNCTION,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+79,V1,Comm,Acornsoft,Input,Educational,Intro Pack 1,,Yes,,,,,present,,AS/INTRO1,8200,*RUN INPUT,INPUT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+80,V1,Comm,Acornsoft,Jumps,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN JUMPS,JUMPS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+81,V1,Comm,Acornsoft,Tests,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN TESTS,TESTS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+82,V1,Comm,Acornsoft,Loops,Educational,Intro Pack 1,,,,,,,present,,AS/INTRO1,8200,*RUN LOOPS,LOOPS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+83,V1,Comm,Acornsoft,Graphics,Educational,Intro Pack 1,,,No,,,,present,,AS/INTRO1,8200,*RUN GRAPHICS,GRAPHICS,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+84,V1,Comm,Acornsoft,MiniCalc,Business,Intro Pack 2,,,,,,,present,,AS/INTRO2,8200,*RUN MINICALC,MINICALC,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+85,V1,Comm,Acornsoft,Sales,Business,Intro Pack 2,,,,,,,present,,AS/INTRO2,8200,*RUN SALES,SALES,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+86,V1,Comm,Acornsoft,Telephone Book,Business,Intro Pack 3,,,,,,,present,,AS/INTRO3,8200,*RUN TBOOK,"TBOOK
 TDATA",,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-87,V1,Comm,Acornsoft,Touch Types,Educational,Intro Pack 3,,No,,,,,present,,AS/INTRO3,8200,*RUN TYPER,TYPER,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-88,V1,Comm,Acornsoft,Timer,Utility,Intro Pack 3,,No,,,,,present,,AS/INTRO3,8200,*RUN TIMER,TIMER,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-89,V1,Comm,Acornsoft,Attack,Game,Intro Pack 4,,No,,,,,present,,AS/INTRO4,8200,*RUN ATTACK,ATTACK,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-90,V1,Comm,Acornsoft,Connect 4,Game,Intro Pack 4,,No,,,,,present,,AS/INTRO4,8200,*RUN CONNECT4,CONNECT4,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-91,V1,Comm,Acornsoft,Breakout,Game,Intro Pack 4,,No,,,,,present,,AS/INTRO4,8200,*RUN BREAKOUT,BREAKOUT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-92,V1,Comm,Acornsoft,Memory,Game,Intro Pack 4,,No,,,,,present,,AS/INTRO4,8200,*RUN MEMORY,MEMORY,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-93,V1,Comm,Acornsoft,Mastermind,Game,Intro Pack 4,,No,,,,,present,,AS/INTRO4,8200,*RUN MASTERMI,MASTERMI,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
-94,V2,Comm,Acornsoft,Life,Simulation,,,No,,,,,present,,AS/LIFE,8200,"CH.""LIFE""","LIFE
+87,V1,Comm,Acornsoft,Touch Types,Educational,Intro Pack 3,,,,,,,present,,AS/INTRO3,8200,*RUN TYPER,TYPER,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+88,V1,Comm,Acornsoft,Timer,Utility,Intro Pack 3,,,,,,,present,,AS/INTRO3,8200,*RUN TIMER,TIMER,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+89,V1,Comm,Acornsoft,Attack,Game,Intro Pack 4,,,,,,,present,,AS/INTRO4,8200,*RUN ATTACK,ATTACK,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+90,V1,Comm,Acornsoft,Connect 4,Game,Intro Pack 4,,,,,,,present,,AS/INTRO4,8200,*RUN CONNECT4,CONNECT4,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+91,V1,Comm,Acornsoft,Breakout,Game,Intro Pack 4,,,,,,,present,,AS/INTRO4,8200,*RUN BREAKOUT,BREAKOUT,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+92,V1,Comm,Acornsoft,Memory,Game,Intro Pack 4,,,,,,,present,,AS/INTRO4,8200,*RUN MEMORY,MEMORY,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+93,V1,Comm,Acornsoft,Mastermind,Game,Intro Pack 4,,,,,,,present,,AS/INTRO4,8200,*RUN MASTERMI,MASTERMI,,Works,https://acornatom.nl/atom_handleidingen/introp/introp01.htm
+94,V2,Comm,Acornsoft,Life,Simulation,,,,,,,,present,,AS/LIFE,8200,"CH.""LIFE""","LIFE
 LIFEPA
 LIFEPB
 LIFEPC
 LIFEPD
 LIFEPE",,Works,https://acornatom.nl/atom_handleidingen/pdf/Life.pdf
-95,V1,Comm,Acornsoft,Lisp,Language,,,No,,,,,present,,AS/LISP,3B00,"*LOAD LISP
+95,V1,Comm,Acornsoft,Lisp,Language,,,,,,,,present,,AS/LISP,3B00,"*LOAD LISP
 *RUN LISP2","LISP
 LISP2",,Works,https://site.acornatom.nl/boeken/lisp-theory-and-practice.pdf
-96,V1,Comm,Acornsoft,Plot,Utility,Maths Pack 1,,No,,,,,present,,AS/MATHS1,8200,"CH.""PLOT""",PLOT,,Works,
-97,V1,Comm,Acornsoft,Simultaneous Equations,Utility,Maths Pack 1,,No,,,,,present,,AS/MATHS1,8200,"CH.""SIMULTAN""",SIMULTAN,,Works,
-98,V1,Comm,Acornsoft,Linear Regression,Utility,Maths Pack 1,,No,,,,,present,,AS/MATHS1,8200,"CH.""REGRESSI""",REGRESSI,,Works,
+96,V1,Comm,Acornsoft,Plot,Utility,Maths Pack 1,,Yes,,,,,present,,AS/MATHS1,8200,"CH.""PLOT""",PLOT,,Works,
+97,V1,Comm,Acornsoft,Simultaneous Equations,Utility,Maths Pack 1,,Yes,,,,,present,,AS/MATHS1,8200,"CH.""SIMULTAN""",SIMULTAN,,Works,
+98,V1,Comm,Acornsoft,Linear Regression,Utility,Maths Pack 1,,Yes,,,,,present,,AS/MATHS1,8200,"CH.""REGRESSI""",REGRESSI,,Works,
 99,V1,Comm,Acornsoft,Polynomial,Utility,Maths Pack 2,,Yes,,,,,present,,AS/MATHS2,8200,"CH.""POLYNOM""",POLYNOM,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 100,V1,Comm,Acornsoft,Rational,Utility,Maths Pack 2,,Yes,,,,,present,,AS/MATHS2,8200,"CH.""RATIONAL""",RATIONAL,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 101,V3,Comm,Acornsoft,Triginometry,Utility,Maths Pack 2,,Yes,,,,,present,,AS/MATHS2,8200,"CH.""TRIGONOM""",TRIGONOM,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 102,V1,Comm,Acornsoft,Fourier,Utility,Maths Pack 2,,Yes,,,,,present,,AS/MATHS2,8200,"CH.""FOURIER""",FOURIER,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
-103,V1,Non Comm,Non Comm,Pascal (16K),Language,,Yes,No,,,,,present,Mel Conway,OTHER,8200,*RUN PASCAL,PASCAL,,Works,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
-104,V1,Comm,Acornsoft,Peeko Computer,Educational,,,No,,,,,present,,AS/PEEKO,8200,"CH.""PEEKO""","PEEKO
+103,V1,Non Comm,Non Comm,Pascal (16K),Language,,Yes,,,,,,present,Mel Conway,OTHER,8200,*RUN PASCAL,PASCAL,,Works,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
+104,V1,Comm,Acornsoft,Peeko Computer,Educational,,,,,,,,present,,AS/PEEKO,8200,"CH.""PEEKO""","PEEKO
 ADD
 COPY
 FACTOR",,Works,https://acornatom.nl/atom_handleidingen/asof/peeko.html
-105,V1,Comm,Acornsoft,White on Black,Utility,Soft VDU,,No,,,,,present,,AS/SOFTVDU,8200,*RUN VDUB,VDUB,,Works,https://silicon-heaven.com/atom/manual/softvdu.html
-106,V1,Comm,Acornsoft,Black on White,Utility,Soft VDU,,No,,,,,present,,AS/SOFTVDU,8200,*RUN VDUW,VDUW,,Works,https://silicon-heaven.com/atom/manual/softvdu.html
-107,V1,Comm,Acornsoft,Designer,Utility,Soft VDU,,No,,,,,present,,AS/SOFTVDU,8200,"*RUN VDUB
+105,V1,Comm,Acornsoft,White on Black,Utility,Soft VDU,,,,,,,present,,AS/SOFTVDU,8200,*RUN VDUB,VDUB,,Works,https://silicon-heaven.com/atom/manual/softvdu.html
+106,V1,Comm,Acornsoft,Black on White,Utility,Soft VDU,,,,,,,present,,AS/SOFTVDU,8200,*RUN VDUW,VDUW,,Works,https://silicon-heaven.com/atom/manual/softvdu.html
+107,V1,Comm,Acornsoft,Designer,Utility,Soft VDU,,,,,,,present,,AS/SOFTVDU,8200,"*RUN VDUB
 CH.""DESIGN""","DESIGN
 VDUB",,Works,https://silicon-heaven.com/atom/manual/softvdu.html
-108,V1,Comm,Acornsoft,Synthesiser,Music,,,No,,,,,present,,AS/SYNTH,8200,"CH.""SYNTH""","SYNTH
+108,V1,Comm,Acornsoft,Synthesiser,Music,,,,,,,,present,,AS/SYNTH,8200,"CH.""SYNTH""","SYNTH
 TOCCATA
 SEASIDE
 PICNIC",,Works,
-109,V3,Comm,Acornsoft,Disassembler,Utility,Utility Pack 1,,No,,,,,present,,AS/UTILS1,8200,*RUN DISASAS,DISASAS,,Works,
-110,V3,Comm,Acornsoft,Fast Cassette OS,Utility,Utility Pack 1,,No,,,,,present,,AS/UTILS1,9700,"?18=130
+109,V3,Comm,Acornsoft,Disassembler,Utility,Utility Pack 1,,,,,,,present,,AS/UTILS1,8200,*RUN DISASAS,DISASAS,,Works,
+110,V3,Comm,Acornsoft,Fast Cassette OS,Utility,Utility Pack 1,,,,,,,present,,AS/UTILS1,9700,"?18=130
 CH.""FASTCOS""",FASTCOS,,Works,
-111,V1,Comm,Acornsoft,Renumber,Utility,Utility Pack 1,,No,,,,,present,,AS/UTILS1,8200,*RUN RENUM,RENUM,,Works,
+111,V1,Comm,Acornsoft,Renumber,Utility,Utility Pack 1,,,,,,,present,,AS/UTILS1,8200,*RUN RENUM,RENUM,,Works,
 112,V1,Modern,Acornsoft,Wordpack (32K),Business,,Yes,,,,,,present,,AS/WORDPACK,8200,*RUN ED64,ED64,,Works,
-113,V1,Comm,Acornsoft,Pairs,Educational,Atom Word Tutor,,No,,,,,present,,AS/WORDTUT,3B00,"*LOAD PAIRSD
+113,V1,Comm,Acornsoft,Pairs,Educational,Atom Word Tutor,,,,,,,present,,AS/WORDTUT,3B00,"*LOAD PAIRSD
 CH.""PAIRS""","PAIRS
 PAIRSD",,Works,
-114,V1,Comm,Acornsoft,Relations,Educational,Atom Word Tutor,,No,,,,,present,,AS/WORDTUT,3B00,"*LOAD RELATD
+114,V1,Comm,Acornsoft,Relations,Educational,Atom Word Tutor,,,,,,,present,,AS/WORDTUT,3B00,"*LOAD RELATD
 CH.""RELAT""","RELAT
 RELATD",,Works,
-115,V1,Comm,Acornsoft,Sentences,Educational,Atom Word Tutor,,No,,,,,present,,AS/WORDTUT,3B00,"*LOAD SENTD
+115,V1,Comm,Acornsoft,Sentences,Educational,Atom Word Tutor,,,,,,,present,,AS/WORDTUT,3B00,"*LOAD SENTD
 CH.""SENTENS""","SENTENS
 SENTD",,Works,
 116,,Comm,Atomic S/W,3-Towers,Game,,,,,,,,missing,,AT,,,,,,
@@ -254,7 +254,7 @@ LABYINS",,Works,
 157,V1,Comm,Bug Byte,Pinball,Game,,,,,,,,present,,BB,8200,"CH.""PINBALL""",PINBALL,,Works,
 158,V1,Comm,Bug Byte,Pontoon,Game,,,,,,,,present,,BB,8200,"*LOAD PONTOON
 RUN",PONTOON,,Works,
-159,V1,Comm,Bug Byte,Rhino,Game,,,Yes,,,,,present,,BB,8200,"CH.""RHINO""",RHINO,,Works,
+159,V1,Comm,Bug Byte,Rhino,Game,,,,,,,,present,,BB,8200,"CH.""RHINO""",RHINO,,Works,
 160,,Comm,Bug Byte,Simon,Game,,,,,,,,missing,,BB,,,,,,
 161,,Comm,Bug Byte,Squares,Game,,,,,,,,missing,,BB,,,,,,
 162,V7B1,Comm,Bug Byte,Star Trek,Game,,,Yes,,,,,present,,BB/STARTRK,8200,"*LOAD DATA
