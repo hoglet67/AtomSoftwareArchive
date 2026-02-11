@@ -841,44 +841,44 @@ IF properAnnotationCounts
 	BNE AnnotationTypeLoop
 	RTS
 
+	; Offset into the MenuTable of the pointer to the secondary
+	; table for the annotation type
+
+.MenuTableIndex
+FOR i, 0, NumFacets - 2, 1
+	EQUB 4 + 2 * i
+NEXT
 
 	; Increment an annotation count
-	; X=Annotation value (1 = Long Publisher, 2 = Genre, 3 = Collection)
-	; A=Annotation Value
+	; X=Annotation type (1 = Long Publisher, 2 = Genre, 3 = Collection)
+	; A=Annotation id value (7 bits)
 
 .IncAnnotationCounts
 	CLC
-	ADC #1
+	ADC #1		; Skip over the secondary table length field
 	ASL A
-	PHA
-	TXA
-	ASL A
-	TAY
-	INY
-	INY
-	CLC
-	PLA
+	LDY MenuTableIndex - 1, X
 	ADC (MenuTablePtr),Y
 	STA Tmp
 	INY
 	LDA (MenuTablePtr),Y
 	ADC #0
-	STA Tmp + 1
+	STA Tmp + 1	; Tmp the address of the pointer to the facet record
 	LDY #0
 	LDA (Tmp),Y
 	STA AnnotationString
 	INY
 	LDA (Tmp),Y
 	STA AnnotationString + 1
-	LDY #3		;
+	LDY #3		; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
 .loop
 	LDA (AnnotationString),Y
 	ADC #0
 	STA (AnnotationString),Y
 	DEY
-	BCS loop
-	RTS
+	BCS loop	; skip back in the rare case of carry
+	RTS 		; (you only get this if you search for <space>)
 
 	; Clear the 2nd and 3rd byte of each annotation record
 	; We will use these to store counts of the number of search filtered items
