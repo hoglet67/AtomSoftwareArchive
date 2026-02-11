@@ -84,11 +84,14 @@ public abstract class SecondaryTable extends TableBase {
           int calculatedSize = map.size() * 2 + 4;
           for (Map.Entry<String, Integer> entry : map.entrySet()) {
               String key = entry.getKey();
-              calculatedSize += key.length() + 1;
+              calculatedSize += key.length();
               if (includeCounts) {
                   calculatedSize += 4; // Space for the counts
+              } else {
+                  calculatedSize++; // Just a terminator
               }
           }
+          calculatedSize++;
           return calculatedSize;
     }
 
@@ -106,7 +109,7 @@ public abstract class SecondaryTable extends TableBase {
         writeShort(bos, map.size());
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             writeShort(bos, absoluteAddress);
-            absoluteAddress += (titles != null ? 4 : 0) + entry.getKey().length() + 1;
+            absoluteAddress += (titles != null ? 4 : 1) + entry.getKey().length();
         }
         writeShort(bos, 0x0000);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -120,12 +123,16 @@ public abstract class SecondaryTable extends TableBase {
                         count++;
                     }
                 }
-                writeShort(bos, count);
+                writeByte(bos, (byte)(0x80 | ((count >> 8) & 0x7f)));
+                writeByte(bos, (byte)(count & 0xff));
                 writeShort(bos, 0);
+                writeString(bos, key);
+            } else {
+                writeString(bos, key);
+                writeByte(bos, -1);
             }
-            writeString(bos, key);
-            writeByte(bos, (byte) 0x80);
         }
+        writeByte(bos, -1);
         if (debug) {
             System.out.println("length " + bos.size() + " bytes");
         }

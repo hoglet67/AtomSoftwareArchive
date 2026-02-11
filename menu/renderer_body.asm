@@ -1,3 +1,4 @@
+
 .WritePage
 
 IF properAnnotationCounts
@@ -239,10 +240,11 @@ IF properAnnotationCounts
 ENDIF
 
 	LDA (Title),Y
-	STA BinBuffer
+   AND #&7F
+	STA BinBuffer + 1
 	INY
 	LDA (Title),Y
-	STA BinBuffer + 1
+	STA BinBuffer
 	JSR WriteCount
 
 	LDA #<CountString
@@ -306,7 +308,7 @@ ENDIF
 
 .NullCollectionMessage
 	; Currently just blank, a string like "NO COLLECTION" could be put here
-	EQUB 0
+	EQUB &ff
 
 .NotNullCollection
 	; Currently the MSB of the annotation is lost, which limits secondary tables to 7 bit values
@@ -326,8 +328,7 @@ ENDIF
 
 .LengthOfAnnotationLoop
 	LDA (AnnotationString),Y
-	AND #&7F
-	BEQ WriteLetter
+	BMI WriteLetter
 	INY
 	DEX
 	BNE LengthOfAnnotationLoop
@@ -366,8 +367,7 @@ ENDIF
 	LDY #0
 .WriteAnnotation
 	LDA (AnnotationString),Y
-	AND #&7F
-	BEQ WriteLineExit
+	BMI WriteLineExit
 	JSR WriteToScreen
 	INY
 	BNE WriteAnnotation
@@ -590,7 +590,7 @@ ENDIF
 	LDA #')'
 	STA CountString,X
 	INX
-	LDA #0
+	LDA #&80
 	STA CountString,X
 	PLA
 	TAX
@@ -870,11 +870,14 @@ IF properAnnotationCounts
 	INY
 	LDA (Tmp),Y
 	STA AnnotationString + 1
-	INY
-	CLC
+	LDY #3		;
+	SEC
+.loop
 	LDA (AnnotationString),Y
-	ADC #1
+	ADC #0
 	STA (AnnotationString),Y
+	DEY
+	BCS loop
 	RTS
 
 	; Clear the 2nd and 3rd byte of each annotation record

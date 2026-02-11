@@ -920,7 +920,7 @@ ENDIF
 	LDY #0
 .ScreenString1
 	LDA (TmpPtr),Y
-	AND #&7F
+	BMI ScreenString2
 	BEQ ScreenString2
 	JSR WriteToScreen
 	INY
