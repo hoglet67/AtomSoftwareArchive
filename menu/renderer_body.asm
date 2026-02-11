@@ -25,7 +25,7 @@ ENDIF
 	TAY
 	INY
 	INY
-	CLC
+	; CLC		; pretty sure this is not needed, as annotation is small
 	LDA (MenuTablePtr),Y
 	ADC #2
 	STA AnnotationPtr
@@ -44,8 +44,8 @@ ENDIF
 	STA CurrentRow
 	STA CurrentRow + 1
 
-	; Default the Title Name Offset to no categories
-	LDA #4
+	; Default to assuming we are on a facet page
+	LDA #FacetTitleOffset
 	STA TitleNameOffset
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -229,16 +229,14 @@ ENDIF
 	LDA Annotation
 	BPL NormalAnnotation
 
-	LDY #CountOffset
+	LDY #FacetCountOffset
 
 IF properAnnotationCounts
 	LDA SearchFirst
 	BEQ NoSearch
-	INY
-	INY
+	LDY #FacetWorkingOffset
 .NoSearch
 ENDIF
-
 	LDA (Title),Y
 	AND #&7F
 	STA BinBuffer + 1

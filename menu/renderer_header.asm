@@ -12,7 +12,7 @@
 
 	SearchModeMask          = &0F		; large enough to represent NumFacets
 
-	CountOffset		= 0
+	; Field offsets into the title table record
 
 	PubIdOffset     	= 2
 	GenreIdOffset           = 0
@@ -31,6 +31,12 @@
 	VersionFilterNum	= 6
 	JoystickFilterNum	= 7
 	CategoriesFilterNum 	= 8
+
+	; Field offsets into the secondard table record
+
+	FacetCountOffset	= 0	   ; the original facet count where there is a search
+	FacetWorkingOffset	= 2	   ; the on-the-fly calculated  facet count where there is a seach
+	FacetTitleOffset	= 4	   ; the name of the facet itself
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Operating System Subroutines
