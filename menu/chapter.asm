@@ -23,8 +23,8 @@ ENDIF
 ; C -> SortTablePtr    - the load address of the SORT data file
 ; D -> MenuTablePtr    - the load address of the MENU data file
 ; E -> FilterString    - current filter record address
-; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3,4,5 showing the filter selection pages)
-; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Compatile, 4=Version, 5=Collection)
+; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3,4,5,6,7,8 showing the filter selection pages)
+; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Chunk, 4=Ram, 5=Rom, 6=Version, 7=Joystick, 8=Collection)
 ; H -> FilterVal       - current filter value (as an integer)
 ; I -> TmpI            - A temporary variable
 ; K                    - The index number of the program about to be *RUN
@@ -311,8 +311,8 @@ ENDIF
 	BEQ PageStateZero
 
 .ChangeFilter
-	; Filter 1..5 = (publisher, genre,  compatible, version, category)
-	; // 6..8 key pressed (filter by publisher, genre or connection)
+	; Filter 1..8
+	; // 1..8 key pressed
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	STA PageState
 	LDA #0
@@ -832,9 +832,6 @@ ENDIF
 .LabelYExit
 	RTS
 
-.LabelYNumSpaces
-	EQUB 0, 1, 5, 0, 3, 2, 0
-
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to print the filter name not padded at all
 	; I is passed in as the accumulator
@@ -866,8 +863,13 @@ ENDIF
 	EQUW LabelZ4
 	EQUW LabelZ5
 	EQUW LabelZ6
+	EQUW LabelZ7
+	EQUW LabelZ8
 
-; TODO: Why are sone of these padded?
+
+.LabelYNumSpaces
+	EQUB 0, 1, 5, 5, 7, 7, 3, 2, 0
+
 
 .LabelZ0
 	EQUS "TITLE     ", 0
@@ -879,15 +881,21 @@ ENDIF
 	EQUS "GENRE", 0
 
 .LabelZ3
-	EQUS "COMPATIBLE", 0
+	EQUS "CHUNK", 0
 
 .LabelZ4
-	EQUS "VERSION", 0
+	EQUS "RAM", 0
 
 .LabelZ5
-	EQUS "JOYSTICK", 0
+	EQUS "ROM", 0
 
 .LabelZ6
+	EQUS "VERSION", 0
+
+.LabelZ7
+	EQUS "JOYSTICK", 0
+
+.LabelZ8
 	EQUS "COLLECTION", 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -19,7 +19,6 @@ public class SpreadsheetParser {
     private static final String GENRE = "genre";
     private static final String COLLECTION = "collection";
     private static final String PUBLISHER = "publisher";
-    private static final String SHORTPUB = "shortpub";
     private static final String BOOT = "boot";
     private static final String STATUS = "status";
     private static final String RUN = "run";
@@ -30,8 +29,11 @@ public class SpreadsheetParser {
     private static final String FILENAMES = "filenames";
     private static final String UPDATED = "updated";
     private static final String RAM32K = "32k";
-    private static final String FPROM = "fp";
     private static final String JOYSTICK = "joystick";
+    private static final String FP = "fp";
+    private static final String PCHARME = "pcharme";
+    private static final String GAGS = "gags";
+    private static final String AXR1 = "axr1";
 
     private File file;
 
@@ -64,14 +66,17 @@ public class SpreadsheetParser {
             int run_column = -1;
             int boot_column = -1;
             int publisher_column = -1;
-            int shortpub_column = -1;
             int collection_column = -1;
             int genre_column = -1;
             int filenames_column = -1;
             int updated_column = -1;
             int ram32k_column = -1;
             int joystick_column = -1;
-            int fprom_column = -1;
+            int fp_column = -1;
+            int pcharme_column = -1;
+            int gags_column = -1;
+            int axr1_column = -1;
+
 
             for (int i = 0; i < headers.length; i++) {
                 if (headers[i].toLowerCase().contains(IDENTIFIER)) {
@@ -98,9 +103,6 @@ public class SpreadsheetParser {
                 if (headers[i].toLowerCase().contains(PUBLISHER)) {
                     publisher_column = i;
                 }
-                if (headers[i].toLowerCase().contains(SHORTPUB)) {
-                    shortpub_column = i;
-                }
                 if (headers[i].toLowerCase().contains(COLLECTION)) {
                     collection_column = i;
                 }
@@ -119,33 +121,58 @@ public class SpreadsheetParser {
                 if (headers[i].toLowerCase().contains(JOYSTICK)) {
                     joystick_column = i;
                 }
-                if (headers[i].toLowerCase().startsWith(FPROM)) {
-                    fprom_column = i;
+                if (headers[i].toLowerCase().startsWith(FP)) {
+                    fp_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(PCHARME)) {
+                    pcharme_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(GAGS)) {
+                    gags_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(AXR1)) {
+                    axr1_column = i;
                 }
             }
 
             for (String[] program : programs) {
                 AtomTitle item = new AtomTitle();
+
+                // Status
                 String status = program[status_column].trim();
                 if (!status.equalsIgnoreCase(STATUS_PRESENT)) {
                     continue;
                 }
+
+                // Identifier
                 String identifier = program[identifier_column].trim();
                 item.setIdentifier(Integer.parseInt(identifier));
-                String chunk = program[chunk_column].trim();
-                item.setChunk(chunk.substring(0,  1)); // Only use first character of chunk
+
+                // Chunk
+                String chunk = program[chunk_column].trim().toUpperCase();
+                item.setChunk(chunk);
+
+                // Title
                 String title = program[title_column].trim().toUpperCase();
                 item.setTitle(title);
+
+                // Directory
                 String dir = program[dir_column].trim();
                 item.setDir(dir);
+
+                // Run commands
                 String run = program[run_column].trim();
                 item.setRun(run);
+
+                // Boot address
                 String boot = program[boot_column].trim();
                 item.setBoot(boot);
+
+                // Publisher
                 String publisher = program[publisher_column].trim().toUpperCase();
                 item.setPublisher(publisher);
-                String shortpub = program[shortpub_column].trim().toUpperCase();
-                item.setShortPublisher(shortpub);
+
+                // Collections
                 String[] collections = program[collection_column].trim().toUpperCase().split("\n");
                 List<String> collectionsList = new ArrayList<String>();
                 for (String collection : collections) {
@@ -155,8 +182,12 @@ public class SpreadsheetParser {
                     }
                 }
                 item.setCollections(collectionsList);
+
+                // Genre
                 String genre = program[genre_column].trim().toUpperCase();
                 item.setGenre(genre);
+
+                // Filenames
                 String[] filenames = program[filenames_column].trim().toUpperCase().split("\n");
                 List<String> filesnamesList = new ArrayList<String>();
                 for (String filename : filenames) {
@@ -168,30 +199,21 @@ public class SpreadsheetParser {
                     }
                 }
                 item.setFilenames(filesnamesList);
+
+                // RamDependency
                 String ram32K = program[ram32k_column].trim().toUpperCase();
                 item.setCompatible12K(!ram32K.startsWith("YES"));
-
-                if (item.getChunk().equals("C")) {
-                    item.setCompatible("32K+8K");
+                if (item.isAGD()) {
+                    item.setRamDependency("32K+8K");
                 } else if (item.isCompatible12K()) {
-                    if (item.getTitle().contains("(R)")) {
-                        item.setCompatible("6K+6K+ROMS");
-                    } else {
-                        item.setCompatible("6K+6K");
-                    }
+                    item.setRamDependency("6K+6K");
                 } else if (item.getTitle().contains("16K")) {
-                    if (item.getTitle().contains("(R)")) {
-                        item.setCompatible("16K+6K+ROMS");
-                    } else {
-                        item.setCompatible("16K+6K");
-                    }
+                    item.setRamDependency("16K+6K");
                 } else {
-                    if (item.getTitle().contains("(R)")) {
-                        item.setCompatible("32K+6K+ROMS");
-                    } else {
-                        item.setCompatible("32K+6K");
-                    }
+                    item.setRamDependency("32K+6K");
                 }
+
+                // Version
                 String version = program[updated_column].trim().toUpperCase();
                 // Collapse V8, V8B1, V8B2, etc down to V8
                 if (version.length() > 3) {
@@ -199,14 +221,47 @@ public class SpreadsheetParser {
                     version = version.substring(0, version.length() - 2);
                 }
                 item.setVersion(version);
+
+                // Joystick
                 String joystick = program[joystick_column].trim().toUpperCase();
                 if (joystick.isBlank()) {
                     item.setJoystick("NONE");
                 } else {
                     item.setJoystick(joystick);
                 }
-                String fprom = program[fprom_column].trim().toUpperCase();
-                item.setFpROM(fprom.equals("YES"));
+
+                // FP ROM
+                String fp = program[fp_column].trim().toUpperCase();
+                if (fp.equals("YES")) {
+                    item.setFp(true);
+                } else if (fp.equals("NO")) {
+                    item.setFp(false);
+                }
+
+                // PCharme ROM
+                String pcharme = program[pcharme_column].trim().toUpperCase();
+                if (pcharme.equals("YES")) {
+                    item.setPcharme(true);
+                } else if (pcharme.equals("NO")) {
+                    item.setPcharme(false);
+                }
+
+                // GAGS ROM
+                String gags = program[gags_column].trim().toUpperCase();
+                if (gags.equals("YES")) {
+                    item.setGags(true);
+                } else if (gags.equals("NO")) {
+                    item.setGags(false);
+                }
+
+                // AXR1 ROM
+                String axr1 = program[axr1_column].trim().toUpperCase();
+                if (axr1.equals("YES")) {
+                    item.setAxr1(true);
+                } else if (axr1.equals("NO")) {
+                    item.setAxr1(false);
+                }
+
                 items.add(item);
                 accumulateStats(item);
             }

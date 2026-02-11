@@ -19,20 +19,20 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     protected File archiveDir;
     protected String menuBase;
-    protected int numChunks;
+    protected int numChapters;
     protected int sectorNum;
     protected String title;
 
-    public GenerateDiskImageFiles(File archiveDir, String menuBase, int numChunks) {
+    public GenerateDiskImageFiles(File archiveDir, String menuBase, int numChapters) {
         super();
         this.archiveDir = archiveDir;
         this.menuBase = menuBase;
-        this.numChunks = numChunks;
+        this.numChapters = numChapters;
     }
 
     abstract protected String getMenuDiskName();
 
-    abstract protected String getChapterDiskName(int chunk);
+    abstract protected String getChapterDiskName(int chapter);
 
     abstract protected void addDisk(byte[] image, String name) throws IOException;
 
@@ -168,22 +168,22 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
         addDisk(image, getMenuDiskName());
 
-        for (int chunk = 0; chunk < numChunks; chunk++) {
-            char chunkLetter = (char) ('A' + chunk);
-            byte[] chunkImage = createBlankDiskImage("MENU" + chunkLetter);
+        for (int chapter = 0; chapter < numChapters; chapter++) {
+            char chapterLetter = (char) ('A' + chapter);
+            byte[] chapterImage = createBlankDiskImage("MENU" + chapterLetter);
             for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
-                ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
-                addFile(chunkImage, atmFile);
+                ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chapterLetter), ATOMMC_MENU_FILES[i]));
+                addFile(chapterImage, atmFile);
             }
             ATMFile chapFile;
-            if (chunk == numChunks - 1) {
+            if (chapter == numChapters - 1) {
                 chapFile = new ATMFile(new File(archiveDir, "ALL" + getTarget().name()));
             } else {
                 chapFile = new ATMFile(new File(archiveDir, "CHAP" + getTarget().name()));
             }
             chapFile.setTitle("CHAP");
-            addFile(chunkImage, chapFile);
-            addDisk(chunkImage, getChapterDiskName(chunk));
+            addFile(chapterImage, chapFile);
+            addDisk(chapterImage, getChapterDiskName(chapter));
         }
     }
 
@@ -191,7 +191,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
         if (debug) {
             System.out.println(item.getTitle());
         }
-        File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
+        File bootfile = new File(new File(archiveDir, menuBase + item.getChapter()),
                                  "" + item.getIdentifier());
         ATMFile bootAtmFile = new ATMFile(bootfile);
         bootAtmFile.setTitle(bootName);

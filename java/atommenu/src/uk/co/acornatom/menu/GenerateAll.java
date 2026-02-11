@@ -30,18 +30,18 @@ public class GenerateAll {
         this.menuBase = menuBase;
     }
 
-    private IArchiveGenerator archiveGeneratorFactory(Target target, int numChunks) throws IOException {
+    private IArchiveGenerator archiveGeneratorFactory(Target target, int numChapters) throws IOException {
         switch (target) {
             case SDDOS2:
-                return new GenerateSDDOS2Files(archiveDir, menuBase, numChunks, new File(archiveDir + ".img"));
+                return new GenerateSDDOS2Files(archiveDir, menuBase, numChapters, new File(archiveDir + ".img"));
             case SDDOS3:
-                return new GenerateSDDOS3Files(archiveDir, menuBase, numChunks, new File(archiveDir + "_SDDOS3.zip"));
+                return new GenerateSDDOS3Files(archiveDir, menuBase, numChapters, new File(archiveDir + "_SDDOS3.zip"));
             case  JS:
-                return new GenerateJSFiles(archiveDir, menuBase, numChunks, new File(archiveDir + ".js"));
+                return new GenerateJSFiles(archiveDir, menuBase, numChapters, new File(archiveDir + ".js"));
             case ECONET:
-                return new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"), menuBase, numChunks);
+                return new GenerateEconetFiles(archiveDir, new File(archiveDir + "_ECONET.zip"), menuBase, numChapters);
             case  GOSDC:
-                return new GenerateGoSDCFiles(archiveDir, menuBase, numChunks, new File(archiveDir + ".gosdc"));
+                return new GenerateGoSDCFiles(archiveDir, menuBase, numChapters, new File(archiveDir + ".gosdc"));
             case ATOMMC:
                 return new GenerateAtoMMCFiles();
         }
@@ -123,13 +123,11 @@ public class GenerateAll {
                         if (!((start >= 0x0000 && end <= 0x0400) ||
                               (start >= 0x2800 && end <= 0x3C00) ||
                               (start >= 0x8000 && end <= 0x9800) ||
-                              (start >= 0xa000 && end <= 0xb000 && item.getChunk().equals(IFileGenerator.ROMS_CHUNK)))) {
+                              (start >= 0xa000 && end <= 0xb000 && item.isROM()))) {
                             if (item.isCompatible12K() && !atm.isGarbageSignature()) {
                                 if (warn) {
                                     System.out.println();
-                                    System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: "
-                                            + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle() + " "
-                                            + item.getIdentifier());
+                                    System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: " + item);
                                 }
                                 System.out.println("    " + atm.toStringDetailed());
                                 warn = false; // don't output further warnings about ths title
@@ -159,7 +157,7 @@ public class GenerateAll {
                     ATMFile atm = new ATMFile(file);
                     if (atm.isGarbageSignature()) {
                         System.out.println("WARNING: Garbage signature detected: " + atm.toStringDetailed() + " "
-                                + item.getChunk() + ": " + item.getPublisher() + " " + item.getTitle());
+                                + item);
                     }
                 } catch (IOException e) {
                     System.out.println("WARNING: Missing file: " + file);
@@ -168,22 +166,100 @@ public class GenerateAll {
         }
     }
 
+    private static final String FP = "FP";
+    private static final String PCHARME = "PCHARME";
+    private static final String GAGS = "GAGS";
+    private static final String AXR1 = "AXR1";
+
 
     public RomDef[] roms = new RomDef[] {
 
-       new RomDef("PCHARME", new String[] { "BEEP", "CASE", "CONT", "FUNCTION", "FEND", "INKEY", "INSTR", "PROC", "PEND", "PROGRAM", "HTAB",
-                                            "VTAB", "WHILE", "WEND", "XIF", "READ", "DATA", "RESTORE" }),
+        new RomDef(
+                FP,
+                AtomTitle::isFp,
+                new String[] {
+                        "%",
+                        "COLOUR",
+                        "FDIM",
+                        "FIF",
+                        "FINPUT",
+                        "FPRINT",
+                        "FPUT",
+                        "FUNTIL",
+                        "STR"
+                        }),
 
-            new RomDef("FP", new String[] { "%", "COLOUR", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
+       new RomDef(
+               PCHARME,
+               AtomTitle::isPcharme,
+               new String[] {
+                       "BEEP",
+                       "CASE",
+                       "CONT",
+                       "FUNCTION",
+                       "FEND",
+                       "INKEY",
+                       "INSTR",
+                       "PROC",
+                       "PEND",
+                       "PROGRAM",
+                       "HTAB",
+                       "VTAB",
+                       "WHILE",
+                       "WEND",
+                       "XIF",
+                       "READ",
+                       "DATA",
+                       "RESTORE"
+                       }),
 
-            new RomDef("ATOMIC WINDOWS", new String[] { "DLG" }),
 
-            new RomDef("AXR1", new String[] { "GRMOD", "GRMO.", "GRM.", "GR.", "TXMOD", "TXMO.", "TXM.", "TX.", "SHAPE", "SHAP.", "SHA.", "SH."  }),
+            new RomDef(
+                    AXR1,
+                    AtomTitle::isAxr1,
+                    new String[] {
+                            "GRMOD",
+                            "GRMO.",
+                            "GRM.",
+                            "GR.",
+                            "TXMOD",
+                            "TXMO.",
+                            "TXM.",
+                            "TX.",
+                            "SHAPE",
+                            "SHAP.",
+                            "SHA.",
+                            "SH."
+                            }),
 
-            new RomDef("GAGS",
-                    new String[] { "CLS", "ATKEY", "JOYSTK", "INV", "BORDER", "PAINT", "CUBE", "CIRCLE", "PIXEL", "WINDOW", "WOFF",
-                                   "FILL", "SCROLL", "HLINE", "VLINE", "INK", "PAPER", "MODE", "BLOCK", "SOUND", "PAUSE", "CREATE", "DEF",
-                                   "BASE"
+            new RomDef(
+                    GAGS,
+                    AtomTitle::isGags,
+                    new String[] {
+                            "CLS",
+                            "ATKEY",
+                            "JOYSTK",
+                            "INV",
+                            "BORDER",
+                            "PAINT",
+                            "CUBE",
+                            "CIRCLE",
+                            "PIXEL",
+                            "WINDOW",
+                            "WOFF",
+                            "FILL",
+                            "SCROLL",
+                            "HLINE",
+                            "VLINE",
+                            "INK",
+                            "PAPER",
+                            "MODE",
+                            "BLOCK",
+                            "SOUND",
+                            "PAUSE",
+                            "CREATE",
+                            "DEF",
+                            "BASE"
                     // lots more
                     })
     };
@@ -264,46 +340,73 @@ public class GenerateAll {
             }
             for (RomDef rom : roms) {
                 Set<String> commands = found.get(rom);
-                if (!commands.isEmpty() && !item.getCollections().contains(rom.getName())) {
-                   item.getCollections().add(rom.getName());
-                }
-                if (rom.getName().equals("FP")) {
-                    if (commands.isEmpty() && item.isFpROM()) {
-                        System.out.println("WARNING: Compatibility: Title probably wrongly marked as " + rom + ": " + item);
-                    } else if (!commands.isEmpty() && !item.isFpROM()) {
-                        System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
-                    }
+                boolean needed = !commands.isEmpty();
+                if (needed && Boolean.FALSE.equals(rom.isNeeded(item))) {
+                    System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
+                } else if (!needed && Boolean.TRUE.equals(rom.isNeeded(item))) {
+                    System.out.println("WARNING: Compatibility: Title probably wrongly marked as " + rom + ": " + item);
                 } else {
-                    if (!commands.isEmpty() && !item.getTitle().contains("(R)")) {
-                        System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
+                    // TODO: Make this generic
+                    if (needed) {
+                        System.out.println("INFO: Compatibility: Title needs " + rom + ": " + item);
+                    }
+                    switch(rom.getName()) {
+                    case FP:
+                        item.setFp(needed);
+                        break;
+                    case PCHARME:
+                        item.setPcharme(needed);
+                        break;
+                    case GAGS:
+                        item.setGags(needed);
+                        break;
+                    case AXR1:
+                        item.setAxr1(needed);
+                        break;
                     }
                 }
             }
+            // Update the textual romDependency field
+            StringBuffer sb = new StringBuffer();
+            boolean first = true;
+            for (RomDef rom : roms) {
+                if (rom.isNeeded(item)) {
+                    if (!first) {
+                        sb.append(",");
+                    }
+                    sb.append(rom);
+                    first = false;
+                }
+            }
+            if (first) {
+                sb.append("NONE");
+            }
+            item.setRomDependency(sb.toString());
         }
     }
 
-    // Count the number of titles remaining in each chunk
-    // (and also create the All chunk)
-    private Map<String, Integer> calculateChunkStats(List<AtomTitle> items, String message) {
-        Map<String, Integer> chunks = new TreeMap<String, Integer>();
+    // Count the number of titles remaining in each chapter
+    // (and also create the All chapter)
+    private Map<String, Integer> calculateChapterStats(List<AtomTitle> items, String message) {
+        Map<String, Integer> chapters = new TreeMap<String, Integer>();
         int total = 0;
         for (AtomTitle item : items) {
-            // Count the number of titles in each chunk
-            String chunk = item.getChunk();
-            Integer count = chunks.get(chunk);
+            // Count the number of titles in each chapter
+            String chapter = item.getChapter();
+            Integer count = chapters.get(chapter);
             if (count == null) {
                 count = 0;
             }
-            chunks.put(chunk, count + 1);
+            chapters.put(chapter, count + 1);
             total++;
         }
-        chunks.put(IFileGenerator.ALL_CHUNK, total);
+        chapters.put(IFileGenerator.ALL_CHAPTER, total);
         banner(message);
-        for (String chunk : chunks.keySet()) {
-            System.out.println(    "Chunk " + chunk + " has " + chunks.get(chunk) + " titles");
+        for (String chapter : chapters.keySet()) {
+            System.out.println(    "Chapter " + chapter + " has " + chapters.get(chapter) + " titles");
         }
         System.out.println(    "Total " + total + " titles");
-        return chunks;
+        return chapters;
     }
 
     public void generateAll(File catalogCSV, Set<Target> userTargets, String version) {
@@ -317,18 +420,10 @@ public class GenerateAll {
         // Drop incomplete titles (where files are missing)
         checkFiles(items);
 
-        Comparator<AtomTitle> customComparator = new Comparator<AtomTitle>() {
-            @Override
-            public int compare(AtomTitle o1, AtomTitle o2) {
-                if (!o1.getChunk().equals(o2.getChunk())) {
-                    return o1.getChunk().compareTo(o2.getChunk());
-                } else if (!o1.getPublisher().equals(o2.getPublisher())) {
-                    return o1.getPublisher().compareTo(o2.getPublisher());
-                } else {
-                    return o1.getTitle().compareTo(o2.getTitle());
-                }
-            };
-        };
+        Comparator<AtomTitle> customComparator = Comparator
+                .comparing(AtomTitle::getChunk)
+                .thenComparing(AtomTitle::getPublisher)
+                .thenComparing(AtomTitle::getTitle);
 
         List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
         sortedItems.sort(customComparator);
@@ -342,14 +437,14 @@ public class GenerateAll {
         // Test for various Utility ROM signatures
         checkUtilityRomSignatures(sortedItems);
 
-        // Compute initial stats of sizes of each chunks
-        Map<String, Integer> initialChunkStats = calculateChunkStats(items, "Master stats");
+        // Compute initial stats of sizes of each chapters
+        Map<String, Integer> initialChapterStats = calculateChapterStats(items, "Master stats");
 
-        // Names of the chunks A, B, C, D, ....
-        Collection<String> chunkNames = initialChunkStats.keySet();
+        // Names of the chapters A, B, C, D, ....
+        Collection<String> chapterNames = initialChapterStats.keySet();
 
-        // Number of chunks
-        int numChunks = chunkNames.size();
+        // Number of chapters
+        int numChapters = chapterNames.size();
 
         // Iterate through the targets
         for (Target target : Target.values()) {
@@ -366,7 +461,7 @@ public class GenerateAll {
 
                 banner("Generating " + target.name());
 
-                IArchiveGenerator generator = archiveGeneratorFactory(target, numChunks);
+                IArchiveGenerator generator = archiveGeneratorFactory(target, numChapters);
 
                 File bootLoaderBinary = new File(archiveDir, "BOOT.bin");
 
@@ -384,27 +479,27 @@ public class GenerateAll {
                 // Give the generator the opportunity to map titles to disk images
                 generator.allocateDisks(targetItems);
 
-                // Recalculate sizes of each chunks
-                Map<String, Integer> chunkStats = calculateChunkStats(targetItems, target.name() + " stats");
+                // Recalculate sizes of each chapters
+                Map<String, Integer> chapterStats = calculateChapterStats(targetItems, target.name() + " stats");
 
-                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chunkStats, target);
+                IFileGenerator splashGen = new GenerateSplashFiles(archiveDir, version, chapterStats, target);
                 splashGen.generateFiles(null);
 
                 // Each menu chapter will be a separate disk
-                for (String chunk : chunkNames) {
-                    File menuDir = new File(archiveDir, menuBase + chunk);
+                for (String chapter : chapterNames) {
+                    File menuDir = new File(archiveDir, menuBase + chapter);
                     menuDir.mkdirs();
-                    List<AtomTitle> chunkItems = new ArrayList<AtomTitle>();
+                    List<AtomTitle> chapterItems = new ArrayList<AtomTitle>();
                     for (AtomTitle item : targetItems) {
-                        if (item.getChunk().equals(chunk) || chunk.equals(IFileGenerator.ALL_CHUNK)) {
-                            chunkItems.add(item);
+                        if (item.getChapter().equals(chapter) || chapter.equals(IFileGenerator.ALL_CHAPTER)) {
+                            chapterItems.add(item);
                         }
                     }
                     IFileGenerator bootstrapGen = new GenerateBootstrapFiles(menuDir, bootLoaderBinary, romBootLoaderBinary, target);
-                    bootstrapGen.generateFiles(chunkItems);
-                    IFileGenerator menuGen = new GenerateMenuFiles(archiveDir, menuDir, chunk, target);
+                    bootstrapGen.generateFiles(chapterItems);
+                    IFileGenerator menuGen = new GenerateMenuFiles(archiveDir, menuDir, chapter, target);
                     menuGen.setDebug(true);
-                    menuGen.generateFiles(chunkItems);
+                    menuGen.generateFiles(chapterItems);
                 }
 
                 banner("Generating Files for " + target.name());

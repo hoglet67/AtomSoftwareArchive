@@ -17,9 +17,9 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     private File sdImageFile;
     byte[] SDimage;
 
-    public GenerateSDDOS2Files(File archiveDir, String menuBase, int numChunks, File imageFile)
+    public GenerateSDDOS2Files(File archiveDir, String menuBase, int numChapters, File imageFile)
             throws IOException {
-        super(archiveDir, menuBase, numChunks);
+        super(archiveDir, menuBase, numChapters);
         this.sdImageFile = imageFile;
     }
 
@@ -76,8 +76,8 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    protected String getChapterDiskName(int chunk) {
-        return "" + (1 + chunk);
+    protected String getChapterDiskName(int chapter) {
+        return "" + (1 + chapter);
     }
 
     protected boolean areItemsCombinable(File archiveDir, AtomTitle item1, AtomTitle item2) {
@@ -115,7 +115,7 @@ public class GenerateSDDOS2Files extends GenerateDiskImageFiles {
         super.allocateDisks(items);
         // Generate disk numbers up front, combining pairs of titles if possible
         // (this is just used by SDDOS)
-        int diskNo = numChunks; // Skip the menu disks
+        int diskNo = numChapters; // Skip the menu disks
         AtomTitle lastItem = null;
         for (AtomTitle item : items) {
             // Test if two items are combinable

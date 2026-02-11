@@ -11,9 +11,9 @@ public class GenerateSDDOS3Files extends GenerateDiskImageFiles {
 
     private ZipOutputStream zipStream;
 
-    public GenerateSDDOS3Files(File archiveDir, String menuBase, int numChunks, File sddos3ZipFile)
+    public GenerateSDDOS3Files(File archiveDir, String menuBase, int numChapters, File sddos3ZipFile)
             throws IOException {
-        super(archiveDir, menuBase, numChunks);
+        super(archiveDir, menuBase, numChapters);
         this.zipStream = new ZipOutputStream(new FileOutputStream(sddos3ZipFile));
     }
 
@@ -23,8 +23,8 @@ public class GenerateSDDOS3Files extends GenerateDiskImageFiles {
     }
 
     @Override
-    protected String getChapterDiskName(int chunk) {
-        return "MNU" + (char)('A' + chunk) + ".DSK";
+    protected String getChapterDiskName(int chapter) {
+        return "MNU" + (char)('A' + chapter) + ".DSK";
     }
 
 

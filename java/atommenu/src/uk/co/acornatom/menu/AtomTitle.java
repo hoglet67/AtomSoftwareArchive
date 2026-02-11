@@ -1,7 +1,9 @@
 package uk.co.acornatom.menu;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class AtomTitle {
@@ -16,10 +18,15 @@ public class AtomTitle {
     private String publisher;
     private String shortPublisher;
     private String version;
-    private String compatible;
+    private String ramDependency;
+    private String romDependency;
     private String joystick;
     private List<String> collections;
     private String genre;
+    private Boolean fp;
+    private Boolean pcharme;
+    private Boolean gags;
+    private Boolean axr1;
 
     private List<String> filenames;
     private Set<String> runnables = new HashSet<String>();
@@ -28,13 +35,85 @@ public class AtomTitle {
     // These are part of AtomTitle and and filled in as the indexes are built
     private int absoluteAddress;
 
-
     // These other computed things
     private boolean compatible12K;
-    private boolean fpROM;
+
     private int estimatedDiskSectors;
     private Integer diskNo;
 
+    private static Map<String, String> chunkChapterMap = new HashMap<String, String>();
+
+    static {
+        chunkChapterMap.put(IFileGenerator.COMM_CHUNK, 		"A");
+        chunkChapterMap.put(IFileGenerator.MODERN_CHUNK, 	"B");
+        chunkChapterMap.put(IFileGenerator.AGD_CHUNK, 		"C");
+        chunkChapterMap.put(IFileGenerator.NON_COMM_CHUNK, 	"D");
+        chunkChapterMap.put(IFileGenerator.BOOKS_CHUNK, 	"E");
+        chunkChapterMap.put(IFileGenerator.MAGAZINES_CHUNK, "E");
+        chunkChapterMap.put(IFileGenerator.ROMS_CHUNK, 		"F");
+    }
+
+    public static Map<String, String> longShortPubMap = new HashMap<String, String>();
+
+    static {
+        longShortPubMap.put("???", "???");
+        longShortPubMap.put("AARDVARK", "AA");
+        longShortPubMap.put("ACORNSOFT", "AS");
+        longShortPubMap.put("ACORN USER", "AU");
+        longShortPubMap.put("A&F S/W", "A&F");
+        longShortPubMap.put("AGD", "AGD");
+        longShortPubMap.put("A&R S/W", "AR");
+        longShortPubMap.put("ASP S/W", "ASP");
+        longShortPubMap.put("ATOMIC S/W", "AT");
+        longShortPubMap.put("ATOMIC THEORY", "ATAP");
+        longShortPubMap.put("ATOM MAGIC BOOK", "AMB");
+        longShortPubMap.put("BEARSOFT", "BS");
+        longShortPubMap.put("BUG BYTE", "BB");
+        longShortPubMap.put("COMP TODAY", "CT");
+        longShortPubMap.put("COMPUTER CONCEPTS", "CC");
+        longShortPubMap.put("COMPUTERSMITH", "CS");
+        longShortPubMap.put("C&VG", "C&VG");
+        longShortPubMap.put("DP SAVILLE", "DPS");
+        longShortPubMap.put("ECCE PRODS", "ECCE");
+        longShortPubMap.put("ECD", "ECD");
+        longShortPubMap.put("ELECTROCOMP SUPS", "ES");
+        longShortPubMap.put("GETTING ACQUAINTED", "GA");
+        longShortPubMap.put("HOBBIT", "HB");
+        longShortPubMap.put("HOBBYSCOOP", "HBSC");
+        longShortPubMap.put("HOPESOFT", "HS");
+        longShortPubMap.put("INFOCOM", "INF");
+        longShortPubMap.put("INTERFACE", "TBOI");
+        longShortPubMap.put("INUFUTO", "INU");
+        longShortPubMap.put("JIM BAGLEY", "JB");
+        longShortPubMap.put("LARSOFT", "LS");
+        longShortPubMap.put("LEE S/W", "LEE");
+        longShortPubMap.put("LEVEL 9", "L9");
+        longShortPubMap.put("MAGNUS OLSSON", "MO");
+        longShortPubMap.put("MICRO MANIA", "MM");
+        longShortPubMap.put("NON COMM", "NC");
+        longShortPubMap.put("OAK LEAVES", "OL");
+        longShortPubMap.put("PCT", "PCT");
+        longShortPubMap.put("PCW", "PCW");
+        longShortPubMap.put("PEARCE", "PES");
+        longShortPubMap.put("PE", "PE");
+        longShortPubMap.put("PRACTICAL PROGRAMS", "PPBA");
+        longShortPubMap.put("PROCYON", "PROC");
+        longShortPubMap.put("PROG POWER", "PP");
+        longShortPubMap.put("PRO SOFTWARE", "PS");
+        longShortPubMap.put("PSION", "PSI");
+        longShortPubMap.put("PUBLISHER", "SHORTPUB");
+        longShortPubMap.put("QUODLIBET", "QUO");
+        longShortPubMap.put("RAMTRONICS", "RAM");
+        longShortPubMap.put("RETRO S/W", "RS");
+        longShortPubMap.put("ROSS S/W", "ROSS");
+        longShortPubMap.put("SUPERLEX", "SUP");
+        longShortPubMap.put("THE ATOM", "TA");
+        longShortPubMap.put("TIMEDATA", "TD");
+        longShortPubMap.put("WAKE UP YOUR ATOM", "WUYA");
+        longShortPubMap.put("WATFORD ELEC", "WE");
+        longShortPubMap.put("WILLOW S/W", "WS");
+        longShortPubMap.put("YOUR COMPUTER", "YC");
+    }
 
     public AtomTitle() {
         diskNo = null;
@@ -60,6 +139,9 @@ public class AtomTitle {
 
     public void setChunk(String chunk) {
         this.chunk = chunk;
+        if (!chunkChapterMap.containsKey(chunk)) {
+            throw new RuntimeException("Unmapped chunk present in spreadsheet: " + chunk + "; add it to chunkChapterMap!");
+        }
     }
 
     public String getChunk() {
@@ -103,6 +185,12 @@ public class AtomTitle {
             publisher = "???";
         }
         this.publisher = publisher;
+        if (AtomTitle.longShortPubMap.containsKey(publisher)) {
+            this.shortPublisher = longShortPubMap.get(publisher);
+        } else {
+            this.shortPublisher = "???";
+            System.out.println("WARNING: Short Published missing for " + publisher);
+        }
     }
 
     public String getPublisher() {
@@ -139,16 +227,20 @@ public class AtomTitle {
         return version;
     }
 
-    public void setCompatible(String compatible) {
-        this.compatible = compatible;
+    public void setRamDependency(String ramDependency) {
+        this.ramDependency = ramDependency;
     }
 
-    public String getCompatible() {
-        return compatible;
+    public String getRamDepencency() {
+        return ramDependency;
     }
 
-    public void setShortPublisher(String shortPublisher) {
-        this.shortPublisher = shortPublisher;
+    public void setRomDependency(String romDependency) {
+        this.romDependency = romDependency;
+    }
+
+    public String getRomDepencency() {
+        return romDependency;
     }
 
     public String getShortPublisher() {
@@ -181,7 +273,7 @@ public class AtomTitle {
 
     @Override
     public String toString() {
-        return this.chunk + " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
+        return this.getChapter( )+ " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
     }
 
     public int getEstimatedDiskSectors() {
@@ -224,13 +316,48 @@ public class AtomTitle {
         this.joystick = joystick;
     }
 
-    public boolean isFpROM() {
-        return fpROM;
+    public Boolean isFp() {
+        return fp;
     }
 
-    public void setFpROM(boolean fpROM) {
-        this.fpROM = fpROM;
+    public void setFp(Boolean fp) {
+        this.fp = fp;
     }
 
+    public Boolean isPcharme() {
+        return pcharme;
+    }
+
+    public void setPcharme(Boolean pcharme) {
+        this.pcharme = pcharme;
+    }
+
+    public void setGags(Boolean gags) {
+        this.gags = gags;
+    }
+
+    public Boolean isGags() {
+        return gags;
+    }
+
+    public void setAxr1(Boolean axr1) {
+        this.axr1 = axr1;
+    }
+
+    public Boolean isAxr1() {
+        return axr1;
+    }
+
+    public String getChapter() {
+        return chunkChapterMap.get(chunk);
+    }
+
+    public boolean isROM() {
+        return chunk.equals(IFileGenerator.ROMS_CHUNK);
+    }
+
+    public boolean isAGD() {
+        return chunk.equals(IFileGenerator.AGD_CHUNK);
+    }
 
 }

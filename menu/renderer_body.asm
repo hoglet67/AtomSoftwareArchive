@@ -4,7 +4,7 @@
 IF properAnnotationCounts
 
 	LDA SearchMode
-	AND #7
+	AND #SearchModeMask
 	BNE WritePage1
 	JSR ClearAnnotationCounts
 .WritePage1
@@ -45,7 +45,7 @@ ENDIF
 	STA CurrentRow + 1
 
 	; Default the Title Name Offset to no categories
-	LDA #CategoriesIdOffset
+	LDA #4
 	STA TitleNameOffset
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -79,7 +79,7 @@ ENDIF
 
 	; Do the search comparison
 	LDA SearchMode
-	AND #7
+	AND #SearchModeMask
 	BNE FilterCompare
 
 	; Find the offset to the title, by skipping over all the categories
@@ -135,7 +135,7 @@ IF properAnnotationCounts
 ENDIF
 
 .FilterCompare
-	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Collection
+	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Chunk, 4=Ram, 5=Rom, 6=Version, 7=Joystick, 8=Collection
 	LDY Filter
 
 	; If there is no filter, we move on to compare the search (if there is one)
@@ -240,7 +240,7 @@ IF properAnnotationCounts
 ENDIF
 
 	LDA (Title),Y
-   AND #&7F
+	AND #&7F
 	STA BinBuffer + 1
 	INY
 	LDA (Title),Y
@@ -260,19 +260,23 @@ ENDIF
 ; 0 = Short Publisher -> 1
 ; 1 = Publisher       -> 1
 ; 2 = Genre           -> 2
-; 3 = Compatible      -> 3
-; 4 = Version         -> 4
-; 5 = Joystick       -> 5
-; 5 = Collection      -> 6
+; 3 = Chunk           -> 3
+; 4 = Ram      	      -> 4
+; 5 = Rom      	      -> 5
+; 6 = Version         -> 6
+; 7 = Joystick        -> 7
+; 8 = Collection      -> 8
 
 .AnnotationIdMap
 	EQUB 	1 ; Short Publisher
 	EQUB 	1 ; Publisher
 	EQUB 	2 ; Genre
-	EQUB 	3 ; Compatible
-	EQUB 	4 ; Version
-	EQUB 	5 ; Joyctick
-	EQUB 	6 ; Collection
+	EQUB 	3 ; Chunk
+	EQUB 	4 ; Ram
+	EQUB 	5 ; Rom
+	EQUB 	6 ; Version
+	EQUB 	7 ; Joyctick
+	EQUB 	8 ; Collection
 
 ; Offset of first record in the annotation
 ; (depends on whether the table was build against a sort index)
@@ -282,7 +286,9 @@ ENDIF
 	EQUB 	0 ; Short Publisher
 	EQUB 	4 ; Publisher
 	EQUB 	4 ; Genre
-	EQUB 	4 ; Compatible
+	EQUB 	4 ; Chunk
+	EQUB 	4 ; Ram
+	EQUB 	4 ; Rom
 	EQUB 	4 ; Version
 	EQUB 	4 ; Joystick
 	EQUB 	4 ; Collection
@@ -484,8 +490,6 @@ ENDIF
 	RTS
 
 ;; Extract Filter/Annotation ID from title table and nomalize
-;; 1=Publisher, 2=Genre, 3=Compatible, 4=Version, 5=Category
-
 ;; TODO Optimise this
 
 .ExtractTableValue
@@ -499,7 +503,7 @@ ENDIF
 	AND #&3F
 	RTS
 
-; 2 = Genre (encoded within bits 6..3 of byte 1)
+; 2 = Genre (encoded within bits 6..3 of byte 0)
 .Filter2
 	CPY #GenreFilterNum
 	BNE Filter3
@@ -511,11 +515,20 @@ ENDIF
 	AND #&0F
 	RTS
 
-; 3 = Compatible (encoded within bits 7..5 of byte 3)
+; 3 = Chunk (encoded within bits 3..0 of byte 4)
 .Filter3
-	CPY #CompatibleFilterNum
+	CPY #ChunkFilterNum
 	BNE Filter4
-	LDY #CompatibleIdOffset
+	LDY #ChunkIdOffset
+	LDA (Title), Y
+	AND #&0F
+	RTS
+
+; 4 = Ram (encoded within bits 7..5 of byte 3)
+.Filter4
+	CPY #RamFilterNum
+	BNE Filter5
+	LDY #RamIdOffset
 	LDA (Title), Y
 	ROL A
 	ROL A
@@ -524,19 +537,31 @@ ENDIF
 	AND #&07
 	RTS
 
+; 5 = Rom (encoded within bits 7..4 of byte 4)
+.Filter5
+	CPY #RomFilterNum
+	BNE Filter6
+	LDY #RomIdOffset
+	LDA (Title), Y
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	RTS
+
 ; 4 = Version (encoded within bits 4..0 of byte 3)
-.Filter4
+.Filter6
 	CPY #VersionFilterNum
-	BNE Filter5
+	BNE Filter7
 	LDY #VersionIdOffset
 	LDA (Title), Y
 	AND #&1F
 	RTS
 
-; 5 = Joystick (encoded within bits 7..6 of byte 3)
-.Filter5
+; 7 = Joystick (encoded within bits 7..6 of byte 3)
+.Filter7
 	CPY #JoystickFilterNum
-	BNE Filter6
+	BNE Filter8
 	LDY #JoystickIdOffset
 	LDA (Title), Y
 	ROL A
@@ -544,8 +569,9 @@ ENDIF
 	ROL A
 	AND #&03
 	RTS
-; 6 = Collecton (byte 4 onwards)
-.Filter6
+
+; 8 = Collecton (byte 5 onwards)
+.Filter8
 	LDY #CategoriesIdOffset
 	LDA (Title), Y
 	EOR #&80

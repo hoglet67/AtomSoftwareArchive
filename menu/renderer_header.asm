@@ -8,23 +8,29 @@
 	; Table Structure Offsets
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	NumFacets       	= 6
+	NumFacets       	= 8
+
+	SearchModeMask          = &0F		; large enough to represent NumFacets
 
 	CountOffset		= 0
 
-	GenreIdOffset           = 0
 	PubIdOffset     	= 2
-	CompatibleIdOffset     	= 3
+	GenreIdOffset           = 0
+	ChunkIdOffset     	= 4
+	RamIdOffset     	= 3
+	RomIdOffset     	= 4
 	VersionIdOffset     	= 3
 	JoystickIdOffset  	= 2
-	CategoriesIdOffset  	= 4
+	CategoriesIdOffset  	= 5
 
 	PubFilterNum		= 1
 	GenreFilterNum		= 2
-	CompatibleFilterNum	= 3
-	VersionFilterNum	= 4
-	JoystickFilterNum	= 5
-	CategoriesFilterNum 	= 6
+	ChunkFilterNum		= 3
+	RamFilterNum		= 4
+	RomFilterNum		= 5
+	VersionFilterNum	= 6
+	JoystickFilterNum	= 7
+	CategoriesFilterNum 	= 8
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Operating System Subroutines

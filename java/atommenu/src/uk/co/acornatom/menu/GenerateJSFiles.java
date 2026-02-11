@@ -13,9 +13,9 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
     PrintWriter JSwriter;
     boolean first;
 
-    public GenerateJSFiles(File archiveDir, String menuBase, int numChunks, File jsImageFile)
+    public GenerateJSFiles(File archiveDir, String menuBase, int numChapters, File jsImageFile)
             throws IOException {
-        super(archiveDir, menuBase, numChunks);
+        super(archiveDir, menuBase, numChapters);
         this.jsImageFile = jsImageFile;
         this.first = true;
     }
@@ -33,8 +33,8 @@ public class GenerateJSFiles extends GenerateDiskImageFiles {
     }
 
     @Override
-    protected String getChapterDiskName(int chunk) {
-        return "MNU" + (char)('A' + chunk);
+    protected String getChapterDiskName(int chapter) {
+        return "MNU" + (char)('A' + chapter);
     }
 
     @Override

@@ -27,12 +27,12 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
     private ZipOutputStream nullStream;
     private File archiveDir;
     private String menuBase;
-    private int numChunks;
+    private int numChapters;
 
-    public GenerateEconetFiles(File archiveDir, File econetZipFile, String menuBase, int numChunks) throws IOException {
+    public GenerateEconetFiles(File archiveDir, File econetZipFile, String menuBase, int numChapters) throws IOException {
         this.archiveDir = archiveDir;
         this.menuBase = menuBase;
-        this.numChunks = numChunks;
+        this.numChapters = numChapters;
         this.zipStream = new ZipOutputStream(new FileOutputStream(econetZipFile));
         this.nullStream = new ZipOutputStream(new OutputStream() {
             @Override
@@ -139,18 +139,18 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
         addFile(BASEDIR, splashFile);
 
         // MNU[A-F]/...
-        if (numChunks > 8) {
-            throw new RuntimeException("Too many menu chunks");
+        if (numChapters > 7) {
+            throw new RuntimeException("Too many menu chapters");
         }
-        for (int chunk = 0; chunk < numChunks; chunk++) {
-            char chunkLetter = (char) ('A' + chunk);
-            String dir = BASEDIR + "MNU" + chunkLetter + DIRSEP;
+        for (int chapter = 0; chapter < numChapters; chapter++) {
+            char chapterLetter = (char) ('A' + chapter);
+            String dir = BASEDIR + "MNU" + chapterLetter + DIRSEP;
             for (int i = 0; i < ATOMMC_MENU_FILES.length; i++) {
-                ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chunkLetter), ATOMMC_MENU_FILES[i]));
+                ATMFile atmFile = new ATMFile(new File(new File(archiveDir, menuBase + chapterLetter), ATOMMC_MENU_FILES[i]));
                 addFile(dir, atmFile);
             }
             ATMFile chapFile;
-            if (chunk == numChunks - 1) {
+            if (chapter == numChapters - 1) {
                 chapFile = new ATMFile(new File(archiveDir, "ALLECO"));
             } else {
                 chapFile = new ATMFile(new File(archiveDir, "CHAPECO"));
@@ -325,7 +325,7 @@ public class GenerateEconetFiles extends ArchiveGeneratorBase {
 
                 String dir = getDir(item.getIdentifier());
 
-                File bootfile = new File(new File(archiveDir, menuBase + item.getChunk().substring(0, 1)),
+                File bootfile = new File(new File(archiveDir, menuBase + item.getChapter()),
                         "" + item.getIdentifier());
                 ATMFile bootAtmFile = new ATMFile(bootfile);
                 bootAtmFile.setTitle("BOOT");

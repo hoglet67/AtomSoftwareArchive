@@ -9,10 +9,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GenerateMenuFiles extends GenerateBase {
 
@@ -25,7 +23,9 @@ public class GenerateMenuFiles extends GenerateBase {
     private Comparator<String> titleComparator      = Comparator.naturalOrder();
     private Comparator<String> publisherComparator  = Comparator.naturalOrder();
     private Comparator<String> genreComparator      = Comparator.naturalOrder();
-    private Comparator<String> compatibleComparator = Comparator.nullsLast(intuitiveStringComparator);
+    private Comparator<String> chunkComparator      = Comparator.naturalOrder();
+    private Comparator<String> ramComparator        = Comparator.nullsLast(intuitiveStringComparator);
+    private Comparator<String> romComparator        = Comparator.nullsLast(intuitiveStringComparator);
     private Comparator<String> versionComparator    = intuitiveStringComparator.reversed();
     private Comparator<String> joystickComparator    = Comparator.naturalOrder();
     private Comparator<String> collectionComparator = Comparator.nullsLast(intuitiveStringComparator);
@@ -50,11 +50,23 @@ public class GenerateMenuFiles extends GenerateBase {
             AtomTitle::getGenre,
             genreComparator);
 
-    private SecondaryTable compatibles = new SecondaryTableSingleValue(
-            "Compatible",
+    private SecondaryTable chunks = new SecondaryTableSingleValue(
+            "Chunk",
+            new BitField(4, 0, 4),
+            AtomTitle::getChunk,
+            chunkComparator);
+
+    private SecondaryTable ramDependencies = new SecondaryTableSingleValue(
+            "RAM",
             new BitField(3, 5, 3),
-            AtomTitle::getCompatible,
-            compatibleComparator);
+            AtomTitle::getRamDepencency,
+            ramComparator);
+
+    private SecondaryTable romDependencies = new SecondaryTableSingleValue(
+            "ROM",
+            new BitField(4, 4, 4),
+            AtomTitle::getRomDepencency,
+            romComparator);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
@@ -70,7 +82,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable collections = new SecondaryTableMultiValue (
             "Collection",
-            new BitField(4, 0, 7),
+            new BitField(5, 0, 7),
             AtomTitle::getCollections,     // for indexing
             collectionComparator);
 
@@ -78,7 +90,9 @@ public class GenerateMenuFiles extends GenerateBase {
             shortPublishers,
             publishers,
             genres,
-            compatibles,
+            chunks,
+            ramDependencies,
+            romDependencies,
             versions,
             joysticks,
             collections
@@ -86,7 +100,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     // Define the title table
 
-    private int titleHeaderSize = 4;
+    private int titleHeaderSize = 5;
 
     // The ordering of this table doesn't actually make any difference, as it's always accessed via a sort table
     private TitleTable titleTable = new TitleTable(
@@ -110,8 +124,16 @@ public class GenerateMenuFiles extends GenerateBase {
                     Comparator.comparing(AtomTitle::getGenre, genreComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
-            new SortTable("Compatible",
-                    Comparator.comparing(AtomTitle::getCompatible, compatibleComparator).
+            new SortTable("Chunk",
+                    Comparator.comparing(AtomTitle::getChunk, chunkComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Ram",
+                    Comparator.comparing(AtomTitle::getRamDepencency, ramComparator).
+                    thenComparing(AtomTitle::getTitle, titleComparator)),
+
+            new SortTable("Rom",
+                    Comparator.comparing(AtomTitle::getRomDepencency, romComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
             new SortTable("Version",
@@ -122,7 +144,6 @@ public class GenerateMenuFiles extends GenerateBase {
                     Comparator.comparing(AtomTitle::getJoystick, joystickComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
-
             new SortTable("Collection",
                     Comparator.comparing(AtomTitle::getCollectionFirst, collectionComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
@@ -130,18 +151,18 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private File archiveDir;
     private File menuDir;
-    boolean agdChunk;
-    private boolean allChunk;
+    private boolean agdChapter;
+    private boolean allChapter;
     private Target target;
-    private String chunk;
+    private String chapter;
 
-    public GenerateMenuFiles(File archiveDir, File menuDir, String chunk, Target target) {
+    public GenerateMenuFiles(File archiveDir, File menuDir, String chapter, Target target) {
         this.archiveDir = archiveDir;
         this.menuDir = menuDir;
-        this.agdChunk = chunk.equals(IFileGenerator.AGD_CHUNK);
-        this.allChunk = chunk.equals(IFileGenerator.ALL_CHUNK);
+        this.agdChapter = chapter.equals(IFileGenerator.AGD_CHAPTER);
+        this.allChapter = chapter.equals(IFileGenerator.ALL_CHAPTER);
         this.target = target;
-        this.chunk = chunk;
+        this.chapter = chapter;
     }
 
     @Override
@@ -162,7 +183,6 @@ public class GenerateMenuFiles extends GenerateBase {
         // Reset the secondary tables
         // ------------------------------------------------------------------------------------
 
-        Map<String, String> longPubShortPub = new HashMap<String, String>();
         for (int i = 0; i < secondaryTables.length; i++) { // All tables
             secondaryTables[i].clear();
         }
@@ -175,7 +195,6 @@ public class GenerateMenuFiles extends GenerateBase {
             for (int i = 1; i < secondaryTables.length; i++) { // Skip first table (short pub)
                 secondaryTables[i].addToIndex(title);
             }
-            longPubShortPub.put(title.getPublisher(), title.getShortPublisher());
         }
 
         // ------------------------------------------------------------------------------------
@@ -192,8 +211,10 @@ public class GenerateMenuFiles extends GenerateBase {
 
         shortPublishers.clear();
         for (String key : publishers.keySet()) {
-            if (longPubShortPub.containsKey(key)) {
-                shortPublishers.put(longPubShortPub.get(key), publishers.get(key));
+            if (AtomTitle.longShortPubMap.containsKey(key)) {
+                shortPublishers.put(AtomTitle.longShortPubMap.get(key), publishers.get(key));
+            } else {
+               throw new RuntimeException("Publisher " + key + " is missing from longShortPub map");
             }
         }
 
@@ -236,7 +257,7 @@ public class GenerateMenuFiles extends GenerateBase {
             menuTableLen += secondaryTables[i].calculateSize(atomTitles); // Note, items is not used here, tables need to be pre-filled
         }
 
-        if (allChunk) {
+        if (allChapter) {
             // Avoid 0A00-0AFF (Disk Controller Window)
             // Avoid 1000-19FF (CHAPTER MENU)
             // Avoid 2000-2FFF (SDDOS Catalog Buffer)
@@ -245,7 +266,7 @@ public class GenerateMenuFiles extends GenerateBase {
             titleTableSpace = sortTableAddr - titleTableAddr;
             menuTableAddr   = 0x8200;
             menuTableSpace  = 0x9800 - menuTableAddr;
-        } else if (agdChunk) {
+        } else if (agdChapter) {
             // Avoid 2800-31FF (CHAPTER MENU)
             // Avoid 2000-2FFF (SDDOS Catalog Buffer)
             sortTableAddr   = 0x9800 - sortTableLen;
@@ -271,7 +292,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         if (debug) {
-            dumpTitles("Chunk " + chunk + " in title sort order", atomTitles);
+            dumpTitles("Chapter " + chapter+ " in title sort order", atomTitles);
         }
 
         byte[] titleTableBytes = titleTable.createTable(titleTableAddr, atomTitles);
@@ -330,8 +351,8 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         System.out.println("----------------------------------------");
-        System.out.println("Chunk " + chunk + ": Title Table Free Space: " + (titleTableSpace - titleTableLen) + " bytes");
-        System.out.println("Chunk " + chunk + ": Menu  Table Free Space: " + (menuTableSpace - menuTableLen) + " bytes");
+        System.out.println("Chapter " + chapter + ": Title Table Free Space: " + (titleTableSpace - titleTableLen) + " bytes");
+        System.out.println("Chapter " + chapter+ ": Menu  Table Free Space: " + (menuTableSpace - menuTableLen) + " bytes");
         System.out.println("----------------------------------------");
 
         // ------------------------------------------------------------------------------------
@@ -339,7 +360,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
-        if (allChunk) {
+        if (allChapter) {
             ATMFile.copy(new File(archiveDir, "ALL"), new File(menuDir, "CHAP"));
         } else {
             ATMFile.copy(new File(archiveDir, "CHAP"), new File(menuDir, "CHAP"));
@@ -359,7 +380,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private void writeTables(File menuDir, String name, int loadAddr, int[] addrs, byte[][] tables) throws IOException {
         System.out.println("----------------------------------------");
-        System.out.println("Chunk " + chunk + ": Atom file: " + name);
+        System.out.println("Chapter " + chapter+ ": Atom file: " + name);
         System.out.println("----------------------------------------");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         int addr = loadAddr + 2 * tables.length;
@@ -388,7 +409,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private void writeTable(File menuDir, String name, int loadAddr, byte[] table) throws IOException {
         System.out.println("----------------------------------------");
-        System.out.println("Chunk " + chunk + ": Atom file: " + name);
+        System.out.println("Chapter " + chapter + ": Atom file: " + name);
         System.out.println("----------------------------------------");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bos.write(table);

@@ -299,7 +299,7 @@ public class GenerateSplashFiles extends GenerateBase {
         y += 2;
 
         for (Map.Entry<String, Integer> chapter : chapterStats.entrySet()) {
-            // Re-write the chunk titles
+            // Re-write the chap titles
             String title;
             switch (chapter.getKey().charAt(0)) {
             case 'A':
