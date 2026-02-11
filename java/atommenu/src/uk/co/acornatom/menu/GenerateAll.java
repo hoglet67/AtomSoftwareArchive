@@ -174,7 +174,7 @@ public class GenerateAll {
        new RomDef("PCHARME", new String[] { "BEEP", "CASE", "CONT", "FUNCTION", "FEND", "INKEY", "INSTR", "PROC", "PEND", "PROGRAM", "HTAB",
                                             "VTAB", "WHILE", "WEND", "XIF", "READ", "DATA", "RESTORE" }),
 
-            new RomDef("FP", new String[] { "%", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
+            new RomDef("FP", new String[] { "%", "COLOUR", "FDIM", "FIF", "FINPUT", "FPRINT", "FPUT", "FUNTIL", "STR" }),
 
             new RomDef("ATOMIC WINDOWS", new String[] { "DLG" }),
 
