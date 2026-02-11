@@ -174,6 +174,8 @@ popd
 
 mkdir -p $ARCHIVE/$OTHER
 cp atms/spellen1/MOONLAN $ARCHIVE/$OTHER
+package "atms/dd-18/PASCAL" "$ARCHIVE/$OTHER"
+package "atms/Acl2-19/BIORYTH" "$ARCHIVE/$OTHER"
 
 ##############################################################
 # Magnus Olsson
@@ -358,8 +360,6 @@ package "atms/forth/*" "$ARCHIVE/$AS/FORTH"
 
 package "atms/Applic1/LISP*" "$ARCHIVE/$AS/LISP"
 
-package "atms/dd-18/PASCAL" "$ARCHIVE/$OTHER"
-
 package "atms/Friso/ATOMCALC" "$ARCHIVE/$AS/ATOMCALC"
 
 package "atms/Wordpack/ED64" "$ARCHIVE/$AS/WORDPACK"
@@ -380,7 +380,6 @@ package "atms/Acl1-15/747" "$ARCHIVE/$BB"
 # package "atms/Acl1-15/INVADBB" "$ARCHIVE/$BB" # manually fixed
 # package "atms/Acl1-03/BACKGAM" "$ARCHIVE/$BB" # this is actually a PCW type-in
 # package "atms/Acl1-21/BATSHIP" "$ARCHIVE/$BB" # this is actually a program called space battle that need FP Rom
-package "atms/Acl2-19/BIORYTH" "$ARCHIVE/$BB"
 #package "atms/bugbyte__chess_disk/*" "$ARCHIVE/$BB"
 #mv $ARCHIVE/$BB/AJM "$ARCHIVE/$BB/--AJM"
 

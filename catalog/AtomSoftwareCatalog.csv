@@ -229,7 +229,7 @@ BKOUTINS",,Works,
 143,V13B1,Comm,Bug Byte,Backgammon,Game,,,,,,,,present,,BB,8200,"CH.""BACKGAM""","BACKGAM
 BACKINS",,Test,
 144,V5,Comm,Bug Byte,Battleships,Game,,,,,,,,present,,BB,8200,"CH.""BATSHIP""",BATSHIP,,Works,
-145,V1,Comm,Bug Byte,Bio-Rhythms,Simulation,,,,,,,,present,,BB,8200,"CH.""BIORYTH""",BIORYTH,,Works,
+145,V1,Non Comm,Non Comm,Bio-Rhythms,Simulation,,,,,,,,present,,OTHER,8200,"CH.""BIORYTH""",BIORYTH,,Works,
 146,V14B1,Comm,Bug Byte,Chess,Game,,,,,,,,present,,BB/CHESS,8200,"CH.""CHESSBB""","RUNNER
 CHESSBB
 PROG
