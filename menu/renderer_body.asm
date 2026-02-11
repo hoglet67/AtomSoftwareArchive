@@ -96,7 +96,7 @@ ENDIF
 .SearchCompare1
 	INY
 	LDA (Title),Y
-	BEQ NextRow
+	BMI NextRow
 .SearchCompare2
 	CMP SearchFirst
 	BNE SearchCompare1
@@ -326,6 +326,7 @@ ENDIF
 
 .LengthOfAnnotationLoop
 	LDA (AnnotationString),Y
+	AND #&7F
 	BEQ WriteLetter
 	INY
 	DEX
@@ -365,6 +366,7 @@ ENDIF
 	LDY #0
 .WriteAnnotation
 	LDA (AnnotationString),Y
+	AND #&7F
 	BEQ WriteLineExit
 	JSR WriteToScreen
 	INY
@@ -377,7 +379,7 @@ ENDIF
 	LDY TitleNameOffset
 .WriteTitleNoHighlight1
 	LDA (Title),Y
-	BEQ WriteTitleNoHighlight2
+	BMI WriteTitleNoHighlight2
 	JSR WriteToScreen
 	INY
 	DEX
@@ -390,7 +392,7 @@ ENDIF
 	LDY TitleNameOffset
 .WriteTitleHighlight1
 	LDA (Title),Y
-	BEQ WriteTitleHighlight3
+	BMI WriteTitleHighlight3
 	CMP SearchFirst
 	BEQ PossibleMatch
 .WriteTitleHighlight2
@@ -414,7 +416,7 @@ ENDIF
 	LDA SearchBuffer,X
 	BEQ Match
 	LDA (Title),Y
-	BEQ NoMatch
+	BMI NoMatch
 	CMP SearchBuffer,X
 	BEQ PossibleMatchTestNext
 
@@ -497,7 +499,7 @@ ENDIF
 	AND #&3F
 	RTS
 
-; 2 = Genre (encoded within bits 7..5 of byte 1)
+; 2 = Genre (encoded within bits 6..3 of byte 1)
 .Filter2
 	CPY #GenreFilterNum
 	BNE Filter3
@@ -506,6 +508,7 @@ ENDIF
 	LSR A
 	LSR A
 	LSR A
+	AND #&0F
 	RTS
 
 ; 3 = Compatible (encoded within bits 7..5 of byte 3)

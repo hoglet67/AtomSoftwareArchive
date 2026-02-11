@@ -46,7 +46,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable genres = new SecondaryTableSingleValue(
             "Genre",
-            new BitField(1, 3, 5),
+            new BitField(0, 3, 4),
             AtomTitle::getGenre,
             genreComparator);
 

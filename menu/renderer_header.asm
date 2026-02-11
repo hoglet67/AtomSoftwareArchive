@@ -12,7 +12,7 @@
 
 	CountOffset		= 0
 
-	GenreIdOffset           = 1
+	GenreIdOffset           = 0
 	PubIdOffset     	= 2
 	CompatibleIdOffset     	= 3
 	VersionIdOffset     	= 3

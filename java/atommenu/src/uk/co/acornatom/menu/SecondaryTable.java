@@ -124,7 +124,7 @@ public abstract class SecondaryTable extends TableBase {
                 writeShort(bos, 0);
             }
             writeString(bos, key);
-            writeByte(bos, 0);
+            writeByte(bos, (byte) 0x80);
         }
         if (debug) {
             System.out.println("length " + bos.size() + " bytes");

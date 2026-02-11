@@ -453,13 +453,13 @@ ENDIF
 	LDX #TmpPtr
 	JSR Dereference
 	; For SDDOS we pack two games per disk
-	LDA TmpPtr + 1
+	LDA TmpPtr
 	AND #$7
 IF (sddos2 = 1)
 	LSR A
 ENDIF
 	STA BinBuffer + 1
-	LDA TmpPtr
+	LDA TmpPtr+1
 IF (sddos2 = 1)
 	ROR A
 ENDIF
@@ -920,6 +920,7 @@ ENDIF
 	LDY #0
 .ScreenString1
 	LDA (TmpPtr),Y
+	AND #&7F
 	BEQ ScreenString2
 	JSR WriteToScreen
 	INY
