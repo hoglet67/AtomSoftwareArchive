@@ -641,12 +641,21 @@ IF (info_option = 1)
 .loop1
 	INX
 .loop2
+
+	;; Test for the termination condition (the end of the caregories)
+	CPX #CategoriesFilterNum
+	BNE print_facet
+	LDY #0
+	LDA (Title), Y
+	BPL ClearToBottom
+
+.print_facet
+	; Indent to right-justify the facet names
 	LDY LabelYNumSpaces,X
 	INY
 .indent
 	DEY
 	BEQ indent_done
-	; Indent to right-justify the facet names
 	LDA #' '
 	JSR WriteToScreen
 	BNE indent
@@ -655,14 +664,11 @@ IF (info_option = 1)
 	; Print the the facet name
 	; On entry: A = facet number (1..8)
 	; Preserves: nothing!
-
 	TXA
 	PHA
 	JSR LabelZ
-
 	LDA #'='
 	JSR WriteToScreen
-
 	PLA
 	TAX
 	BEQ Skip
@@ -672,7 +678,6 @@ IF (info_option = 1)
 
 	LDY #0
 	LDA (Title), Y
-	BPL ClearToBottom
 	AND #&7F
 	INC Title
 	BNE GetRecord
