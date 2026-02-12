@@ -403,7 +403,8 @@ public class GenerateAll {
                     if (!first) {
                         sb.append(",");
                     }
-                    sb.append(rom);
+                    sb.append(rom.getName());
+                    item.getCollections().add(rom.getName());
                     first = false;
                 }
             }
