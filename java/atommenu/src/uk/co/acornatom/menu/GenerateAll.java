@@ -366,6 +366,9 @@ public class GenerateAll {
             for (RomDef rom : roms) {
                 Set<String> commands = found.get(rom);
                 boolean needed = !commands.isEmpty();
+                if (needed) {
+                   System.out.println("INFO: Compatibility: Title " + item + ": uses commands from " + rom + ": " + commands);
+                }
                 if (Boolean.TRUE.equals(rom.isNeeded(item))) {
                    if (!needed) {
                     System.out.println("WARNING: Compatibility: Title " + item + ": probably wrongly marked as " + rom);
@@ -376,9 +379,6 @@ public class GenerateAll {
                    }
                 } else {
                     // TODO: Make this generic
-                    if (needed) {
-                        System.out.println("INFO: Compatibility: Title " + item + ": needs " + rom + ": " + commands);
-                    }
                     switch(rom.getName()) {
                     case FP:
                         item.setFp(needed);
