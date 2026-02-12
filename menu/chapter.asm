@@ -367,7 +367,7 @@ ENDIF
 .TestForInfo
 IF (info_option = 1)
 	CPY #32		; @
-	BNE TestForSelect
+	BNE TestForHelp
 	JSR LabelInfo
 	JMP LabelB
 ENDIF
