@@ -434,7 +434,7 @@ DAT1
 EDITOR
 LOADER
 MMINER",,Works,
-271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,Yes,,,,,AtoMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
+271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,Yes,,,,,JoyMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
 JUNGLE
 MUSIC
 RUNME",,Works,
@@ -477,7 +477,7 @@ COLOSSAL",,,
 *RUN SNOWBALL","VDUWLO
 SNOWBALL",,,
 302,,Comm,,Astrofire (Kees),,,,,,,,,duplicate,,,,,,,Duplicate of Prog Power Astrafire,
-303,V3,Modern,Retro S/W,Chuckie Egg (M)(16K),Game,RS Mono,Yes,,,,,AtoMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
+303,V3,Modern,Retro S/W,Chuckie Egg (M)(16K),Game,RS Mono,Yes,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -486,7 +486,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-304,V3,Modern,Retro S/W,Chuckie Egg (C)(16K),Game,RS Colour,Yes,,,,,AtoMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
+304,V3,Modern,Retro S/W,Chuckie Egg (C)(16K),Game,RS Colour,Yes,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -495,7 +495,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,Yes,,,,,AtoMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
+305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,Yes,,,,,JoyMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -505,7 +505,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",,Works,
-306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,Yes,,,,,AtoMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
+306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,Yes,,,,,JoyMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -875,7 +875,7 @@ ERRTAB",,Works,
 *RUN PS2A
 ","PROG
 PS2A",,Works,
-615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,Yes,,,,,AtoMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
+615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,Yes,,,,,JoyMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
 REPSCR
 REPTON",,Works,
 616,V5,Non Comm,Non Comm,Lost Gold (32K)(R),Adventure,,Yes,,Yes,No,No,,present,,OTHER,8200,"CH.""ADVLDG""",ADVLDG,,Works,
@@ -1266,7 +1266,7 @@ PRINT FOR HELP: SEE MANUAL
 674,V6,Non Comm,Non Comm,Desert,Game,,,,,,,,present,,NC,8200,"CH.""DESERT""",DESERT,,Works,
 675,V6,Non Comm,Non Comm,Duck (R) (32K),Game,,Yes,,Yes,Yes,Yes,,present,Roland Leurs,NC,8200,"CH.""DUCK""",DUCK,,Works,
 676,V6,Non Comm,Non Comm,Jet,Game,,,,,,,,present,Boede Hommel,NC,8200,"CH.""JET""",JET,,Works,
-679,V8B1,Modern,Retro S/W,Joe Blade (32K),Game,RS Mono,Yes,,,,,AtoMMC,present,Kees van Oss,RS/JOE,8200,*RUN JOE,"JOE
+679,V8B1,Modern,Retro S/W,Joe Blade (32K),Game,RS Mono,Yes,,,,,JoyMMC,present,Kees van Oss,RS/JOE,8200,*RUN JOE,"JOE
 JOECODE
 PANEL1
 SCRE",,Works,
@@ -1481,67 +1481,67 @@ SOKSPEL
 SOKSPRI
 SSCORE
 SSOKSCR",,Works,
-782,V8B2,Comm,Acornsoft,Invaders (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""INVADER""",INVADER,,Works,
-783,V8B2,Comm,Bug Byte,Galaxian (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""GALAXBB""",GALAXBB,,Works,
-784,V10B5,Comm,Bug Byte,Atom Invaders (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""INVADBB""",INVADBB,,Works,
-785,V8B3,Comm,A&F S/W,Cylon Attack (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""CYLONATT""",CYLONATT,,Works,
+782,V8B2,Comm,Acornsoft,Invaders (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""INVADER""",INVADER,,Works,
+783,V8B2,Comm,Bug Byte,Galaxian (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""GALAXBB""",GALAXBB,,Works,
+784,V10B5,Comm,Bug Byte,Atom Invaders (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""INVADBB""",INVADBB,,Works,
+785,V8B3,Comm,A&F S/W,Cylon Attack (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""CYLONATT""",CYLONATT,,Works,
 786,V8B3,Comm,Acornsoft,Dog Fight (JS),Game,,,,,,,Both,present,,JS/DAVE,8200,"CH. ""DOGFIGHT""",DOGFIGHT,,Works,
-787,V14B1,Comm,A&F S/W,Space Panic (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,*RUN PANIC,PANIC,,Test,
+787,V14B1,Comm,A&F S/W,Space Panic (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,*RUN PANIC,PANIC,,Test,
 788,V8B3,Comm,Prog Power,Stock Car (JS),Game,,,,,,,Both,present,,JS/DAVE,8200,"CH.""STOCKCAR""",STOCKCAR,,Works,
-789,V8B3,Comm,Acornsoft,Asteroids (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""ASTEROID""",ASTEROID,,Works,
-790,V8B3,Comm,Acornsoft,Snooker (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""SNOOKER""",SNOOKER,,Works,
-791,V8B3,Comm,Acornsoft,Lunar Lander (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""LANDER""",LANDER,,Works,
-792,V8B3,Comm,Acornsoft,Amoeba (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"CH.""AMOEBA""",AMOEBA,,Works,
-793,V14B1,Comm,Hopesoft,Atom Man (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,"*LOAD AMAN
+789,V8B3,Comm,Acornsoft,Asteroids (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""ASTEROID""",ASTEROID,,Works,
+790,V8B3,Comm,Acornsoft,Snooker (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""SNOOKER""",SNOOKER,,Works,
+791,V8B3,Comm,Acornsoft,Lunar Lander (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""LANDER""",LANDER,,Works,
+792,V8B3,Comm,Acornsoft,Amoeba (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"CH.""AMOEBA""",AMOEBA,,Works,
+793,V14B1,Comm,Hopesoft,Atom Man (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,"*LOAD AMAN
 *RUN AMANRUN","AMAN
 AMANRUN",,Test,
-794,V8B3,Comm,Prog Power,Astrobirds (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN ASTROBI,ASTROBI,,Works,
-795,V8B3,Comm,Acornsoft,Babies (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""BABIES""",BABIES,,Works,
-796,V8B3,Comm,Micro Mania,Centipede (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN CENTIPE,CENTIPE,,Works,
-797,V8B3,Comm,Micro Mania,Defender (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN DEFENDE,DEFENDE,,Works,
-798,V8B3,Comm,Acornsoft,Dodgems (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN DODGEMS,DODGEMS,,Works,
-799,V8B3,Magazines,Your Computer,Acorn Kong (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""KONG""",KONG,,Works,
-800,V8B3,Comm,Prog Power,Martians (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN MARTIAN,MARTIAN,,Works,
-801,V8B3,Comm,Micro Mania,Omega Mission (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN OMEGA,"OMEGA
+794,V8B3,Comm,Prog Power,Astrobirds (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN ASTROBI,ASTROBI,,Works,
+795,V8B3,Comm,Acornsoft,Babies (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""BABIES""",BABIES,,Works,
+796,V8B3,Comm,Micro Mania,Centipede (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN CENTIPE,CENTIPE,,Works,
+797,V8B3,Comm,Micro Mania,Defender (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN DEFENDE,DEFENDE,,Works,
+798,V8B3,Comm,Acornsoft,Dodgems (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN DODGEMS,DODGEMS,,Works,
+799,V8B3,Magazines,Your Computer,Acorn Kong (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""KONG""",KONG,,Works,
+800,V8B3,Comm,Prog Power,Martians (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN MARTIAN,MARTIAN,,Works,
+801,V8B3,Comm,Micro Mania,Omega Mission (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN OMEGA,"OMEGA
 DATA",,Works,
-802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,Yes,,,,,Keyboard,present,,JS/KEES,8200,"*LOAD POINTER
+802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,Yes,,,,,JoyKBD,present,,JS/KEES,8200,"*LOAD POINTER
 RUN",POINTER,,Works,
-803,V8B3,Comm,Acornsoft,Rat Trap (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN RATTRAP,RATTRAP,,Works,
-804,V8B3,Comm,Acornsoft,Robots (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""ROBOTS""",ROBOTS,,Works,
-805,V8B3,Comm,Prog Power,Cowboy Shoot-Out (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN SHOOTOU,SHOOTOU,,Works,
-806,V8B3,Comm,Acornsoft,Star Gate (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN STARGAT,STARGAT,,Works,
-807,V8B3,Comm,A&F S/W,Torpedo Run (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN TORP,TORP,,Works,
-808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
-809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,Yes,,No,Yes,No,Keyboard,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
-810,V8B3,Non Comm,Non Comm,Ghost (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""GHOST""",GHOST,,Works,
-811,V8B3,Non Comm,Non Comm,Saturn (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""SATURN""",SATURN,,Works,
-812,V8B3,Comm,Prog Power,3D Asteroids (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""3DASTER""",3DASTER,,Works,
-813,V8B3,Comm,Acornsoft,Four Row (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""4OP1RIJ""",4OP1RIJ,,Works,
-814,V8B3,Non Comm,Non Comm,Bowling (R) (JS),Game,,,,Yes,No,No,Keyboard,present,,JS/WIM,8200,"CH.""BOWLING""",BOWLING,,Works,
-815,V8B3,Comm,Acornsoft,Breakout (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""BREAKOU""",BREAKOU,,Works,
-816,V8B3,Comm,Acornsoft,Breakout (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""BRKOUT""",BRKOUT,,Works,
-817,V8B3,Books,Atom Magic Book,Drive (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""DRIVE""",DRIVE,,Works,
-818,V8B3,Comm,Prog Power,Space Fighter (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""FIGHTER""",FIGHTER,,Works,
-819,V8B3,Comm,A&F S/W,Frogger (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""FROGGER""",FROGGER,,Works,
-820,V8B3,Comm,Prog Power,Hyperfire (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""HYPERFI""",HYPERFI,,Works,
-821,V8B3,Non Comm,Non Comm,Jet (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""JET""",JET,,Works,
-822,V8B3,Non Comm,Non Comm,Race (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""JOYRACE""",JOYRACE,,Works,
-823,V8B3,Non Comm,Non Comm,Navigator (R) (JS),Game,,,,No,Yes,No,Keyboard,present,,JS/WIM,8200,"CH.""NAVIGAT""",NAVIGAT,,Works,
-824,V14B1,Comm,A&F S/W,Painter (JS),Game,,,,,,,Keyboard,present,,JS/DAVE,8200,*RUN PAINTER,PAINTER,,Test,
-825,V8B3,Comm,Micro Mania,Puckman (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""PUCKMA""",PUCKMA,,Works,
-826,V8B3,Non Comm,Non Comm,Race Rups (R) (JS),Game,,,,Yes,No,No,Keyboard,present,,JS/WIM,8200,"CH.""RACRUPS""",RACRUPS,,Works,
-827,V8B3,Non Comm,Non Comm,Rhinoceros (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""RHINORO""",RHINORO,,Works,
-828,V8B3,Non Comm,Non Comm,Shuttle (R) (JS),Game,,,,Yes,No,Yes,Keyboard,present,,JS/WIM,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
-829,V8B3,Comm,Acornsoft,Snake (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""SNAKE""",SNAKE,,Works,
-830,V8B3,Comm,Acornsoft,Snapper (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""SNAPPER""",SNAPPER,,Works,
-831,V8B3,Non Comm,Non Comm,Space Zap (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""SPACZAP""",SPACZAP,,Works,
-832,V8B3,Non Comm,Non Comm,Space Robots (R) (JS),Game,,Yes,,No,Yes,Yes,Keyboard,present,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",SPAROBS,,Works,
-833,V8B3,Comm,Prog Power,Swarm (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""SWARM""",SWARM,,Works,
-834,V8B3,Non Comm,Non Comm,Stowaway (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""VERSTE1""",VERSTE1,,Works,
-835,V8B3,Comm,Prog Power,Warlords (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""WARLOR""",WARLOR,,Works,
-836,V8B3,Comm,Bug Byte,Wiggle (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""WIGGLE""",WIGGLE,,Works,
-837,V8B3,Comm,Prog Power,Munchyman (JS),Game,,,,,,,Keyboard,present,,JS/WIM,8200,"CH.""MUNCHJH""",MUNCHJH,,Works,
-838,V8,Comm,Prog Power,Air Attack (JS),Game,,,,,,,Keyboard,present,J. Dyson,JS/WIM,8200,"*LOAD AIRATTA
+803,V8B3,Comm,Acornsoft,Rat Trap (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN RATTRAP,RATTRAP,,Works,
+804,V8B3,Comm,Acornsoft,Robots (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""ROBOTS""",ROBOTS,,Works,
+805,V8B3,Comm,Prog Power,Cowboy Shoot-Out (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN SHOOTOU,SHOOTOU,,Works,
+806,V8B3,Comm,Acornsoft,Star Gate (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN STARGAT,STARGAT,,Works,
+807,V8B3,Comm,A&F S/W,Torpedo Run (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TORP,TORP,,Works,
+808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
+809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,Yes,,No,Yes,No,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
+810,V8B3,Non Comm,Non Comm,Ghost (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""GHOST""",GHOST,,Works,
+811,V8B3,Non Comm,Non Comm,Saturn (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""SATURN""",SATURN,,Works,
+812,V8B3,Comm,Prog Power,3D Asteroids (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""3DASTER""",3DASTER,,Works,
+813,V8B3,Comm,Acornsoft,Four Row (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""4OP1RIJ""",4OP1RIJ,,Works,
+814,V8B3,Non Comm,Non Comm,Bowling (R) (JS),Game,,,,Yes,No,No,JoyKBD,present,,JS/WIM,8200,"CH.""BOWLING""",BOWLING,,Works,
+815,V8B3,Comm,Acornsoft,Breakout (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""BREAKOU""",BREAKOU,,Works,
+816,V8B3,Comm,Acornsoft,Breakout (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""BRKOUT""",BRKOUT,,Works,
+817,V8B3,Books,Atom Magic Book,Drive (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""DRIVE""",DRIVE,,Works,
+818,V8B3,Comm,Prog Power,Space Fighter (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""FIGHTER""",FIGHTER,,Works,
+819,V8B3,Comm,A&F S/W,Frogger (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""FROGGER""",FROGGER,,Works,
+820,V8B3,Comm,Prog Power,Hyperfire (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""HYPERFI""",HYPERFI,,Works,
+821,V8B3,Non Comm,Non Comm,Jet (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""JET""",JET,,Works,
+822,V8B3,Non Comm,Non Comm,Race (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""JOYRACE""",JOYRACE,,Works,
+823,V8B3,Non Comm,Non Comm,Navigator (R) (JS),Game,,,,No,Yes,No,JoyKBD,present,,JS/WIM,8200,"CH.""NAVIGAT""",NAVIGAT,,Works,
+824,V14B1,Comm,A&F S/W,Painter (JS),Game,,,,,,,JoyKBD,present,,JS/DAVE,8200,*RUN PAINTER,PAINTER,,Test,
+825,V8B3,Comm,Micro Mania,Puckman (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""PUCKMA""",PUCKMA,,Works,
+826,V8B3,Non Comm,Non Comm,Race Rups (R) (JS),Game,,,,Yes,No,No,JoyKBD,present,,JS/WIM,8200,"CH.""RACRUPS""",RACRUPS,,Works,
+827,V8B3,Non Comm,Non Comm,Rhinoceros (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""RHINORO""",RHINORO,,Works,
+828,V8B3,Non Comm,Non Comm,Shuttle (R) (JS),Game,,,,Yes,No,Yes,JoyKBD,present,,JS/WIM,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
+829,V8B3,Comm,Acornsoft,Snake (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAKE""",SNAKE,,Works,
+830,V8B3,Comm,Acornsoft,Snapper (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAPPER""",SNAPPER,,Works,
+831,V8B3,Non Comm,Non Comm,Space Zap (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SPACZAP""",SPACZAP,,Works,
+832,V8B3,Non Comm,Non Comm,Space Robots (R) (JS),Game,,Yes,,No,Yes,Yes,JoyKBD,present,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",SPAROBS,,Works,
+833,V8B3,Comm,Prog Power,Swarm (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SWARM""",SWARM,,Works,
+834,V8B3,Non Comm,Non Comm,Stowaway (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""VERSTE1""",VERSTE1,,Works,
+835,V8B3,Comm,Prog Power,Warlords (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WARLOR""",WARLOR,,Works,
+836,V8B3,Comm,Bug Byte,Wiggle (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WIGGLE""",WIGGLE,,Works,
+837,V8B3,Comm,Prog Power,Munchyman (JS),Game,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""MUNCHJH""",MUNCHJH,,Works,
+838,V8,Comm,Prog Power,Air Attack (JS),Game,,,,,,,JoyKBD,present,J. Dyson,JS/WIM,8200,"*LOAD AIRATTA
 RUN","AIRATTA
 ATDATA",,Works,
 839,V8B3,Non Comm,Non Comm,Ghost,Game,,,,,,,,present,,NC,8200,"CH.""GHOST""",GHOST,,Works,
@@ -1552,11 +1552,11 @@ ATDATA",,Works,
 CH.""DARTS2""","DARTS1
 DARTS2",,Works,
 843,V8B3,Non Comm,Non Comm,Le Passe Temps,Game,,,,,,,,present,,NC,8200,"CH.""4OP1RY""",4OP1RY,,Works,
-844,V9B1,Non Comm,Non Comm,Pacman (JS),Game,,,,,,,Keyboard,present,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",PACMAN,,Works,
-845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R),Game,,Yes,,No,Yes,No,Keyboard,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
-846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R),Game,,,,Yes,Yes,No,Keyboard,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
-847,V9B1,Non Comm,Non Comm,Helicopter Lander (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""JHELI""",JHELI,,Works,
-848,V9B1,Comm,Bug Byte,Last Run (JS),Game,,,,,,,Keyboard,present,,JS/KEES,8200,"CH.""JLAST""",JLAST,,Works,
+844,V9B1,Non Comm,Non Comm,Pacman (JS),Game,,,,,,,JoyKBD,present,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",PACMAN,,Works,
+845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R),Game,,Yes,,No,Yes,No,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
+846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R),Game,,,,Yes,Yes,No,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
+847,V9B1,Non Comm,Non Comm,Helicopter Lander (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JHELI""",JHELI,,Works,
+848,V9B1,Comm,Bug Byte,Last Run (JS),Game,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JLAST""",JLAST,,Works,
 849,V9B1,Modern,Non Comm,BeebSID15 70's Rock,Music,SID,Yes,,,,,,present,,SID/ATMSID15,2900,*RUN SIDMENU,"69WHOLE
 70ALLRI
 70IRONM
@@ -1610,16 +1610,16 @@ SIDMENU
 874,V9B1,Non Comm,Non Comm,The Nudger,Game,GameBase,,,,,,,present,Steve Webster,GB,8200,"CH.""197""",197,,Works,
 875,V9B1,Non Comm,Non Comm,Cubic,Utility,GameBase,,,,,,,present,Steve Webster,GB,8200,"CH.""199""",199,,Works,
 876,V9B1,Non Comm,Non Comm,Starship Manna,Game,GameBase,,,,,,,present,??,GB,8200,"CH.""226""",226,,Works,
-877,V9B1,Non Comm,Non Comm,Cement (JS),Game,,,,,,,Keyboard,present,RK,JS/WIM,8200,"*LOAD CEMENT
+877,V9B1,Non Comm,Non Comm,Cement (JS),Game,,,,,,,JoyKBD,present,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",CEMENT,,Works,
-878,V9B1,Modern,Retro S/W,F-14 Tomcat (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/F14,8200,"CH.""F14RUN""","F14CODE
+878,V9B1,Modern,Retro S/W,F-14 Tomcat (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/F14,8200,"CH.""F14RUN""","F14CODE
 F14RUN
 F14SCR
 LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-879,V9B2,Modern,Retro S/W,F-14 Tomcat SID (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
+879,V9B2,Modern,Retro S/W,F-14 Tomcat SID (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1627,21 +1627,21 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-880,V9B2,Modern,Retro S/W,Elite Demo (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
+880,V9B2,Modern,Retro S/W,Elite Demo (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
 ELITE
 KEYS.TXT",,Works,
-881,V10B4,Modern,Retro S/W,Manic Miner (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
+881,V10B4,Modern,Retro S/W,Manic Miner (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
 MMINTRO
 MMCODE",,Works,
 882,V9B2,Non Comm,Non Comm,Type Ahead,Utility,,,,,,,,present,Ronald Boers,NC,8200,"CH.""TYPEAHD""",TYPEAHD,,Works,
 883,V9B2,Modern,Jim Bagley,Dragon's Lair (1MHz),Game,,Yes,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR,DLAIR,,Works,
 884,V9B2,Modern,Jim Bagley,Dragon's Lair (2MHz),Game,,Yes,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,DLAIR2M,,Works,
 885,V9B2,Non Comm,Non Comm,Chess (Usurpator II),Game,,,,,,,,present,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,USURII,,Works,
-886,V10B1,Modern,Retro S/W,Jet Set Willy (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
+886,V10B1,Modern,Retro S/W,Jet Set Willy (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
 JSWCODE",,Works,
-887,V10B1,Modern,Retro S/W,Jet Set Willy II (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
+887,V10B1,Modern,Retro S/W,Jet Set Willy II (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
 JSW2COD",,Works,
-888,V10B1,Modern,Retro S/W,Egghead in Space (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
+888,V10B1,Modern,Retro S/W,Egghead in Space (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
 EHCODE",,Works,
 889,V10B1,Comm,A&F S/W,Tangled,Game,,,,,,,,present,,AF,8200,"CH.""TANGLED""",TANGLED,,Works,
 890,V10B1,Comm,Aardvark,Galaxians,Game,,,,,,,,present,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,GALAXIAN,,,
@@ -1671,9 +1671,9 @@ COLOSS
 BOOT6502",,Works,
 896,V10B1,Non Comm,Non Comm,Squirrel Tree,Adventure,,,,,,,,present,Unknown,NC,8200,"CH.""SQUIRL1""","SQUIRL1
 SQUIRL2",,Works,
-897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
+897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
 SIDRUN",,Works,
-898,V10B4,Modern,Retro S/W,W.A.R. (32K),Game,RS Mono,Yes,,,,,Keyboard,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
+898,V10B4,Modern,Retro S/W,W.A.R. (32K),Game,RS Mono,Yes,,,,,JoyKBD,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
 GAME2
 LOADER1
 LOADER2

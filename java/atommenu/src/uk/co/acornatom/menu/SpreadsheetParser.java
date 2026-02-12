@@ -225,7 +225,11 @@ public class SpreadsheetParser {
                 // Joystick
                 String joystick = program[joystick_column].trim().toUpperCase();
                 if (joystick.isBlank()) {
-                    item.setJoystick("NONE");
+                    if (item.getChunk().equals(IFileGenerator.AGD_CHUNK)) {
+                        item.setJoystick("BOTH");
+                    } else {
+                        item.setJoystick("NONE");
+                    }
                 } else {
                     item.setJoystick(joystick);
                 }
