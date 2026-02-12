@@ -332,15 +332,15 @@ public class AtomTitle {
         this.pcharme = pcharme;
     }
 
-    public void setGags(Boolean gags) {
-        this.gags = gags;
-    }
-
     public Boolean isGags() {
         return gags;
     }
 
-    public void setAxr1(Boolean axr1) {
+   public void setGags(Boolean gags) {
+        this.gags = gags;
+    }
+
+   public void setAxr1(Boolean axr1) {
         this.axr1 = axr1;
     }
 

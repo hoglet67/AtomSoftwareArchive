@@ -33,7 +33,7 @@ public class SpreadsheetParser {
     private static final String FP = "fp";
     private static final String PCHARME = "pcharme";
     private static final String GAGS = "gags";
-    private static final String AXR1 = "axr1";
+    private static final String AXR1 = "axr";
 
     private File file;
 

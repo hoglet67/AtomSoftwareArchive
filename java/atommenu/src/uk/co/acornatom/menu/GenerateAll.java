@@ -175,31 +175,20 @@ public class GenerateAll {
     public RomDef[] roms = new RomDef[] {
 
         new RomDef(
-                FP,
-                AtomTitle::isFp,
-                new String[] {
-                        "%",
-                        "COLOUR",
-                        "FDIM",
-                        "FIF",
-                        "FINPUT",
-                        "FPRINT",
-                        "FPUT",
-                        "FUNTIL",
-                        "STR"
-                        }),
-
-       new RomDef(
-               PCHARME,
-               AtomTitle::isPcharme,
-               new String[] {
+                   PCHARME,
+                   AtomTitle::isPcharme,
+                   new String[] {
                        "BEEP",
                        "CASE",
                        "CONT",
+                       "COPY",
                        "FUNCTION",
                        "FEND",
                        "INKEY",
                        "INSTR",
+                       "KEY",
+                       "PAUSE",
+                       "POP",
                        "PROC",
                        "PEND",
                        "PROGRAM",
@@ -211,57 +200,93 @@ public class GenerateAll {
                        "READ",
                        "DATA",
                        "RESTORE"
-                       }),
+                   }),
+
+        new RomDef(
+                   GAGS,
+                   AtomTitle::isGags,
+                   new String[] {
+                       "CLS",
+                       "ATKEY",
+                       "JOYSTK",
+                       "INV",
+                       "BORDER",
+                       "PAINT",
+                       "CUBE",
+                       "CIRCLE",
+                       "PIXEL",
+                       "WINDOW",
+                       "WOFF",
+                       "FILL",
+                       "SCROLL",
+                       "HLINE",
+                       "VLINE",
+                       "INK",
+                       "PAPER",
+                       "MODE",
+                       "BLOCK",
+                       "SOUND",
+                       "PAUSE",
+                       "CREATE",
+                       "DEF",
+                       "BASE",
+                       "ASSIGN:",
+                       "DEASS:",
+                       "KILL",
+                       "SET",
+                       "UNSET",
+                       "IMAGE",
+                       "TURN",
+                       "CARRY",
+                       "SHOVE",
+                       "POS",
+                       "ATHIT",
+                       "INT",
+                       "ATTRG"
+                   }),
+
+        new RomDef(
+                   AXR1,
+                   AtomTitle::isAxr1,
+                   new String[] {
+                       "GRMOD",
+                       "GRMO.",
+                       "GRM.",
+                       "GR.",
+                       "TXMOD",
+                       "TXMO.",
+                       "TXM.",
+                       "TX.",
+                       "SHAPE",
+                       "SHAP.",
+                       "SHA.",
+                       "SH.",
+                       "PLAY",
+                       "PLA.",
+                       "PL.",
+                       "COPY",
+                       "KEY",
+                       "READ",
+                       "DATA",
+                       "RESTORE"
+                   }),
+
+        new RomDef(
+                   FP,
+                   AtomTitle::isFp,
+                   new String[] {
+                       "%",
+                       "COLOUR",
+                       "FDIM",
+                       "FIF",
+                       "FINPUT",
+                       "FPRINT",
+                       "FPUT",
+                       "FUNTIL",
+                       "STR"
+                   }),
 
 
-            new RomDef(
-                    AXR1,
-                    AtomTitle::isAxr1,
-                    new String[] {
-                            "GRMOD",
-                            "GRMO.",
-                            "GRM.",
-                            "GR.",
-                            "TXMOD",
-                            "TXMO.",
-                            "TXM.",
-                            "TX.",
-                            "SHAPE",
-                            "SHAP.",
-                            "SHA.",
-                            "SH."
-                            }),
-
-            new RomDef(
-                    GAGS,
-                    AtomTitle::isGags,
-                    new String[] {
-                            "CLS",
-                            "ATKEY",
-                            "JOYSTK",
-                            "INV",
-                            "BORDER",
-                            "PAINT",
-                            "CUBE",
-                            "CIRCLE",
-                            "PIXEL",
-                            "WINDOW",
-                            "WOFF",
-                            "FILL",
-                            "SCROLL",
-                            "HLINE",
-                            "VLINE",
-                            "INK",
-                            "PAPER",
-                            "MODE",
-                            "BLOCK",
-                            "SOUND",
-                            "PAUSE",
-                            "CREATE",
-                            "DEF",
-                            "BASE"
-                    // lots more
-                    })
     };
 
     // Check for ROM signatures
@@ -341,14 +366,18 @@ public class GenerateAll {
             for (RomDef rom : roms) {
                 Set<String> commands = found.get(rom);
                 boolean needed = !commands.isEmpty();
-                if (needed && Boolean.FALSE.equals(rom.isNeeded(item))) {
-                    System.out.println("WARNING: Compatibility: Title probably should be marked as " + rom + ": " + item + " " + commands);
-                } else if (!needed && Boolean.TRUE.equals(rom.isNeeded(item))) {
-                    System.out.println("WARNING: Compatibility: Title probably wrongly marked as " + rom + ": " + item);
+                if (Boolean.TRUE.equals(rom.isNeeded(item))) {
+                   if (!needed) {
+                    System.out.println("WARNING: Compatibility: Title " + item + ": probably wrongly marked as " + rom);
+                   }
+                } else if (Boolean.FALSE.equals(rom.isNeeded(item))) {
+                   if (needed) {
+                      System.out.println("WARNING: Compatibility: Title " + item + ": probably should be marked as " + rom + ": " + commands);
+                   }
                 } else {
                     // TODO: Make this generic
                     if (needed) {
-                        System.out.println("INFO: Compatibility: Title needs " + rom + ": " + item);
+                        System.out.println("INFO: Compatibility: Title " + item + ": needs " + rom + ": " + commands);
                     }
                     switch(rom.getName()) {
                     case FP:
@@ -425,8 +454,11 @@ public class GenerateAll {
                 .thenComparing(AtomTitle::getPublisher)
                 .thenComparing(AtomTitle::getTitle);
 
+        Comparator<AtomTitle> spreadsheetComparator = Comparator
+                .comparing(AtomTitle::getIdentifier);
+
         List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
-        sortedItems.sort(customComparator);
+        sortedItems.sort(spreadsheetComparator);
 
         // Produce WARNINGs for titles are missing 32K Ram = YES tags in the spreadsheet
         check12KCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
