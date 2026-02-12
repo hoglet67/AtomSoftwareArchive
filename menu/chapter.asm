@@ -211,19 +211,6 @@ ENDIF
 	JMP LabelB
 
 .LabelE
-	; 500eIF?#B002&64=0 AND F=0 A=(A+1)&3;GOS.i;Y=0;G.b
-	BIT $b002
-	BVS CallInkey
-	LDA PageState
-	BNE CallInkey
-	INC Annotation
-	LDA Annotation
-	CMP #NumFacets + 1
-	BCC NoAnnWrap
-	LDA #0
-.NoAnnWrap
-	STA Annotation
-	JMP SetItemToZero
 
 .CallInkey
 	; // Call InKey()
@@ -293,14 +280,13 @@ ENDIF
 	JMP LabelA
 
 .TestForFilter
-	; // 1..6 key pressed (change sort or filter)
-	; 620 IF ?Q>16 AND ?Q<21 S=?Q-17;F=0;A=A&127;G.a
-	CPY #16+1
+	; // 0 = clear; 1..N = filter
+	CPY #16
 	BCC TestForPrevSort
-	CPY #16+NumFacets+1+1
+	CPY #16+NumFacets+1
 	BCS TestForPrevSort
 	TYA
-	SBC #16
+	SBC #15
 	; At the point A=0..5
 
 	; Filter 0 = clear filters
@@ -335,7 +321,7 @@ ENDIF
 
 .TestForNextSort
 	CPY #3	; ]
-	BNE TestForSelect
+	BNE TestForPrevTag
 
 	INX
 	CPX #NumFacets+1
@@ -359,6 +345,28 @@ ENDIF
 	AND #$7f
 	STA Annotation
 	JMP LabelA
+
+.TestForPrevTag
+	LDA PageState		; Tags not use in filter pages
+	BNE TestForSelect
+	LDX Annotation
+	CPY #58			; Z
+	BNE TestForNextTag
+	DEX
+	BPL ChangeTag
+	LDX #NumFacets
+	BNE ChangeTag
+
+.TestForNextTag
+	CPY #56			; X
+	BNE TestForSelect
+	INX
+	CPX #NumFacets + 1
+	BNE ChangeTag
+	LDX #0
+.ChangeTag
+	STX Annotation
+	JMP SetItemToZero
 
 .TestForSelect
 	; // <Return> or <Space> pressed (select current item)
@@ -872,7 +880,7 @@ ENDIF
 
 
 .LabelYNumSpaces
-	EQUB 0, 1, 5, 5, 7, 7, 3, 2, 0
+	EQUB 0, 1, 5, 3, 0, 0, 3, 2, 0
 
 
 .LabelZ0
@@ -885,13 +893,13 @@ ENDIF
 	EQUS "GENRE", 0
 
 .LabelZ3
-	EQUS "CHUNK", 0
+	EQUS "CHAPTER", 0
 
 .LabelZ4
-	EQUS "RAM", 0
+	EQUS "RAM NEEDED", 0
 
 .LabelZ5
-	EQUS "ROM", 0
+	EQUS "ROM NEEDED", 0
 
 .LabelZ6
 	EQUS "VERSION", 0
