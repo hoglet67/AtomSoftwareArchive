@@ -137,7 +137,7 @@ ENDIF
 	; 300cIF ?#B001&128>0 G.d
 	BIT $b001
 	BMI LabelD
-	JMP LabelC2
+	BPL LabelC2
 
 .HandleUpKeyOriginal
 	; // Ctrl Key is pressed Original Atom (scroll up)
@@ -152,7 +152,7 @@ ENDIF
 	JSR LabelI
 	DEC Item
 	JSR LabelI
-	BMI ReleaseKey ; Always
+	BMI ReleaseKey		; Branch always
 
 .LabelC1
 	; 320 IF P>1 P=P-1;GOS.i;Y=L-1;G.b
@@ -163,7 +163,7 @@ ENDIF
 	JSR LabelI
 	LDA #(LinesPerPage - 1)
 	STA Item
-	JMP LabelB
+	BNE LabelB		; Branch always
 
 .LabelD
 	; // Check for original Atom
@@ -174,14 +174,14 @@ ENDIF
 	; // Control Key is pressed emulator (scroll down)
 	; 400dIF?#B001&64>0 G.e
 	BIT $b001
-	BVS LabelE
-	JMP LabelD2
+	BVS CallInkey
+	BVC LabelD2		; Branch always
 
 .HandleDownKeyOriginal
 	; // Shift Key is pressed Original Atom (scroll down)
 	; 300cIF ?#B001&128>0 G.d
 	BIT $b001
-	BMI LabelE
+	BMI CallInkey
 
 .LabelD2
 	; 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
@@ -201,33 +201,30 @@ ENDIF
 	; 420 IF P<M P=P+1;GOS.i;Y=0;G.b
 	LDA Page
 	CMP NumPages
-	BEQ LabelE
+	BEQ CallInkey
 	INC Page
 
 .SetItemToZero
 	JSR LabelI
 	LDA #0
 	STA Item
-	JMP LabelB
-
-.LabelE
+	JMP LabelB		; Branch always
 
 .CallInkey
-	; // Call InKey()
-	; 510 LINK (B+3)
+	; Call InKey to scan the keyboard
 	JSR Inkey
 
-	; // No key pressed
-	; 520 IF ?Q=255 G.c
 	CPY #$FF
-	BNE TestForEscape
-	JMP LabelC
+	BEQ LabelC		; Branch of no key pressed
 
-.TestForEscape
-	CPY #&3B
-	BNE TestForPrevPage
+	CPY #&3B		; Escape
+	BNE TestForFilter
 
-	; Escape pressed; change back to the "root" directory
+	; Escape pressed, if on filter page, return to title page
+	LDA PageState
+	BNE PageStateZero
+
+	; Really exit, changing back to the "root" directory
 	JSR OscliString
 IF (sddos2 = 1 OR sddos3 = 1)
 	EQUS "DRIVE 0", Return
@@ -239,45 +236,6 @@ ENDIF
 	JSR OscliString
 	EQUS "RUN MENU", Return
 	; never returns
-
-.TestForPrevPage
-	; // < key pressed (previous page)
-	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
-	CPY #28
-	BNE TestForNextPage
-	LDA NumPages
-	CMP #1
-	BEQ TestForNextPage
-	DEC Page
-	BNE PrevPageNoWrap
- 	STA Page
-.PrevPageNoWrap
- 	JMP SetItemToZero
-
-.TestForNextPage
-	; // > key pressed (next page)
-	; 610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
-	CPY #30
-	BNE TestForHelp
-	LDA NumPages
-	CMP #1
-	BEQ TestForHelp
-	INC Page
-	LDA NumPages
-	CMP Page
-	BCS NextPageNoWrap
-	LDA #1
-	STA Page
-.NextPageNoWrap
-	JMP SetItemToZero
-
-.TestForHelp
-	; // ? key pressed (help)
-	; 615 IF ?Q=31 GOS.h;G.a
-	CPY #31
-	BNE TestForFilter
-	JSR LabelH
-	JMP LabelA
 
 .TestForFilter
 	; // 0 = clear; 1..N = filter
@@ -310,10 +268,8 @@ ENDIF
 
 .TestForPrevSort
 	LDX SortType
-
 	CPY #1	; [
 	BNE TestForNextSort
-
 	DEX
 	BPL ChangeSort
 	LDX #NumFacets
@@ -321,8 +277,7 @@ ENDIF
 
 .TestForNextSort
 	CPY #3	; ]
-	BNE TestForPrevTag
-
+	BNE TestForPrevPage
 	INX
 	CPX #NumFacets+1
 	BNE ChangeSort
@@ -346,9 +301,41 @@ ENDIF
 	STA Annotation
 	JMP LabelA
 
+.TestForPrevPage
+	; // < key pressed (previous page)
+	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
+	CPY #28
+	BNE TestForNextPage
+	LDA NumPages
+	CMP #1
+	BEQ TestForNextPage
+	DEC Page
+	BNE PrevPageNoWrap
+ 	STA Page
+.PrevPageNoWrap
+ 	JMP SetItemToZero
+
+.TestForNextPage
+	; // > key pressed (next page)
+	; 610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
+	CPY #30
+	BNE TestForPrevTag
+	LDA NumPages
+	CMP #1
+	BEQ TestForPrevTag
+	INC Page
+	LDA NumPages
+	CMP Page
+	BCS NextPageNoWrap
+	LDA #1
+	STA Page
+.NextPageNoWrap
+	JMP SetItemToZero
+
+
 .TestForPrevTag
 	LDA PageState		; Tags not use in filter pages
-	BNE TestForSelect
+	BNE TestForHelp
 	LDX Annotation
 	CPY #58			; Z
 	BNE TestForNextTag
@@ -359,7 +346,7 @@ ENDIF
 
 .TestForNextTag
 	CPY #56			; X
-	BNE TestForSelect
+	BNE TestForHelp
 	INX
 	CPX #NumFacets + 1
 	BNE ChangeTag
@@ -367,6 +354,14 @@ ENDIF
 .ChangeTag
 	STX Annotation
 	JMP SetItemToZero
+
+.TestForHelp
+	; // ? key pressed (help)
+	; 615 IF ?Q=31 GOS.h;G.a
+	CPY #31
+	BNE TestForSelect
+	JSR LabelH
+	JMP LabelA
 
 .TestForSelect
 	; // <Return> or <Space> pressed (select current item)
@@ -387,7 +382,6 @@ ENDIF
 	STA Page
 	JSR LabelJ
 	JSR Search
-
 	JMP LabelA
 
 .JumpToLabelC
