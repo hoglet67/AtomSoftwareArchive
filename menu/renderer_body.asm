@@ -869,7 +869,7 @@ IF properAnnotationCounts
 	; table for the annotation type
 
 .MenuTableIndex
-FOR i, 0, NumFacets - 2, 1
+FOR i, 0, NumFacets - 1, 1
 	EQUB 4 + 2 * i
 NEXT
 
