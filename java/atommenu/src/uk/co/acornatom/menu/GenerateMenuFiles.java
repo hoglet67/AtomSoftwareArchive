@@ -25,7 +25,8 @@ public class GenerateMenuFiles extends GenerateBase {
     private Comparator<String> genreComparator      = Comparator.naturalOrder();
     private Comparator<String> chunkComparator      = Comparator.naturalOrder();
     private Comparator<String> ramComparator        = Comparator.nullsLast(intuitiveStringComparator);
-    private Comparator<String> romComparator        = Comparator.nullsLast(intuitiveStringComparator);
+    private Comparator<String> romComparatorNF      = new RomComparator(true);
+    private Comparator<String> romComparatorNL      = new RomComparator(false);
     private Comparator<String> versionComparator    = intuitiveStringComparator.reversed();
     private Comparator<String> joystickComparator   = Comparator.naturalOrder();
     private Comparator<String> collectionComparator = Comparator.nullsLast(intuitiveStringComparator);
@@ -66,7 +67,7 @@ public class GenerateMenuFiles extends GenerateBase {
             "ROM",
             new BitField(4, 4, 4),
             AtomTitle::getRomDepencency,
-            romComparator);
+            romComparatorNF);
 
     private SecondaryTable versions = new SecondaryTableSingleValue(
             "Version",
@@ -133,7 +134,7 @@ public class GenerateMenuFiles extends GenerateBase {
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
             new SortTable("Rom",
-                    Comparator.comparing(AtomTitle::getRomDepencency, romComparator).
+                    Comparator.comparing(AtomTitle::getRomDepencency, romComparatorNL).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
             new SortTable("Version",
@@ -467,4 +468,51 @@ public class GenerateMenuFiles extends GenerateBase {
     public Target getTarget() {
         return target;
     }
+
+    private Comparator<String> compNullsFirst = Comparator.nullsFirst(Comparator.naturalOrder());
+    private Comparator<String> compNullsLast  = Comparator.nullsLast(Comparator.naturalOrder());
+
+    public class RomComparator implements Comparator<String> {
+        private boolean nullsFirst;
+        public RomComparator(boolean nullsFirst) {
+            this.nullsFirst = nullsFirst;
+        }
+        @Override
+        public int compare(String o1, String o2) {
+            if (o1.equals("NONE")) {
+                o1 = null;
+            } else if (o1.equals("FP")) {
+                o1 = "0FP";
+            }
+            if (o2.equals("NONE")) {
+                o2 = null;
+            } else if (o2.equals("FP")) {
+                o2 = "0FP";
+            }
+            if (nullsFirst) {
+                return compNullsFirst.compare(o1, o2);
+            } else {
+                return compNullsLast.compare(o1, o2);
+            }
+        }
+    };
+        /*
+    public class RomComparator implements Comparator<String> {
+        @Override
+        public int compare(String o1, String o2) {
+           if (o1.equals(o2)) {
+              return 0;
+           } else if (o1.equals("NONE")) {
+              return -1;
+           } else if (o2.equals("NONE")) {
+              return 1;
+           } else if (o1.equals("FP")) {
+              return -1;
+           } else if (o2.equals("FP")) {
+              return 1;
+           } else {
+              return o1.compareTo(o2);
+           }
+        }
+        };*/
 }
