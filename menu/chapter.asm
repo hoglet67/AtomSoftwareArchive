@@ -344,6 +344,10 @@ ENDIF
 
 .ChangeSort
 	STX SortType
+	BNE ChangeAnnotation
+	INX			; Title sort defaults to long publisher
+.ChangeAnnotation
+	STX Annotation
 
 	; Page in the appropriate sort table
 	JSR LoadSortTable
