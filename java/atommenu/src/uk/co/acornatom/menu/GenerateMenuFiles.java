@@ -361,6 +361,7 @@ public class GenerateMenuFiles extends GenerateBase {
         // ------------------------------------------------------------------------------------
 
         ATMFile.copy(new File(archiveDir, "HELP"), new File(menuDir, "HELP"));
+        ATMFile.copy(new File(archiveDir, "INFO"), new File(menuDir, "INFO"));
         if (allChapter) {
             ATMFile.copy(new File(archiveDir, "ALL"), new File(menuDir, "CHAP"));
         } else {

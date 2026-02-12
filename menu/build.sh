@@ -12,6 +12,7 @@ echo "Building with version $VERSION"
 
 # Delete the old MNU folders
 rm -rf $ARCHIVE/MENU
+rm -rf $ARCHIVE/INFO
 rm -rf $ARCHIVE/HELP
 rm -rf $ARCHIVE/$DIR[A-Z]
 
@@ -26,7 +27,8 @@ $BEEBASM -i boot.asm -o $ARCHIVE/BOOTROM.bin -D rom=1
 # Compile the GoSDC ROM Boot Loader
 $BEEBASM -i boot.asm -o $ARCHIVE/BOOTROMGOSDC.bin -D rom=1 -D gosdc=1
 
-# Add in help screens
+# Add in info help screens
+cp splash/INFO.ATM $ARCHIVE/INFO
 cp splash/HELP.ATM $ARCHIVE/HELP
 
 # Compile the Splash Menu (for AtomMMC)
@@ -82,6 +84,7 @@ $BEEBASM -i chapter.asm -o $ARCHIVE/ALLGOS -D Base=0x1000 -D gosdc=1
 java -jar ../java/atommenu/atommenu.jar ../catalog/AtomSoftwareCatalog.csv $ARCHIVE $*
 
 # Remove unnecessary files from the root directory
+rm -f $ARCHIVE/INFO
 rm -f $ARCHIVE/HELP
 rm -f $ARCHIVE/BOOT*
 rm -f $ARCHIVE/CHAP*

@@ -108,6 +108,14 @@ ENDIF
 	STA SearchBuffer
 
 .LabelA
+
+	;1060 Y=-2;GOS.i;Y=0;P=1;R.
+	LDY #$00
+	STY Item
+	INY
+	STY Page
+
+.LabelA1
 	; // Turn off the cursor and refresh the screen
 	; 130a?#E1=0;GOS.x
 	; ?#E1=0 Not needed as we do our own screen output driver
@@ -355,7 +363,7 @@ ENDIF
 
 .TestForNextTag
 	CPY #56			; X
-	BNE TestForInfo
+	BNE TestForHelp
 	INX
 	CPX #NumFacets + 1
 	BNE ChangeTag
@@ -364,21 +372,13 @@ ENDIF
 	STX Annotation
 	JMP SetItemToZero
 
-.TestForInfo
-IF (info_option = 1)
-	CPY #32		; @
-	BNE TestForHelp
-	JSR LabelInfo
-	JMP LabelB
-ENDIF
-
 .TestForHelp
 	; // ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
 	BNE TestForSelect
 	JSR LabelH
-	JMP LabelA
+	JMP LabelA1
 
 .TestForSelect
 	; // <Return> or <Space> pressed (select current item)
@@ -434,10 +434,10 @@ ENDIF
 	LDA PageState
 	STA FilterType
 	CLC
-	LDA TmpPtr
+	LDA Title
 	ADC #4
 	STA FilterString
-	LDA TmpPtr + 1
+	LDA Title + 1
 	ADC #0
 	STA FilterString + 1
 
@@ -454,20 +454,32 @@ ENDIF
 	STA FilterVal
 	JMP PageStateZero
 
+IF (info_option = 1)
+.JumpToLabelA1
+	JSR ClearScreen
+	JMP LabelA1
 .BootProgram
+   	JSR LabelInfo
+	CMP #&1B
+	BEQ JumpToLabelA1
+ELSE
+.BootProgram
+ENDIF
+
+	JSR GetItemAddress
 
 	; // Handle *RUN of a title - K is the title index
 	; 800 K=(!I)&#7FF
-	LDX #TmpPtr
+	LDX #Title
 	JSR Dereference
 	; For SDDOS we pack two games per disk
-	LDA TmpPtr
+	LDA Title
 	AND #$7
 IF (sddos2 = 1)
 	LSR A
 ENDIF
 	STA BinBuffer + 1
-	LDA TmpPtr+1
+	LDA Title+1
 IF (sddos2 = 1)
 	ROR A
 ENDIF
@@ -606,16 +618,16 @@ ENDIF
 	ADC #2
 	TAY
 	LDA #<(RowReturnBuf)
-	STA TmpPtr
+	STA Title
 	LDA #>(RowReturnBuf)
-	STA TmpPtr + 1
-	LDA (TmpPtr),Y
+	STA Title + 1
+	LDA (Title),Y
 	PHA
 	INY
-	LDA (TmpPtr),Y
-	STA TmpPtr + 1
+	LDA (Title),Y
+	STA Title + 1
 	PLA
-	STA TmpPtr
+	STA Title
 	RTS
 }
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -626,16 +638,13 @@ IF (info_option = 1)
 
 .LabelInfo
 {
+	JSR OscliString
+	EQUS "LOAD INFO", Return
+
 	LDA #<(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
-
-	JSR GetItemAddress	; Get the item address into TmpPtr
-	LDA TmpPtr
-	STA Title
-	LDA TmpPtr+1
-	STA Title+1
 
 	LDX #&00
 .loop1
@@ -647,7 +656,7 @@ IF (info_option = 1)
 	BNE print_facet
 	LDY #0
 	LDA (Title), Y
-	BPL ClearToBottom
+	BPL PrintTitle
 
 .print_facet
 	; Indent to right-justify the facet names
@@ -667,7 +676,9 @@ IF (info_option = 1)
 	TXA
 	PHA
 	JSR LabelZ
-	LDA #'='
+	LDA #':'
+	JSR WriteToScreen
+	LDA #' '
 	JSR WriteToScreen
 	PLA
 	TAX
@@ -728,32 +739,27 @@ IF (info_option = 1)
 	STA Title
 	BCC loop1
 	INC Title + 1
-	BNE loop1
-
-.ClearToBottom
-	JSR PrintSpace_then_PadToEOL
-	LDA Screen
-	CMP #&E0
-	BNE ClearToBottom
+	BNE loop1	; branch always
 
 ; Finally go back and print the title
-	LDA #<(ScreenStart + StartLine * CharsPerLine)
+.PrintTitle
+	LDA #<(ScreenStart + StartLine * CharsPerLine + 2)
 	STA Screen
-	LDA #>(ScreenStart + StartLine * CharsPerLine)
+	LDA #>(ScreenStart + StartLine * CharsPerLine + 2)
 	STA Screen + 1
 .TitleLoop
 	LDY #0
 	LDA (Title),Y
-	BMI Done
-	INC Title
-	BNE NoCarry
-	INC Title + 1
-.NoCarry
+	BMI TitleDone
 	JSR WriteToScreen
-	JMP TitleLoop
-.Done
-	JSR PrintSpace_then_PadToEOL
-	JSR PrintSpace_then_PadToEOL
+	INC Title
+	BNE TitleLoop
+	INC Title + 1
+	BNE TitleLoop
+
+.TitleDone
+	LDY #2
+	JSR HighlightRowY
 	JMP Osrdch
 }
 
@@ -794,14 +800,11 @@ ENDIF
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .LabelI
-
 	;900i?Q=Y+2;LINK(B+6);R.
-
 	LDY Item
 	INY
 	INY
-	STY Row
-	JMP HighlightRow
+	JMP HighlightRowY
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to set the zero page locations prior to calling machine code
@@ -870,7 +873,6 @@ ENDIF
 	; 1040 IF G>0 I=G;P."  ";GOS.z;P."="$E'
 	; 1050 Z=Z+2
 	; 1060 Y=-2;GOS.i;Y=0;P=1;R.
-
 
 .LabelX
 
@@ -963,15 +965,43 @@ ENDIF
 	INC Sort + 1
 
 .LabelX5
-	;1060 Y=-2;GOS.i;Y=0;P=1;R.
-	LDA #$fe
-	STA Item
-	JSR LabelI
-	LDY #$00
-	STY Item
-	INY
-	STY Page
+	LDY #0
+	;; Fall through to
+
+.HighlightRowY
+{
+	LDA #<(ScreenStart)
+	STA Screen
+	LDA #>(ScreenStart)
+	STA Screen+1
+	TYA
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	BCC HighlightRow1
+	INC Screen+1
+.HighlightRow1
+	CLC
+	ADC Screen
+	STA Screen
+
+	LDY #2
+.HighlightRow2
+	JSR WaitUntilVSync
+	DEY
+	BNE HighlightRow2
+
+	LDY #$1F
+.HighlightRow3
+	LDA (Screen),Y
+	EOR #$80
+	STA (Screen),Y
+	DEY
+	BPL HighlightRow3
 	RTS
+}
 
 .LabelXString1
 	EQUS "SORTED BY ", 0

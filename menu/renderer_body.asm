@@ -453,40 +453,6 @@ ENDIF
 	STY Key
 	RTS
 
-.HighlightRow
-
-	LDA #<(ScreenStart)
-	STA Screen
-	LDA #>(ScreenStart)
-	STA Screen+1
-	LDA Row
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	BCC HighlightRow1
-	INC Screen+1
-.HighlightRow1
-	CLC
-	ADC Screen
-	STA Screen
-
-	LDY #2
-.HighlightRow2
-	JSR WaitUntilVSync
-	DEY
-	BNE HighlightRow2
-
-	LDY #$1F
-.HighlightRow3
-	LDA (Screen),Y
-	EOR #$80
-	STA (Screen),Y
-	DEY
-	BPL HighlightRow3
-	RTS
-
 ;; Extract Filter/Annotation ID from title table and nomalize
 ;; TODO Optimise this
 
