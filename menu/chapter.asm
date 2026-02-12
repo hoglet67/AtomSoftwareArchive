@@ -4,6 +4,10 @@ include "sysvars.asm"
 
 include "renderer_header.asm"
 
+; info_option = atommc
+
+info_option = 1
+
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
@@ -38,6 +42,8 @@ ENDIF
 ; Z -> Sort            - The currently base address of the current sort index or filter pointer table)
 
 	org Base - 22
+
+	guard Base + &B00
 
 .STARTOFHEADER
 
@@ -336,6 +342,9 @@ ENDIF
 .TestForPrevTag
 	LDA PageState		; Tags not use in filter pages
 	BNE TestForHelp
+
+	; The followimg commands work only in thw  title page (PageState=0
+	;     PrevTag (Z), Next Tag (X) and Info (@)
 	LDX Annotation
 	CPY #58			; Z
 	BNE TestForNextTag
@@ -346,7 +355,7 @@ ENDIF
 
 .TestForNextTag
 	CPY #56			; X
-	BNE TestForHelp
+	BNE TestForInfo
 	INX
 	CPX #NumFacets + 1
 	BNE ChangeTag
@@ -354,6 +363,14 @@ ENDIF
 .ChangeTag
 	STX Annotation
 	JMP SetItemToZero
+
+.TestForInfo
+IF (info_option = 1)
+	CPY #32		; @
+	BNE TestForSelect
+	JSR LabelInfo
+	JMP LabelB
+ENDIF
 
 .TestForHelp
 	; // ? key pressed (help)
@@ -406,24 +423,9 @@ ENDIF
 	STA Item
 
 .LabelF
-
 	; // Get the address of the record selected
 	; 680fI=R!(Y*2 + 2)
-	LDA Item
-	ASL A
-	ADC #2
-	TAY
-	LDA #<(RowReturnBuf)
-	STA TmpPtr
-	LDA #>(RowReturnBuf)
-	STA TmpPtr + 1
-	LDA (TmpPtr),Y
-	PHA
-	INY
-	LDA (TmpPtr),Y
-	STA TmpPtr + 1
-	PLA
-	STA TmpPtr
+	JSR GetItemAddress
 
 	; // Handle selection of a filter item
 	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
@@ -486,8 +488,7 @@ ENDIF
 
 	; 870 P.$12;LINK #FFF7
 	; 880 END
-	LDA #12
-	JSR Oswrch
+	JSR ClearScreen
 
 IF (sddos2 = 1 )
 
@@ -598,7 +599,173 @@ ENDIF
 ;; Translated Basic Subroutines
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+.GetItemAddress
+{
+	LDA Item
+	ASL A
+	ADC #2
+	TAY
+	LDA #<(RowReturnBuf)
+	STA TmpPtr
+	LDA #>(RowReturnBuf)
+	STA TmpPtr + 1
+	LDA (TmpPtr),Y
+	PHA
+	INY
+	LDA (TmpPtr),Y
+	STA TmpPtr + 1
+	PLA
+	STA TmpPtr
+	RTS
+}
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	; Subroutine to show the help
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+IF (info_option = 1)
+
+.LabelInfo
+{
+	LDA #<(ScreenStart + (StartLine + 2) * CharsPerLine)
+	STA Screen
+	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
+	STA Screen + 1
+
+	JSR GetItemAddress	; Get the item address into TmpPtr
+	LDA TmpPtr
+	STA Title
+	LDA TmpPtr+1
+	STA Title+1
+
+	LDX #&00
+.loop1
+	INX
+.loop2
+	LDY LabelYNumSpaces,X
+	INY
+.indent
+	DEY
+	BEQ indent_done
+	; Indent to right-justify the facet names
+	LDA #' '
+	JSR WriteToScreen
+	BNE indent
+.indent_done
+
+	; Print the the facet name
+	; On entry: A = facet number (1..8)
+	; Preserves: nothing!
+
+	TXA
+	PHA
+	JSR LabelZ
+
+	LDA #'='
+	JSR WriteToScreen
+
+	PLA
+	TAX
+	BEQ Skip
+
+	CPX #CategoriesFilterNum
+	BNE NotCategory
+
+	LDY #0
+	LDA (Title), Y
+	BPL ClearToBottom
+	AND #&7F
+	INC Title
+	BNE GetRecord
+	INC Title+1
+	BNE GetRecord
+
+.NotCategory
+	; Extract the facet value from the title table
+	; On entry: Y = facet number (1..8)
+	; On exit:  A = facet value
+	; Preseves X
+	TAY
+	JSR ExtractTableValue
+
+.GetRecord
+	; Get the address of the facet string
+	; On entry: X = facet number (1..8), A = facet valye
+	; On exit:  (AnnotationString) points to the start of the record
+	; Preseves X
+	JSR GetAnnotationRecord
+
+	; Skip over the 4 count bytes
+	LDA AnnotationString
+	ADC #4
+	STA TmpPtr
+	LDA AnnotationString + 1
+	ADC #0
+	STA TmpPtr+1
+
+	; Print the facet string
+	; On Entry: (tmpPtr) points to the string
+	; Preseves X
+	JSR ScreenString
+
+.Skip
+	; Pad to end of line
+	JSR PadToEOL
+
+	CPX #CategoriesFilterNum - 1
+	BCC loop1
+	BNE loop2
+
+.UpdateTitle
+	; Repoint the title to the categories list
+	LDA Title
+	CLC
+	ADC #CategoriesIdOffset
+	STA Title
+	BCC loop1
+	INC Title + 1
+	BNE loop1
+
+.ClearToBottom
+	JSR PrintSpace_then_PadToEOL
+	LDA Screen
+	CMP #&E0
+	BNE ClearToBottom
+
+; Finally go back and print the title
+	LDA #<(ScreenStart + StartLine * CharsPerLine)
+	STA Screen
+	LDA #>(ScreenStart + StartLine * CharsPerLine)
+	STA Screen + 1
+.TitleLoop
+	LDY #0
+	LDA (Title),Y
+	BMI Done
+	INC Title
+	BNE NoCarry
+	INC Title + 1
+.NoCarry
+	JSR WriteToScreen
+	JMP TitleLoop
+.Done
+	JSR PrintSpace_then_PadToEOL
+	JSR PrintSpace_then_PadToEOL
+	JMP Osrdch
+}
+
+.PrintSpace_then_PadToEOL
+{
+.loop
+	LDA #' '
+	JSR WriteToScreen
+
+.*PadToEOL
+	LDA Screen
+	AND #&1F
+	BNE loop
+	RTS
+}
+
+ENDIF
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to show the help
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -613,9 +780,9 @@ ENDIF
 	;895 LINK#FFE3;P.$12;R.
 
 	JSR Osrdch
+.ClearScreen
 	LDA #12
-	JSR Oswrch
-	RTS
+	JMP Oswrch
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to invert line 2+Y on the screen
@@ -874,11 +1041,11 @@ ENDIF
 
 
 .LabelYNumSpaces
-	EQUB 0, 1, 5, 3, 0, 0, 3, 2, 0
+	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
 
 
 .LabelZ0
-	EQUS "TITLE     ", 0
+	EQUS "TITLE", 0
 
 .LabelZ1
 	EQUS "PUBLISHER", 0

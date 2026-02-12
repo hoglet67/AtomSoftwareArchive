@@ -873,11 +873,9 @@ FOR i, 0, NumFacets - 1, 1
 	EQUB 4 + 2 * i
 NEXT
 
-	; Increment an annotation count
 	; X=Annotation type (1 = Long Publisher, 2 = Genre, 3 = Collection)
 	; A=Annotation id value (7 bits)
-
-.IncAnnotationCounts
+.GetAnnotationRecord
 	CLC
 	ADC #1		; Skip over the secondary table length field
 	ASL A
@@ -894,6 +892,11 @@ NEXT
 	INY
 	LDA (Tmp),Y
 	STA AnnotationString + 1
+	RTS
+
+	; Increment an annotation count
+.IncAnnotationCounts
+	JSR GetAnnotationRecord
 	LDY #3		; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
 .loop

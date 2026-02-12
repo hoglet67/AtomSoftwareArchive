@@ -6,7 +6,7 @@
 	LDX #0
 	LDY #0
 .OscliString1
-	INC	TmpPtr
+	INC TmpPtr
 	BNE OscliString2
 	INC TmpPtr + 1
 .OscliString2
@@ -16,7 +16,7 @@
 	CMP #Return
 	BNE OscliString1
 	JSR Oscli
-	INC	TmpPtr
+	INC TmpPtr
 	BNE OscliString3
 	INC TmpPtr + 1
 .OscliString3
