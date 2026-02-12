@@ -407,7 +407,7 @@ ENDIF
 .TestForAtoM
 	; // A..M key pressed (select an item)
 	; 660 IF ?Q<33 OR ?Q>45 G.c
-	CPY #32
+	CPY #33
 	BCC JumpToLabelC
 	CPY #46
 	BCS JumpToLabelC
