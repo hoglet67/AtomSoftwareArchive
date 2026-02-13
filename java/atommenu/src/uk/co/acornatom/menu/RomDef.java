@@ -1,12 +1,14 @@
 package uk.co.acornatom.menu;
 
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 
-public class RomDef {
+public class RomDef implements Comparable<RomDef> {
 
-    protected String name;
-    protected Function<? super AtomTitle, ? extends Boolean> atomFieldGetter;
-    protected String[] commands;
+    private String name;
+    private Function<? super AtomTitle, ? extends Boolean> atomFieldGetter;
+    private Set<String> commands;
 
     public RomDef(
             String name,
@@ -15,14 +17,17 @@ public class RomDef {
             ) {
         this.name = name;
         this.atomFieldGetter = atomFieldGetter;
-        this.commands = commands;
+        this.commands = new TreeSet<String>();
+        for (String command : commands) {
+            this.commands.add(command);
+        }
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String[] getCommands() {
+    public Set<String> getCommands() {
         return this.commands;
     }
 
@@ -34,5 +39,15 @@ public class RomDef {
     public Boolean isNeeded(AtomTitle title) {
         return atomFieldGetter.apply(title);
     }
+
+    public boolean equals(RomDef o) {
+        return name.equals(o.getName());
+    }
+
+    @Override
+    public int compareTo(RomDef o) {
+        return name.compareTo(o.getName());
+    }
+
 
 }

@@ -399,7 +399,7 @@ ATOMIDAT",,"Works - Dave updated lines 3100,3110 as original relied on an extens
 RUN","171
 171B
 DRAGONC",,Works,
-265,V3,Modern,Retro S/W,Castle Quest (16K) (R),Game,RS Mono,Yes,,No,Yes,No,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
+265,V3,Modern,Retro S/W,Castle Quest (16K) (R),Game,RS Mono,Yes,,Yes,Yes,No,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
 DATA",,Works,
 266,V2,Modern,Retro S/W,Chuckie Egg (16K),Game,./dave/RS/CASQUEST/CAST,Yes,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
 CCH-EGG
@@ -577,7 +577,7 @@ REDMOON",,Works,
 340,V4,Magazines,C&VG,Bug Battle,Game,,,,,,,,present,G. Dunnett,CVG,8200,"CH.""BUGBATT""",BUGBATT,,Works,
 341,V4,Non Comm,Non Comm,Cards Bridge? (R),Game,,,,No,No,Yes,,present,???,NC/TB,8200,"CH.""CARDS-H""",CARDS-H,,Works,
 342,V4,Non Comm,Non Comm,Cards Bridge? (R),Game,,,,No,No,Yes,,present,???,NC/TB,8200,"CH.""CARDS-V""",CARDS-V,,Works,
-345,V4,Non Comm,Non Comm,City Bomber (R),Game,,Yes,,Yes,No,No,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
+345,V4,Non Comm,Non Comm,City Bomber (R),Game,,Yes,,No,Yes,No,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
 346,,Non Comm,Non Comm,Gobi Woestijn,Game,,,,,,,,duplicate,???,NC,8200,"CH.""DESERT""",DESERT,,,
 347,V13B1,Books,Getting Acquainted,Dodgem,Game,,,,,,,,present,???,GA,8200,"CH.""DODGEM""",DODGEM,,Test,
 349,V4,Non Comm,Non Comm,Draw Poker (R),Game,,Yes,,No,Yes,No,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
@@ -599,7 +599,7 @@ CH.""LANDING""",LANDING,,Works,
 367,V4,Non Comm,Non Comm,Lunar Lander,Game,,,,,,,,present,???,NC,8200,"CH.""LUNLAN""",LUNLAN,,Works,
 368,V7B2,Non Comm,Magnus Olsson,Masken,Game,,,,,,,,present,Magnus Olssen,MO,8200,"CH.""MASKEN""",MASKEN,,Works,
 369,V4,Non Comm,Non Comm,Moonlander,Game,,,,,,,,present,???,NC,8200,"CH.""MLANDER""",MLANDER,,Works,
-370,V4,Non Comm,Non Comm,Navigator (R),Game,,,,Yes,No,No,,present,R.Leurs,NC,8200,"CH.""NAVIGAT""",NAVIGAT,,Works,
+370,V4,Non Comm,Non Comm,Navigator (R),Game,,,,No,Yes,No,,present,R.Leurs,NC,8200,"CH.""NAVIGAT""",NAVIGAT,,Works,
 371,V4,Non Comm,Non Comm,Nightmare Park,Game,,,,,,,,present,S.M.Probyn,NC,8200,"CH.""NIGHTM""",NIGHTM,,Works,
 373,V4,Non Comm,Non Comm,Othello,Game,,,,,,,,duplicate,???,NC,8200,"?18=40
 CH.""OTHEL1""",OTHEL1,,Works,
@@ -612,7 +612,7 @@ CH.""OTHEL1""",OTHEL1,,Works,
 381,V4,Non Comm,Non Comm,POGO (R),Game,,Yes,,Yes,Yes,Yes,,present,Hamburgersoft,NC/TB,8200,"CH.""POGO""",POGO,,Works,
 382,V4,Non Comm,Non Comm,Pointer,Game,,Yes,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
 383,V4,Non Comm,Non Comm,Prinses (R),Game,,,,No,Yes,No,,present,G.T.H.,NC,8200,"CH.""PRINSES""",PRINSES,,Works,
-384,V4,Non Comm,Non Comm,Puzzel (R),Game,,,,No,Yes,No,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
+384,V4,Non Comm,Non Comm,Puzzel (R),Game,,,,Yes,No,No,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
 385,V4,Non Comm,Non Comm,Race,Game,,,,,,,,present,A.Clarke,NC,8200,"CH.""RACE""",RACE,,Works,
 386,,Non Comm,Non Comm,Formula One,Game,,,,,,,,duplicate,JVK,NC,8200,"CH.""RACING""",RACING,,,
 387,V4,Non Comm,Non Comm,Race Rups (R),Game,,,,Yes,No,No,,present,???,NC,8200,"CH.""RACRUPS""",RACRUPS,,Works,
@@ -1573,7 +1573,7 @@ DARTS2",,Works,
 79ANOTH
 SIDMENU
 ",,Works,
-850,V9B1,Magazines,Hobbit,Valtinet (R),Game,,,,Yes,No,No,,present,,HB,8200,"CH.""VALINET""",VALINET,,Works,
+850,V9B1,Magazines,Hobbit,Valtinet (R),Game,,,,Yes,No,Yes,,present,,HB,8200,"CH.""VALINET""",VALINET,,Works,
 851,V9B1,Non Comm,Non Comm,VDG FS Time,Utility,Test,,Yes,,,,,present,David Banks,NC/TEST,8200,"CH.""VDCTIME""",VDCTIME,,Works,
 852,V9B1,Magazines,PCW,Atom Quest,Game,,,,,,,,present,Nick Foale,PCW,8200,"CH.""QUEST""",QUEST,,Works,
 853,V9B1,Non Comm,Non Comm,Co-Ord.,Game,GameBase,,,,,,,present,??,GB,8200,"CH.""028""","028

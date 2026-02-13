@@ -2,10 +2,9 @@ package uk.co.acornatom.menu;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class RomScanner {
@@ -24,7 +23,7 @@ public class RomScanner {
     }
 
 
-    public RomDef[] roms = new RomDef[] {
+    private RomDef[] roms = new RomDef[] {
 
         new RomDef(
                    PCHARME,
@@ -49,6 +48,7 @@ public class RomScanner {
                        "WHILE",
                        "WEND",
                        "XIF",
+                       "ELSE",
                        "READ",
                        "DATA",
                        "RESTORE"
@@ -178,19 +178,6 @@ public class RomScanner {
 
     };
 
-    private void identifyCommands(Set<String> statements, Map<RomDef, Set<String>> found) {
-        for (String statement : statements) {
-            for (RomDef rom : roms) {
-                for (String command : rom.getCommands()) {
-                    if (statement.startsWith(command)) {
-                        found.get(rom).add(command);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     private Set<String> basicStatements(AtomTitle item) {
         Set<String> statements = new TreeSet<String>();
         for (String filename : item.getFilenames()) {
@@ -265,26 +252,99 @@ public class RomScanner {
         return sb.toString();
     }
 
-    public void scan(AtomTitle item) {
-        Map<RomDef, Set<String>> found = new HashMap<RomDef, Set<String>>();
+    private Set<String> allCommands() {
+        Set<String> all = new TreeSet<String>();
         for (RomDef rom : roms) {
-            found.put(rom, new HashSet<String>());
+            for (String command : rom.getCommands()) {
+                all.add(command);
+            }
+        }
+        return all;
+    }
+
+    private Set<String> matchCommands(Set<String> statements, Set<String> commands) {
+        Set<String> matched = new TreeSet<String>();
+        for (String statement : statements) {
+            for (String command : commands) {
+                if (statement.startsWith(command)) {
+                    matched.add(command);
+                }
+            }
+        }
+        return matched;
+    }
+
+    private Set<String> getMatches(Set<String> progCommands, Set<String> romCommands) {
+        Set<String> matches = new TreeSet<String>();
+        for (String progCommand : progCommands) {
+            if (romCommands.contains(progCommand)) {
+                matches.add(progCommand);
+            }
+        }
+        return matches;
+    }
+
+    public void setNeeded(AtomTitle item, RomDef rom, boolean needed) {
+        // TODO: Make this generic
+        switch (rom.getName()) {
+        case FP:
+            item.setFp(needed);
+            break;
+        case PCHARME:
+            item.setPcharme(needed);
+            break;
+        case GAGS:
+            item.setGags(needed);
+            break;
+        case AXR1:
+            item.setAxr1(needed);
+            break;
+        case WEROM:
+            item.setWerom(needed);
+            break;
+        case PPTOOLKIT:
+            item.setPPToolkit(needed);
+            break;
+        default:
+            throw new RuntimeException("Unknown ROM: " + rom.getName());
         }
 
+    }
+    public void scan(AtomTitle item) {
         // Extract all likely Basic Statements from the item (scanning multiple files if needed)
         Set<String> statements = basicStatements(item);
 
-        // Match those statements to the known commands from various Utility ROMs
-        identifyCommands(statements, found);
+        // Match those statements against known ROM commands
+        Set<String> progCommands = matchCommands(statements, allCommands());
+
+
+        Map<RomDef, Set<String>> neededMap = new TreeMap<RomDef, Set<String>>();
+        // Match the program commands to fewest ROMs
+        while (!progCommands.isEmpty()) {
+            RomDef bestRom = null;
+            Set<String> bestMatches = null;
+            // Go through ROMs in priority order, lookimg for the ROM that matches the most commands
+            for (RomDef rom : roms) {
+                Set<String> matches = getMatches(progCommands, rom.getCommands());
+                if (bestMatches == null || matches.size() > bestMatches.size()) {
+                    bestMatches = matches;
+                    bestRom = rom;
+                }
+            }
+            if (bestRom != null) {
+                progCommands.removeAll(bestMatches);
+                neededMap.put(bestRom, bestMatches);
+                System.out.println("INFO: Compatibility: Title " + item + ": uses commands from " + bestRom + ": " + bestMatches);
+            } else {
+                throw new RuntimeException("No commands matched: " + progCommands);
+            }
+        }
+
 
         // Tag the item with the ROM(s) that could supply those commands
         // Note: lots of false positives due to the same command being in multiple ROMs
         for (RomDef rom : roms) {
-            Set<String> commands = found.get(rom);
-            boolean needed = !commands.isEmpty();
-            if (needed) {
-                System.out.println("INFO: Compatibility: Title " + item + ": uses commands from " + rom + ": " + commands);
-            }
+            boolean needed = neededMap.containsKey(rom);
             if (Boolean.TRUE.equals(rom.isNeeded(item))) {
                 if (!needed) {
                     System.out.println("WARNING: Compatibility: Title " + item + ": probably wrongly marked as " + rom);
@@ -292,37 +352,15 @@ public class RomScanner {
             } else if (Boolean.FALSE.equals(rom.isNeeded(item))) {
                 if (needed) {
                     System.out.println(
-                            "WARNING: Compatibility: Title " + item + ": probably should be marked as " + rom + ": " + commands);
+                            "WARNING: Compatibility: Title " + item + ": probably should be marked as " + rom + ": " + neededMap.get(rom));
                 }
             } else {
-                // TODO: Make this generic
-                switch (rom.getName()) {
-                case FP:
-                    item.setFp(needed);
-                    break;
-                case PCHARME:
-                    item.setPcharme(needed);
-                    break;
-                case GAGS:
-                    item.setGags(needed);
-                    break;
-                case AXR1:
-                    item.setAxr1(needed);
-                    break;
-                case WEROM:
-                    // TODO: Add this later
-                    item.setWerom(false);
-                    break;
-                case PPTOOLKIT:
-                    // TODO: Add this later
-                    item.setPPToolkit(false);
-                    break;
-                default:
-                    throw new RuntimeException("Unknown ROM: " + rom.getName());
-                }
+                setNeeded(item, rom, needed);
             }
         }
+
         item.setRomDependency(getFormattedRomList(item));
+
     }
 
 }
