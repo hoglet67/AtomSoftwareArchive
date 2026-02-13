@@ -10,16 +10,17 @@ public class RomDef implements Comparable<RomDef> {
     private Function<? super AtomTitle, ? extends Boolean> atomFieldGetter;
     private Set<String> commands;
 
+
     public RomDef(
             String name,
             Function<? super AtomTitle, ? extends Boolean> atomFieldGetter,
-            String[] commands
+            RomCommandDef[] commands
             ) {
         this.name = name;
         this.atomFieldGetter = atomFieldGetter;
         this.commands = new TreeSet<String>();
-        for (String command : commands) {
-            this.commands.add(command);
+        for (RomCommandDef command : commands) {
+            this.commands.addAll(command.getNames());
         }
     }
 

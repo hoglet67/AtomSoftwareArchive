@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class RomScanner {
-
+    private static final String BASIC = "BASIC";
     private static final String FP = "FP";
     private static final String PCHARME = "PCHARME";
     private static final String GAGS = "GAGS";
@@ -23,158 +23,182 @@ public class RomScanner {
     }
 
 
+    public static RomDef basicRomDef =
+            new RomDef(
+                    BASIC,
+                    null,
+                    new RomCommandDef[] {
+                        new RomCommandDef("CLEAR"),
+                        new RomCommandDef("DIM"),
+                        new RomCommandDef("DRAW"),
+                        new RomCommandDef("DO"),
+                        new RomCommandDef("END", 1),
+                        new RomCommandDef("FOR", 1),
+                        new RomCommandDef("GOSUB", 1),
+                        new RomCommandDef("GOTO", 1),
+                        new RomCommandDef("IF"),
+                        new RomCommandDef("INPUT", 2),
+                        new RomCommandDef("LET"),
+                        new RomCommandDef("LINK", 2),
+                        new RomCommandDef("MOVE"),
+                        new RomCommandDef("NEXT", 1),
+                        new RomCommandDef("PLOT"),
+                        new RomCommandDef("PRINT", 1),
+                        new RomCommandDef("PUT"),
+                        new RomCommandDef("REM"),
+                        new RomCommandDef("SHUT", 3),
+                        new RomCommandDef("SPUT", 2),
+                        new RomCommandDef("UNTIL", 1),
+                        new RomCommandDef("WAIT")
+                    });
+
+    public static RomDef fpRomDef=
+            new RomDef(
+                    FP,
+                    AtomTitle::isFp,
+                    new RomCommandDef[] {
+                        new RomCommandDef("FDIM"),
+                        new RomCommandDef("FIF"),
+                        new RomCommandDef("FINPUT", 3),
+                        new RomCommandDef("FPRINT", 2),
+                        new RomCommandDef("FPUT"),
+                        new RomCommandDef("FUNTIL", 2),
+                        new RomCommandDef("STR"),
+                        new RomCommandDef("COLOUR", 1),
+                        new RomCommandDef("%")
+                    });
+
     private RomDef[] roms = new RomDef[] {
+        fpRomDef,
 
         new RomDef(
                    PCHARME,
                    AtomTitle::isPcharme,
-                   new String[] {
-                       "BEEP",
-                       "CASE",
-                       "CONT",
-                       "COPY",
-                       "FUNCTION",
-                       "FEND",
-                       "INKEY",
-                       "INSTR",
-                       "KEY",
-                       "PAUSE",
-                       "POP",
-                       "PROC",
-                       "PEND",
-                       "PROGRAM",
-                       "HTAB",
-                       "VTAB",
-                       "WHILE",
-                       "WEND",
-                       "XIF",
-                       "ELSE",
-                       "READ",
-                       "DATA",
-                       "RESTORE"
+                   new RomCommandDef[] {
+                       new RomCommandDef("BEEP", 2),
+                       new RomCommandDef("CASE", 2),
+                       new RomCommandDef("CONT"),
+                       new RomCommandDef("COPY"),
+                       new RomCommandDef("DATA"),
+                       new RomCommandDef("ELSE"),
+                       new RomCommandDef("FEND"),
+                       new RomCommandDef("FUNCTION", 4),
+                       new RomCommandDef("HTAB", 2),
+                       new RomCommandDef("ICOPY", 2),
+                       new RomCommandDef("INKEY", 3),
+                       new RomCommandDef("KEY", 1),
+                       new RomCommandDef("ON ERROR"),
+                       new RomCommandDef("ON", 1),
+                       new RomCommandDef("PAUSE", 2),
+                       new RomCommandDef("PEND"),
+                       new RomCommandDef("POP"),
+                       new RomCommandDef("PROC"),
+                       new RomCommandDef("PROGRAM"),
+                       new RomCommandDef("READ"),
+                       new RomCommandDef("RESTORE", 3),
+                       new RomCommandDef("STOP"),
+                       new RomCommandDef("VTAB"),
+                       new RomCommandDef("WEND"),
+                       new RomCommandDef("WHILE"),
+                       new RomCommandDef("XIF"),
+                       new RomCommandDef("ZERO", 1),
                    }),
 
         new RomDef(
                    GAGS,
                    AtomTitle::isGags,
-                   new String[] {
-                       "CLS",
-                       "ATKEY",
-                       "JOYSTK",
-                       "INV",
-                       "BORDER",
-                       "PAINT",
-                       "CUBE",
-                       "CIRCLE",
-                       "PIXEL",
-                       "WINDOW",
-                       "WOFF",
-                       "FILL",
-                       "SCROLL",
-                       "HLINE",
-                       "VLINE",
-                       "INK",
-                       "PAPER",
-                       "MODE",
-                       "BLOCK",
-                       "SOUND",
-                       "PAUSE",
-                       "CREATE",
-                       "DEF",
-                       "BASE",
-                       "ASSIGN:",
-                       "DEASS:",
-                       "KILL",
-                       "SET",
-                       "UNSET",
-                       "IMAGE",
-                       "TURN",
-                       "CARRY",
-                       "SHOVE",
-                       "POS",
-                       "ATHIT",
-                       "INT",
-                       "ATTRG"
+                   new RomCommandDef[] {
+                       new RomCommandDef("CLS", 2),
+                       new RomCommandDef("ATKEY", 2),
+                       new RomCommandDef("JOYSTK", 2),
+                       new RomCommandDef("INV"),
+                       new RomCommandDef("BORDER", 2),
+                       new RomCommandDef("PAINT", 2),
+                       new RomCommandDef("CUBE", 2),
+                       new RomCommandDef("CIRCLE", 2),
+                       new RomCommandDef("PIXEL", 2),
+                       new RomCommandDef("WINDOW", 2),
+                       new RomCommandDef("WOFF", 2),
+                       new RomCommandDef("FILL", 2),
+                       new RomCommandDef("SCROLL", 2),
+                       new RomCommandDef("HLINE", 2),
+                       new RomCommandDef("VLINE", 2),
+                       new RomCommandDef("INK", 3),
+                       new RomCommandDef("PAPER", 2),
+                       new RomCommandDef("MODE", 2),
+                       new RomCommandDef("BLOCK", 2),
+                       new RomCommandDef("SOUND", 2),
+                       new RomCommandDef("PAUSE", 2),
+                       new RomCommandDef("CREATE", 2),
+                       new RomCommandDef("DEF", 2),
+                       new RomCommandDef("BASE", 2),
+                       new RomCommandDef("ASSIGN:", 2),
+                       new RomCommandDef("DEASS:", 2),
+                       new RomCommandDef("KILL", 2),
+                       new RomCommandDef("SET", 2),
+                       new RomCommandDef("UNSET", 3),
+                       new RomCommandDef("IMAGE", 2),
+                       new RomCommandDef("TURN", 2),
+                       new RomCommandDef("CARRY", 2),
+                       new RomCommandDef("SHOVE", 3),
+                       new RomCommandDef("POS", 2),
+                       new RomCommandDef("ATHIT", 2),
+                       new RomCommandDef("INT", 2),
+                       new RomCommandDef("ATTRG", 2)
                    }),
 
         new RomDef(
                    AXR1,
                    AtomTitle::isAxr1,
-                   new String[] {
-                       "GRMOD",
-                       "GRMO.",
-                       "GRM.",
-                       "GR.",
-                       "TXMOD",
-                       "TXMO.",
-                       "TXM.",
-                       "TX.",
-                       "SHAPE",
-                       "SHAP.",
-                       "SHA.",
-                       "SH.",
-                       "PLAY",
-                       "PLA.",
-                       "PL.",
-                       "COPY",
-                       "KEY",
-                       "READ",
-                       "DATA",
-                       "RESTORE"
+                   new RomCommandDef[] {
+                       new RomCommandDef("GRMOD", 2),
+                       new RomCommandDef("TXMOD", 2),
+                       new RomCommandDef("SHAPE", 2),
+                       new RomCommandDef("PLAY", 2),
+                       new RomCommandDef("COPY", 2),
+                       new RomCommandDef("KEY", 1),
+                       new RomCommandDef("ON ERR", 2),
+                       new RomCommandDef("READ", 2),
+                       new RomCommandDef("DATA", 2),
+                       new RomCommandDef("RESTORE", 3)
                    }),
 
         new RomDef(
-                WEROM,
-                AtomTitle::isWerom,
-                new String[] {
-                       "ABDO",
-                       "ABFOR",
-                       "ABSUB",
-                       "CURSOR",
-                       "DATA",
-                       "EXIT",
-                       "KBD",
-                       "KEY",
-                       "ONERROR",
-                       "READ",
-                       "RESTORE"
+                   WEROM,
+        		   AtomTitle::isWerom,
+        		   new RomCommandDef[] {
+        		       new RomCommandDef("ABDO", 3),
+        		       new RomCommandDef("ABFOR", 1),
+        		       new RomCommandDef("ABSUB", 3),
+        		       new RomCommandDef("CURSOR", 2),
+        		       new RomCommandDef("DATA", 2),
+        		       new RomCommandDef("EXIT", 2),
+        		       new RomCommandDef("KBD", 2),
+        		       new RomCommandDef("KEY", 1),
+        		       new RomCommandDef("ONERROR", 1),
+        		       new RomCommandDef("READ", 3),
+        		       new RomCommandDef("RESTORE", 3)
                    }),
 
         new RomDef(
-                PPTOOLKIT,
-                AtomTitle::isPPToolkit,
-                new String[] {
-                       "BEEP",
-                       "CURSOR",
-                       "KEY",
-                       "INKEY",
-                       "STOP",
-                       "POP",
-                       "XIF",
-                       "ELSE",
-                       "WHILE",
-                       "ENDWHILE",
-                       "READ",
-                       "DATA",
-                       "RESTORE",
-                       "ONERROR"
-                   }),
-
-        new RomDef(
-                   FP,
-                   AtomTitle::isFp,
-                   new String[] {
-                       "%",
-                       "COLOUR",
-                       "FDIM",
-                       "FIF",
-                       "FINPUT",
-                       "FPRINT",
-                       "FPUT",
-                       "FUNTIL",
-                       "STR"
-                   }),
-
+        		   PPTOOLKIT,
+        		   AtomTitle::isPPToolkit,
+        		   new RomCommandDef[] {
+        		       new RomCommandDef("BEEP", 2),
+        		       new RomCommandDef("CURSOR", 2),
+        		       new RomCommandDef("KEY", 2),
+        		       new RomCommandDef("INKEY", 2),
+        		       new RomCommandDef("STOP", 2),
+        		       new RomCommandDef("POP", 2),
+        		       new RomCommandDef("XIF", 2),
+        		       new RomCommandDef("ELSE", 2),
+        		       new RomCommandDef("WHILE", 2),
+        		       new RomCommandDef("ENDWHILE", 2),
+        		       new RomCommandDef("READ", 2),
+        		       new RomCommandDef("DATA", 2),
+        		       new RomCommandDef("RESTORE", 2),
+        		       new RomCommandDef("ONERROR", 2)
+                   })
 
     };
 
@@ -203,16 +227,28 @@ public class RomScanner {
                                 i++; // Skip label
                             }
                             // Search for the end of the line
-                            int start = i;
+                            int lineStart = i;
                             while (i < data.length && data[i] != ((byte) 0x0d)) {
                                 i++;
                             }
                             if (i < data.length && line > lastLine) {
                                 // Test line for signature statements
-                                int end = i;
-                                String basic = new String(data, start, end - start);
-                                for (String s : basic.split(";")) {
-                                    statements.add(s.strip());
+                                String basic = new String(data, lineStart, i - lineStart);
+                                // Split the line a semicolon characters, except within quoted strings
+                                int start = 0;
+                                boolean inQuotedString = false;
+                                for (int j = 0; j < basic.length(); j++) {
+                                    if (basic.charAt(j) == '"') {
+                                        inQuotedString = !inQuotedString;
+                                    } else if (basic.charAt(j) == ';') {
+                                        if (!inQuotedString) {
+                                            statements.add(basic.substring(start, j).strip());
+                                            start = j + 1;
+                                        }
+                                    }
+                                }
+                                if (start < basic.length()) {
+                                    statements.add(basic.substring(start).strip());
                                 }
                                 lastLine = line;
                             } else {
@@ -265,10 +301,20 @@ public class RomScanner {
     private Set<String> matchCommands(Set<String> statements, Set<String> commands) {
         Set<String> matched = new TreeSet<String>();
         for (String statement : statements) {
+            String best = null;
+            int bestLen = -1;
+            // Look for the length of longest match
             for (String command : commands) {
                 if (statement.startsWith(command)) {
-                    matched.add(command);
+                    int len = command.length();
+                    if (len  > bestLen) {
+                        bestLen = len;
+                        best = command;
+                    }
                 }
+            }
+            if (best != null) {
+                matched.add(best);
             }
         }
         return matched;
@@ -317,7 +363,6 @@ public class RomScanner {
         // Match those statements against known ROM commands
         Set<String> progCommands = matchCommands(statements, allCommands());
 
-
         Map<RomDef, Set<String>> neededMap = new TreeMap<RomDef, Set<String>>();
         // Match the program commands to fewest ROMs
         while (!progCommands.isEmpty()) {
@@ -326,41 +371,42 @@ public class RomScanner {
             // Go through ROMs in priority order, lookimg for the ROM that matches the most commands
             for (RomDef rom : roms) {
                 Set<String> matches = getMatches(progCommands, rom.getCommands());
-                if (bestMatches == null || matches.size() > bestMatches.size()) {
+                if ((bestMatches == null) ||
+                        (matches.size() > bestMatches.size()) ||
+                        (matches.size() == bestMatches.size() && Boolean.TRUE.equals(rom.isNeeded(item)))
+                        ) {
                     bestMatches = matches;
                     bestRom = rom;
                 }
             }
             if (bestRom != null) {
                 progCommands.removeAll(bestMatches);
+                System.out.println("INFO: ROM Compatibility: Title " + item  + ": uses commands from " + bestRom + ": " + bestMatches);
                 neededMap.put(bestRom, bestMatches);
-                System.out.println("INFO: Compatibility: Title " + item + ": uses commands from " + bestRom + ": " + bestMatches);
             } else {
                 throw new RuntimeException("No commands matched: " + progCommands);
             }
         }
 
-
-        // Tag the item with the ROM(s) that could supply those commands
-        // Note: lots of false positives due to the same command being in multiple ROMs
+        // Tag the item with the ROM(s) that can best could those commands
         for (RomDef rom : roms) {
             boolean needed = neededMap.containsKey(rom);
             if (Boolean.TRUE.equals(rom.isNeeded(item))) {
                 if (!needed) {
-                    System.out.println("WARNING: Compatibility: Title " + item + ": probably wrongly marked as " + rom);
+                    System.out.println("WARNING: ROM Compatibility: Title " + item + ": probably wrongly marked as " + rom + " = YES");
                 }
             } else if (Boolean.FALSE.equals(rom.isNeeded(item))) {
                 if (needed) {
                     System.out.println(
-                            "WARNING: Compatibility: Title " + item + ": probably should be marked as " + rom + ": " + neededMap.get(rom));
+                            "WARNING: ROM Compatibility: Title " + item + ": probably wrongly marked as " + rom + " = NO: " + neededMap.get(rom));
                 }
             } else {
+                if (needed) {
+                    System.out.println("WARNING: ROM Compatibility: Title " + item + ": probably should be marked as " + rom + " = YES: " + neededMap.get(rom));
+                }
                 setNeeded(item, rom, needed);
             }
         }
-
         item.setRomDependency(getFormattedRomList(item));
-
     }
-
 }
