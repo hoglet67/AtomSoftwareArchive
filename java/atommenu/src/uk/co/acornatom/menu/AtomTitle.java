@@ -27,6 +27,8 @@ public class AtomTitle {
     private Boolean pcharme;
     private Boolean gags;
     private Boolean axr1;
+    private Boolean werom;
+    private Boolean pptoolkit;
 
     private List<String> filenames;
     private Set<String> runnables = new HashSet<String>();
@@ -340,12 +342,28 @@ public class AtomTitle {
         this.gags = gags;
     }
 
+   public Boolean isAxr1() {
+       return axr1;
+   }
+
    public void setAxr1(Boolean axr1) {
         this.axr1 = axr1;
     }
 
-    public Boolean isAxr1() {
-        return axr1;
+    public Boolean isWerom() {
+        return werom;
+    }
+
+    public void setWerom(Boolean werom) {
+        this.werom = werom;
+    }
+
+    public Boolean isPPToolkit() {
+        return pptoolkit;
+    }
+
+    public void setPPToolkit(Boolean pptoolkit) {
+        this.pptoolkit = pptoolkit;
     }
 
     public String getChapter() {
@@ -359,5 +377,6 @@ public class AtomTitle {
     public boolean isAGD() {
         return chunk.equals(IFileGenerator.AGD_CHUNK);
     }
+
 
 }

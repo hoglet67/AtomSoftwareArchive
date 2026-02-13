@@ -34,6 +34,8 @@ public class SpreadsheetParser {
     private static final String PCHARME = "pcharme";
     private static final String GAGS = "gags";
     private static final String AXR1 = "axr";
+    private static final String WEROM = "werom";
+    private static final String PPTOOLKIT = "pptoolkit";
 
     private File file;
 

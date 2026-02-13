@@ -14,6 +14,8 @@ public class RomScanner {
     private static final String PCHARME = "PCHARME";
     private static final String GAGS = "GAGS";
     private static final String AXR1 = "AXR1";
+    private static final String WEROM = "WEROM";
+    private static final String PPTOOLKIT = "PPTOOLKIT";
 
     private File archiveDir;
 
@@ -119,6 +121,43 @@ public class RomScanner {
                        "READ",
                        "DATA",
                        "RESTORE"
+                   }),
+
+        new RomDef(
+                WEROM,
+                AtomTitle::isWerom,
+                new String[] {
+                       "ABDO",
+                       "ABFOR",
+                       "ABSUB",
+                       "CURSOR",
+                       "DATA",
+                       "EXIT",
+                       "KBD",
+                       "KEY",
+                       "ONERROR",
+                       "READ",
+                       "RESTORE"
+                   }),
+
+        new RomDef(
+                PPTOOLKIT,
+                AtomTitle::isPPToolkit,
+                new String[] {
+                       "BEEP",
+                       "CURSOR",
+                       "KEY",
+                       "INKEY",
+                       "STOP",
+                       "POP",
+                       "XIF",
+                       "ELSE",
+                       "WHILE",
+                       "ENDWHILE",
+                       "READ",
+                       "DATA",
+                       "RESTORE",
+                       "ONERROR"
                    }),
 
         new RomDef(
@@ -270,6 +309,16 @@ public class RomScanner {
                 case AXR1:
                     item.setAxr1(needed);
                     break;
+                case WEROM:
+                    // TODO: Add this later
+                    item.setWerom(false);
+                    break;
+                case PPTOOLKIT:
+                    // TODO: Add this later
+                    item.setPPToolkit(false);
+                    break;
+                default:
+                    throw new RuntimeException("Unknown ROM: " + rom.getName());
                 }
             }
         }
