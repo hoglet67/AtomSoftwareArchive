@@ -12,7 +12,7 @@ ADV1D",,Works,
 9,V2,Comm,A&F S/W,Zodiac,Adventure,,,,,,,,,,present,,AF,8200,"*LOAD ADV2P
 *RUN ADV2D","ADV2P
 ADV2D",,Works,
-10,V1,Comm,A&R S/W,Trap,Game,,,,,,,,,,present,,AR,8200,*RUN TRAP,TRAP,,Works,
+10,V1,Comm,A&R S/W,Trap,Game,,,Yes,,,,,,,present,,AR,8200,*RUN TRAP,TRAP,,Works,
 11,,Comm,Aardvark,Hedgehog,Game,,,,,,,,,,missing,Nick Pelling (aka Orlando M Pilchard),AA,,,,,,
 12,V11B7,Comm,Aardvark,Invaders,Game,,,,,,,,,,present,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN INVADER,INVADER,,,
 13,V1,Comm,Acornsoft,House,Adventure,Atom Adventures,,,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
@@ -84,10 +84,10 @@ PROTOVDU",,Works,https://site.acornatom.nl/boeken/forth-theory-and-practice.pdf
 50,V1,Comm,Acornsoft,Simon,Game,Games Pack 6,,,,,,,,,present,,AS/GAMES06,8200,"CH.""SIMON""",SIMON,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
 51,V1,Comm,Acornsoft,Amoeba,Game,Games Pack 6,,,,,,,,,present,,AS/GAMES06,8200,"CH.""AMOEBA""",AMOEBA,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2006.pdf
 52,V1,Comm,Acornsoft,Green Things,Game,Games Pack 7,,,,,,,,,present,,AS/GAMES07,8200,"CH.""GREENTHI""",GREENTHI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
-53,V1,Comm,Acornsoft,Balistics,Game,Games Pack 7,,,,,,,,,present,,AS/GAMES07,8200,"CH.""BALLISTI""",BALLISTI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
+53,V1,Comm,Acornsoft,Balistics,Game,Games Pack 7,,Yes,,,,,,,present,,AS/GAMES07,8200,"CH.""BALLISTI""",BALLISTI,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
 54,V1,Comm,Acornsoft,Snake,Game,Games Pack 7,,,,,,,,,present,,AS/GAMES07,8200,"CH.""SNAKE""",SNAKE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2007.pdf
 55,V1,Comm,Acornsoft,Star Gate,Game,Games Pack 8,,,,,,,,,present,,AS/GAMES08,8200,"CH.""STARGATE""",STARGATE,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
-56,V1,Comm,Acornsoft,Go Moku,Game,Games Pack 8,,,,,,,,,present,,AS/GAMES08,8200,"CH.""GOMOKU""",GOMOKU,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
+56,V1,Comm,Acornsoft,Go Moku,Game,Games Pack 8,,Yes,,,,,,,present,,AS/GAMES08,8200,"CH.""GOMOKU""",GOMOKU,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
 57,V1,Comm,Acornsoft,Robots,Game,Games Pack 8,,,,,,,,,present,,AS/GAMES08,8200,"CH.""ROBOTS""",ROBOTS,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2008.pdf
 58,V1,Comm,Acornsoft,Snapper,Game,Games Pack 9,,,,,,,,,present,,AS/GAMES09,8200,"CH.""SNAPPER""",SNAPPER,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
 59,V1,Comm,Acornsoft,Minotaur,Game,Games Pack 9,,,,,,,,,present,,AS/GAMES09,8200,"CH.""MINOTAUR""",MINOTAUR,,Works,https://acornatom.nl/atom_handleidingen/pdf/gamespack%2009.pdf
@@ -193,7 +193,7 @@ SENTD",,Works,
 124,,Comm,Atomic S/W,Program-Move,Utility,,,,,,,,,,missing,,AT,,,,,,
 125,,Comm,Atomic S/W,Sketch,Graphics,,,,,,,,,,missing,,AT,,,,,,
 126,,Comm,Atomic S/W,Ski Run,Game,,,,,,,,,,missing,,AT,,,,,,
-127,V5,Comm,Atomic S/W,Space Adventure,Adventure,,,,,,,,,,present,,AT,8200,"CH.""SPACE""",SPACE,,Works,
+127,V5,Comm,Atomic S/W,Space Adventure,Adventure,,,Yes,,,,,,,present,,AT,8200,"CH.""SPACE""",SPACE,,Works,
 128,,Comm,Atomic S/W,Word Processor,Business,,,,,,,,,,missing,,AT,,,,,,
 129,V1,Comm,Bug Byte,747,Game,,,Yes,,,,,,,present,,BB,8200,"CH.""747""",747,,Works,
 130,V7B1,Comm,Bug Byte,Hangman,Game,2K Programs 1,,,,,,,,,present,,BB/2KPRGS1,8200,"CH.""HANGMAN""","HANGMAN
@@ -240,7 +240,7 @@ BBDISINS",,Test,
 149,V1,Comm,Bug Byte,Galaxian,Game,,,,,,,,,,present,,BB,8200,"CH.""GALAXBB""",GALAXBB,,Works,
 150,V1,Comm,Bug Byte,Golf,Game,,,Yes,,,,,,,present,,BB,8200,"CH.""GOLFBB""",GOLFBB,,Works,
 151,V5,Comm,Bug Byte,Horse Race,Game,,,,,,,,,,present,,BB,8200,"CH.""HORSE""",HORSE,,Works,
-152,V2,Comm,Bug Byte,Labyrinth,Game,,,,,,,,,,present,,BB,8200,"*LOAD LABY1
+152,V2,Comm,Bug Byte,Labyrinth,Game,,,Yes,,,,,,,present,,BB,8200,"*LOAD LABY1
 *LOAD LABY2
 *RUN LABY3","LABY1
 LABY2
@@ -263,7 +263,7 @@ DATA
 STARIN",,Works,
 164,V8B1,Comm,Bug Byte,Typist,Educational,,,,,,,,,,present,,BB,8200,"CH.""TYPIST""",TYPIST,,Works,
 165,V1,Comm,Bug Byte,UFO Bomber,Game,,,,,,,,,,present,,BB,8200,"CH.""UFO""",UFO,,Works,
-166,V1,Comm,Bug Byte,Wiggle,Game,,,,,,,,,,present,,BB,8200,"CH.""WIGGEL""",WIGGEL,,Works,
+166,V1,Comm,Bug Byte,Wiggle,Game,,,Yes,,,,,,,present,,BB,8200,"CH.""WIGGEL""",WIGGEL,,Works,
 167,V5,Comm,Hopesoft,PS1A Atom Adventure,Adventure,,,,,,,,,,present,,HS,8200,"*LOAD ADV
 *RUN A1","ADV
 A1",,Works,
@@ -300,7 +300,7 @@ ATDATA",,Works,
 184,V3,Comm,Prog Power,Astrafire,Game,,,,,,,,,,present,R. Howells,PP,8200,"CH.""ASTFIRE""",ASTFIRE,,Works,
 185,V8B1,Comm,Prog Power,Astro Warrior,Game,,,,,,,,,,present,D.Dini,PP,8200,"CH.""ASTROWA""",ASTROWA,,Works,
 186,V1,Comm,Prog Power,Astrobirds,Game,,,,,,,,,,present,J.M. Dyson,PP,8200,"CH.""ASTROBI""",ASTROBI,,Works,
-187,V1,Comm,Prog Power,Atom Business Game,Game,,,,,,,,,,present,G.R. Davies,PP,8200,"CH.""BUSINESS""",BUSINESS,,Works,
+187,V1,Comm,Prog Power,Atom Business Game,Game,,,Yes,,,,,,,present,G.R. Davies,PP,8200,"CH.""BUSINESS""",BUSINESS,,Works,
 188,V7B2,Comm,Prog Power,Atomstore,Business,,,,,,,No,,,present,A. Reece,PP,8200,*RUN ATOMSTO,"ATOMSTO
 STDAT",,Works,
 189,V1,Comm,Prog Power,Awari,Game,,,,,,,,,,present,T.Madden,PP,8200,"CH.""AWARI""",AWARI,,Works,
@@ -312,7 +312,7 @@ DATA
 ERROR
 1-F12
 COPY",,Works,
-193,V1,Comm,Prog Power,Constellation,Simulation,,,,,,,,,,present,R.M.P. Hanson,PP,8200,"CH.""CONSTELL""",CONSTELL,,Works,
+193,V1,Comm,Prog Power,Constellation,Simulation,,,Yes,,,,,,,present,R.M.P. Hanson,PP,8200,"CH.""CONSTELL""",CONSTELL,,Works,
 194,V1,Comm,Prog Power,Cowboy Shoot-Out,Game,,,,,,,,,,present,S. Vout,PP,8200,"CH.""SHOOTOUT""",SHOOTOUT,,Works,
 195,V7B2,Comm,Prog Power,Dambusters,Game,,,,,,,,,,present,G. Douglass,PP,8200,"CH.""DAMBUST""",DAMBUST,,Works,
 196,V1,Comm,Prog Power,Demon Dungeon,Game,,,,,,,,,,present,R.M.P. Hanson,PP,8200,"CH.""DEMONDUN""",DEMONDUN,,Works,
@@ -335,7 +335,7 @@ GALAXIN",,Works,
 206,,Comm,Prog Power,Lunar Lander,Game,,,,,,,,,,missing,J.M. Dyson,PP,,,,,,
 207,V10B5,Comm,Prog Power,Martians,Game,,,,,,,,,,present,R.M.P. Hanson,PP,8200,*RUN MARTIANS,MARTIANS,,Works,
 208,,Comm,Prog Power,Mazeball,Game,,,,,,,,,,missing,S. Draper,PP,,,,,,
-209,V3,Comm,Prog Power,Micro-Budget,Business,,,,,,,,,,present,R.M.P. Hanson,PP,8200,"CH.""MICROB""",MICROB,,Works,
+209,V3,Comm,Prog Power,Micro-Budget,Business,,,Yes,,,,,,,present,R.M.P. Hanson,PP,8200,"CH.""MICROB""",MICROB,,Works,
 210,,Comm,Prog Power,Minefield,Game,,,,,,,,,,missing,T.Madden,PP,,,,,,
 211,V5,Comm,Prog Power,Mode 4 VDU (Source),Utility,,,,,,,,,,present,R.M.P. Hanson,PP,2900,"?18=130
 CH.""VDUAS""",VDUAS,,Works,
@@ -434,11 +434,11 @@ DAT1
 EDITOR
 LOADER
 MMINER",,Works,
-271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,Yes,,,,,,,JoyMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
+271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
 JUNGLE
 MUSIC
 RUNME",,Works,
-272,V3,Comm,A&F S/W,Frogger,Game,,,,,,,,,,present,,AF,8200,"CH.""FROGGER""",FROGGER,,Works,
+272,V3,Comm,A&F S/W,Frogger,Game,,,Yes,,,,,,,present,,AF,8200,"CH.""FROGGER""",FROGGER,,Works,
 273,,Comm,Prog Power,Dodge,Game,,,,,,,,,,missing,S. Draper,PP,,,,,,
 274,,Comm,Prog Power,Reaction Race,Game,,,,,,,,,,missing,R.M.P. Hanson,PP,,,,,,
 275,V3,Comm,Prog Power,Space Battle,Game,,,,,,,,,,present,T. Mabbs,PP,8200,"CH.""SPBAT""",SPBAT,,Works,
@@ -495,7 +495,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,Yes,,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
+305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,Yes,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -505,7 +505,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",,Works,
-306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,Yes,,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
+306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -536,7 +536,7 @@ MMINER",,Works,
 311,V3,Comm,A&F S/W,Minefield,Game,,,,,,,,,,present,,AF,8200,"CH.""MINEFIEL""",MINEFIEL,,Works,
 312,V3,Non Comm,Non Comm,Bell Hop,Game,,,,,,,,,,present,ML & JMF,OTHER,8200,*RUN BELLHOP,BELLHOP,,Works,
 313,V3,Non Comm,Non Comm,Boxes,Game,,,,,,,,,,present,,OTHER,8200,"CH.""BOXES""",BOXES,,Works,
-314,V3,Non Comm,Non Comm,Cement,Game,,,,,,,,,,present,RK,OTHER,8200,"*LOAD CEMENT
+314,V3,Non Comm,Non Comm,Cement,Game,,,Yes,,,,,,,present,RK,OTHER,8200,"*LOAD CEMENT
 RUN",CEMENT,,Works,
 315,V3,Non Comm,Non Comm,Pengo,Game,,,,,,,,,,present,M.LAUWERENS,OTHER,8200,*RUN PENGO,PENGO,,Works,
 316,V3,Non Comm,Non Comm,Stitch,Game,,,,,,,,,,present,,OTHER,8200,"CH.""STITCH""",STITCH,,Works,
@@ -563,14 +563,14 @@ LORDSOF",,Works,
 *RUN REDMOON","VDUBLO
 REDMOON",,Works,
 325,V4,Modern,Level 9,Price of Magik (32K),Adventure,Time and Magik,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,MAGIK,,Works,
-326,V4,Magazines,Your Computer,Acorn Kong,Game,,,,,,,,,,present,???,YC,8200,"CH.""ACKONG""",ACKONG,,Works,
+326,V4,Magazines,Your Computer,Acorn Kong,Game,,,Yes,,,,,,,present,???,YC,8200,"CH.""ACKONG""",ACKONG,,Works,
 328,V4,Non Comm,Non Comm,Artist,Utility,,,,,,,,,,duplicate,???,NC,8200,*RUN ARTIST,ARTIST,,Works,
 330,V4,Non Comm,Non Comm,Atomica Spacewar (R),Game,,,,Yes,No,No,,,,present,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",ATOMICA,,Works,
 331,V7B2,Magazines,Your Computer,Bit Bandit,Game,,,,,,,,,,present,S.P.Elliot,YC,8200,"CH.""BANDIT""",BANDIT,,Works,
-332,V4,Non Comm,Non Comm,Space Battle (R),Game,,,,No,No,Yes,,,,present,???,NC/TB,8200,"CH.""BATSHIP""",BATSHIP,,Works,
+332,V4,Non Comm,Non Comm,Space Battle (R),Game,,,Yes,No,No,Yes,,,,present,???,NC/TB,8200,"CH.""BATSHIP""",BATSHIP,,Works,
 333,V4,Non Comm,Non Comm,Backgammon,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""BCKGAM""",BCKGAM,,Works,This is actually Bug Byte Backgammon!
 334,V4,Non Comm,Non Comm,Beetle,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""BEETLE""",BEETLE,,Works,
-335,V7B2,Magazines,Your Computer,Blitzkrieg,Game,,,,,,,,,,present,???,YC,8200,"CH.""BLITZ""",BLITZ,,Works,
+335,V7B2,Magazines,Your Computer,Blitzkrieg,Game,,,Yes,,,,,,,present,???,YC,8200,"CH.""BLITZ""",BLITZ,,Works,
 336,V4,Magazines,C&VG,Blockbuster,Game,,,,,,,,,,present,Chris Cytera,CVG,8200,"CH.""BLOBUST""",BLOBUST,,Works,
 338,V4,Non Comm,Non Comm,Bowling (R),Game,,,,Yes,No,No,,,,present,F.Bitter,NC/TB,8200,"CH.""BOWL2""",BOWL2,,Works,
 339,V4,Non Comm,Non Comm,Breakout,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""BREAKOU""",BREAKOU,,Works,
@@ -580,20 +580,20 @@ REDMOON",,Works,
 345,V4,Non Comm,Non Comm,City Bomber (R),Game,,Yes,,No,Yes,No,,,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
 346,,Non Comm,Non Comm,Gobi Woestijn,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""DESERT""",DESERT,,,
 347,V13B1,Books,Getting Acquainted,Dodgem,Game,,,,,,,,,,present,???,GA,8200,"CH.""DODGEM""",DODGEM,,Test,
-349,V4,Non Comm,Non Comm,Draw Poker (R),Game,,Yes,,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
+349,V4,Non Comm,Non Comm,Draw Poker (R),Game,,Yes,Yes,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
 350,,Non Comm,Non Comm,Drive,Game,,,,,,,,,,duplicate,D.Dini,NC,8200,*RUN DRIVE,DRIVE,,,
-351,V4,Non Comm,Non Comm,Fizzle Bricks,Game,,,,,,,,,,present,???,NC,8200,"CH.""FOURROW""",FOURROW,,Works,
+351,V4,Non Comm,Non Comm,Fizzle Bricks,Game,,,Yes,,,,,,,present,???,NC,8200,"CH.""FOURROW""",FOURROW,,Works,
 352,V4,Non Comm,Non Comm,Golf,Game,,,,,,,,,,present,???,NC,8200,"CH.""GOLF""",GOLF,,Works,
-353,V4,Comm,Computersmith,Golf,Game,,,,,,,,,,present,???,CS,8200,"CH.""GOLF-CS""",GOLF-CS,,Works,
+353,V4,Comm,Computersmith,Golf,Game,,,Yes,,,,,,,present,???,CS,8200,"CH.""GOLF-CS""",GOLF-CS,,Works,
 354,,Non Comm,Non Comm,Hostage,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""GYZEL""",GYZEL,,,
-356,V4,Magazines,Your Computer,The Hawk,Game,,,,,,,,,,present,???,YC,8200,"CH.""HAWK""",HAWK,,Works,
+356,V4,Magazines,Your Computer,The Hawk,Game,,,Yes,,,,,,,present,???,YC,8200,"CH.""HAWK""",HAWK,,Works,
 357,,Non Comm,Non Comm,Highway (R),Game,,,,,,,,,,missing,R.Leurs,NC,8200,"CH.""HIGHWAY""",HIGHWAY,,,
 359,V4,Non Comm,Non Comm,Huncher (R),Game,,,,No,No,Yes,,,,present,S.Myngheer,NC/TB,8200,"CH.""HUNCHER""",HUNCHER,,Works,
 361,,Non Comm,Non Comm,Intra Terrestrial (R),Game,,,,,,,,,,missing,J.Biel,NC,8200,"CH.""INTRA""",INTRA,,,
 362,,Non Comm,Non Comm,Jet (R),Game,,,,,,,,,,duplicate,B.Hommel,NC,8200,*RUN JET,JET,,,
-363,V4,Non Comm,Magnus Olsson,Katakomb,Game,,,,,,,,,,present,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",KATAKOMB,,Works,
+363,V4,Non Comm,Magnus Olsson,Katakomb,Game,,,Yes,,,,,,,present,Magnus Olssen,MO,8200,"CH.""KATAKOMB""",KATAKOMB,,Works,
 364,V4,Non Comm,Non Comm,Snakes & Ladders,Game,,,,,,,,,,duplicate,???,NC,8200,*RUN LADDERS,LADDERS,,Broken,
-365,V8B1,Magazines,Hobbyscoop,Zachte landing,Game,,,,,,,,,,present,H.Wagenaar,HS,2900,"?18=130
+365,V8B1,Magazines,Hobbyscoop,Zachte landing,Game,,,Yes,,,,,,,present,H.Wagenaar,HS,2900,"?18=130
 CH.""LANDING""",LANDING,,Works,
 366,V4,Non Comm,Non Comm,Grand Prix Special,Game,,,,,,,,,,present,???,NC,8200,"CH.""LEMANS""",LEMANS,,Works,
 367,V4,Non Comm,Non Comm,Lunar Lander,Game,,,,,,,,,,present,???,NC,8200,"CH.""LUNLAN""",LUNLAN,,Works,
@@ -617,17 +617,17 @@ CH.""OTHEL1""",OTHEL1,,Works,
 386,,Non Comm,Non Comm,Formula One,Game,,,,,,,,,,duplicate,JVK,NC,8200,"CH.""RACING""",RACING,,,
 387,V4,Non Comm,Non Comm,Race Rups (R),Game,,,,Yes,No,No,,,,present,???,NC,8200,"CH.""RACRUPS""",RACRUPS,,Works,
 389,V8B1,Non Comm,Non Comm,Reversi (R),Game,,,,Yes,No,No,,,,present,L.Bijnagte,NC,8200,*RUN REVERS3,REVERS3,,Works,
-390,V4,Non Comm,Non Comm,Rhinoceros,Game,,,,,,,,,,present,J.R.Marks,NC,8200,"CH.""RHINOS2""",RHINOS2,,Works,
+390,V4,Non Comm,Non Comm,Rhinoceros,Game,,,Yes,,,,,,,present,J.R.Marks,NC,8200,"CH.""RHINOS2""",RHINOS2,,Works,
 391,,Non Comm,Non Comm,Saturn,Game,,,,,,,,,,duplicate,R.Knapen,NC,8200,"CH.""SATURN""",SATURN,,,
 392,,Non Comm,Non Comm,Shelobs Army (R),Game,,,,,,,,,,duplicate,G.Hillebrand,NC,8200,*RUN SHELOBS,SHELOBS,,,
-393,V8B1,Non Comm,Non Comm,Shuttle (R),Game,,,,No,No,Yes,,,,present,B.Bekooy,NC,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
-394,V4,Comm,Electrocomp sups,Ski Slope,Game,,,,,,,,,,present,???,ES,8200,"CH.""SKI""",SKI,,Works,
+393,V8B1,Non Comm,Non Comm,Shuttle (R),Game,,,Yes,No,No,Yes,,,,present,B.Bekooy,NC,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
+394,V4,Comm,Electrocomp sups,Ski Slope,Game,,,Yes,,,,,,,present,???,ES,8200,"CH.""SKI""",SKI,,Works,
 395,V4,Magazines,C&VG,Ski-ing,Game,,,,,,,,,,present,S.  J. Harris,CVG,8200,"CH.""SKIING""",SKIING,,Works,
-396,V4,Non Comm,Non Comm,Skippy,Game,,,,,No,,,,,present,???,NC,8200,*RUN SKIPPY,SKIPPY,,Works,
+396,V4,Non Comm,Non Comm,Skippy,Game,,,Yes,,No,,,,,present,???,NC,8200,*RUN SKIPPY,SKIPPY,,Works,
 397,V4,Comm,Electrocomp sups,Snakes,Game,,,,,,,,,,present,???,ES,8200,"CH.""SLANGEN""",SLANGEN,,Works,
 398,V8B1,Non Comm,Non Comm,Snoopy,Game,,,,,,,,,,present,???,NC,8200,"CH.""SNOOPY""",SNOOPY,,Works,
 399,,Non Comm,Non Comm,Space Zap,Game,,,,,,,,,,duplicate,G.Groenewold,NC,8200,"CH.""SPACZAB""",SPACZAB,,,
-400,V7B2,Non Comm,Magnus Olsson,Star Trek IV (R),Game,,,,,,,Yes,,,present,Magnus Olssen,MO,9700,"*LOAD 157
+400,V7B2,Non Comm,Magnus Olsson,Star Trek IV (R),Game,,,Yes,,,,Yes,,,present,Magnus Olssen,MO,9700,"*LOAD 157
 *LOAD 157S
 ?18=40
 RUN","157
@@ -697,21 +697,21 @@ RUN","157
 467,V4,Books,Atomic Theory,Rom Test,Utility,Test,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""12-2""",12-2,,Works,
 468,V4,Books,Atomic Theory,Harpsichord,Music,,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""17-3""",17-3,,Works,
 469,V4,Books,Atomic Theory,Bulls and Cows,Game,,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""17-4""",17-4,,Works,
-470,V4,Books,Atomic Theory,Sine and Tangent,Graphics,,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-1""",22-1,,Works,
-471,V4,Books,Atomic Theory,Cycloid Curve,Graphics,,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-2""",22-2,,Works,
-472,V4,Books,Atomic Theory,Saddle Curve,Graphics,,,,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-3""",22-3,,Works,
+470,V4,Books,Atomic Theory,Sine and Tangent,Graphics,,,Yes,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-1""",22-1,,Works,
+471,V4,Books,Atomic Theory,Cycloid Curve,Graphics,,,Yes,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-2""",22-2,,Works,
+472,V4,Books,Atomic Theory,Saddle Curve,Graphics,,,Yes,,,,,,,present,David Johnson Davies,ATAP,8200,"CH.""22-3""",22-3,,Works,
 473,V4,Books,Practical Programs,Silver-Dollar Game,Game,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""DOLLAR""",DOLLAR,,Works,
 474,V4,Books,Practical Programs,Car Maze,Game,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CARMAZE""",CARMAZE,,Works,
 475,V4,Books,Practical Programs,Card Trick,Game,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CARDTRIC""",CARDTRIC,,Works,
 476,V4,Books,Practical Programs,Patterns,Game,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""PATTERNS""",PATTERNS,,Works,
-477,V4,Books,Practical Programs,Contours,Graphics,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CONTOURS""",CONTOURS,,Works,
-478,V4,Books,Practical Programs,Rotation,Graphics,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""ROTATION""",ROTATION,,Works,
-479,V4,Books,Practical Programs,Surface,Graphics,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""SURFACE""",SURFACE,,Works,
+477,V4,Books,Practical Programs,Contours,Graphics,,,Yes,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CONTOURS""",CONTOURS,,Works,
+478,V4,Books,Practical Programs,Rotation,Graphics,,,Yes,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""ROTATION""",ROTATION,,Works,
+479,V4,Books,Practical Programs,Surface,Graphics,,,Yes,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""SURFACE""",SURFACE,,Works,
 480,V4,Books,Practical Programs,Anagrams,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""ANAGRAMS""",ANAGRAMS,,Works,
 481,V4,Books,Practical Programs,Buzz-Phrases,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""BUZZ""",BUZZ,,Works,
 482,V4,Books,Practical Programs,Limericks,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""LIMERICK""",LIMERICK,,Works,
 483,V4,Books,Practical Programs,Catalogue,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CATALOG""",CATALOG,,Works,
-484,V4,Books,Practical Programs,Fractions,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""FRACTION""",FRACTION,,Works,
+484,V4,Books,Practical Programs,Fractions,Utility,,,Yes,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""FRACTION""",FRACTION,,Works,
 485,V4,Books,Practical Programs,Polynomials,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""POLYNOMI""",POLYNOMI,,Works,
 486,V4,Books,Practical Programs,Calculator,Utility,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""CALCULAT""",CALCULAT,,Works,
 487,V4,Books,Practical Programs,Assignment,Language,,,,,,,,,,present,David Johnson Davies,PPBA,8200,"CH.""ASSIGN""",ASSIGN,,Works,
@@ -753,7 +753,7 @@ COMPILER",,Works,
 499,V4,Books,Interface,Fruit Machine,Game,,,,,,,,,,present,Ian Smith,TBOI,8200,"CH.""FRMACH""",FRMACH,,Works,
 500,V4,Books,Interface,10 Pin Bowling,Game,,,,,,,,,,present,Tim Hartnell,TBOI,8200,"CH.""BOWLING""",BOWLING,,Works,
 501,V4,Books,Interface,Starwars,Game,,,,,,,,,,present,G. Hillebrand,TBOI,8200,"CH.""STARWAR""",STARWAR,,Works,
-502,V4,Books,Interface,Invader Force,Game,,,,,,,,,,present,Ian Smith,TBOI,8200,"CH.""INVADE""",INVADE,,Works,
+502,V4,Books,Interface,Invader Force,Game,,,Yes,,,,,,,present,Ian Smith,TBOI,8200,"CH.""INVADE""",INVADE,,Works,
 503,V4,Books,Interface,Number Rotate!,Game,,,,,,,,,,present,Markus Jakobsson,TBOI,8200,"CH.""ROTATE""",ROTATE,,Works,
 504,V4,Books,Interface,Nim,Game,,,,,,,,,,present,,TBOI,8200,"CH.""NIM""",NIM,,Works,
 505,V4,Books,Interface,Reversi,Game,,,,,,,,,,present,Jeremy Ruston,TBOI,8200,"CH.""REVERSI""",REVERSI,,Works,
@@ -766,7 +766,7 @@ COMPILER",,Works,
 512,V4,Books,Interface,Flight,Game,,,,,,,,,,present,G.S. Buttrick,TBOI,8200,"CH.""FLIGHT""",FLIGHT,,Works,
 513,V4,Books,Interface,Symphonique,Music,,,,,,,,,,present,Colin Barker,TBOI,8200,"CH.""SYMPH""",SYMPH,,Works,
 514,V4,Books,Interface,Kinetic String Art,Graphics,,,,,,,,,,present,Jeremy Ruston,TBOI,8200,"CH.""KINETIC""",KINETIC,,Works,
-515,V4,Books,Interface,Saucer Plot,Graphics,,,,,,,,,,present,Russel Heins and Robert Heard,TBOI,8200,"CH.""SAUCER""",SAUCER,,Works,
+515,V4,Books,Interface,Saucer Plot,Graphics,,,Yes,,,,,,,present,Russel Heins and Robert Heard,TBOI,8200,"CH.""SAUCER""",SAUCER,,Works,
 516,V4,Books,Interface,Threedee etch,Graphics,,,,,,,,,,present,Jeremy Ruston,TBOI,8200,"CH.""3DETCH""",3DETCH,,Works,
 517,V4,Books,Interface,Tablet,Graphics,,,,,,,,,,present,Russel Heins and Robert Heard,TBOI,8200,"CH.""TABLET""",TABLET,,Works,
 518,V4,Books,Interface,Doomswatch Cave,Game,,,,,,,,,,present,Tim Hartnell,TBOI,8200,"CH.""CAVE""",CAVE,,Works,
@@ -784,33 +784,33 @@ COMPILER",,Works,
 530,V4,Books,Interface,Asteroid belt,Game,,,,,,,,,,present,Ian Smith,TBOI,8200,"CH.""ASTROID""",ASTROID,,Works,
 531,V4,Books,Interface,Co-ord,Game,,,,,,,,,,present,Robert Heard,TBOI,8200,"CH.""COORD""",COORD,,Works,
 532,V4,Books,Interface,Artist,Graphics,,,,,,,,,,present,Ken North,TBOI,8200,"CH.""ARTIST""",ARTIST,,Works,
-533,V5,Magazines,C&VG,Dodgems,Game,,,,,,,,,,present,John Dyson,CVG,8200,"CH.""DODGEMS""",DODGEMS,,Works,
+533,V5,Magazines,C&VG,Dodgems,Game,,,Yes,,,,,,,present,John Dyson,CVG,8200,"CH.""DODGEMS""",DODGEMS,,Works,
 534,V4,Magazines,C&VG,Breakout,Game,,,,,,,,,,present,Tim Jackson,CVG,8200,"CH.""BREAKOU""",BREAKOU,,Works,
 535,V7B2,Magazines,C&VG,Life,Game,,,,,,,,,,present,Tim Jackson,CVG,2900,"*LOAD LIFE 8200
 ?18=130
 RUN",LIFE,,Works,
 536,V5,Magazines,C&VG,Alien Hunt,Game,,,,,,,,,,present,John Kirk,CVG,8200,"CH.""ALIEN""",ALIEN,,Works,
 537,V7B2,Magazines,C&VG,Entomb,Game,,,,,,,,,,present,Murray Allen,CVG,8200,"CH.""ENTOMB""",ENTOMB,,Works,
-538,V7B2,Magazines,C&VG,Moon Lander,Game,,,,,,,,,,present,S Draper,CVG,8200,"CH.""MOONLAN""",MOONLAN,,Works,
+538,V7B2,Magazines,C&VG,Moon Lander,Game,,,Yes,,,,,,,present,S Draper,CVG,8200,"CH.""MOONLAN""",MOONLAN,,Works,
 539,V6,Magazines,C&VG,Spiderman,Game,,,,,,,,,,present,Martin Hurley,CVG,8200,"CH.""SPIDERMA""",SPIDERMA,,Works,
 540,V7B2,Magazines,C&VG,Save the Princess,Game,,,,,,,,,,present,George Taylor,CVG,8200,"CH.""PRNCSS""",PRNCSS,,Works,
 541,V5,Magazines,C&VG,Snakes & Ladders,Game,,,,,,,,,,present,A. Worral,CVG,8200,"CH.""LADDERS""",LADDERS,,Works,
 542,V4,Magazines,C&VG,Haunted House,Game,,,,,,,,,,present,Alex Pearson,CVG,8200,"CH.""HAUNTED""",HAUNTED,,Works,
-543,V4,Magazines,C&VG,Starwar,Game,,,,,,,,,,present,J. C. Flower,CVG,8200,"CH.""STARWAR""",STARWAR,,Works,
+543,V4,Magazines,C&VG,Starwar,Game,,,Yes,,,,,,,present,J. C. Flower,CVG,8200,"CH.""STARWAR""",STARWAR,,Works,
 544,V7B2,Magazines,C&VG,Mining Colony,Game,,,,,,,,,,present,Robert Campbell,CVG,8200,"CH.""MINING""",MINING,,Works,
 545,V6,Magazines,C&VG,Monster,Game,,,,,,,,,,present,Marcus Jakobsson,CVG,8200,"CH.""MONSTER""",MONSTER,,Works,
 546,V7B2,Magazines,C&VG,Bullion Snatch,Game,,,,,,,,,,present,Stephen Mayfroidt,CVG,8200,"CH.""BULLION""",BULLION,,Works,
 547,V7B2,Magazines,C&VG,Rhino,Game,,,,,,,,,,present,R. M. Andrews,CVG,8200,"CH.""RHINO""",RHINO,,Works,
-548,V5,Magazines,C&VG,Formula One,Game,,,,,,,,,,present,Chris Johnson,CVG,8200,"CH.""RACING""",RACING,,Works,
+548,V5,Magazines,C&VG,Formula One,Game,,,Yes,,,,,,,present,Chris Johnson,CVG,8200,"CH.""RACING""",RACING,,Works,
 549,V7B2,Magazines,C&VG,Grow,Game,,,,,,,,,,present,Marcus Jacobsson,CVG,8200,"CH.""GROW""",GROW,,Works,
 550,V4,Magazines,C&VG,Duck Shoot,Game,,,,No,No,No,No,Yes,,present,Tim Jackson,CVG,8200,"CH.""DUCK""",DUCK,,Works,
-551,V4,Books,Wake up your Atom,Hostage,Game,,,,,,,,,,present,,WUYA,8200,"CH.""HOSTAGE""",HOSTAGE,,Works,
+551,V4,Books,Wake up your Atom,Hostage,Game,,,Yes,,,,,,,present,,WUYA,8200,"CH.""HOSTAGE""",HOSTAGE,,Works,
 552,V14B1,Books,Wake up your Atom,Hyperman,Game,,,,,,,,,,present,,WUYA,8200,"CH.""HYPERMAN""",HYPERMAN,,Works,
 553,V4,Books,Wake up your Atom,Bone Hunt,Game,,,,,,,,,,present,,WUYA,8200,"CH.""BONEHUNT""",BONEHUNT,,Works,
 554,V4,Books,Wake up your Atom,Directory,Business,,,,,,,,,,present,,WUYA,8200,"CH.""DIRECTOR""",DIRECTOR,,Works,
-555,V4,Books,Wake up your Atom,Tennis,Game,,,,,,,,,,present,,WUYA,8200,"CH.""TENNIS""",TENNIS,,Works,
+555,V4,Books,Wake up your Atom,Tennis,Game,,,Yes,,,,,,,present,,WUYA,8200,"CH.""TENNIS""",TENNIS,,Works,
 556,V4,Books,Wake up your Atom,French Test,Educational,,,,,,,,,,present,,WUYA,8200,"CH.""FRENCH""",FRENCH,,Works,
-557,V4,Books,Wake up your Atom,Pontoon,Game,,,,,,,,,,present,,WUYA,8200,"*LOAD PONTOON
+557,V4,Books,Wake up your Atom,Pontoon,Game,,,Yes,,,,,,,present,,WUYA,8200,"*LOAD PONTOON
 RUN",PONTOON,,Works,
 558,V4,Books,Wake up your Atom,Safe Break,Educational,,,,,,,,,,present,,WUYA,8200,"CH.""SAFEBRK""",SAFEBRK,,Works,
 559,V4,Books,Wake up your Atom,Alarm Clock,Utility,,,,,,,,,,present,,WUYA,8200,"CH.""ALARM""",ALARM,,Works,
@@ -819,12 +819,12 @@ RUN",PONTOON,,Works,
 562,V4,Books,Wake up your Atom,Anagrams,Utility,,,,,,,,,,present,,WUYA,8200,"CH.""ANAGRAM""",ANAGRAM,,Works,
 563,V4,Books,Wake up your Atom,Spacefire,Game,,,,,,,,,,present,,WUYA,8200,"CH.""SPAFIRE""",SPAFIRE,,Works,
 564,V4,Books,Wake up your Atom,Bases,Utility,,,,,,,,,,present,,WUYA,8200,"CH.""BASES""",BASES,,Works,
-565,V4,Books,Wake up your Atom,Shoot Out,Game,,,,,,,,,,present,,WUYA,8200,"CH.""SHOOTOUT""",SHOOTOUT,,Works,
+565,V4,Books,Wake up your Atom,Shoot Out,Game,,,Yes,,,,,,,present,,WUYA,8200,"CH.""SHOOTOUT""",SHOOTOUT,,Works,
 566,V4,Books,Wake up your Atom,Solitaire,Game,,,,,,,,,,present,,WUYA,8200,"CH.""SOLIT""",SOLIT,,Works,
-567,V4,Books,Wake up your Atom,Beetle,Game,,,,,,,,,,present,,WUYA,8200,"CH.""BEETLE""",BEETLE,,Works,
+567,V4,Books,Wake up your Atom,Beetle,Game,,,Yes,,,,,,,present,,WUYA,8200,"CH.""BEETLE""",BEETLE,,Works,
 568,V4,Books,Wake up your Atom,Helicopter Lander,Game,,,,,,,,,,present,,WUYA,8200,"CH.""HELICOP""",HELICOP,,Works,
-569,V4,Books,Wake up your Atom,Atomic Drawing Pad,Graphics,,,,,,,,,,present,,WUYA,8200,"CH.""DRAWING""",DRAWING,,Works,
-570,V4,Books,Wake up your Atom,Fractions,Utility,,,,,,,,,,present,,WUYA,8200,"CH.""FRACTION""",FRACTION,,Works,
+569,V4,Books,Wake up your Atom,Atomic Drawing Pad,Graphics,,,Yes,,,,,,,present,,WUYA,8200,"CH.""DRAWING""",DRAWING,,Works,
+570,V4,Books,Wake up your Atom,Fractions,Utility,,,Yes,,,,,,,present,,WUYA,8200,"CH.""FRACTION""",FRACTION,,Works,
 571,V5,Non Comm,Non Comm,Devil's Dungeon,Adventure,,,,,,,,,,present,Jerry Lakin,NC,8200,"CH.""DUNGEON""",DUNGEON,,Works,
 572,V5,Comm,Atomic S/W,Dragon Writer,Business,,,,,,,,,,present,,AT,8200,"CH.""DRAGON""",DRAGON,,Works,
 573,V5,Books,ECCE Prods,Alpha Beta Sort,Educational,,,,,,,,,,present,,ECCE,8200,"*LOAD ABSORT
@@ -875,7 +875,7 @@ ERRTAB",,Works,
 *RUN PS2A
 ","PROG
 PS2A",,Works,
-615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,Yes,,,,,,,JoyMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
+615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
 REPSCR
 REPTON",,Works,
 616,V5,Non Comm,Non Comm,Lost Gold (32K)(R),Adventure,,Yes,,Yes,No,No,,,,present,,OTHER,8200,"CH.""ADVLDG""",ADVLDG,,Works,
@@ -1271,12 +1271,12 @@ JOECODE
 PANEL1
 SCRE",,Works,
 680,V6,Non Comm,Non Comm,3-2-1,Game,Mainwaring,,,,,,,,,present,Phil Mainwaring,NC,8200,"CH.""3-2-1""",3-2-1,,Works,
-681,V6,Non Comm,Non Comm,X-Wing Attack,Game,Mainwaring,,,,,,,,,present,Phil Mainwaring,NC,8200,"CH.""X-WING""",X-WING,,Works,
+681,V6,Non Comm,Non Comm,X-Wing Attack,Game,Mainwaring,,Yes,,,,,,,present,Phil Mainwaring,NC,8200,"CH.""X-WING""",X-WING,,Works,
 682,V6,Non Comm,Non Comm,Robot Nim,Game,Mainwaring,,,,,,,,,present,Phil Mainwaring,NC,8200,"CH.""ROBOTNIM""",ROBOTNIM,,Works,
-683,V7B2,Magazines,Your Computer,Atom Quest,Adventure,,,,No,No,No,,,,present,,YC,2800,"*LOAD QUESTDA 8200
+683,V7B2,Magazines,Your Computer,Atom Quest,Adventure,,,Yes,No,No,No,,,,present,,YC,2800,"*LOAD QUESTDA 8200
 CH.""QUEST""","QUEST
 QUESTDA",,Works,
-684,V6,Comm,ECD,Moonlander,Game,,,,,,,,,,present,,OTHER,8200,"CH.""MOONLAN""",MOONLAN,,Works,
+684,V6,Comm,ECD,Moonlander,Game,,,Yes,,,,,,,present,,OTHER,8200,"CH.""MOONLAN""",MOONLAN,,Works,
 685,,Comm,Pro Software,Space Adventure,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
 686,,Comm,Pro Software,Reversi,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
 687,,Comm,Pro Software,3D Labyrinth,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
@@ -1324,7 +1324,7 @@ INVASIN",,Works,
 CMPWRLD
 SIDPLAY
 LOADER",,Works,
-703,V7B2,Modern,Non Comm,Mandelbrot,Graphics,Mainwaring,,,,,,,,,present,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""","MSC3A
+703,V7B2,Modern,Non Comm,Mandelbrot,Graphics,Mainwaring,,Yes,,,,,,,present,Phil Mainwaring,NC/MSAA,8200,"CH.""MSDISP""","MSC3A
 MSC3AD
 MSC3AL
 MSC3ALD
@@ -1354,21 +1354,21 @@ MSDISP",,Works,
 717,V7B2,Magazines,Comp Today,GRAF-RITE,Utility,,,,,,,,,,present,Bruce F. Smith,CT,8200,"CH.""GRAFRITE""",GRAFRITE,,Works,
 718,V7B2,Magazines,PCW,HiRes Print,Utility,,,,,,,,,,present,Christopher Cant,PCW,8200,"CH.""HIRES""",HIRES,,Works,
 719,V7B2,Magazines,Acorn User,Morse,Utility,,,,,,,,,,present,,AU,8200,"CH.""MORSE""",MORSE,,Works,
-720,V7B2,Non Comm,Non Comm,3D Maze,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/001A,8200,"CH.""MAZE""",MAZE,,Works,
+720,V7B2,Non Comm,Non Comm,3D Maze,Game,Arcadian Tapes,,Yes,,,,,,,present,,TAPES/001A,8200,"CH.""MAZE""",MAZE,,Works,
 721,V7B2,Non Comm,Non Comm,Owl,Graphics,Arcadian Tapes,,,,,,,,,present,,TAPES/001A,8200,"CH.""OWL""",OWL,,Works,
 722,V7B2,Non Comm,Non Comm,Pelmanism,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/001A,8200,"CH.""PELMANI""",PELMANI,,Needs Fixing,
 723,V7B2,Non Comm,Non Comm,Reversal,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/002A,8200,"CH.""REVERSA""",REVERSA,,Works,
 724,V7B2,Non Comm,Non Comm,Sketchpad,Graphics,Arcadian Tapes,,,,,,,,,present,,TAPES/002A,8200,"CH.""SKETCHP""",SKETCHP,,Works,
-725,V7B2,Non Comm,Non Comm,Graphics Demos,Graphics,Arcadian Tapes,,,,,,,,,present,,TAPES/006B,8200,"CH.""GRAPHIC""",GRAPHIC,,Works,
+725,V7B2,Non Comm,Non Comm,Graphics Demos,Graphics,Arcadian Tapes,,Yes,,,,,,,present,,TAPES/006B,8200,"CH.""GRAPHIC""",GRAPHIC,,Works,
 726,V7B2,Non Comm,Non Comm,3D OXO,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/009B,8200,"CH.""3DOXO""",3DOXO,,Works,
 727,V7B2,Non Comm,Non Comm,Life,Simulation,Arcadian Tapes,,,,,,,,,present,,TAPES/011A,8200,"CH.""LIFEMC""",LIFEMC,,Works,
 728,V7B2,Non Comm,Non Comm,Fighter,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/013A,8200,"CH.""FIGHTER""",FIGHTER,,Works,
-729,V7B2,Non Comm,Non Comm,Spiroprint,Graphics,Arcadian Tapes,,,,,,,,,present,,TAPES/022A,8200,"CH.""SPIROPR""",SPIROPR,,Works,
+729,V7B2,Non Comm,Non Comm,Spiroprint,Graphics,Arcadian Tapes,,Yes,,,,,,,present,,TAPES/022A,8200,"CH.""SPIROPR""",SPIROPR,,Works,
 730,V7B2,Non Comm,Non Comm,Air Raid,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/023A,8200,"CH.""AIRRAID""",AIRRAID,,Works,
 731,V7B2,Non Comm,Non Comm,Camel,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/023A,8200,"CH.""CAMEL""",CAMEL,,Works,
 732,V7B2,Non Comm,Non Comm,Depth Charge,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/023A,8200,"CH.""DEPTHCH""",DEPTHCH,,Works,
 733,V7B2,Non Comm,Non Comm,Fighter,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/023A,8200,"CH.""FIGHTER""",FIGHTER,,Works,
-734,V7B2,Non Comm,Non Comm,Spirograph,Graphics,Arcadian Tapes,,,,,,,,,present,,TAPES/030A,8200,"CH.""SPIROGR""",SPIROGR,,Works,
+734,V7B2,Non Comm,Non Comm,Spirograph,Graphics,Arcadian Tapes,,Yes,,,,,,,present,,TAPES/030A,8200,"CH.""SPIROGR""",SPIROGR,,Works,
 735,V7B2,Non Comm,Non Comm,War Fish,Game,Arcadian Tapes,,,,,,,,,present,,TAPES/034A,8200,"CH.""WARFISH""",WARFISH,,Works,
 736,V7B2,Non Comm,Non Comm,Car Maze,Game,,,,,,,,,,present,,NC,8200,"CH.""CARMAZE""",CARMAZE,,Works,
 737,V7B2,Non Comm,Non Comm,Plane and Tank Battle,Game,,,,,,,,,,present,,NC,8200,"CH.""TANKBAT""",TANKBAT,,Works,
@@ -1379,7 +1379,7 @@ MSDISP",,Works,
 742,V7B3,Magazines,Your Computer,Atom Squash,Game,,,,,,,,,,present,,YC,8200,"CH.""SQUASH""",SQUASH,,Works,
 743,V7B3,Magazines,Your Computer,Acorn Pilot,Game,,,,,,,,,,present,,YC,8200,"CH.""PILOTX""",PILOTX,,Works,
 744,V7B3,Magazines,Your Computer,Forth Connection,Game,,,,,,,,,,present,,YC,8200,"CH.""CONNECT""",CONNECT,,Broken,
-745,V13B1,Magazines,Your Computer,Rally Racer,Game,,,,,,,,,,present,,YC,8200,"CH.""RALLY""",RALLY,,Test,
+745,V13B1,Magazines,Your Computer,Rally Racer,Game,,,Yes,,,,,,,present,,YC,8200,"CH.""RALLY""",RALLY,,Test,
 746,V7B3,ROMS,Non Comm,RX Box,Graphics,,,,,,,,,,present,,ROMS/NC/RXBOX,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD 46E8 8800",46E8,,Works,
 747,V7B3,Magazines,Acorn User,Screen Dump,Utility,,,,,,,,,,present,,AU,8200,"CH.""SCRDUMP""",SCRDUMP,,Works,
@@ -1424,10 +1424,10 @@ SID",Yes,,,,,,,,present,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,"FLAPPY
 ANGRY
 SIDPLAY
 START",,Works,
-770,V8B1,Comm,Bug Byte,Statistics 1,Utility,,,,,,,,,,present,,BB,8200,"CH.""STATS1""",STATS1,,Works,
-771,V8B1,Comm,Bug Byte,Statistics 2,Utility,,,,,,,,,,present,,BB,8200,"CH.""STATS2""",STATS2,,Works,
-772,V8B1,Comm,Bug Byte,Statistics 3,Utility,,,,,,,,,,present,,BB,8200,"CH.""STATS3""",STATS3,,Works,
-773,V8B1,Comm,Bug Byte,Statistics 4,Utility,,,,,,,,,,present,,BB,8200,"CH.""STATS4""",STATS4,,Works,
+770,V8B1,Comm,Bug Byte,Statistics 1,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS1""",STATS1,,Works,
+771,V8B1,Comm,Bug Byte,Statistics 2,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS2""",STATS2,,Works,
+772,V8B1,Comm,Bug Byte,Statistics 3,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS3""",STATS3,,Works,
+773,V8B1,Comm,Bug Byte,Statistics 4,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS4""",STATS4,,Works,
 774,V8B1,Non Comm,Non Comm,Gokkast 1,Game,,Yes,,,,,,,,present,,NC/GOKKAST1,8200,"CH.""GOKKAST""","CONTROL
 GOKKAST
 HO-LA
@@ -1500,7 +1500,7 @@ AMANRUN",,Test,
 796,V8B3,Comm,Micro Mania,Centipede (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN CENTIPE,CENTIPE,,Works,
 797,V8B3,Comm,Micro Mania,Defender (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN DEFENDE,DEFENDE,,Works,
 798,V8B3,Comm,Acornsoft,Dodgems (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN DODGEMS,DODGEMS,,Works,
-799,V8B3,Magazines,Your Computer,Acorn Kong (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""KONG""",KONG,,Works,
+799,V8B3,Magazines,Your Computer,Acorn Kong (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""KONG""",KONG,,Works,
 800,V8B3,Comm,Prog Power,Martians (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN MARTIAN,MARTIAN,,Works,
 801,V8B3,Comm,Micro Mania,Omega Mission (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN OMEGA,"OMEGA
 DATA",,Works,
@@ -1511,7 +1511,7 @@ RUN",POINTER,,Works,
 805,V8B3,Comm,Prog Power,Cowboy Shoot-Out (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN SHOOTOU,SHOOTOU,,Works,
 806,V8B3,Comm,Acornsoft,Star Gate (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN STARGAT,STARGAT,,Works,
 807,V8B3,Comm,A&F S/W,Torpedo Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TORP,TORP,,Works,
-808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
+808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
 809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
 810,V8B3,Non Comm,Non Comm,Ghost (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""GHOST""",GHOST,,Works,
 811,V8B3,Non Comm,Non Comm,Saturn (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""SATURN""",SATURN,,Works,
@@ -1522,16 +1522,16 @@ RUN",POINTER,,Works,
 816,V8B3,Comm,Acornsoft,Breakout (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""BRKOUT""",BRKOUT,,Works,
 817,V8B3,Books,Atom Magic Book,Drive (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""DRIVE""",DRIVE,,Works,
 818,V8B3,Comm,Prog Power,Space Fighter (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""FIGHTER""",FIGHTER,,Works,
-819,V8B3,Comm,A&F S/W,Frogger (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""FROGGER""",FROGGER,,Works,
+819,V8B3,Comm,A&F S/W,Frogger (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""FROGGER""",FROGGER,,Works,
 820,V8B3,Comm,Prog Power,Hyperfire (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""HYPERFI""",HYPERFI,,Works,
 821,V8B3,Non Comm,Non Comm,Jet (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""JET""",JET,,Works,
 822,V8B3,Non Comm,Non Comm,Race (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""JOYRACE""",JOYRACE,,Works,
 823,V8B3,Non Comm,Non Comm,Navigator (R) (JS),Game,,,,No,Yes,No,,,JoyKBD,present,,JS/WIM,8200,"CH.""NAVIGAT""",NAVIGAT,,Works,
 824,V14B1,Comm,A&F S/W,Painter (JS),Game,,,,,,,,,JoyKBD,present,,JS/DAVE,8200,*RUN PAINTER,PAINTER,,Test,
 825,V8B3,Comm,Micro Mania,Puckman (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""PUCKMA""",PUCKMA,,Works,
-826,V8B3,Non Comm,Non Comm,Race Rups (R) (JS),Game,,,,Yes,No,No,,,JoyKBD,present,,JS/WIM,8200,"CH.""RACRUPS""",RACRUPS,,Works,
-827,V8B3,Non Comm,Non Comm,Rhinoceros (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""RHINORO""",RHINORO,,Works,
-828,V8B3,Non Comm,Non Comm,Shuttle (R) (JS),Game,,,,Yes,No,Yes,,,JoyKBD,present,,JS/WIM,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
+826,V8B3,Non Comm,Non Comm,Race Rups (R) (JS),Game,,,Yes,Yes,No,No,,,JoyKBD,present,,JS/WIM,8200,"CH.""RACRUPS""",RACRUPS,,Works,
+827,V8B3,Non Comm,Non Comm,Rhinoceros (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""RHINORO""",RHINORO,,Works,
+828,V8B3,Non Comm,Non Comm,Shuttle (R) (JS),Game,,,Yes,Yes,No,Yes,,,JoyKBD,present,,JS/WIM,8200,"CH.""SHUTTLE""",SHUTTLE,,Works,
 829,V8B3,Comm,Acornsoft,Snake (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAKE""",SNAKE,,Works,
 830,V8B3,Comm,Acornsoft,Snapper (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAPPER""",SNAPPER,,Works,
 831,V8B3,Non Comm,Non Comm,Space Zap (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SPACZAP""",SPACZAP,,Works,
@@ -1539,22 +1539,22 @@ RUN",POINTER,,Works,
 833,V8B3,Comm,Prog Power,Swarm (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SWARM""",SWARM,,Works,
 834,V8B3,Non Comm,Non Comm,Stowaway (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""VERSTE1""",VERSTE1,,Works,
 835,V8B3,Comm,Prog Power,Warlords (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WARLOR""",WARLOR,,Works,
-836,V8B3,Comm,Bug Byte,Wiggle (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WIGGLE""",WIGGLE,,Works,
+836,V8B3,Comm,Bug Byte,Wiggle (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WIGGLE""",WIGGLE,,Works,
 837,V8B3,Comm,Prog Power,Munchyman (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""MUNCHJH""",MUNCHJH,,Works,
 838,V8,Comm,Prog Power,Air Attack (JS),Game,,,,,,,,,JoyKBD,present,J. Dyson,JS/WIM,8200,"*LOAD AIRATTA
 RUN","AIRATTA
 ATDATA",,Works,
 839,V8B3,Non Comm,Non Comm,Ghost,Game,,,,,,,,,,present,,NC,8200,"CH.""GHOST""",GHOST,,Works,
 840,V8B3,Non Comm,Non Comm,Saturn,Game,,,,,,,,,,present,,NC,8200,"CH.""SATURN""",SATURN,,Works,
-841,V8B3,Comm,Electrocomp sups,Basic Invaders,Game,,,,,,,,,,present,,ES,8200,"CH.""BAINV""",BAINV,,Works,
-842,V8B3,Comm,Electrocomp sups,Darts,Game,,,,,,,,,,present,,ES,300,"*RUN DARTS1
+841,V8B3,Comm,Electrocomp sups,Basic Invaders,Game,,,Yes,,,,,,,present,,ES,8200,"CH.""BAINV""",BAINV,,Works,
+842,V8B3,Comm,Electrocomp sups,Darts,Game,,,Yes,,,,,,,present,,ES,300,"*RUN DARTS1
 ?18=46
 CH.""DARTS2""","DARTS1
 DARTS2",,Works,
 843,V8B3,Non Comm,Non Comm,Le Passe Temps,Game,,,,,,,,,,present,,NC,8200,"CH.""4OP1RY""",4OP1RY,,Works,
 844,V9B1,Non Comm,Non Comm,Pacman (JS),Game,,,,,,,,,JoyKBD,present,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",PACMAN,,Works,
 845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
-846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R),Game,,,,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
+846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R),Game,,,Yes,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
 847,V9B1,Non Comm,Non Comm,Helicopter Lander (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JHELI""",JHELI,,Works,
 848,V9B1,Comm,Bug Byte,Last Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JLAST""",JLAST,,Works,
 849,V9B1,Modern,Non Comm,BeebSID15 70's Rock,Music,SID,Yes,,,,,,,,present,,SID/ATMSID15,2900,*RUN SIDMENU,"69WHOLE
@@ -1596,8 +1596,8 @@ SIDMENU
 ",,Works,
 862,V9B1,Non Comm,Non Comm,Atom Pilot,Language,GameBase,,,,,,,,,present,acc-nl,GB,8200,*RUN 098,"098
 ",,Works,
-863,V9B1,Non Comm,Non Comm,Maze Game,Game,GameBase,,,,,,,,,present,??,GB,8200,"CH.""134""",134,,Works,
-864,V9B1,Non Comm,Non Comm,Flight Simulator,Game,GameBase,Yes,,,,,,,,present,Acorn user,GB,8200,"CH.""144""",144,,Works,
+863,V9B1,Non Comm,Non Comm,Maze Game,Game,GameBase,,Yes,,,,,,,present,??,GB,8200,"CH.""134""",134,,Works,
+864,V9B1,Non Comm,Non Comm,Flight Simulator,Game,GameBase,Yes,Yes,,,,,,,present,Acorn user,GB,8200,"CH.""144""",144,,Works,
 865,V9B1,Non Comm,Non Comm,Super Zombie,Game,GameBase,,,,,,,,,present,Magnus Olssen,GB,8200,"CH.""155""",155,,Works,
 866,V9B1,Non Comm,Magnus Olsson,Megalife (R),Simulation,GameBase,,,,,,Yes,,,present,Magnus Olssen,GB,8200,*RUN 158,158,,Works - requires WE-ROM,
 867,V9B1,Non Comm,Non Comm,Condot (R),Game,GameBase,,,,,No,Yes,,,present,Creative Computing,GB,8200,"CH.""159""",159,,Works,
@@ -1605,12 +1605,12 @@ SIDMENU
 869,V9B1,Magazines,PCW,Acorn Scramble,Game,,,,,,,,,,present,Nick Foale,PCW,8200,*RUN SCRMBLE,SCRMBLE,,Works,
 870,V9B1,Non Comm,Non Comm,Check-Mate,Game,GameBase,,,,,,,,,present,Magnus Olsson,GB,8200,"CH.""168""",168,,Works,
 871,V9B1,Non Comm,Magnus Olsson,DFC 700 (R),Game,GameBase,,,,,,Yes,,,present,Magnus Olssen,GB,8200,"CH.""169""",169,,Works - requires WE-ROM,
-872,V9B1,Non Comm,Non Comm,Lunar Lander,Game,GameBase,,,,,,,,,present,Magnus Olssen,GB,8200,"CH.""172""",172,,Works,
+872,V9B1,Non Comm,Non Comm,Lunar Lander,Game,GameBase,,Yes,,,,,,,present,Magnus Olssen,GB,8200,"CH.""172""",172,,Works,
 873,V9B1,Non Comm,Non Comm,Q-bert (R),Game,GameBase,,,No,No,Yes,,,,present,??,GB,8200,"CH.""185""",185,,Works - requires AXR1,
 874,V9B1,Non Comm,Non Comm,The Nudger,Game,GameBase,,,,,,,,,present,Steve Webster,GB,8200,"CH.""197""",197,,Works,
-875,V9B1,Non Comm,Non Comm,Cubic,Utility,GameBase,,,,,,,,,present,Steve Webster,GB,8200,"CH.""199""",199,,Works,
+875,V9B1,Non Comm,Non Comm,Cubic,Utility,GameBase,,Yes,,,,,,,present,Steve Webster,GB,8200,"CH.""199""",199,,Works,
 876,V9B1,Non Comm,Non Comm,Starship Manna,Game,GameBase,,,,,,,,,present,??,GB,8200,"CH.""226""",226,,Works,
-877,V9B1,Non Comm,Non Comm,Cement (JS),Game,,,,,,,,,JoyKBD,present,RK,JS/WIM,8200,"*LOAD CEMENT
+877,V9B1,Non Comm,Non Comm,Cement (JS),Game,,,Yes,,,,,,JoyKBD,present,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",CEMENT,,Works,
 878,V9B1,Modern,Retro S/W,F-14 Tomcat (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/F14,8200,"CH.""F14RUN""","F14CODE
 F14RUN
@@ -1662,8 +1662,8 @@ SIDMENU
 ",,Two bad tracks,
 892,V10B1,Non Comm,Non Comm,Maurice (Demo),Game,,,,,,,,,,present,,NC,8200,"CH.""MAURICE""",MAURICE,,Works,
 893,V10B1,Non Comm,Non Comm,Scramble (R),Game,,,,No,No,Yes,,,,present,,NC,8200,"CH.""SCRAMBLE""",SCRAMBLE,,Works,
-894,V10B1,Modern,Non Comm,RAF Test (R),Utility,Test,,,Yes,No,No,,,,present,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",RAFTEST,,Works,
-895,V10B1,Modern,Non Comm,Atom Tube Host,Utility,Tube,Yes,,,,,,,,present,David Banks,TUBE,8200,"CH.""BOOT6502""","TUBE
+894,V10B1,Modern,Non Comm,RAF Test (R),Utility,Test,,Yes,Yes,No,No,,,,present,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",RAFTEST,,Works,
+895,V10B1,Modern,Non Comm,Atom Tube Host,Utility,Tube,Yes,No,,,,,,,present,David Banks,TUBE,8200,"CH.""BOOT6502""","TUBE
 BASIC2
 CLOCKSP
 HIBASIC
@@ -1882,7 +1882,7 @@ FGSCR",,Works,
 954,V11B1,AGD,AGD,Foggy's Quest (M),Game,AGD Pack 1,Yes,,,,,,,,present,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""","FOGCODE
 FOGRUN
 FOGSCR",,Works,
-955,V11B1,AGD,AGD,Foggy's Quest (C),Game,AGD Pack 1,Yes,,,,,,,,present,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""","FOGCODE
+955,V11B1,AGD,AGD,Foggy's Quest (C),Game,AGD Pack 1,Yes,Yes,,,,,,,present,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""","FOGCODE
 FOGRUN
 FOGSCR",,Works,
 956,V11B2,AGD,AGD,Funky Fungus,Game,AGD Pack 22,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGUS,8200,"CH.""FUNRUN""","FUNCODE
@@ -2403,7 +2403,7 @@ SHOW2E
 SHOW3
 SHOW3E
 DISOLV",,Works,
-1121,V11B7,Non Comm,Non Comm,Jackpot (32K) (R),Game,,Yes,,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
+1121,V11B7,Non Comm,Non Comm,Jackpot (32K) (R),Game,,Yes,Yes,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
 J-PROG
 J-SHAPE",,Works,
 1122,,Comm,Computer Concepts,Softscreen,Utility,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
@@ -2480,7 +2480,7 @@ GXSCR",,Works,
 1146,V12B1,AGD,AGD,Gnoni 2020,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""","GNCODE
 GNRUN
 GNSCR",,Works,
-1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
+1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,Yes,Yes,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
 L1RUN
 L1SCR",,Works,
 1148,V12B1,AGD,AGD,Laetitia 2,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""","L2CODE
@@ -2708,7 +2708,7 @@ UCSCR",,Test,
 1225,V13B1,ROMS,Pearce,ATOM SIGN ROM,Utility,,,,,,,,,,present,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",1E13,,Test,
-1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R),Graphics,,Yes,,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
+1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
 1227,V13B1,Non Comm,Non Comm,KAARTEN (R),Game,,,,No,Yes,No,,,,present,,NC,8200,"CH.""KAARTEN""",KAARTEN,,Test,
 1228,V13B1,Non Comm,Non Comm,K-TRUUK,Game,,,,,,,,,,present,,NC,8200,"CH.""K-TRUUK""",K-TRUUK,,Test,
 1229,V13B1,Non Comm,Non Comm,GAGS Demo 2 (R),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""GAGDEM2""",GAGDEM2,,Test,
@@ -2719,12 +2719,12 @@ PRINT FOR HELP: SEE FORUM
 1234,V13B1,Magazines,PCW,Ghost Maze,Game,,,,,,,,,,present,A S Whittington,PCW,8200,"CH.""GHOST""",GHOST,,Test,
 1235,V13B1,Magazines,PCW,Turbo,Game,,,,,,,,,,present,Russell Wheeler,PCW,8200,"CH.""TURBO""",TURBO,,Test,
 1236,V13B1,Magazines,PCW,Cakes,Game,,,,,,,,,,present,Russell Wheeler,PCW,8200,"CH.""CAKES""",CAKES,,Test,
-1237,V14B1,Magazines,PCW,Footprints,Game,,,,,,,,,,present,Peter Robinson,PCW,8200,"CH.""FOOTPRI""",FOOTPRI,,Test,
+1237,V14B1,Magazines,PCW,Footprints,Game,,,Yes,,,,,,,present,Peter Robinson,PCW,8200,"CH.""FOOTPRI""",FOOTPRI,,Test,
 1238,V13B1,Magazines,PCT,Calendar,Utility,,,,,,,,,,present,Barry Pickles,PCT,8200,"CH.""CALENDR""",CALENDR,,Test,
 1239,V13B1,Magazines,PCT,Double Speed Saver,Utility,,,,,,,,,,present,P J Sadler,PCT,8200,"CH.""DSAVE""",DSAVE,,Test,
-1240,V13B1,Magazines,PCT,Gas/Electric Estimator,Utility,,,,,,,,,,present,D Tyler,PCT,8200,"CH.""GASELEC""",GASELEC,,Test,
+1240,V13B1,Magazines,PCT,Gas/Electric Estimator,Utility,,,Yes,,,,,,,present,D Tyler,PCT,8200,"CH.""GASELEC""",GASELEC,,Test,
 1241,V13B1,Magazines,PCT,Inverse Video,Utility,,,,,,,,,,present,N Tonks,PCT,8200,"CH.""INVERT""",INVERT,,Test,
-1242,V13B1,Magazines,PCT,Trang,Game,,,,,,,,,,present,S Drayper,PCT,8200,"CH.""TRANG""",TRANG,,Test,
+1242,V13B1,Magazines,PCT,Trang,Game,,,Yes,,,,,,,present,S Drayper,PCT,8200,"CH.""TRANG""",TRANG,,Test,
 1243,V13B1,Magazines,PCT,Worm,Game,,,,,,,,,,present,A P Morris,PCT,8200,"CH.""WORM""",WORM,,Test,
 1244,V13B1,Magazines,PCT,Up and Down Lister,Utility,,,,,,,,,,present,Peter Reber,PCT,8200,"CH.""UPDOWN""",UPDOWN,,Test,
 1245,V13B1,Books,Getting Acquainted,Breakout,Game,,,,,,,,,,present,???,GA,8200,"CH.""BREAKOU""",BREAKOU,,Works,
@@ -2835,9 +2835,9 @@ ZISCR",,Test,
 1288,V14B1,ROMS,Non Comm,RAM Test 00-6F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM280 8800",AROM280,,Test,
 1289,V14B1,Modern,Non Comm,Atomic RAM Test,Utility,Test,,,,,,,,,present,Kees vas Oss,NC/TEST,8200,"CH.""RAMTEST""",RAMTEST,,Test,
-1290,V14B1,Non Comm,Non Comm,Mandelbrot,Graphics,,,,,,,,,,present,Matalog,NC,8200,"CH.""MANDEL""",MANDEL,,Test,
+1290,V14B1,Non Comm,Non Comm,Mandelbrot,Graphics,,,Yes,,,,,,,present,Matalog,NC,8200,"CH.""MANDEL""",MANDEL,,Test,
 1291,V14B1,Books,The Atom,Life,Simulation,,,,,,,,,,present,,TA,8200,"CH.""LIFE""",LIFE,,Test,
-1292,V14B1,Magazines,PE,Fascimile,Utility,,,,,,,,,,present,,PE,8200,"CH.""DIGIFAX""",DIGIFAX,,Test,
+1292,V14B1,Magazines,PE,Fascimile,Utility,,,Yes,,,,,,,present,,PE,8200,"CH.""DIGIFAX""",DIGIFAX,,Test,
 1293,V14B1,Magazines,PE,Morse Tutor,Utility,,,,,,,,,,present,,PE,8200,"CH.""MORSE""",MORSE,,Test,
 1294,V14B1,Modern,Retro S/W,DareDevil Dennis (32K),Game,RS Colour,Yes,,,,,,,,present,Kees van Oss,RS/DDD,8200,"CH.""DDDRUN""","DATA
 DDDCODE
