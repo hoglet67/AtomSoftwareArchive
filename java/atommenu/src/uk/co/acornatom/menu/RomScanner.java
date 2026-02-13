@@ -268,7 +268,7 @@ public class RomScanner {
         return statements;
     }
 
-    public String getFormattedRomList(AtomTitle item) {
+    private void setFinalROMMetadata(AtomTitle item) {
         // Update the textual romDependency field
         StringBuffer sb = new StringBuffer();
         boolean first = true;
@@ -278,14 +278,14 @@ public class RomScanner {
                     sb.append(",");
                 }
                 sb.append(rom.getName());
-                item.getCollections().add(rom.getName());
+                item.getCollections().add("R:" + rom.getName());
                 first = false;
             }
         }
         if (first) {
             sb.append("NONE");
         }
-        return sb.toString();
+        item.setRomDependency(sb.toString());
     }
 
     private Set<String> allCommands() {
@@ -407,6 +407,6 @@ public class RomScanner {
                 setNeeded(item, rom, needed);
             }
         }
-        item.setRomDependency(getFormattedRomList(item));
+        setFinalROMMetadata(item);
     }
 }
