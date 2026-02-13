@@ -660,15 +660,7 @@ IF (info_option = 1)
 
 .print_facet
 	; Indent to right-justify the facet names
-	LDY LabelYNumSpaces,X
-	INY
-.indent
-	DEY
-	BEQ indent_done
-	LDA #' '
-	JSR WriteToScreen
-	BNE indent
-.indent_done
+	JSR LabelY1
 
 	; Print the the facet name
 	; On entry: A = facet number (1..8)
@@ -1023,13 +1015,13 @@ ENDIF
 	PHA
 	JSR LabelZ
 	PLA
+	TAX
 
 	;1220 IF I=1 P." "
 	;1230 IF I=2 P."     "
 	;1240 R.
-	TAY
-	LDA LabelYNumSpaces,Y
-	TAY
+.LabelY1
+	LDY LabelYNumSpaces,X
 	LDA #' '
 .LabelYLoop
 	DEY
