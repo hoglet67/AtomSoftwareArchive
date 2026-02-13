@@ -78,6 +78,8 @@ public class SpreadsheetParser {
             int pcharme_column = -1;
             int gags_column = -1;
             int axr1_column = -1;
+            int werom_column = -1;
+            int pptoolkit_column = -1;
 
 
             for (int i = 0; i < headers.length; i++) {
@@ -134,6 +136,12 @@ public class SpreadsheetParser {
                 }
                 if (headers[i].toLowerCase().startsWith(AXR1)) {
                     axr1_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(WEROM)) {
+                    werom_column = i;
+                }
+                if (headers[i].toLowerCase().startsWith(PPTOOLKIT)) {
+                    pptoolkit_column = i;
                 }
             }
 
@@ -268,6 +276,23 @@ public class SpreadsheetParser {
                     item.setAxr1(false);
                 }
 
+                // WEROM ROM
+                String werom = program[werom_column].trim().toUpperCase();
+                if (werom.equals("YES")) {
+                    item.setWerom(true);
+                } else if (werom.equals("NO")) {
+                    item.setWerom(false);
+                }
+
+                // PPTOOLKIT ROM
+                String pptoolkit = program[pptoolkit_column].trim().toUpperCase();
+                if (pptoolkit.equals("YES")) {
+                    item.setPPToolkit(true);
+                } else if (pptoolkit.equals("NO")) {
+                    item.setPPToolkit(false);
+                }
+
+                // Save the item
                 items.add(item);
                 accumulateStats(item);
             }
