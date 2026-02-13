@@ -479,13 +479,13 @@ ENDIF
 	AND #&0F
 	RTS
 
-; 3 = Chunk (encoded within bits 3..0 of byte 4)
+; 3 = Chunk (encoded within bits 2..0 of byte 4)
 .Filter3
 	CPY #ChunkFilterNum
 	BNE Filter4
 	LDY #ChunkIdOffset
 	LDA (Title), Y
-	AND #&0F
+	AND #&07
 	RTS
 
 ; 4 = Ram (encoded within bits 7..5 of byte 3)
@@ -501,13 +501,12 @@ ENDIF
 	AND #&07
 	RTS
 
-; 5 = Rom (encoded within bits 7..4 of byte 4)
+; 5 = Rom (encoded within bits 7..3 of byte 4)
 .Filter5
 	CPY #RomFilterNum
 	BNE Filter6
 	LDY #RomIdOffset
 	LDA (Title), Y
-	LSR A
 	LSR A
 	LSR A
 	LSR A

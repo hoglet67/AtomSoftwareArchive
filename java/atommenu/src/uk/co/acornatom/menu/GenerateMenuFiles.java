@@ -53,7 +53,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable chunks = new SecondaryTableSingleValue(
             "Chunk",
-            new BitField(4, 0, 4),
+            new BitField(4, 0, 3),
             AtomTitle::getChunk,
             chunkComparator);
 
@@ -65,7 +65,7 @@ public class GenerateMenuFiles extends GenerateBase {
 
     private SecondaryTable romDependencies = new SecondaryTableSingleValue(
             "ROM",
-            new BitField(4, 4, 4),
+            new BitField(4, 3, 5),
             AtomTitle::getRomDepencency,
             romComparatorNF);
 
