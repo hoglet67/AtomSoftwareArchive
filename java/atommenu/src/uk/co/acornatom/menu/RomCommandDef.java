@@ -10,7 +10,15 @@ public class RomCommandDef {
 
     private void addName(String name) {
         if (RomScanner.basicRomDef == null || !RomScanner.basicRomDef.getCommands().contains(name)) {
-            names.add(name);
+            if (name.equals("%")) {
+                for (char c = '@'; c <= 'Z'; c++) {
+                    names.add("%" + c + '=');
+                    names.add("%" + c + c);
+                    names.add("%!");
+                }
+            } else {
+                names.add(name);
+            }
         } else {
             System.out.println("Skipping " + name + " as it it handled by BASIC");
         }
