@@ -229,7 +229,7 @@ BKOUTINS",,Works,
 143,V13B1,Comm,Bug Byte,Backgammon,Game,,,,,,,,,,present,,BB,8200,"CH.""BACKGAM""","BACKGAM
 BACKINS",,Test,
 144,V5,Comm,Bug Byte,Battleships,Game,,,,,,,,,,present,,BB,8200,"CH.""BATSHIP""",BATSHIP,,Works,
-145,V1,Non Comm,Non Comm,Bio-Rhythms (R),Simulation,,,,Yes,No,No,,,,present,,OTHER,8200,"CH.""BIORYTH""",BIORYTH,,Works,
+145,V1,Non Comm,Non Comm,Bio-Rhythms (R),Simulation,,,Yes,Yes,No,No,,,,present,,OTHER,8200,"CH.""BIORYTH""",BIORYTH,,Works,
 146,V14B1,Comm,Bug Byte,Chess,Game,,,,,,,,,,present,,BB/CHESS,8200,"CH.""CHESSBB""","RUNNER
 CHESSBB
 PROG
@@ -580,7 +580,7 @@ REDMOON",,Works,
 345,V4,Non Comm,Non Comm,City Bomber (R),Game,,Yes,,No,Yes,No,,,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
 346,,Non Comm,Non Comm,Gobi Woestijn,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""DESERT""",DESERT,,,
 347,V13B1,Books,Getting Acquainted,Dodgem,Game,,,,,,,,,,present,???,GA,8200,"CH.""DODGEM""",DODGEM,,Test,
-349,V4,Non Comm,Non Comm,Draw Poker (R),Game,,Yes,Yes,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
+349,V4,Non Comm,Non Comm,Draw Poker (R) (40K),Game,,Yes,Yes,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
 350,,Non Comm,Non Comm,Drive,Game,,,,,,,,,,duplicate,D.Dini,NC,8200,*RUN DRIVE,DRIVE,,,
 351,V4,Non Comm,Non Comm,Fizzle Bricks,Game,,,Yes,,,,,,,present,???,NC,8200,"CH.""FOURROW""",FOURROW,,Works,
 352,V4,Non Comm,Non Comm,Golf,Game,,,,,,,,,,present,???,NC,8200,"CH.""GOLF""",GOLF,,Works,
@@ -1553,8 +1553,8 @@ CH.""DARTS2""","DARTS1
 DARTS2",,Works,
 843,V8B3,Non Comm,Non Comm,Le Passe Temps,Game,,,,,,,,,,present,,NC,8200,"CH.""4OP1RY""",4OP1RY,,Works,
 844,V9B1,Non Comm,Non Comm,Pacman (JS),Game,,,,,,,,,JoyKBD,present,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",PACMAN,,Works,
-845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
-846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R),Game,,,Yes,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
+845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R) (40K),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
+846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R) (40K),Game,,,Yes,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
 847,V9B1,Non Comm,Non Comm,Helicopter Lander (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JHELI""",JHELI,,Works,
 848,V9B1,Comm,Bug Byte,Last Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JLAST""",JLAST,,Works,
 849,V9B1,Modern,Non Comm,BeebSID15 70's Rock,Music,SID,Yes,,,,,,,,present,,SID/ATMSID15,2900,*RUN SIDMENU,"69WHOLE
@@ -2480,7 +2480,7 @@ GXSCR",,Works,
 1146,V12B1,AGD,AGD,Gnoni 2020,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""","GNCODE
 GNRUN
 GNSCR",,Works,
-1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,Yes,Yes,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
+1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
 L1RUN
 L1SCR",,Works,
 1148,V12B1,AGD,AGD,Laetitia 2,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""","L2CODE
@@ -2708,7 +2708,7 @@ UCSCR",,Test,
 1225,V13B1,ROMS,Pearce,ATOM SIGN ROM,Utility,,,,,,,,,,present,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",1E13,,Test,
-1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
+1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R) (40K),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
 1227,V13B1,Non Comm,Non Comm,KAARTEN (R),Game,,,,No,Yes,No,,,,present,,NC,8200,"CH.""KAARTEN""",KAARTEN,,Test,
 1228,V13B1,Non Comm,Non Comm,K-TRUUK,Game,,,,,,,,,,present,,NC,8200,"CH.""K-TRUUK""",K-TRUUK,,Test,
 1229,V13B1,Non Comm,Non Comm,GAGS Demo 2 (R),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""GAGDEM2""",GAGDEM2,,Test,
@@ -2839,7 +2839,7 @@ ZISCR",,Test,
 1291,V14B1,Books,The Atom,Life,Simulation,,,,,,,,,,present,,TA,8200,"CH.""LIFE""",LIFE,,Test,
 1292,V14B1,Magazines,PE,Fascimile,Utility,,,Yes,,,,,,,present,,PE,8200,"CH.""DIGIFAX""",DIGIFAX,,Test,
 1293,V14B1,Magazines,PE,Morse Tutor,Utility,,,,,,,,,,present,,PE,8200,"CH.""MORSE""",MORSE,,Test,
-1294,V14B1,Modern,Retro S/W,DareDevil Dennis (32K),Game,RS Colour,Yes,,,,,,,,present,Kees van Oss,RS/DDD,8200,"CH.""DDDRUN""","DATA
+1294,V14B1,Modern,Retro S/W,DareDevil Dennis (32K),Game,RS Colour,Yes,Yes,,,,,,,present,Kees van Oss,RS/DDD,8200,"CH.""DDDRUN""","DATA
 DDDCODE
 DDDRUN
 DDDSCR
