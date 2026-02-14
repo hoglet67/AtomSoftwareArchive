@@ -399,7 +399,7 @@ ATOMIDAT",,"Works - Dave updated lines 3100,3110 as original relied on an extens
 RUN","171
 171B
 DRAGONC",,Works,
-265,V3,Modern,Retro S/W,Castle Quest (16K) (R),Game,RS Mono,Yes,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
+265,V3,Modern,Retro S/W,Castle Quest (40K) (R),Game,RS Mono,Yes,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
 DATA",,Works,
 266,V2,Modern,Retro S/W,Chuckie Egg (16K),Game,./dave/RS/CASQUEST/CAST,Yes,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
 CCH-EGG
@@ -1469,7 +1469,7 @@ D2-EDIT
 D2-SCR
 D2-SPEL
 D2-SPRI",,Works,
-781,V8B2,Non Comm,Non Comm,Sokatom (R) (32K),Game,,Yes,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""","S-RESET
+781,V8B2,Non Comm,Non Comm,Sokatom (R) (40K),Game,,Yes,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""","S-RESET
 SCORE
 SOKATOM
 SOKBLD1
@@ -2403,7 +2403,7 @@ SHOW2E
 SHOW3
 SHOW3E
 DISOLV",,Works,
-1121,V11B7,Non Comm,Non Comm,Jackpot (32K) (R),Game,,Yes,Yes,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
+1121,V11B7,Non Comm,Non Comm,Jackpot (40K) (R),Game,,Yes,Yes,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
 J-PROG
 J-SHAPE",,Works,
 1122,,Comm,Computer Concepts,Softscreen,Utility,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
@@ -2847,6 +2847,6 @@ DDDTUNE
 INLAY
 INTRO
 LOADER",,Test,
-1295,V14B1,Modern,Retro S/W,TREES & TENTS (32K),Game,RS Mono,Yes,,,,,,,Both,present,Kees van Oss,RS/TENTS,8200,"CH.""TTRUN""","TTCODE
+1295,V14B1,Modern,Retro S/W,TREES & TENTS (40K),Game,RS Mono,Yes,,,,,,,Both,present,Kees van Oss,RS/TENTS,8200,"CH.""TTRUN""","TTCODE
 TTRUN
 TTSCR",,Works,
