@@ -360,6 +360,13 @@ public class RomScanner {
         // Extract all likely Basic Statements from the item (scanning multiple files if needed)
         Set<String> statements = basicStatements(item);
 
+        // Scan for COPY to #9800 region
+        for (String statement : statements) {
+            if ((statement.contains("COPY") || statement.contains("BASE")) && statement.contains("#9")) {
+                System.out.println("WARNING: Compatibility: Title probably should be marked as 40K: " + item + " : " + statement);
+            }
+        }
+
         // Match those statements against known ROM commands
         Set<String> progCommands = matchCommands(statements, allCommands());
 

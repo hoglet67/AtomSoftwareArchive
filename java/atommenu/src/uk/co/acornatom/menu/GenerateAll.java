@@ -119,6 +119,9 @@ public class GenerateAll {
                     if (atm.isAtm()) {
                         int start = atm.getLoadAddr();
                         int end = atm.getLoadAddr() + atm.getLength();
+                        if (start < 0xA000 && end > 0x9800 && !atm.isGarbageSignature()) {
+                            System.out.println("WARNING: Compatibility: Title probably should be marked as 40K: " + item + " : " + atm);
+                        }
                         if (!((start >= 0x0000 && end <= 0x0400) ||
                               (start >= 0x2800 && end <= 0x3C00) ||
                               (start >= 0x8000 && end <= 0x9800) ||
