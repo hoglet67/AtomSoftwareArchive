@@ -610,7 +610,7 @@ CH.""OTHEL1""",OTHEL1,,Works,
 379,V4,Non Comm,Non Comm,Persuit Plane,Game,,,,,,,,,,present,JC-ADM,NC,8200,*RUN PLANE,PLANE,,Works,
 380,V4,Non Comm,Non Comm,Plane,Game,,,,,,,,,,present,???,NC,8200,"CH.""PLANES""",PLANES,,Works,
 381,V4,Non Comm,Non Comm,POGO (R),Game,,32K+6K,,Yes,Yes,Yes,,,,present,Hamburgersoft,NC/TB,8200,"CH.""POGO""",POGO,,Works,
-382,V4,Non Comm,Non Comm,Pointer,Game,,32K+6K,,,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
+382,V4,Non Comm,Non Comm,Pointer,Game,,6K+6K,,,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
 383,V4,Non Comm,Non Comm,Prinses (R),Game,,,,No,Yes,No,,,,present,G.T.H.,NC,8200,"CH.""PRINSES""",PRINSES,,Works,
 384,V4,Non Comm,Non Comm,Puzzel (R),Game,,,,Yes,No,No,,,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
 385,V4,Non Comm,Non Comm,Race,Game,,,,,,,,,,present,A.Clarke,NC,8200,"CH.""RACE""",RACE,,Works,
@@ -1504,7 +1504,7 @@ AMANRUN",,Test,
 800,V8B3,Comm,Prog Power,Martians (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN MARTIAN,MARTIAN,,Works,
 801,V8B3,Comm,Micro Mania,Omega Mission (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN OMEGA,"OMEGA
 DATA",,Works,
-802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,32K+6K,,,,,,,JoyKBD,present,,JS/KEES,8200,"*LOAD POINTER
+802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,6K+6K,,,,,,,JoyKBD,present,,JS/KEES,8200,"*LOAD POINTER
 RUN",POINTER,,Works,
 803,V8B3,Comm,Acornsoft,Rat Trap (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN RATTRAP,RATTRAP,,Works,
 804,V8B3,Comm,Acornsoft,Robots (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""ROBOTS""",ROBOTS,,Works,
