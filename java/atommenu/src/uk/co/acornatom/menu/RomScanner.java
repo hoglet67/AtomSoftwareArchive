@@ -22,7 +22,6 @@ public class RomScanner {
         this.archiveDir = archiveDir;
     }
 
-
     public static RomDef basicRomDef =
             new RomDef(
                     BASIC,
@@ -354,6 +353,19 @@ public class RomScanner {
         default:
             throw new RuntimeException("Unknown ROM: " + rom.getName());
         }
+    }
+
+
+    public boolean testForCopyOrBase(String s) {
+        String hex = "89ABCDEF";
+        if (s.contains("COPY") || s.contains("BASE")) {
+            for (char c : hex.toCharArray()) {
+                if (s.contains("#9" + c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
 
     }
     public void scan(AtomTitle item) {
@@ -362,8 +374,11 @@ public class RomScanner {
 
         // Scan for COPY to #9800 region
         for (String statement : statements) {
-            if ((statement.contains("COPY") || statement.contains("BASE")) && statement.contains("#9")) {
-                System.out.println("WARNING: Compatibility: Title probably should be marked as 40K: " + item + " : " + statement);
+            if (testForCopyOrBase(statement)) {
+                if (item.getRamDependency().endsWith("6K")) {
+                    System.out.println("WARNING: RAM Compatibility: Title probably should be marked as " +
+                                       item.getRamDependency().replace("+6K", "+8K") + ": " + item + " : " + statement);
+                }
             }
         }
 
