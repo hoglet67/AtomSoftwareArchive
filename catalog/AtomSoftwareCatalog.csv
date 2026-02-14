@@ -1,4 +1,4 @@
-Index,Updated,Chunk,Publisher,Title,Genre,Collection,32K RAM,FP,PCHARME,GAGS,AXR1,WEROM,PPTOOLKIT,Joystick,Status,Author (if known),Directory,Boot Address,To Run,Filenames,,Notes,Documentation Link
+Index,Updated,Chunk,Publisher,Title,Genre,Collection,RAM,FP,PCHARME,GAGS,AXR1,WEROM,PPTOOLKIT,Joystick,Status,Author (if known),Directory,Boot Address,To Run,Filenames,,Notes,Documentation Link
 1,V1,Comm,A&F S/W,Cylon Attack,Game,,,,,,,,,,present,,AF,8200,"CH.""CYLONATT""",CYLONATT,,Works,
 2,V2,Comm,A&F S/W,Death Satellite,Adventure,,,,,,,,,,present,,AF,8200,"*LOAD ADV1P
 *RUN ADV1D","ADV1P
@@ -24,7 +24,7 @@ DUNGEON",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
 15,V1,Comm,Acornsoft,Intergalactic,Adventure,Atom Adventures,,,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN INTERGAL","ADVENTUR
 INTERGAL",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-16,V1,Modern,Acornsoft,Sphinx Adv (R) (40K),Adventure,Atom Adventures,Yes,,Yes,No,No,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
+16,V1,Modern,Acornsoft,Sphinx Adv (R) (40K),Adventure,Atom Adventures,32K+8K,,Yes,No,No,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
 SPHINX1
 SPHINX2
 SPHINXIN",,Works,
@@ -154,7 +154,7 @@ LISP2",,Works,https://site.acornatom.nl/boeken/lisp-theory-and-practice.pdf
 100,V1,Comm,Acornsoft,Rational,Utility,Maths Pack 2,,Yes,,,,,,,present,,AS/MATHS2,8200,"CH.""RATIONAL""",RATIONAL,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 101,V3,Comm,Acornsoft,Triginometry,Utility,Maths Pack 2,,Yes,,,,,,,present,,AS/MATHS2,8200,"CH.""TRIGONOM""",TRIGONOM,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
 102,V1,Comm,Acornsoft,Fourier,Utility,Maths Pack 2,,Yes,,,,,,,present,,AS/MATHS2,8200,"CH.""FOURIER""",FOURIER,,Works,https://acornatom.nl/atom_handleidingen/pdf/maths%20pack%202.pdf
-103,V1,Non Comm,Non Comm,Pascal (16K),Language,,Yes,,,,,,,,present,Mel Conway,OTHER,8200,*RUN PASCAL,PASCAL,,Works,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
+103,V1,Non Comm,Non Comm,Pascal (32K),Language,,32K+6K,,,,,,,,present,Mel Conway,OTHER,8200,*RUN PASCAL,PASCAL,,Works,https://acornatom.nl/atom_handleidingen/pascal/pascal.html
 104,V1,Comm,Acornsoft,Peeko Computer,Educational,,,,,,,,,,present,,AS/PEEKO,8200,"CH.""PEEKO""","PEEKO
 ADD
 COPY
@@ -172,7 +172,7 @@ PICNIC",,Works,
 110,V3,Comm,Acornsoft,Fast Cassette OS,Utility,Utility Pack 1,,,,,,,,,present,,AS/UTILS1,9700,"?18=130
 CH.""FASTCOS""",FASTCOS,,Works,
 111,V1,Comm,Acornsoft,Renumber,Utility,Utility Pack 1,,,,,,,,,present,,AS/UTILS1,8200,*RUN RENUM,RENUM,,Works,
-112,V1,Modern,Acornsoft,Wordpack (32K),Business,,Yes,,,,,,,,present,,AS/WORDPACK,8200,*RUN ED64,ED64,,Works,
+112,V1,Modern,Acornsoft,Wordpack (32K),Business,,32K+6K,,,,,,,,present,,AS/WORDPACK,8200,*RUN ED64,ED64,,Works,
 113,V1,Comm,Acornsoft,Pairs,Educational,Atom Word Tutor,,,,,,,,,present,,AS/WORDTUT,3B00,"*LOAD PAIRSD
 CH.""PAIRS""","PAIRS
 PAIRSD",,Works,
@@ -399,9 +399,9 @@ ATOMIDAT",,"Works - Dave updated lines 3100,3110 as original relied on an extens
 RUN","171
 171B
 DRAGONC",,Works,
-265,V3,Modern,Retro S/W,Castle Quest (40K) (R),Game,RS Mono,Yes,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
+265,V3,Modern,Retro S/W,Castle Quest (40K) (R),Game,RS Mono,32K+8K,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
 DATA",,Works,
-266,V2,Modern,Retro S/W,Chuckie Egg (16K),Game,./dave/RS/CASQUEST/CAST,Yes,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
+266,V2,Modern,Retro S/W,Chuckie Egg (16K),Game,./dave/RS/CASQUEST/CAST,16K+6K,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -410,7 +410,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-267,V2,Modern,Retro S/W,Galaforce (32K),Game,,Yes,,,,,,,,obsolete,,RS/GALA,8200,"CH.""RUNME""","ASM
+267,V2,Modern,Retro S/W,Galaforce (32K),Game,,32K+6K,,,,,,,,obsolete,,RS/GALA,8200,"CH.""RUNME""","ASM
 CGALA
 CGALSCR
 FONT
@@ -420,7 +420,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",,Works,
-268,V3,Modern,Retro S/W,Hard Hat Harry (32K),Game,RS Colour,Yes,,,,,,,,present,,RS/HARRY,8200,*RUN HARRY,"HARRY
+268,V3,Modern,Retro S/W,Hard Hat Harry (32K),Game,RS Colour,32K+6K,,,,,,,,present,,RS/HARRY,8200,*RUN HARRY,"HARRY
 LOADER",,Works,
 269,V2,Modern,Retro S/W,Hyper Viper,Game,,,,,,,,,,obsolete,,RS/HYPERV,8200,"CH.""LOADER""","CHYPER
 LOA-ASM
@@ -434,7 +434,7 @@ DAT1
 EDITOR
 LOADER
 MMINER",,Works,
-271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
+271,V8B1,Modern,Retro S/W,Jungle Journey (32K),Game,RS Colour,32K+6K,Yes,,,,,,JoyMMC,present,,RS/JUNGLE,8200,"CH.""RUNME""","INTRO
 JUNGLE
 MUSIC
 RUNME",,Works,
@@ -459,25 +459,25 @@ RUNME",,Works,
 290,V7B2,Comm,Prog Power,Blitz,Game,,,,,,,,,,present,S. Skippo,PP,8200,"CH.""BLITZ""",BLITZ,,Works,
 291,,Comm,Prog Power,Rat Race,Game,,,,,,,,,,missing,S. Skippo,PP,,,,,,
 292,,Comm,Prog Power,Galactica,Game,,,,,,,,,,missing,S. Vout,PP,,,,,,
-293,V2,Modern,Level 9,Colossal Adv (32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,COLOSSAL,,Works,
-294,V2,Modern,Level 9,Snowball (32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,SNOWBALL,,Works,
+293,V2,Modern,Level 9,Colossal Adv (32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,8200,*RUN COLOSSAL,COLOSSAL,,Works,
+294,V2,Modern,Level 9,Snowball (32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,8200,*RUN SNOWBALL,SNOWBALL,,Works,
 295,V3,Non Comm,Magnus Olsson,Diamonds,Adventure,,,,,,,,,,present,Magnus Olsson,MO,8200,"CH.""DIAMONDS""",DIAMONDS,,Works,
 296,,Comm,???,Intra Terrestrial,Adventure,,,,,,,,,,duplicate,,,,,,,,
 297,V3,Comm,Bearsoft,Wolf Pack,Game,,,,,,,,,,present,M. Barwise,BS,8200,"CH.""WOLFPAC""",WOLFPAC,,Works,
-298,V3,Modern,Level 9,Colossal Adv (B)(32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+298,V3,Modern,Level 9,Colossal Adv (B)(32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN COLOSSAL","VDUBLO
 COLOSSAL",,,
-299,V3,Modern,Level 9,Snowball (B)(32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
+299,V3,Modern,Level 9,Snowball (B)(32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUBLO
 *RUN SNOWBALL","VDUBLO
 SNOWBALL",,,
-300,V3,Modern,Level 9,Colossal Adv (W)(32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
+300,V3,Modern,Level 9,Colossal Adv (W)(32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN COLOSSAL","VDUWLO
 COLOSSAL",,,
-301,V3,Modern,Level 9,Snowball (W)(32K),Adventure,,Yes,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
+301,V3,Modern,Level 9,Snowball (W)(32K),Adventure,,32K+6K,,,,,,,,obsolete,"Mike, Nick and Pete Austin",L9,2900,"*RUN VDUWLO
 *RUN SNOWBALL","VDUWLO
 SNOWBALL",,,
 302,,Comm,,Astrofire (Kees),,,,,,,,,,,duplicate,,,,,,,Duplicate of Prog Power Astrafire,
-303,V3,Modern,Retro S/W,Chuckie Egg (M)(16K),Game,RS Mono,Yes,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
+303,V3,Modern,Retro S/W,Chuckie Egg (M)(16K),Game,RS Mono,16K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -486,7 +486,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-304,V3,Modern,Retro S/W,Chuckie Egg (C)(16K),Game,RS Colour,Yes,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
+304,V3,Modern,Retro S/W,Chuckie Egg (C)(16K),Game,RS Colour,32K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -495,7 +495,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,Yes,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
+305,V8B2,Modern,Retro S/W,Galaforce (M)(32K),Game,RS Mono,32K+6K,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN MGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -505,7 +505,7 @@ MGALSCR
 ROTDATA
 RUNME
 SCORE",,Works,
-306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
+306,V10B5,Modern,Retro S/W,Galaforce (C)(32K),Game,RS Colour,32K+6K,Yes,,,,,,JoyMMC,present,,RS/GALA,8200,*RUN CGALA,"ASM
 CGALA
 CGALSCR
 FONT
@@ -540,29 +540,29 @@ MMINER",,Works,
 RUN",CEMENT,,Works,
 315,V3,Non Comm,Non Comm,Pengo,Game,,,,,,,,,,present,M.LAUWERENS,OTHER,8200,*RUN PENGO,PENGO,,Works,
 316,V3,Non Comm,Non Comm,Stitch,Game,,,,,,,,,,present,,OTHER,8200,"CH.""STITCH""",STITCH,,Works,
-317,V4,Modern,Level 9,Colossal Adv (32K),Adventure,Middle Earth,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
+317,V4,Modern,Level 9,Colossal Adv (32K),Adventure,Middle Earth,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/COLOSSAL,2900,"*RUN VDUBLO
 *RUN COLOSSAL","VDUBLO
 COLOSSAL",,Works,
-318,V4,Modern,Level 9,Adv Quest (32K),Adventure,Middle Earth,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/ADQUEST,2900,"*RUN VDUBLO
+318,V4,Modern,Level 9,Adv Quest (32K),Adventure,Middle Earth,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/ADQUEST,2900,"*RUN VDUBLO
 *RUN ADQUEST","VDUBLO
 ADQUEST",,Works,
-319,V4,Modern,Level 9,Dungeon Adv (32K),Adventure,Middle Earth,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/DUNGEON,2900,"*RUN VDUBLO
+319,V4,Modern,Level 9,Dungeon Adv (32K),Adventure,Middle Earth,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/DUNGEON,2900,"*RUN VDUBLO
 *RUN DUNGEON","VDUBLO
 DUNGEON",,Works,
-320,V4,Modern,Level 9,Snowball (32K),Adventure,Silicon Dreams,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/SNOWBALL,2900,"*RUN VDUBLO
+320,V4,Modern,Level 9,Snowball (32K),Adventure,Silicon Dreams,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/SNOWBALL,2900,"*RUN VDUBLO
 *RUN SNOWBALL","VDUBLO
 SNOWBALL",,Works,
-321,V4,Modern,Level 9,Return to Eden (32K),Adventure,Silicon Dreams,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/EDEN,2900,"*RUN VDUBLO
+321,V4,Modern,Level 9,Return to Eden (32K),Adventure,Silicon Dreams,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/EDEN,2900,"*RUN VDUBLO
 *RUN EDEN","VDUBLO
 EDEN",,Works,
-322,V4,Modern,Level 9,Worm in Paradise (32K),Adventure,Silicon Dreams,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/WORM,2900,*RUN WORM,WORM,,Works,
-323,V4,Modern,Level 9,Lords of Time (32K),Adventure,Time and Magik,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/LORDSOF,2900,"*RUN VDUBLO
+322,V4,Modern,Level 9,Worm in Paradise (32K),Adventure,Silicon Dreams,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/WORM,2900,*RUN WORM,WORM,,Works,
+323,V4,Modern,Level 9,Lords of Time (32K),Adventure,Time and Magik,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/LORDSOF,2900,"*RUN VDUBLO
 *RUN LORDSOF","VDUBLO
 LORDSOF",,Works,
-324,V4,Modern,Level 9,Red Moon (32K),Adventure,Time and Magik,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/REDMOON,2900,"*RUN VDUBLO
+324,V4,Modern,Level 9,Red Moon (32K),Adventure,Time and Magik,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/REDMOON,2900,"*RUN VDUBLO
 *RUN REDMOON","VDUBLO
 REDMOON",,Works,
-325,V4,Modern,Level 9,Price of Magik (32K),Adventure,Time and Magik,Yes,,,,,,,,present,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,MAGIK,,Works,
+325,V4,Modern,Level 9,Price of Magik (32K),Adventure,Time and Magik,32K+6K,,,,,,,,present,"Mike, Nick and Pete Austin",L9/MAGIK,2900,*RUN MAGIK,MAGIK,,Works,
 326,V4,Magazines,Your Computer,Acorn Kong,Game,,,Yes,,,,,,,present,???,YC,8200,"CH.""ACKONG""",ACKONG,,Works,
 328,V4,Non Comm,Non Comm,Artist,Utility,,,,,,,,,,duplicate,???,NC,8200,*RUN ARTIST,ARTIST,,Works,
 330,V4,Non Comm,Non Comm,Atomica Spacewar (R),Game,,,,Yes,No,No,,,,present,J.A.F.M.van Eldik,NC/TB,8200,"CH.""ATOMICA""",ATOMICA,,Works,
@@ -577,10 +577,10 @@ REDMOON",,Works,
 340,V4,Magazines,C&VG,Bug Battle,Game,,,,,,,,,,present,G. Dunnett,CVG,8200,"CH.""BUGBATT""",BUGBATT,,Works,
 341,V4,Non Comm,Non Comm,Cards Bridge? (R),Game,,,,No,No,Yes,,,,present,???,NC/TB,8200,"CH.""CARDS-H""",CARDS-H,,Works,
 342,V4,Non Comm,Non Comm,Cards Bridge? (R),Game,,,,No,No,Yes,,,,present,???,NC/TB,8200,"CH.""CARDS-V""",CARDS-V,,Works,
-345,V4,Non Comm,Non Comm,City Bomber (R),Game,,Yes,,No,Yes,No,,,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
+345,V4,Non Comm,Non Comm,City Bomber (R),Game,,32K+6K,,No,Yes,No,,,,present,R.Boers,NC/TB,8200,"CH.""CITYBOM""",CITYBOM,,Works,
 346,,Non Comm,Non Comm,Gobi Woestijn,Game,,,,,,,,,,duplicate,???,NC,8200,"CH.""DESERT""",DESERT,,,
 347,V13B1,Books,Getting Acquainted,Dodgem,Game,,,,,,,,,,present,???,GA,8200,"CH.""DODGEM""",DODGEM,,Test,
-349,V4,Non Comm,Non Comm,Draw Poker (R) (40K),Game,,Yes,Yes,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
+349,V4,Non Comm,Non Comm,Draw Poker (R) (40K),Game,,32K+8K,Yes,No,Yes,No,,,,present,E.Thijsse,NC/TB,8200,"CH.""DRAWPOK""",DRAWPOK,,Works,
 350,,Non Comm,Non Comm,Drive,Game,,,,,,,,,,duplicate,D.Dini,NC,8200,*RUN DRIVE,DRIVE,,,
 351,V4,Non Comm,Non Comm,Fizzle Bricks,Game,,,Yes,,,,,,,present,???,NC,8200,"CH.""FOURROW""",FOURROW,,Works,
 352,V4,Non Comm,Non Comm,Golf,Game,,,,,,,,,,present,???,NC,8200,"CH.""GOLF""",GOLF,,Works,
@@ -609,8 +609,8 @@ CH.""OTHEL1""",OTHEL1,,Works,
 378,V4,Non Comm,Non Comm,Plakoto,Game,,,,,,,,,,present,???,NC,8200,"CH.""PLAKOTO""",PLAKOTO,,Works,
 379,V4,Non Comm,Non Comm,Persuit Plane,Game,,,,,,,,,,present,JC-ADM,NC,8200,*RUN PLANE,PLANE,,Works,
 380,V4,Non Comm,Non Comm,Plane,Game,,,,,,,,,,present,???,NC,8200,"CH.""PLANES""",PLANES,,Works,
-381,V4,Non Comm,Non Comm,POGO (R),Game,,Yes,,Yes,Yes,Yes,,,,present,Hamburgersoft,NC/TB,8200,"CH.""POGO""",POGO,,Works,
-382,V4,Non Comm,Non Comm,Pointer,Game,,Yes,,,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
+381,V4,Non Comm,Non Comm,POGO (R),Game,,32K+6K,,Yes,Yes,Yes,,,,present,Hamburgersoft,NC/TB,8200,"CH.""POGO""",POGO,,Works,
+382,V4,Non Comm,Non Comm,Pointer,Game,,32K+6K,,,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
 383,V4,Non Comm,Non Comm,Prinses (R),Game,,,,No,Yes,No,,,,present,G.T.H.,NC,8200,"CH.""PRINSES""",PRINSES,,Works,
 384,V4,Non Comm,Non Comm,Puzzel (R),Game,,,,Yes,No,No,,,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
 385,V4,Non Comm,Non Comm,Race,Game,,,,,,,,,,present,A.Clarke,NC,8200,"CH.""RACE""",RACE,,Works,
@@ -875,13 +875,13 @@ ERRTAB",,Works,
 *RUN PS2A
 ","PROG
 PS2A",,Works,
-615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,Yes,Yes,,,,,,JoyMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
+615,V8B1,Modern,Retro S/W,Repton (32K),Game,RS Colour,32K+6K,Yes,,,,,,JoyMMC,present,,RS/REPTON,8200,*RUN REPTON,"LOADER
 REPSCR
 REPTON",,Works,
-616,V5,Non Comm,Non Comm,Lost Gold (32K)(R),Adventure,,Yes,,Yes,No,No,,,,present,,OTHER,8200,"CH.""ADVLDG""",ADVLDG,,Works,
+616,V5,Non Comm,Non Comm,Lost Gold (32K)(R),Adventure,,32K+6K,,Yes,No,No,,,,present,,OTHER,8200,"CH.""ADVLDG""",ADVLDG,,Works,
 617,V6,Modern,Non Comm,Reptune (#BDC0),Music,SID,,,,,,,,,present,,SID/ATOMSID,8200,*RUN REPTUNE,REPTUNE,,Works,
 618,V6,Modern,Non Comm,SidTest (#BDC0),Music,SID,,,,,,,,,present,,SID/ATOMSID,8200,"CH.""SIDTEST""",SIDTEST,,Works,
-619,V6,Modern,Non Comm,AtomSID (#BDC0) (32K),Music,SID,Yes,,,,,,,,present,,SID/ATOMSID,2900,*RUN SIDMENU,"AXELF
+619,V6,Modern,Non Comm,AtomSID (#BDC0) (32K),Music,SID,32K+6K,,,,,,,,present,,SID/ATOMSID,2900,*RUN SIDMENU,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
@@ -899,7 +899,7 @@ WIZARDO",,Works,
 620,V6,Modern,Non Comm,HubPlay (#9FC0),Music,SID,,,,,,,,,present,,SID/DAVESID,8200,*RUN HUBPLAY,HUBPLAY,,Works,
 621,V6,Modern,Non Comm,Reptune (#9FC0),Music,SID,,,,,,,,,present,,SID/DAVESID,8200,*RUN REPTUNE,REPTUNE,,Works,
 622,V6,Modern,Non Comm,SidTest (#9FC0),Music,SID,,,,,,,,,present,,SID/DAVESID,8200,"CH.""SIDTEST""",SIDTEST,,Works,
-623,V6,Modern,Non Comm,AtomSID (#9FC0) (32K),Music,SID,Yes,,,,,,,,present,,SID/DAVESID,2900,*RUN SIDMENU,"AXELF
+623,V6,Modern,Non Comm,AtomSID (#9FC0) (32K),Music,SID,32K+6K,,,,,,,,present,,SID/DAVESID,2900,*RUN SIDMENU,"AXELF
 BLADERU
 BLUESBR
 CHARIOT
@@ -914,7 +914,7 @@ TERMINA
 TITANIC
 TOPGUN
 WIZARDO",,Works,
-624,V6,Modern,Non Comm,BeebSID01 Bill Carr,Music,SID,Yes,,,,,,,,present,,SID/ATMSID1,2900,*RUN SIDMENU,"4X4
+624,V6,Modern,Non Comm,BeebSID01 Bill Carr,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID1,2900,*RUN SIDMENU,"4X4
 BATMAN
 CHRDN
 CNFZN
@@ -928,7 +928,7 @@ THRUST
 URIDIUM
 VISAGE
 ",,Works,
-625,V6,Modern,Non Comm,BeebSID02 BBC Games,Music,SID,Yes,,,,,,,,present,,SID/ATMSID2,2900,*RUN SIDMENU,"BUBBLEB
+625,V6,Modern,Non Comm,BeebSID02 BBC Games,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID2,2900,*RUN SIDMENU,"BUBBLEB
 FIRETRA
 HOPPER1
 HOPPER3
@@ -942,7 +942,7 @@ REPTONA
 SABREWU
 SIDMENU
 WAYOFTH",,Works,
-626,V6,Modern,Non Comm,BeebSID03 The 80s,Music,SID,Yes,,,,,,,,present,,SID/ATMSID3,2900,*RUN SIDMENU,"ALWAYSO
+626,V6,Modern,Non Comm,BeebSID03 The 80s,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID3,2900,*RUN SIDMENU,"ALWAYSO
 AXELFAA
 BILLIEJ
 CARELES
@@ -958,7 +958,7 @@ SWEETDR
 TAKEMYB
 THEFINA
 TOGETHE",,Works,
-627,V6,Modern,Non Comm,BeebSID04 The Beatles,Music,SID,Yes,,,,,,,,present,,SID/ATMSID4,2900,*RUN SIDMENU,"ALLYOUN
+627,V6,Modern,Non Comm,BeebSID04 The Beatles,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID4,2900,*RUN SIDMENU,"ALLYOUN
 COMETOG
 ELEANOR
 HERECOM
@@ -974,7 +974,7 @@ WHENIM6
 WITHALI
 YELLOWS
 YESTERD",,Works,
-628,V6,Modern,Non Comm,BeebSID05 Movies,Music,SID,Yes,,,,,,,,present,,SID/ATMSID5,2900,*RUN SIDMENU,"BLADERU
+628,V6,Modern,Non Comm,BeebSID05 Movies,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID5,2900,*RUN SIDMENU,"BLADERU
 BLUESBR
 CHARIOT
 GHOSTBU
@@ -990,7 +990,7 @@ TERMINA
 TITANIC
 TOPGUNA
 WIZARDO",,Works,
-629,V6,Modern,Non Comm,BeebSID06 Madonna,Music,SID,Yes,,,,,,,,present,,SID/ATMSID6,2900,*RUN SIDMENU,"DEEPERA
+629,V6,Modern,Non Comm,BeebSID06 Madonna,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID6,2900,*RUN SIDMENU,"DEEPERA
 FROZENA
 HOLIDAY
 INTOTHE
@@ -1006,7 +1006,7 @@ SPOTLIG
 THISUSE
 WHOSTHA
 YOULLSE",,Works,
-630,V6,Modern,Non Comm,BeebSID07 XMAS Time,Music,SID,Yes,,,,,,,,present,,SID/ATMSID7,2900,*RUN SIDMENU,"ANIOLPA
+630,V6,Modern,Non Comm,BeebSID07 XMAS Time,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID7,2900,*RUN SIDMENU,"ANIOLPA
 DECKTHE
 DOTHEYK
 FAIRYTA
@@ -1026,7 +1026,7 @@ SILENTN
 WALKING
 WEWISHY
 WHITECH",,Works,
-631,V6,Modern,Non Comm,BeebSID08 Queen,Music,SID,Yes,,,,,,,,present,,SID/ATMSID8,2900,*RUN SIDMENU,"SIDMENU
+631,V6,Modern,Non Comm,BeebSID08 Queen,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID8,2900,*RUN SIDMENU,"SIDMENU
 1973SEV
 1975BOH
 1977AWE
@@ -1042,7 +1042,7 @@ WHITECH",,Works,
 1986WHO
 1989SCA
 1991THE",,Works,
-632,V6,Modern,Non Comm,BeebSID09 1981,Music,SID,Yes,,,,,,,,present,,SID/ATMSID9,2900,*RUN SIDMENU,"01IMAGI
+632,V6,Modern,Non Comm,BeebSID09 1981,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID9,2900,*RUN SIDMENU,"01IMAGI
 01LOSPA
 02FADET
 02INTHE
@@ -1063,7 +1063,7 @@ WHITECH",,Works,
 12CAMBO
 12DONTY
 SIDMENU",,Works,
-633,V6,Modern,Non Comm,BeebSID10 Olympics,Music,SID,Yes,,,,,,,,present,,SID/ATMSID10,2900,*RUN SIDMENU,"01GODSA
+633,V6,Modern,Non Comm,BeebSID10 Olympics,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID10,2900,*RUN SIDMENU,"01GODSA
 02JAMES
 03TUBUL
 04INDUL
@@ -1081,7 +1081,7 @@ SIDMENU",,Works,
 98COMET
 99HEYJU
 SIDMENU",,Works,
-634,V6,Modern,Non Comm,BeebSID11 Telly,Music,SID,Yes,,,,,,,,present,,SID/ATMSID11,2900,*RUN SIDMENU,"ADDAMSF
+634,V6,Modern,Non Comm,BeebSID11 Telly,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID11,2900,*RUN SIDMENU,"ADDAMSF
 AUFWIED
 BACARDI
 BENNYHI
@@ -1108,7 +1108,7 @@ SOOTYAN
 STARTRE
 THOMAST
 WOMBLES",,Works,
-635,V6,Modern,Non Comm,BeebSID12 Jarre,Music,SID,Yes,,,,,,,,present,,SID/ATMSID12,2900,*RUN SIDMENU,"01OXYGE
+635,V6,Modern,Non Comm,BeebSID12 Jarre,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID12,2900,*RUN SIDMENU,"01OXYGE
 02EQUIN
 03MAGNE
 04ZOOLO
@@ -1119,7 +1119,7 @@ WOMBLES",,Works,
 09WAITI
 10CHRON
 SIDMENU",,Works,
-636,V6,Modern,Non Comm,BeebSID13 Jackson,Music,SID,Yes,,,,,,,,present,,SID/ATMSID13,2900,*RUN SIDMENU,"82ABILL
+636,V6,Modern,Non Comm,BeebSID13 Jackson,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID13,2900,*RUN SIDMENU,"82ABILL
 82BBEAT
 83AWANN
 83BSAYS
@@ -1137,7 +1137,7 @@ SIDMENU",,Works,
 93GIVEI
 SIDMENU
 ",,Works,
-637,V6,Modern,Non Comm,XMAS SID (#BDC0) (32K),Music,SID,Yes,,,,,,,,present,,SID/XMASSID,2900,*RUN VU-MENU,"DOKNOW
+637,V6,Modern,Non Comm,XMAS SID (#BDC0) (32K),Music,SID,32K+6K,,,,,,,,present,,SID/XMASSID,2900,*RUN VU-MENU,"DOKNOW
 JINGLE
 JOHNXMAS
 LAST
@@ -1254,7 +1254,7 @@ PRINT FOR HELP: SEE MANUAL
 PRINT FOR COMMANDS: MDBOX
 PRINT FOR HELP: SEE MANUAL
 *LOAD 9496 8800",9496,,"Broken - commands work, but crash/corrupt",
-668,V6,Modern,Acornsoft,BBC Basic II (32K),Language,,Yes,,,,,,,,present,,BBC,8200,*RUN ATBASIC2,ATBASIC2,,Works,
+668,V6,Modern,Acornsoft,BBC Basic II (32K),Language,,32K+6K,,,,,,,,present,,BBC,8200,*RUN ATBASIC2,ATBASIC2,,Works,
 669,V6,ROMS,Non Comm,Atomic Windows 1.2 BD,Graphics,,,,,,,,,,present,Kees van Oss,ROMS/NC/ATOMICW,8200,"PRINT INITIALIZATION: AUTOMATIC
 PRINT FOR VERSION: AW
 PRINT FOR HELP: SEE MANUAL
@@ -1264,9 +1264,9 @@ PRINT FOR HELP: SEE MANUAL
 672,V6,Modern,Non Comm,GODIL 80x40 Demo,Graphics,GODIL,,,,,,,,,present,David Banks,GODIL,8200,"CH.""DEMO""",DEMO,,Works,
 673,V6,Non Comm,Non Comm,Bombs Away,Game,,,,,,,,,,present,,NC,8200,"CH.""BOMBS""",BOMBS,,Works,
 674,V6,Non Comm,Non Comm,Desert,Game,,,,,,,,,,present,,NC,8200,"CH.""DESERT""",DESERT,,Works,
-675,V6,Non Comm,Non Comm,Duck (R) (32K),Game,,Yes,,Yes,Yes,Yes,,,,present,Roland Leurs,NC,8200,"CH.""DUCK""",DUCK,,Works,
+675,V6,Non Comm,Non Comm,Duck (R) (32K),Game,,32K+6K,,Yes,Yes,Yes,,,,present,Roland Leurs,NC,8200,"CH.""DUCK""",DUCK,,Works,
 676,V6,Non Comm,Non Comm,Jet,Game,,,,,,,,,,present,Boede Hommel,NC,8200,"CH.""JET""",JET,,Works,
-679,V8B1,Modern,Retro S/W,Joe Blade (32K),Game,RS Mono,Yes,,,,,,,JoyMMC,present,Kees van Oss,RS/JOE,8200,*RUN JOE,"JOE
+679,V8B1,Modern,Retro S/W,Joe Blade (32K),Game,RS Mono,32K+6K,,,,,,,JoyMMC,present,Kees van Oss,RS/JOE,8200,*RUN JOE,"JOE
 JOECODE
 PANEL1
 SCRE",,Works,
@@ -1283,34 +1283,34 @@ QUESTDA",,Works,
 688,,Comm,Pro Software,Air Strike,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
 689,,Comm,Pro Software,Chase,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
 690,,Comm,Pro Software,Road Race,Game,,,,,,,,,,missing,,,,,,,"Advert in Personal Computing Today, Nov 82",
-691,V7B3,Modern,Retro S/W,TCCOTMV (32),Adventure,Quill,Yes,,,,,,,,present,Stuart,QUILL/TCC,2900,"*LOAD DB32
+691,V7B3,Modern,Retro S/W,TCCOTMV (32),Adventure,Quill,32K+6K,,,,,,,,present,Stuart,QUILL/TCC,2900,"*LOAD DB32
 *RUN QLUC32","DB32
 QLUC32",,Works,
-692,V7B3,Modern,Retro S/W,TCCOTMV (40),Adventure,Quill,Yes,,,,,,,,present,Stuart,QUILL/TCC,2900,"*RUN VDU2440
+692,V7B3,Modern,Retro S/W,TCCOTMV (40),Adventure,Quill,32K+6K,,,,,,,,present,Stuart,QUILL/TCC,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40","VDU2440
 DB40
 QLLC40",,Works,
-693,V7B1,Modern,Larsoft,Hex (32),Adventure,Quill,Yes,,,,,,,,present,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
+693,V7B1,Modern,Larsoft,Hex (32),Adventure,Quill,32K+6K,,,,,,,,present,Geoff Larsen,QUILL/HEX,2900,"*LOAD DB32
 *RUN QLUC32","DB32
 QLUC32",,Works,
-694,V7B2,Modern,Larsoft,Hex (40),Adventure,Quill,Yes,,,,,,,,present,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
+694,V7B2,Modern,Larsoft,Hex (40),Adventure,Quill,32K+6K,,,,,,,,present,Geoff Larsen,QUILL/HEX,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40","VDU2440
 DB40
 QLLC40",,Works,
-695,V7B1,Modern,Lee S/W,Atahaulpa Part 1 (32),Adventure,Quill,Yes,,,,,,,,present,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
+695,V7B1,Modern,Lee S/W,Atahaulpa Part 1 (32),Adventure,Quill,32K+6K,,,,,,,,present,Anthony Lee,QUILL/SRCH1,2900,"*LOAD DB32
 *RUN QLUC32","DB32
 QLUC32",,Works,
-696,V7B2,Modern,Lee S/W,Atahaulpa Part 1 (40),Adventure,Quill,Yes,,,,,,,,present,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
+696,V7B2,Modern,Lee S/W,Atahaulpa Part 1 (40),Adventure,Quill,32K+6K,,,,,,,,present,Anthony Lee,QUILL/SRCH1,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40","VDU2440
 DB40
 QLLC40",,Works,
-697,V7B1,Modern,Lee S/W,Atahaulpa Part 2 (32),Adventure,Quill,Yes,,,,,,,,present,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
+697,V7B1,Modern,Lee S/W,Atahaulpa Part 2 (32),Adventure,Quill,32K+6K,,,,,,,,present,Anthony Lee,QUILL/SRCH2,2900,"*LOAD DB32
 *RUN QLUC32","DB32
 QLUC32",,Works,
-698,V7B2,Modern,Lee S/W,Atahaulpa Part 2 (40),Adventure,Quill,Yes,,,,,,,,present,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
+698,V7B2,Modern,Lee S/W,Atahaulpa Part 2 (40),Adventure,Quill,32K+6K,,,,,,,,present,Anthony Lee,QUILL/SRCH2,2900,"*RUN VDU2440
 *LOAD DB40
 *RUN QLLC40","VDU2440
 DB40
@@ -1318,9 +1318,9 @@ QLLC40",,Works,
 699,V7B1,Comm,Prog Power,Invasion,Game,,,,,,,,,,present,T.M.Millar,PP,8200,"?18=40
 CH.""INVAS""","INVAS
 INVASIN",,Works,
-700,V11B5,Modern,Non Comm,GODIL OSWRCH80,Graphics,GODIL,Yes,,,,,,,,present,David Banks,GODIL,8200,*RUN OSWRCH80,OSWRCH80,,Works,
+700,V11B5,Modern,Non Comm,GODIL OSWRCH80,Graphics,GODIL,32K+6K,,,,,,,,present,David Banks,GODIL,8200,*RUN OSWRCH80,OSWRCH80,,Works,
 701,V7B2,Comm,ASP S/W,The White Barrows,Adventure,,,,,,,,,,present,,ASP,8200,"CH.""WHITEBA""",WHITEBA,,Works,
-702,V7B2,Modern,Non Comm,Kraftwerk (SID) (32k),Music,Mainwaring,Yes,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
+702,V7B2,Modern,Non Comm,Kraftwerk (SID) (32k),Music,Mainwaring,32K+6K,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
 CMPWRLD
 SIDPLAY
 LOADER",,Works,
@@ -1397,7 +1397,7 @@ MSDISP",,Works,
 759,V7,Non Comm,Non Comm,Roman Numerals,Utility,Mockford,,,,,,,,,present,Bob Mockford,BM,8200,"CH.""ROMAN""",ROMAN,,Works,
 760,V7,Non Comm,Non Comm,"Rock, Scissors, Paper",Game,Mockford,,,,,,,,,present,Bob Mockford,BM,8200,"CH.""ROSCPA""",ROSCPA,,Works,
 761,V7,Non Comm,Non Comm,Sub Hunt,Game,Mockford,,,,,,,,,present,Bob Mockford,BM,8200,"CH.""SUBHUNT""",SUBHUNT,,Works,
-762,V7,Modern,Non Comm,BeebSID14 1982,Music,SID,Yes,,,,,,,,present,,SID/ATMSID14,2900,*RUN SIDMENU,"01THELA
+762,V7,Modern,Non Comm,BeebSID14 1982,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID14,2900,*RUN SIDMENU,"01THELA
 02ILLFI
 03THEMO
 04GOLDE
@@ -1412,15 +1412,15 @@ MSDISP",,Works,
 11MADWO
 12OURHO
 SIDMENU",,Works,
-763,V7,Modern,Retro S/W,Flappy Bird (32K),Game,RS Colour,Yes,,,,,,,,present,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,FLAPPY,,Works,
+763,V7,Modern,Retro S/W,Flappy Bird (32K),Game,RS Colour,32K+6K,,,,,,,,present,Kees van Oss,RS/FLAPPY,8200,*RUN FLAPPY,FLAPPY,,Works,
 764,V7,Comm,Bearsoft,Frogger,Game,,,,,,,,,,present,,BS,8200,*RUN FROGGER,FROGGER,,Works,
 765,V11B5,ROMS,Non Comm,FPGA Utils 0.28,Utility,,,,,,,,,,present,David Banks,ROMS/NC/FPGAUTIL,8200,"PRINT INITIALIZATION: AUTOMATIC
 *LOAD DC8E 8800",DC8E,,Works,
-766,V8B1,Modern,Non Comm,Dormann 6502 Tests,Utility,Test,Yes,,,,,,,,present,Klaus Dormann,NC/TEST,8200,*RUN D6502,D6502,,Works,
-767,V8B1,Modern,Non Comm,Dormann 65C02 Tests,Utility,Test,Yes,,,,,,,,present,Klaus Dormann,NC/TEST,8200,*RUN D65C02,D65C02,,Works,
+766,V8B1,Modern,Non Comm,Dormann 6502 Tests,Utility,Test,32K+6K,,,,,,,,present,Klaus Dormann,NC/TEST,8200,*RUN D6502,D6502,,Works,
+767,V8B1,Modern,Non Comm,Dormann 65C02 Tests,Utility,Test,32K+6K,,,,,,,,present,Klaus Dormann,NC/TEST,8200,*RUN D65C02,D65C02,,Works,
 768,V8B1,Modern,Non Comm,6502 BCD Tests,Utility,Test,,,,,,,,,present,Bruce Clark,NC/TEST,8200,*RUN BCDTEST,BCDTEST,,Works,
 769,V8B1,Modern,Retro S/W,Flappy Bird SID (32K),Game,"RS Colour
-SID",Yes,,,,,,,,present,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,"FLAPPY
+SID",32K+6K,,,,,,,,present,Kees van Oss,RS/FLAPPYSD,8200,*RUN START,"FLAPPY
 ANGRY
 SIDPLAY
 START",,Works,
@@ -1428,7 +1428,7 @@ START",,Works,
 771,V8B1,Comm,Bug Byte,Statistics 2,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS2""",STATS2,,Works,
 772,V8B1,Comm,Bug Byte,Statistics 3,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS3""",STATS3,,Works,
 773,V8B1,Comm,Bug Byte,Statistics 4,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS4""",STATS4,,Works,
-774,V8B1,Non Comm,Non Comm,Gokkast 1,Game,,Yes,,,,,,,,present,,NC/GOKKAST1,8200,"CH.""GOKKAST""","CONTROL
+774,V8B1,Non Comm,Non Comm,Gokkast 1,Game,,32K+6K,,,,,,,,present,,NC/GOKKAST1,8200,"CH.""GOKKAST""","CONTROL
 GOKKAST
 HO-LA
 HO-NU
@@ -1437,7 +1437,7 @@ PICTURE
 PUNTEN
 SCHERM
 VDU",,Works,
-775,V8B1,Non Comm,Non Comm,Gokkast 2,Game,,Yes,,,,,,,,present,,NC/GOKKAST2,8200,"CH.""GKKST2""","2BASC28
+775,V8B1,Non Comm,Non Comm,Gokkast 2,Game,,32K+6K,,,,,,,,present,,NC/GOKKAST2,8200,"CH.""GKKST2""","2BASC28
 2BASC65
 2BASC98
 2BONS68
@@ -1448,7 +1448,7 @@ VDU",,Works,
 2SCHM80
 GKKST2
 VDU",,Works,
-776,V8B1,Non Comm,Non Comm,Smileys Fruit Machine (R),Game,,Yes,,Yes,No,No,,,,present,,NC/SMILEYS,8200,"CH.""FRUITMA""","2440VDU
+776,V8B1,Non Comm,Non Comm,Smileys Fruit Machine (R),Game,,32K+6K,,Yes,No,No,,,,present,,NC/SMILEYS,8200,"CH.""FRUITMA""","2440VDU
 CONTROL
 DRAAI
 FRUITMA
@@ -1458,18 +1458,18 @@ SCHERM
 SYMBOOL",,Works,
 777,V8B1,Non Comm,Non Comm,Charon (Fn Keys),Utility,,,,,,,,,,present,,NC,8200,"CH.""CHARON""",CHARON,,Works,
 778,V8B1,Non Comm,Non Comm,Speed Boat (R),Game,,,,No,No,Yes,,,,present,,NC,8200,"CH.""SPEBOAT""",SPEBOAT,,Works,
-779,V8B1,Modern,Non Comm,Star Wars Asciimation,Graphics,GODIL,Yes,,,,,,,,present,,GODIL/SW,8200,"*LOAD PLAY800
+779,V8B1,Modern,Non Comm,Star Wars Asciimation,Graphics,GODIL,32K+6K,,,,,,,,present,,GODIL/SW,8200,"*LOAD PLAY800
 *LOAD STARWARS
 CH.""SW8""","SW8
 SW1X.TXT
 PLAY800
 STARWARS",,Works,
-780,V8B1,Non Comm,Non Comm,Duck-2 (R) (32K),Game,,Yes,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""","DUCK-2
+780,V8B1,Non Comm,Non Comm,Duck-2 (R) (32K),Game,,32K+6K,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/DUCK2,8200,"CH.""DUCK-2""","DUCK-2
 D2-EDIT
 D2-SCR
 D2-SPEL
 D2-SPRI",,Works,
-781,V8B2,Non Comm,Non Comm,Sokatom (R) (40K),Game,,Yes,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""","S-RESET
+781,V8B2,Non Comm,Non Comm,Sokatom (R) (40K),Game,,32K+8K,,Yes,Yes,Yes,,,,present,Roland Leurs,NC/SOK,8200,"CH.""SOKATOM""","S-RESET
 SCORE
 SOKATOM
 SOKBLD1
@@ -1504,7 +1504,7 @@ AMANRUN",,Test,
 800,V8B3,Comm,Prog Power,Martians (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN MARTIAN,MARTIAN,,Works,
 801,V8B3,Comm,Micro Mania,Omega Mission (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN OMEGA,"OMEGA
 DATA",,Works,
-802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,Yes,,,,,,,JoyKBD,present,,JS/KEES,8200,"*LOAD POINTER
+802,V8B3,Non Comm,Non Comm,Pointer (JS),Game,,32K+6K,,,,,,,JoyKBD,present,,JS/KEES,8200,"*LOAD POINTER
 RUN",POINTER,,Works,
 803,V8B3,Comm,Acornsoft,Rat Trap (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN RATTRAP,RATTRAP,,Works,
 804,V8B3,Comm,Acornsoft,Robots (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""ROBOTS""",ROBOTS,,Works,
@@ -1512,7 +1512,7 @@ RUN",POINTER,,Works,
 806,V8B3,Comm,Acornsoft,Star Gate (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN STARGAT,STARGAT,,Works,
 807,V8B3,Comm,A&F S/W,Torpedo Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TORP,TORP,,Works,
 808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
-809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
+809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,16K+6K,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
 810,V8B3,Non Comm,Non Comm,Ghost (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""GHOST""",GHOST,,Works,
 811,V8B3,Non Comm,Non Comm,Saturn (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""SATURN""",SATURN,,Works,
 812,V8B3,Comm,Prog Power,3D Asteroids (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""3DASTER""",3DASTER,,Works,
@@ -1535,7 +1535,7 @@ RUN",POINTER,,Works,
 829,V8B3,Comm,Acornsoft,Snake (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAKE""",SNAKE,,Works,
 830,V8B3,Comm,Acornsoft,Snapper (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SNAPPER""",SNAPPER,,Works,
 831,V8B3,Non Comm,Non Comm,Space Zap (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SPACZAP""",SPACZAP,,Works,
-832,V8B3,Non Comm,Non Comm,Space Robots (R) (JS),Game,,Yes,,No,Yes,Yes,,,JoyKBD,present,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",SPAROBS,,Works,
+832,V8B3,Non Comm,Non Comm,Space Robots (R) (JS),Game,,32K+6K,,No,Yes,Yes,,,JoyKBD,present,Roland Leurs,JS/WIM,8200,"CH.""SPAROBS""",SPAROBS,,Works,
 833,V8B3,Comm,Prog Power,Swarm (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""SWARM""",SWARM,,Works,
 834,V8B3,Non Comm,Non Comm,Stowaway (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""VERSTE1""",VERSTE1,,Works,
 835,V8B3,Comm,Prog Power,Warlords (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""WARLOR""",WARLOR,,Works,
@@ -1553,11 +1553,11 @@ CH.""DARTS2""","DARTS1
 DARTS2",,Works,
 843,V8B3,Non Comm,Non Comm,Le Passe Temps,Game,,,,,,,,,,present,,NC,8200,"CH.""4OP1RY""",4OP1RY,,Works,
 844,V9B1,Non Comm,Non Comm,Pacman (JS),Game,,,,,,,,,JoyKBD,present,Thony Brown,JS/WIM,8200,"CH.""PACMAN""",PACMAN,,Works,
-845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R) (40K),Game,,Yes,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
-846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R) (40K),Game,,,Yes,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
+845,V9B1,Non Comm,Non Comm,Burger Time (JS) (R) (40K),Game,,32K+8K,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""BTIME""",BTIME,,Works,
+846,V9B1,Non Comm,Non Comm,Egg Catcher (JS) (R) (40K),Game,,32K+8K,Yes,Yes,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""KIP""",KIP,,Works,
 847,V9B1,Non Comm,Non Comm,Helicopter Lander (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JHELI""",JHELI,,Works,
 848,V9B1,Comm,Bug Byte,Last Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""JLAST""",JLAST,,Works,
-849,V9B1,Modern,Non Comm,BeebSID15 70's Rock,Music,SID,Yes,,,,,,,,present,,SID/ATMSID15,2900,*RUN SIDMENU,"69WHOLE
+849,V9B1,Modern,Non Comm,BeebSID15 70's Rock,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID15,2900,*RUN SIDMENU,"69WHOLE
 70ALLRI
 70IRONM
 70LAYLA
@@ -1597,7 +1597,7 @@ SIDMENU
 862,V9B1,Non Comm,Non Comm,Atom Pilot,Language,GameBase,,,,,,,,,present,acc-nl,GB,8200,*RUN 098,"098
 ",,Works,
 863,V9B1,Non Comm,Non Comm,Maze Game,Game,GameBase,,Yes,,,,,,,present,??,GB,8200,"CH.""134""",134,,Works,
-864,V9B1,Non Comm,Non Comm,Flight Simulator,Game,GameBase,Yes,Yes,,,,,,,present,Acorn user,GB,8200,"CH.""144""",144,,Works,
+864,V9B1,Non Comm,Non Comm,Flight Simulator,Game,GameBase,32K+6K,Yes,,,,,,,present,Acorn user,GB,8200,"CH.""144""",144,,Works,
 865,V9B1,Non Comm,Non Comm,Super Zombie,Game,GameBase,,,,,,,,,present,Magnus Olssen,GB,8200,"CH.""155""",155,,Works,
 866,V9B1,Non Comm,Magnus Olsson,Megalife (R),Simulation,GameBase,,,,,,Yes,,,present,Magnus Olssen,GB,8200,*RUN 158,158,,Works - requires WE-ROM,
 867,V9B1,Non Comm,Non Comm,Condot (R),Game,GameBase,,,,,No,Yes,,,present,Creative Computing,GB,8200,"CH.""159""",159,,Works,
@@ -1612,14 +1612,14 @@ SIDMENU
 876,V9B1,Non Comm,Non Comm,Starship Manna,Game,GameBase,,,,,,,,,present,??,GB,8200,"CH.""226""",226,,Works,
 877,V9B1,Non Comm,Non Comm,Cement (JS),Game,,,Yes,,,,,,JoyKBD,present,RK,JS/WIM,8200,"*LOAD CEMENT
 RUN",CEMENT,,Works,
-878,V9B1,Modern,Retro S/W,F-14 Tomcat (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/F14,8200,"CH.""F14RUN""","F14CODE
+878,V9B1,Modern,Retro S/W,F-14 Tomcat (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/F14,8200,"CH.""F14RUN""","F14CODE
 F14RUN
 F14SCR
 LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-879,V9B2,Modern,Retro S/W,F-14 Tomcat SID (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
+879,V9B2,Modern,Retro S/W,F-14 Tomcat SID (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1627,25 +1627,25 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-880,V9B2,Modern,Retro S/W,Elite Demo (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
+880,V9B2,Modern,Retro S/W,Elite Demo (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
 ELITE
 KEYS.TXT",,Works,
-881,V10B4,Modern,Retro S/W,Manic Miner (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
+881,V10B4,Modern,Retro S/W,Manic Miner (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
 MMINTRO
 MMCODE",,Works,
 882,V9B2,Non Comm,Non Comm,Type Ahead,Utility,,,,,,,,,,present,Ronald Boers,NC,8200,"CH.""TYPEAHD""",TYPEAHD,,Works,
-883,V9B2,Modern,Jim Bagley,Dragon's Lair (1MHz),Game,,Yes,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR,DLAIR,,Works,
-884,V9B2,Modern,Jim Bagley,Dragon's Lair (2MHz),Game,,Yes,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,DLAIR2M,,Works,
+883,V9B2,Modern,Jim Bagley,Dragon's Lair (1MHz),Game,,32K+6K,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR,DLAIR,,Works,
+884,V9B2,Modern,Jim Bagley,Dragon's Lair (2MHz),Game,,32K+6K,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,DLAIR2M,,Works,
 885,V9B2,Non Comm,Non Comm,Chess (Usurpator II),Game,,,,,,,,,,present,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,USURII,,Works,
-886,V10B1,Modern,Retro S/W,Jet Set Willy (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
+886,V10B1,Modern,Retro S/W,Jet Set Willy (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
 JSWCODE",,Works,
-887,V10B1,Modern,Retro S/W,Jet Set Willy II (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
+887,V10B1,Modern,Retro S/W,Jet Set Willy II (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
 JSW2COD",,Works,
-888,V10B1,Modern,Retro S/W,Egghead in Space (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
+888,V10B1,Modern,Retro S/W,Egghead in Space (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
 EHCODE",,Works,
 889,V10B1,Comm,A&F S/W,Tangled,Game,,,,,,,,,,present,,AF,8200,"CH.""TANGLED""",TANGLED,,Works,
 890,V10B1,Comm,Aardvark,Galaxians,Game,,,,,,,,,,present,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,GALAXIAN,,,
-891,V10B1,Modern,Non Comm,BeebSID16 ABBA,Music,SID,Yes,,,,,,,,present,,SID/ATMSID16,2900,*RUN SIDMENU,"1975BFE
+891,V10B1,Modern,Non Comm,BeebSID16 ABBA,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID16,2900,*RUN SIDMENU,"1975BFE
 1975MAM
 1975SOS
 1976KNO
@@ -1663,7 +1663,7 @@ SIDMENU
 892,V10B1,Non Comm,Non Comm,Maurice (Demo),Game,,,,,,,,,,present,,NC,8200,"CH.""MAURICE""",MAURICE,,Works,
 893,V10B1,Non Comm,Non Comm,Scramble (R),Game,,,,No,No,Yes,,,,present,,NC,8200,"CH.""SCRAMBLE""",SCRAMBLE,,Works,
 894,V10B1,Modern,Non Comm,RAF Test (R),Utility,Test,,Yes,Yes,No,No,,,,present,Kees van Oss,NC/TEST,8200,"CH.""RAFTEST""",RAFTEST,,Works,
-895,V10B1,Modern,Non Comm,Atom Tube Host,Utility,Tube,Yes,No,,,,,,,present,David Banks,TUBE,8200,"CH.""BOOT6502""","TUBE
+895,V10B1,Modern,Non Comm,Atom Tube Host,Utility,Tube,32K+6K,No,,,,,,,present,David Banks,TUBE,8200,"CH.""BOOT6502""","TUBE
 BASIC2
 CLOCKSP
 HIBASIC
@@ -1671,9 +1671,9 @@ COLOSS
 BOOT6502",,Works,
 896,V10B1,Non Comm,Non Comm,Squirrel Tree,Adventure,,,,,,,,,,present,Unknown,NC,8200,"CH.""SQUIRL1""","SQUIRL1
 SQUIRL2",,Works,
-897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
+897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
 SIDRUN",,Works,
-898,V10B4,Modern,Retro S/W,W.A.R. (32K),Game,RS Mono,Yes,,,,,,,JoyKBD,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
+898,V10B4,Modern,Retro S/W,W.A.R. (32K),Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
 GAME2
 LOADER1
 LOADER2
@@ -1681,7 +1681,7 @@ LOADSC
 WAR
 WARSC",,Works,
 899,V10B5,Comm,A&F S/W,Kamikaze,Game,,,,,,,,,,present,,AF,8200,"CH.""KAMIKAZ""",KAMIKAZ,,Works,
-900,V10B5,Modern,Non Comm,BeebSID17 Pet Shop Boys,Music,SID,Yes,,,,,,,,present,,SID/ATMSID17,2900,*RUN SIDMENU,"00GOWES
+900,V10B5,Modern,Non Comm,BeebSID17 Pet Shop Boys,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID17,2900,*RUN SIDMENU,"00GOWES
 01WESTE
 02LOVEC
 03OPPOR
@@ -1697,7 +1697,7 @@ WARSC",,Works,
 SIDMENU
 
 ",,Works,
-901,V10B5,Modern,Non Comm,BeebSID18 Club Hits!,Music,SID,Yes,,,,,,,,present,,SID/ATMSID18,2900,*RUN SIDMENU,"01RHYTH
+901,V10B5,Modern,Non Comm,BeebSID18 Club Hits!,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID18,2900,*RUN SIDMENU,"01RHYTH
 02LAMOU
 03PUMPU
 ANOTHER
@@ -1727,24 +1727,24 @@ WHATTIM
 ",,Works,
 902,V10B5,Books,The Atom,Racer,Game,,,,,,,,,,present,,TA,8200,"CH.""RACER""",RACER,,Works,
 903,V10B5,Books,The Atom,Breakout,Game,,,,,,,,,,present,,TA,8200,"CH.""BREAKOU""",BREAKOU,,Works,
-904,V10B5,Modern,Non Comm,Bad Apple (Clear 0),Music,SID,Yes,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""","MOVIE0
+904,V10B5,Modern,Non Comm,Bad Apple (Clear 0),Music,SID,32K+6K,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME0""","MOVIE0
 MUSIC
 PLAYER0
 RUNME0
 SIDPLAY",,Works,
-905,V10B5,Modern,Non Comm,Bad Apple (Clear 2),Music,SID,Yes,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""","MOVIE2
+905,V10B5,Modern,Non Comm,Bad Apple (Clear 2),Music,SID,32K+6K,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME2""","MOVIE2
 MUSIC
 PLAYER2
 RUNME2
 SIDPLAY",,Works,
-906,V10B5,Modern,Non Comm,Bad Apple (Clear 4),Music,SID,Yes,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""","BACKSCR
+906,V10B5,Modern,Non Comm,Bad Apple (Clear 4),Music,SID,32K+6K,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME4""","BACKSCR
 MOVIE2
 MUSIC
 PLAYER4
 RUNME4
 SIDPLAY",,Works,
 907,V6,Modern,Non Comm,HubPlay (#BDC0),Music,SID,,,,,,,,,present,,SID/ATOMSID,8200,*RUN HUBPLAY,HUBPLAY,,Works,
-908,V11B3,Modern,Non Comm,Bad Apple (Clear 4 FS),Music,SID,Yes,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME6""","MOVIE4C
+908,V11B3,Modern,Non Comm,Bad Apple (Clear 4 FS),Music,SID,32K+6K,,,,,,,,present,Kees van Oss,SID/BADAPPL,8200,"CH.""RUNME6""","MOVIE4C
 MUSIC
 PLAYER6
 RUNME6
@@ -1754,7 +1754,7 @@ SIDPLAY",,Works,
 911,V11B1,Non Comm,Non Comm,Parachute,Game,,,,,,,,,,present,,NC,8200,"CH. ""PARACHU""",PARACHU,,Works,
 912,V11B1,Non Comm,Non Comm,Shopper,Game,,,Yes,,,,,,,present,,NC,8200,"CH. ""SHOPPER""",SHOPPER,,Works,
 913,V11B1,Non Comm,Non Comm,Gattack,Game,,,,,,,,,,present,,NC,8200,"CH. ""GATTACK""",GATTACK,,Works,
-914,V11B1,Non Comm,Non Comm,Topografie (32K),Game,,Yes,,,,,,,,present,,NC/TOPOT,8200,"CH. ""TOPOT""","DATA
+914,V11B1,Non Comm,Non Comm,Topografie (32K),Game,,32K+6K,,,,,,,,present,,NC/TOPOT,8200,"CH. ""TOPOT""","DATA
 MAP
 PROG
 TOPOT",,Works,
@@ -1762,7 +1762,7 @@ TOPOT",,Works,
 916,V11B1,ROMS,Prog Power,PP MC Monitor,Language,,,,,,,,,,present,,ROMS/PP/MCMON,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE MANUAL
 *LOAD FC5A 8800",FC5A,,Works,
-917,V11B1,Modern,Non Comm,BeebSID19 Classical,Music,SID,Yes,,,,,,,,present,,SID/ATMSID19,2900,*RUN SIDMENU,"AIRONTH
+917,V11B1,Modern,Non Comm,BeebSID19 Classical,Music,SID,32K+6K,,,,,,,,present,,SID/ATMSID19,2900,*RUN SIDMENU,"AIRONTH
 ALSOSPR
 CANCANO
 DEUTSCH
@@ -1778,940 +1778,940 @@ SYMPHON
 THEMAGI
 TOCCATA",,Works,
 918,V11B2,Magazines,PCW,UFO,Game,,,,,,,,,,present,Paul Vernon,PCW,8200,"CH.""UFO""",UFO,,Works,
-919,V11B2,AGD,AGD,The Amethyst Dagger,Game,AGD Pack 18,Yes,,,,,,,,present,Kees van Oss,AGD/ADAGGER,8200,"CH.""DAGRUN""","DAGCODE
+919,V11B2,AGD,AGD,The Amethyst Dagger,Game,AGD Pack 18,32K+8K,,,,,,,,present,Kees van Oss,AGD/ADAGGER,8200,"CH.""DAGRUN""","DAGCODE
 DAGRUN
 DAGSCR",,Works,
-920,V11B1,AGD,AGD,Aeon 1,Game,AGD Pack 3,Yes,,,,,,,,present,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""","A1CODE
+920,V11B1,AGD,AGD,Aeon 1,Game,AGD Pack 3,32K+8K,,,,,,,,present,Kees van Oss,AGD/AEON1,8200,"CH.""A1RUN""","A1CODE
 A1RUN
 A1SCR",,Works,
-921,V11B1,AGD,AGD,Aeon 2,Game,AGD Pack 3,Yes,,,,,,,,present,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""","A2CODE
+921,V11B1,AGD,AGD,Aeon 2,Game,AGD Pack 3,32K+8K,,,,,,,,present,Kees van Oss,AGD/AEON2,8200,"CH.""A2RUN""","A2CODE
 A2RUN
 A2SCR",,Works,
-922,V11B1,AGD,AGD,Aeon 3,Game,AGD Pack 3,Yes,,,,,,,,present,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""","A3CODE
+922,V11B1,AGD,AGD,Aeon 3,Game,AGD Pack 3,32K+8K,,,,,,,,present,Kees van Oss,AGD/AEON3,8200,"CH.""A3RUN""","A3CODE
 A3RUN
 A3SCR",,Works,
-923,V11B1,AGD,AGD,Aeon 4,Game,AGD Pack 3,Yes,,,,,,,,present,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""","A4CODE
+923,V11B1,AGD,AGD,Aeon 4,Game,AGD Pack 3,32K+8K,,,,,,,,present,Kees van Oss,AGD/AEON4,8200,"CH.""A4RUN""","A4CODE
 A4RUN
 A4SCR",,Works,
-924,V11B2,AGD,AGD,Baffo Jones,Game,AGD Pack 6,Yes,,,,,,,,present,Kees van Oss,AGD/BAFFO,8200,"CH.""BAFRUN""","BAFCODE
+924,V11B2,AGD,AGD,Baffo Jones,Game,AGD Pack 6,32K+8K,,,,,,,,present,Kees van Oss,AGD/BAFFO,8200,"CH.""BAFRUN""","BAFCODE
 BAFRUN
 BAFSCR",,Works,
-925,V11B1,AGD,AGD,Baldy ZX,Game,AGD Pack 4,Yes,,,,,,,,present,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""","BALCODE
+925,V11B1,AGD,AGD,Baldy ZX,Game,AGD Pack 4,32K+8K,,,,,,,,present,Kees van Oss,AGD/BALDY,8200,"CH.""BALRUN""","BALCODE
 BALRUN
 BALSCR",,Works,
-926,V11B2,AGD,AGD,Bean Brothers,Game,AGD Pack 22,Yes,,,,,,,,present,Kees van Oss,AGD/BEANBRO,8200,"CH.""BBRUN""","BBCODE
+926,V11B2,AGD,AGD,Bean Brothers,Game,AGD Pack 22,32K+8K,,,,,,,,present,Kees van Oss,AGD/BEANBRO,8200,"CH.""BBRUN""","BBCODE
 BBRUN
 BBSCR",,Works,
-927,V11B2,AGD,AGD,The Big Javi's Adventure,Game,AGD Pack 13,Yes,,,,,,,,present,Kees van Oss,AGD/BIGJAVI,8200,"CH.""BJRUN""","BJCODE
+927,V11B2,AGD,AGD,The Big Javi's Adventure,Game,AGD Pack 13,32K+8K,,,,,,,,present,Kees van Oss,AGD/BIGJAVI,8200,"CH.""BJRUN""","BJCODE
 BJRUN
 BJSCR",,Works,
-928,V11B1,AGD,AGD,Baby Monkey Alba,Game,AGD Pack 4,Yes,,,,,,,,present,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""","BMCODE
+928,V11B1,AGD,AGD,Baby Monkey Alba,Game,AGD Pack 4,32K+8K,,,,,,,,present,Kees van Oss,AGD/BMALBA,8200,"CH.""BMRUN""","BMCODE
 BMRUN
 BMSCR",,Works,
-929,V11B2,AGD,AGD,Bubble Monkey Bros,Game,AGD Pack 16,Yes,,,,,,,,present,Kees van Oss,AGD/BMBROS,8200,"CH.""BMBRUN""","BMBCODE
+929,V11B2,AGD,AGD,Bubble Monkey Bros,Game,AGD Pack 16,32K+8K,,,,,,,,present,Kees van Oss,AGD/BMBROS,8200,"CH.""BMBRUN""","BMBCODE
 BMBRUN",,Works,
-930,V11B1,AGD,AGD,Bob Bustin Ghosts,Game,AGD Pack 5,Yes,,,,,,,,present,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""","B1CODE
+930,V11B1,AGD,AGD,Bob Bustin Ghosts,Game,AGD Pack 5,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOB1,8200,"CH.""B1RUN""","B1CODE
 B1RUN
 B1SCR",,Works,
-931,V11B1,AGD,AGD,Bob Lurching Dead,Game,AGD Pack 5,Yes,,,,,,,,present,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""","B2CODE
+931,V11B1,AGD,AGD,Bob Lurching Dead,Game,AGD Pack 5,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOB2,8200,"CH.""B2RUN""","B2CODE
 B2RUN
 B2SCR",,Works,
-932,V11B1,AGD,AGD,Bob Summer Breeze,Game,AGD Pack 5,Yes,,,,,,,,present,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""","B3CODE
+932,V11B1,AGD,AGD,Bob Summer Breeze,Game,AGD Pack 5,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOB3,8200,"CH.""B3RUN""","B3CODE
 B3RUN
 B3SCR",,Works,
-933,V11B1,AGD,AGD,Bob Jet Pack,Game,AGD Pack 5,Yes,,,,,,,,present,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""","B4CODE
+933,V11B1,AGD,AGD,Bob Jet Pack,Game,AGD Pack 5,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOB4,8200,"CH.""B4RUN""","B4CODE
 B4RUN
 B4SCR",,Works,
-934,V11B1,AGD,AGD,Brick Racer,Game,AGD Pack 4,Yes,,,,,,,,present,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""","BRCODE
+934,V11B1,AGD,AGD,Brick Racer,Game,AGD Pack 4,32K+8K,,,,,,,,present,Kees van Oss,AGD/BRICK,8200,"CH.""BRRUN""","BRCODE
 BRRUN
 BRSCR",,Works,
-935,V11B1,AGD,AGD,B-Squared,Game,AGD Pack 4,Yes,,,,,,,,present,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""","BSCODE
+935,V11B1,AGD,AGD,B-Squared,Game,AGD Pack 4,32K+8K,,,,,,,,present,Kees van Oss,AGD/BSQUARE,8200,"CH.""BSRUN""","BSCODE
 BSRUN
 BSSCR",,Works,
-936,V11B2,AGD,AGD,Bumber,Game,AGD Pack 6,Yes,,,,,,,,present,Kees van Oss,AGD/BUMBER,8200,"CH.""BUMRUN""","BUMCODE
+936,V11B2,AGD,AGD,Bumber,Game,AGD Pack 6,32K+8K,,,,,,,,present,Kees van Oss,AGD/BUMBER,8200,"CH.""BUMRUN""","BUMCODE
 BUMRUN
 BUMSCR",,Works,
-937,V11B2,AGD,AGD,Castle Capers,Game,AGD Pack 6,Yes,,,,,,,,present,Kees van Oss,AGD/CAPERS,8200,"CH.""CAPRUN""","CAPCODE
+937,V11B2,AGD,AGD,Castle Capers,Game,AGD Pack 6,32K+8K,,,,,,,,present,Kees van Oss,AGD/CAPERS,8200,"CH.""CAPRUN""","CAPCODE
 CAPRUN",,Works,
-938,V11B2,AGD,AGD,Caps and Rescue 1,Game,AGD Pack 7,Yes,,,,,,,,present,Kees van Oss,AGD/CAPRES1,8200,"CH.""CR1RUN""","CR1CODE
+938,V11B2,AGD,AGD,Caps and Rescue 1,Game,AGD Pack 7,32K+8K,,,,,,,,present,Kees van Oss,AGD/CAPRES1,8200,"CH.""CR1RUN""","CR1CODE
 CR1RUN
 CR1SCR",,Works,
-939,V11B2,AGD,AGD,Caps and Rescue 2,Game,AGD Pack 7,Yes,,,,,,,,present,Kees van Oss,AGD/CAPRES2,8200,"CH.""CR2RUN""","CR2CODE
+939,V11B2,AGD,AGD,Caps and Rescue 2,Game,AGD Pack 7,32K+8K,,,,,,,,present,Kees van Oss,AGD/CAPRES2,8200,"CH.""CR2RUN""","CR2CODE
 CR2RUN
 CR2SCR",,Works,
-940,V11B2,AGD,AGD,Caps and Rescue 3,Game,AGD Pack 7,Yes,,,,,,,,present,Kees van Oss,AGD/CAPRES3,8200,"CH.""CR3RUN""","CR3CODE
+940,V11B2,AGD,AGD,Caps and Rescue 3,Game,AGD Pack 7,32K+8K,,,,,,,,present,Kees van Oss,AGD/CAPRES3,8200,"CH.""CR3RUN""","CR3CODE
 CR3RUN
 CR3SCR",,Works,
-941,V11B2,AGD,AGD,Prelude to chaos,Game,AGD Pack 6,Yes,,,,,,,,present,Kees van Oss,AGD/CHAOS,8200,"CH.""CHRUN""","CHCODE
+941,V11B2,AGD,AGD,Prelude to chaos,Game,AGD Pack 6,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHAOS,8200,"CH.""CHRUN""","CHCODE
 CHRUN
 CHSCR",,Works,
-942,V11B2,AGD,AGD,Circuitry,Game,AGD Pack 7,Yes,,,,,,,,present,Kees van Oss,AGD/CIRCUIT,8200,"CH.""CIRRUN""","CIRCODE
+942,V11B2,AGD,AGD,Circuitry,Game,AGD Pack 7,32K+8K,,,,,,,,present,Kees van Oss,AGD/CIRCUIT,8200,"CH.""CIRRUN""","CIRCODE
 CIRRUN
 CIRSCR",,Works,
-943,V11B2,AGD,AGD,Cyber Mania,Game,AGD Pack 8,Yes,,,,,,,,present,Kees van Oss,AGD/CYBER,8200,"CH.""CYBRUN""","CYBCODE
+943,V11B2,AGD,AGD,Cyber Mania,Game,AGD Pack 8,32K+8K,,,,,,,,present,Kees van Oss,AGD/CYBER,8200,"CH.""CYBRUN""","CYBCODE
 CYBRUN",,Works,
-944,V11B2,AGD,AGD,Davey Dudds,Game,AGD Pack 8,Yes,,,,,,,,present,Kees van Oss,AGD/DAVEY,8200,"CH.""DDRUN""","DDCODE
+944,V11B2,AGD,AGD,Davey Dudds,Game,AGD Pack 8,32K+8K,,,,,,,,present,Kees van Oss,AGD/DAVEY,8200,"CH.""DDRUN""","DDCODE
 DDRUN
 DDSCR",,Works,
-945,V11B2,AGD,AGD,Double Bubble,Game,AGD Pack 8,Yes,,,,,,,,present,Kees van Oss,AGD/DBUBBLE,8200,"CH.""DBRUN""","DBCODE
+945,V11B2,AGD,AGD,Double Bubble,Game,AGD Pack 8,32K+8K,,,,,,,,present,Kees van Oss,AGD/DBUBBLE,8200,"CH.""DBRUN""","DBCODE
 DBRUN
 DBSCR",,Works,
-946,V11B2,AGD,AGD,Doodle Bug,Game,AGD Pack 9,Yes,,,,,,,,present,Kees van Oss,AGD/DBUG,8200,"CH.""DBRUN""","DBCODE
+946,V11B2,AGD,AGD,Doodle Bug,Game,AGD Pack 9,32K+8K,,,,,,,,present,Kees van Oss,AGD/DBUG,8200,"CH.""DBRUN""","DBCODE
 DBRUN
 DBSCR",,Works,
-947,V11B2,AGD,AGD,Droid Buster,Game,AGD Pack 9,Yes,,,,,,,,present,Kees van Oss,AGD/DBUSTER,8200,"CH.""DBRUN""","DBCODE
+947,V11B2,AGD,AGD,Droid Buster,Game,AGD Pack 9,32K+8K,,,,,,,,present,Kees van Oss,AGD/DBUSTER,8200,"CH.""DBRUN""","DBCODE
 DBRUN
 DBSCR",,Works,
-948,V11B2,AGD,AGD,Dungeon Raiders,Game,AGD Pack 9,Yes,,,,,,,,present,Kees van Oss,AGD/DRAIDER,8200,"CH.""DRRUN""","DRCODE
+948,V11B2,AGD,AGD,Dungeon Raiders,Game,AGD Pack 9,32K+8K,,,,,,,,present,Kees van Oss,AGD/DRAIDER,8200,"CH.""DRRUN""","DRCODE
 DRRUN",,Works,
-949,V11B2,AGD,AGD,Dark Tricks,Game,AGD Pack 8,Yes,,,,,,,,present,Kees van Oss,AGD/DTRICKS,8200,"CH.""DTRUN""","DTCODE
+949,V11B2,AGD,AGD,Dark Tricks,Game,AGD Pack 8,32K+8K,,,,,,,,present,Kees van Oss,AGD/DTRICKS,8200,"CH.""DTRUN""","DTCODE
 DTRUN
 DTSCR",,Works,
-950,V11B2,AGD,AGD,In the Walls of ERYX,Game,AGD Pack 9,Yes,,,,,,,,present,Kees van Oss,AGD/ERYX,8200,"CH.""ERRUN""","ERCODE
+950,V11B2,AGD,AGD,In the Walls of ERYX,Game,AGD Pack 9,32K+8K,,,,,,,,present,Kees van Oss,AGD/ERYX,8200,"CH.""ERRUN""","ERCODE
 ERRUN
 ERSCR",,Works,
-951,V11B2,AGD,AGD,Space Escape,Game,AGD Pack 10,Yes,,,,,,,,present,Kees van Oss,AGD/ESCAPE,8200,"CH.""ESRUN""","ESCODE
+951,V11B2,AGD,AGD,Space Escape,Game,AGD Pack 10,32K+8K,,,,,,,,present,Kees van Oss,AGD/ESCAPE,8200,"CH.""ESRUN""","ESCODE
 ESRUN
 ESSCR",,Works,
-952,V11B2,AGD,AGD,Mini Explorer,Game,AGD Pack 10,Yes,,,,,,,,present,Kees van Oss,AGD/EXPLORE,8200,"CH.""EXPRUN""","EXPCODE
+952,V11B2,AGD,AGD,Mini Explorer,Game,AGD Pack 10,32K+8K,,,,,,,,present,Kees van Oss,AGD/EXPLORE,8200,"CH.""EXPRUN""","EXPCODE
 EXPRUN
 EXPSCR",,Works,
-953,V11B2,AGD,AGD,Flappy the Ghost,Game,AGD Pack 10,Yes,,,,,,,,present,Kees van Oss,AGD/FGHOST,8200,"CH.""FGRUN""","FGCODE
+953,V11B2,AGD,AGD,Flappy the Ghost,Game,AGD Pack 10,32K+8K,,,,,,,,present,Kees van Oss,AGD/FGHOST,8200,"CH.""FGRUN""","FGCODE
 FGRUN
 FGSCR",,Works,
-954,V11B1,AGD,AGD,Foggy's Quest (M),Game,AGD Pack 1,Yes,,,,,,,,present,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""","FOGCODE
+954,V11B1,AGD,AGD,Foggy's Quest (M),Game,AGD Pack 1,32K+8K,,,,,,,,present,Kees van Oss,AGD/FOGBW,8200,"CH.""FOGRUN""","FOGCODE
 FOGRUN
 FOGSCR",,Works,
-955,V11B1,AGD,AGD,Foggy's Quest (C),Game,AGD Pack 1,Yes,Yes,,,,,,,present,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""","FOGCODE
+955,V11B1,AGD,AGD,Foggy's Quest (C),Game,AGD Pack 1,32K+8K,Yes,,,,,,,present,Kees van Oss,AGD/FOGCO,8200,"CH.""FOGRUN""","FOGCODE
 FOGRUN
 FOGSCR",,Works,
-956,V11B2,AGD,AGD,Funky Fungus,Game,AGD Pack 22,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGUS,8200,"CH.""FUNRUN""","FUNCODE
+956,V11B2,AGD,AGD,Funky Fungus,Game,AGD Pack 22,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGUS,8200,"CH.""FUNRUN""","FUNCODE
 FUNPAN
 FUNRUN
 FUNSCR",,Works,
-957,V11B1,AGD,AGD,Christmas Gift Hunt,Game,AGD Pack 2,Yes,,,,,,,,present,Kees van Oss,AGD/GIFTHUN,8200,"CH.""GHRUN""","GHCODE
+957,V11B1,AGD,AGD,Christmas Gift Hunt,Game,AGD Pack 2,32K+8K,,,,,,,,present,Kees van Oss,AGD/GIFTHUN,8200,"CH.""GHRUN""","GHCODE
 GHRUN
 GHSCR",,Works,
-958,V11B1,AGD,AGD,Grumpy Santa,Game,AGD Pack 2,Yes,,,,,,,,present,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""","GSCODE
+958,V11B1,AGD,AGD,Grumpy Santa,Game,AGD Pack 2,32K+8K,,,,,,,,present,Kees van Oss,AGD/GRUMPY,8200,"CH.""GSRUN""","GSCODE
 GSRUN
 GSSCR",,Works,
-959,V11B2,AGD,AGD,Hedgehog,Game,AGD Pack 10,Yes,,,,,,,,present,Kees van Oss,AGD/HEDGEHO,8200,"CH.""HHRUN""","HHCODE
+959,V11B2,AGD,AGD,Hedgehog,Game,AGD Pack 10,32K+8K,,,,,,,,present,Kees van Oss,AGD/HEDGEHO,8200,"CH.""HHRUN""","HHCODE
 HHRUN
 HHSCR",,Works,
-960,V11B2,AGD,AGD,Heroes Rescue,Game,AGD Pack 11,Yes,,,,,,,,present,Kees van Oss,AGD/HEROES,8200,"CH.""HERRUN""","HERCODE
+960,V11B2,AGD,AGD,Heroes Rescue,Game,AGD Pack 11,32K+8K,,,,,,,,present,Kees van Oss,AGD/HEROES,8200,"CH.""HERRUN""","HERCODE
 HERRUN
 HERSCR",,Works,
-961,V11B2,AGD,AGD,Higgy 2 The Wrath of McMania,Game,AGD Pack 19,Yes,,,,,,,,present,Kees van Oss,AGD/HIGGY2,8200,"CH.""HIGRUN""","HIGCODE
+961,V11B2,AGD,AGD,Higgy 2 The Wrath of McMania,Game,AGD Pack 19,32K+8K,,,,,,,,present,Kees van Oss,AGD/HIGGY2,8200,"CH.""HIGRUN""","HIGCODE
 HIGRUN
 HIGSCR",,Works,
-962,V11B2,AGD,AGD,HopNFrog,Game,AGD Pack 11,Yes,,,,,,,,present,Kees van Oss,AGD/HOPNFRO,8200,"CH.""HOPRUN""","HOPCODE
+962,V11B2,AGD,AGD,HopNFrog,Game,AGD Pack 11,32K+8K,,,,,,,,present,Kees van Oss,AGD/HOPNFRO,8200,"CH.""HOPRUN""","HOPCODE
 HOPRUN",,Works,
-963,V11B2,AGD,AGD,Hyperkill,Game,AGD Pack 11,Yes,,,,,,,,present,Kees van Oss,AGD/HYPERKI,8200,"CH.""HYPRUN""","HYPCODE
+963,V11B2,AGD,AGD,Hyperkill,Game,AGD Pack 11,32K+8K,,,,,,,,present,Kees van Oss,AGD/HYPERKI,8200,"CH.""HYPRUN""","HYPCODE
 HYPRUN
 HYPSCR",,Works,
-964,V11B2,AGD,AGD,Ice Slider Z,Game,AGD Pack 12,Yes,,,,,,,,present,Kees van Oss,AGD/ICESLID,8200,"CH.""ISRUN""","ISCODE
+964,V11B2,AGD,AGD,Ice Slider Z,Game,AGD Pack 12,32K+8K,,,,,,,,present,Kees van Oss,AGD/ICESLID,8200,"CH.""ISRUN""","ISCODE
 ISRUN
 ISSCR",,Works,
-965,V11B2,AGD,AGD,Impossabubble,Game,AGD Pack 13,Yes,,,,,,,,present,Kees van Oss,AGD/IMPOSS,8200,"CH.""IMPRUN""","IMPCODE
+965,V11B2,AGD,AGD,Impossabubble,Game,AGD Pack 13,32K+8K,,,,,,,,present,Kees van Oss,AGD/IMPOSS,8200,"CH.""IMPRUN""","IMPCODE
 IMPRUN
 IMPSCR",,Works,
-966,V11B2,AGD,AGD,Jane Jelly Egg Diamond,Game,AGD Pack 12,Yes,,,,,,,,present,Kees van Oss,AGD/JANE1,8200,"CH.""J1RUN""","J1CODE
+966,V11B2,AGD,AGD,Jane Jelly Egg Diamond,Game,AGD Pack 12,32K+8K,,,,,,,,present,Kees van Oss,AGD/JANE1,8200,"CH.""J1RUN""","J1CODE
 J1RUN
 J1SCR",,Works,
-967,V11B2,AGD,AGD,Jane Jelly Hot Marmelade,Game,AGD Pack 12,Yes,,,,,,,,present,Kees van Oss,AGD/JANE2,8200,"CH.""J2RUN""","J2CODE
+967,V11B2,AGD,AGD,Jane Jelly Hot Marmelade,Game,AGD Pack 12,32K+8K,,,,,,,,present,Kees van Oss,AGD/JANE2,8200,"CH.""J2RUN""","J2CODE
 J2RUN
 J2SCR",,Works,
-968,V11B2,AGD,AGD,Jane Jelly Treasure of Zedin,Game,AGD Pack 12,Yes,,,,,,,,present,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""","J3CODE
+968,V11B2,AGD,AGD,Jane Jelly Treasure of Zedin,Game,AGD Pack 12,32K+8K,,,,,,,,present,Kees van Oss,AGD/JANE3,8200,"CH.""J3RUN""","J3CODE
 J3RUN
 J3SCR",,Works,
-969,V11B2,AGD,AGD,Jump Collision,Game,AGD Pack 17,Yes,,,,,,,,present,Kees van Oss,AGD/JUMPCOL,8200,"CH.""JCRUN""","JCCODE
+969,V11B2,AGD,AGD,Jump Collision,Game,AGD Pack 17,32K+8K,,,,,,,,present,Kees van Oss,AGD/JUMPCOL,8200,"CH.""JCRUN""","JCCODE
 JCRUN
 JCSCR",,Works,
-970,V11B2,AGD,AGD,Kanga,Game,AGD Pack 13,Yes,,,,,,,,present,Kees van Oss,AGD/KANGA,8200,"CH.""KANRUN""","KANCODE
+970,V11B2,AGD,AGD,Kanga,Game,AGD Pack 13,32K+8K,,,,,,,,present,Kees van Oss,AGD/KANGA,8200,"CH.""KANRUN""","KANCODE
 KANRUN
 KANSCR",,Works,
-971,V11B2,AGD,AGD,Killerbees,Game,AGD Pack 13,Yes,,,,,,,,present,Kees van Oss,AGD/KILLERB,8200,"CH.""KBRUN""","KBCODE
+971,V11B2,AGD,AGD,Killerbees,Game,AGD Pack 13,32K+8K,,,,,,,,present,Kees van Oss,AGD/KILLERB,8200,"CH.""KBRUN""","KBCODE
 KBRUN
 KBSCR",,Works,
-972,V11B2,AGD,AGD,Knight Hero,Game,AGD Pack 11,Yes,,,,,,,,present,Kees van Oss,AGD/KNIGHT,8200,"CH.""KHRUN""","KHCODE
+972,V11B2,AGD,AGD,Knight Hero,Game,AGD Pack 11,32K+8K,,,,,,,,present,Kees van Oss,AGD/KNIGHT,8200,"CH.""KHRUN""","KHCODE
 KHRUN
 KHSCR",,Works,
-973,V11B2,AGD,AGD,Diamond Geezer,Game,AGD Pack 14,Yes,,,,,,,,present,Kees van Oss,AGD/LADDER,8200,"CH.""LADRUN""","LADCODE
+973,V11B2,AGD,AGD,Diamond Geezer,Game,AGD Pack 14,32K+8K,,,,,,,,present,Kees van Oss,AGD/LADDER,8200,"CH.""LADRUN""","LADCODE
 LADRUN
 LADSCR",,Works,
-974,V11B2,AGD,AGD,Little Dragon 2,Game,AGD Pack 14,Yes,,,,,,,,present,Kees van Oss,AGD/LDRAG2,8200,"CH.""LDRUN""","LDCODE
+974,V11B2,AGD,AGD,Little Dragon 2,Game,AGD Pack 14,32K+8K,,,,,,,,present,Kees van Oss,AGD/LDRAG2,8200,"CH.""LDRUN""","LDCODE
 LDRUN
 LDSCR",,Works,
-975,V11B2,AGD,AGD,The Treasure of Lumos,Game,AGD Pack 14,Yes,,,,,,,,present,Kees van Oss,AGD/LUMOS,8200,"CH.""LUMRUN""","LUMCODE
+975,V11B2,AGD,AGD,The Treasure of Lumos,Game,AGD Pack 14,32K+8K,,,,,,,,present,Kees van Oss,AGD/LUMOS,8200,"CH.""LUMRUN""","LUMCODE
 LUMRUN
 LUMSCR",,Works,
-976,V11B2,AGD,AGD,The Malignant Core,Game,AGD Pack 14,Yes,,,,,,,,present,Kees van Oss,AGD/MALIGNA,8200,"CH.""MGRUN""","MGCODE
+976,V11B2,AGD,AGD,The Malignant Core,Game,AGD Pack 14,32K+8K,,,,,,,,present,Kees van Oss,AGD/MALIGNA,8200,"CH.""MGRUN""","MGCODE
 MGRUN
 MGSCR",,Works,
-977,V11B2,AGD,AGD,Mike The Guitar,Game,AGD Pack 15,Yes,,,,,,,,present,Kees van Oss,AGD/MIKE,8200,"CH.""MGRUN""","MGCODE
+977,V11B2,AGD,AGD,Mike The Guitar,Game,AGD Pack 15,32K+8K,,,,,,,,present,Kees van Oss,AGD/MIKE,8200,"CH.""MGRUN""","MGCODE
 MGRUN
 MGSCR",,Works,
-978,V11B2,AGD,AGD,LandOfMireMare Instructions,Game,AGD Pack 15,Yes,,,,,,,,present,Kees van Oss,AGD/MIREMAR,8200,"CH.""MMRUN""","MMCODE
+978,V11B2,AGD,AGD,LandOfMireMare Instructions,Game,AGD Pack 15,32K+8K,,,,,,,,present,Kees van Oss,AGD/MIREMAR,8200,"CH.""MMRUN""","MMCODE
 MMPAN
 MMRUN
 MMSCR",,Works,
-979,V11B2,AGD,AGD,Montys Honey Run,Game,AGD Pack 16,Yes,,,,,,,,present,Kees van Oss,AGD/MONTY1,8200,"CH.""MM1RUN""","MM1CODE
+979,V11B2,AGD,AGD,Montys Honey Run,Game,AGD Pack 16,32K+8K,,,,,,,,present,Kees van Oss,AGD/MONTY1,8200,"CH.""MM1RUN""","MM1CODE
 MM1RUN
 MM1SCR",,Works,
-980,V11B2,AGD,AGD,Montys Last Strike Christmas Job,Game,AGD Pack 16,Yes,,,,,,,,present,Kees van Oss,AGD/MONTYXM,8200,"CH.""MMXRUN""","MMXCODE
+980,V11B2,AGD,AGD,Montys Last Strike Christmas Job,Game,AGD Pack 16,32K+8K,,,,,,,,present,Kees van Oss,AGD/MONTYXM,8200,"CH.""MMXRUN""","MMXCODE
 MMXRUN
 MMXSCR",,Works,
-981,V11B2,AGD,AGD,Nadral,Game,AGD Pack 15,Yes,,,,,,,,present,Kees van Oss,AGD/NADRAL,8200,"CH.""NADRUN""","NADCODE
+981,V11B2,AGD,AGD,Nadral,Game,AGD Pack 15,32K+8K,,,,,,,,present,Kees van Oss,AGD/NADRAL,8200,"CH.""NADRUN""","NADCODE
 NADRUN
 NADSCR",,Works,
-982,V11B2,AGD,AGD,Nemokay Island,Game,AGD Pack 17,Yes,,,,,,,,present,Kees van Oss,AGD/NEMOKAY,8200,"CH.""NEMRUN""","NEMCODE
+982,V11B2,AGD,AGD,Nemokay Island,Game,AGD Pack 17,32K+8K,,,,,,,,present,Kees van Oss,AGD/NEMOKAY,8200,"CH.""NEMRUN""","NEMCODE
 NEMRUN
 NEMSCR",,Works,
-983,V11B2,AGD,AGD,Night Stalker ZX,Game,AGD Pack 17,Yes,,,,,,,,present,Kees van Oss,AGD/NIGHTST,8200,"CH.""NSRUN""","NSCODE
+983,V11B2,AGD,AGD,Night Stalker ZX,Game,AGD Pack 17,32K+8K,,,,,,,,present,Kees van Oss,AGD/NIGHTST,8200,"CH.""NSRUN""","NSCODE
 NSRUN
 NSSCR",,Works,
-984,V11B2,AGD,AGD,Ninja Garden Simulator,Game,AGD Pack 17,Yes,,,,,,,,present,Kees van Oss,AGD/NINJA,8200,"CH.""NINRUN""","NINCODE
+984,V11B2,AGD,AGD,Ninja Garden Simulator,Game,AGD Pack 17,32K+8K,,,,,,,,present,Kees van Oss,AGD/NINJA,8200,"CH.""NINRUN""","NINCODE
 NINRUN
 NINSCR",,Works,
-985,V11B2,AGD,AGD,Oceano,Game,AGD Pack 18,Yes,,,,,,,,present,Kees van Oss,AGD/OCEANO,8200,"CH.""OCERUN""","OCECODE
+985,V11B2,AGD,AGD,Oceano,Game,AGD Pack 18,32K+8K,,,,,,,,present,Kees van Oss,AGD/OCEANO,8200,"CH.""OCERUN""","OCECODE
 OCERUN
 OCESCR",,Works,
-986,V11B2,AGD,AGD,Octukitty,Game,AGD Pack 18,Yes,,,,,,,,present,Kees van Oss,AGD/OCTUKIT,8200,"CH.""OCTRUN""","OCTCODE
+986,V11B2,AGD,AGD,Octukitty,Game,AGD Pack 18,32K+8K,,,,,,,,present,Kees van Oss,AGD/OCTUKIT,8200,"CH.""OCTRUN""","OCTCODE
 OCTRUN
 OCTSCR",,Works,
-987,V11B2,AGD,AGD,Ooze,Game,AGD Pack 18,Yes,,,,,,,,present,Kees van Oss,AGD/OOZE,8200,"CH.""OOZRUN""","OOZCODE
+987,V11B2,AGD,AGD,Ooze,Game,AGD Pack 18,32K+8K,,,,,,,,present,Kees van Oss,AGD/OOZE,8200,"CH.""OOZRUN""","OOZCODE
 OOZRUN
 OOZSCR",,Works,
-988,V11B2,AGD,AGD,Parachute,Game,AGD Pack 19,Yes,,,,,,,,present,Kees van Oss,AGD/PARACHU,8200,"CH.""PARRUN""","PARCODE
+988,V11B2,AGD,AGD,Parachute,Game,AGD Pack 19,32K+8K,,,,,,,,present,Kees van Oss,AGD/PARACHU,8200,"CH.""PARRUN""","PARCODE
 PARRUN
 PARSCR",,Works,
-989,V11B2,AGD,AGD,Pages Castle Quest,Game,AGD Pack 19,Yes,,,,,,,,present,Kees van Oss,AGD/PCQUEST,8200,"CH.""PCQRUN""","PCQCODE
+989,V11B2,AGD,AGD,Pages Castle Quest,Game,AGD Pack 19,32K+8K,,,,,,,,present,Kees van Oss,AGD/PCQUEST,8200,"CH.""PCQRUN""","PCQCODE
 PCQRUN
 PCQSCR",,Works,
-990,V11B2,AGD,AGD,Page and the Curse of the Pharaoh,Game,AGD Pack 19,Yes,,,,,,,,present,Kees van Oss,AGD/PHARAOH,8200,"CH.""PHARUN""","PHACODE
+990,V11B2,AGD,AGD,Page and the Curse of the Pharaoh,Game,AGD Pack 19,32K+8K,,,,,,,,present,Kees van Oss,AGD/PHARAOH,8200,"CH.""PHARUN""","PHACODE
 PHARUN
 PHASCR",,Works,
-991,V11B2,AGD,AGD,Pick Axe Pete,Game,AGD Pack 20,Yes,,,,,,,,present,Kees van Oss,AGD/PICKAXE,8200,"CH.""PAPRUN""","PAPCODE
+991,V11B2,AGD,AGD,Pick Axe Pete,Game,AGD Pack 20,32K+8K,,,,,,,,present,Kees van Oss,AGD/PICKAXE,8200,"CH.""PAPRUN""","PAPCODE
 PAPRUN
 PAPSCR",,Works,
-992,V11B2,AGD,AGD,Pink Pills Moritz Meds,Game,AGD Pack 15,Yes,,,,,,,,present,Kees van Oss,AGD/PINKPIL,8200,"CH.""PPRUN""","PPCODE
+992,V11B2,AGD,AGD,Pink Pills Moritz Meds,Game,AGD Pack 15,32K+8K,,,,,,,,present,Kees van Oss,AGD/PINKPIL,8200,"CH.""PPRUN""","PPCODE
 PPRUN
 PPSCR",,Works,
-993,V11B2,AGD,AGD,Popeye,Game,AGD Pack 20,Yes,,,,,,,,present,Kees van Oss,AGD/POPEYE,8200,"CH.""POPRUN""","POPCODE
+993,V11B2,AGD,AGD,Popeye,Game,AGD Pack 20,32K+8K,,,,,,,,present,Kees van Oss,AGD/POPEYE,8200,"CH.""POPRUN""","POPCODE
 POPRUN
 POPSCR",,Works,
-994,V11B2,AGD,AGD,Pumpkin Poe,Game,AGD Pack 20,Yes,,,,,,,,present,Kees van Oss,AGD/PUMPKIN,8200,"CH.""PKPRUN""","PKPCODE
+994,V11B2,AGD,AGD,Pumpkin Poe,Game,AGD Pack 20,32K+8K,,,,,,,,present,Kees van Oss,AGD/PUMPKIN,8200,"CH.""PKPRUN""","PKPCODE
 PKPRUN
 PKPSCR",,Works,
-995,V11B2,AGD,AGD,QBox,Game,AGD Pack 20,Yes,,,,,,,,present,Kees van Oss,AGD/QBOX,8200,"CH.""QBRUN""","QBCODE
+995,V11B2,AGD,AGD,QBox,Game,AGD Pack 20,32K+8K,,,,,,,,present,Kees van Oss,AGD/QBOX,8200,"CH.""QBRUN""","QBCODE
 QBRUN
 QBSCR",,Works,
-996,V11B2,AGD,AGD,R2D2,Game,AGD Pack 24,Yes,,,,,,,,present,Kees van Oss,AGD/R2D2,8200,"CH.""R2RUN""","R2CODE
+996,V11B2,AGD,AGD,R2D2,Game,AGD Pack 24,32K+8K,,,,,,,,present,Kees van Oss,AGD/R2D2,8200,"CH.""R2RUN""","R2CODE
 R2RUN
 R2SCR",,Works,
-997,V11B2,AGD,AGD,Rescue Lander,Game,AGD Pack 21,Yes,,,,,,,,present,Kees van Oss,AGD/RESCUE,8200,"CH.""RESRUN""","RESCODE
+997,V11B2,AGD,AGD,Rescue Lander,Game,AGD Pack 21,32K+8K,,,,,,,,present,Kees van Oss,AGD/RESCUE,8200,"CH.""RESRUN""","RESCODE
 RESRUN
 RESSCR",,Works,
-998,V11B2,AGD,AGD,Robo Probe,Game,AGD Pack 21,Yes,,,,,,,,present,Kees van Oss,AGD/ROBOPRO,8200,"CH.""RPRUN""","RPCODE
+998,V11B2,AGD,AGD,Robo Probe,Game,AGD Pack 21,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROBOPRO,8200,"CH.""RPRUN""","RPCODE
 RPRUN
 RPSCR",,Works,
-999,V11B2,AGD,AGD,ROVR,Game,AGD Pack 21,Yes,,,,,,,,present,Kees van Oss,AGD/ROVR,8200,"CH.""ROVRUN""","ROVCODE
+999,V11B2,AGD,AGD,ROVR,Game,AGD Pack 21,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROVR,8200,"CH.""ROVRUN""","ROVCODE
 ROVRUN
 ROVSCR",,Works,
-1000,V11B2,AGD,AGD,Rubicon,Game,AGD Pack 21,Yes,,,,,,,,present,Kees van Oss,AGD/RUBICON,8200,"CH.""RUBRUN""","RUBCODE
+1000,V11B2,AGD,AGD,Rubicon,Game,AGD Pack 21,32K+8K,,,,,,,,present,Kees van Oss,AGD/RUBICON,8200,"CH.""RUBRUN""","RUBCODE
 RUBRUN
 RUBSCR",,Works,
-1001,V11B2,AGD,AGD,Santos Christmas Adventure,Game,AGD Pack 22,Yes,,,,,,,,present,Kees van Oss,AGD/SANTOS,8200,"CH.""SANRUN""","SANCODE
+1001,V11B2,AGD,AGD,Santos Christmas Adventure,Game,AGD Pack 22,32K+8K,,,,,,,,present,Kees van Oss,AGD/SANTOS,8200,"CH.""SANRUN""","SANCODE
 SANPAN
 SANRUN
 SANSCR",,Works,
-1002,V11B2,AGD,AGD,Robot1 Ship of Doom,Game,AGD Pack 22,Yes,,,,,,,,present,Kees van Oss,AGD/SHIPOFD,8200,"CH.""SODRUN""","SODCODE
+1002,V11B2,AGD,AGD,Robot1 Ship of Doom,Game,AGD Pack 22,32K+8K,,,,,,,,present,Kees van Oss,AGD/SHIPOFD,8200,"CH.""SODRUN""","SODCODE
 SODRUN
 SODSCR",,Works,
-1003,V11B2,AGD,AGD,That Sinking Feeling,Game,AGD Pack 23,Yes,,,,,,,,present,Kees van Oss,AGD/SINKING,8200,"CH.""SINRUN""","SINCODE
+1003,V11B2,AGD,AGD,That Sinking Feeling,Game,AGD Pack 23,32K+8K,,,,,,,,present,Kees van Oss,AGD/SINKING,8200,"CH.""SINRUN""","SINCODE
 SINRUN
 SINSCR",,Works,
-1004,V11B2,AGD,AGD,Sophia,Game,AGD Pack 16,Yes,,,,,,,,present,Kees van Oss,AGD/SOPHIA,8200,"CH.""SOPRUN""","SOPCODE
+1004,V11B2,AGD,AGD,Sophia,Game,AGD Pack 16,32K+8K,,,,,,,,present,Kees van Oss,AGD/SOPHIA,8200,"CH.""SOPRUN""","SOPCODE
 SOPPAN
 SOPRUN
 SOPSCR",,Works,
-1005,V11B2,AGD,AGD,Sorceress,Game,AGD Pack 24,Yes,,,,,,,,present,Kees van Oss,AGD/SORCE,8200,"CH.""SO1RUN""","SO1CODE
+1005,V11B2,AGD,AGD,Sorceress,Game,AGD Pack 24,32K+8K,,,,,,,,present,Kees van Oss,AGD/SORCE,8200,"CH.""SO1RUN""","SO1CODE
 SO1RUN
 SO1SCR",,Works,
-1006,V11B2,AGD,AGD,Sorceress2,Game,AGD Pack 24,Yes,,,,,,,,present,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""","SO2CODE
+1006,V11B2,AGD,AGD,Sorceress2,Game,AGD Pack 24,32K+8K,,,,,,,,present,Kees van Oss,AGD/SORCE2,8200,"CH.""SO2RUN""","SO2CODE
 SO2RUN
 SO2SCR",,Works,
-1007,V11B2,AGD,AGD,Space Junk,Game,AGD Pack 23,Yes,,,,,,,,present,Kees van Oss,AGD/SPACEJU,8200,"CH.""SJRUN""","SJCODE
+1007,V11B2,AGD,AGD,Space Junk,Game,AGD Pack 23,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPACEJU,8200,"CH.""SJRUN""","SJCODE
 SJRUN
 SJSCR",,Works,
-1008,V11B2,AGD,AGD,Speccy Pong,Game,AGD Pack 23,Yes,,,,,,,,present,Kees van Oss,AGD/SPECCYP,8200,"CH.""PONRUN""","PONCODE
+1008,V11B2,AGD,AGD,Speccy Pong,Game,AGD Pack 23,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPECCYP,8200,"CH.""PONRUN""","PONCODE
 PONRUN
 PONSCR",,Works,
-1009,V11B2,AGD,AGD,Steel Jeeg,Game,AGD Pack 23,Yes,,,,,,,,present,Kees van Oss,AGD/STEEL,8200,"CH.""STERUN""","STECODE
+1009,V11B2,AGD,AGD,Steel Jeeg,Game,AGD Pack 23,32K+8K,,,,,,,,present,Kees van Oss,AGD/STEEL,8200,"CH.""STERUN""","STECODE
 STERUN
 STESCR",,Works,
-1010,V11B2,AGD,AGD,Tea and Sympathy,Game,AGD Pack 24,Yes,,,,,,,,present,Kees van Oss,AGD/TEASYMP,8200,"CH.""TSRUN""","TSCODE
+1010,V11B2,AGD,AGD,Tea and Sympathy,Game,AGD Pack 24,32K+8K,,,,,,,,present,Kees van Oss,AGD/TEASYMP,8200,"CH.""TSRUN""","TSCODE
 TSRUN
 TSSCR",,Works,
-1011,V11B2,AGD,AGD,Terrahawks,Game,AGD Pack 25,Yes,,,,,,,,present,Kees van Oss,AGD/TERRAHA,8200,"CH.""TERRUN""","TERCODE
+1011,V11B2,AGD,AGD,Terrahawks,Game,AGD Pack 25,32K+8K,,,,,,,,present,Kees van Oss,AGD/TERRAHA,8200,"CH.""TERRUN""","TERCODE
 TERRUN
 TERSCR",,Works,
-1012,V11B2,AGD,AGD,The Incredible Shrinking Professor,Game,AGD Pack 25,Yes,,,,,,,,present,Kees van Oss,AGD/TISP,8200,"CH.""TISRUN""","TISCODE
+1012,V11B2,AGD,AGD,The Incredible Shrinking Professor,Game,AGD Pack 25,32K+8K,,,,,,,,present,Kees van Oss,AGD/TISP,8200,"CH.""TISRUN""","TISCODE
 TISRUN
 TISSCR",,Works,
-1013,V11B2,AGD,AGD,Tea Leaf Ted Bear,Game,AGD Pack 25,Yes,,,,,,,,present,Kees van Oss,AGD/TLBEAR,8200,"CH.""TLBRUN""","TLBCODE
+1013,V11B2,AGD,AGD,Tea Leaf Ted Bear,Game,AGD Pack 25,32K+8K,,,,,,,,present,Kees van Oss,AGD/TLBEAR,8200,"CH.""TLBRUN""","TLBCODE
 TLBRUN
 TLBSCR",,Works,
-1014,V11B2,AGD,AGD,Tea Leaf Ted Man,Game,AGD Pack 25,Yes,,,,,,,,present,Kees van Oss,AGD/TLTED,8200,"CH.""TLTRUN""","TLTCODE
+1014,V11B2,AGD,AGD,Tea Leaf Ted Man,Game,AGD Pack 25,32K+8K,,,,,,,,present,Kees van Oss,AGD/TLTED,8200,"CH.""TLTRUN""","TLTCODE
 TLTRUN
 TLTSCR",,Works,
-1015,V11B2,AGD,AGD,The Vectornauts,Game,AGD Pack 26,Yes,,,,,,,,present,Kees van Oss,AGD/VECTORN,8200,"CH.""VECRUN""","VECCODE
+1015,V11B2,AGD,AGD,The Vectornauts,Game,AGD Pack 26,32K+8K,,,,,,,,present,Kees van Oss,AGD/VECTORN,8200,"CH.""VECRUN""","VECCODE
 VECRUN
 VECSCR",,Works,
-1016,V11B2,AGD,AGD,Vintik,Game,AGD Pack 26,Yes,,,,,,,,present,Kees van Oss,AGD/VINTIK,8200,"CH.""VINRUN""","VINCODE
+1016,V11B2,AGD,AGD,Vintik,Game,AGD Pack 26,32K+8K,,,,,,,,present,Kees van Oss,AGD/VINTIK,8200,"CH.""VINRUN""","VINCODE
 VINRUN
 VINSCR",,Works,
-1017,V11B2,AGD,AGD,Zombo's Christmas Capers,Game,AGD Pack 26,Yes,,,,,,,,present,Kees van Oss,AGD/ZOMBOX,8200,"CH.""ZOXRUN""","ZOXCODE
+1017,V11B2,AGD,AGD,Zombo's Christmas Capers,Game,AGD Pack 26,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZOMBOX,8200,"CH.""ZOXRUN""","ZOXCODE
 ZOXPAN
 ZOXRUN
 ZOXSCR",,Works,
-1018,V11B2,AGD,AGD,Zukinox,Game,AGD Pack 26,Yes,,,,,,,,present,Kees van Oss,AGD/ZUKINOX,8200,"CH.""ZUKRUN""","ZUKCODE
+1018,V11B2,AGD,AGD,Zukinox,Game,AGD Pack 26,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZUKINOX,8200,"CH.""ZUKRUN""","ZUKCODE
 ZUKRUN
 ZUKSCR",,Works,
-1019,V11B3,AGD,AGD,Astronaut Labyrinth,Game,AGD Pack 27,Yes,,,,,,,,present,Kees van Oss,AGD/ASTRONA,8200,"CH.""ASTRUN""","ASTCODE
+1019,V11B3,AGD,AGD,Astronaut Labyrinth,Game,AGD Pack 27,32K+8K,,,,,,,,present,Kees van Oss,AGD/ASTRONA,8200,"CH.""ASTRUN""","ASTCODE
 ASTRUN
 ASTSCR",,Works,
-1020,V11B3,AGD,AGD,Cronopios Y Famas,Game,AGD Pack 27,Yes,,,,,,,,present,Kees van Oss,AGD/CRONOPI,8200,"CH.""CRORUN""","CROCODE
+1020,V11B3,AGD,AGD,Cronopios Y Famas,Game,AGD Pack 27,32K+8K,,,,,,,,present,Kees van Oss,AGD/CRONOPI,8200,"CH.""CRORUN""","CROCODE
 CROPAN
 CRORUN
 CROSCR",,Works,
-1021,V11B3,AGD,AGD,Code Zero,Game,AGD Pack 27,Yes,,,,,,,,present,Kees van Oss,AGD/CODEZER,8200,"CH.""CZRUN""","CZCODE
+1021,V11B3,AGD,AGD,Code Zero,Game,AGD Pack 27,32K+8K,,,,,,,,present,Kees van Oss,AGD/CODEZER,8200,"CH.""CZRUN""","CZCODE
 CZRUN
 CZSCR",,Works,
-1022,V11B3,AGD,AGD,Puzzle Boxes,Game,AGD Pack 27,Yes,,,,,,,,present,Kees van Oss,AGD/BOXES,8200,"CH.""BOXRUN""","BOXCODE
+1022,V11B3,AGD,AGD,Puzzle Boxes,Game,AGD Pack 27,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOXES,8200,"CH.""BOXRUN""","BOXCODE
 BOXRUN
 BOXSCR",,Works,
-1023,V11B4,AGD,AGD,Astrosmash ZX,Game,AGD Pack 28,Yes,,,,,,,,present,Kees van Oss,AGD/ASTROSM,8200,"CH.""ASRUN""","ASCODE
+1023,V11B4,AGD,AGD,Astrosmash ZX,Game,AGD Pack 28,32K+8K,,,,,,,,present,Kees van Oss,AGD/ASTROSM,8200,"CH.""ASRUN""","ASCODE
 ASRUN
 ASSCR",,Works,
-1024,V11B4,AGD,AGD,Bubble Frenzy,Game,AGD Pack 28,Yes,,,,,,,,present,Kees van Oss,AGD/BUBBLEF,8200,"CH.""BFRUN""","BFCODE
+1024,V11B4,AGD,AGD,Bubble Frenzy,Game,AGD Pack 28,32K+8K,,,,,,,,present,Kees van Oss,AGD/BUBBLEF,8200,"CH.""BFRUN""","BFCODE
 BFRUN
 BFSCR",,Works,
-1025,V11B4,AGD,AGD,Donkey Kong Jr,Game,AGD Pack 28,Yes,,,,,,,,present,Kees van Oss,AGD/DKJR,8200,"CH.""DKJRUN""","DKJCODE
+1025,V11B4,AGD,AGD,Donkey Kong Jr,Game,AGD Pack 28,32K+8K,,,,,,,,present,Kees van Oss,AGD/DKJR,8200,"CH.""DKJRUN""","DKJCODE
 DKJRUN
 DKJSCR",,Works,
-1026,V11B4,AGD,AGD,Flipping Horace,Game,AGD Pack 28,Yes,,,,,,,,present,Kees van Oss,AGD/FLIPHOR,8200,"CH.""FHRUN""","FHCODE
+1026,V11B4,AGD,AGD,Flipping Horace,Game,AGD Pack 28,32K+8K,,,,,,,,present,Kees van Oss,AGD/FLIPHOR,8200,"CH.""FHRUN""","FHCODE
 FHRUN
 FHSCR",,Works,
 1027,V11B3,Non Comm,Non Comm,Colour Test 1,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,"CH.""CLTST1""",CLTST1,,Works,
-1028,V11B6,AGD,AGD,Albert the Wolf,Game,AGD Pack 31,Yes,,,,,,,,present,Kees van Oss,AGD/ALBERTW,8200,"CH.""AWRUN""","AWCODE
+1028,V11B6,AGD,AGD,Albert the Wolf,Game,AGD Pack 31,32K+8K,,,,,,,,present,Kees van Oss,AGD/ALBERTW,8200,"CH.""AWRUN""","AWCODE
 AWRUN
 AWSCR",,Works,
-1029,V11B6,AGD,AGD,All Hallows,Game,AGD Pack 31,Yes,,,,,,,,present,Kees van Oss,AGD/ALLHALL,8200,"CH.""AHRUN""","AHCODE
+1029,V11B6,AGD,AGD,All Hallows,Game,AGD Pack 31,32K+8K,,,,,,,,present,Kees van Oss,AGD/ALLHALL,8200,"CH.""AHRUN""","AHCODE
 AHRUN
 AHSCR",,Works,
-1030,V11B6,AGD,AGD,Angry Birds Opposition,Game,AGD Pack 31,Yes,,,,,,,,present,Kees van Oss,AGD/ANGRYBI,8200,"CH.""ABRUN""","ABCODE
+1030,V11B6,AGD,AGD,Angry Birds Opposition,Game,AGD Pack 31,32K+8K,,,,,,,,present,Kees van Oss,AGD/ANGRYBI,8200,"CH.""ABRUN""","ABCODE
 ABRUN
 ABSCR",,Works,
-1031,V11B6,AGD,AGD,Antiquity Jones,Game,AGD Pack 29,Yes,,,,,,,,present,Kees van Oss,AGD/ANTIQUI,8200,"CH.""ANTRUN""","ANTCODE
+1031,V11B6,AGD,AGD,Antiquity Jones,Game,AGD Pack 29,32K+8K,,,,,,,,present,Kees van Oss,AGD/ANTIQUI,8200,"CH.""ANTRUN""","ANTCODE
 ANTRUN
 ANTSCR",,Works,
-1032,V11B6,AGD,AGD,Billys Quest,Game,AGD Pack 37,Yes,,,,,,,,present,Kees van Oss,AGD/BILQUES,8200,"CH.""BILRUN""","BILCODE
+1032,V11B6,AGD,AGD,Billys Quest,Game,AGD Pack 37,32K+8K,,,,,,,,present,Kees van Oss,AGD/BILQUES,8200,"CH.""BILRUN""","BILCODE
 BILRUN
 BILSCR",,Works,
-1033,V11B6,AGD,AGD,Binary,Game,AGD Pack 32,Yes,,,,,,,,present,Kees van Oss,AGD/BINARY,8200,"CH.""BINRUN""","BINCODE
+1033,V11B6,AGD,AGD,Binary,Game,AGD Pack 32,32K+8K,,,,,,,,present,Kees van Oss,AGD/BINARY,8200,"CH.""BINRUN""","BINCODE
 BINPAN
 BINRUN
 BINSCR",,Works,
-1034,V11B6,AGD,AGD,Bob the Blob Xavier,Game,AGD Pack 37,Yes,,,,,,,,present,Kees van Oss,AGD/BOBBLOB,8200,"CH.""BOBRUN""","BOBCODE
+1034,V11B6,AGD,AGD,Bob the Blob Xavier,Game,AGD Pack 37,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOBBLOB,8200,"CH.""BOBRUN""","BOBCODE
 BOBRUN
 BOBSCR",,Works,
-1035,V11B6,AGD,AGD,Bot Floater,Game,AGD Pack 37,Yes,,,,,,,,present,Kees van Oss,AGD/BOTFLOA,8200,"CH.""BOTRUN""","BOTCODE
+1035,V11B6,AGD,AGD,Bot Floater,Game,AGD Pack 37,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOTFLOA,8200,"CH.""BOTRUN""","BOTCODE
 BOTRUN
 BOTSCR",,Works,
-1036,V11B6,AGD,AGD,Battle Tank 3D and some Cr,Game,AGD Pack 33,Yes,,,,,,,,present,Kees van Oss,AGD/BTANK3D,8200,"CH.""BT3RUN""","BT3CODE
+1036,V11B6,AGD,AGD,Battle Tank 3D and some Cr,Game,AGD Pack 33,32K+8K,,,,,,,,present,Kees van Oss,AGD/BTANK3D,8200,"CH.""BT3RUN""","BT3CODE
 BT3RUN
 BT3SCR",,Works,
-1037,V11B6,AGD,AGD,Catch a Hare,Game,AGD Pack 33,Yes,,,,,,,,present,Kees van Oss,AGD/CATCHAH,8200,"CH.""CHRUN""","CHCODE
+1037,V11B6,AGD,AGD,Catch a Hare,Game,AGD Pack 33,32K+8K,,,,,,,,present,Kees van Oss,AGD/CATCHAH,8200,"CH.""CHRUN""","CHCODE
 CHRUN
 CHSCR",,Works,
-1038,V11B6,AGD,AGD,Cattivik level1,Game,AGD Pack 30,Yes,,,,,,,,present,Kees van Oss,AGD/CATTI1A,8200,"CH.""C1ARUN""","C1ACODE
+1038,V11B6,AGD,AGD,Cattivik level1,Game,AGD Pack 30,32K+8K,,,,,,,,present,Kees van Oss,AGD/CATTI1A,8200,"CH.""C1ARUN""","C1ACODE
 C1APAN
 C1ARUN
 C1ASCR",,Works,
-1039,V11B6,AGD,AGD,Cattivik level2,Game,AGD Pack 30,Yes,,,,,,,,present,Kees van Oss,AGD/CATTI1B,8200,"CH.""C1BRUN""","C1BCODE
+1039,V11B6,AGD,AGD,Cattivik level2,Game,AGD Pack 30,32K+8K,,,,,,,,present,Kees van Oss,AGD/CATTI1B,8200,"CH.""C1BRUN""","C1BCODE
 C1BPAN
 C1BRUN
 C1BSCR",,Works,
-1040,V11B6,AGD,AGD,Cattivik level3,Game,AGD Pack 30,Yes,,,,,,,,present,Kees van Oss,AGD/CATTI1C,8200,"CH.""C1CRUN""","C1CCODE
+1040,V11B6,AGD,AGD,Cattivik level3,Game,AGD Pack 30,32K+8K,,,,,,,,present,Kees van Oss,AGD/CATTI1C,8200,"CH.""C1CRUN""","C1CCODE
 C1CPAN
 C1CRUN
 C1CSCR",,Works,
-1041,V11B6,AGD,AGD,Cattivik never Dies,Game,AGD Pack 33,Yes,,,,,,,,present,Kees van Oss,AGD/CATTI2,8200,"CH.""CA2RUN""","CA2CODE
+1041,V11B6,AGD,AGD,Cattivik never Dies,Game,AGD Pack 33,32K+8K,,,,,,,,present,Kees van Oss,AGD/CATTI2,8200,"CH.""CA2RUN""","CA2CODE
 CA2RUN
 CA2SCR",,Works,
-1042,V11B6,AGD,AGD,Cherry Challenge,Game,AGD Pack 37,Yes,,,,,,,,present,Kees van Oss,AGD/CHERRY6,8200,"CH.""C68RUN""","C68CODE
+1042,V11B6,AGD,AGD,Cherry Challenge,Game,AGD Pack 37,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHERRY6,8200,"CH.""C68RUN""","C68CODE
 C68RUN
 C68SCR",,Works,
-1043,V11B6,AGD,AGD,Chopperdrop,Game,AGD Pack 29,Yes,,,,,,,,present,Kees van Oss,AGD/CHOPPER,8200,"CH.""CDRUN""","CDCODE
+1043,V11B6,AGD,AGD,Chopperdrop,Game,AGD Pack 29,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHOPPER,8200,"CH.""CDRUN""","CDCODE
 CDRUN
 CDSCR",,Works,
-1044,V11B6,AGD,AGD,Chunk Zone,Game,AGD Pack 33,Yes,,,,,,,,present,Kees van Oss,AGD/CHUNKZO,8200,"CH.""CZRUN""","CZCODE
+1044,V11B6,AGD,AGD,Chunk Zone,Game,AGD Pack 33,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHUNKZO,8200,"CH.""CZRUN""","CZCODE
 CZRUN",,Works,
-1045,V11B6,AGD,AGD,Cousin Horace Chapter 3-Sl,Game,AGD Pack 34,Yes,,,,,,,,present,Kees van Oss,AGD/COUSIN3,8200,"CH.""CH3RUN""","CH3CODE
+1045,V11B6,AGD,AGD,Cousin Horace Chapter 3-Sl,Game,AGD Pack 34,32K+8K,,,,,,,,present,Kees van Oss,AGD/COUSIN3,8200,"CH.""CH3RUN""","CH3CODE
 CH3PAN
 CH3RUN
 CH3SCR",,Works,
-1046,V11B6,AGD,AGD,Cousin Horace Chapter 5-To,Game,AGD Pack 34,Yes,,,,,,,,present,Kees van Oss,AGD/COUSIN5,8200,"CH.""CH5RUN""","CH5CODE
+1046,V11B6,AGD,AGD,Cousin Horace Chapter 5-To,Game,AGD Pack 34,32K+8K,,,,,,,,present,Kees van Oss,AGD/COUSIN5,8200,"CH.""CH5RUN""","CH5CODE
 CH5PAN
 CH5RUN
 CH5SCR",,Works,
-1047,V11B6,AGD,AGD,Dead Flesh Boy,Game,AGD Pack 35,Yes,,,,,,,,present,Kees van Oss,AGD/DFLESHB,8200,"CH.""DFBRUN""","DFBCODE
+1047,V11B6,AGD,AGD,Dead Flesh Boy,Game,AGD Pack 35,32K+8K,,,,,,,,present,Kees van Oss,AGD/DFLESHB,8200,"CH.""DFBRUN""","DFBCODE
 DFBRUN
 DFBSCR",,Works,
-1048,V11B6,AGD,AGD,Donkey Kong Reloaded Again,Game,AGD Pack 35,Yes,,,,,,,,present,Kees van Oss,AGD/DKRELOA,8200,"CH.""DKRRUN""","DKRCODE
+1048,V11B6,AGD,AGD,Donkey Kong Reloaded Again,Game,AGD Pack 35,32K+8K,,,,,,,,present,Kees van Oss,AGD/DKRELOA,8200,"CH.""DKRRUN""","DKRCODE
 DKRRUN
 DKRSCR",,Works,
-1049,V11B6,AGD,AGD,The Dragon with the Wagon,Game,AGD Pack 38,Yes,,,,,,,,present,Kees van Oss,AGD/DRAGNWA,8200,"CH.""DRARUN""","DRACODE
+1049,V11B6,AGD,AGD,The Dragon with the Wagon,Game,AGD Pack 38,32K+8K,,,,,,,,present,Kees van Oss,AGD/DRAGNWA,8200,"CH.""DRARUN""","DRACODE
 DRARUN
 DRASCR",,Works,
-1050,V11B6,AGD,AGD,Ferret Buster,Game,AGD Pack 35,Yes,,,,,,,,present,Kees van Oss,AGD/FBUSTER,8200,"CH.""FBRUN""","FBCODE
+1050,V11B6,AGD,AGD,Ferret Buster,Game,AGD Pack 35,32K+8K,,,,,,,,present,Kees van Oss,AGD/FBUSTER,8200,"CH.""FBRUN""","FBCODE
 FBRUN",,Works,
-1051,V11B6,AGD,AGD,Gerry Andersons UFO,Game,AGD Pack 31,Yes,,,,,,,,present,Kees van Oss,AGD/GAUFO,8200,"CH.""GAURUN""","GAUCODE
+1051,V11B6,AGD,AGD,Gerry Andersons UFO,Game,AGD Pack 31,32K+8K,,,,,,,,present,Kees van Oss,AGD/GAUFO,8200,"CH.""GAURUN""","GAUCODE
 GAURUN
 GAUSCR",,Works,
-1052,V11B6,AGD,AGD,Indiana Jones and the Foun,Game,AGD Pack 35,Yes,,,,,,,,present,Kees van Oss,AGD/IJONES,8200,"CH.""IJRUN""","IJCODE
+1052,V11B6,AGD,AGD,Indiana Jones and the Foun,Game,AGD Pack 35,32K+8K,,,,,,,,present,Kees van Oss,AGD/IJONES,8200,"CH.""IJRUN""","IJCODE
 IJRUN
 IJSCR",,Works,
-1053,V11B6,AGD,AGD,Joey Jumpy,Game,AGD Pack 38,Yes,,,,,,,,present,Kees van Oss,AGD/JOEYJUM,8200,"CH.""JOERUN""","JOECODE
+1053,V11B6,AGD,AGD,Joey Jumpy,Game,AGD Pack 38,32K+8K,,,,,,,,present,Kees van Oss,AGD/JOEYJUM,8200,"CH.""JOERUN""","JOECODE
 JOERUN
 JOESCR",,Works,
-1054,V11B6,AGD,AGD,Crazy Kong City-Episode1-S,Game,AGD Pack 34,Yes,,,,,,,,present,Kees van Oss,AGD/KONG1,8200,"CH.""K1RUN""","K1CODE
+1054,V11B6,AGD,AGD,Crazy Kong City-Episode1-S,Game,AGD Pack 34,32K+8K,,,,,,,,present,Kees van Oss,AGD/KONG1,8200,"CH.""K1RUN""","K1CODE
 K1RUN
 K1SCR",,Works,
-1055,V11B6,AGD,AGD,Crazy Kong City-Episode2-S,Game,AGD Pack 34,Yes,,,,,,,,present,Kees van Oss,AGD/KONG2,8200,"CH.""K2RUN""","K2CODE
+1055,V11B6,AGD,AGD,Crazy Kong City-Episode2-S,Game,AGD Pack 34,32K+8K,,,,,,,,present,Kees van Oss,AGD/KONG2,8200,"CH.""K2RUN""","K2CODE
 K2RUN
 K2SCR",,Works,
-1056,V11B6,AGD,AGD,Krap Park,Game,AGD Pack 32,Yes,,,,,,,,present,Kees van Oss,AGD/KRAPPAR,8200,"CH.""KPRUN""","KPCODE
+1056,V11B6,AGD,AGD,Krap Park,Game,AGD Pack 32,32K+8K,,,,,,,,present,Kees van Oss,AGD/KRAPPAR,8200,"CH.""KPRUN""","KPCODE
 KPRUN
 KPSCR",,Works,
-1057,V11B6,AGD,AGD,Kyd Cadet,Game,AGD Pack 36,Yes,,,,,,,,present,Kees van Oss,AGD/KYD1,8200,"CH.""K1RUN""","K1CODE
+1057,V11B6,AGD,AGD,Kyd Cadet,Game,AGD Pack 36,32K+8K,,,,,,,,present,Kees van Oss,AGD/KYD1,8200,"CH.""K1RUN""","K1CODE
 K1RUN
 K1SCR",,Works,
-1058,V11B6,AGD,AGD,Kyd Cadet II The Rescue of,Game,AGD Pack 36,Yes,,,,,,,,present,Kees van Oss,AGD/KYD2,8200,"CH.""K2RUN""","K2CODE
+1058,V11B6,AGD,AGD,Kyd Cadet II The Rescue of,Game,AGD Pack 36,32K+8K,,,,,,,,present,Kees van Oss,AGD/KYD2,8200,"CH.""K2RUN""","K2CODE
 K2RUN
 K2SCR",,Works,
-1059,V11B6,AGD,AGD,Kyd Cadet 3 The Eyeburx Pl,Game,AGD Pack 36,Yes,,,,,,,,present,Kees van Oss,AGD/KYD3,8200,"CH.""K3RUN""","K3CODE
+1059,V11B6,AGD,AGD,Kyd Cadet 3 The Eyeburx Pl,Game,AGD Pack 36,32K+8K,,,,,,,,present,Kees van Oss,AGD/KYD3,8200,"CH.""K3RUN""","K3CODE
 K3RUN
 K3SCR",,Works,
-1060,V11B6,AGD,AGD,Lost in Space,Game,AGD Pack 38,Yes,,,,,,,,present,Kees van Oss,AGD/LINSPAC,8200,"CH.""LINRUN""","LINCODE
+1060,V11B6,AGD,AGD,Lost in Space,Game,AGD Pack 38,32K+8K,,,,,,,,present,Kees van Oss,AGD/LINSPAC,8200,"CH.""LINRUN""","LINCODE
 LINRUN
 LINSCR",,Works,
-1061,V11B6,AGD,AGD,Lost Little Spaceman,Game,AGD Pack 32,Yes,,,,,,,,present,Kees van Oss,AGD/LLSPACE,8200,"CH.""LLSRUN""","LLSCODE
+1061,V11B6,AGD,AGD,Lost Little Spaceman,Game,AGD Pack 32,32K+8K,,,,,,,,present,Kees van Oss,AGD/LLSPACE,8200,"CH.""LLSRUN""","LLSCODE
 LLSRUN
 LLSSCR",,Works,
-1062,V11B6,AGD,AGD,Lost in my Spectrum,Game,AGD Pack 30,Yes,,,,,,,,present,Kees van Oss,AGD/LOSTSPE,8200,"CH.""LISRUN""","LISCODE
+1062,V11B6,AGD,AGD,Lost in my Spectrum,Game,AGD Pack 30,32K+8K,,,,,,,,present,Kees van Oss,AGD/LOSTSPE,8200,"CH.""LISRUN""","LISCODE
 LISRUN
 LISSCR",,Works,
-1063,V11B6,AGD,AGD,Last Human,Game,AGD Pack 38,Yes,,,,,,,,present,Kees van Oss,AGD/LSTHUMA,8200,"CH.""LSTRUN""","LSTCODE
+1063,V11B6,AGD,AGD,Last Human,Game,AGD Pack 38,32K+8K,,,,,,,,present,Kees van Oss,AGD/LSTHUMA,8200,"CH.""LSTRUN""","LSTCODE
 LSTRUN
 LSTSCR",,Works,
-1064,V11B6,AGD,AGD,Lupo Alberto,Game,AGD Pack 36,Yes,,,,,,,,present,Kees van Oss,AGD/LUPOALB,8200,"CH.""LARUN""","LACODE
+1064,V11B6,AGD,AGD,Lupo Alberto,Game,AGD Pack 36,32K+8K,,,,,,,,present,Kees van Oss,AGD/LUPOALB,8200,"CH.""LARUN""","LACODE
 LARUN
 LASCR",,Works,
-1065,V11B6,AGD,AGD,Mark gets sucked in,Game,AGD Pack 39,Yes,,,,,,,,present,Kees van Oss,AGD/MGSI,8200,"CH.""MGSRUN""","MGSCODE
+1065,V11B6,AGD,AGD,Mark gets sucked in,Game,AGD Pack 39,32K+8K,,,,,,,,present,Kees van Oss,AGD/MGSI,8200,"CH.""MGSRUN""","MGSCODE
 MGSRUN
 MGSSCR",,Works,
-1066,V11B6,AGD,AGD,Mission on Mars,Game,AGD Pack 39,Yes,,,,,,,,present,Kees van Oss,AGD/MISSMAR,8200,"CH.""MARRUN""","MARCODE
+1066,V11B6,AGD,AGD,Mission on Mars,Game,AGD Pack 39,32K+8K,,,,,,,,present,Kees van Oss,AGD/MISSMAR,8200,"CH.""MARRUN""","MARCODE
 MARRUN
 MARSCR",,Works,
-1067,V11B6,AGD,AGD,Platform Prodigy,Game,AGD Pack 39,Yes,,,,,,,,present,Kees van Oss,AGD/PLTFPDG,8200,"CH.""PLTRUN""","PLTCODE
+1067,V11B6,AGD,AGD,Platform Prodigy,Game,AGD Pack 39,32K+8K,,,,,,,,present,Kees van Oss,AGD/PLTFPDG,8200,"CH.""PLTRUN""","PLTCODE
 PLTRUN
 PLTSCR",,Works,
-1068,V11B6,AGD,AGD,The Quest to become King,Game,AGD Pack 39,Yes,,,,,,,,present,Kees van Oss,AGD/QBECKIN,8200,"CH.""QBKRUN""","QBKCODE
+1068,V11B6,AGD,AGD,The Quest to become King,Game,AGD Pack 39,32K+8K,,,,,,,,present,Kees van Oss,AGD/QBECKIN,8200,"CH.""QBKRUN""","QBKCODE
 QBKRUN
 QBKSCR",,Works,
-1069,V11B6,AGD,AGD,Randomator,Game,AGD Pack 40,Yes,,,,,,,,present,Kees van Oss,AGD/RNDMATO,8200,"CH.""RNDRUN""","RNDCODE
+1069,V11B6,AGD,AGD,Randomator,Game,AGD Pack 40,32K+8K,,,,,,,,present,Kees van Oss,AGD/RNDMATO,8200,"CH.""RNDRUN""","RNDCODE
 RNDRUN
 RNDSCR",,Works,
-1070,V11B6,AGD,AGD,Robot The Impossible Missi,Game,AGD Pack 32,Yes,,,,,,,,present,Kees van Oss,AGD/ROBOT,8200,"CH.""ROBRUN""","ROBCODE
+1070,V11B6,AGD,AGD,Robot The Impossible Missi,Game,AGD Pack 32,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROBOT,8200,"CH.""ROBRUN""","ROBCODE
 ROBPAN
 ROBRUN
 ROBSCR",,Works,
-1071,V11B6,AGD,AGD,Rocky Roads and Divots,Game,AGD Pack 40,Yes,,,,,,,,present,Kees van Oss,AGD/ROCKROD,8200,"CH.""RRRUN""","RRCODE
+1071,V11B6,AGD,AGD,Rocky Roads and Divots,Game,AGD Pack 40,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROCKROD,8200,"CH.""RRRUN""","RRCODE
 RRRUN
 RRSCR",,Works,
-1072,V11B6,AGD,AGD,Rudolph rescues Xmas,Game,AGD Pack 40,Yes,,,,,,,,present,Kees van Oss,AGD/RUDXMAS,8200,"CH.""RUDRUN""","RUDCODE
+1072,V11B6,AGD,AGD,Rudolph rescues Xmas,Game,AGD Pack 40,32K+8K,,,,,,,,present,Kees van Oss,AGD/RUDXMAS,8200,"CH.""RUDRUN""","RUDCODE
 RUDRUN
 RUDSCR",,Works,
-1073,V11B6,AGD,AGD,STW Theme Park,Game,AGD Pack 40,Yes,,,,,,,,present,Kees van Oss,AGD/STWTP,8200,"CH.""STWRUN""","STWCODE
+1073,V11B6,AGD,AGD,STW Theme Park,Game,AGD Pack 40,32K+8K,,,,,,,,present,Kees van Oss,AGD/STWTP,8200,"CH.""STWRUN""","STWCODE
 STWRUN
 STWSCR",,Works,
-1074,V11B6,AGD,AGD,Tiki Temple,Game,AGD Pack 41,Yes,,,,,,,,present,Kees van Oss,AGD/TIKITMP,8200,"CH.""TTRUN""","TTCODE
+1074,V11B6,AGD,AGD,Tiki Temple,Game,AGD Pack 41,32K+8K,,,,,,,,present,Kees van Oss,AGD/TIKITMP,8200,"CH.""TTRUN""","TTCODE
 TTRUN
 TTSCR",,Works,
-1075,V11B6,AGD,AGD,Timothys Travels,Game,AGD Pack 41,Yes,,,,,,,,present,Kees van Oss,AGD/TIMTRAV,8200,"CH.""TIMRUN""","TIMCODE
+1075,V11B6,AGD,AGD,Timothys Travels,Game,AGD Pack 41,32K+8K,,,,,,,,present,Kees van Oss,AGD/TIMTRAV,8200,"CH.""TIMRUN""","TIMCODE
 TIMRUN
 TIMSCR",,Works,
-1076,V11B6,AGD,AGD,Toofy in Fan Land,Game,AGD Pack 29,Yes,,,,,,,,present,Kees van Oss,AGD/TOOFY1,8200,"CH.""TO1RUN""","TO1CODE
+1076,V11B6,AGD,AGD,Toofy in Fan Land,Game,AGD Pack 29,32K+8K,,,,,,,,present,Kees van Oss,AGD/TOOFY1,8200,"CH.""TO1RUN""","TO1CODE
 TO1RUN
 TO1SCR",,Works,
-1077,V11B6,AGD,AGD,Toofys Winter Nuts,Game,AGD Pack 29,Yes,,,,,,,,present,Kees van Oss,AGD/TOOFY2,8200,"CH.""TO2RUN""","TO2CODE
+1077,V11B6,AGD,AGD,Toofys Winter Nuts,Game,AGD Pack 29,32K+8K,,,,,,,,present,Kees van Oss,AGD/TOOFY2,8200,"CH.""TO2RUN""","TO2CODE
 TO2RUN
 TO2SCR",,Works,
-1078,V11B6,AGD,AGD,Trick or Troll,Game,AGD Pack 41,Yes,,,,,,,,present,Kees van Oss,AGD/TRIKTRO,8200,"CH.""TRIRUN""","TRICODE
+1078,V11B6,AGD,AGD,Trick or Troll,Game,AGD Pack 41,32K+8K,,,,,,,,present,Kees van Oss,AGD/TRIKTRO,8200,"CH.""TRIRUN""","TRICODE
 TRIRUN
 TRISCR",,Works,
-1079,V11B6,AGD,AGD,Zoes Adventure,Game,AGD Pack 41,Yes,,,,,,,,present,Kees van Oss,AGD/ZOESADV,8200,"CH.""ZOERUN""","ZOECODE
+1079,V11B6,AGD,AGD,Zoes Adventure,Game,AGD Pack 41,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZOESADV,8200,"CH.""ZOERUN""","ZOECODE
 ZOERUN
 ZOESCR",,Works,
-1080,V11B7,AGD,AGD,Andys Escape,Game,AGD Pack 42,Yes,,,,,,,,present,Kees van Oss,AGD/ANDYSES,8200,"CH.""AERUN""","AECODE
+1080,V11B7,AGD,AGD,Andys Escape,Game,AGD Pack 42,32K+8K,,,,,,,,present,Kees van Oss,AGD/ANDYSES,8200,"CH.""AERUN""","AECODE
 AERUN",,Works,
-1081,V11B7,AGD,AGD,Being Left is not Right,Game,AGD Pack 48,Yes,,,,,,,,present,Kees van Oss,AGD/BEINGLE,8200,"CH.""BLRUN""","BLCODE
+1081,V11B7,AGD,AGD,Being Left is not Right,Game,AGD Pack 48,32K+8K,,,,,,,,present,Kees van Oss,AGD/BEINGLE,8200,"CH.""BLRUN""","BLCODE
 BLRUN
 BLSCR",,Works,
-1082,V11B7,AGD,AGD,Deadzone,Game,AGD Pack 42,Yes,,,,,,,,present,Kees van Oss,AGD/DEADZON,8200,"CH.""DZRUN""","DZCODE
+1082,V11B7,AGD,AGD,Deadzone,Game,AGD Pack 42,32K+8K,,,,,,,,present,Kees van Oss,AGD/DEADZON,8200,"CH.""DZRUN""","DZCODE
 DZPAN
 DZRUN
 DZSCR",,Works,
-1083,V11B7,AGD,AGD,Doompit part1,Game,AGD Pack 51,Yes,,,,,,,,present,Kees van Oss,AGD/DOOMPT1,8200,"CH.""DP1RUN""","DP1CODE
+1083,V11B7,AGD,AGD,Doompit part1,Game,AGD Pack 51,32K+8K,,,,,,,,present,Kees van Oss,AGD/DOOMPT1,8200,"CH.""DP1RUN""","DP1CODE
 DP1PAN
 DP1RUN
 DP1SCR",,Works,
-1084,V11B7,AGD,AGD,Doompit part2,Game,AGD Pack 51,Yes,,,,,,,,present,Kees van Oss,AGD/DOOMPT2,8200,"CH.""DP2RUN""","DP2CODE
+1084,V11B7,AGD,AGD,Doompit part2,Game,AGD Pack 51,32K+8K,,,,,,,,present,Kees van Oss,AGD/DOOMPT2,8200,"CH.""DP2RUN""","DP2CODE
 DP2PAN
 DP2RUN
 DP2SCR",,Works,
-1085,V11B7,AGD,AGD,Doompit part3,Game,AGD Pack 51,Yes,,,,,,,,present,Kees van Oss,AGD/DOOMPT3,8200,"CH.""DP3RUN""","DP3CODE
+1085,V11B7,AGD,AGD,Doompit part3,Game,AGD Pack 51,32K+8K,,,,,,,,present,Kees van Oss,AGD/DOOMPT3,8200,"CH.""DP3RUN""","DP3CODE
 DP3PAN
 DP3RUN
 DP3SCR",,Works,
-1086,V11B7,AGD,AGD,Funky Fungus part 2,Game,AGD Pack 43,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGUS2,8200,"CH.""F2RUN""","F2CODE
+1086,V11B7,AGD,AGD,Funky Fungus part 2,Game,AGD Pack 43,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGUS2,8200,"CH.""F2RUN""","F2CODE
 F2PAN
 F2RUN
 F2SCR",,Works,
-1087,V11B7,AGD,AGD,Funky Fungus part 3,Game,AGD Pack 43,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGUS3,8200,"CH.""F3RUN""","F3CODE
+1087,V11B7,AGD,AGD,Funky Fungus part 3,Game,AGD Pack 43,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGUS3,8200,"CH.""F3RUN""","F3CODE
 F3PAN
 F3RUN
 F3SCR",,Works,
-1088,V11B7,AGD,AGD,Funky Fungus part 4,Game,AGD Pack 43,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGUS4,8200,"CH.""F4RUN""","F4CODE
+1088,V11B7,AGD,AGD,Funky Fungus part 4,Game,AGD Pack 43,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGUS4,8200,"CH.""F4RUN""","F4CODE
 F4PAN
 F4RUN
 F4SCR",,Works,
-1089,V11B7,AGD,AGD,Generatio Digital,Game,AGD Pack 42,Yes,,,,,,,,present,Kees van Oss,AGD/GENERAC,8200,"CH.""GDRUN""","GDCODE
+1089,V11B7,AGD,AGD,Generatio Digital,Game,AGD Pack 42,32K+8K,,,,,,,,present,Kees van Oss,AGD/GENERAC,8200,"CH.""GDRUN""","GDCODE
 GDRUN
 GDSCR",,Works,
-1090,V11B7,AGD,AGD,Find the Green Room,Game,AGD Pack 42,Yes,,,,,,,,present,Kees van Oss,AGD/GREENRO,8200,"CH.""GRRUN""","GRCODE
+1090,V11B7,AGD,AGD,Find the Green Room,Game,AGD Pack 42,32K+8K,,,,,,,,present,Kees van Oss,AGD/GREENRO,8200,"CH.""GRRUN""","GRCODE
 GRRUN",,Works,
-1091,V11B7,AGD,AGD,Knight Hero White,Game,AGD Pack 49,Yes,,,,,,,,present,Kees van Oss,AGD/KNIGHTW,8200,"CH.""KWRUN""","KWCODE
+1091,V11B7,AGD,AGD,Knight Hero White,Game,AGD Pack 49,32K+8K,,,,,,,,present,Kees van Oss,AGD/KNIGHTW,8200,"CH.""KWRUN""","KWCODE
 KWRUN
 KWSCR",,Works,
-1092,V11B7,AGD,AGD,Meteromania,Game,AGD Pack 50,Yes,,,,,,,,present,Kees van Oss,AGD/METEORM,8200,"CH.""MMRUN""","MMCODE
+1092,V11B7,AGD,AGD,Meteromania,Game,AGD Pack 50,32K+8K,,,,,,,,present,Kees van Oss,AGD/METEORM,8200,"CH.""MMRUN""","MMCODE
 MMRUN
 MMSCR",,Works,
-1093,V11B7,AGD,AGD,Monkey J The Treasure of t,Game,AGD Pack 50,Yes,,,,,,,,present,Kees van Oss,AGD/MONKEY,8200,"CH.""MJRUN""","MJCODE
+1093,V11B7,AGD,AGD,Monkey J The Treasure of t,Game,AGD Pack 50,32K+8K,,,,,,,,present,Kees van Oss,AGD/MONKEY,8200,"CH.""MJRUN""","MJCODE
 MJRUN",,Works,
-1094,V11B7,AGD,AGD,Montys Last Strike,Game,AGD Pack 43,Yes,,,,,,,,present,Kees van Oss,AGD/MONTYLS,8200,"CH.""MLSRUN""","MLSCODE
+1094,V11B7,AGD,AGD,Montys Last Strike,Game,AGD Pack 43,32K+8K,,,,,,,,present,Kees van Oss,AGD/MONTYLS,8200,"CH.""MLSRUN""","MLSCODE
 MLSRUN",,Works,
-1095,V11B7,AGD,AGD,Moritz,Game,AGD Pack 44,Yes,,,,,,,,present,Kees van Oss,AGD/MORITZ,8200,"CH.""MORUN""","MOCODE
+1095,V11B7,AGD,AGD,Moritz,Game,AGD Pack 44,32K+8K,,,,,,,,present,Kees van Oss,AGD/MORITZ,8200,"CH.""MORUN""","MOCODE
 MORUN
 MOSCR",,Works,
-1096,V11B7,AGD,AGD,Mouser,Game,AGD Pack 44,Yes,,,,,,,,present,Kees van Oss,AGD/MOUSER,8200,"CH.""MOURUN""","MOUCODE
+1096,V11B7,AGD,AGD,Mouser,Game,AGD Pack 44,32K+8K,,,,,,,,present,Kees van Oss,AGD/MOUSER,8200,"CH.""MOURUN""","MOUCODE
 MOURUN
 MOUSCR",,Works,
-1097,V11B7,AGD,AGD,Mysterious Dimensions Pt1,Game,AGD Pack 46,Yes,,,,,,,,present,Kees van Oss,AGD/MYSTER,8200,"CH.""M1RUN""","M1CODE
+1097,V11B7,AGD,AGD,Mysterious Dimensions Pt1,Game,AGD Pack 46,32K+8K,,,,,,,,present,Kees van Oss,AGD/MYSTER,8200,"CH.""M1RUN""","M1CODE
 M1PAN
 M1RUN
 M1SCR",,Works,
-1098,V11B7,AGD,AGD,Mysterious Dimensions Pt2,Game,AGD Pack 46,Yes,,,,,,,,present,Kees van Oss,AGD/MYSTER2,8200,"CH.""M2RUN""","M2CODE
+1098,V11B7,AGD,AGD,Mysterious Dimensions Pt2,Game,AGD Pack 46,32K+8K,,,,,,,,present,Kees van Oss,AGD/MYSTER2,8200,"CH.""M2RUN""","M2CODE
 M2PAN
 M2RUN
 M2SCR",,Works,
-1099,V11B7,AGD,AGD,Nixy the Glade Sprite,Game,AGD Pack 44,Yes,,,,,,,,present,Kees van Oss,AGD/NIXY,8200,"CH.""NIXRUN""","NIXCODE
+1099,V11B7,AGD,AGD,Nixy the Glade Sprite,Game,AGD Pack 44,32K+8K,,,,,,,,present,Kees van Oss,AGD/NIXY,8200,"CH.""NIXRUN""","NIXCODE
 NIXRUN
 NIXSCR",,Works,
-1100,V11B7,AGD,AGD,Nixy The Seeds of Doom,Game,AGD Pack 51,Yes,,,,,,,,present,Kees van Oss,AGD/NIXY2,8200,"CH.""NI2RUN""","NI2CODE
+1100,V11B7,AGD,AGD,Nixy The Seeds of Doom,Game,AGD Pack 51,32K+8K,,,,,,,,present,Kees van Oss,AGD/NIXY2,8200,"CH.""NI2RUN""","NI2CODE
 NI2RUN
 NI2SCR",,Works,
-1101,V11B7,AGD,AGD,Oh La La,Game,AGD Pack 44,Yes,,,,,,,,present,Kees van Oss,AGD/OHLALA,8200,"CH.""OLLRUN""","OLLCODE
+1101,V11B7,AGD,AGD,Oh La La,Game,AGD Pack 44,32K+8K,,,,,,,,present,Kees van Oss,AGD/OHLALA,8200,"CH.""OLLRUN""","OLLCODE
 OLLRUN",,Works,
-1102,V11B7,AGD,AGD,Operation Labyrinth Fall,Game,AGD Pack 45,Yes,,,,,,,,present,Kees van Oss,AGD/OPLABFA,8200,"CH.""OLFRUN""","OLFCODE
+1102,V11B7,AGD,AGD,Operation Labyrinth Fall,Game,AGD Pack 45,32K+8K,,,,,,,,present,Kees van Oss,AGD/OPLABFA,8200,"CH.""OLFRUN""","OLFCODE
 OLFRUN
 OLFSCR",,Works,
-1103,V11B7,AGD,AGD,Pengo Quest,Game,AGD Pack 45,Yes,,,,,,,,present,Kees van Oss,AGD/PENGO,8200,"CH.""PENRUN""","PENCODE
+1103,V11B7,AGD,AGD,Pengo Quest,Game,AGD Pack 45,32K+8K,,,,,,,,present,Kees van Oss,AGD/PENGO,8200,"CH.""PENRUN""","PENCODE
 PENRUN
 PENSCR
 PRNRUN",,Works,
-1104,V11B7,AGD,AGD,Percy Penguin in The Prese,Game,AGD Pack 45,Yes,,,,,,,,present,Kees van Oss,AGD/PERCY,8200,"CH.""PPRUN""","PPCODE
+1104,V11B7,AGD,AGD,Percy Penguin in The Prese,Game,AGD Pack 45,32K+8K,,,,,,,,present,Kees van Oss,AGD/PERCY,8200,"CH.""PPRUN""","PPCODE
 PPRUN
 PPSCR",,Works,
-1105,V11B7,AGD,AGD,Prospector,Game,AGD Pack 45,Yes,,,,,,,,present,Kees van Oss,AGD/PROSPEC,8200,"CH.""PRORUN""","PROCODE
+1105,V11B7,AGD,AGD,Prospector,Game,AGD Pack 45,32K+8K,,,,,,,,present,Kees van Oss,AGD/PROSPEC,8200,"CH.""PRORUN""","PROCODE
 PRORUN
 PROSCR",,Works,
-1106,V11B7,AGD,AGD,PTM,Game,AGD Pack 46,Yes,,,,,,,,present,Kees van Oss,AGD/PTM,8200,"CH.""PTMRUN""","PTMCODE
+1106,V11B7,AGD,AGD,PTM,Game,AGD Pack 46,32K+8K,,,,,,,,present,Kees van Oss,AGD/PTM,8200,"CH.""PTMRUN""","PTMCODE
 PTMRUN
 PTMSCR",,Works,
-1107,V11B7,AGD,AGD,Quahappy,Game,AGD Pack 46,Yes,,,,,,,,present,Kees van Oss,AGD/QUAHAPP,8200,"CH.""QHRUN""","QHCODE
+1107,V11B7,AGD,AGD,Quahappy,Game,AGD Pack 46,32K+8K,,,,,,,,present,Kees van Oss,AGD/QUAHAPP,8200,"CH.""QHRUN""","QHCODE
 QHRUN
 QHSCR",,Works,
-1108,V11B7,AGD,AGD,Robots Rumble,Game,AGD Pack 49,Yes,,,,,,,,present,Kees van Oss,AGD/ROBOTSR,8200,"CH.""RRRUN""","RRCODE
+1108,V11B7,AGD,AGD,Robots Rumble,Game,AGD Pack 49,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROBOTSR,8200,"CH.""RRRUN""","RRCODE
 RRRUN
 RRSCR",,Works,
-1109,V11B7,AGD,AGD,Sc0tb0t,Game,AGD Pack 50,Yes,,,,,,,,present,Kees van Oss,AGD/SC0TB0T,8200,"CH.""SBRUN""","SBCODE
+1109,V11B7,AGD,AGD,Sc0tb0t,Game,AGD Pack 50,32K+8K,,,,,,,,present,Kees van Oss,AGD/SC0TB0T,8200,"CH.""SBRUN""","SBCODE
 SBRUN
 SBSCR",,Works,
-1110,V11B7,AGD,AGD,Seto Taiso to Kazan,Game,AGD Pack 47,Yes,,,,,,,,present,Kees van Oss,AGD/SETOKAZ,8200,"CH.""SKRUN""","SKCODE
+1110,V11B7,AGD,AGD,Seto Taiso to Kazan,Game,AGD Pack 47,32K+8K,,,,,,,,present,Kees van Oss,AGD/SETOKAZ,8200,"CH.""SKRUN""","SKCODE
 SKPAN
 SKRUN
 SKSCR",,Works,
-1111,V11B7,AGD,AGD,Seto Taisho to Kazan,Game,AGD Pack 50,Yes,,,,,,,,present,Kees van Oss,AGD/SETOYOK,8200,"CH.""SYRUN""","SYCODE
+1111,V11B7,AGD,AGD,Seto Taisho to Kazan,Game,AGD Pack 50,32K+8K,,,,,,,,present,Kees van Oss,AGD/SETOYOK,8200,"CH.""SYRUN""","SYCODE
 SYPAN
 SYRUN
 SYSCR",,Works,
-1112,V11B7,AGD,AGD,Sophia II Part 1,Game,AGD Pack 48,Yes,,,,,,,,present,Kees van Oss,AGD/SOPHI21,8200,"CH.""S21RUN""","S21CODE
+1112,V11B7,AGD,AGD,Sophia II Part 1,Game,AGD Pack 48,32K+8K,,,,,,,,present,Kees van Oss,AGD/SOPHI21,8200,"CH.""S21RUN""","S21CODE
 S21PAN
 S21RUN
 S21SCR",,Works,
-1113,V11B7,AGD,AGD,Sophia II Part 2,Game,AGD Pack 48,Yes,,,,,,,,present,Kees van Oss,AGD/SOPHI22,8200,"CH.""S22RUN""","S22CODE
+1113,V11B7,AGD,AGD,Sophia II Part 2,Game,AGD Pack 48,32K+8K,,,,,,,,present,Kees van Oss,AGD/SOPHI22,8200,"CH.""S22RUN""","S22CODE
 S22PAN
 S22RUN
 S22SCR",,Works,
-1114,V11B7,AGD,AGD,Sophia II Part 3,Game,AGD Pack 48,Yes,,,,,,,,present,Kees van Oss,AGD/SOPHI23,8200,"CH.""S23RUN""","S23CODE
+1114,V11B7,AGD,AGD,Sophia II Part 3,Game,AGD Pack 48,32K+8K,,,,,,,,present,Kees van Oss,AGD/SOPHI23,8200,"CH.""S23RUN""","S23CODE
 S23PAN
 S23RUN
 S23SCR",,Works,
-1115,V11B7,AGD,AGD,Space Disposal,Game,AGD Pack 47,Yes,,,,,,,,present,Kees van Oss,AGD/SPACEDI,8200,"CH.""SDRUN""","SDCODE
+1115,V11B7,AGD,AGD,Space Disposal,Game,AGD Pack 47,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPACEDI,8200,"CH.""SDRUN""","SDCODE
 SDRUN
 SDSCR",,Works,
-1116,V11B7,AGD,AGD,Super 48k Box,Game,AGD Pack 49,Yes,,,,,,,,present,Kees van Oss,AGD/SUPER48,8200,"CH.""SBRUN""","SBCODE
+1116,V11B7,AGD,AGD,Super 48k Box,Game,AGD Pack 49,32K+8K,,,,,,,,present,Kees van Oss,AGD/SUPER48,8200,"CH.""SBRUN""","SBCODE
 SBRUN
 SBSCR",,Works,
-1117,V11B7,AGD,AGD,Terrapins,Game,AGD Pack 49,Yes,,,,,,,,present,Kees van Oss,AGD/TERRAPI,8200,"CH.""TPRUN""","TPCODE
+1117,V11B7,AGD,AGD,Terrapins,Game,AGD Pack 49,32K+8K,,,,,,,,present,Kees van Oss,AGD/TERRAPI,8200,"CH.""TPRUN""","TPCODE
 TPRUN
 TPSCR",,Works,
-1118,V11B7,AGD,AGD,Zbylut Owrzodzien,Game,AGD Pack 47,Yes,,,,,,,,present,Kees van Oss,AGD/ZBYLUT,8200,"CH.""ZBRUN""","ZBCODE
+1118,V11B7,AGD,AGD,Zbylut Owrzodzien,Game,AGD Pack 47,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZBYLUT,8200,"CH.""ZBRUN""","ZBCODE
 ZBPAN
 ZBRUN
 ZBSCR",,Works,
-1119,V11B7,AGD,AGD,Zombo,Game,AGD Pack 47,Yes,,,,,,,,present,Kees van Oss,AGD/ZOMBO,8200,"CH.""ZORUN""","ZOCODE
+1119,V11B7,AGD,AGD,Zombo,Game,AGD Pack 47,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZOMBO,8200,"CH.""ZORUN""","ZOCODE
 ZOPAN
 ZORUN
 ZOSCR",,Works,
-1120,V11B7,AGD,AGD,*** AGD Demo Carousel ***,Game,,Yes,,,,,,,,present,Kees van Oss,AGD,8200,"CH.""SHOW1""","SHOW1
+1120,V11B7,AGD,AGD,*** AGD Demo Carousel ***,Game,,32K+6K,,,,,,,,present,Kees van Oss,AGD,8200,"CH.""SHOW1""","SHOW1
 SHOW2
 SHOW2E
 SHOW3
 SHOW3E
 DISOLV",,Works,
-1121,V11B7,Non Comm,Non Comm,Jackpot (40K) (R),Game,,Yes,Yes,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
+1121,V11B7,Non Comm,Non Comm,Jackpot (40K) (R),Game,,32K+8K,Yes,Yes,No,No,,,,present,,NC,8400,*RUN JACKPOT,"JACKPOT
 J-PROG
 J-SHAPE",,Works,
 1122,,Comm,Computer Concepts,Softscreen,Utility,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
 1123,,Comm,Computer Concepts,Invaders,Game,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
 1124,,Comm,Computer Concepts,Alarn Clock,Utility,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
 1125,,Comm,Computer Concepts,Sound Effects,Utility,,,,,,,,,,missing,,,,,,,Advert in Computing Today March 82,
-1126,V12B1,AGD,AGD,Alchemist II,Game,AGD Pack 52,Yes,,,,,,,,present,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""","AL2CODE
+1126,V12B1,AGD,AGD,Alchemist II,Game,AGD Pack 52,32K+8K,,,,,,,,present,Kees van Oss,AGD/ALCHEM2,8200,"CH.""AL2RUN""","AL2CODE
 AL2RUN
 AL2SCR",,Works,
-1127,V12B1,AGD,AGD,Amongbad,Game,AGD Pack 52,Yes,,,,,,,,present,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""","ABCODE
+1127,V12B1,AGD,AGD,Amongbad,Game,AGD Pack 52,32K+8K,,,,,,,,present,Kees van Oss,AGD/AMONGBA,8200,"CH.""ABRUN""","ABCODE
 ABRUN
 ABSCR",,Works,
-1128,V12B1,AGD,AGD,Apulija-13,Game,AGD Pack 52,Yes,,,,,,,,present,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""","APCODE
+1128,V12B1,AGD,AGD,Apulija-13,Game,AGD Pack 52,32K+8K,,,,,,,,present,Kees van Oss,AGD/APULIJA,8200,"CH.""APRUN""","APCODE
 APPAN
 APRUN
 APSCR",,Works,
-1129,V12B1,AGD,AGD,Blimpgeddon,Game,AGD Pack 52,Yes,,,,,,,,present,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""","BGCODE
+1129,V12B1,AGD,AGD,Blimpgeddon,Game,AGD Pack 52,32K+8K,,,,,,,,present,Kees van Oss,AGD/BLIMPGE,8200,"CH.""BGRUN""","BGCODE
 BGRUN
 BGSCR",,Works,
-1130,V12B1,AGD,AGD,Agent Blue Daytime,Game,AGD Pack 53,Yes,,,,,,,,present,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""","BLDCODE
+1130,V12B1,AGD,AGD,Agent Blue Daytime,Game,AGD Pack 53,32K+8K,,,,,,,,present,Kees van Oss,AGD/BLUEDAY,8200,"CH.""BLDRUN""","BLDCODE
 BLDRUN
 BLDSCR",,Works,
-1131,V12B1,AGD,AGD,Agent Blue Nighttime,Game,AGD Pack 53,Yes,,,,,,,,present,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""","BLNCODE
+1131,V12B1,AGD,AGD,Agent Blue Nighttime,Game,AGD Pack 53,32K+8K,,,,,,,,present,Kees van Oss,AGD/BLUENIG,8200,"CH.""BLNRUN""","BLNCODE
 BLNRUN
 BLNSCR",,Works,
-1132,V12B1,AGD,AGD,Bulletstorm,Game,AGD Pack 53,Yes,,,,,,,,present,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""","BSCODE
+1132,V12B1,AGD,AGD,Bulletstorm,Game,AGD Pack 53,32K+8K,,,,,,,,present,Kees van Oss,AGD/BULLETS,8200,"CH.""BSRUN""","BSCODE
 BSRUN
 BSSCR",,Works,
-1133,V12B1,AGD,AGD,Chiquito,Game,AGD Pack 53,Yes,,,,,,,,present,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""","CHCODE
+1133,V12B1,AGD,AGD,Chiquito,Game,AGD Pack 53,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHIQUIT,8200,"CH.""CHRUN""","CHCODE
 CHRUN
 CHSCR",,Works,
-1134,V12B1,AGD,AGD,Code112,Game,AGD Pack 54,Yes,,,,,,,,present,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""","112CODE
+1134,V12B1,AGD,AGD,Code112,Game,AGD Pack 54,32K+8K,,,,,,,,present,Kees van Oss,AGD/CODE112,8200,"CH.""112RUN""","112CODE
 112PAN
 112RUN
 112SCR",,Works,
-1135,V12B1,AGD,AGD,Deepcore Raider,Game,AGD Pack 54,Yes,,,,,,,,present,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""","DCCODE
+1135,V12B1,AGD,AGD,Deepcore Raider,Game,AGD Pack 54,32K+8K,,,,,,,,present,Kees van Oss,AGD/DCRAIDE,8200,"CH.""DCRUN""","DCCODE
 DCRUN
 DCSCR",,Works,
-1136,V12B1,AGD,AGD,Dirty Dozer,Game,AGD Pack 54,Yes,,,,,,,,present,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""","DDCODE
+1136,V12B1,AGD,AGD,Dirty Dozer,Game,AGD Pack 54,32K+8K,,,,,,,,present,Kees van Oss,AGD/DIRTYDO,8200,"CH.""DDRUN""","DDCODE
 DDPAN
 DDRUN
 DDSCR",,Works,
-1137,V12B1,AGD,AGD,Donkey Kong jr2,Game,AGD Pack 54,Yes,,,,,,,,present,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""","JR2CODE
+1137,V12B1,AGD,AGD,Donkey Kong jr2,Game,AGD Pack 54,32K+8K,,,,,,,,present,Kees van Oss,AGD/DKJR2,8200,"CH.""JR2RUN""","JR2CODE
 JR2RUN",,Works,
-1138,V12B1,AGD,AGD,Donkey Kong Reloaded,Game,AGD Pack 55,Yes,,,,,,,,present,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""","DKRCODE
+1138,V12B1,AGD,AGD,Donkey Kong Reloaded,Game,AGD Pack 55,32K+8K,,,,,,,,present,Kees van Oss,AGD/DKRELO,8200,"CH.""DKRRUN""","DKRCODE
 DKRRUN
 DKRSCR",,Works,
-1139,V12B1,AGD,AGD,Flype,Game,AGD Pack 55,Yes,,,,,,,,present,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""","FLCODE
+1139,V12B1,AGD,AGD,Flype,Game,AGD Pack 55,32K+8K,,,,,,,,present,Kees van Oss,AGD/FLYPE,8200,"CH.""FLRUN""","FLCODE
 FLRUN
 FLSCR",,Works,
-1140,V12B1,AGD,AGD,Fungus Reloaded 1,Game,AGD Pack 56,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""","F21CODE
+1140,V12B1,AGD,AGD,Fungus Reloaded 1,Game,AGD Pack 56,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGS21,8200,"CH.""F21RUN""","F21CODE
 F21PAN
 F21RUN
 F21SCR",,Works,
-1141,V12B1,AGD,AGD,Fungus Reloaded 2,Game,AGD Pack 56,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""","F22CODE
+1141,V12B1,AGD,AGD,Fungus Reloaded 2,Game,AGD Pack 56,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGS22,8200,"CH.""F22RUN""","F22CODE
 F22PAN
 F22RUN
 F22SCR",,Works,
-1142,V12B1,AGD,AGD,Fungus Reloaded 3,Game,AGD Pack 56,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""","F23CODE
+1142,V12B1,AGD,AGD,Fungus Reloaded 3,Game,AGD Pack 56,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGS23,8200,"CH.""F23RUN""","F23CODE
 F23PAN
 F23RUN
 F23SCR",,Works,
-1143,V12B1,AGD,AGD,Fungus Reloaded 4,Game,AGD Pack 56,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""","F24CODE
+1143,V12B1,AGD,AGD,Fungus Reloaded 4,Game,AGD Pack 56,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGS24,8200,"CH.""F24RUN""","F24CODE
 F24PAN
 F24RUN
 F24SCR",,Works,
-1144,V12B1,AGD,AGD,Fungus Reloaded Boss,Game,AGD Pack 56,Yes,,,,,,,,present,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""","F25CODE
+1144,V12B1,AGD,AGD,Fungus Reloaded Boss,Game,AGD Pack 56,32K+8K,,,,,,,,present,Kees van Oss,AGD/FUNGS25,8200,"CH.""F25RUN""","F25CODE
 F25PAN
 F25RUN
 F25SCR",,Works,
-1145,V12B1,AGD,AGD,Gherkins Christmas Carnage,Game,AGD Pack 55,Yes,,,,,,,,present,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""","GXCODE
+1145,V12B1,AGD,AGD,Gherkins Christmas Carnage,Game,AGD Pack 55,32K+8K,,,,,,,,present,Kees van Oss,AGD/GHERKIN,8200,"CH.""GXRUN""","GXCODE
 GXRUN
 GXSCR",,Works,
-1146,V12B1,AGD,AGD,Gnoni 2020,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""","GNCODE
+1146,V12B1,AGD,AGD,Gnoni 2020,Game,AGD Pack 57,32K+8K,,,,,,,,present,Kees van Oss,AGD/GNONI,8200,"CH.""GNRUN""","GNCODE
 GNRUN
 GNSCR",,Works,
-1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
+1147,V12B1,AGD,AGD,Laetitia 1,Game,AGD Pack 58,32K+8K,,,,,,,,present,Kees van Oss,AGD/LAETIT1,8200,"CH.""L1RUN""","L1CODE
 L1RUN
 L1SCR",,Works,
-1148,V12B1,AGD,AGD,Laetitia 2,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""","L2CODE
+1148,V12B1,AGD,AGD,Laetitia 2,Game,AGD Pack 58,32K+8K,,,,,,,,present,Kees van Oss,AGD/LAETIT2,8200,"CH.""L2RUN""","L2CODE
 L2RUN
 L2SCR",,Works,
-1149,V12B1,AGD,AGD,Laetitia 3,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""","L3CODE
+1149,V12B1,AGD,AGD,Laetitia 3,Game,AGD Pack 58,32K+8K,,,,,,,,present,Kees van Oss,AGD/LAETIT3,8200,"CH.""L3RUN""","L3CODE
 L3RUN
 L3SCR",,Works,
-1150,V12B1,AGD,AGD,Laetitia 4,Game,AGD Pack 58,Yes,,,,,,,,present,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""","L4CODE
+1150,V12B1,AGD,AGD,Laetitia 4,Game,AGD Pack 58,32K+8K,,,,,,,,present,Kees van Oss,AGD/LAETIT4,8200,"CH.""L4RUN""","L4CODE
 L4RUN
 L4SCR",,Works,
-1151,V12B1,AGD,AGD,Lost Cavern,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""","LCCODE
+1151,V12B1,AGD,AGD,Lost Cavern,Game,AGD Pack 57,32K+8K,,,,,,,,present,Kees van Oss,AGD/LOSTCAV,8200,"CH.""LCRUN""","LCCODE
 LCRUN
 LCSCR",,Works,
-1152,V12B1,AGD,AGD,Lost Island,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""","LICODE
+1152,V12B1,AGD,AGD,Lost Island,Game,AGD Pack 57,32K+8K,,,,,,,,present,Kees van Oss,AGD/LSTILND,8200,"CH.""LIRUN""","LICODE
 LIRUN
 LISCR",,Works,
-1153,V12B1,AGD,AGD,Magicable,Game,AGD Pack 57,Yes,,,,,,,,present,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""","MACODE
+1153,V12B1,AGD,AGD,Magicable,Game,AGD Pack 57,32K+8K,,,,,,,,present,Kees van Oss,AGD/MAGICAB,8200,"CH.""MARUN""","MACODE
 MARUN
 MASCR",,Works,
-1154,V12B1,AGD,AGD,Akane,Game,AGD Pack 62,Yes,,,,,,,,present,Kees van Oss,AGD/AKANE,8200,"CH.""AKRUN""","AKCODE
+1154,V12B1,AGD,AGD,Akane,Game,AGD Pack 62,32K+8K,,,,,,,,present,Kees van Oss,AGD/AKANE,8200,"CH.""AKRUN""","AKCODE
 AKRUN
 AKSCR",,Works,
-1155,V12B1,AGD,AGD,Monty Mole and The Lost So,Game,AGD Pack 59,Yes,,,,,,,,present,Kees van Oss,AGD/MONTYTL,8200,"CH.""MTLRUN""","MTLCODE
+1155,V12B1,AGD,AGD,Monty Mole and The Lost So,Game,AGD Pack 59,32K+8K,,,,,,,,present,Kees van Oss,AGD/MONTYTL,8200,"CH.""MTLRUN""","MTLCODE
 MTLRUN
 MTLSCR",,Works,
-1156,V12B1,AGD,AGD,Mr Hair Adventure,Game,AGD Pack 59,Yes,,,,,,,,present,Kees van Oss,AGD/MRHAIRA,8200,"CH.""MHARUN""","MHACODE
+1156,V12B1,AGD,AGD,Mr Hair Adventure,Game,AGD Pack 59,32K+8K,,,,,,,,present,Kees van Oss,AGD/MRHAIRA,8200,"CH.""MHARUN""","MHACODE
 MHARUN
 MHASCR",,Works,
-1157,V12B1,AGD,AGD,Omelettes for breakfast,Game,AGD Pack 59,Yes,,,,,,,,present,Kees van Oss,AGD/OMELETT,8200,"CH.""OMRUN""","OMCODE
+1157,V12B1,AGD,AGD,Omelettes for breakfast,Game,AGD Pack 59,32K+8K,,,,,,,,present,Kees van Oss,AGD/OMELETT,8200,"CH.""OMRUN""","OMCODE
 OMRUN",,Works,
-1158,V12B1,AGD,AGD,Stripping Penelope 18+,Game,AGD Pack 59,Yes,,,,,,,,present,Kees van Oss,AGD/PENELOP,8200,"CH.""PERUN""","PECODE
+1158,V12B1,AGD,AGD,Stripping Penelope 18+,Game,AGD Pack 59,32K+8K,,,,,,,,present,Kees van Oss,AGD/PENELOP,8200,"CH.""PERUN""","PECODE
 PERUN",,Works,
-1159,V12B1,AGD,AGD,Quest for Elements,Game,AGD Pack 60,Yes,,,,,,,,present,Kees van Oss,AGD/QUEST,8200,"CH.""QFERUN""","QFECODE
+1159,V12B1,AGD,AGD,Quest for Elements,Game,AGD Pack 60,32K+8K,,,,,,,,present,Kees van Oss,AGD/QUEST,8200,"CH.""QFERUN""","QFECODE
 QFERUN
 QFESCR",,Works,
-1160,V12B1,AGD,AGD,The Shining,Game,AGD Pack 60,Yes,,,,,,,,present,Kees van Oss,AGD/SHINING,8200,"CH.""SHRUN""","SHCODE
+1160,V12B1,AGD,AGD,The Shining,Game,AGD Pack 60,32K+8K,,,,,,,,present,Kees van Oss,AGD/SHINING,8200,"CH.""SHRUN""","SHCODE
 SHRUN
 SHSCR",,Works,
-1161,V12B1,AGD,AGD,Castle of Sorrow,Game,AGD Pack 60,Yes,,,,,,,,present,Kees van Oss,AGD/SORROW,8200,"CH.""CSRUN""","CSCODE
+1161,V12B1,AGD,AGD,Castle of Sorrow,Game,AGD Pack 60,32K+8K,,,,,,,,present,Kees van Oss,AGD/SORROW,8200,"CH.""CSRUN""","CSCODE
 CSRUN
 CSSCR",,Works,
-1162,V12B1,AGD,AGD,Springbot,Game,AGD Pack 60,Yes,,,,,,,,present,Kees van Oss,AGD/SPRINGB,8200,"CH.""SBRUN""","SBCODE
+1162,V12B1,AGD,AGD,Springbot,Game,AGD Pack 60,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPRINGB,8200,"CH.""SBRUN""","SBCODE
 SBRUN
 SBSCR",,Works,
-1163,V12B1,AGD,AGD,Sprouty,Game,AGD Pack 61,Yes,,,,,,,,present,Kees van Oss,AGD/SPROUTY,8200,"CH.""SPRUN""","SPCODE
+1163,V12B1,AGD,AGD,Sprouty,Game,AGD Pack 61,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPROUTY,8200,"CH.""SPRUN""","SPCODE
 SPRUN
 SPSCR",,Works,
-1164,V12B1,AGD,AGD,Moritz the Striker,Game,AGD Pack 61,Yes,,,,,,,,present,Kees van Oss,AGD/STRIKER,8200,"CH.""STRUN""","STCODE
+1164,V12B1,AGD,AGD,Moritz the Striker,Game,AGD Pack 61,32K+8K,,,,,,,,present,Kees van Oss,AGD/STRIKER,8200,"CH.""STRUN""","STCODE
 STRUN
 STSCR",,Works,
-1165,V12B1,AGD,AGD,Tank,Game,AGD Pack 61,Yes,,,,,,,,present,Kees van Oss,AGD/TANK,8200,"CH.""TARUN""","TACODE
+1165,V12B1,AGD,AGD,Tank,Game,AGD Pack 61,32K+8K,,,,,,,,present,Kees van Oss,AGD/TANK,8200,"CH.""TARUN""","TACODE
 TARUN
 TASCR",,Works,
-1166,V12B1,AGD,AGD,Toofys Nutty Nightmare,Game,AGD Pack 61,Yes,,,,,,,,present,Kees van Oss,AGD/TOOFY3,8200,"CH.""TO3RUN""","TO3CODE
+1166,V12B1,AGD,AGD,Toofys Nutty Nightmare,Game,AGD Pack 61,32K+8K,,,,,,,,present,Kees van Oss,AGD/TOOFY3,8200,"CH.""TO3RUN""","TO3CODE
 TO3RUN
 TO3SCR",,Works,
-1167,V12B1,AGD,AGD,Trasmoz,Game,AGD Pack 62,Yes,,,,,,,,present,Kees van Oss,AGD/TRASMOZ,8200,"CH.""TRRUN""","TRCODE
+1167,V12B1,AGD,AGD,Trasmoz,Game,AGD Pack 62,32K+8K,,,,,,,,present,Kees van Oss,AGD/TRASMOZ,8200,"CH.""TRRUN""","TRCODE
 TRRUN
 TRSCR",,Works,
-1168,V12B1,AGD,AGD,UFO,Game,AGD Pack 62,Yes,,,,,,,,present,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""","UFOCODE
+1168,V12B1,AGD,AGD,UFO,Game,AGD Pack 62,32K+8K,,,,,,,,present,Kees van Oss,AGD/UFO,8200,"CH.""UFORUN""","UFOCODE
 UFORUN
 UFOSCR",,Works,
-1169,V12B1,AGD,AGD,Vampire Vengeance,Game,AGD Pack 62,Yes,,,,,,,,present,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""","VVCODE
+1169,V12B1,AGD,AGD,Vampire Vengeance,Game,AGD Pack 62,32K+8K,,,,,,,,present,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""","VVCODE
 VVRUN
 VVSCR",,Works,
-1170,V1202,Modern,Non Comm,Adventure,Adventure,OZMOO,Yes,,,,,,,,present,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,"VDUMENU
+1170,V1202,Modern,Non Comm,Adventure,Adventure,OZMOO,32K+6K,,,,,,,,present,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1171,V1202,Modern,Non Comm,Alien Research Centre 3,Adventure,OZMOO,Yes,,,,,,,,present,John Wilson,OZMOO/ARC3,8200,*RUN VDUMENU,"VDUMENU
+1171,V1202,Modern,Non Comm,Alien Research Centre 3,Adventure,OZMOO,32K+6K,,,,,,,,present,John Wilson,OZMOO/ARC3,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1172,V1202,Modern,Non Comm,Behind Closed Doors 9,Adventure,OZMOO,Yes,,,,,,,,present,John Wilson,OZMOO/BCD9,8200,*RUN VDUMENU,"VDUMENU
+1172,V1202,Modern,Non Comm,Behind Closed Doors 9,Adventure,OZMOO,32K+6K,,,,,,,,present,John Wilson,OZMOO/BCD9,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1173,V1202,Modern,Infocom,Beyond Zork,Adventure,OZMOO,Yes,,,,,,,,present,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,"VDUMENU
+1173,V1202,Modern,Infocom,Beyond Zork,Adventure,OZMOO,32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1174,V1202,Modern,Non Comm,Calypso,Adventure,OZMOO,Yes,,,,,,,,present,Dave Footitt,OZMOO/CALYPSO,8200,*RUN VDUMENU,"VDUMENU
+1174,V1202,Modern,Non Comm,Calypso,Adventure,OZMOO,32K+6K,,,,,,,,present,Dave Footitt,OZMOO/CALYPSO,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1175,V1202,Modern,Non Comm,Hibernated 1 - Dir's Cut,Adventure,OZMOO,Yes,,,,,,,,present,Stefan Vogt,OZMOO/HIBER1,8200,*RUN VDUMENU,"VDUMENU
+1175,V1202,Modern,Non Comm,Hibernated 1 - Dir's Cut,Adventure,OZMOO,32K+6K,,,,,,,,present,Stefan Vogt,OZMOO/HIBER1,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1176,V1202,Modern,Infocom,Hitchhiker's Guide,Adventure,OZMOO,Yes,,,,,,,,present,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN VDUMENU,"VDUMENU
+1176,V1202,Modern,Infocom,Hitchhiker's Guide,Adventure,OZMOO,32K+6K,,,,,,,,present,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1177,V1202,Modern,Infocom,Hollywood Hijinx,Adventure,OZMOO,Yes,,,,,,,,present,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN VDUMENU,"VDUMENU
+1177,V1202,Modern,Infocom,Hollywood Hijinx,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1178,V1202,Modern,Non Comm,The Job R5,Adventure,OZMOO,Yes,,,,,,,,present,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN VDUMENU,"VDUMENU
+1178,V1202,Modern,Non Comm,The Job R5,Adventure,OZMOO,32K+6K,,,,,,,,present,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1179,V1202,Modern,Infocom,Leather Goddesses,Adventure,OZMOO,Yes,,,,,,,,present,Steve Meretzky,OZMOO/LEATHER,8200,*RUN VDUMENU,"VDUMENU
+1179,V1202,Modern,Infocom,Leather Goddesses,Adventure,OZMOO,32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/LEATHER,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1180,V1202,Modern,Infocom,Planetfall,Adventure,OZMOO,Yes,,,,,,,,present,Steve Meretzky,OZMOO/PLANET,8200,*RUN VDUMENU,"VDUMENU
+1180,V1202,Modern,Infocom,Planetfall,Adventure,OZMOO,32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/PLANET,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1181,V1202,Modern,Infocom,Wishbringer,Adventure,OZMOO,Yes,,,,,,,,present,Brian Moriarty,OZMOO/WISH,8200,*RUN VDUMENU,"VDUMENU
+1181,V1202,Modern,Infocom,Wishbringer,Adventure,OZMOO,32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/WISH,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1182,V1202,Modern,Infocom,Zork1,Adventure,OZMOO,Yes,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN VDUMENU,"VDUMENU
+1182,V1202,Modern,Infocom,Zork1,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1183,V1202,Modern,Infocom,Zork2,Adventure,OZMOO,Yes,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN VDUMENU,"VDUMENU
+1183,V1202,Modern,Infocom,Zork2,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1184,V1202,Modern,Infocom,Zork3,Adventure,OZMOO,Yes,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN VDUMENU,"VDUMENU
+1184,V1202,Modern,Infocom,Zork3,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1185,V13B1,AGD,AGD,Aunt Rose,Game,AGD Pack 63,Yes,,,,,,,,present,Kees van Oss,AGD/AUNTROS,8200,"CH.""ARRUN""","ARCODE
+1185,V13B1,AGD,AGD,Aunt Rose,Game,AGD Pack 63,32K+8K,,,,,,,,present,Kees van Oss,AGD/AUNTROS,8200,"CH.""ARRUN""","ARCODE
 ARRUN
 ARSCR",,Test,
-1186,V13B1,AGD,AGD,Bandito,Game,AGD Pack 63,Yes,,,,,,,,present,Kees van Oss,AGD/BANDITO,8200,"CH.""BARUN""","BACODE
+1186,V13B1,AGD,AGD,Bandito,Game,AGD Pack 63,32K+8K,,,,,,,,present,Kees van Oss,AGD/BANDITO,8200,"CH.""BARUN""","BACODE
 BARUN
 BASCR",,Test,
-1187,V13B1,AGD,AGD,Beef,Game,AGD Pack 63,Yes,,,,,,,,present,Kees van Oss,AGD/BEEF,8200,"CH.""BERUN""","BECODE
+1187,V13B1,AGD,AGD,Beef,Game,AGD Pack 63,32K+8K,,,,,,,,present,Kees van Oss,AGD/BEEF,8200,"CH.""BERUN""","BECODE
 BERUN
 BESCR",,Test,
-1188,V13B1,AGD,AGD,Bola ke Ase,Game,AGD Pack 63,Yes,,,,,,,,present,Kees van Oss,AGD/BOLA,8200,"CH.""BORUN""","BOCODE
+1188,V13B1,AGD,AGD,Bola ke Ase,Game,AGD Pack 63,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOLA,8200,"CH.""BORUN""","BOCODE
 BORUN
 BOSCR",,Test,
-1189,V13B1,AGD,AGD,Bomb Bomb Buster,Game,AGD Pack 64,Yes,,,,,,,,present,Kees van Oss,AGD/BOMBBOM,8200,"CH.""BBRUN""","BBCODE
+1189,V13B1,AGD,AGD,Bomb Bomb Buster,Game,AGD Pack 64,32K+8K,,,,,,,,present,Kees van Oss,AGD/BOMBBOM,8200,"CH.""BBRUN""","BBCODE
 BBRUN
 BBSCR",,Test,
-1190,V13B1,AGD,AGD,Bunny vs Fox,Game,AGD Pack 64,Yes,,,,,,,,present,Kees van Oss,AGD/BUNNY,8200,"CH.""BURUN""","BUCODE
+1190,V13B1,AGD,AGD,Bunny vs Fox,Game,AGD Pack 64,32K+8K,,,,,,,,present,Kees van Oss,AGD/BUNNY,8200,"CH.""BURUN""","BUCODE
 BURUN
 BUSCR",,Test,
-1191,V13B1,AGD,AGD,Chopper Defense,Game,AGD Pack 64,Yes,,,,,,,,present,Kees van Oss,AGD/CHOPDEF,8200,"CH.""CDRUN""","CDCODE
+1191,V13B1,AGD,AGD,Chopper Defense,Game,AGD Pack 64,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHOPDEF,8200,"CH.""CDRUN""","CDCODE
 CDRUN
 CDSCR
 CDSCR2",,Test,
-1192,V13B1,AGD,AGD,Bunnys Big Adventure,Game,AGD Pack 64,Yes,,,,,,,,present,Kees van Oss,AGD/CHUBBY,8200,"CH.""CBRUN""","CBCODE
+1192,V13B1,AGD,AGD,Bunnys Big Adventure,Game,AGD Pack 64,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHUBBY,8200,"CH.""CBRUN""","CBCODE
 CBRUN
 CBSCR",,Test,
-1193,V13B1,AGD,AGD,Combat Wombat,Game,AGD Pack 65,Yes,,,,,,,,present,Kees van Oss,AGD/COMBAT,8200,"CH.""CORUN""","COCODE
+1193,V13B1,AGD,AGD,Combat Wombat,Game,AGD Pack 65,32K+8K,,,,,,,,present,Kees van Oss,AGD/COMBAT,8200,"CH.""CORUN""","COCODE
 CORUN
 COSCR",,Test,
-1194,V13B1,AGD,AGD,Dark Castle,Game,AGD Pack 65,Yes,,,,,,,,present,Kees van Oss,AGD/DARKCAS,8200,"CH.""DCRUN""","DCCODE
+1194,V13B1,AGD,AGD,Dark Castle,Game,AGD Pack 65,32K+8K,,,,,,,,present,Kees van Oss,AGD/DARKCAS,8200,"CH.""DCRUN""","DCCODE
 DCRUN
 DCSCR",,Test,
-1195,V13B1,AGD,AGD,Defeat the Devil,Game,AGD Pack 65,Yes,,,,,,,,present,Kees van Oss,AGD/DEFEATD,8200,"CH.""DDRUN""","DDCODE
+1195,V13B1,AGD,AGD,Defeat the Devil,Game,AGD Pack 65,32K+8K,,,,,,,,present,Kees van Oss,AGD/DEFEATD,8200,"CH.""DDRUN""","DDCODE
 DDRUN
 DDSCR",,Test,
-1196,V13B1,AGD,AGD,Dirty Dozer 2,Game,AGD Pack 65,Yes,,,,,,,,present,Kees van Oss,AGD/DIRTYD2,8200,"CH.""DD2RUN""","DD2CODE
+1196,V13B1,AGD,AGD,Dirty Dozer 2,Game,AGD Pack 65,32K+8K,,,,,,,,present,Kees van Oss,AGD/DIRTYD2,8200,"CH.""DD2RUN""","DD2CODE
 DD2PAN
 DD2RUN
 DD2SCR",,Test,
-1197,V13B1,AGD,AGD,Forward to the Past,Game,AGD Pack 66,Yes,,,,,,,,present,Kees van Oss,AGD/FORWARD,8200,"CH.""FWRUN""","FWCODE
+1197,V13B1,AGD,AGD,Forward to the Past,Game,AGD Pack 66,32K+8K,,,,,,,,present,Kees van Oss,AGD/FORWARD,8200,"CH.""FWRUN""","FWCODE
 FWRUN
 FWSCR",,Test,
-1198,V13B1,AGD,AGD,Gherbert Groundhog Save th,Game,AGD Pack 66,Yes,,,,,,,,present,Kees van Oss,AGD/GHERBER,8200,"CH.""GGRUN""","GGCODE
+1198,V13B1,AGD,AGD,Gherbert Groundhog Save th,Game,AGD Pack 66,32K+8K,,,,,,,,present,Kees van Oss,AGD/GHERBER,8200,"CH.""GGRUN""","GGCODE
 GGRUN
 GGSCR",,Test,
-1199,V13B1,AGD,AGD,GhoSte's Grunge,Game,AGD Pack 66,Yes,,,,,,,,present,Kees van Oss,AGD/GRUNGE,8200,"CH.""GRRUN""","GRCODE
+1199,V13B1,AGD,AGD,GhoSte's Grunge,Game,AGD Pack 66,32K+8K,,,,,,,,present,Kees van Oss,AGD/GRUNGE,8200,"CH.""GRRUN""","GRCODE
 GRRUN",,Test,
-1200,V13B1,AGD,AGD,The Man with the Golden JS,Game,AGD Pack 66,Yes,,,,,,,,present,Kees van Oss,AGD/HITCH,8200,"CH.""HIRUN""","HICODE
+1200,V13B1,AGD,AGD,The Man with the Golden JS,Game,AGD Pack 66,32K+8K,,,,,,,,present,Kees van Oss,AGD/HITCH,8200,"CH.""HIRUN""","HICODE
 HIRUN
 HISCR",,Test,
-1201,V13B1,AGD,AGD,Janky Joe in Retro Hell,Game,AGD Pack 67,Yes,,,,,,,,present,Kees van Oss,AGD/JANKYJO,8200,"CH.""JJRUN""","JJCODE
+1201,V13B1,AGD,AGD,Janky Joe in Retro Hell,Game,AGD Pack 67,32K+8K,,,,,,,,present,Kees van Oss,AGD/JANKYJO,8200,"CH.""JJRUN""","JJCODE
 JJDAT
 JJRUN
 JJSCR",,Test,
-1202,V13B1,AGD,AGD,Javi Pomez,Game,AGD Pack 68,Yes,,,,,,,,present,Kees van Oss,AGD/JAVIPOM,8200,"CH.""JPRUN""","JPCODE
+1202,V13B1,AGD,AGD,Javi Pomez,Game,AGD Pack 68,32K+8K,,,,,,,,present,Kees van Oss,AGD/JAVIPOM,8200,"CH.""JPRUN""","JPCODE
 JPRUN
 JPSCR",,Test,
-1203,V13B1,AGD,AGD,Jet Pack Neo,Game,AGD Pack 68,Yes,,,,,,,,present,Kees van Oss,AGD/JETPACK,8200,"CH.""JPNRUN""","JPNCODE
+1203,V13B1,AGD,AGD,Jet Pack Neo,Game,AGD Pack 68,32K+8K,,,,,,,,present,Kees van Oss,AGD/JETPACK,8200,"CH.""JPNRUN""","JPNCODE
 JPNRUN
 JPNSCR",,Test,
-1204,V13B1,AGD,AGD,Last Escape,Game,AGD Pack 68,Yes,,,,,,,,present,Kees van Oss,AGD/LASTESC,8200,"CH.""LERUN""","LECODE
+1204,V13B1,AGD,AGD,Last Escape,Game,AGD Pack 68,32K+8K,,,,,,,,present,Kees van Oss,AGD/LASTESC,8200,"CH.""LERUN""","LECODE
 LERUN
 LESCR",,Test,
-1205,V13B1,AGD,AGD,Mabus Mania,Game,AGD Pack 67,Yes,,,,,,,,present,Kees van Oss,AGD/MABUS,8200,"CH.""MMRUN""","MMCODE
+1205,V13B1,AGD,AGD,Mabus Mania,Game,AGD Pack 67,32K+8K,,,,,,,,present,Kees van Oss,AGD/MABUS,8200,"CH.""MMRUN""","MMCODE
 MMRUN
 MMSCR",,Test,
-1206,V13B1,AGD,AGD,Manic Mulholland,Game,AGD Pack 67,Yes,,,,,,,,present,Kees van Oss,AGD/MANIC,8200,"CH.""MMRUN""","MMCODE
+1206,V13B1,AGD,AGD,Manic Mulholland,Game,AGD Pack 67,32K+8K,,,,,,,,present,Kees van Oss,AGD/MANIC,8200,"CH.""MMRUN""","MMCODE
 MMRUN
 MMSCR",,Test,
-1207,V13B1,AGD,AGD,Mojoni in the Sewer World,Game,AGD Pack 68,Yes,,,,,,,,present,Kees van Oss,AGD/MOJONI,8200,"CH.""MORUN""","MOCODE
+1207,V13B1,AGD,AGD,Mojoni in the Sewer World,Game,AGD Pack 68,32K+8K,,,,,,,,present,Kees van Oss,AGD/MOJONI,8200,"CH.""MORUN""","MOCODE
 MORUN
 MOSCR",,Test,
-1208,V13B1,AGD,AGD,Nevermore,Game,AGD Pack 69,Yes,,,,,,,,present,Kees van Oss,AGD/NEVERMO,8200,"CH.""NMRUN""","NMCODE
+1208,V13B1,AGD,AGD,Nevermore,Game,AGD Pack 69,32K+8K,,,,,,,,present,Kees van Oss,AGD/NEVERMO,8200,"CH.""NMRUN""","NMCODE
 NMRUN
 NMSCR",,Test,
-1209,V13B1,AGD,AGD,Ninja Poison1,Game,AGD Pack 69,Yes,,,,,,,,present,Kees van Oss,AGD/NINJA1,8200,"CH.""NP1RUN""","NP1CODE
+1209,V13B1,AGD,AGD,Ninja Poison1,Game,AGD Pack 69,32K+8K,,,,,,,,present,Kees van Oss,AGD/NINJA1,8200,"CH.""NP1RUN""","NP1CODE
 NP1RUN
 NP1SCR",,Test,
-1210,V13B1,AGD,AGD,Papyrus,Game,AGD Pack 69,Yes,,,,,,,,present,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""","PACODE
+1210,V13B1,AGD,AGD,Papyrus,Game,AGD Pack 69,32K+8K,,,,,,,,present,Kees van Oss,AGD/PAPYRUS,8200,"CH.""PARUN""","PACODE
 PARUN
 PASCR",,Test,
-1211,V13B1,AGD,AGD,Psycho Santa,Game,AGD Pack 69,Yes,,,,,,,,present,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""","PSCODE
+1211,V13B1,AGD,AGD,Psycho Santa,Game,AGD Pack 69,32K+8K,,,,,,,,present,Kees van Oss,AGD/PSYCHO,8200,"CH.""PSRUN""","PSCODE
 PSRUN
 PSSCR",,Test,
-1212,V13B1,AGD,AGD,Unicycle,Game,AGD Pack 67,Yes,,,,,,,,present,Kees van Oss,AGD/UNICYCL,8200,"CH.""UCRUN""","UCCODE
+1212,V13B1,AGD,AGD,Unicycle,Game,AGD Pack 67,32K+8K,,,,,,,,present,Kees van Oss,AGD/UNICYCL,8200,"CH.""UCRUN""","UCCODE
 UCRUN
 UCSCR",,Test,
-1213,V13B1,Non Comm,Inufuto,AERIAL,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN AERIAL,AERIAL,,Test,
-1214,V13B1,Non Comm,Inufuto,ANTIAIR,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN ANTIAIR,ANTIAIR,,Test,
-1215,V13B1,Non Comm,Inufuto,BATTLOT,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN BATTLOT,BATTLOT,,Test,
-1216,V13B1,Non Comm,Inufuto,BOOTSKEL,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN BOOTSKE,BOOTSKE,,Test,
-1217,V13B1,Non Comm,Inufuto,CACORM,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN CACORM,CACORM,,Test,
-1218,V13B1,Non Comm,Inufuto,CAVIT,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN CAVIT,CAVIT,,Test,
-1219,V13B1,Non Comm,Inufuto,CRACKY,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN CRACKY,CRACKY,,Test,
-1220,V13B1,Non Comm,Inufuto,GUNTUS,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN GUNTUS,GUNTUS,,Test,
-1221,V13B1,Non Comm,Inufuto,HOPMAN,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN HOPMAN,HOPMAN,,Test,
-1222,V13B1,Non Comm,Inufuto,LIFT,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN LIFT,LIFT,,Test,
-1223,V13B1,Non Comm,Inufuto,NEURAS,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN NEURAS,NEURAS,,Test,
-1224,V13B1,Non Comm,Inufuto,YEWDOW,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN YEWDOW,YEWDOW,,Test,
+1213,V13B1,Non Comm,Inufuto,AERIAL,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN AERIAL,AERIAL,,Test,
+1214,V13B1,Non Comm,Inufuto,ANTIAIR,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN ANTIAIR,ANTIAIR,,Test,
+1215,V13B1,Non Comm,Inufuto,BATTLOT,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN BATTLOT,BATTLOT,,Test,
+1216,V13B1,Non Comm,Inufuto,BOOTSKEL,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN BOOTSKE,BOOTSKE,,Test,
+1217,V13B1,Non Comm,Inufuto,CACORM,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN CACORM,CACORM,,Test,
+1218,V13B1,Non Comm,Inufuto,CAVIT,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN CAVIT,CAVIT,,Test,
+1219,V13B1,Non Comm,Inufuto,CRACKY,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN CRACKY,CRACKY,,Test,
+1220,V13B1,Non Comm,Inufuto,GUNTUS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN GUNTUS,GUNTUS,,Test,
+1221,V13B1,Non Comm,Inufuto,HOPMAN,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN HOPMAN,HOPMAN,,Test,
+1222,V13B1,Non Comm,Inufuto,LIFT,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN LIFT,LIFT,,Test,
+1223,V13B1,Non Comm,Inufuto,NEURAS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN NEURAS,NEURAS,,Test,
+1224,V13B1,Non Comm,Inufuto,YEWDOW,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN YEWDOW,YEWDOW,,Test,
 1225,V13B1,ROMS,Pearce,ATOM SIGN ROM,Utility,,,,,,,,,,present,,ROMS/PES/SIGN,8200,"PRINT TO INITIALIZE: LINK #A000
 PRINT FOR HELP: SEE FORUM
 *LOAD 1E13 8800",1E13,,Test,
-1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R) (40K),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
+1226,V13B1,Non Comm,Non Comm,Pie Chart Generator (R) (40K),Graphics,,32K+8K,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""PIE-CHA""",PIE-CHA,,Test,
 1227,V13B1,Non Comm,Non Comm,KAARTEN (R),Game,,,,No,Yes,No,,,,present,,NC,8200,"CH.""KAARTEN""",KAARTEN,,Test,
 1228,V13B1,Non Comm,Non Comm,K-TRUUK,Game,,,,,,,,,,present,,NC,8200,"CH.""K-TRUUK""",K-TRUUK,,Test,
-1229,V13B1,Non Comm,Non Comm,GAGS Demo 2 (R),Graphics,,Yes,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""GAGDEM2""",GAGDEM2,,Test,
+1229,V13B1,Non Comm,Non Comm,GAGS Demo 2 (R),Graphics,,32K+6K,Yes,No,Yes,No,,,,present,,NC,8200,"CH.""GAGDEM2""",GAGDEM2,,Test,
 1230,V13B1,Non Comm,Non Comm,Piet Heim (Reversi) (R),Game,,,,No,No,Yes,,,,present,,NC,8200,"CH.""P-HEIN""",P-HEIN,,Test,
 1231,V13B1,Magazines,PCW,Four-Stroke Cycle (R),Graphics,,,,,,,,,,present,Jonathan Empson,PCW,8200,"CH.""4STROKE""",4STROKE,,Test,
 1232,V13B1,Magazines,PCW,Backgammon,Game,,,,,,,,,,present,Peter Robinson,PCW,8200,"CH.""BACKGAM""",BACKGAM,,Test,
@@ -2730,99 +2730,99 @@ PRINT FOR HELP: SEE FORUM
 1245,V13B1,Books,Getting Acquainted,Breakout,Game,,,,,,,,,,present,???,GA,8200,"CH.""BREAKOU""",BREAKOU,,Works,
 1246,V13B1,Books,Getting Acquainted,Labyrinth,Game,,,,,,,,,,present,???,GA,8200,"CH.""LABYRIN""",LABYRIN,,Works,
 1247,V13B1,Books,Getting Acquainted,Swappo,Game,,,,,,,,,,present,???,GA,8200,"CH.""SWAPPO""",SWAPPO,,Works,
-1248,V14B1,AGD,AGD,The 8 Bit Wars,Game,AGD Pack 70,Yes,,,,,,,,present,Kees van Oss,AGD/8BITWAR,8200,"CH.""8BWRUN""","8BWCODE
+1248,V14B1,AGD,AGD,The 8 Bit Wars,Game,AGD Pack 70,32K+8K,,,,,,,,present,Kees van Oss,AGD/8BITWAR,8200,"CH.""8BWRUN""","8BWCODE
 8BWPAN
 8BWRUN
 8BWSCR",,Test,
-1249,V14B1,AGD,AGD,AI Made me do it,Game,AGD Pack 74,Yes,,,,,,,,present,Kees van Oss,AGD/AI,8200,"CH.""AIRUN""","AICODE
+1249,V14B1,AGD,AGD,AI Made me do it,Game,AGD Pack 74,32K+8K,,,,,,,,present,Kees van Oss,AGD/AI,8200,"CH.""AIRUN""","AICODE
 AIRUN
 AISCR",,Test,
-1250,V14B1,AGD,AGD,Blocktor Woot,Game,AGD Pack 74,Yes,,,,,,,,present,Kees van Oss,AGD/BLOCKTO,8200,"CH.""BWRUN""","BWCODE
+1250,V14B1,AGD,AGD,Blocktor Woot,Game,AGD Pack 74,32K+8K,,,,,,,,present,Kees van Oss,AGD/BLOCKTO,8200,"CH.""BWRUN""","BWCODE
 BWRUN
 BWSCR",,Test,
-1251,V14B1,AGD,AGD,Bubble Trouble,Game,AGD Pack 75,Yes,,,,,,,,present,Kees van Oss,AGD/BUBBLET,8200,"CH.""BTRUN""","BTCODE
+1251,V14B1,AGD,AGD,Bubble Trouble,Game,AGD Pack 75,32K+8K,,,,,,,,present,Kees van Oss,AGD/BUBBLET,8200,"CH.""BTRUN""","BTCODE
 BTRUN
 BTSCR",,Test,
-1252,V14B1,AGD,AGD,Chispy,Game,AGD Pack 74,Yes,,,,,,,,present,Kees van Oss,AGD/CHISPY,8200,"CH.""CHRUN""","CHCODE
+1252,V14B1,AGD,AGD,Chispy,Game,AGD Pack 74,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHISPY,8200,"CH.""CHRUN""","CHCODE
 CHRUN
 CHSCR",,Test,
-1253,V14B1,AGD,AGD,e in King Chrums Gold Min,Game,AGD Pack 74,Yes,,,,,,,,present,Kees van Oss,AGD/CHRUMA,8200,"CH.""CHRUN""","CHCODE
+1253,V14B1,AGD,AGD,e in King Chrums Gold Min,Game,AGD Pack 74,32K+8K,,,,,,,,present,Kees van Oss,AGD/CHRUMA,8200,"CH.""CHRUN""","CHCODE
 CHRUN
 CHSCR",,Test,
-1254,V14B1,AGD,AGD,Cocaine Bear,Game,AGD Pack 71,Yes,,,,,,,,present,Kees van Oss,AGD/COCAINE,8200,"CH.""CBRUN""","CBCODE
+1254,V14B1,AGD,AGD,Cocaine Bear,Game,AGD Pack 71,32K+8K,,,,,,,,present,Kees van Oss,AGD/COCAINE,8200,"CH.""CBRUN""","CBCODE
 CBRUN",,Test,
-1255,V14B1,AGD,AGD,Corey Coolbrew,Game,AGD Pack 75,Yes,,,,,,,,present,Kees van Oss,AGD/COREY,8200,"CH.""CCRUN""","CCCODE
+1255,V14B1,AGD,AGD,Corey Coolbrew,Game,AGD Pack 75,32K+8K,,,,,,,,present,Kees van Oss,AGD/COREY,8200,"CH.""CCRUN""","CCCODE
 CCRUN
 CCSCR",,Test,
-1256,V14B1,AGD,AGD,Cyclus1,Game,AGD Pack 75,Yes,,,,,,,,present,Kees van Oss,AGD/CYCLUS1,8200,"CH.""CY1RUN""","CY1CODE
+1256,V14B1,AGD,AGD,Cyclus1,Game,AGD Pack 75,32K+8K,,,,,,,,present,Kees van Oss,AGD/CYCLUS1,8200,"CH.""CY1RUN""","CY1CODE
 CY1PAN
 CY1RUN
 CY1SCR",,Test,
-1257,V14B1,AGD,AGD,Cyclus2,Game,AGD Pack 75,Yes,,,,,,,,present,Kees van Oss,AGD/CYCLUS2,8200,"CH.""CY2RUN""","CY2CODE
+1257,V14B1,AGD,AGD,Cyclus2,Game,AGD Pack 75,32K+8K,,,,,,,,present,Kees van Oss,AGD/CYCLUS2,8200,"CH.""CY2RUN""","CY2CODE
 CY2RUN
 CY2SCR",,Test,
-1258,V14B1,AGD,AGD,Dark Knight 2,Game,AGD Pack 76,Yes,,,,,,,,present,Kees van Oss,AGD/DARKKNI,8200,"CH.""DN2RUN""","DN2CODE
+1258,V14B1,AGD,AGD,Dark Knight 2,Game,AGD Pack 76,32K+8K,,,,,,,,present,Kees van Oss,AGD/DARKKNI,8200,"CH.""DN2RUN""","DN2CODE
 DN2PAN
 DN2RUN
 DN2SCR
 DN2SCR2",,Test,
-1259,V14B1,AGD,AGD,Driar,Game,AGD Pack 76,Yes,,,,,,,,present,Kees van Oss,AGD/DRIAR,8200,"CH.""DRRUN""","DRCODE
+1259,V14B1,AGD,AGD,Driar,Game,AGD Pack 76,32K+8K,,,,,,,,present,Kees van Oss,AGD/DRIAR,8200,"CH.""DRRUN""","DRCODE
 DRRUN
 DRSCR",,Test,
-1260,V14B1,AGD,AGD,The day before the day th,Game,AGD Pack 70,Yes,,,,,,,,present,Kees van Oss,AGD/EARTHST,8200,"CH.""DERUN""","DECODE
+1260,V14B1,AGD,AGD,The day before the day th,Game,AGD Pack 70,32K+8K,,,,,,,,present,Kees van Oss,AGD/EARTHST,8200,"CH.""DERUN""","DECODE
 DERUN
 DESCR",,Test,
-1261,V14B1,AGD,AGD,Frankee goes home,Game,AGD Pack 76,Yes,,,,,,,,present,Kees van Oss,AGD/FRANKEE,8200,"CH.""FRRUN""","FRCODE
+1261,V14B1,AGD,AGD,Frankee goes home,Game,AGD Pack 76,32K+8K,,,,,,,,present,Kees van Oss,AGD/FRANKEE,8200,"CH.""FRRUN""","FRCODE
 FRRUN
 FRSCR",,Test,
-1262,V14B1,AGD,AGD,Franky Lost his Body,Game,AGD Pack 73,Yes,,,,,,,,present,Kees van Oss,AGD/FRANKY,8200,"CH.""FRRUN""","FRCODE
+1262,V14B1,AGD,AGD,Franky Lost his Body,Game,AGD Pack 73,32K+8K,,,,,,,,present,Kees van Oss,AGD/FRANKY,8200,"CH.""FRRUN""","FRCODE
 FRRUN
 FRSCR",,Test,
-1263,V14B1,AGD,AGD,The Goblin,Game,AGD Pack 70,Yes,,,,,,,,present,Kees van Oss,AGD/GOBLIN,8200,"CH.""GORUN""","GOCODE
+1263,V14B1,AGD,AGD,The Goblin,Game,AGD Pack 70,32K+8K,,,,,,,,present,Kees van Oss,AGD/GOBLIN,8200,"CH.""GORUN""","GOCODE
 GORUN
 GOSCR",,Test,
-1264,V14B1,AGD,AGD,The Hairy Fly,Game,AGD Pack 70,Yes,,,,,,,,present,Kees van Oss,AGD/HAIRFLY,8200,"CH.""HFRUN""","HFCODE
+1264,V14B1,AGD,AGD,The Hairy Fly,Game,AGD Pack 70,32K+8K,,,,,,,,present,Kees van Oss,AGD/HAIRFLY,8200,"CH.""HFRUN""","HFCODE
 HFRUN
 HFSCR",,Test,
-1265,V14B1,AGD,AGD,Mr Hair and the Kitty Kat,Game,AGD Pack 71,Yes,,,,,,,,present,Kees van Oss,AGD/HAIRKIT,8200,"CH.""KKRUN""","KKCODE
+1265,V14B1,AGD,AGD,Mr Hair and the Kitty Kat,Game,AGD Pack 71,32K+8K,,,,,,,,present,Kees van Oss,AGD/HAIRKIT,8200,"CH.""KKRUN""","KKCODE
 KKRUN
 KKSCR",,Test,
-1266,V14B1,AGD,AGD,Mr Hair a very hairy Remi,Game,AGD Pack 71,Yes,,,,,,,,present,Kees van Oss,AGD/HAIRREM,8200,"CH.""HRRUN""","HRCODE
+1266,V14B1,AGD,AGD,Mr Hair a very hairy Remi,Game,AGD Pack 71,32K+8K,,,,,,,,present,Kees van Oss,AGD/HAIRREM,8200,"CH.""HRRUN""","HRCODE
 HRRUN
 HRSCR",,Test,
-1267,V14B1,AGD,AGD,Herbie wants to be a Milli,Game,AGD Pack 76,Yes,,,,,,,,present,Kees van Oss,AGD/HERBIE,8200,"CH.""HMRUN""","HMCODE
+1267,V14B1,AGD,AGD,Herbie wants to be a Milli,Game,AGD Pack 76,32K+8K,,,,,,,,present,Kees van Oss,AGD/HERBIE,8200,"CH.""HMRUN""","HMCODE
 HMRUN
 HMSCR",,Test,
-1268,V14B1,AGD,AGD,Enter the Prilel,Game,AGD Pack 71,Yes,,,,,,,,present,Kees van Oss,AGD/PRILEL,8200,"CH.""EPRUN""","EPCODE
+1268,V14B1,AGD,AGD,Enter the Prilel,Game,AGD Pack 71,32K+8K,,,,,,,,present,Kees van Oss,AGD/PRILEL,8200,"CH.""EPRUN""","EPCODE
 EPPAN
 EPRUN
 EPSCR",,Test,
-1269,V14B1,AGD,AGD,Restless Andre,Game,AGD Pack 72,Yes,,,,,,,,present,Kees van Oss,AGD/RESTLES,8200,"CH.""RARUN""","RACODE
+1269,V14B1,AGD,AGD,Restless Andre,Game,AGD Pack 72,32K+8K,,,,,,,,present,Kees van Oss,AGD/RESTLES,8200,"CH.""RARUN""","RACODE
 RARUN
 RASCR",,Test,
-1270,V14B1,AGD,AGD,Roasty,Game,AGD Pack 72,Yes,,,,,,,,present,Kees van Oss,AGD/ROASTY,8200,"CH.""RORUN""","ROCODE
+1270,V14B1,AGD,AGD,Roasty,Game,AGD Pack 72,32K+8K,,,,,,,,present,Kees van Oss,AGD/ROASTY,8200,"CH.""RORUN""","ROCODE
 RORUN
 ROSCR",,Test,
-1271,V14B1,AGD,AGD,Spider Mami,Game,AGD Pack 72,Yes,,,,,,,,present,Kees van Oss,AGD/SPIDERM,8200,"CH.""SMRUN""","SMCODE
+1271,V14B1,AGD,AGD,Spider Mami,Game,AGD Pack 72,32K+8K,,,,,,,,present,Kees van Oss,AGD/SPIDERM,8200,"CH.""SMRUN""","SMCODE
 SMRUN
 SMSCR",,Test,
-1272,V14B1,AGD,AGD,Jet Set Steamboat Willie,Game,AGD Pack 72,Yes,,,,,,,,present,Kees van Oss,AGD/WILLIE,8200,"CH.""SWRUN""","SWCODE
+1272,V14B1,AGD,AGD,Jet Set Steamboat Willie,Game,AGD Pack 72,32K+8K,,,,,,,,present,Kees van Oss,AGD/WILLIE,8200,"CH.""SWRUN""","SWCODE
 SWRUN
 SWSCR",,Test,
-1273,V14B1,AGD,AGD,The Witch,Game,AGD Pack 73,Yes,,,,,,,,present,Kees van Oss,AGD/WITCH,8200,"CH.""TWRUN""","TWCODE
+1273,V14B1,AGD,AGD,The Witch,Game,AGD Pack 73,32K+8K,,,,,,,,present,Kees van Oss,AGD/WITCH,8200,"CH.""TWRUN""","TWCODE
 TWRUN
 TWSCR",,Test,
-1274,V14B1,AGD,AGD,Yokai Monk,Game,AGD Pack 73,Yes,,,,,,,,present,Kees van Oss,AGD/YOKAI,8200,"CH.""YMRUN""","YMCODE
+1274,V14B1,AGD,AGD,Yokai Monk,Game,AGD Pack 73,32K+8K,,,,,,,,present,Kees van Oss,AGD/YOKAI,8200,"CH.""YMRUN""","YMCODE
 YMRUN
 YMSCR",,Test,
-1275,V14B1,AGD,AGD,Ziona Quest,Game,AGD Pack 73,Yes,,,,,,,,present,Kees van Oss,AGD/ZIONA,8200,"CH.""ZIRUN""","ZICODE
+1275,V14B1,AGD,AGD,Ziona Quest,Game,AGD Pack 73,32K+8K,,,,,,,,present,Kees van Oss,AGD/ZIONA,8200,"CH.""ZIRUN""","ZICODE
 ZIRUN
 ZISCR",,Test,
-1276,V14B1,Non Comm,Inufuto,OSOTOS,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN OSOTOS,OSOTOS,,Test,
-1277,V14B1,Non Comm,Inufuto,MIEYEN,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN MIEYEN,MIEYEN,,Test,
-1278,V14B1,Non Comm,Inufuto,MAZY2,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN MAZY2,MAZY2,,Test,
-1279,V14B1,Non Comm,Inufuto,SVELLAS,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN SVELLAS,SVELLAS,,Test,
-1280,V14B1,Non Comm,Inufuto,AWASS,Game,,Yes,,,,,,,,present,Inufuto,INU,8200,*RUN AWASS,AWASS,,Test,
+1276,V14B1,Non Comm,Inufuto,OSOTOS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN OSOTOS,OSOTOS,,Test,
+1277,V14B1,Non Comm,Inufuto,MIEYEN,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN MIEYEN,MIEYEN,,Test,
+1278,V14B1,Non Comm,Inufuto,MAZY2,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN MAZY2,MAZY2,,Test,
+1279,V14B1,Non Comm,Inufuto,SVELLAS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN SVELLAS,SVELLAS,,Test,
+1280,V14B1,Non Comm,Inufuto,AWASS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN AWASS,AWASS,,Test,
 1281,V14B1,Modern,Non Comm,"RAM Test 00-03,28-3B",Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM060,RAM060,,Test,
 1282,V14B1,Modern,Non Comm,RAM Test 00-3F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM160,RAM160,,Test,
 1283,V14B1,Modern,Non Comm,RAM Test 00-7F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM320,RAM320,,Test,
@@ -2839,7 +2839,7 @@ ZISCR",,Test,
 1291,V14B1,Books,The Atom,Life,Simulation,,,,,,,,,,present,,TA,8200,"CH.""LIFE""",LIFE,,Test,
 1292,V14B1,Magazines,PE,Fascimile,Utility,,,Yes,,,,,,,present,,PE,8200,"CH.""DIGIFAX""",DIGIFAX,,Test,
 1293,V14B1,Magazines,PE,Morse Tutor,Utility,,,,,,,,,,present,,PE,8200,"CH.""MORSE""",MORSE,,Test,
-1294,V14B1,Modern,Retro S/W,DareDevil Dennis (32K),Game,RS Colour,Yes,Yes,,,,,,,present,Kees van Oss,RS/DDD,8200,"CH.""DDDRUN""","DATA
+1294,V14B1,Modern,Retro S/W,DareDevil Dennis (32K),Game,RS Colour,32K+6K,Yes,,,,,,,present,Kees van Oss,RS/DDD,8200,"CH.""DDDRUN""","DATA
 DDDCODE
 DDDRUN
 DDDSCR
@@ -2847,6 +2847,6 @@ DDDTUNE
 INLAY
 INTRO
 LOADER",,Test,
-1295,V14B1,Modern,Retro S/W,TREES & TENTS (40K),Game,RS Mono,Yes,,,,,,,Both,present,Kees van Oss,RS/TENTS,8200,"CH.""TTRUN""","TTCODE
+1295,V14B1,Modern,Retro S/W,TREES & TENTS (40K),Game,RS Mono,32K+8K,,,,,,,Both,present,Kees van Oss,RS/TENTS,8200,"CH.""TTRUN""","TTCODE
 TTRUN
 TTSCR",,Works,
