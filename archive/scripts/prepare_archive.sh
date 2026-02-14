@@ -146,8 +146,9 @@ do
 DST=../archive/$ARCHIVE/`dirname $SRC`/`basename $SRC .bas`
 java -jar ../java/atombasic/atombasic.jar $SRC $DST
 done
-# Special Case the SPL Compiler to load at 8200
+# Special Case the titles that need loading at 8200
 java -jar ../java/atombasic/atombasic.jar PPBA/COMPILER.bas  ../archive/$ARCHIVE/PPBA/COMPILER 8200
+java -jar ../java/atombasic/atombasic.jar CVG/LIFE.bas  ../archive/$ARCHIVE/CVG/LIFE 8200
 popd
 
 
@@ -410,8 +411,6 @@ package "atms/Acl1-08/RHINO" "$ARCHIVE/$BB"
 ##############################################################
 
 package "atms/Acl1-10/CENTI" "$ARCHIVE/$MM"
-package "atms/Acl1-11/OMEGA" "$ARCHIVE/$MM"
-package "atms/Acl1-11/DATA" "$ARCHIVE/$MM"
 package "atms/Acl1-18/DEFEND" "$ARCHIVE/$MM"
 package "atms/Acl1-11/PUCKMAN" "$ARCHIVE/$MM"
 
