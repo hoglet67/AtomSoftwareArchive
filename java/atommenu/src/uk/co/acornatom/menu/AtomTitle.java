@@ -37,9 +37,6 @@ public class AtomTitle {
     // These are part of AtomTitle and and filled in as the indexes are built
     private int absoluteAddress;
 
-    // These other computed things
-    private boolean compatible12K;
-
     private int estimatedDiskSectors;
     private Integer diskNo;
 
@@ -233,7 +230,7 @@ public class AtomTitle {
         this.ramDependency = ramDependency;
     }
 
-    public String getRamDepencency() {
+    public String getRamDependency() {
         return ramDependency;
     }
 
@@ -266,16 +263,12 @@ public class AtomTitle {
     }
 
     public boolean isCompatible12K() {
-        return compatible12K;
-    }
-
-    public void setCompatible12K(boolean compatible12K) {
-        this.compatible12K = compatible12K;
+        return "6K+6K".equals(ramDependency);
     }
 
     @Override
     public String toString() {
-        return this.getChapter( )+ " " + this.publisher + " " + this.title + " (" + this.identifier + ")";
+        return this.getChapter() + " " + this.publisher + " " + this.title + " (" + this.identifier + ") " + this.ramDependency;
     }
 
     public int getEstimatedDiskSectors() {

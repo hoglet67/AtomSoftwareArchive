@@ -60,7 +60,7 @@ public class GenerateMenuFiles extends GenerateBase {
     private SecondaryTable ramDependencies = new SecondaryTableSingleValue(
             "RAM",
             new BitField(3, 5, 3),
-            AtomTitle::getRamDepencency,
+            AtomTitle::getRamDependency,
             ramComparator);
 
     private SecondaryTable romDependencies = new SecondaryTableSingleValue(
@@ -130,7 +130,7 @@ public class GenerateMenuFiles extends GenerateBase {
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
             new SortTable("Ram",
-                    Comparator.comparing(AtomTitle::getRamDepencency, ramComparator).
+                    Comparator.comparing(AtomTitle::getRamDependency, ramComparator).
                     thenComparing(AtomTitle::getTitle, titleComparator)),
 
             new SortTable("Rom",

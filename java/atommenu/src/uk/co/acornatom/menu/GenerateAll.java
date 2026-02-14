@@ -106,45 +106,53 @@ public class GenerateAll {
         }
     }
 
-    // Check 12K compatibility
-    private void check12KCompatibility(List<AtomTitle> items) {
-        banner("Checking 12K Compatibility");
+    // Check Ram compatibility
+    private void checkRamCompatibility(List<AtomTitle> items) {
+        banner("Checking Ram Compatibility");
         for (AtomTitle item : items) {
             boolean ok = true;
             boolean warn = true;
+            int lower_need = 6;
+            int upper_need = item.isAGD() ? 8 : 6;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
                 try {
                     ATMFile atm = new ATMFile(file);
                     if (atm.isAtm()) {
+                        System.out.println("INFO: RAM Compatibility: Title: " + item + " " + atm);
                         int start = atm.getLoadAddr();
                         int end = atm.getLoadAddr() + atm.getLength();
-                        if (start < 0xA000 && end > 0x9800 && !atm.isGarbageSignature()) {
-                            System.out.println("WARNING: Compatibility: Title probably should be marked as 40K: " + item + " : " + atm);
-                        }
-                        if (!((start >= 0x0000 && end <= 0x0400) ||
-                              (start >= 0x2800 && end <= 0x3C00) ||
-                              (start >= 0x8000 && end <= 0x9800) ||
-                              (start >= 0xa000 && end <= 0xb000 && item.isROM()))) {
-                            if (item.isCompatible12K() && !atm.isGarbageSignature()) {
-                                if (warn) {
-                                    System.out.println();
-                                    System.out.println("WARNING: Compatibility: Title probably should be marked as 32K: " + item);
-                                }
-                                System.out.println("    " + atm.toStringDetailed());
-                                warn = false; // don't output further warnings about ths title
+                        boolean garbage = atm.isGarbageSignature();
+                        // Determine whether the title needs more that 6K of upper RAM
+                        if (start < 0xA000 && (end > 0x9900 || (end > 0x9800 && !garbage))) {
+                            if (upper_need < 8) {
+                                upper_need = 8;
                             }
-                            ok = false; // title is not OK for 12K Atom
+                        }
+                        // Determine whether the title needs more that 6K of lower RAM
+                        if (start >= 0x0000 && (end <= 0x0400 || (end <= 0x0500 && garbage))) {
+                            // File fits in first 1KB which all atoms have so do nothing
+                        } else if (start < 0x2800 || (start < 0x8000 && (end > 0x3d00 || (end > 0x3c00 && !garbage)))) {
+                            // File uses the region outside the 5KB lower text space
+                            if (end <= 0x4000) {
+                                if (lower_need < 16) {
+                                    lower_need = 16;
+                                }
+                            } else {
+                                if (lower_need < 32) {
+                                    lower_need = 32;
+                                }
+                            }
                         }
                     }
                 } catch (IOException e) {
                     System.out.println("WARNING: Missing file: " + file);
                 }
             }
-            // There are a very small number of these
-            if (!item.isCompatible12K() && ok) {
-                System.out.println();
-                System.out.println("WARNING: Compatibility: Title probably wrongly marked as 32K: " + item.getIdentifier() + " " + item.getTitle());
+            String need = lower_need + "K+" + upper_need + "K";
+            System.out.println("INFO: RAM Compatibility: Title needs " + need + ": " + item);
+            if (!need.equals(item.getRamDependency())) {
+                System.out.println("WARNING: RAM Compatibility: Title probably should be marked as " + need + ": " + item);
             }
         }
     }
@@ -223,8 +231,8 @@ public class GenerateAll {
         List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
         sortedItems.sort(spreadsheetComparator);
 
-        // Produce WARNINGs for titles are missing 32K Ram = YES tags in the spreadsheet
-        check12KCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
+        // Produce WARNINGs for titles that have incorrect RAM dependency
+        checkRamCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
         // Produce WARNINGs for titles that might have garbage on the end
         checkGarbageSignature(sortedItems); // Use SortedItems so WARNINGs in sensible order

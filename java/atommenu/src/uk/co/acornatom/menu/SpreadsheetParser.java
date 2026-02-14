@@ -28,7 +28,7 @@ public class SpreadsheetParser {
     private static final String CHUNK = "chunk";
     private static final String FILENAMES = "filenames";
     private static final String UPDATED = "updated";
-    private static final String RAM32K = "32k";
+    private static final String RAM = "ram";
     private static final String JOYSTICK = "joystick";
     private static final String FP = "fp";
     private static final String PCHARME = "pcharme";
@@ -72,7 +72,7 @@ public class SpreadsheetParser {
             int genre_column = -1;
             int filenames_column = -1;
             int updated_column = -1;
-            int ram32k_column = -1;
+            int ram_column = -1;
             int joystick_column = -1;
             int fp_column = -1;
             int pcharme_column = -1;
@@ -119,8 +119,8 @@ public class SpreadsheetParser {
                 if (headers[i].toLowerCase().contains(UPDATED)) {
                     updated_column = i;
                 }
-                if (headers[i].toLowerCase().contains(RAM32K)) {
-                    ram32k_column = i;
+                if (headers[i].toLowerCase().contains(RAM)) {
+                    ram_column = i;
                 }
                 if (headers[i].toLowerCase().contains(JOYSTICK)) {
                     joystick_column = i;
@@ -211,17 +211,11 @@ public class SpreadsheetParser {
                 item.setFilenames(filesnamesList);
 
                 // RamDependency
-                String ram32K = program[ram32k_column].trim().toUpperCase();
-                item.setCompatible12K(!ram32K.startsWith("YES"));
-                if (item.isAGD()) {
-                    item.setRamDependency("32K+8K");
-                } else if (item.isCompatible12K()) {
-                    item.setRamDependency("6K+6K");
-                } else if (item.getTitle().contains("16K")) {
-                    item.setRamDependency("16K+6K");
-                } else {
-                    item.setRamDependency("32K+6K");
+                String ram = program[ram_column].trim().toUpperCase();
+                if (ram.isBlank()) {
+                    ram = "6K+6K";
                 }
+                item.setRamDependency(ram);
 
                 // Version
                 String version = program[updated_column].trim().toUpperCase();
