@@ -112,7 +112,7 @@ public class GenerateAll {
         for (AtomTitle item : items) {
             boolean ok = true;
             boolean warn = true;
-            int lower_need = 6;
+            int lower_need = item.getCollections().contains("OZMOO") ? 32 : 6;
             int upper_need = item.isAGD() ? 8 : 6;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
@@ -153,6 +153,8 @@ public class GenerateAll {
             System.out.println("INFO: RAM Compatibility: Title needs " + need + ": " + item);
             if (!need.equals(item.getRamDependency())) {
                 System.out.println("WARNING: RAM Compatibility: Title probably should be marked as " + need + ": " + item);
+                // TODO: For testing, make it so!
+                // item.setRamDependency(need);
             }
         }
     }
