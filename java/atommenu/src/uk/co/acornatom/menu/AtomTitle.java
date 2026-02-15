@@ -29,6 +29,7 @@ public class AtomTitle {
     private Boolean axr1;
     private Boolean werom;
     private Boolean pptoolkit;
+    private Boolean pages98to8F;
 
     private List<String> filenames;
     private Set<String> runnables = new HashSet<String>();
@@ -311,7 +312,7 @@ public class AtomTitle {
         this.joystick = joystick;
     }
 
-    public Boolean isFp() {
+    public Boolean usesFp() {
         return fp;
     }
 
@@ -319,7 +320,7 @@ public class AtomTitle {
         this.fp = fp;
     }
 
-    public Boolean isPcharme() {
+    public Boolean usesPcharme() {
         return pcharme;
     }
 
@@ -327,23 +328,23 @@ public class AtomTitle {
         this.pcharme = pcharme;
     }
 
-    public Boolean isGags() {
+    public Boolean usesGags() {
         return gags;
     }
 
-   public void setGags(Boolean gags) {
+    public void setGags(Boolean gags) {
         this.gags = gags;
     }
 
-   public Boolean isAxr1() {
-       return axr1;
-   }
+    public Boolean usesAxr1() {
+        return axr1;
+    }
 
-   public void setAxr1(Boolean axr1) {
+    public void setAxr1(Boolean axr1) {
         this.axr1 = axr1;
     }
 
-    public Boolean isWerom() {
+    public Boolean usesWerom() {
         return werom;
     }
 
@@ -351,7 +352,7 @@ public class AtomTitle {
         this.werom = werom;
     }
 
-    public Boolean isPPToolkit() {
+    public Boolean usesPPToolkit() {
         return pptoolkit;
     }
 
@@ -371,5 +372,12 @@ public class AtomTitle {
         return chunk.equals(IFileGenerator.AGD_CHUNK);
     }
 
+    public Boolean usesPages98to8F() {
+        return pages98to8F;
+    }
+
+    public void setPages98to8F(Boolean ramPages98to8F) {
+        this.pages98to8F = ramPages98to8F;
+    }
 
 }

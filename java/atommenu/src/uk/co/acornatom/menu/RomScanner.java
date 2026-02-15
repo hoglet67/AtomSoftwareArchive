@@ -54,7 +54,7 @@ public class RomScanner {
     public static RomDef fpRomDef=
             new RomDef(
                     FP,
-                    AtomTitle::isFp,
+                    AtomTitle::usesFp,
                     new RomCommandDef[] {
                         new RomCommandDef("FDIM"),
                         new RomCommandDef("FIF"),
@@ -72,7 +72,7 @@ public class RomScanner {
 
         new RomDef(
                    PCHARME,
-                   AtomTitle::isPcharme,
+                   AtomTitle::usesPcharme,
                    new RomCommandDef[] {
                        new RomCommandDef("BEEP", 2),
                        new RomCommandDef("CASE", 2),
@@ -105,7 +105,7 @@ public class RomScanner {
 
         new RomDef(
                    GAGS,
-                   AtomTitle::isGags,
+                   AtomTitle::usesGags,
                    new RomCommandDef[] {
                        new RomCommandDef("CLS", 2),
                        new RomCommandDef("ATKEY", 2),
@@ -148,7 +148,7 @@ public class RomScanner {
 
         new RomDef(
                    AXR1,
-                   AtomTitle::isAxr1,
+                   AtomTitle::usesAxr1,
                    new RomCommandDef[] {
                        new RomCommandDef("GRMOD", 2),
                        new RomCommandDef("TXMOD", 2),
@@ -164,7 +164,7 @@ public class RomScanner {
 
         new RomDef(
                    WEROM,
-        		   AtomTitle::isWerom,
+        		   AtomTitle::usesWerom,
         		   new RomCommandDef[] {
         		       new RomCommandDef("ABDO", 3),
         		       new RomCommandDef("ABFOR", 1),
@@ -181,7 +181,7 @@ public class RomScanner {
 
         new RomDef(
         		   PPTOOLKIT,
-        		   AtomTitle::isPPToolkit,
+        		   AtomTitle::usesPPToolkit,
         		   new RomCommandDef[] {
         		       new RomCommandDef("BEEP", 2),
         		       new RomCommandDef("CURSOR", 2),
@@ -373,12 +373,11 @@ public class RomScanner {
         Set<String> statements = basicStatements(item);
 
         // Scan for COPY to #9800 region
+        item.setPages98to8F(false);
         for (String statement : statements) {
             if (testForCopyOrBase(statement)) {
-                if (item.getRamDependency().endsWith("6K")) {
-                    System.out.println("WARNING: RAM Compatibility: Title probably should be marked as " +
-                                       item.getRamDependency().replace("+6K", "+8K") + ": " + item + " : " + statement);
-                }
+                item.setPages98to8F(true);
+                System.out.println("INFO: RAM Compatibility: Title: " + item + " uses pages 98-9F: " + statement);
             }
         }
 

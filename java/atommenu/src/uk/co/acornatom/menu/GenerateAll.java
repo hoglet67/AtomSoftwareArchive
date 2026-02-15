@@ -111,7 +111,7 @@ public class GenerateAll {
         banner("Checking Ram Compatibility");
         for (AtomTitle item : items) {
             int lower_need = item.getCollections().contains("OZMOO") ? 32 : 6;
-            int upper_need = item.isAGD() ? 8 : 6;
+            int upper_need = ((item.isAGD() && !item.getTitle().contains("DEMO CAROUSEL")) || item.usesPages98to8F()) ? 8 : 6;
             for (String filename : item.getFilenames()) {
                 File file = new File(new File(archiveDir, item.getDir()), filename);
                 try {
@@ -122,7 +122,8 @@ public class GenerateAll {
                         int end = atm.getLoadAddr() + atm.getLength();
                         boolean garbage = atm.isGarbageSignature();
                         // Determine whether the title needs more that 6K of upper RAM
-                        if (start < 0xA000 && (end > 0x9900 || (end > 0x9800 && !garbage))) {
+                        // (the end <= 0xB000 is a hack to avoid false positives from BBC BASIC 2 that is 8000-BFFF)
+                        if (start < 0xA000 && end <= 0xB000 && (end > 0x9900 || (end > 0x9800 && !garbage))) {
                             if (upper_need < 8) {
                                 upper_need = 8;
                             }
@@ -142,9 +143,9 @@ public class GenerateAll {
                 }
             }
             String need = lower_need + "K+" + upper_need + "K";
-            System.out.println("INFO: RAM Compatibility: Title needs " + need + ": " + item);
+            System.out.println("INFO: RAM Compatibility: Title: " +  item + " needs " + need);
             if (!need.equals(item.getRamDependency())) {
-                System.out.println("WARNING: RAM Compatibility: Title probably should be marked as " + need + ": " + item);
+                System.out.println("WARNING: RAM Compatibility: Title: " + item + " probably should be marked as " + need);
                 // TODO: For testing, make it so!
                 // item.setRamDependency(need);
             }
@@ -172,7 +173,7 @@ public class GenerateAll {
 
     // Check for ROM signatures
     private void checkUtilityRomSignatures(List<AtomTitle> items) {
-        banner("Checking files for Utility ROMs");
+        banner("Checking files for Utility ROM usage");
         RomScanner scanner = new RomScanner(archiveDir);
         for (AtomTitle item : items) {
             scanner.scan(item);
@@ -225,14 +226,14 @@ public class GenerateAll {
         List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
         sortedItems.sort(customComparator);
 
-        // Produce WARNINGs for titles that have incorrect RAM dependency
-        checkRamCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
-
         // Produce WARNINGs for titles that might have garbage on the end
         checkGarbageSignature(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
         // Test for various Utility ROM signatures
         checkUtilityRomSignatures(sortedItems);
+
+        // Produce WARNINGs for titles that have incorrect RAM dependency
+        checkRamCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
 
         // Compute initial stats of sizes of each chapters
         Map<String, Integer> initialChapterStats = calculateChapterStats(items, "Master stats");
