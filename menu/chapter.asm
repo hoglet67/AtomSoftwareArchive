@@ -74,6 +74,11 @@ ENDIF
 
 .STARTOF
 
+;; This needs 26 bytes; to save space we just allow it to overlap the
+;; startup code, which is run just once.
+
+.RowReturnBuf
+;;	SKIP LinesPerPage * 2
 
 .Menu
 
@@ -1336,8 +1341,6 @@ ELIF (gosdc = 1)
 	JMP WriteHex1
 ENDIF
 
-.RowReturnBuf
-	SKIP LinesPerPage * 2
 
 .ENDOF
 
