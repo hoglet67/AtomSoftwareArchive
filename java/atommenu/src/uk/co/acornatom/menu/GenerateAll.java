@@ -134,14 +134,8 @@ public class GenerateAll {
                             // File fits in first 1KB which all atoms have so do nothing
                         } else if (start < 0x2800 || (start < 0x8000 && (end > 0x3d00 || (end > 0x3c00 && !garbage)))) {
                             // File uses the region outside the 5KB lower text space
-                            if (end <= 0x4000) {
-                                if (lower_need < 16) {
-                                    lower_need = 16;
-                                }
-                            } else {
-                                if (lower_need < 32) {
-                                    lower_need = 32;
-                                }
+                            if (lower_need < 32) {
+                                lower_need = 32;
                             }
                         }
                     }
