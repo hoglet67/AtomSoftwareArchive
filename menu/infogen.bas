@@ -1,6 +1,6 @@
 100 P.$12
 110 ?#E1=0;?#8000=32
-120 P."         TITLE DETAILS"';Y=-2;GOS.i
+120 P."           TITLE INFO"';Y=-2;GOS.i
 130 I=128
 140 P.''''''''''''''
 150 P." ANY KEY TO RUN  ESC TO GO BACK"
