@@ -612,11 +612,11 @@ CH.""OTHEL1""",OTHEL1,,Works,
 381,V4,Non Comm,Non Comm,POGO (R),Game,,32K+6K,,Yes,Yes,Yes,,,,present,Hamburgersoft,NC/TB,8200,"CH.""POGO""",POGO,,Works,
 382,V4,Non Comm,Non Comm,Pointer,Game,,6K+6K,,,,,,,,present,???,NC,8200,*RUN POINTER,POINTER,,Works,
 383,V4,Non Comm,Non Comm,Prinses (R),Game,,,,No,Yes,No,,,,present,G.T.H.,NC,8200,"CH.""PRINSES""",PRINSES,,Works,
-384,V4,Non Comm,Non Comm,Puzzel (R),Game,,,,Yes,No,No,,,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
+384,V4,Non Comm,Non Comm,Puzzel (R),Game,,32K+6K,,Yes,No,No,,,,present,Frans,NC/TB,8200,"CH.""PUZZEL""",PUZZEL,,Works,
 385,V4,Non Comm,Non Comm,Race,Game,,,,,,,,,,present,A.Clarke,NC,8200,"CH.""RACE""",RACE,,Works,
 386,,Non Comm,Non Comm,Formula One,Game,,,,,,,,,,duplicate,JVK,NC,8200,"CH.""RACING""",RACING,,,
 387,V4,Non Comm,Non Comm,Race Rups (R),Game,,,,Yes,No,No,,,,present,???,NC,8200,"CH.""RACRUPS""",RACRUPS,,Works,
-389,V8B1,Non Comm,Non Comm,Reversi (R),Game,,,,Yes,No,No,,,,present,L.Bijnagte,NC,8200,*RUN REVERS3,REVERS3,,Works,
+389,V8B1,Non Comm,Non Comm,Reversi (R),Game,,32K+6K,,Yes,No,No,,,,present,L.Bijnagte,NC,8200,*RUN REVERS3,REVERS3,,Works,
 390,V4,Non Comm,Non Comm,Rhinoceros,Game,,,Yes,,,,,,,present,J.R.Marks,NC,8200,"CH.""RHINOS2""",RHINOS2,,Works,
 391,,Non Comm,Non Comm,Saturn,Game,,,,,,,,,,duplicate,R.Knapen,NC,8200,"CH.""SATURN""",SATURN,,,
 392,,Non Comm,Non Comm,Shelobs Army (R),Game,,,,,,,,,,duplicate,G.Hillebrand,NC,8200,*RUN SHELOBS,SHELOBS,,,
@@ -1428,7 +1428,7 @@ START",,Works,
 771,V8B1,Comm,Bug Byte,Statistics 2,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS2""",STATS2,,Works,
 772,V8B1,Comm,Bug Byte,Statistics 3,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS3""",STATS3,,Works,
 773,V8B1,Comm,Bug Byte,Statistics 4,Utility,,,Yes,,,,,,,present,,BB,8200,"CH.""STATS4""",STATS4,,Works,
-774,V8B1,Non Comm,Non Comm,Gokkast 1,Game,,32K+6K,,,,,,,,present,,NC/GOKKAST1,8200,"CH.""GOKKAST""","CONTROL
+774,V8B1,Non Comm,Non Comm,Gokkast 1,Game,,32K+8K,,,,,,,,present,,NC/GOKKAST1,8200,"CH.""GOKKAST""","CONTROL
 GOKKAST
 HO-LA
 HO-NU
@@ -1437,7 +1437,7 @@ PICTURE
 PUNTEN
 SCHERM
 VDU",,Works,
-775,V8B1,Non Comm,Non Comm,Gokkast 2,Game,,32K+6K,,,,,,,,present,,NC/GOKKAST2,8200,"CH.""GKKST2""","2BASC28
+775,V8B1,Non Comm,Non Comm,Gokkast 2,Game,,32K+8K,,,,,,,,present,,NC/GOKKAST2,8200,"CH.""GKKST2""","2BASC28
 2BASC65
 2BASC98
 2BONS68
@@ -1754,7 +1754,7 @@ SIDPLAY",,Works,
 911,V11B1,Non Comm,Non Comm,Parachute,Game,,,,,,,,,,present,,NC,8200,"CH. ""PARACHU""",PARACHU,,Works,
 912,V11B1,Non Comm,Non Comm,Shopper,Game,,,Yes,,,,,,,present,,NC,8200,"CH. ""SHOPPER""",SHOPPER,,Works,
 913,V11B1,Non Comm,Non Comm,Gattack,Game,,,,,,,,,,present,,NC,8200,"CH. ""GATTACK""",GATTACK,,Works,
-914,V11B1,Non Comm,Non Comm,Topografie (32K),Game,,32K+6K,,,,,,,,present,,NC/TOPOT,8200,"CH. ""TOPOT""","DATA
+914,V11B1,Non Comm,Non Comm,Topografie (32K),Game,,32K+8K,,,,,,,,present,,NC/TOPOT,8200,"CH. ""TOPOT""","DATA
 MAP
 PROG
 TOPOT",,Works,
@@ -2397,7 +2397,7 @@ ZBSCR",,Works,
 ZOPAN
 ZORUN
 ZOSCR",,Works,
-1120,V11B7,AGD,AGD,*** AGD Demo Carousel ***,Game,,32K+6K,,,,,,,,present,Kees van Oss,AGD,8200,"CH.""SHOW1""","SHOW1
+1120,V11B7,AGD,AGD,*AGD Demo Carousel*,Game,,32K+6K,,,,,,,,present,Kees van Oss,AGD,8200,"CH.""SHOW1""","SHOW1
 SHOW2
 SHOW2E
 SHOW3
