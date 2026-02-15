@@ -454,19 +454,17 @@ ENDIF
 	STA FilterVal
 	JMP PageStateZero
 
-IF (info_option = 1)
-.JumpToLabelA1
-	JSR ClearScreen
-	JMP LabelA1
 .BootProgram
+
+IF (info_option = 1)
    	JSR LabelInfo
 	CMP #&1B
-	BEQ JumpToLabelA1
-ELSE
-.BootProgram
-ENDIF
-
+	BNE BootContinue
+	JSR ClearScreen
+	JMP LabelA1
+.BootContinue
 	JSR GetItemAddress
+ENDIF
 
 	; // Handle *RUN of a title - K is the title index
 	; 800 K=(!I)&#7FF
@@ -733,21 +731,29 @@ IF (info_option = 1)
 	INC Title + 1
 	BNE loop1	; branch always
 
-; Finally go back and print the title
+; Finally go back and print the title (centred)
 .PrintTitle
-	LDA #<(ScreenStart + StartLine * CharsPerLine + 2)
+	LDY #&FF
+	LDX #&21
+.TitleLoop1
+	DEX
+	INY
+	LDA (Title),Y
+	BPL TitleLoop1
+	TXA
+	LSR A
+	ORA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
-	LDA #>(ScreenStart + StartLine * CharsPerLine + 2)
+	LDA #>(ScreenStart + StartLine * CharsPerLine)
 	STA Screen + 1
-.TitleLoop
+
 	LDY #0
+.TitleLoop2
 	LDA (Title),Y
 	BMI TitleDone
 	JSR WriteToScreen
-	INC Title
-	BNE TitleLoop
-	INC Title + 1
-	BNE TitleLoop
+	INY
+	BNE TitleLoop2
 
 .TitleDone
 	LDY #2
