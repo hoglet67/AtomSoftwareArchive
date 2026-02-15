@@ -357,7 +357,14 @@ package "atms/Adventur/SPH*" "$ARCHIVE/$AS/ADVENT"
 
 package "atms/Games3/CHESS" "$ARCHIVE/$AS/CHESS"
 
-package "atms/forth/*" "$ARCHIVE/$AS/FORTH"
+# local copy in archive/dave/AS/FORTH that is a clean conversion
+# from an original tape.
+#
+# Note: Kees patch from is no longer needed, as AtoMMC doesn't use
+# 3ca-3fc (except 3ca during *MENU)
+# https://stardot.org.uk/forums/viewtopic.php?p=127697#p127697
+#
+# package "atms/forth/*" "$ARCHIVE/$AS/FORTH"
 
 package "atms/Applic1/LISP*" "$ARCHIVE/$AS/LISP"
 

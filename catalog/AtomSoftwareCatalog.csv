@@ -46,7 +46,7 @@ CH.""DATABASE""","DATABASE
 WINELIST",,"Works - slow to start; seems to be scanning all memory in basic and getting confused by 32K RAM. If you have 32K RAM, *LOAD WINELIST 4000 will speed things up. Loads to command prompt after a minute. ",https://acornatom.nl/atom_handleidingen/dbase/dbase01.htm
 31,V3,Comm,Acornsoft,Address Book,Business,Atom Desk Diary,,,,,,,,,present,,AS/DIARY,8200,"CH.""ADRBOOK""",ADRBOOK,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
 32,V1,Comm,Acornsoft,Planner,Business,Atom Desk Diary,,,,,,,,,present,,AS/DIARY,8200,"CH.""PLANNER""",PLANNER,,Works,https://acornatom.nl/atom_handleidingen/asof/desk.html
-33,V3,Comm,Acornsoft,Forth,Language,,,,,,,,,,present,,AS/FORTH,8200,"*LOAD FORTH-D
+33,V3,Comm,Acornsoft,Forth,Language,,,,,,,,,,duplicate,,AS/FORTH,8200,"*LOAD FORTH-D
 *RUN FORTH-C","FORTH
 FORTH-C
 FORTH-D
@@ -2850,3 +2850,26 @@ LOADER",,Test,
 1295,V14B1,Modern,Retro S/W,TREES & TENTS,Game,RS Mono,32K+8K,,,,,,,Both,present,Kees van Oss,RS/TENTS,8200,"CH.""TTRUN""","TTCODE
 TTRUN
 TTSCR",,Works,
+1296,V14B1,Comm,Acornsoft,Forth,Language,,,,,,,,,,present,,AS/FORTH,8200,"*LOAD FORTH-D
+*RUN FORTH-C","FORTH
+FORTH-C
+FORTH-D
+006
+007
+008
+009
+010
+011
+012
+013
+014
+018
+019
+020
+021
+110
+111
+112
+113
+114
+115",,Test,https://site.acornatom.nl/boeken/forth-theory-and-practice.pdf
