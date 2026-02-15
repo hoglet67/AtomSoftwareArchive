@@ -121,6 +121,10 @@ ENDIF
 	; ?#E1=0 Not needed as we do our own screen output driver
 	JSR LabelX
 
+	LDA SearchBuffer
+	BEQ LabelB
+	JSR ShowCurrentSearchNoCursor
+
 .LabelB
 	; // Refresh rows, page number and total number of pages
 	; 200bGOS.j
