@@ -401,7 +401,7 @@ RUN","171
 DRAGONC",,Works,
 265,V3,Modern,Retro S/W,Castle Quest (40K) (R),Game,RS Mono,32K+8K,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
 DATA",,Works,
-266,V2,Modern,Retro S/W,Chuckie Egg (16K),Game,./dave/RS/CASQUEST/CAST,16K+6K,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
+266,V2,Modern,Retro S/W,Chuckie Egg (32K),Game,./dave/RS/CASQUEST/CAST,32K+6K,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -477,7 +477,7 @@ COLOSSAL",,,
 *RUN SNOWBALL","VDUWLO
 SNOWBALL",,,
 302,,Comm,,Astrofire (Kees),,,,,,,,,,,duplicate,,,,,,,Duplicate of Prog Power Astrafire,
-303,V3,Modern,Retro S/W,Chuckie Egg (M)(16K),Game,RS Mono,16K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
+303,V3,Modern,Retro S/W,Chuckie Egg (M)(32K),Game,RS Mono,32K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN MCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -486,7 +486,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-304,V3,Modern,Retro S/W,Chuckie Egg (C)(16K),Game,RS Colour,32K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
+304,V3,Modern,Retro S/W,Chuckie Egg (C)(32K),Game,RS Colour,32K+6K,,,,,,,JoyMMC,present,,RS/CHUCKIE,8200,*RUN CCH-EGG,"ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -1512,7 +1512,7 @@ RUN",POINTER,,Works,
 806,V8B3,Comm,Acornsoft,Star Gate (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN STARGAT,STARGAT,,Works,
 807,V8B3,Comm,A&F S/W,Torpedo Run (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TORP,TORP,,Works,
 808,V8B3,Comm,A&R S/W,Trap (JS),Game,,,Yes,,,,,,JoyKBD,present,,JS/KEES,8200,*RUN TRAP,TRAP,,Works,
-809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (16K) (JS),Game,,16K+6K,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
+809,V8B3,Non Comm,Non Comm,Shelob's Army (R) (32K) (JS),Game,,32K+6K,,No,Yes,No,,,JoyKBD,present,,JS/KEES,8200,"CH.""SHELOBS""",SHELOBS,,Works,
 810,V8B3,Non Comm,Non Comm,Ghost (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""GHOST""",GHOST,,Works,
 811,V8B3,Non Comm,Non Comm,Saturn (JS),Game,,,,,,,,,JoyKBD,present,,JS/KEES,8200,"CH.""SATURN""",SATURN,,Works,
 812,V8B3,Comm,Prog Power,3D Asteroids (JS),Game,,,,,,,,,JoyKBD,present,,JS/WIM,8200,"CH.""3DASTER""",3DASTER,,Works,
