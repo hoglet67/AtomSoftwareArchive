@@ -7,7 +7,7 @@ import java.util.List;
 abstract public class ArchiveGeneratorBase extends GenerateBase implements IArchiveGenerator {
 
     // Files to copy into each MNU folder
-    public static String[] ATOMMC_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3", "SORT4", "SORT5", "SORT6", "SORT7", "INFO", "HELP"};
+    public static String[] ATOMMC_MENU_FILES = { "MENU1", "MENU2", "SORT0", "SORT1", "SORT2", "SORT3", "SORT4", "SORT5", "SORT6", "SORT7", "SORT8", "INFO", "HELP"};
 
     protected void patch_atommc_joystick(ATMFile atmFile, AtomTitle item) {
         byte[] bytes = atmFile.getData();
