@@ -644,20 +644,13 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
 
-	LDA #CategoriesIdOffset
+	LDA #CategoriesIdOffset-1
 	STA TmpOffset
 
-	LDX #&01
-.loop
-	;; Test for the termination condition (the end of the caregories)
-	CPX #CategoriesFilterNum
-	BNE print_facet
-
-	LDY TmpOffset
-	LDA (Title), Y
-	BPL PrintTitle
-
-.print_facet
+	LDX #&00
+.loop1
+	INX
+.loop2
 	; Indent to right-justify the facet names
 	JSR LabelY1
 
@@ -673,13 +666,26 @@ IF (info_option = 1)
 	JSR WriteToScreen
 	PLA
 	TAX
-	BEQ Skip
+
+	; Setup a default value string of NONE
+	; This is currently used in the case of no categories
+;	LDA #<NoneString
+;	STA TmpPtr
+;	LDA #>NoneString
+;	STA TmpPtr + 1
 
 	CPX #CategoriesFilterNum
 	BNE NotCategory
 
+	LDA #<NoneString
+	STA TmpPtr
+	LDA #>NoneString
+	STA TmpPtr + 1
+
+	INC TmpOffset
 	LDY TmpOffset
 	LDA (Title), Y
+	BPL DefaultValue
 	AND #&7F
 	INC TmpOffset
 	BNE GetRecord
@@ -710,18 +716,19 @@ IF (info_option = 1)
 	; Print the facet string
 	; On Entry: (tmpPtr) points to the string
 	; Preseves X
+.DefaultValue
 	JSR ScreenString
 
-.Skip
 	; Pad to end of line
 	JSR PadToEOL
 
-	; Move to the next facet, but don't go beyon
+	; Move to the next facet, but don't go beyond
 	CPX #CategoriesFilterNum
-	BCS loop
-	INX
-	BNE loop
-
+	BCC loop1
+	; Check for the loop terminating condition
+	LDY TmpOffset
+	LDA (Title), Y
+	BMI loop2
 
 ; Finally go back and print the title (centred)
 .PrintTitle
@@ -753,6 +760,9 @@ IF (info_option = 1)
 	LDY #2
 	JSR HighlightRowY
 	JMP Osrdch
+
+.NoneString
+	EQUS "NONE", -1
 }
 
 .PrintSpace_then_PadToEOL
