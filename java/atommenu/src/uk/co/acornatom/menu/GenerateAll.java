@@ -110,8 +110,6 @@ public class GenerateAll {
     private void checkRamCompatibility(List<AtomTitle> items) {
         banner("Checking Ram Compatibility");
         for (AtomTitle item : items) {
-            boolean ok = true;
-            boolean warn = true;
             int lower_need = item.getCollections().contains("OZMOO") ? 32 : 6;
             int upper_need = item.isAGD() ? 8 : 6;
             for (String filename : item.getFilenames()) {
@@ -216,16 +214,16 @@ public class GenerateAll {
         // Drop incomplete titles (where files are missing)
         checkFiles(items);
 
-        Comparator<AtomTitle> customComparator = Comparator
-                .comparing(AtomTitle::getChunk)
-                .thenComparing(AtomTitle::getPublisher)
-                .thenComparing(AtomTitle::getTitle);
+//        Comparator<AtomTitle> customComparator = Comparator
+//                .comparing(AtomTitle::getChunk)
+//                .thenComparing(AtomTitle::getPublisher)
+//                .thenComparing(AtomTitle::getTitle);
 
-        Comparator<AtomTitle> spreadsheetComparator = Comparator
+        Comparator<AtomTitle> customComparator = Comparator
                 .comparing(AtomTitle::getIdentifier);
 
         List<AtomTitle> sortedItems = new ArrayList<AtomTitle>(items);
-        sortedItems.sort(spreadsheetComparator);
+        sortedItems.sort(customComparator);
 
         // Produce WARNINGs for titles that have incorrect RAM dependency
         checkRamCompatibility(sortedItems); // Use SortedItems so WARNINGs in sensible order
