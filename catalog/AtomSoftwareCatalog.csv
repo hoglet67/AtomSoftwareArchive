@@ -401,7 +401,7 @@ RUN","171
 DRAGONC",,Works,
 265,V3,Modern,Retro S/W,Castle Quest,Game,RS Mono,32K+8K,,Yes,Yes,No,,,,present,,RS/CASQUEST,8200,"CH.""CAST""","CAST
 DATA",,Works,
-266,V2,Modern,Retro S/W,Chuckie Egg,Game,./dave/RS/CASQUEST/CAST,32K+6K,,,,,,,,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
+266,V2,Modern,Retro S/W,Chuckie Egg,Game,./dave/RS/CASQUEST/CAST,32K+6K,,,,,,,JoyMMC,obsolete,,RS/CHUCKIE,8200,"CH.""RUNME""","ASM
 CCH-EGG
 CCHUCK
 FONT
@@ -410,7 +410,7 @@ MCHUCK
 MENU
 ROTDATA
 RUNME",,Works,
-267,V2,Modern,Retro S/W,Galaforce,Game,,32K+6K,,,,,,,,obsolete,,RS/GALA,8200,"CH.""RUNME""","ASM
+267,V2,Modern,Retro S/W,Galaforce,Game,,32K+6K,,,,,,,JoyMMC,obsolete,,RS/GALA,8200,"CH.""RUNME""","ASM
 CGALA
 CGALSCR
 FONT
@@ -1320,7 +1320,7 @@ CH.""INVAS""","INVAS
 INVASIN",,Works,
 700,V11B5,Modern,Non Comm,GODIL OSWRCH80,Graphics,GODIL,32K+6K,,,,,,,,present,David Banks,GODIL,8200,*RUN OSWRCH80,OSWRCH80,,Works,
 701,V7B2,Comm,ASP S/W,The White Barrows,Adventure,,,,,,,,,,present,,ASP,8200,"CH.""WHITEBA""",WHITEBA,,Works,
-702,V7B2,Modern,Non Comm,Kraftwerk (SID),Music,Mainwaring,32K+6K,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
+702,V7B2,Modern,Non Comm,Kraftwerk (SID),Music,"Mainwaring, SID",32K+6K,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
 CMPWRLD
 SIDPLAY
 LOADER",,Works,
@@ -1619,7 +1619,7 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-879,V9B2,Modern,Retro S/W,F-14 Tomcat SID,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
+879,V9B2,Modern,Retro S/W,F-14 Tomcat SID,Game,"RS Mono, SID",32K+6K,,,,,,,Both,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1627,21 +1627,21 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-880,V9B2,Modern,Retro S/W,Elite Demo,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
+880,V9B2,Modern,Retro S/W,Elite Demo,Game,"RS Mono, SID",32K+6K,,,,,,,None,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
 ELITE
 KEYS.TXT",,Works,
-881,V10B4,Modern,Retro S/W,Manic Miner,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
+881,V10B4,Modern,Retro S/W,Manic Miner,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
 MMINTRO
 MMCODE",,Works,
 882,V9B2,Non Comm,Non Comm,Type Ahead,Utility,,,,,,,,,,present,Ronald Boers,NC,8200,"CH.""TYPEAHD""",TYPEAHD,,Works,
 883,V9B2,Modern,Jim Bagley,Dragon's Lair (1MHz),Game,,32K+6K,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR,DLAIR,,Works,
 884,V9B2,Modern,Jim Bagley,Dragon's Lair (2MHz),Game,,32K+6K,,,,,,,,present,Jim Bagley,DLAIR,8200,*RUN DLAIR2M,DLAIR2M,,Works,
 885,V9B2,Non Comm,Non Comm,Chess (Usurpator II),Game,,,,,,,,,,present,H.G.Muller/F.Bouma,NC,8200,*RUN USURII,USURII,,Works,
-886,V10B1,Modern,Retro S/W,Jet Set Willy,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
+886,V10B1,Modern,Retro S/W,Jet Set Willy,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/JSW,8200,"CH.""JSWRUN""","JSWRUN
 JSWCODE",,Works,
-887,V10B1,Modern,Retro S/W,Jet Set Willy II,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
+887,V10B1,Modern,Retro S/W,Jet Set Willy II,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/JSW2,8200,"CH.""JSW2RUN""","JSW2RUN
 JSW2COD",,Works,
-888,V10B1,Modern,Retro S/W,Egghead in Space,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
+888,V10B1,Modern,Retro S/W,Egghead in Space,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/EGGHEAD,8200,*RUN EHRUN,"EHRUN
 EHCODE",,Works,
 889,V10B1,Comm,A&F S/W,Tangled,Game,,,,,,,,,,present,,AF,8200,"CH.""TANGLED""",TANGLED,,Works,
 890,V10B1,Comm,Aardvark,Galaxians,Game,,,,,,,,,,present,Nick Pelling (aka Orlando M Pilchard),AA,8200,*RUN GALAXIAN,GALAXIAN,,,
@@ -1671,9 +1671,9 @@ COLOSS
 BOOT6502",,Works,
 896,V10B1,Non Comm,Non Comm,Squirrel Tree,Adventure,,,,,,,,,,present,Unknown,NC,8200,"CH.""SQUIRL1""","SQUIRL1
 SQUIRL2",,Works,
-897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
+897,V10B2,Modern,Retro S/W,Tetris,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/TETRIS,8200,"CH.""SIDRUN""","SIDCODE
 SIDRUN",,Works,
-898,V10B4,Modern,Retro S/W,W.A.R.,Game,RS Mono,32K+6K,,,,,,,JoyKBD,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
+898,V10B4,Modern,Retro S/W,W.A.R.,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/WAR,8200,"CH.""WAR""","GAME1
 GAME2
 LOADER1
 LOADER2
