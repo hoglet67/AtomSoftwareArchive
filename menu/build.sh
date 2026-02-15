@@ -47,19 +47,19 @@ $BEEBASM -i menu.asm -o $ARCHIVE/MENUECO -D econet=1
 $BEEBASM -i menu.asm -o $ARCHIVE/MENUGOS -D gosdc=1
 
 # Compile the Chapter Menu (for AtomMMC)
-$BEEBASM -i chapter.asm -o $ARCHIVE/CHAP -D atommc=1 -v > chapter.log
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAP -D atommc=1 -v > chapter_atommc.log
 
 # Compile the Chapter Menu (for SDDOS2)
-$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPSDDOS2 -D sddos2=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPSDDOS2 -D sddos2=1 -v > chapter_sddos2.log
 
 # Compile the Chapter Menu (for SDDOS3)
-$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPSDDOS3 -D sddos3=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPSDDOS3 -D sddos3=1 -v > chapter_sddos3.log
 
 # Compile the Chapter Menu (for Econet)
-$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPECO -D econet=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPECO -D econet=1 -v > chapter_econet.log
 
 # Compile the Chapter Menu (for GoSDC)
-$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPGOS -D gosdc=1
+$BEEBASM -i chapter.asm -o $ARCHIVE/CHAPGOS -D gosdc=1 -v > chapter_gosdc.log
 
 # Compile the All Menu (for AtomMMC)
 $BEEBASM -i chapter.asm -o $ARCHIVE/ALL -D Base=0x1000 -D atommc=1
