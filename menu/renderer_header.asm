@@ -103,8 +103,8 @@ ENDIF
 	; The value used to return InKey
 	Key              = ZeroBase + $0f
 
-	; The row address to highlight
-	Row              = ZeroBase + $0f
+	; A temporary offset into the title record, used by the info screen
+	TmpOffset        = ZeroBase + $0f
 
 	; These are working values
 	Title            = ZeroBase + $10

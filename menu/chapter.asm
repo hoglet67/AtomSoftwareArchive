@@ -644,15 +644,16 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
 
-	LDX #&00
-.loop1
-	INX
-.loop2
+	LDA #CategoriesIdOffset
+	STA TmpOffset
 
+	LDX #&01
+.loop
 	;; Test for the termination condition (the end of the caregories)
 	CPX #CategoriesFilterNum
 	BNE print_facet
-	LDY #0
+
+	LDY TmpOffset
 	LDA (Title), Y
 	BPL PrintTitle
 
@@ -677,12 +678,10 @@ IF (info_option = 1)
 	CPX #CategoriesFilterNum
 	BNE NotCategory
 
-	LDY #0
+	LDY TmpOffset
 	LDA (Title), Y
 	AND #&7F
-	INC Title
-	BNE GetRecord
-	INC Title+1
+	INC TmpOffset
 	BNE GetRecord
 
 .NotCategory
@@ -717,29 +716,24 @@ IF (info_option = 1)
 	; Pad to end of line
 	JSR PadToEOL
 
-	CPX #CategoriesFilterNum - 1
-	BCC loop1
-	BNE loop2
+	; Move to the next facet, but don't go beyon
+	CPX #CategoriesFilterNum
+	BCS loop
+	INX
+	BNE loop
 
-.UpdateTitle
-	; Repoint the title to the categories list
-	LDA Title
-	CLC
-	ADC #CategoriesIdOffset
-	STA Title
-	BCC loop1
-	INC Title + 1
-	BNE loop1	; branch always
 
 ; Finally go back and print the title (centred)
 .PrintTitle
-	LDY #&FF
-	LDX #&21
+	LDX #&20
+	LDY TmpOffset
 .TitleLoop1
-	DEX
-	INY
 	LDA (Title),Y
-	BPL TitleLoop1
+	BMI TitleDone1
+	INY
+	DEX
+	BNE TitleLoop1
+.TitleDone1
 	TXA
 	LSR A
 	ORA #<(ScreenStart + StartLine * CharsPerLine)
@@ -747,7 +741,7 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
 	STA Screen + 1
 
-	LDY #0
+	LDY TmpOffset
 .TitleLoop2
 	LDA (Title),Y
 	BMI TitleDone
