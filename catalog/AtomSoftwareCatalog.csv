@@ -2873,3 +2873,25 @@ FORTH-D
 113
 114
 115",,Test,https://site.acornatom.nl/boeken/forth-theory-and-practice.pdf
+1297,V14B1,Comm,Acornsoft,Forth Utilities,Language,,,,,,,,,,present,,AS/FORTH,8200,"*LOAD FORTH-D
+*RUN FORTH-C","FORTH
+FORTH-C
+FORTH-D
+024
+025
+026
+027
+028
+029
+030
+031
+032
+033
+036
+037
+038
+039
+040
+041
+042
+043",,Test,https://archive.org/details/atom-forth-utilities
