@@ -23,6 +23,34 @@
 	JoystickByteOffset  	= 2
 	CollectionsByteOffset  	= 5
 
+	PubMask     		= &3F
+	GenreMask         	= &78
+	ChunkMask     		= &07
+	RamMask     		= &E0
+	RomMask     		= &F8
+	VersionMask     	= &1F
+	JoystickMask  		= &C0
+	CollectionsMask  	= &FF
+
+	PubXor     		= &00
+	GenreXor         	= &00
+	ChunkXor     		= &00
+	RamXor     		= &00
+	RomXor     		= &00
+	VersionXor    		= &00
+	JoystickXor  		= &00
+	CollectionsXor  	= &80
+
+	PubBitOffset     	= 0
+	GenreBitOffset          = 3
+	ChunkBitOffset     	= 0
+	RamBitOffset     	= 5
+	RomBitOffset     	= 3
+	VersionBitOffset     	= 0
+	JoystickBitOffset  	= 6
+	CollectionsBitOffset  	= 0
+
+
 	PubFilterNum		= 1
 	GenreFilterNum		= 2
 	ChunkFilterNum		= 3

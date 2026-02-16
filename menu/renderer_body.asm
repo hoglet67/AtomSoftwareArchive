@@ -1,4 +1,3 @@
-
 .WritePage
 
 IF properAnnotationCounts
@@ -453,91 +452,112 @@ ENDIF
 	STY Key
 	RTS
 
+
+.FacetByteOffsetTable
+	EQUB PubByteOffset
+	EQUB GenreByteOffset
+	EQUB ChunkByteOffset
+	EQUB RamByteOffset
+	EQUB RomByteOffset
+	EQUB VersionByteOffset
+	EQUB JoystickByteOffset
+	EQUB CollectionsByteOffset
+
+.FacetMaskTable
+	EQUB PubMask
+	EQUB GenreMask
+	EQUB ChunkMask
+	EQUB RamMask
+	EQUB RomMask
+	EQUB VersionMask
+	EQUB JoystickMask
+	EQUB CollectionsMask
+
+.FacetXorTable
+	EQUB PubXor
+	EQUB GenreXor
+	EQUB ChunkXor
+	EQUB RamXor
+	EQUB RomXor
+	EQUB VersionXor
+	EQUB JoystickXor
+	EQUB CollectionsXor
+
+;; This is a table of branch offsets used in some self modifyinf code
+;; to avoid the cost of a loop:
+;;     vvvvvv is modified based on the table value
+;; BNE offset
+;; LSR A        ; offset 0 shifts 7 bits
+;; LSR A	; offset 1 shifts 6 bits
+;; LSR A	; offset 2 shifts 5 bits
+;; LSR A	; offset 3 shifts 4 bits
+;; LSR A	; offset 4 shifts 3 bits
+;; LSR A	; offset 5 shifts 2 bits
+;; LSR A	; offset 6 shifts 1 bits
+;; RTS 		; offset 7 shifts 0 bits
+
+.FacetBitOffsetTable
+	EQUB 7 - PubBitOffset
+	EQUB 7 - GenreBitOffset
+	EQUB 7 - ChunkBitOffset
+	EQUB 7 - RamBitOffset
+	EQUB 7 - RomBitOffset
+	EQUB 7 - VersionBitOffset
+	EQUB 7 - JoystickBitOffset
+	EQUB 7 - CollectionsBitOffset
+
 ;; Extract Filter/Annotation ID from title table and nomalize
-;; TODO Optimise this
+
+IF 0
+.ExtractTableValue
+{
+	TYA
+	TAX
+	LDA FacetByteOffsetTable - 1, X
+	TAY
+	LDA (Title), Y
+	EOR FacetXorTable - 1, X
+	AND FacetMaskTable - 1, X
+	LDY FacetBitOffsetTable - 1, X
+	STY label1 + 1
+.label1
+	BEQ label2
+.label2
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	RTS
+}
+ENDIF
 
 .ExtractTableValue
 {
-; 1 = Publisher (encoded within bits 5..0 of byte 2)
-.Filter1
-	CPY #PubFilterNum
-	BNE Filter2
-	LDY #PubByteOffset
+	LDA FacetBitOffsetTable - 1, Y
+	STA shift + 1
+	LDA FacetMaskTable - 1, Y
+	STA mask + 1
+	LDA FacetXorTable - 1, Y
+	STA xor + 1
+	LDA FacetByteOffsetTable - 1, Y
+	TAY
 	LDA (Title), Y
-	AND #&3F
-	RTS
-
-; 2 = Genre (encoded within bits 6..3 of byte 0)
-.Filter2
-	CPY #GenreFilterNum
-	BNE Filter3
-	LDY #GenreByteOffset
-	LDA (Title), Y
+.mask
+	AND #&00
+.xor
+	EOR #&00
+.shift
+	BNE P%+2
 	LSR A
 	LSR A
 	LSR A
-	AND #&0F
-	RTS
-
-; 3 = Chunk (encoded within bits 2..0 of byte 4)
-.Filter3
-	CPY #ChunkFilterNum
-	BNE Filter4
-	LDY #ChunkByteOffset
-	LDA (Title), Y
-	AND #&07
-	RTS
-
-; 4 = Ram (encoded within bits 7..5 of byte 3)
-.Filter4
-	CPY #RamFilterNum
-	BNE Filter5
-	LDY #RamByteOffset
-	LDA (Title), Y
-	ROL A
-	ROL A
-	ROL A
-	ROL A
-	AND #&07
-	RTS
-
-; 5 = Rom (encoded within bits 7..3 of byte 4)
-.Filter5
-	CPY #RomFilterNum
-	BNE Filter6
-	LDY #RomByteOffset
-	LDA (Title), Y
 	LSR A
 	LSR A
 	LSR A
-	RTS
-
-; 4 = Version (encoded within bits 4..0 of byte 3)
-.Filter6
-	CPY #VersionFilterNum
-	BNE Filter7
-	LDY #VersionByteOffset
-	LDA (Title), Y
-	AND #&1F
-	RTS
-
-; 7 = Joystick (encoded within bits 7..6 of byte 3)
-.Filter7
-	CPY #JoystickFilterNum
-	BNE Filter8
-	LDY #JoystickByteOffset
-	LDA (Title), Y
-	ROL A
-	ROL A
-	ROL A
-	AND #&03
-	RTS
-
-; 8 = Collecton (byte 5 onwards)
-.Filter8
-	LDY #CollectionsByteOffset
-	LDA (Title), Y
-	EOR #&80
+	LSR A
 	RTS
 }
 
