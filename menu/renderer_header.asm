@@ -21,7 +21,7 @@
 	RomIdOffset     	= 4
 	VersionIdOffset     	= 3
 	JoystickIdOffset  	= 2
-	CategoriesIdOffset  	= 5
+	CollectionsIdOffset  	= 5
 
 	PubFilterNum		= 1
 	GenreFilterNum		= 2
@@ -30,7 +30,7 @@
 	RomFilterNum		= 5
 	VersionFilterNum	= 6
 	JoystickFilterNum	= 7
-	CategoriesFilterNum 	= 8
+	CollectionsFilterNum 	= 8
 
 	; Field offsets into the secondard table record
 

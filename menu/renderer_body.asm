@@ -82,8 +82,8 @@ ENDIF
 	AND #SearchModeMask
 	BNE FilterCompare
 
-	; Find the offset to the title, by skipping over all the categories
-	LDY #CategoriesIdOffset - 1
+	; Find the offset to the title, by skipping over all the collections
+	LDY #CollectionsIdOffset - 1
 .FindTitle
 	INY
 	LDA (Title),Y
@@ -118,7 +118,7 @@ ENDIF
 ; This list is terminated by a non-negative value (the first char of the title name)
 
 .CatFilter
-	LDY #CategoriesIdOffset
+	LDY #CollectionsIdOffset
 .CatFilterLoop
 	LDA (Title), Y
 	BPL NextRow
@@ -140,7 +140,7 @@ ENDIF
 
 	; If there is no filter, we move on to compare the search (if there is one)
 	BEQ MatchingRow
-	CPY #CategoriesFilterNum
+	CPY #CollectionsFilterNum
 	BEQ CatFilter
 
 	;; Extract and normalize the ID value from the table
@@ -535,7 +535,7 @@ ENDIF
 
 ; 8 = Collecton (byte 5 onwards)
 .Filter8
-	LDY #CategoriesIdOffset
+	LDY #CollectionsIdOffset
 	LDA (Title), Y
 	EOR #&80
 	RTS
@@ -808,11 +808,11 @@ IF properAnnotationCounts
 .AnnotationTypeLoop
 	LDA AnnotationIdMap,X
 	TAY
-	CPY #CategoriesFilterNum
-	BNE AnnotationNotCategory
+	CPY #CollectionsFilterNum
+	BNE AnnotationNotCollection
 
-	LDY #CategoriesIdOffset
-.AnnotationNextCategory
+	LDY #CollectionsIdOffset
+.AnnotationNextCollection
 	LDA (Title),Y
 	BPL AnnotationNextType
 	AND #$7F
@@ -820,9 +820,9 @@ IF properAnnotationCounts
 	JSR IncAnnotationCounts
 	LDY TmpY
 	INY
-	BNE AnnotationNextCategory
+	BNE AnnotationNextCollection
 
-.AnnotationNotCategory
+.AnnotationNotCollection
 	JSR ExtractTableValue
 	JSR IncAnnotationCounts
 .AnnotationNextType

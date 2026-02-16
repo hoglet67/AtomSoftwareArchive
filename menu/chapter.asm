@@ -653,7 +653,7 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
 
-	LDA #CategoriesIdOffset
+	LDA #CollectionsIdOffset
 	STA TmpOffset
 
 	LDX #&00
@@ -677,14 +677,14 @@ IF (info_option = 1)
 	TAX
 
 	; Setup a default value string of NONE
-	; This is currently used in the case of no categories
+	; This is currently used in the case of no collections
 ;	LDA #<NoneString
 ;	STA TmpPtr
 ;	LDA #>NoneString
 ;	STA TmpPtr + 1
 
-	CPX #CategoriesFilterNum
-	BNE NotCategory
+	CPX #CollectionsFilterNum
+	BNE NotCollection
 
 	LDA #<NoneString
 	STA TmpPtr
@@ -697,7 +697,7 @@ IF (info_option = 1)
 	AND #&7F
 	BPL GetRecord	; branch always
 
-.NotCategory
+.NotCollection
 	; Extract the facet value from the title table
 	; On entry: Y = facet number (1..8)
 	; On exit:  A = facet value
@@ -730,7 +730,7 @@ IF (info_option = 1)
 	JSR PadToEOL
 
 	; Move to the next facet, but don't go beyond
-	CPX #CategoriesFilterNum
+	CPX #CollectionsFilterNum
 	BCC loop1
 	; Check for the loop terminating condition
 	LDY TmpOffset
