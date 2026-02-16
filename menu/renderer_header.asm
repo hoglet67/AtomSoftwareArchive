@@ -14,14 +14,14 @@
 
 	; Field offsets into the title table record
 
-	PubIdOffset     	= 2
-	GenreIdOffset           = 0
-	ChunkIdOffset     	= 4
-	RamIdOffset     	= 3
-	RomIdOffset     	= 4
-	VersionIdOffset     	= 3
-	JoystickIdOffset  	= 2
-	CollectionsIdOffset  	= 5
+	PubByteOffset     	= 2
+	GenreByteOffset         = 0
+	ChunkByteOffset     	= 4
+	RamByteOffset     	= 3
+	RomByteOffset     	= 4
+	VersionByteOffset     	= 3
+	JoystickByteOffset  	= 2
+	CollectionsByteOffset  	= 5
 
 	PubFilterNum		= 1
 	GenreFilterNum		= 2

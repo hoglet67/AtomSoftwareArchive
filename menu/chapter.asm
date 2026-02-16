@@ -653,7 +653,7 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
 
-	LDA #CollectionsIdOffset
+	LDA #CollectionsByteOffset
 	STA TmpOffset
 
 	LDX #&00

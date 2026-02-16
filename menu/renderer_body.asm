@@ -83,7 +83,7 @@ ENDIF
 	BNE FilterCompare
 
 	; Find the offset to the title, by skipping over all the collections
-	LDY #CollectionsIdOffset - 1
+	LDY #CollectionsByteOffset - 1
 .FindTitle
 	INY
 	LDA (Title),Y
@@ -118,7 +118,7 @@ ENDIF
 ; This list is terminated by a non-negative value (the first char of the title name)
 
 .CatFilter
-	LDY #CollectionsIdOffset
+	LDY #CollectionsByteOffset
 .CatFilterLoop
 	LDA (Title), Y
 	BPL NextRow
@@ -462,7 +462,7 @@ ENDIF
 .Filter1
 	CPY #PubFilterNum
 	BNE Filter2
-	LDY #PubIdOffset
+	LDY #PubByteOffset
 	LDA (Title), Y
 	AND #&3F
 	RTS
@@ -471,7 +471,7 @@ ENDIF
 .Filter2
 	CPY #GenreFilterNum
 	BNE Filter3
-	LDY #GenreIdOffset
+	LDY #GenreByteOffset
 	LDA (Title), Y
 	LSR A
 	LSR A
@@ -483,7 +483,7 @@ ENDIF
 .Filter3
 	CPY #ChunkFilterNum
 	BNE Filter4
-	LDY #ChunkIdOffset
+	LDY #ChunkByteOffset
 	LDA (Title), Y
 	AND #&07
 	RTS
@@ -492,7 +492,7 @@ ENDIF
 .Filter4
 	CPY #RamFilterNum
 	BNE Filter5
-	LDY #RamIdOffset
+	LDY #RamByteOffset
 	LDA (Title), Y
 	ROL A
 	ROL A
@@ -505,7 +505,7 @@ ENDIF
 .Filter5
 	CPY #RomFilterNum
 	BNE Filter6
-	LDY #RomIdOffset
+	LDY #RomByteOffset
 	LDA (Title), Y
 	LSR A
 	LSR A
@@ -516,7 +516,7 @@ ENDIF
 .Filter6
 	CPY #VersionFilterNum
 	BNE Filter7
-	LDY #VersionIdOffset
+	LDY #VersionByteOffset
 	LDA (Title), Y
 	AND #&1F
 	RTS
@@ -525,7 +525,7 @@ ENDIF
 .Filter7
 	CPY #JoystickFilterNum
 	BNE Filter8
-	LDY #JoystickIdOffset
+	LDY #JoystickByteOffset
 	LDA (Title), Y
 	ROL A
 	ROL A
@@ -535,7 +535,7 @@ ENDIF
 
 ; 8 = Collecton (byte 5 onwards)
 .Filter8
-	LDY #CollectionsIdOffset
+	LDY #CollectionsByteOffset
 	LDA (Title), Y
 	EOR #&80
 	RTS
@@ -811,7 +811,7 @@ IF properAnnotationCounts
 	CPY #CollectionsFilterNum
 	BNE AnnotationNotCollection
 
-	LDY #CollectionsIdOffset
+	LDY #CollectionsByteOffset
 .AnnotationNextCollection
 	LDA (Title),Y
 	BPL AnnotationNextType
@@ -912,7 +912,7 @@ NEXT
 	STA (AnnotationString),Y
 	PLA
 	TAY
-	BNE	ClearAnnotationCounts3
+	BNE ClearAnnotationCounts3
 .ClearAnnotationCounts6
 	PLA
 	TAY
