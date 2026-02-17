@@ -1320,7 +1320,8 @@ CH.""INVAS""","INVAS
 INVASIN",,Works,
 700,V11B5,Modern,Non Comm,GODIL OSWRCH80,Graphics,GODIL,32K+6K,,,,,,,,present,David Banks,GODIL,8200,*RUN OSWRCH80,OSWRCH80,,Works,
 701,V7B2,Comm,ASP S/W,The White Barrows,Adventure,,,,,,,,,,present,,ASP,8200,"CH.""WHITEBA""",WHITEBA,,Works,
-702,V7B2,Modern,Non Comm,Kraftwerk (SID),Music,"Mainwaring, SID",32K+6K,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
+702,V7B2,Modern,Non Comm,Kraftwerk (SID),Music,"Mainwaring
+SID",32K+6K,,,,,,,,present,Phil Mainwaring,SID/KRFTWRK,8200,"CH.""LOADER""","KRFTWRK
 CMPWRLD
 SIDPLAY
 LOADER",,Works,
@@ -1619,7 +1620,8 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-879,V9B2,Modern,Retro S/W,F-14 Tomcat SID,Game,"RS Mono, SID",32K+6K,,,,,,,Both,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
+879,V9B2,Modern,Retro S/W,F-14 Tomcat SID,Game,"RS Mono
+SID",32K+6K,,,,,,,Both,present,Kees van Oss,RS/F14SID,8200,"CH.""F14RUN""","F14CODE
 F14MUSIC
 F14RUN
 F14SCR
@@ -1627,7 +1629,8 @@ LEVEL1
 LEVEL2
 LEVEL3
 LEVEL4",,Works,
-880,V9B2,Modern,Retro S/W,Elite Demo,Game,"RS Mono, SID",32K+6K,,,,,,,None,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
+880,V9B2,Modern,Retro S/W,Elite Demo,Game,"RS Mono
+SID",32K+6K,,,,,,,None,present,Kees van Oss,RS/ELITE,8200,*RUN ELITE,"CODE
 ELITE
 KEYS.TXT",,Works,
 881,V10B4,Modern,Retro S/W,Manic Miner,Game,RS Mono,32K+6K,,,,,,,Both,present,Kees van Oss,RS/MMINER,8200,"CH.""MMRUN""","MMRUN
