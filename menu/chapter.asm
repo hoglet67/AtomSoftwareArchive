@@ -653,7 +653,7 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
 	STA Screen + 1
 
-	LDA #CategoriesIdOffset-1
+	LDA #CategoriesIdOffset
 	STA TmpOffset
 
 	LDX #&00
@@ -691,13 +691,11 @@ IF (info_option = 1)
 	LDA #>NoneString
 	STA TmpPtr + 1
 
-	INC TmpOffset
 	LDY TmpOffset
 	LDA (Title), Y
 	BPL DefaultValue
 	AND #&7F
-	INC TmpOffset
-	BNE GetRecord
+	BPL GetRecord	; branch always
 
 .NotCategory
 	; Extract the facet value from the title table
@@ -735,6 +733,7 @@ IF (info_option = 1)
 	CPX #CategoriesFilterNum
 	BCC loop1
 	; Check for the loop terminating condition
+	INC TmpOffset
 	LDY TmpOffset
 	LDA (Title), Y
 	BMI loop2
