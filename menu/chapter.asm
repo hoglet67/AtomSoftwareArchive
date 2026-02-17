@@ -733,8 +733,11 @@ IF (info_option = 1)
 	CPX #CategoriesFilterNum
 	BCC loop1
 	; Check for the loop terminating condition
-	INC TmpOffset
 	LDY TmpOffset
+	LDA (Title), Y
+	BPL PrintTitle
+	INY
+	STY TmpOffset
 	LDA (Title), Y
 	BMI loop2
 
