@@ -10,7 +10,10 @@
 
 	NumFacets       	= 8
 
-	DisplayModeMask         = &0F		; large enough to represent NumFacets
+	; DisplayModeFlags
+	DMUpdateCounts		= &80	; 1=disable rendering (i.e. count only)
+	DMDisableSearchFilter	= &40	; 1=disable search/filtering
+	DMHighlightMatches	= &20	; 1=highlight search matches
 
 	; Field offsets into the title table record
 

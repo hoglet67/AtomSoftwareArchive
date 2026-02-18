@@ -67,17 +67,19 @@ NEXT
 .CollectionsFacetValue
 	EQUB &00
 
-.WritePage
-
 IF properAnnotationCounts
-
-	LDA DisplayMode
-	AND #DisplayModeMask
-	BNE WritePage1
+.CalculateAnnotationCounts
 	JSR ClearAnnotationCounts
-.WritePage1
-
+	LDA #DMUpdateCounts
+	STA DisplayMode
 ENDIF
+
+; Display Mode controls behaviour
+; Bit 7 - 1=disable search/filtering
+; Bit 6 - 1=disable rendering (i.e. count only)
+; Bit 5 - 1=highlight search matches
+
+.WritePage
 
 	LDA SearchBuffer
 	STA SearchFirst
@@ -146,9 +148,8 @@ ENDIF
 .IncSort
 
 	; Bypass search/filter code when in one of the filter pages
-	LDA DisplayMode
-	AND #DisplayModeMask
-	BNE MatchingRowFastPath
+	BIT DisplayMode
+	BVS MatchingRow
 
 	; Find the offset to the title, by skipping over all the collections
 	LDY #CollectionsByteOffset - 1
@@ -161,7 +162,7 @@ ENDIF
 	; Bypass search/filter/update counts code if no search and no filter
 	LDA SearchFirst
 	ORA FilterType
-	BEQ MatchingRowFastPath
+	BEQ MatchingRow
 
 .SearchCompare
 {
@@ -223,17 +224,21 @@ ENDIF
 .FilterMatch
 }
 
+.MatchingRow
 IF properAnnotationCounts
+	BIT DisplayMode
+	BPL MatchingRow1
 	JSR AccumulateAnnotationCounts
+	JMP NextRow
 ENDIF
 
-.MatchingRowFastPath
+.MatchingRow1
 	INC CurrentRow
-	BNE MatchingRow1
+	BNE MatchingRow2
 	INC CurrentRow + 1
 
 	;; Have we reached the required start row yet?
-.MatchingRow1
+.MatchingRow2
 	SEC
 	LDA CurrentRow
 	SBC StartRow
@@ -309,8 +314,8 @@ ENDIF
 	LDY #FacetCountOffset
 
 IF properAnnotationCounts
-	LDA SearchFirst
-	BEQ NoSearch
+;	LDA SearchFirst
+;	BEQ NoSearch
 	LDY #FacetWorkingOffset
 .NoSearch
 ENDIF
@@ -424,9 +429,10 @@ ENDIF
 
 .WriteTitle
 
-	LDA DisplayMode
-	BPL WriteTitle1
 	LDA SearchFirst
+	BEQ WriteTitle1
+	LDA DisplayMode
+	AND #DMHighlightMatches
 	BEQ WriteTitle1
 
 	; There is an active search filter, so try to highlight
@@ -679,11 +685,10 @@ ENDIF
 	LDA BcdBuffer
 	RTS
 
-
-
 .Search
 
-	LDA #$80
+	LDA DisplayMode
+	ORA #DMHighlightMatches
 	STA DisplayMode
 
 	; Update current results set and number of pages
@@ -873,6 +878,8 @@ IF properAnnotationCounts
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; Accumulate the annotation counts
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; TODO: This doesn't have to update all the tables now, just the current facet
 
 .AccumulateAnnotationCounts
 

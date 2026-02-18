@@ -139,6 +139,11 @@ ENDIF
 	JSR LabelJ
 
 	; 260 LINK B;M=(!R&#FFFF+L-1)/L
+	LDA PageState
+	BEQ LabelB1
+	LDA #DMDisableSearchFilter
+.LabelB1
+	STA DisplayMode
 	JSR WritePage
 	JSR CalculateNumPages
 	STY NumPages
@@ -288,6 +293,10 @@ ENDIF
 	LDA Annotation
 	ORA #$80
 	STA Annotation
+IF properAnnotationCounts
+	; Recalculate Annotation counts the new filter screen
+	JSR CalculateAnnotationCounts
+ENDIF
 	JMP LabelA
 
 .TestForPrevSort
@@ -845,24 +854,18 @@ ENDIF
 	INC StartRow + 1
 .LabelJ2
 	INY
-	BNE	LabelJ1
+	BNE LabelJ1
 
 .LabelJ3
 	LDA #<RowReturnBuf
 	STA RowRet
 	LDA #>RowReturnBuf
 	STA RowRet+1
-
-	LDA PageState
-	STA DisplayMode
-
 	RTS
-
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to update the page header
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 	; 1000xP.$30'"                                "$30
 	; 1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
