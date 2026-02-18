@@ -291,12 +291,21 @@ ENDIF
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	STA PageState
 	LDA Annotation
+IF properAnnotationCounts
+	; Update the annotation to point to this facet
+	PHA
+	LDA PageState
+	STA Annotation
+	; Recalculate Annotation counts the new filter screen
+	LDA #DMUpdateCounts
+	STA DisplayMode
+	JSR WritePage
+	; Restore the original annotation the user has chose (to see on the title page)
+	PLA
+ENDIF
+	; Set bit 7 of the annotation to switch to "show counts" mode
 	ORA #$80
 	STA Annotation
-IF properAnnotationCounts
-	; Recalculate Annotation counts the new filter screen
-	JSR CalculateAnnotationCounts
-ENDIF
 	JMP LabelA
 
 .TestForPrevSort
@@ -669,6 +678,8 @@ IF (info_option = 1)
 	LDX #&00
 .loop1
 	INX
+	JSR GetAnnotationTable
+
 .loop2
 	; Indent to right-justify the facet names
 	JSR LabelY1
@@ -720,14 +731,12 @@ IF (info_option = 1)
 	; On entry: X = facet number (1..8), A = facet valye
 	; On exit:  (AnnotationString) points to the start of the record
 	; Preseves X
-	JSR GetAnnotationRecord
+	JSR GetAnnotationString
 
 	; Skip over the 4 count bytes
-	LDA AnnotationString
-	ADC #4
+	LDA AnnotationPtr
 	STA TmpPtr
-	LDA AnnotationString + 1
-	ADC #0
+	LDA AnnotationPtr + 1
 	STA TmpPtr+1
 
 	; Print the facet string

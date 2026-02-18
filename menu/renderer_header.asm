@@ -140,8 +140,8 @@ ENDIF
 
 	; These are working values
 	Title            = ZeroBase + $10
-	AnnotationPtr    = ZeroBase + $12
-	AnnotationString = ZeroBase + $14
+	AnnotationTable  = ZeroBase + $12
+	AnnotationPtr    = ZeroBase + $14
 	Screen           = ZeroBase + $16
 	TmpX             = ZeroBase + $18
 	TmpY             = ZeroBase + $19

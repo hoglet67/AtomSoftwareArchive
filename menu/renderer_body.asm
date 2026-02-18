@@ -67,20 +67,13 @@ NEXT
 .CollectionsFacetValue
 	EQUB &00
 
-IF properAnnotationCounts
-.CalculateAnnotationCounts
-	JSR ClearAnnotationCounts
-	LDA #DMUpdateCounts
-	STA DisplayMode
-ENDIF
 
 ; Display Mode controls behaviour
-; Bit 7 - 1=disable search/filtering
-; Bit 6 - 1=disable rendering (i.e. count only)
+; Bit 7 - 1=disable rendering (i.e. count only)
+; Bit 6 - 1=disable search/filtering
 ; Bit 5 - 1=highlight search matches
 
 .WritePage
-
 	LDA SearchBuffer
 	STA SearchFirst
 
@@ -89,20 +82,15 @@ ENDIF
 	LDA Sort + 1
 	STA CurrentSort + 1
 
-	; Calculate a pointer to the requested annotation table, skipping the length field
-	LDA Annotation
-	ASL A
-	TAY
-	INY
-	INY
-	; CLC		; pretty sure this is not needed, as annotation is small
-	LDA (MenuTablePtr),Y
-	ADC #2
-	STA AnnotationPtr
-	INY
-	LDA (MenuTablePtr),Y
-	ADC #0
-	STA AnnotationPtr + 1
+IF properAnnotationCounts
+	BIT DisplayMode
+	BPL SkipClearCounts
+	LDX Annotation
+	JSR ClearAnnotationCounts
+.SkipClearCounts
+ENDIF
+	LDX Annotation
+	JSR GetAnnotationTable
 
 	LDA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
@@ -328,68 +316,27 @@ ENDIF
 	JSR WriteCount
 
 	LDA #<CountString
-	STA AnnotationString
+	STA AnnotationPtr
 	LDA #>CountString
-	STA AnnotationString + 1
+	STA AnnotationPtr + 1
 
 	JMP LengthOfAnnotation
 
-
-;; Maps annotation to Table ID type
-
-; 0 = Short Publisher -> 1
-; 1 = Publisher       -> 1
-; 2 = Genre           -> 2
-; 3 = Chunk           -> 3
-; 4 = Ram      	      -> 4
-; 5 = Rom      	      -> 5
-; 6 = Version         -> 6
-; 7 = Joystick        -> 7
-; 8 = Collection      -> 8
-
-.AnnotationIdMap
-	EQUB 	1 ; Short Publisher
-	EQUB 	1 ; Publisher
-	EQUB 	2 ; Genre
-	EQUB 	3 ; Chunk
-	EQUB 	4 ; Ram
-	EQUB 	5 ; Rom
-	EQUB 	6 ; Version
-	EQUB 	7 ; Joyctick
-	EQUB 	8 ; Collection
-
-; Offset of first record in the annotation
-; (depends on whether the table was build against a sort index)
-; Always 0 or 4
-
-.AnnotationOffset
-	EQUB 	0 ; Short Publisher
-	EQUB 	4 ; Publisher
-	EQUB 	4 ; Genre
-	EQUB 	4 ; Chunk
-	EQUB 	4 ; Ram
-	EQUB 	4 ; Rom
-	EQUB 	4 ; Version
-	EQUB 	4 ; Joystick
-	EQUB 	4 ; Collection
-
 .NormalAnnotation
 	LDY Annotation
-	LDA AnnotationOffset,Y
-	PHA
-	LDA AnnotationIdMap,Y
-	TAY
+	BNE NotShortPub
+	INY	; The sort publisher annotation uses the same ID as the pubisher (TODO: Just stuff extra values into the table!)
+.NotShortPub
 	JSR ExtractTableValue
 
 	BPL NotNullCollection
 
 	; CollectionIDs always have bit 7 set
 	; If bit 7 is clear, there is no collection
-	PLA
-	LDA #<NullCollectionMessage
-	STA AnnotationString
-	LDA #>NullCollectionMessage
-	STA AnnotationString + 1
+	LDA #<(NullCollectionMessage)
+	STA AnnotationPtr
+	LDA #>(NullCollectionMessage)
+	STA AnnotationPtr + 1
 	BNE LengthOfAnnotation
 
 .NullCollectionMessage
@@ -398,22 +345,13 @@ ENDIF
 
 .NotNullCollection
 	; Currently the MSB of the annotation is lost, which limits secondary tables to 7 bit values
-	ASL A
-	TAY
-	PLA
-	CLC
-	ADC (AnnotationPtr),Y
-	STA AnnotationString
-	INY
-	LDA #0
-	ADC (AnnotationPtr),Y
-	STA AnnotationString + 1
+	JSR GetAnnotationString
 
 .LengthOfAnnotation
-	LDY #0
+	LDY #0	; TODO: probably a bug here for the short publisher
 
 .LengthOfAnnotationLoop
-	LDA (AnnotationString),Y
+	LDA (AnnotationPtr),Y
 	BMI WriteLetter
 	INY
 	DEX
@@ -428,7 +366,6 @@ ENDIF
 	JSR WriteToScreen
 
 .WriteTitle
-
 	LDA SearchFirst
 	BEQ WriteTitle1
 	LDA DisplayMode
@@ -453,7 +390,7 @@ ENDIF
 
 	LDY #0
 .WriteAnnotation
-	LDA (AnnotationString),Y
+	LDA (AnnotationPtr),Y
 	BMI WriteLineExit
 	JSR WriteToScreen
 	INY
@@ -873,128 +810,126 @@ ENDIF
 	RTS
 
 
-IF properAnnotationCounts
+; Calculate a pointer to the requested annotation table, skipping the length field
+; Get the address of the relevant secondary table for annotations
+; - in normal mode (DisplayMode bit 7 = 0) this is used for rendering the annotation
+; - in update counts mode (DisplayMode bit 7 = 1) this is where the current filter counts are maintained
 
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	;; Accumulate the annotation counts
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; TODO: This doesn't have to update all the tables now, just the current facet
-
-.AccumulateAnnotationCounts
-
-	LDX #NumFacets
-.AnnotationTypeLoop
-	LDA AnnotationIdMap,X
-	TAY
-	CPY #CollectionsFilterNum
-	BNE AnnotationNotCollection
-
-	LDY #CollectionsByteOffset
-.AnnotationNextCollection
-	LDA (Title),Y
-	BPL AnnotationNextType
-	AND #$7F
-	STY TmpY
-	JSR IncAnnotationCounts
-	LDY TmpY
-	INY
-	BNE AnnotationNextCollection
-
-.AnnotationNotCollection
-	JSR ExtractTableValue
-	JSR IncAnnotationCounts
-.AnnotationNextType
-	DEX
-	BNE AnnotationTypeLoop
-	RTS
-
-	; Offset into the MenuTable of the pointer to the secondary
-	; table for the annotation type
-
-.MenuTableIndex
-FOR i, 0, NumFacets - 1, 1
-	EQUB 4 + 2 * i
-NEXT
-
-	; X=Annotation type (1 = Long Publisher, 2 = Genre, 3 = Collection)
-	; A=Annotation id value (7 bits)
-.GetAnnotationRecord
-	CLC
-	ADC #1		; Skip over the secondary table length field
+; X=Annotation type
+.GetAnnotationTable
+{
+	TXA
 	ASL A
-	LDY MenuTableIndex - 1, X
-	ADC (MenuTablePtr),Y
-	STA Tmp
+	TAY
+	INY
+	INY
+	; CLC		; pretty sure this is not needed, as annotation is small
+	LDA (MenuTablePtr),Y
+	ADC #2		; skip over the total number of entries
+	STA AnnotationTable
 	INY
 	LDA (MenuTablePtr),Y
 	ADC #0
-	STA Tmp + 1	; Tmp the address of the pointer to the facet record
-	LDY #0
-	LDA (Tmp),Y
-	STA AnnotationString
-	INY
-	LDA (Tmp),Y
-	STA AnnotationString + 1
+	STA AnnotationTable + 1
 	RTS
+}
 
-	; Increment an annotation count
-.IncAnnotationCounts
+; A=Annotation id value (7 bits)
+.GetAnnotationRecord
+{
+	ASL A
+	TAY
+	LDA (AnnotationTable), Y
+	STA AnnotationPtr
+	INY
+	LDA (AnnotationTable), Y
+	STA AnnotationPtr + 1
+	RTS
+}
+
+; A=Annotation id value (7 bits)
+.GetAnnotationString
+{
+	JSR GetAnnotationRecord
+	LDA Annotation
+	BEQ done
+	LDA #4
+	CLC
+	ADC AnnotationPtr
+	STA AnnotationPtr
+	BCC done
+	INC AnnotationPtr + 1
+.done
+	RTS
+}
+
+IF properAnnotationCounts
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Accumulate the annotation counts
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.AccumulateAnnotationCounts
+{
+	LDY Annotation
+	CPY #CollectionsFilterNum
+	BEQ collection
+
+	JSR ExtractTableValue
+
+.update_count
 	JSR GetAnnotationRecord
 	LDY #3		; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
-.loop
-	LDA (AnnotationString),Y
+.update_loop
+	LDA (AnnotationPtr),Y
 	ADC #0
-	STA (AnnotationString),Y
+	STA (AnnotationPtr),Y
 	DEY
-	BCS loop	; skip back in the rare case of carry
+	BCS update_loop	; skip back in the rare case of carry
 	RTS 		; (you only get this if you search for <space>)
 
-	; Clear the 2nd and 3rd byte of each annotation record
-	; We will use these to store counts of the number of search filtered items
+.collection
+	LDY #CollectionsByteOffset
+.collection_loop
+	LDA (Title),Y
+	BPL done
+	AND #&7F
+	STY TmpY
+	JSR update_count
+	LDY TmpY
+	INY
+	BNE collection_loop
+.done
+	RTS
+}
+
+; Clear the 2nd and 3rd byte of each annotation record
+; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
-	LDY #4		;  skip over title and short pub tables
-.ClearAnnotationCounts1
-	CLC
-	LDA (MenuTablePtr),Y
-	ADC #2
+{
+	JSR GetAnnotationTable
+.loop
+	LDY #0
+	LDA (AnnotationTable), Y
 	STA Tmp
 	INY
-	LDA (MenuTablePtr),Y
-	ADC #0
+	LDA (AnnotationTable), Y
 	STA Tmp + 1
-	JSR ClearAnnotationCounts2
+	BEQ done
+	INY		; Y=2
+	LDA #0
+	STA (Tmp),Y
 	INY
-	CPY #4 + NumFacets * 2
-	BNE ClearAnnotationCounts1
+	STA (Tmp),Y
+	CLC
+	LDA AnnotationTable
+	ADC #&02
+	STA AnnotationTable
+	BCC loop
+	INC AnnotationTable + 1
+	BNE loop
+.done
 	RTS
-.ClearAnnotationCounts2
-	TYA
-	PHA
-	LDX #0
-	LDY #$FF
-.ClearAnnotationCounts3
-	INY
-	LDA (Tmp),Y
-	STA AnnotationString
-	INY
-	LDA (Tmp),Y
-	STA AnnotationString + 1
-	BEQ ClearAnnotationCounts6
-	TYA
-	PHA
-	LDY #2
-	TXA
-	STA (AnnotationString),Y
-	INY
-	STA (AnnotationString),Y
-	PLA
-	TAY
-	BNE ClearAnnotationCounts3
-.ClearAnnotationCounts6
-	PLA
-	TAY
-	RTS
-
+}
 ENDIF
