@@ -134,17 +134,28 @@ ENDIF
 	BCC IncSort
 	INC CurrentSort + 1
 .IncSort
-
-	; Bypass search/filter code when in one of the filter pages
+	; Test if we are rendering one of the filter pages
 	BIT DisplayMode
-	BVS MatchingRow
+	BVC FindTitle
 
+	; Yes, so the match now becomes a non-zero facet count
+	LDY #FacetWorkingOffset
+	LDA (Title), Y
+	BNE MatchingRow
+	INY
+	LDA (Title), Y
+	BNE MatchingRow
+
+	; The facet count is zero, so move to the next row
+	BEQ NextRow ; Branch always
+
+.FindTitle
 	; Find the offset to the title, by skipping over all the collections
 	LDY #CollectionsByteOffset - 1
-.FindTitle
+.FindTitleLoop
 	INY
 	LDA (Title),Y
-	BMI FindTitle
+	BMI FindTitleLoop
 	STY TitleNameOffset
 
 	; Bypass search/filter/update counts code if no search and no filter

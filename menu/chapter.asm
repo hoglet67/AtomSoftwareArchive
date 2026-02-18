@@ -119,6 +119,26 @@ ENDIF
 	INY
 	STY Page
 
+IF properAnnotationCounts
+	; Update the annotation to point to this facet
+	LDA Annotation
+	PHA
+	LDA PageState
+	STA Annotation
+	; Make sure the title table is used, not the facet table
+	LDA SortTablePtr
+	STA Sort
+	LDA SortTablePtr + 1
+	STA Sort + 1
+	; Recalculate Annotation counts the new filter screen
+	LDA #DMUpdateCounts
+	STA DisplayMode
+	JSR WritePage
+	; Restore the original annotation the user has chose (to see on the title page)
+	PLA
+	STA Annotation
+ENDIF
+
 .LabelA1
 	; // Turn off the cursor and refresh the screen
 	; 130a?#E1=0;GOS.x
@@ -291,23 +311,6 @@ ENDIF
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	STA PageState
 	LDA Annotation
-IF properAnnotationCounts
-	; Update the annotation to point to this facet
-	PHA
-	LDA PageState
-	STA Annotation
-	; Make sure the title table is used, not the facet table
-	LDA SortTablePtr
-	STA Sort
-	LDA SortTablePtr + 1
-	STA Sort + 1
-	; Recalculate Annotation counts the new filter screen
-	LDA #DMUpdateCounts
-	STA DisplayMode
-	JSR WritePage
-	; Restore the original annotation the user has chose (to see on the title page)
-	PLA
-ENDIF
 	; Set bit 7 of the annotation to switch to "show counts" mode
 	ORA #$80
 	STA Annotation
