@@ -296,6 +296,11 @@ IF properAnnotationCounts
 	PHA
 	LDA PageState
 	STA Annotation
+	; Make sure the title table is used, not the facet table
+	LDA SortTablePtr
+	STA Sort
+	LDA SortTablePtr + 1
+	STA Sort + 1
 	; Recalculate Annotation counts the new filter screen
 	LDA #DMUpdateCounts
 	STA DisplayMode

@@ -267,6 +267,9 @@ ENDIF
 	JMP NextRow
 
 .WritePageEndOfList
+	BIT DisplayMode
+	BMI WritePageExit
+
 	; We have hit the end of the sort list
 	LDA RowCount
 	CMP #LinesPerPage
@@ -287,6 +290,7 @@ ENDIF
 	INY
 	LDA CurrentRow + 1
 	STA (RowRet), Y
+.WritePageExit
 	RTS
 
 .WriteLine
@@ -516,6 +520,10 @@ ENDIF
 	EQUB 7 - CollectionsBitOffset
 
 ;; Extract Filter/Annotation ID from title table and nomalize
+
+;; TODO: the self modification could be done less often
+;; i.e. when ever Annotation is updated
+
 .ExtractTableValue
 {
 	LDA FacetBitOffsetTable, Y
