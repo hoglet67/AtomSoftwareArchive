@@ -1,15 +1,71 @@
 .ClearFilters
+{
 	LDA #0
 	STA FilterType
 	STA FilterVal
+	LDY #CollectionsByteOffset
+.loop
+	STA FacetMasks, Y
+	STA FacetValues, Y
+	DEY
+	BPL loop
 	RTS
+}
 
 ; Y = Filter Type
 ; A = Filter Value
 .AddFilter
-	STY FilterType
-	STA FilterVal
+{
+	; FilterVal and FilterType are just used for display purposes
+	; as it's hard (but not impossible) to invert the data in
+	; in FacetMasks/FacetValues
+	STA FilterVal   ; Now just used for display purposes
+	STY FilterType	; Now just used for display purposes
+
+	; Shift the value to the right bit position
+	LDX FacetBitOffsetTable - 1, Y
+.shift_loop
+	CPX #7
+	BEQ shift_done
+	ASL A
+	INX
+	BCC shift_loop  ; should be branch always
+.shift_done
+	PHA		; save the shifted valte
+
+	; make X = byte offset into FacetMasks/Values for the required filter
+	LDX FacetByteOffsetTable - 1, Y
+
+	; Update the FacetValues table with the (shifted) value
+	LDA FacetMaskTable - 1, Y
+	EOR #&FF
+	AND FacetValues, X
+	STA FacetValues, X
+	PLA
+	ORA FacetValues, X
+	STA FacetValues, X
+
+	; Update the FacetMasks table with the mask
+	LDA FacetMaskTable - 1, Y
+	ORA FacetMasks, X
+	STA FacetMasks, X
+
 	RTS
+}
+
+.FacetMasks
+FOR i, 0, CollectionsByteOffset - 1, 1
+	EQUB &00
+NEXT
+.CollectionsFacetMask
+	EQUB &00
+
+.FacetValues
+FOR i, 0, CollectionsByteOffset - 1, 1
+	EQUB &00
+NEXT
+.CollectionsFacetValue
+	EQUB &00
 
 .WritePage
 
@@ -125,42 +181,40 @@ ENDIF
 	LDY TmpY
 	BNE SearchCompare1
 
-; 5 = Collecton (byte 4 onwards)
-; If the filter is catgory, there are is a list to try to match against
-; This list is terminated by a non-negative value (the first char of the title name)
-
-.CatFilter
-	LDY #CollectionsByteOffset
-.CatFilterLoop
-	LDA (Title), Y
-	BPL NextRow
-	AND #$7F
-	CMP FilterVal
-	BEQ MatchingRow
-	INY
-	BNE CatFilterLoop   ; Branch always
-
 .SearchMatch
 
 IF properAnnotationCounts
 	JSR AccumulateAnnotationCounts
 ENDIF
 
+; Attempt to match against the currently compiled filter set
+;
+; If the filter includes a collections, there are is a list to try to
+; match against This list is terminated by a non-negative value (the
+; first char of the title name)
+
 .FilterCompare
-	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Chunk, 4=Ram, 5=Rom, 6=Version, 7=Joystick, 8=Collection
-	LDY FilterType
-
-	; If there is no filter, we move on to compare the search (if there is one)
-	BEQ MatchingRow
-	CPY #CollectionsFilterNum
-	BEQ CatFilter
-
-	;; Extract and normalize the ID value from the table
-	JSR ExtractTableValue
-
-	;; Do the filter comparison, skip to next row if no match
-	CMP FilterVal
+	LDY #0
+.FilterCompareLoop
+	;; TODO could code this differently and optimize Mask=0
+	LDA (Title), Y
+	EOR FacetValues, Y
+	AND FacetMasks, Y
 	BNE NextRow
+	INY
+	CPY #CollectionsByteOffset
+	BNE FilterCompareLoop
+
+	LDA CollectionsFacetMask
+	BEQ MatchingRow	   ; If No Collections Filter we have a match
+.CatFilterLoop
+	LDA (Title), Y
+	BPL NextRow
+	EOR CollectionsFacetValue
+	AND CollectionsFacetMask
+	BEQ MatchingRow
+	INY
+	BNE CatFilterLoop   ; Branch always
 
 .MatchingRow
 	INC CurrentRow
@@ -520,33 +574,6 @@ ENDIF
 	EQUB 7 - CollectionsBitOffset
 
 ;; Extract Filter/Annotation ID from title table and nomalize
-
-IF 0
-.ExtractTableValue
-{
-	TYA
-	TAX
-	LDA FacetByteOffsetTable - 1, X
-	TAY
-	LDA (Title), Y
-	EOR FacetXorTable - 1, X
-	AND FacetMaskTable - 1, X
-	LDY FacetBitOffsetTable - 1, X
-	STY label1 + 1
-.label1
-	BEQ label2
-.label2
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	RTS
-}
-ENDIF
-
 .ExtractTableValue
 {
 	LDA FacetBitOffsetTable - 1, Y
