@@ -1,3 +1,16 @@
+.ClearFilters
+	LDA #0
+	STA FilterType
+	STA FilterVal
+	RTS
+
+; Y = Filter Type
+; A = Filter Value
+.AddFilter
+	STY FilterType
+	STA FilterVal
+	RTS
+
 .WritePage
 
 IF properAnnotationCounts
@@ -79,7 +92,7 @@ ENDIF
 	; Do the search comparison
 	LDA DisplayMode
 	AND #DisplayModeMask
-	BNE FilterCompare
+	BNE MatchingRow
 
 	; Find the offset to the title, by skipping over all the collections
 	LDY #CollectionsByteOffset - 1
@@ -135,7 +148,7 @@ ENDIF
 
 .FilterCompare
 	;; 0=NoFilter, 1=Publisher, 2=Genre, 3=Chunk, 4=Ram, 5=Rom, 6=Version, 7=Joystick, 8=Collection
-	LDY Filter
+	LDY FilterType
 
 	; If there is no filter, we move on to compare the search (if there is one)
 	BEQ MatchingRow
@@ -681,6 +694,7 @@ ENDIF
 	CPY #0
 	BNE ShowCurrentSearchNoCursor
 
+.ClearSearchLine
 	LDA #Space
 	LDY #CharsPerLine - 1
 .SearchExit2

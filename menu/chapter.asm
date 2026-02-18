@@ -101,10 +101,9 @@ ENDIF
 	LDY #0
 	STY SortType    ; S=0
 	STY PageState   ; F=0
-	STY FilterType  ; G=0
 	INY
 	STY Annotation  ; A=1
-
+	JSR ClearFilters
 	JSR LoadSortTable
 
 	; // Initialize the search buffer to empty
@@ -126,7 +125,11 @@ ENDIF
 	; ?#E1=0 Not needed as we do our own screen output driver
 	JSR LabelX
 
-	LDA SearchBuffer
+	JSR ClearSearchLine
+
+	LDA PageState		; Only show SEARCH= in title page state
+	BNE LabelB
+	LDA SearchBuffer	; Only show SEARCH= when there is an active search
 	BEQ LabelB
 	JSR ShowCurrentSearchNoCursor
 
@@ -274,16 +277,14 @@ ENDIF
 	; 630 IF ?Q=21 F=0;G=0;A=A&127;G.a
 	CMP #0
 	BNE ChangeFilter
-	STA FilterType
-	BEQ PageStateZero
+	JSR ClearFilters
+	JMP PageStateZero
 
 .ChangeFilter
 	; Filter 1..8
 	; // 1..8 key pressed
 	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	STA PageState
-	LDA #0
-	STA FilterType
 	LDA Annotation
 	ORA #$80
 	STA Annotation
@@ -440,8 +441,7 @@ ENDIF
 	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
 	LDA PageState
 	BEQ BootProgram
-	LDA PageState
-	STA FilterType
+
 	CLC
 	LDA Title
 	ADC #4
@@ -460,7 +460,8 @@ ENDIF
 	ADC #LinesPerPage
 	BCC LabelF1
 .LabelF2
-	STA FilterVal
+	LDY PageState
+	JSR AddFilter	; Y = FilterType, A = FilterValue
 	JMP PageStateZero
 
 .BootProgram
@@ -847,30 +848,14 @@ ENDIF
 	BNE	LabelJ1
 
 .LabelJ3
-	;952 !#84=R
 	LDA #<RowReturnBuf
 	STA RowRet
 	LDA #>RowReturnBuf
 	STA RowRet+1
 
-	;953 ?#86=A
-	;not needed as these are collapsed
-
-	;954 ?#87=(G&1)*2+(G&2)/2
-	LDA FilterType
-	STA Filter
-
-	;955 ?#88=H
-	;not needed as these are collapsed
-
-	;956 ?#89=F
 	LDA PageState
 	STA DisplayMode
 
-	; 957 ?#8A=P
-	;not needed as these are collapsed
-
-	;958 R.
 	RTS
 
 
@@ -953,7 +938,9 @@ ENDIF
 	JSR ScreenString
 
 	;1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
-	LDA FilterType
+	LDA PageState		; Only show FILTER= in title page state
+	BNE LabelX4
+	LDA FilterType		; Only show FILTER= when there is an active filter
 	BEQ LabelX4
 	LDA #' '
 	JSR WriteToScreen
