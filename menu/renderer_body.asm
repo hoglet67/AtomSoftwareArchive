@@ -23,7 +23,7 @@
 	STY FilterType	; Now just used for display purposes
 
 	; Shift the value to the right bit position
-	LDX FacetBitOffsetTable - 1, Y
+	LDX FacetBitOffsetTable, Y
 .shift_loop
 	CPX #7
 	BEQ shift_done
@@ -34,10 +34,10 @@
 	PHA		; save the shifted valte
 
 	; make X = byte offset into FacetMasks/Values for the required filter
-	LDX FacetByteOffsetTable - 1, Y
+	LDX FacetByteOffsetTable, Y
 
 	; Update the FacetValues table with the (shifted) value
-	LDA FacetMaskTable - 1, Y
+	LDA FacetMaskTable, Y
 	EOR #&FF
 	AND FacetValues, X
 	STA FacetValues, X
@@ -46,7 +46,7 @@
 	STA FacetValues, X
 
 	; Update the FacetMasks table with the mask
-	LDA FacetMaskTable - 1, Y
+	LDA FacetMaskTable, Y
 	ORA FacetMasks, X
 	STA FacetMasks, X
 
@@ -299,20 +299,17 @@ ENDIF
 	LDA Annotation
 	BPL NormalAnnotation
 
-	LDY #FacetCountOffset
-
 IF properAnnotationCounts
-;	LDA SearchFirst
-;	BEQ NoSearch
 	LDY #FacetWorkingOffset
-.NoSearch
+ELSE
+	LDY #FacetCountOffset
 ENDIF
 	LDA (Title),Y
 	AND #&7F
-	STA BinBuffer + 1
+	STA BinBuffer + 1	; MSB first (i.e. cound is stored big endian)
 	INY
 	LDA (Title),Y
-	STA BinBuffer
+	STA BinBuffer		; LSB last
 	JSR WriteCount
 
 	LDA #<CountString
@@ -324,9 +321,6 @@ ENDIF
 
 .NormalAnnotation
 	LDY Annotation
-	BNE NotShortPub
-	INY	; The sort publisher annotation uses the same ID as the pubisher (TODO: Just stuff extra values into the table!)
-.NotShortPub
 	JSR ExtractTableValue
 
 	BPL NotNullCollection
@@ -473,8 +467,8 @@ ENDIF
 	STY Key
 	RTS
 
-
 .FacetByteOffsetTable
+	EQUB PubByteOffset
 	EQUB PubByteOffset
 	EQUB GenreByteOffset
 	EQUB ChunkByteOffset
@@ -486,6 +480,7 @@ ENDIF
 
 .FacetMaskTable
 	EQUB PubMask
+	EQUB PubMask
 	EQUB GenreMask
 	EQUB ChunkMask
 	EQUB RamMask
@@ -495,6 +490,7 @@ ENDIF
 	EQUB CollectionsMask
 
 .FacetXorTable
+	EQUB PubXor
 	EQUB PubXor
 	EQUB GenreXor
 	EQUB ChunkXor
@@ -519,6 +515,7 @@ ENDIF
 
 .FacetBitOffsetTable
 	EQUB 7 - PubBitOffset
+	EQUB 7 - PubBitOffset
 	EQUB 7 - GenreBitOffset
 	EQUB 7 - ChunkBitOffset
 	EQUB 7 - RamBitOffset
@@ -530,13 +527,13 @@ ENDIF
 ;; Extract Filter/Annotation ID from title table and nomalize
 .ExtractTableValue
 {
-	LDA FacetBitOffsetTable - 1, Y
+	LDA FacetBitOffsetTable, Y
 	STA shift + 1
-	LDA FacetMaskTable - 1, Y
+	LDA FacetMaskTable, Y
 	STA mask + 1
-	LDA FacetXorTable - 1, Y
+	LDA FacetXorTable, Y
 	STA xor + 1
-	LDA FacetByteOffsetTable - 1, Y
+	LDA FacetByteOffsetTable, Y
 	TAY
 	LDA (Title), Y
 .mask
@@ -853,7 +850,7 @@ ENDIF
 	JSR GetAnnotationRecord
 	LDA Annotation
 	BEQ done
-	LDA #4
+	LDA #FacetTitleOffset
 	CLC
 	ADC AnnotationPtr
 	STA AnnotationPtr
@@ -879,7 +876,7 @@ IF properAnnotationCounts
 
 .update_count
 	JSR GetAnnotationRecord
-	LDY #3		; count is stored at offset 3 (LSB) and 2 (MSB)
+	LDY #FacetWorkingOffset + 1 ; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
 .update_loop
 	LDA (AnnotationPtr),Y
@@ -917,7 +914,7 @@ IF properAnnotationCounts
 	LDA (AnnotationTable), Y
 	STA Tmp + 1
 	BEQ done
-	INY		; Y=2
+	LDY #FacetWorkingOffset
 	LDA #0
 	STA (Tmp),Y
 	INY
