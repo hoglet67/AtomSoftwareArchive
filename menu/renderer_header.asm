@@ -10,7 +10,7 @@
 
 	NumFacets       	= 8
 
-	SearchModeMask          = &0F		; large enough to represent NumFacets
+	DisplayModeMask         = &0F		; large enough to represent NumFacets
 
 	; Field offsets into the title table record
 
@@ -110,10 +110,10 @@ ENDIF
 	; (Immutable) The filter value
 	FilterVal        = ZeroBase + $08
 
-	; Search mode value
-	; Bits 0..1 : 0 = Enable search filtering, 1,2,3 = Disable search filtering
+	; Display mode value
+	; Bits 0..3 : 0 = Enable search filtering, 1.... disabl
 	; Bit 7 : 0 =  Hight Matches, 1 = Don't Highlight Matches
-	SearchMode       = ZeroBase + $09
+	DisplayMode      = ZeroBase + $09
 
 	; (Immutable) Current Page
 	Page             = ZeroBase + $0a

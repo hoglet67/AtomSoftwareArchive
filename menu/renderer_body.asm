@@ -2,8 +2,8 @@
 
 IF properAnnotationCounts
 
-	LDA SearchMode
-	AND #SearchModeMask
+	LDA DisplayMode
+	AND #DisplayModeMask
 	BNE WritePage1
 	JSR ClearAnnotationCounts
 .WritePage1
@@ -77,8 +77,8 @@ ENDIF
 .IncSort
 
 	; Do the search comparison
-	LDA SearchMode
-	AND #SearchModeMask
+	LDA DisplayMode
+	AND #DisplayModeMask
 	BNE FilterCompare
 
 	; Find the offset to the title, by skipping over all the collections
@@ -346,7 +346,7 @@ ENDIF
 
 .WriteTitle
 
-	LDA SearchMode
+	LDA DisplayMode
 	BPL WriteTitle1
 	LDA SearchFirst
 	BEQ WriteTitle1
@@ -633,7 +633,7 @@ ENDIF
 .Search
 
 	LDA #$80
-	STA SearchMode
+	STA DisplayMode
 
 	; Update current results set and number of pages
 	JSR WritePage

@@ -865,7 +865,7 @@ ENDIF
 
 	;956 ?#89=F
 	LDA PageState
-	STA SearchMode
+	STA DisplayMode
 
 	; 957 ?#8A=P
 	;not needed as these are collapsed
