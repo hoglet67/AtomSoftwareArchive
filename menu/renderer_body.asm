@@ -200,15 +200,15 @@ ENDIF
 	BNE FilterCompareLoop
 
 	LDA CollectionsFacetMask
-	BEQ FilterMatch	   ; If No Collections Filter we have a match
+	BEQ FilterMatch		; If No Collections Filter we have a match
 .CatFilterLoop
 	LDA (Title), Y
 	BPL NextRow
 	EOR CollectionsFacetValue
-	AND CollectionsFacetMask
+	AND #&7F		; TODO: Fix hard-coded mask
 	BEQ FilterMatch
 	INY
-	BNE CatFilterLoop   ; Branch always
+	BNE CatFilterLoop	; Branch always
 .FilterMatch
 }
 
@@ -883,7 +883,7 @@ IF properAnnotationCounts
 .collection_loop
 	LDA (Title),Y
 	BPL done
-	AND #&7F
+	AND #&7F		; TODO: Fix hard-coded mask
 	STY TmpY
 	JSR update_count
 	LDY TmpY

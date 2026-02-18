@@ -1172,8 +1172,6 @@ ENDIF
 	BNE HandleAutoRepeatPressed
 	BIT $b001
 	BPL HandleAutoRepeatPressed
-	BVC HandleAutoRepeatPressed
-	BIT $b002
 	BVS HandleAutoRepeatKeyReleased
 .HandleAutoRepeatPressed
 	INC TmpPtr
