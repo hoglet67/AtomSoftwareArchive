@@ -313,9 +313,9 @@ ENDIF
 	JSR WriteCount
 
 	LDA #<CountString
-	STA AnnotationPtr
+	STA TmpPtr
 	LDA #>CountString
-	STA AnnotationPtr + 1
+	STA TmpPtr + 1
 
 	JMP LengthOfAnnotation
 
@@ -328,9 +328,9 @@ ENDIF
 	; CollectionIDs always have bit 7 set
 	; If bit 7 is clear, there is no collection
 	LDA #<(NullCollectionMessage)
-	STA AnnotationPtr
+	STA TmpPtr
 	LDA #>(NullCollectionMessage)
-	STA AnnotationPtr + 1
+	STA TmpPtr + 1
 	BNE LengthOfAnnotation
 
 .NullCollectionMessage
@@ -345,7 +345,7 @@ ENDIF
 	LDY #0	; TODO: probably a bug here for the short publisher
 
 .LengthOfAnnotationLoop
-	LDA (AnnotationPtr),Y
+	LDA (TmpPtr),Y
 	BMI WriteLetter
 	INY
 	DEX
@@ -382,16 +382,7 @@ ENDIF
 	DEX
 	BPL WriteSeperatorLoop
 
-	LDY #0
-.WriteAnnotation
-	LDA (AnnotationPtr),Y
-	BMI WriteLineExit
-	JSR WriteToScreen
-	INY
-	BNE WriteAnnotation
-
-.WriteLineExit
-	RTS
+	JMP ScreenString
 
 .WriteTitleNoHighlight
 	LDY TitleNameOffset
@@ -848,15 +839,16 @@ ENDIF
 .GetAnnotationString
 {
 	JSR GetAnnotationRecord
-	LDA Annotation
-	BEQ done
-	LDA #FacetTitleOffset
 	CLC
+	LDA Annotation
+	BEQ isShortPub
+	LDA #FacetTitleOffset
+.isShortPub
 	ADC AnnotationPtr
-	STA AnnotationPtr
-	BCC done
-	INC AnnotationPtr + 1
-.done
+	STA TmpPtr
+	LDA #0
+	ADC AnnotationPtr + 1
+	STA TmpPtr + 1
 	RTS
 }
 

@@ -697,16 +697,10 @@ IF (info_option = 1)
 	PLA
 	TAX
 
-	; Setup a default value string of NONE
-	; This is currently used in the case of no collections
-;	LDA #<NoneString
-;	STA TmpPtr
-;	LDA #>NoneString
-;	STA TmpPtr + 1
-
 	CPX #CollectionsFilterNum
 	BNE NotCollection
 
+	; Setup a default value string of NONE for no collections
 	LDA #<NoneString
 	STA TmpPtr
 	LDA #>NoneString
@@ -732,12 +726,6 @@ IF (info_option = 1)
 	; On exit:  (AnnotationString) points to the start of the record
 	; Preseves X
 	JSR GetAnnotationString
-
-	; Skip over the 4 count bytes
-	LDA AnnotationPtr
-	STA TmpPtr
-	LDA AnnotationPtr + 1
-	STA TmpPtr+1
 
 	; Print the facet string
 	; On Entry: (tmpPtr) points to the string
