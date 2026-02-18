@@ -145,10 +145,10 @@ ENDIF
 	INC CurrentSort + 1
 .IncSort
 
-	; Do the search comparison
+	; Bypass search/filter code when in one of the filter pages
 	LDA DisplayMode
 	AND #DisplayModeMask
-	BNE MatchingRow
+	BNE MatchingRowFastPath
 
 	; Find the offset to the title, by skipping over all the collections
 	LDY #CollectionsByteOffset - 1
@@ -158,9 +158,15 @@ ENDIF
 	BMI FindTitle
 	STY TitleNameOffset
 
+	; Bypass search/filter/update counts code if no search and no filter
 	LDA SearchFirst
-	BEQ FilterCompare
+	ORA FilterType
+	BEQ MatchingRowFastPath
 
+.SearchCompare
+{
+	LDA SearchFirst
+	BEQ SearchMatch
 	DEY
 .SearchCompare1
 	INY
@@ -180,12 +186,8 @@ ENDIF
 	BEQ SearchCompare3
 	LDY TmpY
 	BNE SearchCompare1
-
 .SearchMatch
-
-IF properAnnotationCounts
-	JSR AccumulateAnnotationCounts
-ENDIF
+}
 
 ; Attempt to match against the currently compiled filter set
 ;
@@ -194,6 +196,9 @@ ENDIF
 ; first char of the title name)
 
 .FilterCompare
+{
+	LDA FilterType
+	BEQ FilterMatch
 	LDY #0
 .FilterCompareLoop
 	;; TODO could code this differently and optimize Mask=0
@@ -206,17 +211,23 @@ ENDIF
 	BNE FilterCompareLoop
 
 	LDA CollectionsFacetMask
-	BEQ MatchingRow	   ; If No Collections Filter we have a match
+	BEQ FilterMatch	   ; If No Collections Filter we have a match
 .CatFilterLoop
 	LDA (Title), Y
 	BPL NextRow
 	EOR CollectionsFacetValue
 	AND CollectionsFacetMask
-	BEQ MatchingRow
+	BEQ FilterMatch
 	INY
 	BNE CatFilterLoop   ; Branch always
+.FilterMatch
+}
 
-.MatchingRow
+IF properAnnotationCounts
+	JSR AccumulateAnnotationCounts
+ENDIF
+
+.MatchingRowFastPath
 	INC CurrentRow
 	BNE MatchingRow1
 	INC CurrentRow + 1
