@@ -638,21 +638,13 @@ ENDIF
 
 .GetItemAddress
 {
-	LDA Item
+	LDA Item		; Item starts at 0
 	ASL A
-	ADC #2	; Item starts at 0, row return buffer starts at 1
 	TAY
-	LDA #<(RowReturnBuf)
+	LDA RowReturnBuf + 2, Y	; +2 because total rows stored at 0, 1
 	STA Title
-	LDA #>(RowReturnBuf)
+	LDA RowReturnBuf + 3, Y
 	STA Title + 1
-	LDA (Title),Y
-	PHA
-	INY
-	LDA (Title),Y
-	STA Title + 1
-	PLA
-	STA Title
 	RTS
 }
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -841,10 +833,12 @@ ENDIF
 	BNE LabelJ1
 
 .LabelJ3
-	LDA #<RowReturnBuf
-	STA RowRet
-	LDA #>RowReturnBuf
-	STA RowRet+1
+	LDY #31
+	LDA #0
+.LabelJ4
+	STA RowReturnBuf, Y
+	DEY
+	BPL LabelJ4
 	RTS
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1056,24 +1050,13 @@ ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .TestRowActive
+{
 	ASL A
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	PHP
-	ADC #<(ScreenStart + CharsPerLine * 2)
-	STA TmpPtr
-	LDA #>(ScreenStart + CharsPerLine * 2)
-	ADC #0
-	PLP
-	ADC #0
-	STA TmpPtr + 1
-	LDX #0
-	LDA (TmpPtr,X)
-	CMP #' '
+	TAX
+	LDA RowReturnBuf + 2, X
+	ORA RowReturnBuf + 3, X
 	RTS
-
+}
 
 	; Dereferences the pointer at zero page location X,X+1
 .Dereference

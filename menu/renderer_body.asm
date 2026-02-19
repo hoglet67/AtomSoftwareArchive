@@ -499,10 +499,9 @@ ENDIF
 	ASL A
 	TAY
 	LDA Title
-	STA (RowRet),Y
-	INY
+	STA RowReturnBuf, Y
 	LDA Title + 1
-	STA (RowRet),Y
+	STA RowReturnBuf + 1, Y
 	JMP NextRow
 
 .WritePageEndOfList
@@ -523,12 +522,10 @@ ENDIF
 	BNE WritePageEndOfList
 
 .UpdateTotalRows
-	LDY #0
 	LDA CurrentRow
-	STA (RowRet), Y
-	INY
+	STA RowReturnBuf
 	LDA CurrentRow + 1
-	STA (RowRet), Y
+	STA RowReturnBuf + 1
 .WritePageExit
 	RTS
 
@@ -1006,24 +1003,21 @@ ENDIF
 	BNE UpdateTotalPages1
 	RTS
 
-
 	; Reads the total number of filtered rows returned
 	; Inefficiently divide number of rows by the rows per page
 	; Returns the number of pages in BCD in A
 	; Returns the number of pages in Binary in Y
 .CalculateNumPages
-	LDY #0
 	SEC
-	LDA (RowRet),Y
+	LDA RowReturnBuf
 	SBC #1
 	STA BinBuffer
-	INY
-	LDA (RowRet),Y
+	LDA RowReturnBuf + 1
 	SBC #0
 	STA BinBuffer+1
 	BCC CalculateNumPages2
-	DEY
-	TYA
+
+	LDY #0
 .CalculateNumPages1
 	INY
 	SED
@@ -1042,7 +1036,7 @@ ENDIF
 	BCS CalculateNumPages1
 	RTS
 .CalculateNumPages2
-	TYA
+	LDY #1
 	RTS
 
 

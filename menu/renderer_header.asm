@@ -100,7 +100,7 @@ ENDIF
 	StartRow         = ZeroBase + $02
 
 	; (Immutable) The Address to store the found rows, so that the basic program can access them
-	RowRet           = ZeroBase + $04
+	; RowRet           = ZeroBase + $04
 
 	; (Immutable) The annotation to show: 0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count
 	Annotation       = ZeroBase + $06
