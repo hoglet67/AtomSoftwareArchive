@@ -141,7 +141,7 @@ IF properAnnotationCounts
 ENDIF
 
 .LabelA1
-	; Calculate LinesPerPage and StartLine from FilterCount
+	; Calculate LinesPerPage and StartLine from FilterType
 	JSR CalculateTextWindow
 
 	; Render the header, including the filter list
@@ -939,7 +939,7 @@ ENDIF
 	JSR ScreenStringX
 
 	; Test if there is an active filter
-	LDA FilterCount
+	LDA FilterType
 	BEQ done
 
 	; Display the set of active filters

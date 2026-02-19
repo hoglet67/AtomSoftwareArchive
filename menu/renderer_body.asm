@@ -1,7 +1,7 @@
 .ClearFilters
 {
 	LDA #0
-	STA FilterCount
+	STA FilterType
 	LDY #CollectionsByteOffset
 .loop
 	STA FacetMasks, Y
@@ -15,9 +15,6 @@
 ; A = Filter Value
 .AddFilter
 {
-	; TODO: this isn't great
-	INC FilterCount
-
 	; Shift the value to the right bit position
 	LDX FacetBitOffsetTable, Y
 .shift_loop
@@ -46,7 +43,15 @@
 	ORA FacetMasks, X
 	STA FacetMasks, X
 
+	; Maintain the bit-per-filter FilterType map for expendiency
+	LDA FilterType
+	ORA mask - 1, Y
+	STA FilterType
 	RTS
+
+.mask
+	EQUB &01, &02, &04, &08
+	EQUB &10, &20, &40, &80
 }
 
 .ListFilters
@@ -73,7 +78,7 @@
 ; Facet Value read from (Title)
 .WriteFacetToScreen
 {
-	JSR GetAnnotationTable	; Preserves X
+ 	JSR GetAnnotationTable	; Preserves X
 
 	LDY PadTable, X
 	JSR YSpaces		; preserves X
@@ -110,9 +115,11 @@
 {
 	LDA #' '
 .loop
-	JSR WriteToScreen	; preserves A, X, Y
 	DEY
+	BMI done
+	JSR WriteToScreen	; preserves A, X, Y
 	BNE loop
+.done
 	RTS
 }
 
@@ -126,8 +133,15 @@
 
 .CalculateTextWindow
 {
-	CLC
-	LDA FilterCount
+	LDA FilterType
+	LDX #$FF
+.loop1
+	INX
+.loop2
+	ASL A
+	BCS loop1
+   	BNE loop2
+	TXA
 	BNE notzero
 	SEC
 .notzero
@@ -393,7 +407,7 @@ ENDIF
 
 {
 .FilterCompare
-	LDA FilterCount
+	LDA FilterType
 	BEQ FilterMatch
 	LDY #0
 .FilterCompareLoop
@@ -1027,7 +1041,6 @@ ENDIF
 	TAY
 	INY
 	INY
-	; CLC		; pretty sure this is not needed, as annotation is small
 	LDA (MenuTablePtr),Y
 	STA AnnotationTable
 	INY

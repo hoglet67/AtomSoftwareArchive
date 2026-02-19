@@ -105,8 +105,8 @@ ENDIF
 	; (Immutable) The annotation to show: 0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count
 	Annotation       = ZeroBase + $06
 
-	; No longer used; it's been combined with FilterType
-	FilterCount      = ZeroBase + $07
+	; Filter type is a bit mask, one bit per filter (0 = Publisher, ....)
+	FilterType       = ZeroBase + $07
 
 	; Start Line (was fixed at 2, now depends on number of filters)
 	StartLine        = ZeroBase + $08
