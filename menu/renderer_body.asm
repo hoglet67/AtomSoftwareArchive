@@ -169,9 +169,8 @@
 .notzero
 	ADC #1
 	STA StartLine
-	LDA #15
-	SEC			; TODO - could get rid of this
-	SBC StartLine
+	LDA #16
+	SBC StartLine		; C=1
 	STA LinesPerPage
 	RTS
 }
@@ -582,8 +581,7 @@ ENDIF
 	JSR GetAnnotationString
 
 .LengthOfAnnotation
-	LDY #0	; TODO: probably a bug here for the short publisher
-
+	LDY #0
 .LengthOfAnnotationLoop
 	LDA (TmpPtr),Y
 	BMI WriteLetter
