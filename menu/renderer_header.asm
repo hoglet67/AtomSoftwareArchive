@@ -88,7 +88,6 @@ ENDIF
 	Space           = $20
 	Dot             = $2e
 	CharsPerLine    = 32
-	StartLine       =  2
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Zero Page Locations
@@ -106,12 +105,11 @@ ENDIF
 	; (Immutable) The annotation to show: 0 = Short Publisher, 1 = Publisher, 2 = Genre, 3 = Collection, 255 = Count
 	Annotation       = ZeroBase + $06
 
-	; (Immutable) The filter key: 1 = Genre, 2 = Publisher, 3 = Collection
 	; No longer used; it's been combined with FilterType
-	FilterType       = ZeroBase + $07
+	FilterCount      = ZeroBase + $07
 
-	; (Immutable) The filter value
-	FilterVal        = ZeroBase + $08
+	; Start Line (was fixed at 2, now depends on number of filters)
+	StartLine        = ZeroBase + $08
 
 	; Display mode value
 	; Bits 0..3 : 0 = Enable search filtering, 1.... disabl

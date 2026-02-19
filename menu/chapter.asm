@@ -119,9 +119,6 @@ ENDIF
 	INY
 	STY Page
 
-	LDY #13
-	STY LinesPerPage
-
 IF properAnnotationCounts
 	; Update the annotation to point to this facet
 	LDY PageState
@@ -144,10 +141,11 @@ IF properAnnotationCounts
 ENDIF
 
 .LabelA1
-	; // Turn off the cursor and refresh the screen
-	; 130a?#E1=0;GOS.x
-	; ?#E1=0 Not needed as we do our own screen output driver
-	JSR LabelX
+	; Calculate LinesPerPage and StartLine from FilterCount
+	JSR CalculateTextWindow
+
+	; Render the header, including the filter list
+	JSR RenderHeader
 
 	JSR ClearSearchLine
 
@@ -654,7 +652,7 @@ ENDIF
 {
 	LDA Item
 	ASL A
-	ADC #2
+	ADC #2	; Item starts at 0, row return buffer starts at 1
 	TAY
 	LDA #<(RowReturnBuf)
 	STA Title
@@ -796,19 +794,6 @@ IF (info_option = 1)
 	EQUS "NONE", -1
 }
 
-.PrintSpace_then_PadToEOL
-{
-.loop
-	LDA #' '
-	JSR WriteToScreen
-
-.*PadToEOL
-	LDA Screen
-	AND #&1F
-	BNE loop
-	RTS
-}
-
 ENDIF
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to show the help
@@ -834,9 +819,10 @@ ENDIF
 
 .LabelI
 	;900i?Q=Y+2;LINK(B+6);R.
-	LDY Item
-	INY
-	INY
+	LDA Item
+	CLC
+	ADC StartLine
+	TAY
 	JMP HighlightRowY
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -885,48 +871,33 @@ ENDIF
 	; 1050 Z=Z+2
 	; 1060 Y=-2;GOS.i;Y=0;P=1;R.
 
-.LabelX
-
-	;1000xP.$30'"                                "$30
-	LDA #32
-	LDY #64
-.LabelX1
+.RenderHeader
+{
+	; Clear the top half of the screen
+	LDY #0
+	LDA #' '
+.loop
 	STA ScreenStart,Y
-	DEY
-	BNE LabelX1
+	INY
+	BNE loop
 
+	; Setup the screen pointer to top left
 	LDA #<ScreenStart
 	STA Screen
 	LDA #>ScreenStart
 	STA Screen + 1
 
+	; Title page or Filter page?
 	LDA PageState
-	BNE LabelX2
-	; F is zero
-	;1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
-	LDA #<LabelXString1
-	STA TmpPtr
-	LDA #>LabelXString1
-	STA TmpPtr + 1
+	BEQ title_page
 
-	LDA SortType
-	PHA
-	LDA SortTablePtr
-	STA Sort
-	LDA SortTablePtr + 1
-	STA Sort + 1
+.filter_page
+	; Filter page, print FILTER BY
+	LDX #9
+	JSR ScreenStringX
 
-	BNE LabelX3
-
-.LabelX2
-	; F is not zero
-	;1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2 + 2)&#FFFF
-	LDA #<LabelXString2
-	STA TmpPtr
-	LDA #>LabelXString2
-	STA TmpPtr + 1
+	; Set Sort to the start of the pointer list in the secondary table
 	LDA PageState
-	PHA
 	ASL A
 	ADC #2
 	ADC MenuTablePtr
@@ -934,87 +905,69 @@ ENDIF
 	LDA MenuTablePtr + 1
 	ADC #0
 	STA Sort + 1
-
 	LDX #Sort
 	JSR Dereference
 
-.LabelX3
+	; Prepare for printing the filter facet name
+	LDX PageState
+	BNE facet	; branch always
 
-	;1030 P." BY ";GOS.y;P."  PAGE   /  "
-	JSR ScreenString
-	PLA
-	JSR LabelY
-	LDA #<LabelXString3
-	STA TmpPtr
-	LDA #>LabelXString3
-	STA TmpPtr + 1
-	JSR ScreenString
+.title_page
+	; Title page, print SORTED BY
+	LDX #10
+	JSR ScreenStringX
 
-	;1040 IF G>0 I=G;P."  ";GOS.z;P."="$(E+4)'
-	LDA PageState		; Only show FILTER= in title page state
-	BNE LabelX4
-	LDA FilterType		; Only show FILTER= when there is an active filter
-	BEQ LabelX4
-	LDA #' '
-	JSR WriteToScreen
-	JSR WriteToScreen
-	LDA FilterType
-	JSR LabelZ
-	LDA #'='
-	JSR WriteToScreen
-	LDA FilterString
-	STA TmpPtr
-	LDA FilterString + 1
-	STA TmpPtr + 1
-	JSR ScreenString
+	; Set Sort to the start of the pointer list in the sort table
+	LDA SortTablePtr
+	STA Sort
+	LDA SortTablePtr + 1
+	STA Sort + 1
 
-.LabelX4
+	; Prepare for printing the sort facet name
+	LDX SortType
+
+.facet
+	; Print the facet name
+	JSR ScreenStringX
+
+	; Pad with spaces
+	LDY PadTable, X
+	JSR YSpaces
+
+	; Print PAGE  OF
+	LDX #11
+	JSR ScreenStringX
+
+	; Test if there is an active filter
+	LDA FilterCount
+	BEQ done
+
+	; Display the set of active filters
+	JSR ListFilters
+
+.done
 	LDY #0
-	;; Fall through to
+	;; Fall through to highlight the top trop
+}
 
 .HighlightRowY
 {
-	LDA #<(ScreenStart)
-	STA Screen
-	LDA #>(ScreenStart)
-	STA Screen+1
-	TYA
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	BCC HighlightRow1
-	INC Screen+1
-.HighlightRow1
-	CLC
-	ADC Screen
-	STA Screen
-
+	JSR ScreenLineY
 	LDY #2
-.HighlightRow2
+.loop1
 	JSR WaitUntilVSync
 	DEY
-	BNE HighlightRow2
+	BNE loop1
 
 	LDY #$1F
-.HighlightRow3
+.loop2
 	LDA (Screen),Y
 	EOR #$80
 	STA (Screen),Y
 	DEY
-	BPL HighlightRow3
+	BPL loop2
 	RTS
 }
-
-.LabelXString1
-	EQUS "SORTED BY ", 0
-
-.LabelXString2
-	EQUS "FILTER BY ", 0
-
-.LabelXString3
-	EQUS "  PAGE   /  ", 0
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to print the filter name padded with spaces to 10 chars
@@ -1131,21 +1084,6 @@ ENDIF
 	LDX #0
 	LDA (TmpPtr,X)
 	CMP #' '
-	RTS
-
-
-
-
-.ScreenString
-	LDY #0
-.ScreenString1
-	LDA (TmpPtr),Y
-	BMI ScreenString2
-	BEQ ScreenString2
-	JSR WriteToScreen
-	INY
-	BNE ScreenString1
-.ScreenString2
 	RTS
 
 

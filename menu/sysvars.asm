@@ -26,7 +26,7 @@ gosdc =? 0
 
 	CountString     = OscliBuffer
 
-   Return          = $0d
+	Return          = $0d
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Zero page

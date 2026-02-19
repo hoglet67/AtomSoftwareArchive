@@ -1,8 +1,7 @@
 .ClearFilters
 {
 	LDA #0
-	STA FilterType
-	STA FilterVal
+	STA FilterCount
 	LDY #CollectionsByteOffset
 .loop
 	STA FacetMasks, Y
@@ -16,11 +15,8 @@
 ; A = Filter Value
 .AddFilter
 {
-	; FilterVal and FilterType are just used for display purposes
-	; as it's hard (but not impossible) to invert the data in
-	; in FacetMasks/FacetValues
-	STA FilterVal   ; Now just used for display purposes
-	STY FilterType	; Now just used for display purposes
+	; TODO: this isn't great
+	INC FilterCount
 
 	; Shift the value to the right bit position
 	LDX FacetBitOffsetTable, Y
@@ -52,6 +48,210 @@
 
 	RTS
 }
+
+.ListFilters
+{
+	LDA #<FacetValues
+	STA Title
+	LDA #>FacetValues
+	STA Title + 1
+	LDX #1
+.loop
+	LDY FacetByteOffsetTable, X
+	LDA FacetMaskTable, X
+	AND FacetMasks, Y
+	BEQ next
+	JSR WriteFacetToScreen	; preserves X
+.next
+	INX
+	CPX #CollectionsFilterNum + 1
+	BNE loop
+	RTS
+}
+
+; X = facet number
+; Facet Value read from (Title)
+.WriteFacetToScreen
+{
+	JSR GetAnnotationTable	; Preserves X
+
+	LDY PadTable, X
+	JSR YSpaces		; preserves X
+
+	JSR ScreenStringX	; preserves X
+
+	LDA #'='
+	JSR WriteToScreen	; preserves A, X, Y
+
+	TXA
+	TAY
+	JSR ExtractTableValue   ; Preserves X, result in A
+
+	JSR GetAnnotationString ; Preserves X, result in TmpPtr
+
+	JSR ScreenString
+	;; Fall through to PadToEOL
+}
+
+.PadToEOL
+{
+.loop
+	LDA Screen
+	AND #&1F
+	BEQ done
+	LDA #' '
+	JSR WriteToScreen
+	BNE loop
+.done
+	RTS
+}
+
+.YSpaces
+{
+	LDA #' '
+.loop
+	JSR WriteToScreen	; preserves A, X, Y
+	DEY
+	BNE loop
+	RTS
+}
+
+; Filter  Start  Lines
+; Count	  Line	 Per Page
+; 0	  2	 13
+; 1	  2	 13
+; 2	  3	 12
+; 3	  4	 11
+; ...
+
+.CalculateTextWindow
+{
+	CLC
+	LDA FilterCount
+	BNE notzero
+	SEC
+.notzero
+	ADC #1
+	STA StartLine
+	LDA #15
+	SEC			; TODO - could get rid of this
+	SBC StartLine
+	STA LinesPerPage
+	RTS
+}
+
+.ScreenLineY
+{
+	LDA #<(ScreenStart)
+	STA Screen
+	LDA #>(ScreenStart)
+	STA Screen+1
+	TYA
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	BCC nocarry
+	INC Screen+1
+.nocarry
+	CLC
+	ADC Screen
+	STA Screen
+	RTS
+}
+
+.ScreenStringX
+{
+	LDA StringTableLSB, X
+	STA TmpPtr
+	LDA StringTableMSB, X
+	STA TmpPtr + 1
+	; fall through to
+}
+
+.ScreenString
+{
+	LDY #0
+.loop
+	LDA (TmpPtr),Y
+	BMI done
+	BEQ done
+	JSR WriteToScreen
+	INY
+	BNE loop
+.done
+	RTS
+}
+
+.StringTableLSB
+	EQUB <String0
+	EQUB <String1
+	EQUB <String2
+	EQUB <String3
+	EQUB <String4
+	EQUB <String5
+	EQUB <String6
+	EQUB <String7
+	EQUB <String8
+	EQUB <String9
+	EQUB <String10
+	EQUB <String11
+
+.StringTableMSB
+	EQUB >String0
+	EQUB >String1
+	EQUB >String2
+	EQUB >String3
+	EQUB >String4
+	EQUB >String5
+	EQUB >String6
+	EQUB >String7
+	EQUB >String8
+	EQUB >String9
+	EQUB >String10
+	EQUB >String11
+
+.String0
+	EQUS "TITLE", 0
+
+.String1
+	EQUS "PUBLISHER", 0
+
+.String2
+	EQUS "GENRE", 0
+
+.String3
+	EQUS "CHAPTER", 0
+
+.String4
+	EQUS "RAM NEEDED", 0
+
+.String5
+	EQUS "ROM NEEDED", 0
+
+.String6
+	EQUS "UPDATED", 0
+
+.String7
+	EQUS "JOYSTICK", 0
+
+.String8
+	EQUS "COLLECTION", 0
+
+.String9
+	EQUS "FILTER BY ", 0
+
+.String10
+	EQUS "SORTED BY ", 0
+
+.String11
+	EQUS "  PAGE   /  ", 0
+
+; Padding for the first 9 strings
+
+.PadTable
+	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
 
 .FacetMasks
 FOR i, 0, CollectionsByteOffset - 1, 1
@@ -91,27 +291,8 @@ ENDIF
 	LDX Annotation
 	JSR GetAnnotationTable
 
-;; Calculate the start address by working up from the bottom
-;; TODO: When filtertype becomes filtercount then this will go
-	LDA #(ScreenStart >> 13)
-	STA Screen + 1
-	LDA #15
-	SEC
-	SBC LinesPerPage
-	LDY #5
-.ScreenStartLoop
-	ASL A
-	ROL Screen + 1
-	DEY
-	BNE ScreenStartLoop
-	STA Screen
-
-IF 0
-	LDA #<(ScreenStart + StartLine * CharsPerLine)
-	STA Screen
-	LDA #>(ScreenStart + StartLine * CharsPerLine)
-	STA Screen + 1
-ENDIF
+	LDY StartLine
+	JSR ScreenLineY
 
 	LDA #0
 	STA RowCount
@@ -152,6 +333,9 @@ ENDIF
 .IncSort
 	; Test if we are rendering one of the filter pages
 	BIT DisplayMode
+IF 1
+	BVS MatchingRow
+ELSE
 	BVC FindTitle
 
 	; Yes, so the match now becomes a non-zero facet count
@@ -164,6 +348,7 @@ ENDIF
 
 	; The facet count is zero, so move to the next row
 	BEQ NextRow ; Branch always
+ENDIF
 
 .FindTitle
 	; Find the offset to the title, by skipping over all the collections
@@ -208,7 +393,7 @@ ENDIF
 
 {
 .FilterCompare
-	LDA FilterType
+	LDA FilterCount
 	BEQ FilterMatch
 	LDY #0
 .FilterCompareLoop
