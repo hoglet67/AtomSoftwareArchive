@@ -107,7 +107,9 @@
 
 	JSR ScreenStringX	; preserves X
 
-	LDA #'='
+	LDA #':'
+	JSR WriteToScreen	; preserves A, X, Y
+	LDA #' '
 	JSR WriteToScreen	; preserves A, X, Y
 
 	TXA

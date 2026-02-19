@@ -658,91 +658,33 @@ IF (info_option = 1)
 	JSR OscliString
 	EQUS "LOAD INFO", Return
 
+	; Metata starts on line 4
 	LDA #<(ScreenStart + 4 * CharsPerLine)
 	STA Screen
 	LDA #>(ScreenStart + 4 * CharsPerLine)
 	STA Screen + 1
 
-	LDA #CollectionsByteOffset
-	STA TitleNameOffset
-
-	LDX #&00
+	LDX #1
 .loop1
+	JSR WriteFacetToScreen
 	INX
-	JSR GetAnnotationTable
+	CPX #CollectionsFilterNum
+	BNE loop1
 
 .loop2
-	; Indent to right-justify the facet names
-	JSR LabelY1
-
-	; Print the the facet name
-	; On entry: A = facet number (1..8)
-	; Preserves: nothing!
-	TXA
-	PHA
-	JSR LabelZ
-	LDA #':'
-	JSR WriteToScreen
-	LDA #' '
-	JSR WriteToScreen
-	PLA
-	TAX
-
-	CPX #CollectionsFilterNum
-	BNE NotCollection
-
-	; Setup a default value string of NONE for no collections
-	LDA #<NoneString
-	STA TmpPtr
-	LDA #>NoneString
-	STA TmpPtr + 1
-
-	LDY TitleNameOffset
-	LDA (Title), Y
-	BPL DefaultValue
-	AND #&7F
-	BPL GetRecord	; branch always
-
-.NotCollection
-	; Extract the facet value from the title table
-	; On entry: Y = facet number (1..8)
-	; On exit:  A = facet value
-	; Preseves X
-	TAY
-	JSR ExtractTableValue
-
-.GetRecord
-	; Get the address of the facet string
-	; On entry: X = facet number (1..8), A = facet valye
-	; On exit:  (AnnotationString) points to the start of the record
-	; Preseves X
-	JSR GetAnnotationString
-
-	; Print the facet string
-	; On Entry: (tmpPtr) points to the string
-	; Preseves X
-.DefaultValue
-	JSR ScreenString
-
-	; Pad to end of line
-	JSR PadToEOL
-
-	; Move to the next facet, but don't go beyond
-	CPX #CollectionsFilterNum
-	BCC loop1
-	; Check for the loop terminating condition
-	LDY TitleNameOffset
+	LDY #CollectionsByteOffset
 	LDA (Title), Y
 	BPL PrintTitle
-	INY
-	STY TitleNameOffset
-	LDA (Title), Y
-	BMI loop2
+	JSR WriteFacetToScreen
+	INC Title
+	BNE loop2
+	INC Title + 1
+	BNE loop2
 
 ; Finally go back and print the title (centred)
 .PrintTitle
 	LDX #&20
-	LDY TitleNameOffset
+	LDY #CollectionsByteOffset
 .TitleLoop1
 	LDA (Title),Y
 	BMI TitleDone1
@@ -757,7 +699,7 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + 2 * CharsPerLine)
 	STA Screen + 1
 
-	LDY TitleNameOffset
+	LDY #CollectionsByteOffset
 .TitleLoop2
 	LDA (Title),Y
 	BMI TitleDone
@@ -950,100 +892,6 @@ ENDIF
 	BPL loop2
 	RTS
 }
-
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to print the filter name padded with spaces to 10 chars
-	; I is passed in as the accumulator
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-.LabelY
-
-	;1200yGOS.z
-	PHA
-	JSR LabelZ
-	PLA
-	TAX
-
-	;1220 IF I=1 P." "
-	;1230 IF I=2 P."     "
-	;1240 R.
-.LabelY1
-	LDY LabelYNumSpaces,X
-	LDA #' '
-.LabelYLoop
-	DEY
-	BMI LabelYExit
-	JSR WriteToScreen
-	BNE LabelYLoop
-
-.LabelYExit
-	RTS
-
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to print the filter name not padded at all
-	; I is passed in as the accumulator
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-.LabelZ
-
-	;1500zIF I=0 P."TITLE     "
-	;1510 IF I=1 P."PUBLISHER"
-	;1520 IF I=2 P."GENRE"
-	;1530 IF I=3 P."COLLECTION"
-	;1540 R.
-
-	ASL A
-	ADC #<LabelZJumpTable
-	STA TmpPtr
-	LDA #0
-	ADC #>LabelZJumpTable
-	STA TmpPtr + 1
-	LDX #TmpPtr
-	JSR Dereference
-	JMP ScreenString
-
-.LabelZJumpTable
-	EQUW LabelZ0
-	EQUW LabelZ1
-	EQUW LabelZ2
-	EQUW LabelZ3
-	EQUW LabelZ4
-	EQUW LabelZ5
-	EQUW LabelZ6
-	EQUW LabelZ7
-	EQUW LabelZ8
-
-
-.LabelYNumSpaces
-	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
-
-
-.LabelZ0
-	EQUS "TITLE", 0
-
-.LabelZ1
-	EQUS "PUBLISHER", 0
-
-.LabelZ2
-	EQUS "GENRE", 0
-
-.LabelZ3
-	EQUS "CHAPTER", 0
-
-.LabelZ4
-	EQUS "RAM NEEDED", 0
-
-.LabelZ5
-	EQUS "ROM NEEDED", 0
-
-.LabelZ6
-	EQUS "UPDATED", 0
-
-.LabelZ7
-	EQUS "JOYSTICK", 0
-
-.LabelZ8
-	EQUS "COLLECTION", 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Machine Code Subroutines
