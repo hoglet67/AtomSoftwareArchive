@@ -119,6 +119,9 @@ ENDIF
 	INY
 	STY Page
 
+	LDY #13
+	STY LinesPerPage
+
 IF properAnnotationCounts
 	; Update the annotation to point to this facet
 	LDY PageState
@@ -213,8 +216,9 @@ ENDIF
 	BEQ LabelD
 	DEC Page
 	JSR LabelI
-	LDA #(LinesPerPage - 1)
-	STA Item
+	LDX LinesPerPage
+	DEX
+	STX Item
 	BNE LabelB		; Branch always
 
 .LabelD
@@ -237,11 +241,11 @@ ENDIF
 
 .LabelD2
 	; 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
-	LDA Item
-	CMP #(LinesPerPage - 1)
+	LDX Item
+	INX
+	CPX LinesPerPage
 	BEQ LabelD1
-	CLC
-	ADC #1
+	TXA
 	JSR TestRowActive
 	BEQ LabelD1
 	JSR LabelI
@@ -484,7 +488,7 @@ ENDIF
 	DEY
 	BEQ LabelF2
 	CLC
-	ADC #LinesPerPage
+	ADC LinesPerPage
 	BCC LabelF1
 .LabelF2
 	LDY PageState
@@ -676,13 +680,13 @@ IF (info_option = 1)
 	JSR OscliString
 	EQUS "LOAD INFO", Return
 
-	LDA #<(ScreenStart + (StartLine + 2) * CharsPerLine)
+	LDA #<(ScreenStart + 4 * CharsPerLine)
 	STA Screen
-	LDA #>(ScreenStart + (StartLine + 2) * CharsPerLine)
+	LDA #>(ScreenStart + 4 * CharsPerLine)
 	STA Screen + 1
 
 	LDA #CollectionsByteOffset
-	STA TmpOffset
+	STA TitleNameOffset
 
 	LDX #&00
 .loop1
@@ -715,7 +719,7 @@ IF (info_option = 1)
 	LDA #>NoneString
 	STA TmpPtr + 1
 
-	LDY TmpOffset
+	LDY TitleNameOffset
 	LDA (Title), Y
 	BPL DefaultValue
 	AND #&7F
@@ -749,18 +753,18 @@ IF (info_option = 1)
 	CPX #CollectionsFilterNum
 	BCC loop1
 	; Check for the loop terminating condition
-	LDY TmpOffset
+	LDY TitleNameOffset
 	LDA (Title), Y
 	BPL PrintTitle
 	INY
-	STY TmpOffset
+	STY TitleNameOffset
 	LDA (Title), Y
 	BMI loop2
 
 ; Finally go back and print the title (centred)
 .PrintTitle
 	LDX #&20
-	LDY TmpOffset
+	LDY TitleNameOffset
 .TitleLoop1
 	LDA (Title),Y
 	BMI TitleDone1
@@ -770,12 +774,12 @@ IF (info_option = 1)
 .TitleDone1
 	TXA
 	LSR A
-	ORA #<(ScreenStart + StartLine * CharsPerLine)
+	ORA #<(ScreenStart + 2 * CharsPerLine)
 	STA Screen
-	LDA #>(ScreenStart + StartLine * CharsPerLine)
+	LDA #>(ScreenStart + 2 * CharsPerLine)
 	STA Screen + 1
 
-	LDY TmpOffset
+	LDY TitleNameOffset
 .TitleLoop2
 	LDA (Title),Y
 	BMI TitleDone
@@ -854,7 +858,7 @@ ENDIF
 	BEQ LabelJ3
 	CLC
 	LDA StartRow
-	ADC #LinesPerPage
+	ADC LinesPerPage
 	STA StartRow
 	BCC LabelJ2
 	INC StartRow + 1

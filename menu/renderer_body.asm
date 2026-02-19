@@ -91,10 +91,27 @@ ENDIF
 	LDX Annotation
 	JSR GetAnnotationTable
 
+;; Calculate the start address by working up from the bottom
+;; TODO: When filtertype becomes filtercount then this will go
+	LDA #(ScreenStart >> 13)
+	STA Screen + 1
+	LDA #15
+	SEC
+	SBC LinesPerPage
+	LDY #5
+.ScreenStartLoop
+	ASL A
+	ROL Screen + 1
+	DEY
+	BNE ScreenStartLoop
+	STA Screen
+
+IF 0
 	LDA #<(ScreenStart + StartLine * CharsPerLine)
 	STA Screen
 	LDA #>(ScreenStart + StartLine * CharsPerLine)
 	STA Screen + 1
+ENDIF
 
 	LDA #0
 	STA RowCount
@@ -249,7 +266,7 @@ ENDIF
 .FoundRow
 	; Have we displayed the requested number of rows
 	LDA RowCount
-	CMP #LinesPerPage
+	CMP LinesPerPage
 	BNE FoundRow1
 	JMP NextRow
 
@@ -277,7 +294,7 @@ ENDIF
 
 	; We have hit the end of the sort list
 	LDA RowCount
-	CMP #LinesPerPage
+	CMP LinesPerPage
 	BEQ UpdateTotalRows
 	LDX #CharsPerLine
 .WritePageEndOfList1
@@ -799,7 +816,7 @@ ENDIF
 	PHA
 	SEC
 	LDA BinBuffer
-	SBC #LinesPerPage
+	SBC LinesPerPage
 	STA BinBuffer
 	LDA BinBuffer+1
 	SBC #0

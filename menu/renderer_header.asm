@@ -89,7 +89,6 @@ ENDIF
 	Dot             = $2e
 	CharsPerLine    = 32
 	StartLine       =  2
-	LinesPerPage    = 13
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Zero Page Locations
@@ -132,11 +131,8 @@ ENDIF
 	; Store this in Zero Page as a slight optimization
 	SearchFirst      = ZeroBase + $0e
 
-	; The value used to return InKey
-	;Key              = ZeroBase + $0f
-
-	; A temporary offset into the title record, used by the info screen
-	TmpOffset        = ZeroBase + $0f
+	; The number of active lines per page to be displayed
+	LinesPerPage     = ZeroBase + $0f
 
 	; These are working values
 	Title            = ZeroBase + $10
