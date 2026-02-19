@@ -133,7 +133,7 @@ ENDIF
 	SearchFirst      = ZeroBase + $0e
 
 	; The value used to return InKey
-	Key              = ZeroBase + $0f
+	;Key              = ZeroBase + $0f
 
 	; A temporary offset into the title record, used by the info screen
 	TmpOffset        = ZeroBase + $0f

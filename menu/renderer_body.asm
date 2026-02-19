@@ -460,12 +460,13 @@ ENDIF
 	BNE Match1
 
 .Inkey
+{
 	JSR $FE71
-	BCC Inkey1
+	BCC done
 	LDY #$ff
-.Inkey1
-	STY Key
+.done
 	RTS
+}
 
 .FacetByteOffsetTable
 	EQUB PubByteOffset
