@@ -74,6 +74,28 @@
 	RTS
 }
 
+.FindFilterValue
+{
+	JSR GetAnnotationTable
+	LDY #&00
+.loop
+	LDA (AnnotationTable), Y
+	INY
+	CMP Title
+	BNE next
+	LDA (AnnotationTable), Y
+	CMP Title + 1
+	BNE next
+	TYA
+	LSR A
+	RTS
+.next
+	INY
+	BNE loop
+	SEC
+	RTS
+}
+
 ; X = facet number
 ; Facet Value read from (Title)
 .WriteFacetToScreen
@@ -347,9 +369,6 @@ ENDIF
 .IncSort
 	; Test if we are rendering one of the filter pages
 	BIT DisplayMode
-IF 1
-	BVS MatchingRow
-ELSE
 	BVC FindTitle
 
 	; Yes, so the match now becomes a non-zero facet count
@@ -362,7 +381,6 @@ ELSE
 
 	; The facet count is zero, so move to the next row
 	BEQ NextRow ; Branch always
-ENDIF
 
 .FindTitle
 	; Find the offset to the title, by skipping over all the collections

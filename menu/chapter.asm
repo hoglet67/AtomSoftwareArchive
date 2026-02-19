@@ -471,26 +471,14 @@ ENDIF
 	LDA PageState
 	BEQ BootProgram
 
-	CLC
-	LDA Title
-	ADC #FacetTitleOffset
-	STA FilterString
-	LDA Title + 1
-	ADC #0
-	STA FilterString + 1
+	; Search file the filter record address (Title) in the Secondary Table identified by X
+	; (Assumes an 7-bit value)
+	TAX
+	JSR FindFilterValue	; returns A = FilterValue
 
-	; Assume the filter item is an 8 bit value
-	LDA Item
-	LDY Page
-.LabelF1
-	DEY
-	BEQ LabelF2
-	CLC
-	ADC LinesPerPage
-	BCC LabelF1
-.LabelF2
+	; Add the filter
 	LDY PageState
-	JSR AddFilter	; Y = FilterType, A = FilterValue
+	JSR AddFilter		; Y = FilterType, A = FilterValue
 	JMP PageStateZero
 
 .BootProgram

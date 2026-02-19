@@ -40,7 +40,7 @@ IF (sddos2 = 1 OR sddos3 = 1)
 	NumPages     = $7d ; 1 byte
 	Item         = $7e ; 1 byte
 	SortType     = $7f ; 1 byte
-	FilterString = $8c ; 2 bytes
+	;FilterString = $8c ; 2 bytes
 	AutoRepeat   = $8e ; 2 bytes
 
 	ExecAddr     = $9e ; don't change this, it's what SDDOS uses
@@ -53,7 +53,7 @@ ELIF (econet = 1)
 	NumPages     = $7d ; 1 byte
 	Item         = $7e ; 1 byte
 	SortType     = $7f ; 1 byte
-	FilterString = $8c ; 2 bytes
+	;FilterString = $8c ; 2 bytes
 	AutoRepeat   = $8e ; 2 bytes
 
 	ExecAddr     = $d0 ; don't change this, it's what ECONET uses
@@ -66,7 +66,7 @@ ELIF (gosdc = 1)
 	NumPages     = $75 ; 1 byte
 	Item         = $76 ; 1 byte
 	SortType     = $77 ; 1 byte
-	FilterString = $78 ; 2 bytes
+	;FilterString = $78 ; 2 bytes
 	AutoRepeat   = $7a ; 2 bytes
 
 	ExecAddr     = $d2 ; don't change this, it's what GOSDC uses
@@ -79,7 +79,7 @@ ELSE
 	NumPages     = $75 ; 1 byte
 	Item         = $76 ; 1 byte
 	SortType     = $77 ; 1 byte
-	FilterString = $78 ; 2 bytes
+	;FilterString = $78 ; 2 bytes
 	AutoRepeat   = $7a ; 2 bytes
 
 	ExecAddr     = $cd ; don't change this, it's what AtoMMC uses
