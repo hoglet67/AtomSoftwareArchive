@@ -109,7 +109,7 @@ ENDIF
 
 	; (Immutable) The filter key: 1 = Genre, 2 = Publisher, 3 = Collection
 	; No longer used; it's been combined with FilterType
-	; Filter           = ZeroBase + $07
+	FilterType       = ZeroBase + $07
 
 	; (Immutable) The filter value
 	FilterVal        = ZeroBase + $08
