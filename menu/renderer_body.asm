@@ -85,7 +85,6 @@ NEXT
 IF properAnnotationCounts
 	BIT DisplayMode
 	BPL SkipClearCounts
-	LDX Annotation
 	JSR ClearAnnotationCounts
 .SkipClearCounts
 ENDIF
@@ -158,13 +157,8 @@ ENDIF
 	BMI FindTitleLoop
 	STY TitleNameOffset
 
-	; Bypass search/filter/update counts code if no search and no filter
-	LDA SearchFirst
-	ORA FilterType
-	BEQ MatchingRow
-
-.SearchCompare
 {
+.SearchCompare
 	LDA SearchFirst
 	BEQ SearchMatch
 	DEY
@@ -195,8 +189,8 @@ ENDIF
 ; match against This list is terminated by a non-negative value (the
 ; first char of the title name)
 
-.FilterCompare
 {
+.FilterCompare
 	LDA FilterType
 	BEQ FilterMatch
 	LDY #0
@@ -916,6 +910,7 @@ IF properAnnotationCounts
 ; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
 {
+	LDX Annotation
 	JSR GetAnnotationTable
 .loop
 	LDY #0
