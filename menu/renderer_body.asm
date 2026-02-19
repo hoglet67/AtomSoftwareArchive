@@ -1006,6 +1006,7 @@ ENDIF
 	; Returns the number of pages in BCD in A
 	; Returns the number of pages in Binary in Y
 .CalculateNumPages
+{
 	SEC
 	LDA RowReturnBuf
 	SBC #1
@@ -1013,10 +1014,11 @@ ENDIF
 	LDA RowReturnBuf + 1
 	SBC #0
 	STA BinBuffer+1
-	BCC CalculateNumPages2
+	BCC return_one_page
 
 	LDY #0
-.CalculateNumPages1
+	TYA
+.loop
 	INY
 	SED
 	CLC
@@ -1031,12 +1033,14 @@ ENDIF
 	SBC #0
 	STA BinBuffer+1
 	PLA
-	BCS CalculateNumPages1
-	RTS
-.CalculateNumPages2
-	LDY #1
+	BCS loop
 	RTS
 
+.return_one_page
+	LDY #1
+	TYA
+	RTS
+}
 
 ; Calculate a pointer to the requested annotation table, skipping the length field
 ; Get the address of the relevant secondary table for annotations
