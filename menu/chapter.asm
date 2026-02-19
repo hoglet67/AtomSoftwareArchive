@@ -127,12 +127,9 @@ IF properAnnotationCounts
 	PHA
 	STY Annotation
 	; Make sure the title table is used, not the facet table
-	CLC
 	LDA SortTablePtr
-	ADC #2
 	STA Sort
 	LDA SortTablePtr + 1
-	ADC #0
 	STA Sort + 1
 	; Recalculate Annotation counts the new filter screen
 	LDA #DMUpdateCounts
@@ -474,7 +471,7 @@ ENDIF
 
 	CLC
 	LDA Title
-	ADC #4
+	ADC #FacetTitleOffset
 	STA FilterString
 	LDA Title + 1
 	ADC #0
@@ -968,15 +965,6 @@ ENDIF
 	JSR ScreenString
 
 .LabelX4
-	;1050 Z=Z+2
-	CLC
-	LDA Sort
-	ADC #2
-	STA Sort
-	BCC LabelX5
-	INC Sort + 1
-
-.LabelX5
 	LDY #0
 	;; Fall through to
 

@@ -81,7 +81,7 @@ public abstract class SecondaryTable extends TableBase {
 
     @Override
     public int calculateSize(List<AtomTitle> titles) {
-          int calculatedSize = map.size() * 2 + 4;
+          int calculatedSize = map.size() * 2 + 2;
           for (Map.Entry<String, Integer> entry : map.entrySet()) {
               String key = entry.getKey();
               calculatedSize += key.length();
@@ -104,9 +104,8 @@ public abstract class SecondaryTable extends TableBase {
             System.out.println("address " + Integer.toHexString(absoluteAddress));
         }
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        absoluteAddress += map.size() * 2 + 4; // Skip over the pointers plus
-                                               // the length and terminator
-        writeShort(bos, map.size());
+        absoluteAddress += map.size() * 2 + 2; // Skip over the pointers plus
+                                               // the terminator
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             writeShort(bos, absoluteAddress);
             absoluteAddress += (titles != null ? 4 : 1) + entry.getKey().length();

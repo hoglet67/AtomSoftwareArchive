@@ -826,11 +826,9 @@ ENDIF
 	INY
 	; CLC		; pretty sure this is not needed, as annotation is small
 	LDA (MenuTablePtr),Y
-	ADC #2		; skip over the total number of entries
 	STA AnnotationTable
 	INY
 	LDA (MenuTablePtr),Y
-	ADC #0
 	STA AnnotationTable + 1
 	RTS
 }

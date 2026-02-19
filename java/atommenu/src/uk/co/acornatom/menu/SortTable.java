@@ -29,7 +29,6 @@ public class SortTable extends TableBase {
         Collections.sort(items, comparator);
         // Build the data for the table
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        writeShort(bos, items.size());
         for (AtomTitle item : items) {
             writeShort(bos, item.getAbsoluteAddress());
         }
@@ -42,7 +41,7 @@ public class SortTable extends TableBase {
 
     @Override
     public int calculateSize(List<AtomTitle> titles) {
-        // <NumTitles> <Pointer 0> ... <Pointer N-1> <0000>
-        return 2 + titles.size() * 2 + 2;
+        // <Pointer 0> ... <Pointer N-1> <0000>
+        return titles.size() * 2 + 2;
     }
 }
