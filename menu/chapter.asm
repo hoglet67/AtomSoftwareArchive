@@ -38,32 +38,28 @@ include "chaptervars.asm"
 .STARTOF
 
 .Menu
+{
+	; vvvvvvvv IMPORTANT: This code gets clobbered by the row return buffer
 
-	;; vvvvvvvv IMPORTANT: This code gets clobbered by the row return buffer
-
-	;100 *LOAD MNU/MENU1
 	JSR OscliString
 	EQUS "LOAD MENU1", Return
 
-	;110 D=!#CD&#FFFF
 	LDA ExecAddr
 	STA MenuTablePtr
 	LDA ExecAddr + 1
 	STA MenuTablePtr + 1
 
-	;115 *LOAD MNU/MENU2
 	JSR OscliString
 	EQUS "LOAD MENU2", Return
 
-	;; ^^^^^^^^ IMPORTANT code gets clobbered by the row return buffer
+	; ^^^^^^^^ IMPORTANT code gets clobbered by the row return buffer
 
-	; // Initialize the variables
-	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
+	; Initialize the variables
 	LDY #0
-	STY SortType    ; S=0
-	STY PageState   ; F=0
+	STY SortType
+	STY PageState
 	INY
-	STY Annotation  ; A=1
+	STY Annotation
 
 	; Load the default sort table (sort by title)
 	JSR LoadSortTable
@@ -79,9 +75,9 @@ include "chaptervars.asm"
 ; Main command loop
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.LabelA
+.main_loop_redo_counts
 
-	;1060 Y=-2;GOS.i;Y=0;P=1;R.
+	; Reset the page/item back to the start
 	LDY #&00
 	STY Item
 	INY
@@ -89,7 +85,7 @@ include "chaptervars.asm"
 
 	; Update the annotation to point to this facet
 	LDY PageState
-	BEQ LabelA1
+	BEQ main_loop_redo_sizes
 	LDA Annotation
 	PHA
 	STY Annotation
@@ -106,135 +102,135 @@ include "chaptervars.asm"
 	PLA
 	STA Annotation
 
-.LabelA1
+.main_loop_redo_sizes
 	; Calculate LinesPerPage and StartLine from FilterType
 	JSR CalculateTextWindow
 
 	; Render the header, including the filter list
 	JSR RenderHeader
 
+	; Clear the bottom line
 	JSR ClearSearchLine
 
 	LDA PageState		; Only show SEARCH= in title page state
-	BNE LabelB
+	BNE main_loop_render
 	LDA SearchBuffer	; Only show SEARCH= when there is an active search
-	BEQ LabelB
+	BEQ main_loop_render
+
+	; Render the currently active search
 	JSR ShowCurrentSearchNoCursor
 
-.LabelB
-	; // Refresh rows, page number and total number of pages
-	; 200bGOS.j
+.main_loop_render
+	; Prepare for rendering, setup verious ZP variables
 	JSR SetupRenderingVars
 
-	; 260 LINK B;M=(!R&#FFFF+L-1)/L
+	; Determine the display mode based on the current page state
 	LDA PageState
-	BEQ LabelB1
+	BEQ set_display_mode
 	LDA #DMDisableSearchFilter
-.LabelB1
+.set_display_mode
 	STA DisplayMode
+
+	; Render the page (show upto 13 rows, applying current search and filter set)
 	JSR RenderPage
+
+	; Calculate the number of pages (from Total Rows)
 	JSR CalculateNumPages
 	STY NumPages
 
-	; 270 ?#801B=P/10+176;?#801C=P%10+176
-	; 280 ?#801E=M/10+176;?#801F=M%10+176
-	JSR UpdateTotalPages
+	; Update the PAGE M and N
+	JSR UpdateTotalPages	; TODO This also call CalculateNumPages which is wasteful
 
-	; 290 GOS.i
+	; Highlight the currently active item
 	JSR HighlightItem
 
-.ReleaseKey
+.main_loop_wait_for_key_release
 	JSR HandleAutoRepeat
 
-.LabelC
-	; // Check for original Atom
+.main_loop_scan_keyboard
+	; Check for original Atom
 	LDA &bd00
 	CMP #&bf
-	BNE HandleUpKeyOriginal
+	BNE test_for_up_key_original
 
-	; // Shift Key is pressed emulator (scroll up)
-	; 300cIF ?#B001&128>0 G.d
+	; Test if shift key is pressed (emulator, scroll up)
 	BIT &b001
-	BMI LabelD
-	BPL LabelC2
+	BMI test_for_down_key
+	BPL handle_up_key
 
-.HandleUpKeyOriginal
-	; // Ctrl Key is pressed Original Atom (scroll up)
-	; 300cIF ?#B001&64>0 G.d
+.test_for_up_key_original
+	; Test if ctrl key is pressed (original atom, scroll up)
 	BIT &b001
-	BVS LabelD
+	BVS test_for_down_key
 
-.LabelC2
-	; 310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.c
+.handle_up_key
+	; Handle the up key, decrementing item
 	LDA Item
-	BEQ LabelC1
+	BEQ handle_up_to_previous_page
 	JSR HighlightItem
 	DEC Item
 	JSR HighlightItem
-	BMI ReleaseKey		; Branch always
+	BMI main_loop_wait_for_key_release	; Branch always
 
-.LabelC1
-	; 320 IF P>1 P=P-1;GOS.i;Y=L-1;G.b
+.handle_up_to_previous_page
+	; Handle the up key when at the top of a page
 	LDA Page
 	CMP #1
-	BEQ LabelD
+	BEQ main_loop_wait_for_key_release
 	DEC Page
 	JSR HighlightItem
 	LDX LinesPerPage
 	DEX
 	STX Item
-	BNE LabelB		; Branch always
+	BNE main_loop_render			; Branch always
 
-.LabelD
-	; // Check for original Atom
+.test_for_down_key
+	; Check for original Atom
 	LDA &bd00
 	CMP #&bf
-	BNE HandleDownKeyOriginal
+	BNE test_for_down_key_original
 
-	; // Control Key is pressed emulator (scroll down)
-	; 400dIF?#B001&64>0 G.e
+	; Test if ctrl key is pressed (emulator, scroll down)
 	BIT &b001
-	BVS CallInkey
-	BVC LabelD2		; Branch always
+	BVC handle_down_key
+	BVS main_loop_call_inkey		; Branch always
 
-.HandleDownKeyOriginal
-	; // Shift Key is pressed Original Atom (scroll down)
-	; 300cIF ?#B001&128>0 G.d
+.test_for_down_key_original
+	; Test if shift key is pressed (original atom, scroll down)
 	BIT &b001
-	BMI CallInkey
+	BMI main_loop_call_inkey
 
-.LabelD2
-	; 410 IF Y<>L-1 AND ?(#8060+Y*32)<>32 GOS.i;Y=Y+1;GOS.i;G.c
+.handle_down_key
+	; Handle down key, incrementing item
 	LDX Item
 	INX
 	CPX LinesPerPage
-	BEQ LabelD1
+	BEQ handle_down_to_next_page
 	JSR TestRowXActive
-	BEQ LabelD1
+	BEQ handle_down_to_next_page
 	JSR HighlightItem
 	INC Item
 	JSR HighlightItem
-	JMP ReleaseKey
+	JMP main_loop_wait_for_key_release
 
-.LabelD1
-	; 420 IF P<M P=P+1;GOS.i;Y=0;G.b
+.handle_down_to_next_page
+	; Handle down key when at the bottom of a page
 	LDA Page
 	CMP NumPages
-	BEQ CallInkey
+	BEQ main_loop_wait_for_key_release
 	INC Page
-
-.SetItemToZero
+.set_item_to_zero
 	JSR HighlightItem
 	LDA #0
 	STA Item
-	JMP LabelB		; Branch always
+	JMP main_loop_render			; Branch always
 
-.CallInkey
+.main_loop_call_inkey
 	; Call InKey to scan the keyboard
 	JSR Inkey
 
 	CPY #&FF
-	BEQ LabelC		; Branch of no key pressed
+	BEQ main_loop_scan_keyboard		; Branch of no key pressed
 
 	CPY #&3B		; Escape
 	BNE TestForFilter
@@ -257,7 +253,7 @@ ENDIF
 	; never returns
 
 .TestForFilter
-	; // 0 (16) = title; 1..N = filter
+	; 0 (16) = title; 1..N = filter
 	CPY #16
 	BCC TestForPrevSort
 	CPY #16+NumFacets+1
@@ -269,12 +265,12 @@ ENDIF
 	BNE ChangeFilter
 	LDY PageState
 	JSR ClearFilterY	; Y=0 clears all filters
-	JMP LabelA
+	JMP main_loop_redo_counts
 
 .ChangeFilter
 	; Filter 1..8
 	STA PageState
-	JMP LabelA
+	JMP main_loop_redo_counts
 
 .TestForPrevSort
 	LDX SortType
@@ -308,14 +304,14 @@ ENDIF
 	; Test if we are already in Page State 0 (to avoid flicki
 	LDA PageState
 	BNE change
-	JMP LabelB
+	JMP main_loop_render
 .change
 	LDA #0
 	STA PageState
-	JMP LabelA
+	JMP main_loop_redo_counts
 }
 .TestForPrevPage
-	; // < key pressed (previous page)
+	; < key pressed (previous page)
 	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
 	CPY #28
 	BNE TestForNextPage
@@ -326,10 +322,10 @@ ENDIF
 	BNE PrevPageNoWrap
  	STA Page
 .PrevPageNoWrap
- 	JMP SetItemToZero
+ 	JMP set_item_to_zero
 
 .TestForNextPage
-	; // > key pressed (next page)
+	; > key pressed (next page)
 	; 610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
 	CPY #30
 	BNE TestForPrevTag
@@ -343,7 +339,7 @@ ENDIF
 	LDA #1
 	STA Page
 .NextPageNoWrap
-	JMP SetItemToZero
+	JMP set_item_to_zero
 
 
 .TestForPrevTag
@@ -369,25 +365,25 @@ ENDIF
 	LDX #0
 .ChangeTag
 	STX Annotation
-	JMP SetItemToZero
+	JMP set_item_to_zero
 
 .TestForHelp
-	; // ? key pressed (help)
+	; ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
 	BNE TestForSelect
 	JSR HelpScreen
-	JMP LabelA1
+	JMP main_loop_redo_sizes
 
 .TestForSelect
-	; // <Return> or <Space> pressed (select current item)
+	; <Return> or <Space> pressed (select current item)
 	; 650 IF ?Q=0 OR ?Q=13 G.f
 	CPY #0
 	BEQ LabelF
 	CPY #Return
 	BEQ LabelF
 
-	; // S key pressed (start search)
+	; S key pressed (start search)
 	; 655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);G.a
 	CPY #51
 	BNE TestForAtoM
@@ -398,20 +394,20 @@ ENDIF
 	STA Page
 	JSR SetupRenderingVars
 	JSR Search
-	JMP LabelA
+	JMP main_loop_redo_counts
 
 .JumpToLabelC
-	JMP LabelC
+	JMP main_loop_scan_keyboard
 
 .TestForAtoM
-	; // A..M key pressed (select an item)
+	; A..M key pressed (select an item)
 	; 660 IF ?Q<33 OR ?Q>45 G.c
 	CPY #33
 	BCC JumpToLabelC
 	CPY #46
 	BCS JumpToLabelC
 
-	; // Make sure that the row is not blank
+	; Make sure that the row is not blank
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 	TYA
 	SBC #32
@@ -440,12 +436,12 @@ IF (info_option = 1)
 	CMP #&1B
 	BNE BootContinue
 	JSR ClearScreen
-	JMP LabelA1
+	JMP main_loop_redo_sizes
 .BootContinue
 	JSR GetItemAddress
 ENDIF
 
-	; // Handle *RUN of a title - K is the title index
+	; Handle *RUN of a title - K is the title index
 	; 800 K=(!I)&#7FF
 	LDX #Title
 	JSR Dereference
@@ -582,6 +578,8 @@ ELSE
 	EQUS "RUN ", 0
 
 ENDIF
+
+}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Support code
@@ -1365,10 +1363,7 @@ NEXT
 	RTS
 }
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Accumulate the annotation counts
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; Accumulate the annotation counts
 .AccumulateAnnotationCounts
 {
 	LDY Annotation
@@ -1881,7 +1876,6 @@ NEXT
 	PLA
 	RTS
 }
-
 
 ; Converts the 16-bit value in &BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
 .WriteCount
