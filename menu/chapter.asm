@@ -462,10 +462,6 @@ ENDIF
 	STA Item
 
 .LabelF
-	; // Get the address of the record selected
-	; 680fI=R!(Y*2 + 2)
-	JSR GetItemAddress
-
 	; // Handle selection of a filter item
 	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
 	LDA PageState
@@ -473,8 +469,10 @@ ENDIF
 
 	; Search file the filter record address (Title) in the Secondary Table identified by X
 	; (Assumes an 7-bit value)
-	TAX
-	JSR FindFilterValue	; returns A = FilterValue
+	LDA Item
+	ASL A
+	TAY
+	LDA RowReturnBuf, Y
 
 	; Add the filter
 	LDY PageState
@@ -482,6 +480,8 @@ ENDIF
 	JMP PageStateZero
 
 .BootProgram
+
+	JSR GetItemAddress
 
 IF (info_option = 1)
    	JSR LabelInfo
@@ -641,11 +641,25 @@ ENDIF
 	LDA Item		; Item starts at 0
 	ASL A
 	TAY
-	LDA RowReturnBuf, Y	; +2 because total rows stored at 0, 1
+	LDA RowReturnBuf, Y	; RowReturnBuffer stores the item
 	STA Title
 	LDA RowReturnBuf + 1, Y
 	STA Title + 1
-	RTS
+
+
+	ASL Title		; Double it so it becomes an index into the sort table
+	ROL Title + 1
+
+	CLC			; Now indirect through the sort table
+	LDA Title
+	ADC Sort
+	STA Title
+	LDA Title + 1
+	ADC Sort + 1
+	STA Title + 1
+
+	LDX #Title
+	JMP Dereference
 }
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Subroutine to show the help
@@ -776,7 +790,7 @@ ENDIF
 
 .LabelJ3
 	LDY #31
-	LDA #0
+	LDA #&FF
 .LabelJ4
 	STA RowReturnBuf, Y
 	DEY
@@ -901,8 +915,8 @@ ENDIF
 {
 	ASL A
 	TAX
-	LDA RowReturnBuf, X
-	ORA RowReturnBuf + 1, X
+	LDA RowReturnBuf + 1, X
+	CMP #&FF
 	RTS
 }
 

@@ -143,5 +143,5 @@ ENDIF
 	RowCount         = ZeroBase + $1C
 
 	; Copies of some of the input params so they are not modified
-	CurrentRow       = ZeroBase + $22
+	CurrentItem      = ZeroBase + $22
 	CurrentSort      = ZeroBase + $24

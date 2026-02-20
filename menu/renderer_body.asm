@@ -74,28 +74,6 @@
 	RTS
 }
 
-.FindFilterValue
-{
-	JSR GetAnnotationTable
-	LDY #&00
-.loop
-	LDA (AnnotationTable), Y
-	INY
-	CMP Title
-	BNE next
-	LDA (AnnotationTable), Y
-	CMP Title + 1
-	BNE next
-	TYA
-	LSR A
-	RTS
-.next
-	INY
-	BNE loop
-	SEC
-	RTS
-}
-
 ; X = facet number
 ; Facet Value read from (Title)
 .WriteFacetToScreen
@@ -331,10 +309,14 @@ ENDIF
 	LDY StartLine
 	JSR ScreenLineY
 
-	LDA #0
-	STA RowCount
-	STA CurrentRow
-	STA CurrentRow + 1
+	LDX #0
+	STX RowCount
+	STX TotalItems
+	STX TotalItems + 1
+
+	DEX
+	STX CurrentItem
+	STX CurrentItem + 1
 
 	; Default to assuming we are on a facet page
 	LDA #FacetTitleOffset
@@ -346,6 +328,11 @@ ENDIF
 
 .NextRow
 
+	INC CurrentItem
+	BNE GetTitle
+	INC CurrentItem + 1
+
+.GetTitle
 	LDY #0
 
 	; Follow the sort pointer to the title record, and increment the sort pointer
@@ -461,16 +448,16 @@ IF properAnnotationCounts
 ENDIF
 
 .MatchingRow1
-	INC CurrentRow
+	INC TotalItems
 	BNE MatchingRow2
-	INC CurrentRow + 1
+	INC TotalItems + 1
 
 	;; Have we reached the required start row yet?
 .MatchingRow2
 	SEC
-	LDA CurrentRow
+	LDA TotalItems
 	SBC StartRow
-	LDA CurrentRow + 1
+	LDA TotalItems + 1
 	SBC StartRow+1
 	BCS FoundRow
 	JMP NextRow
@@ -489,13 +476,13 @@ ENDIF
 	JMP NextRow
 
 .FoundRow1
-	; Store Title so that the basic program knows what's on each line
+	; Store current item so that the basic program knows what's on each line
 	LDA RowCount
 	ASL A
 	TAY
-	LDA Title
+	LDA CurrentItem
 	STA RowReturnBuf, Y
-	LDA Title + 1
+	LDA CurrentItem + 1
 	STA RowReturnBuf + 1, Y
 
 	; Increment the count of the number of rows displayed
@@ -513,7 +500,7 @@ ENDIF
 	; We have hit the end of the sort list
 	LDA RowCount
 	CMP LinesPerPage
-	BEQ UpdateTotalRows
+	BEQ WritePageExit
 	LDX #CharsPerLine
 .WritePageEndOfList1
 	LDA #Space
@@ -523,11 +510,6 @@ ENDIF
 	INC RowCount
 	BNE WritePageEndOfList
 
-.UpdateTotalRows
-	LDA CurrentRow
-	STA NumItems
-	LDA CurrentRow + 1
-	STA NumItems + 1
 .WritePageExit
 	RTS
 
@@ -1011,10 +993,10 @@ ENDIF
 .CalculateNumPages
 {
 	SEC
-	LDA NumItems
+	LDA TotalItems
 	SBC #1
 	STA BinBuffer
-	LDA NumItems + 1
+	LDA TotalItems + 1
 	SBC #0
 	STA BinBuffer+1
 	BCC return_one_page
