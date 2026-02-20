@@ -104,13 +104,16 @@ ENDIF
 	STY PageState   ; F=0
 	INY
 	STY Annotation  ; A=1
-	JSR ClearFilters
+
+	; Load the default sort table (sort by title)
 	JSR LoadSortTable
 
-	; // Initialize the search buffer to empty
-	; 125 ?#120=13
-	LDA #0
-	STA SearchBuffer
+	; Initialize the search buffer to empty
+	LDY #0
+	STY SearchBuffer
+
+	; Clear all filters
+	JSR ClearFilterY	; Y=0 clears all filters
 
 .LabelA
 
@@ -292,28 +295,25 @@ ENDIF
 	; never returns
 
 .TestForFilter
-	; // 0 = clear; 1..N = filter
+	; // 0 (16) = title; 1..N = filter
 	CPY #16
 	BCC TestForPrevSort
 	CPY #16+NumFacets+1
 	BCS TestForPrevSort
 	TYA
 	SBC #15
-	; At the point A=0..5
+	; At the point A=0, or 1..N
 
-	; Filter 0 = clear filters
-	; 630 IF ?Q=21 F=0;G=0;A=A&127;G.a
-	CMP #0
 	BNE ChangeFilter
-	JSR ClearFilters
-	JMP PageStateZero
+	LDY PageState
+	JSR ClearFilterY	; Y=0 clears all filters
+	JMP LabelA
 
 .ChangeFilter
 	; Filter 1..8
-	; // 1..8 key pressed
-	; 640 IF ?Q>21 AND ?Q<25 F=?Q-21;G=0;A=A|128;G.a
 	STA PageState
 	LDA Annotation
+
 	; Set bit 7 of the annotation to switch to "show counts" mode
 	ORA #$80
 	STA Annotation
@@ -347,13 +347,19 @@ ENDIF
 	JSR LoadSortTable
 
 .PageStateZero
+{
+	; Test if we are already in Page State 0 (to avoid flicki
+	LDA PageState
+	BNE change
+	JMP LabelB
+.change
 	LDA #0
 	STA PageState
 	LDA Annotation
 	AND #$7f
 	STA Annotation
 	JMP LabelA
-
+}
 .TestForPrevPage
 	; // < key pressed (previous page)
 	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
@@ -467,7 +473,7 @@ ENDIF
 	; Add the filter
 	LDX Item
 	LDA RowReturnLSB, X
-	JSR AddFilter		; Y = FilterType, A = FilterValue
+	JSR AddFilterY		; Y = FilterType, A = FilterValue
 
 	JMP PageStateZero
 

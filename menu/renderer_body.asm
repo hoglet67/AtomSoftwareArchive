@@ -1,19 +1,30 @@
-.ClearFilters
+.ClearFilterY
 {
-	LDA #0
-	STA FilterType
-	LDY #CollectionsByteOffset
+	CPY #0
+	BNE clear_y
+	LDY #CollectionsFilterNum
 .loop
-	STA FacetMasks, Y
-	STA FacetValues, Y
+	JSR clear_y
 	DEY
-	BPL loop
+	BNE loop
+	RTS
+.clear_y
+	LDA FilterTypeMask, Y
+	EOR #&FF
+	AND FilterType
+	STA FilterType
+	LDX FacetByteOffsetTable, Y
+	LDA FacetMaskTable, Y
+	EOR #&FF
+	AND FacetMasks, X
+	STA FacetMasks, X
+	; Note, the FacetValue is irrelevant when the mask is zero
 	RTS
 }
 
 ; Y = Filter Type
 ; A = Filter Value
-.AddFilter
+.AddFilterY
 {
 	; Shift the value to the right bit position
 	LDX FacetBitOffsetTable, Y
@@ -44,15 +55,15 @@
 	STA FacetMasks, X
 
 	; Maintain the bit-per-filter FilterType map for expendiency
-	LDA FilterType
-	ORA mask - 1, Y
+	LDA FilterTypeMask, Y
+	ORA FilterType
 	STA FilterType
 	RTS
+}
 
-.mask
+.FilterTypeMask
 	EQUB &01, &02, &04, &08
 	EQUB &10, &20, &40, &80
-}
 
 .ListFilters
 {
