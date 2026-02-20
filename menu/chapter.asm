@@ -1682,8 +1682,8 @@ NEXT
 .WriteLine
 {
 	; Keep track of how many chars we have available
+	LDX #CharsPerLine - 3
 
-	LDX #CharsPerLine - 2
 	; Prepare the Annotation first (so we know how long it is...)
 
 	; Test display mode to decide on normal annotion vs facet count
@@ -1762,10 +1762,15 @@ NEXT
 	; There is no active search filter, so don't try to highlight
 	JSR WriteTitleNoHighlight   	    ; TODO Could inline this
 
+	; Write the seperator and padding
 .write_separator
-	TXA
-	TAY
-	JSR YSpaces
+	LDA #' '
+.write_separator_loop
+	JSR WriteToScreen
+	DEX
+	BPL write_separator_loop
+
+	; Write the annotation
 	JMP ScreenString
 }
 
