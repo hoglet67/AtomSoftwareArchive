@@ -638,10 +638,9 @@ ENDIF
 .HandleAutoRepeat
 {
 	LDA AutoRepeat
-	STA TmpPtr
-	LDA AutoRepeat + 1
-	STA TmpPtr + 1
+	STA Tmp
 .loop
+	JSR WaitUntilVSync
 	JSR Inkey
 	CPY #255
 	BNE pressed
@@ -649,24 +648,18 @@ ENDIF
 	BPL pressed
 	BVS released
 .pressed
-	INC TmpPtr
-	BNE loop
-	INC TmpPtr + 1
+	DEC Tmp
 	BNE loop
 	; Key was not released
 	; Update the auto repeat timer to the repeat value
-	LDA #<AutoRepeat2
+	LDA #AutoRepeat2
 	STA AutoRepeat
-	LDA #>AutoRepeat2
-	STA AutoRepeat + 1
 	RTS
 .released
 	; Key was released
 	; Update the auto repeat timer to the delay value
-	LDA #<AutoRepeat1
+	LDA #AutoRepeat1
 	STA AutoRepeat
-	LDA #>AutoRepeat1
-	STA AutoRepeat + 1
 	RTS
 }
 

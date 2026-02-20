@@ -15,9 +15,9 @@
 	DMDisableSearchFilter	= &40	; 1=disable search/filtering
 	DMHighlightMatches	= &20	; 1=highlight search matches
 
-	; Autorepeat delay / rate
-	AutoRepeat1		= -&200
-	AutoRepeat2  		= -&20
+	; Autorepeat delay / rate (in 1/60th of seconds)
+	AutoRepeat1		= 30
+	AutoRepeat2  		= 3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Table Structure Offsets
@@ -129,30 +129,30 @@ ENDIF
 ; Zero page - two-byte variables
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	; The auto repeat counter
-	AutoRepeat       	= ZeroBase + &10
-
 	; The first row to render, usually (item + (page - 1) * LinesPerPage
-	StartRow         	= ZeroBase + &12
+	StartRow         	= ZeroBase + &10
 
 	; The index of the item currently being worked on by the renderer
-	CurrentItem      	= ZeroBase + &14
+	CurrentItem      	= ZeroBase + &12
 
 	; The total number of result rows (set after a rendering pass)
-	TotalItems       	= ZeroBase + &16
+	TotalItems       	= ZeroBase + &14
 
 	; The 2-byte binary input of the decimal conversion code
 	; (also occasionally used as a scratch value)
-	BinBuffer        	= ZeroBase + &18
+	BinBuffer        	= ZeroBase + &16
 
 	; The 3-byte BCD output of the decimal conversion code
-	BcdBuffer        	= ZeroBase + &1A
-
-	; Spare 1D-1F
+	BcdBuffer        	= ZeroBase + &18
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Zero page - one-byte variables
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	; Spare 1B-1E
+
+	; The auto repeat counter
+	AutoRepeat       	= ZeroBase + &1F
 
 	; The main state of the application, i.e. what screen sis the user seeing
 	; (0 = Titles screen, 1 = Publishers filter screen, ...)
