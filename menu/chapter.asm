@@ -244,8 +244,7 @@ ENDIF
 	INX
 	CPX LinesPerPage
 	BEQ LabelD1
-	TXA
-	JSR TestRowActive
+	JSR TestRowXActive
 	BEQ LabelD1
 	JSR LabelI
 	INC Item
@@ -456,26 +455,20 @@ ENDIF
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 	TYA
 	SBC #32
-	TAY
-	JSR TestRowActive
+	TAX
+	JSR TestRowXActive
 	BEQ JumpToLabelC
-	TYA
-	STA Item
+	STX Item
 
 .LabelF
-	; // Handle selection of a filter item
-	; 690 IF F>0 G=F;F=0;A=A&127;E=I+4;H=(P-1)*L+Y;G.a
-	LDA PageState
+	LDY PageState
 	BEQ BootProgram
 
-	; Search file the filter record address (Title) in the Secondary Table identified by X
-	; (Assumes an 7-bit value)
-	LDY Item
-	LDA RowReturnLSB, Y
-
 	; Add the filter
-	LDY PageState
+	LDX Item
+	LDA RowReturnLSB, X
 	JSR AddFilter		; Y = FilterType, A = FilterValue
+
 	JMP PageStateZero
 
 .BootProgram
@@ -906,9 +899,8 @@ ENDIF
 ;; Machine Code Subroutines
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.TestRowActive
+.TestRowXActive
 {
-	TAX
 	LDA RowReturnMSB, X
 	CMP #&FF
 	RTS
