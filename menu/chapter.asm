@@ -641,9 +641,9 @@ ENDIF
 	LDA Item		; Item starts at 0
 	ASL A
 	TAY
-	LDA RowReturnBuf + 2, Y	; +2 because total rows stored at 0, 1
+	LDA RowReturnBuf, Y	; +2 because total rows stored at 0, 1
 	STA Title
-	LDA RowReturnBuf + 3, Y
+	LDA RowReturnBuf + 1, Y
 	STA Title + 1
 	RTS
 }
@@ -901,8 +901,8 @@ ENDIF
 {
 	ASL A
 	TAX
-	LDA RowReturnBuf + 2, X
-	ORA RowReturnBuf + 3, X
+	LDA RowReturnBuf, X
+	ORA RowReturnBuf + 1, X
 	RTS
 }
 

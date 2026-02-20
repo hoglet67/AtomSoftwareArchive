@@ -489,12 +489,6 @@ ENDIF
 	JMP NextRow
 
 .FoundRow1
-	; Increment the count of the number of rows displayed
-	INC RowCount
-
-	; Write the line at (Title) to the screen
-	JSR WriteLine
-
 	; Store Title so that the basic program knows what's on each line
 	LDA RowCount
 	ASL A
@@ -503,6 +497,13 @@ ENDIF
 	STA RowReturnBuf, Y
 	LDA Title + 1
 	STA RowReturnBuf + 1, Y
+
+	; Increment the count of the number of rows displayed
+	INC RowCount
+
+	; Write the line at (Title) to the screen
+	JSR WriteLine
+
 	JMP NextRow
 
 .WritePageEndOfList
