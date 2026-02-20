@@ -524,9 +524,9 @@ ENDIF
 
 .UpdateTotalRows
 	LDA CurrentRow
-	STA RowReturnBuf
+	STA NumItems
 	LDA CurrentRow + 1
-	STA RowReturnBuf + 1
+	STA NumItems + 1
 .WritePageExit
 	RTS
 
@@ -1010,10 +1010,10 @@ ENDIF
 .CalculateNumPages
 {
 	SEC
-	LDA RowReturnBuf
+	LDA NumItems
 	SBC #1
 	STA BinBuffer
-	LDA RowReturnBuf + 1
+	LDA NumItems + 1
 	SBC #0
 	STA BinBuffer+1
 	BCC return_one_page
