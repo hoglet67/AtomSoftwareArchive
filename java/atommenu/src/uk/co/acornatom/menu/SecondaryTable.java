@@ -86,7 +86,7 @@ public abstract class SecondaryTable extends TableBase {
               String key = entry.getKey();
               calculatedSize += key.length();
               if (includeCounts) {
-                  calculatedSize += 4; // Space for the counts
+                  calculatedSize += 2; // Space for the counts
               } else {
                   calculatedSize++; // Just a terminator
               }
@@ -108,30 +108,21 @@ public abstract class SecondaryTable extends TableBase {
                                                // the terminator
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             writeShort(bos, absoluteAddress);
-            absoluteAddress += (titles != null ? 4 : 1) + entry.getKey().length();
+            absoluteAddress += (titles != null ? 2 : 1) + entry.getKey().length();
         }
         writeShort(bos, 0x0000);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String key = entry.getKey();
             if (titles != null) {
-                int count = 0;
-                // Count the number of occurrences of this secondary key in the
-                // specified sort table
-                for (AtomTitle title : titles) {
-                    if (match(title, key)) {
-                        count++;
-                    }
-                }
-                writeByte(bos, (byte)(0x80 | ((count >> 8) & 0x7f)));
-                writeByte(bos, (byte)(count & 0xff));
-                writeShort(bos, 0);
+                writeByte(bos, 0x80);
+                writeByte(bos, 0x00);
                 writeString(bos, key);
             } else {
                 writeString(bos, key);
                 writeByte(bos, -1);
             }
         }
-        writeByte(bos, -1);
+        writeByte(bos, 0x80);
         if (debug) {
             System.out.println("length " + bos.size() + " bytes");
         }

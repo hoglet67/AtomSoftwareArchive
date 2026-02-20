@@ -372,6 +372,7 @@ NEXT
 	; Yes, so the match now becomes a non-zero facet count
 	LDY #FacetWorkingOffset
 	LDA (Title), Y
+	AND #&7F
 	BNE MatchingRow
 	INY
 	LDA (Title), Y
@@ -532,7 +533,7 @@ NEXT
 	LDY #FacetWorkingOffset
 	LDA (Title),Y
 	AND #&7F
-	STA BinBuffer + 1	; MSB first (i.e. cound is stored big endian)
+	STA BinBuffer + 1	; MSB first (i.e. count is stored big endian)
 	INY
 	LDA (Title),Y
 	STA BinBuffer		; LSB last
@@ -1119,7 +1120,7 @@ NEXT
 	RTS
 }
 
-; Clear the 2nd and 3rd byte of each annotation record
+; Set the first two bytes of each annotation record to 0x80, 0x00
 ; We will use these to store counts of the number of search filtered items
 .ClearAnnotationCounts
 {
@@ -1134,9 +1135,10 @@ NEXT
 	STA Tmp + 1
 	BEQ done
 	LDY #FacetWorkingOffset
-	LDA #0
+	LDA #&80
 	STA (Tmp),Y
 	INY
+	LDA #&00
 	STA (Tmp),Y
 	CLC
 	LDA AnnotationTable

@@ -65,9 +65,8 @@
 
 	; Field offsets into the secondard table record
 
-	FacetCountOffset	= 0	   ; the original facet count where there is a search
-	FacetWorkingOffset	= 2	   ; the on-the-fly calculated  facet count where there is a seach
-	FacetTitleOffset	= 4	   ; the name of the facet itself
+	FacetWorkingOffset	= 0	   ; the on-the-fly calculated  facet count where there is a seach
+	FacetTitleOffset	= 2	   ; the name of the facet itself
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; Operating System Subroutines
