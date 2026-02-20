@@ -308,12 +308,11 @@ NEXT
 	LDA Sort + 1
 	STA CurrentSort + 1
 
-IF properAnnotationCounts
 	BIT DisplayMode
 	BPL SkipClearCounts
 	JSR ClearAnnotationCounts
+
 .SkipClearCounts
-ENDIF
 	LDX Annotation
 	JSR GetAnnotationTable
 
@@ -451,12 +450,10 @@ ENDIF
 }
 
 .MatchingRow
-IF properAnnotationCounts
 	BIT DisplayMode
 	BPL MatchingRow1
 	JSR AccumulateAnnotationCounts
 	JMP NextRow
-ENDIF
 
 .MatchingRow1
 	INC TotalItems
@@ -532,11 +529,7 @@ ENDIF
 	BIT DisplayMode
 	BVC NormalAnnotation
 
-IF properAnnotationCounts
 	LDY #FacetWorkingOffset
-ELSE
-	LDY #FacetCountOffset
-ENDIF
 	LDA (Title),Y
 	AND #&7F
 	STA BinBuffer + 1	; MSB first (i.e. cound is stored big endian)
@@ -1087,8 +1080,6 @@ ENDIF
 	RTS
 }
 
-IF properAnnotationCounts
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Accumulate the annotation counts
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1157,4 +1148,3 @@ IF properAnnotationCounts
 .done
 	RTS
 }
-ENDIF

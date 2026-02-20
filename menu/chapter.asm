@@ -4,10 +4,6 @@ include "sysvars.asm"
 
 include "renderer_header.asm"
 
-; info_option = atommc
-
-info_option = 1
-
 	KernelOsrdch = $fe94
 	RDCVEC       = $20a
 
@@ -123,7 +119,6 @@ ENDIF
 	INY
 	STY Page
 
-IF properAnnotationCounts
 	; Update the annotation to point to this facet
 	LDY PageState
 	BEQ LabelA1
@@ -142,7 +137,6 @@ IF properAnnotationCounts
 	; Restore the original annotation the user has chose (to see on the title page)
 	PLA
 	STA Annotation
-ENDIF
 
 .LabelA1
 	; Calculate LinesPerPage and StartLine from FilterType
