@@ -1379,27 +1379,27 @@ NEXT
 
 .update_count
 	JSR GetAnnotationRecord
-	LDY #FacetWorkingOffset + 1 ; count is stored at offset 3 (LSB) and 2 (MSB)
+	LDY #FacetWorkingOffset + 1	; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
 .update_loop
 	LDA (AnnotationPtr),Y
 	ADC #0
 	STA (AnnotationPtr),Y
 	DEY
-	BCS update_loop	; skip back in the rare case of carry
-	RTS 		; (you only get this if you search for <space>)
+	BCS update_loop			; skip back in the rare case of carry
+	RTS 				; (you only get this if you search for <space>)
 
 .collection
 	LDY #CollectionsByteOffset
 .collection_loop
 	LDA (Title),Y
 	BPL done
-	AND #&7F		; TODO: Fix hard-coded mask
+	AND #&7F			; TODO: Fix hard-coded mask
 	STY TmpY
 	JSR update_count
 	LDY TmpY
 	INY
-	BNE collection_loop
+	BNE collection_loop		; branch always
 .done
 	RTS
 }
@@ -1471,11 +1471,31 @@ NEXT
 ; Page Rendering
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+.RenderExit
+{
+	BIT DisplayMode
+	BMI exit
+.loop1
+	; We have hit the end of the sort list
+	LDA RowCount
+	CMP LinesPerPage
+	BEQ exit
+	LDX #CharsPerLine
+.loop2
+	LDA #' '
+	JSR WriteToScreen
+	DEX
+	BNE loop2
+	INC RowCount
+	BNE loop1
+.exit
+	RTS
+}
+
 ; Display Mode controls behaviour
 ; Bit 7 - 1=disable rendering (i.e. count only)
 ; Bit 6 - 1=disable search/filtering
 ; Bit 5 - 1=highlight search matches
-
 .RenderPage
 {
 	LDA SearchBuffer
@@ -1487,10 +1507,10 @@ NEXT
 	STA CurrentSort + 1
 
 	BIT DisplayMode
-	BPL SkipClearCounts
+	BPL skip_clear_counts
 	JSR ClearAnnotationCounts
+.skip_clear_counts
 
-.SkipClearCounts
 	LDX Annotation
 	JSR GetAnnotationTable
 
@@ -1514,16 +1534,14 @@ NEXT
 	;; Start of loop that needs to be efficient
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.NextRow
-
+.next_row
 	INC CurrentItem
-	BNE GetTitle
+	BNE nocarry1
 	INC CurrentItem + 1
-
-.GetTitle
-	LDY #0
+.nocarry1
 
 	; Follow the sort pointer to the title record, and increment the sort pointer
+	LDY #0
 	LDA (CurrentSort),Y
 	STA Title
 	INY
@@ -1531,123 +1549,124 @@ NEXT
 	STA Title + 1
 
 	; Test if we have run off the end of the list
-	BNE NotEndOfList
-	JMP WritePageEndOfList
-.NotEndOfList
+	BEQ RenderExit
 
 	; Increment CurrentSort to point to the next title
 	CLC
 	LDA CurrentSort
 	ADC #&02
 	STA CurrentSort
-	BCC IncSort
+	BCC nocarry2
 	INC CurrentSort + 1
-.IncSort
+.nocarry2
+
 	; Test if we are rendering one of the filter pages
 	BIT DisplayMode
-	BVC FindTitle
+	BVC find_title
 
 	; Yes, so the match now becomes a non-zero facet count
 	LDY #FacetWorkingOffset
 	LDA (Title), Y
 	AND #&7F
-	BNE MatchingRow
+	BNE matching_row
 	INY
 	LDA (Title), Y
-	BNE MatchingRow
+	BNE matching_row
 
 	; The facet count is zero, so move to the next row
-	BEQ NextRow ; Branch always
+	BEQ next_row ; Branch always
 
-.FindTitle
+.find_title
+{
 	; Find the offset to the title, by skipping over all the collections
 	LDY #CollectionsByteOffset - 1
-.FindTitleLoop
+.loop
 	INY
 	LDA (Title),Y
-	BMI FindTitleLoop
+	BMI loop
 	STY TitleNameOffset
+}
 
 {
-.SearchCompare
+.search
 	LDA SearchFirst
-	BEQ SearchMatch
+	BEQ match
 	DEY
-.SearchCompare1
+.loop1
 	INY
 	LDA (Title),Y
-	BMI NextRow
-.SearchCompare2
+	BMI next_row
 	CMP SearchFirst
-	BNE SearchCompare1
+	BNE loop1
 	STY TmpY
 	LDX #0
-.SearchCompare3
+.loop2
 	INX
 	INY
 	LDA SearchBuffer,X
-	BEQ SearchMatch
+	BEQ match
 	CMP (Title),Y
-	BEQ SearchCompare3
+	BEQ loop2
 	LDY TmpY
-	BNE SearchCompare1
-.SearchMatch
+	BNE loop1
+.match
 }
 
 ; Attempt to match against the currently compiled filter set
 ;
-; If the filter includes a collections, there are is a list to try to
-; match against This list is terminated by a non-negative value (the
-; first char of the title name)
-
+; If the filter includes a collection, there is a list in the title to
+; try to match against. This list is terminated by a non-negative
+; value (the first char of the title name)
 {
-.FilterCompare
+.filter
 	LDA FilterType
-	BEQ FilterMatch
+	BEQ match
 	LDY #0
-.FilterCompareLoop
+.loop1
 	;; TODO could code this differently and optimize Mask=0
 	LDA (Title), Y
 	EOR FacetValues, Y
 	AND FacetMasks, Y
-	BNE NextRow
+	BNE next_row
 	INY
 	CPY #CollectionsByteOffset
-	BNE FilterCompareLoop
+	BNE loop1
 
 	LDA CollectionsFacetMask
-	BEQ FilterMatch		; If No Collections Filter we have a match
-.CatFilterLoop
+	BEQ match		; If No Collections Filter we have a match
+.loop2
 	LDA (Title), Y
-	BPL NextRow
+	BPL next_row
 	EOR CollectionsFacetValue
 	AND #&7F		; TODO: Fix hard-coded mask
-	BEQ FilterMatch
+	BEQ match
 	INY
-	BNE CatFilterLoop	; Branch always
-.FilterMatch
+	BNE loop2		; Branch always
+.match
 }
 
-.MatchingRow
+.matching_row
 	BIT DisplayMode
-	BPL MatchingRow1
+	BPL matching_row1
+	; In UpdateCounts mode, add one to the appropriate facet counr
 	JSR AccumulateAnnotationCounts
-	JMP NextRow
+	JMP next_row
 
-.MatchingRow1
+.matching_row1
+	; Increment the count of matched items
 	INC TotalItems
-	BNE MatchingRow2
+	BNE matching_row2
 	INC TotalItems + 1
 
-	;; Have we reached the required start row yet?
-.MatchingRow2
+.matching_row2
+	; Have we reached the required start row yet?
 	SEC
 	LDA TotalItems
 	SBC StartRow
 	LDA TotalItems + 1
 	SBC StartRow+1
-	BCS FoundRow
-	JMP NextRow
+	BCS found_row
+	JMP next_row
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;; End of loop that needs to be *very efficient*
@@ -1655,14 +1674,14 @@ NEXT
 
 	; Found a row that matches all filter and search
 
-.FoundRow
+.found_row
 	; Have we displayed the requested number of rows
 	LDA RowCount
 	CMP LinesPerPage
-	BNE FoundRow1
-	JMP NextRow
+	BNE found_row1
+	JMP next_row
 
-.FoundRow1
+.found_row1
 	; Store current item so that the basic program knows what's on each line
 	LDY RowCount
 	LDA CurrentItem
@@ -1675,37 +1694,20 @@ NEXT
 
 	; Write the line at (Title) to the screen
 	JSR WriteLine
+	JMP next_row
+}
 
-	JMP NextRow
-
-.WritePageEndOfList
-	BIT DisplayMode
-	BMI WritePageExit
-
-	; We have hit the end of the sort list
-	LDA RowCount
-	CMP LinesPerPage
-	BEQ WritePageExit
-	LDX #CharsPerLine
-.WritePageEndOfList1
-	LDA #' '
-	JSR WriteToScreen
-	DEX
-	BNE WritePageEndOfList1
-	INC RowCount
-	BNE WritePageEndOfList
-
-.WritePageExit
-	RTS
 
 .WriteLine
+{
 	; Keep track of how many chars we have available
 
-	LDX #CharsPerLine - 3
+	LDX #CharsPerLine - 2
 	; Prepare the Annotation first (so we know how long it is...)
 
+	; Test display mode to decide on normal annotion vs facet count
 	BIT DisplayMode
-	BVC NormalAnnotation
+	BVC normal_annotation
 
 	LDY #FacetWorkingOffset
 	LDA (Title),Y
@@ -1721,136 +1723,138 @@ NEXT
 	LDA #>CountString
 	STA TmpPtr + 1
 
-	JMP LengthOfAnnotation
+	JMP length_of_annotation
 
-.NormalAnnotation
+.normal_annotation
 	LDY Annotation
 	JSR ExtractFilterValue
 
-	BPL NotNullCollection
+	BPL not_null_collection
 
 	; CollectionIDs always have bit 7 set
 	; If bit 7 is clear, there is no collection
-	LDA #<(NullCollectionMessage)
+	LDA #<null_collection_message
 	STA TmpPtr
-	LDA #>(NullCollectionMessage)
+	LDA #>null_collection_message
 	STA TmpPtr + 1
-	BNE LengthOfAnnotation
+	BNE length_of_annotation
 
-.NullCollectionMessage
+.null_collection_message
 	; Currently just blank, a string like "NO COLLECTION" could be put here
 	EQUB &ff
 
-.NotNullCollection
+.not_null_collection
 	; Currently the MSB of the annotation is lost, which limits secondary tables to 7 bit values
 	JSR GetAnnotationString
 
-.LengthOfAnnotation
+	; Measure length of the annotation, so the title can be truncated if needed
+.length_of_annotation
 	LDY #0
-.LengthOfAnnotationLoop
+.loop
 	LDA (TmpPtr),Y
-	BMI WriteLetter
+	BMI done
 	INY
 	DEX
-	BNE LengthOfAnnotationLoop
+	BNE loop
+.done
 
-.WriteLetter
+	; Write the row letter (A..M)
 	CLC
-	LDA #64
+	LDA #'A' - 1
 	ADC RowCount
 	JSR WriteToScreen
 	LDA #'.'
 	JSR WriteToScreen
 
-.WriteTitle
+	; Determine if the title needs the search string highlighting
 	LDA SearchFirst
-	BEQ WriteTitle1
+	BEQ no_highlight
 	LDA DisplayMode
 	AND #DMHighlightMatches
-	BEQ WriteTitle1
+	BEQ no_highlight
 
 	; There is an active search filter, so try to highlight
-	JSR WriteTitleHighlight
-	JMP WriteSeperator
+	JSR WriteTitleHighlight	    	    ; TODO: Could inline this
+	JMP write_separator
 
-.WriteTitle1
+.no_highlight
 	; There is no active search filter, so don't try to highlight
-	JSR WriteTitleNoHighlight
+	JSR WriteTitleNoHighlight   	    ; TODO Could inline this
 
-.WriteSeperator
-	LDA #' '
-
-.WriteSeperatorLoop
-	JSR WriteToScreen
-	DEX
-	BPL WriteSeperatorLoop
-
+.write_separator
+	TXA
+	TAY
+	JSR YSpaces
 	JMP ScreenString
+}
 
 .WriteTitleNoHighlight
+{
 	LDY TitleNameOffset
-.WriteTitleNoHighlight1
+.loop
 	LDA (Title),Y
-	BMI WriteTitleNoHighlight2
+	BMI done
 	JSR WriteToScreen
 	INY
 	DEX
-	BNE WriteTitleNoHighlight1
-.WriteTitleNoHighlight2
+	BNE loop
+.done
 	RTS
+}
 
 .WriteTitleHighlight
+{
 	STX TmpX
 	LDY TitleNameOffset
-.WriteTitleHighlight1
+.write_loop
 	LDA (Title),Y
-	BMI WriteTitleHighlight3
+	BMI done
 	CMP SearchFirst
-	BEQ PossibleMatch
-.WriteTitleHighlight2
+	BEQ possible_match
+.continue
 	JSR WriteToScreen
 	INY
 	DEC TmpX
-	BNE WriteTitleHighlight1
-.WriteTitleHighlight3
+	BNE write_loop
+.done
 	LDX TmpX
 	RTS
 
-.PossibleMatch
+.possible_match
 	PHA
 	TYA
 	PHA
 	LDX #0
-.PossibleMatchTestNext
+.match_loop
 	INX
 	INY
 	LDA SearchBuffer,X
-	BEQ Match
+	BEQ match
 	LDA (Title),Y
-	BMI NoMatch
+	BMI no_match
 	CMP SearchBuffer,X
-	BEQ PossibleMatchTestNext
+	BEQ match_loop
 
-.NoMatch
+.no_match
 	PLA
 	TAY
 	PLA
-	JMP WriteTitleHighlight2
+	JMP continue
 
-.Match
+.match
 	PLA
 	TAY
 	PLA
-.Match1
+.highlight_loop
 	LDA (Title),Y
 	ORA #&80
 	JSR WriteToScreen
 	INY
 	DEC TmpX
-	BEQ WriteTitleHighlight3
+	BEQ done
 	DEX
-	BEQ WriteTitleHighlight1
-	BNE Match1
+	BNE highlight_loop
+	BEQ write_loop
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
