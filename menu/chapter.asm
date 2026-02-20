@@ -106,6 +106,7 @@ include "chaptervars.asm"
 	; Calculate LinesPerPage and StartLine from FilterType
 	JSR CalculateTextWindow
 
+.main_loop_render_all
 	; Render the header, including the filter list
 	JSR RenderHeader
 
@@ -144,7 +145,7 @@ include "chaptervars.asm"
 	; Highlight the currently active item
 	JSR HighlightItem
 
-.main_loop_wait_for_key_release
+.main_loop_release
 	JSR HandleAutoRepeat
 
 .main_loop_scan_keyboard
@@ -170,13 +171,13 @@ include "chaptervars.asm"
 	JSR HighlightItem
 	DEC Item
 	JSR HighlightItem
-	BMI main_loop_wait_for_key_release	; Branch always
+	BMI main_loop_release	; Branch always
 
 .handle_up_to_previous_page
 	; Handle the up key when at the top of a page
 	LDA Page
 	CMP #1
-	BEQ main_loop_wait_for_key_release
+	BEQ main_loop_release
 	DEC Page
 	JSR HighlightItem
 	LDX LinesPerPage
@@ -211,13 +212,13 @@ include "chaptervars.asm"
 	JSR HighlightItem
 	INC Item
 	JSR HighlightItem
-	JMP main_loop_wait_for_key_release
+	JMP main_loop_release
 
 .handle_down_to_next_page
 	; Handle down key when at the bottom of a page
 	LDA Page
 	CMP NumPages
-	BEQ main_loop_wait_for_key_release
+	BEQ main_loop_release
 	INC Page
 .set_item_to_zero
 	JSR HighlightItem
@@ -232,12 +233,12 @@ include "chaptervars.asm"
 	CPY #&FF
 	BEQ main_loop_scan_keyboard		; Branch of no key pressed
 
-	CPY #&3B		; Escape
-	BNE TestForFilter
+	CPY #&3B				; Escape
+	BNE test_for_filter
 
 	; Escape pressed, if on filter page, return to title page
 	LDA PageState
-	BNE PageStateZero
+	BNE page_state_zero
 
 	; Really exit, changing back to the "root" directory
 	JSR OscliString
@@ -252,128 +253,127 @@ ENDIF
 	EQUS "RUN MENU", Return
 	; never returns
 
-.TestForFilter
+.test_for_filter
 	; 0 (16) = title; 1..N = filter
-	CPY #16
-	BCC TestForPrevSort
-	CPY #16+NumFacets+1
-	BCS TestForPrevSort
+	CPY #16					; 0
+	BCC test_for_prev_sort
+	CPY #16+NumFacets+1			; 8
+	BCS test_for_prev_sort
 	TYA
 	SBC #15
-	; At the point A=0, or 1..N
-
-	BNE ChangeFilter
+	; At this point A=0, or 1..N
+	BNE change_filter
 	LDY PageState
-	JSR ClearFilterY	; Y=0 clears all filters
+	JSR ClearFilterY			; Y=0 clears all filters
 	JMP main_loop_redo_counts
 
-.ChangeFilter
+.change_filter
 	; Filter 1..8
 	STA PageState
 	JMP main_loop_redo_counts
 
-.TestForPrevSort
+.test_for_prev_sort
 	LDX SortType
-	CPY #1	; [
-	BNE TestForNextSort
+	CPY #1					; [
+	BNE test_for_next_sort
+	; Decrement the current sort, handling wrapping
 	DEX
-	BPL ChangeSort
+	BPL change_sort
 	LDX #NumFacets
-	BNE ChangeSort
+	BNE change_sort				; branch always
 
-.TestForNextSort
-	CPY #3	; ]
-	BNE TestForPrevPage
+.test_for_next_sort
+	CPY #3					; ]
+	BNE test_for_prev_page
+	; Increment the current sort, handling wrapping
 	INX
-	CPX #NumFacets+1
-	BNE ChangeSort
+	CPX #NumFacets + 1
+	BNE change_sort
 	LDX #0
 
-.ChangeSort
+.change_sort
+	; Action the change of sort, also changing the current annotation ot match
 	STX SortType
-	BNE ChangeAnnotation
-	INX			; Title sort defaults to long publisher
-.ChangeAnnotation
+	BNE not_sort_zero
+	INX					; Title sort defaults to long publisher
+.not_sort_zero
 	STX Annotation
-
 	; Page in the appropriate sort table
 	JSR LoadSortTable
 
-.PageStateZero
-{
-	; Test if we are already in Page State 0 (to avoid flicki
-	LDA PageState
-	BNE change
-	JMP main_loop_render
-.change
+.page_state_zero
 	LDA #0
 	STA PageState
-	JMP main_loop_redo_counts
-}
-.TestForPrevPage
-	; < key pressed (previous page)
-	; 600 IF ?Q=28 IF M>1 P=P-1+(P=1)*M;GOS.i;Y=0;G.b
-	CPY #28
-	BNE TestForNextPage
-	LDA NumPages
+	JMP main_loop_render_all
+
+.jump_main_loop_render
+	JMP main_loop_render
+
+.jump_main_loop_release
+	JMP main_loop_release
+
+.test_for_prev_page
+	CPY #28					; <
+	BNE test_for_next_page
+	; Handle previous page
+	LDA NumPages				; special case there being just one page
 	CMP #1
-	BEQ TestForNextPage
+	BEQ jump_main_loop_release
 	DEC Page
-	BNE PrevPageNoWrap
+	BNE prev_page_nowrap
  	STA Page
-.PrevPageNoWrap
+.prev_page_nowrap
  	JMP set_item_to_zero
 
-.TestForNextPage
-	; > key pressed (next page)
-	; 610 IF ?Q=30 IF M>1 P=P+1-(P=M)*M;GOS.i;Y=0;G.b
-	CPY #30
-	BNE TestForPrevTag
-	LDA NumPages
+.test_for_next_page
+	CPY #30					; >
+	BNE test_for_prev_tag
+	; Handle next page
+	LDA NumPages				; special case there being just one page
 	CMP #1
-	BEQ TestForPrevTag
+	BEQ jump_main_loop_release
 	INC Page
 	LDA NumPages
 	CMP Page
-	BCS NextPageNoWrap
+	BCS next_page_nowrap
 	LDA #1
 	STA Page
-.NextPageNoWrap
+.next_page_nowrap
 	JMP set_item_to_zero
 
+.test_for_prev_tag
+	LDA PageState				; Tags not used in filter pages
+	BNE test_for_help
 
-.TestForPrevTag
-	LDA PageState		; Tags not use in filter pages
-	BNE TestForHelp
-
-	; The followimg commands work only in thw  title page (PageState=0
-	;     PrevTag (Z), Next Tag (X) and Info (@)
 	LDX Annotation
-	CPY #58			; Z
-	BNE TestForNextTag
+	CPY #58					; Z
+	BNE test_for_next_tag
+	; Handle prev tag
 	DEX
-	BPL ChangeTag
+	BPL change_tag
 	LDX #NumFacets
-	BNE ChangeTag
+	BNE change_tag
 
-.TestForNextTag
-	CPY #56			; X
-	BNE TestForHelp
+.test_for_next_tag
+	CPY #56					; X
+	BNE test_for_help
+	; Handle next tag
 	INX
 	CPX #NumFacets + 1
-	BNE ChangeTag
+	BNE change_tag
 	LDX #0
-.ChangeTag
-	STX Annotation
-	JMP set_item_to_zero
 
-.TestForHelp
+.change_tag
+	STX Annotation
+	JMP main_loop_render
+
+.test_for_help
 	; ? key pressed (help)
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
 	BNE TestForSelect
 	JSR HelpScreen
-	JMP main_loop_redo_sizes
+	JMP main_loop_render_all		; redraw the whole screen, but counts will be unchanged
 
 .TestForSelect
 	; <Return> or <Space> pressed (select current item)
@@ -425,7 +425,7 @@ ENDIF
 	LDA RowReturnLSB, X
 	JSR AddFilterY		; Y = FilterType, A = FilterValue
 
-	JMP PageStateZero
+	JMP page_state_zero
 
 .BootProgram
 
