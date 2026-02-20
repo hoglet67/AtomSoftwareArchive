@@ -271,8 +271,13 @@ ENDIF
 	SBC #15
 	; At this point A=0, or 1..N
 	BNE change_filter
+
+	; Clear filter
 	LDY PageState
-	JSR ClearFilterY			; Y=0 clears all filters
+	TYA
+	ORA FilterType
+	BEQ jump_main_loop_release		; nothing to do!
+	JSR ClearFilterY			; Y=0 clears all filters, Y<>0 clean filter N
 	JMP main_loop_redo_counts
 
 .change_filter
