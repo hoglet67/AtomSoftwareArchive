@@ -529,8 +529,8 @@ ENDIF
 	LDX #CharsPerLine - 3
 	; Prepare the Annotation first (so we know how long it is...)
 
-	LDA Annotation
-	BPL NormalAnnotation
+	BIT DisplayMode
+	BVC NormalAnnotation
 
 IF properAnnotationCounts
 	LDY #FacetWorkingOffset

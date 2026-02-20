@@ -312,11 +312,6 @@ ENDIF
 .ChangeFilter
 	; Filter 1..8
 	STA PageState
-	LDA Annotation
-
-	; Set bit 7 of the annotation to switch to "show counts" mode
-	ORA #$80
-	STA Annotation
 	JMP LabelA
 
 .TestForPrevSort
@@ -355,9 +350,6 @@ ENDIF
 .change
 	LDA #0
 	STA PageState
-	LDA Annotation
-	AND #$7f
-	STA Annotation
 	JMP LabelA
 }
 .TestForPrevPage
