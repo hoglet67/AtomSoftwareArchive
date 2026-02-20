@@ -961,10 +961,10 @@ ENDIF
 {
 	LDA #' '
 	LDY #CharsPerLine - 1
-.SearchExit2
+.loop
 	STA ScreenStart + &1E0,Y
 	DEY
-	BPL SearchExit2
+	BPL loop
 	RTS
 }
 
@@ -979,43 +979,42 @@ ENDIF
 	; Save the cursor
 	PHA
 
+	; Move to the bottom row
 	LDA #<(ScreenStart + &1E0)
 	STA Screen
 	LDA #>(ScreenStart + &1E0)
 	STA Screen + 1
 
-	LDY #0
-.ShowCurrentSearch1
-	LDA SearchString,Y
-	BEQ ShowCurrentSearch2
-	JSR WriteToScreen
-	INY
-	BNE ShowCurrentSearch1
+	; Write "  SEARCH="
+	LDX #12
+	JSR ScreenStringX
 
-.ShowCurrentSearch2
+	; Write the contents of the search buffer
 	LDY #0
-.ShowCurrentSearch3
+.loop
 	LDA SearchBuffer,Y
-	CMP #0
-	BEQ ShowCurrentSearch4
+	BEQ done
 	JSR WriteToScreen
 	INY
-	BNE ShowCurrentSearch3
+	BNE loop
 
-.ShowCurrentSearch4
+.done
+	; Save the search buffer pointer
 	STY TmpY
+
+	; Restore the cursor
 	PLA
 	LDY #0
 	STA (Screen),Y
+
+	; Followed by a space
 	INY
-	LDA #&20
+	LDA #' '
 	STA (Screen),Y
+
+	; Exit with Y pointing to the end of the search buffer
 	LDY TmpY
 	RTS
-
-.SearchString
-	EQUS "  SEARCH="
-	EQUB 0
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1166,7 +1165,7 @@ NEXT
 	EQUB JoystickXor
 	EQUB CollectionsXor
 
-;; This is a table of branch offsets used in some self modifyinf code
+;; This is a table of branch offsets used in some self modifying code
 ;; to avoid the cost of a loop:
 ;;     vvvvvv is modified based on the table value
 ;; BNE offset
@@ -1189,7 +1188,6 @@ NEXT
 	EQUB 7 - VersionBitOffset
 	EQUB 7 - JoystickBitOffset
 	EQUB 7 - CollectionsBitOffset
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Multi Facet Filtering Code
@@ -1356,9 +1354,9 @@ NEXT
 	JSR GetAnnotationRecord
 	CLC
 	LDA Annotation
-	BEQ isShortPub
+	BEQ short_pub
 	LDA #FacetTitleOffset
-.isShortPub
+.short_pub
 	ADC AnnotationPtr
 	STA TmpPtr
 	LDA #0
@@ -1447,26 +1445,25 @@ NEXT
 	STY StartRow + 1
 	INY
 	STY StartRow
-.j1
+.loop1
 	CPY Page
-	BEQ j3
+	BEQ done1
 	CLC
 	LDA StartRow
 	ADC LinesPerPage
 	STA StartRow
-	BCC j2
+	BCC nocarry
 	INC StartRow + 1
-.j2
+.nocarry
 	INY
-	BNE j1
-
-.j3
+	BNE loop1
+.done1
 	LDY #&0F
 	LDA #&FF
-.j4
+.loop2
 	STA RowReturnMSB, Y
 	DEY
-	BPL j4
+	BPL loop2
 	RTS
 }
 
@@ -1869,15 +1866,13 @@ NEXT
 	AND #&BF
 	STA (Screen),Y
 	INC Screen
-	BNE WriteToScreen1
+	BNE nocarry
 	INC Screen + 1
-
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
 	AND #&81
 	STA Screen + 1
-
-.WriteToScreen1
+.nocarry
 	LDY TmpY
 	PLA
 	RTS
@@ -1885,7 +1880,7 @@ NEXT
 
 
 ; Converts the 16-bit value in &BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
-.WriteCount:
+.WriteCount
 {
 	TXA
 	PHA
@@ -2192,6 +2187,7 @@ ENDIF
 	EQUB <String9
 	EQUB <String10
 	EQUB <String11
+	EQUB <String12
 
 .StringTableMSB
 	EQUB >String0
@@ -2206,6 +2202,7 @@ ENDIF
 	EQUB >String9
 	EQUB >String10
 	EQUB >String11
+	EQUB >String12
 
 ; Padding for the first 9 strings
 .PadTable
@@ -2246,6 +2243,9 @@ ENDIF
 
 .String11
 	EQUS "  PAGE   /  ", 0
+
+.String12
+	EQUS "  SEARCH=", 0
 
 include "common.asm"
 
