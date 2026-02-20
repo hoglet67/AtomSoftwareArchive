@@ -148,7 +148,7 @@ include "chaptervars.asm"
 .main_loop_release
 	JSR HandleAutoRepeat
 
-.main_loop_scan_keyboard
+.main_loop_scan
 	; Check for original Atom
 	LDA &bd00
 	CMP #&bf
@@ -231,7 +231,7 @@ include "chaptervars.asm"
 	JSR Inkey
 
 	CPY #&FF
-	BEQ main_loop_scan_keyboard		; Branch of no key pressed
+	BEQ main_loop_scan		; Branch of no key pressed
 
 	CPY #&3B				; Escape
 	BNE test_for_filter
@@ -368,27 +368,25 @@ ENDIF
 	JMP main_loop_render
 
 .test_for_help
-	; ? key pressed (help)
-	; 615 IF ?Q=31 GOS.h;G.a
-	CPY #31
-	BNE TestForSelect
+	CPY #31					; /
+	BNE test_for_select
+	; Handle help screen
 	JSR HelpScreen
 	JMP main_loop_render_all		; redraw the whole screen, but counts will be unchanged
 
-.TestForSelect
-	; <Return> or <Space> pressed (select current item)
-	; 650 IF ?Q=0 OR ?Q=13 G.f
-	CPY #0
-	BEQ LabelF
-	CPY #Return
-	BEQ LabelF
+.test_for_select
+	; Test for select
+	CPY #0	      	      	      	      	; <Space>
+	BEQ handle_select
+	CPY #Return				; <Return>
+	BEQ handle_select
 
-	; S key pressed (start search)
-	; 655 IF ?Q=51 AND F=0 GOS.i;P=1;GOS.j;LINK(B+9);G.a
-	CPY #51
-	BNE TestForAtoM
+	; Test for search
+	CPY #51					; S
+	BNE test_for_a_to_m
+	; Handle search
 	LDA PageState
-	BNE TestForAtoM
+	BNE test_for_a_to_m
 	JSR HighlightItem
 	LDA #1
 	STA Page
@@ -396,16 +394,15 @@ ENDIF
 	JSR Search
 	JMP main_loop_redo_counts
 
-.JumpToLabelC
-	JMP main_loop_scan_keyboard
+.jump_main_loop_scan
+	JMP main_loop_scan
 
-.TestForAtoM
+.test_for_a_to_m
 	; A..M key pressed (select an item)
-	; 660 IF ?Q<33 OR ?Q>45 G.c
-	CPY #33
-	BCC JumpToLabelC
-	CPY #46
-	BCS JumpToLabelC
+	CPY #33					; A
+	BCC jump_main_loop_scan
+	CPY #46					; M + 1
+	BCS jump_main_loop_scan
 
 	; Make sure that the row is not blank
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
@@ -413,38 +410,44 @@ ENDIF
 	SBC #32
 	TAX
 	JSR TestRowXActive
-	BEQ JumpToLabelC
+	BEQ jump_main_loop_scan
 	STX Item
 
-.LabelF
+.handle_select
+	; Test whether we are on the title page or a filter page
 	LDY PageState
-	BEQ BootProgram
+	BEQ boot_program
 
-	; Add the filter
+	; Filter page, so add the filter
 	LDX Item
 	LDA RowReturnLSB, X
-	JSR AddFilterY		; Y = FilterType, A = FilterValue
-
+	JSR AddFilterY				; Y = FilterType, A = FilterValue
 	JMP page_state_zero
 
-.BootProgram
-
+.boot_program
 	JSR GetItemAddress
 
+   	; If info option is enabbled, then first show the info screen
 IF (info_option = 1)
    	JSR InfoScreen
 	CMP #&1B
-	BNE BootContinue
+	BNE boot_continue
 	JSR ClearScreen
-	JMP main_loop_redo_sizes
-.BootContinue
+	JMP main_loop_render_all
+.boot_continue
 	JSR GetItemAddress
 ENDIF
+}
 
-	; Handle *RUN of a title - K is the title index
-	; 800 K=(!I)&#7FF
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Really Boot the Program!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+{
+	; Dereference the title to get the 11-bit index number
 	LDX #Title
 	JSR Dereference
+
 	; For SDDOS we pack two games per disk
 	LDA Title
 	AND #&7
@@ -462,26 +465,14 @@ IF (sddos2 = 1)
 	ADC #0
 	STA bootnum
 ENDIF
-	; 810 P=#100
-	; 820 &P="RUN MNU/"
-	; 830 P=P+LEN(P)
-	; 840 IF K>99 P?0=48+(K/100)%10;P=P+1
-	; 850 IF K>9 P?0=48+(K/10)%10;P=P+1
-	; 860 ?P=48+K%10;P?1=13;P?2=13
-
-	; CountString and OscliBuffer are the same (&100)
-
-	; 870 P.&12;LINK #FFF7
-	; 880 END
 	JSR ClearScreen
 
 IF (sddos2 = 1 )
 
 	; SDDOS2 has a *RUNME bug, where only drive 0 is
 	; searched for the file RUNME
-
 	LDA #'0'
-	JSR LoadDisk
+	JSR load_disk
 
 	JSR OscliString
 	EQUS "DRIVE 0", Return
@@ -491,14 +482,14 @@ IF (sddos2 = 1 )
 .bootnum
 	EQUS "0", Return
 
-.LoadDisk
-	STA RunCommand + 4
+.load_disk
+	STA run_command + 4
 
 ELIF (sddos3 = 1)
 
 	; SDDOS3 is less messy if we use three different drives
 	LDA #'2'
-	JSR LoadDisk
+	JSR load_disk
 
 	JSR OscliString
 	EQUS "DRIVE 2", Return
@@ -506,38 +497,38 @@ ELIF (sddos3 = 1)
 	JSR OscliString
 	EQUS "RUN BOOT", Return
 
-.LoadDisk
-	STA RunCommand + 4
+.load_disk
+	STA run_command + 4
 
 ELIF (econet = 1)
 
-	JSR ChangeDirectory
+	JSR change_directory
 
 	JSR OscliString
 	EQUS "BOOT", Return
 
-.ChangeDirectory
+.change_directory
 
 ELIF (gosdc = 1)
 
-	JSR ChangeDirectory
+	JSR change_directory
 
 	JSR OscliString
 	EQUS "RUN BOOT", Return
 
-.ChangeDirectory
+.change_directory
 
 ENDIF
 
-.RunCommand0
+.run_command0
 	LDX #0
-.RunCommand1
-	LDA RunCommand, X
-	BEQ RunCommand2
+.run_command1
+	LDA run_command, X
+	BEQ run_command2
 	STA OscliBuffer, X
 	INX
-	BNE RunCommand1
-.RunCommand2
+	BNE run_command1
+.run_command2
 IF (econet = 1 OR gosdc = 1)
 	JSR WritePath
 ELSE
@@ -545,16 +536,16 @@ ELSE
 ENDIF
 IF (sddos3 = 1)
 	LDY #0
-.RunCommand3
+.run_command3
 	LDA DskSuffix, Y
-	BEQ RunCommand4
+	BEQ run_command4
 	STA OscliBuffer, X
 	INX
 	INY
-	BNE RunCommand3
+	BNE run_command3
 .DskSuffix
 	EQUS ".DSK", 0
-.RunCommand4
+.run_command4
 ENDIF
 	LDA #Return
 	STA OscliBuffer, X
@@ -564,21 +555,20 @@ ENDIF
 
 IF (sddos2 = 1 OR sddos3 = 1)
 
-.RunCommand
+.run_command
 	EQUS "DIN  ,",0
 
 ELIF (econet = 1 OR gosdc = 1)
 
-.RunCommand
+.run_command
 	EQUS "DIR &.ASA.",0
 
 ELSE
 
-.RunCommand
+.run_command
 	EQUS "RUN ", 0
 
 ENDIF
-
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
