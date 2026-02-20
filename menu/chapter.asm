@@ -1,4 +1,4 @@
-	Base =? $2800
+	Base =? &2800
 
 include "sysvars.asm"
 
@@ -14,18 +14,18 @@ include "chaptervars.asm"
 
 	EQUS    "MENU"
 
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
-	EQUB    $00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
+	EQUB    &00
 
 	EQUB    <Base
 	EQUB    >Base
@@ -75,10 +75,14 @@ include "chaptervars.asm"
 	; Clear all filters
 	JSR ClearFilterY	; Y=0 clears all filters
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Main command loop
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 .LabelA
 
 	;1060 Y=-2;GOS.i;Y=0;P=1;R.
-	LDY #$00
+	LDY #&00
 	STY Item
 	INY
 	STY Page
@@ -97,7 +101,7 @@ include "chaptervars.asm"
 	; Recalculate Annotation counts the new filter screen
 	LDA #DMUpdateCounts
 	STA DisplayMode
-	JSR WritePage
+	JSR RenderPage
 	; Restore the original annotation the user has chose (to see on the title page)
 	PLA
 	STA Annotation
@@ -120,7 +124,7 @@ include "chaptervars.asm"
 .LabelB
 	; // Refresh rows, page number and total number of pages
 	; 200bGOS.j
-	JSR LabelJ
+	JSR SetupRenderingVars
 
 	; 260 LINK B;M=(!R&#FFFF+L-1)/L
 	LDA PageState
@@ -128,7 +132,7 @@ include "chaptervars.asm"
 	LDA #DMDisableSearchFilter
 .LabelB1
 	STA DisplayMode
-	JSR WritePage
+	JSR RenderPage
 	JSR CalculateNumPages
 	STY NumPages
 
@@ -137,36 +141,36 @@ include "chaptervars.asm"
 	JSR UpdateTotalPages
 
 	; 290 GOS.i
-	JSR LabelI
+	JSR HighlightItem
 
 .ReleaseKey
 	JSR HandleAutoRepeat
 
 .LabelC
 	; // Check for original Atom
-	LDA $bd00
-	CMP #$bf
+	LDA &bd00
+	CMP #&bf
 	BNE HandleUpKeyOriginal
 
 	; // Shift Key is pressed emulator (scroll up)
 	; 300cIF ?#B001&128>0 G.d
-	BIT $b001
+	BIT &b001
 	BMI LabelD
 	BPL LabelC2
 
 .HandleUpKeyOriginal
 	; // Ctrl Key is pressed Original Atom (scroll up)
 	; 300cIF ?#B001&64>0 G.d
-	BIT $b001
+	BIT &b001
 	BVS LabelD
 
 .LabelC2
 	; 310 IF Y>0 GOS.i;Y=Y-1;GOS.i;G.c
 	LDA Item
 	BEQ LabelC1
-	JSR LabelI
+	JSR HighlightItem
 	DEC Item
-	JSR LabelI
+	JSR HighlightItem
 	BMI ReleaseKey		; Branch always
 
 .LabelC1
@@ -175,7 +179,7 @@ include "chaptervars.asm"
 	CMP #1
 	BEQ LabelD
 	DEC Page
-	JSR LabelI
+	JSR HighlightItem
 	LDX LinesPerPage
 	DEX
 	STX Item
@@ -183,20 +187,20 @@ include "chaptervars.asm"
 
 .LabelD
 	; // Check for original Atom
-	LDA $bd00
-	CMP #$bf
+	LDA &bd00
+	CMP #&bf
 	BNE HandleDownKeyOriginal
 
 	; // Control Key is pressed emulator (scroll down)
 	; 400dIF?#B001&64>0 G.e
-	BIT $b001
+	BIT &b001
 	BVS CallInkey
 	BVC LabelD2		; Branch always
 
 .HandleDownKeyOriginal
 	; // Shift Key is pressed Original Atom (scroll down)
 	; 300cIF ?#B001&128>0 G.d
-	BIT $b001
+	BIT &b001
 	BMI CallInkey
 
 .LabelD2
@@ -207,9 +211,9 @@ include "chaptervars.asm"
 	BEQ LabelD1
 	JSR TestRowXActive
 	BEQ LabelD1
-	JSR LabelI
+	JSR HighlightItem
 	INC Item
-	JSR LabelI
+	JSR HighlightItem
 	JMP ReleaseKey
 
 .LabelD1
@@ -220,7 +224,7 @@ include "chaptervars.asm"
 	INC Page
 
 .SetItemToZero
-	JSR LabelI
+	JSR HighlightItem
 	LDA #0
 	STA Item
 	JMP LabelB		; Branch always
@@ -229,7 +233,7 @@ include "chaptervars.asm"
 	; Call InKey to scan the keyboard
 	JSR Inkey
 
-	CPY #$FF
+	CPY #&FF
 	BEQ LabelC		; Branch of no key pressed
 
 	CPY #&3B		; Escape
@@ -244,7 +248,7 @@ include "chaptervars.asm"
 IF (sddos2 = 1 OR sddos3 = 1)
 	EQUS "DRIVE 0", Return
 ELIF (econet = 1 OR gosdc = 1)
-	EQUS "DIR $", Return
+	EQUS "DIR &", Return
 ELSE
 	EQUS "CWD /", Return
 ENDIF
@@ -372,7 +376,7 @@ ENDIF
 	; 615 IF ?Q=31 GOS.h;G.a
 	CPY #31
 	BNE TestForSelect
-	JSR LabelH
+	JSR HelpScreen
 	JMP LabelA1
 
 .TestForSelect
@@ -389,10 +393,10 @@ ENDIF
 	BNE TestForAtoM
 	LDA PageState
 	BNE TestForAtoM
-	JSR LabelI
+	JSR HighlightItem
 	LDA #1
 	STA Page
-	JSR LabelJ
+	JSR SetupRenderingVars
 	JSR Search
 	JMP LabelA
 
@@ -432,7 +436,7 @@ ENDIF
 	JSR GetItemAddress
 
 IF (info_option = 1)
-   	JSR LabelInfo
+   	JSR InfoScreen
 	CMP #&1B
 	BNE BootContinue
 	JSR ClearScreen
@@ -447,7 +451,7 @@ ENDIF
 	JSR Dereference
 	; For SDDOS we pack two games per disk
 	LDA Title
-	AND #$7
+	AND #&7
 IF (sddos2 = 1)
 	LSR A
 ENDIF
@@ -463,15 +467,15 @@ IF (sddos2 = 1)
 	STA bootnum
 ENDIF
 	; 810 P=#100
-	; 820 $P="RUN MNU/"
+	; 820 &P="RUN MNU/"
 	; 830 P=P+LEN(P)
 	; 840 IF K>99 P?0=48+(K/100)%10;P=P+1
 	; 850 IF K>9 P?0=48+(K/10)%10;P=P+1
 	; 860 ?P=48+K%10;P?1=13;P?2=13
 
-	; CountString and OscliBuffer are the same ($100)
+	; CountString and OscliBuffer are the same (&100)
 
-	; 870 P.$12;LINK #FFF7
+	; 870 P.&12;LINK #FFF7
 	; 880 END
 	JSR ClearScreen
 
@@ -570,7 +574,7 @@ IF (sddos2 = 1 OR sddos3 = 1)
 ELIF (econet = 1 OR gosdc = 1)
 
 .RunCommand
-	EQUS "DIR $.ASA.",0
+	EQUS "DIR &.ASA.",0
 
 ELSE
 
@@ -579,11 +583,20 @@ ELSE
 
 ENDIF
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Support code
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Translated Basic Subroutines
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.Inkey
+{
+	JSR &FE71
+	BCC done
+	LDY #&ff
+.done
+	RTS
+}
 
+; Translates the Item index (in the RowReturn buffer) to a record address
 .GetItemAddress
 {
 	LDY Item		; Item starts at 0
@@ -605,153 +618,208 @@ ENDIF
 	LDX #Title
 	JMP Dereference
 }
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to show the help
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-IF (info_option = 1)
-
-.LabelInfo
+; Test if row X (0 based) is active
+.TestRowXActive
 {
-	JSR OscliString
-	EQUS "LOAD INFO", Return
-
-	; Metata starts on line 4
-	LDA #<(ScreenStart + 4 * CharsPerLine)
-	STA Screen
-	LDA #>(ScreenStart + 4 * CharsPerLine)
-	STA Screen + 1
-
-	LDX #1
-.loop1
-	JSR WriteFacetToScreen
-	INX
-	CPX #CollectionsFilterNum
-	BNE loop1
-
-.loop2
-	LDY #CollectionsByteOffset
-	LDA (Title), Y
-	BPL PrintTitle
-	JSR WriteFacetToScreen
-	INC Title
-	BNE loop2
-	INC Title + 1
-	BNE loop2
-
-; Finally go back and print the title (centred)
-.PrintTitle
-	LDX #&20
-	LDY #CollectionsByteOffset
-.TitleLoop1
-	LDA (Title),Y
-	BMI TitleDone1
-	INY
-	DEX
-	BNE TitleLoop1
-.TitleDone1
-	TXA
-	LSR A
-	ORA #<(ScreenStart + 2 * CharsPerLine)
-	STA Screen
-	LDA #>(ScreenStart + 2 * CharsPerLine)
-	STA Screen + 1
-
-	LDY #CollectionsByteOffset
-.TitleLoop2
-	LDA (Title),Y
-	BMI TitleDone
-	JSR WriteToScreen
-	INY
-	BNE TitleLoop2
-
-.TitleDone
-	LDY #2
-	JSR HighlightRowY
-	JMP Osrdch
-
-.NoneString
-	EQUS "NONE", -1
+	LDA RowReturnMSB, X
+	CMP #&FF
+	RTS
 }
 
-ENDIF
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to show the help
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Dereferences the pointer at zero page location X,X+1
+.Dereference
+{
+	LDA (0,X)
+	PHA
+	INC 0,X
+	BNE skip
+	INC 1,X
+.skip
+	LDA (0,X)
+	STA 1,X
+	PLA
+	STA 0,X
+	RTS
+}
 
-.LabelH
+; Handles auto repeat
+.HandleAutoRepeat
+{
+	LDA AutoRepeat
+	STA TmpPtr
+	LDA AutoRepeat + 1
+	STA TmpPtr + 1
+.loop
+	JSR Inkey
+	CPY #255
+	BNE pressed
+	BIT &b001
+	BPL pressed
+	BVS released
+.pressed
+	INC TmpPtr
+	BNE loop
+	INC TmpPtr + 1
+	BNE loop
+	; Key was not released
+	; Update the auto repeat timer to the repeat value
+	LDA #<AutoRepeat2
+	STA AutoRepeat
+	LDA #>AutoRepeat2
+	STA AutoRepeat + 1
+	RTS
+.released
+	; Key was released
+	; Update the auto repeat timer to the delay value
+	LDA #<AutoRepeat1
+	STA AutoRepeat
+	LDA #>AutoRepeat1
+	STA AutoRepeat + 1
+	RTS
+}
 
-	;900h*LOAD HELP 8000
-
+; Load Sort Table specified by SortType
+.LoadSortTable
+{
+	LDA SortType
+	ORA #'0'
+	STA number
 	JSR OscliString
-	EQUS "LOAD HELP", Return
 
-	;895 LINK#FFE3;P.$12;R.
+	EQUS "LOAD SORT"
+.number
+	EQUS " ", Return
 
-	JSR Osrdch
-.ClearScreen
-	LDA #12
-	JMP Oswrch
+	LDA ExecAddr
+	STA SortTablePtr
+	LDA ExecAddr + 1
+	STA SortTablePtr + 1
+	RTS
+}
 
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to invert line 2+Y on the screen
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Calculations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.LabelI
-	;900i?Q=Y+2;LINK(B+6);R.
-	LDA Item
-	CLC
-	ADC StartLine
-	TAY
-	JMP HighlightRowY
+; Text window size calculation
+;   Filter  Start   Lines
+;   Count   Line   Per Page
+;     0       2      13
+;     1       2      13
+;     2       3      12
+;     3       4      11
+;    ...     ...    ...
+.CalculateTextWindow
+{
+	LDA FilterType
+	LDX #&FF
+.loop1
+	INX
+.loop2
+	ASL A
+	BCS loop1
+   	BNE loop2
+	TXA
+	BNE notzero
+	SEC
+.notzero
+	ADC #1
+	STA StartLine
+	LDA #16
+	SBC StartLine		; C=1
+	STA LinesPerPage
+	RTS
+}
 
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to set the zero page locations prior to calling machine code
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Calculate the number of pages requires to display the current result
+; set, whose size is in TotalItems, by inefficiently dividing by
+; TotalItem by LinesPerPage.
+; Returns the number of pages in BCD in A, and in Binary in Y
+.CalculateNumPages
+{
+	SEC
+	LDA TotalItems
+	SBC #1
+	STA BinBuffer
+	LDA TotalItems + 1
+	SBC #0
+	STA BinBuffer+1
+	BCC return_one_page
 
-.LabelJ
-
-	;950j!#80=Z
-	;not needed as these are collapsed
-
-	;951 !#82=1+(P-1)*L
 	LDY #0
-	STY StartRow + 1
+	TYA
+.loop
 	INY
-	STY StartRow
-.LabelJ1
-	CPY Page
-	BEQ LabelJ3
+	SED
 	CLC
-	LDA StartRow
-	ADC LinesPerPage
-	STA StartRow
-	BCC LabelJ2
-	INC StartRow + 1
-.LabelJ2
-	INY
-	BNE LabelJ1
-
-.LabelJ3
-	LDY #&0F
-	LDA #&FF
-.LabelJ4
-	STA RowReturnMSB, Y
-	DEY
-	BPL LabelJ4
+	ADC #1
+	CLD
+	PHA
+	SEC
+	LDA BinBuffer
+	SBC LinesPerPage
+	STA BinBuffer
+	LDA BinBuffer+1
+	SBC #0
+	STA BinBuffer+1
+	PLA
+	BCS loop
 	RTS
 
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	; Subroutine to update the page header
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.return_one_page
+	LDY #1
+	TYA
+	RTS
+}
 
-	; 1000xP.$30'"                                "$30
-	; 1010 IF F=0 P."ATOMMC";I=S;Z=!(C+S*2)&#FFFF
-	; 1020 IF F>0 P."FILTER";I=F;Z=!(D+F*2 + 2)&#FFFF
-	; 1030 P." BY ";GOS.y;P."  PAGE   /  "
-	; 1040 IF G>0 I=G;P."  ";GOS.z;P."="$E'
-	; 1050 Z=Z+2
-	; 1060 Y=-2;GOS.i;Y=0;P=1;R.
+; Refreshes the Page M OF N text in the top line
+.UpdateTotalPages
+{
+	; Write Page to the CountString
+	LDA Page
+	STA BinBuffer
+	LDA #0
+	STA BinBuffer+1
+
+	JSR BinToDecimal8
+
+	; X is used as the index into CountString
+	LDX #0
+
+	; Make sure that we don't suppress zeros
+	LDY #&FF
+	STY SuppressFlag
+
+	JSR WriteHex
+
+	; Write the page separator into CountString
+	LDA #'/'
+	LDX #2
+	STA CountString, X
+
+	JSR CalculateNumPages
+
+	; Write the number of pages into to the CountString
+	LDX #3
+	JSR WriteHex
+
+	LDX #0
+.loop
+	LDA CountString,X
+	AND #&3F
+	ORA #&80
+	STA ScreenStart + CharsPerLine - 5, X
+	INX
+	CPX #5
+	BNE loop
+	RTS
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Render Page Header
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .RenderHeader
 {
@@ -829,216 +897,306 @@ ENDIF
 
 .done
 	LDY #0
-	;; Fall through to highlight the top trop
+	JMP HighlightRowY
 }
 
-.HighlightRowY
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Search
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.Search
 {
-	JSR ScreenLineY
-	LDY #2
-.loop1
-	JSR WaitUntilVSync
+	LDA DisplayMode
+	ORA #DMHighlightMatches
+	STA DisplayMode
+
+	; Update current results set and number of pages
+	JSR RenderPage
+	JSR UpdateTotalPages
+
+	; Returns with Y being the end of the search buffer
+	LDA #&A0
+	JSR ShowCurrentSearch
+
+	; Read a character
+	JSR Osrdch
+
+	; Return cancels the search
+	CMP #&1B
+	BNE NotEscape
+	LDY #0
+	STY SearchBuffer
+	JMP SearchExit
+
+.NotEscape
+	; Return returns with the seach in place
+	CMP #Return
+	BEQ SearchExit
+
+	CMP #&7F
+	BNE Search1
+
+	; Delete at the beginning of the line also terminates the search
+	CPY #0
+	BEQ SearchExit
+
 	DEY
-	BNE loop1
-
-	LDY #$1F
-.loop2
-	LDA (Screen),Y
-	EOR #$80
-	STA (Screen),Y
-	DEY
-	BPL loop2
-	RTS
-}
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Machine Code Subroutines
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-.TestRowXActive
-{
-	LDA RowReturnMSB, X
-	CMP #&FF
-	RTS
-}
-
-	; Dereferences the pointer at zero page location X,X+1
-.Dereference
-{
-	LDA (0,X)
-	PHA
-	INC 0,X
-	BNE skip
-	INC 1,X
-.skip
-	LDA (0,X)
-	STA 1,X
-	PLA
-	STA 0,X
-	RTS
-}
-
-.HandleAutoRepeat
-	LDA AutoRepeat
-	STA TmpPtr
-	LDA AutoRepeat + 1
-	STA TmpPtr + 1
-.HandleAutoRepeatLoop
-	JSR Inkey
-	CPY #255
-	BNE HandleAutoRepeatPressed
-	BIT $b001
-	BPL HandleAutoRepeatPressed
-	BVS HandleAutoRepeatKeyReleased
-.HandleAutoRepeatPressed
-	INC TmpPtr
-	BNE HandleAutoRepeatLoop
-	INC TmpPtr + 1
-	BNE HandleAutoRepeatLoop
-	; Key was not released
-	; Update the auto repeat timer to the repeat value
-	LDA #<AutoRepeat2
-	STA AutoRepeat
-	LDA #>AutoRepeat2
-	STA AutoRepeat + 1
-	RTS
-.HandleAutoRepeatKeyReleased
-	; Key was released
-	; Update the auto repeat timer to the delay value
-	LDA #<AutoRepeat1
-	STA AutoRepeat
-	LDA #>AutoRepeat1
-	STA AutoRepeat + 1
-	RTS
-
-.LoadSortTable
-	; 60 *LOAD MNU/SORT
-	LDA SortType
-	ORA #'0'
-	STA SortDatNum
-	JSR OscliString
-
-	EQUS "LOAD SORT"
-.SortDatNum
-	EQUS " ", Return
-
-.LoadSortTable1
-	; 70 C=!#CD&#FFFF
-	LDA ExecAddr
-	STA SortTablePtr
-	LDA ExecAddr + 1
-	STA SortTablePtr + 1
-	RTS
-
-.WriteDecimal:
-	JSR BinToDecimal16
-	; Set the flag to support suppression of leading zeros
-	STY SuppressFlag
-	LDY #2
-	; Output the BcdBuffer digits, MS first
-.DecLoop
-	LDA BcdBuffer,Y
-	JSR WriteHex
-	DEY
-	BPL DecLoop
-	RTS
-
-.BinToDecimal16
 	LDA #0
-	STA BcdBuffer
-	STA BcdBuffer+1
-	STA BcdBuffer+2
-	SED
-	LDY #16
-.BinToDecimal16Loop:
-	; Handle the binary bits one at a time
-	ASL BinBuffer
-	ROL BinBuffer+1
-	; Add into the BCD accumulator
-	LDA BcdBuffer
-	ADC BcdBuffer
-	STA BcdBuffer
-	LDA BcdBuffer+1
-	ADC BcdBuffer+1
-	STA BcdBuffer+1
-	LDA BcdBuffer+2
-	ADC BcdBuffer+2
-	STA BcdBuffer+2
+
+.Search1
+	STA SearchBuffer,Y
+	INY
+	LDA #0
+	STA SearchBuffer,Y
+
+	JMP Search
+
+.SearchExit
+	CPY #0
+	BNE ShowCurrentSearchNoCursor
+	; Fall though to...
+}
+
+.ClearSearchLine
+{
+	LDA #' '
+	LDY #CharsPerLine - 1
+.SearchExit2
+	STA ScreenStart + &1E0,Y
 	DEY
-	BNE BinToDecimal16Loop
-	CLD
+	BPL SearchExit2
+	RTS
+}
+
+.ShowCurrentSearchNoCursor
+{
+	LDA #&20
+	; Fall though to...
+}
+
+.ShowCurrentSearch
+{
+	; Save the cursor
+	PHA
+
+	LDA #<(ScreenStart + &1E0)
+	STA Screen
+	LDA #>(ScreenStart + &1E0)
+	STA Screen + 1
+
+	LDY #0
+.ShowCurrentSearch1
+	LDA SearchString,Y
+	BEQ ShowCurrentSearch2
+	JSR WriteToScreen
+	INY
+	BNE ShowCurrentSearch1
+
+.ShowCurrentSearch2
+	LDY #0
+.ShowCurrentSearch3
+	LDA SearchBuffer,Y
+	CMP #0
+	BEQ ShowCurrentSearch4
+	JSR WriteToScreen
+	INY
+	BNE ShowCurrentSearch3
+
+.ShowCurrentSearch4
+	STY TmpY
+	PLA
+	LDY #0
+	STA (Screen),Y
+	INY
+	LDA #&20
+	STA (Screen),Y
+	LDY TmpY
 	RTS
 
-.WriteHex
-	PHA
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR WriteHex1
-	PLA
-.WriteHex1
-	AND #$0f
-	BNE WriteHex2
-	; Suppress leading zero
-	BIT SuppressFlag
-	BPL WriteHex4
-.WriteHex2
-	; Make sure bit 7 of SuppressFlag is set, so we don't suppress further zeros
-	SEC
-	ROR	SuppressFlag
-	CMP #$0a
-	BCC WriteHex3
-	ADC #$06
-.WriteHex3
-	ADC #$30
-	STA CountString,X
-	INX
-.WriteHex4
-	RTS
+.SearchString
+	EQUS "  SEARCH="
+	EQUB 0
+}
 
-IF (econet = 1)
-.WritePath
-	SEC
-	ROR SuppressFlag
-	LDA BinBuffer + 1
-	JSR WriteHex1
-	LDA #DirSep
-	STA OscliBuffer, X
-	INX
-	LDA BinBuffer
-	PHA
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR WriteHex1
-	LDA #DirSep
-	STA OscliBuffer, X
-	INX
-	PLA
-	JMP WriteHex1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Info Screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ELIF (gosdc = 1)
-.WritePath
-	SEC
-	ROR SuppressFlag
-	LDA #'E'
-	STA OscliBuffer, X
+IF (info_option = 1)
+
+.InfoScreen
+{
+	JSR OscliString
+	EQUS "LOAD INFO", Return
+
+	; Metata starts on line 4
+	LDA #<(ScreenStart + 4 * CharsPerLine)
+	STA Screen
+	LDA #>(ScreenStart + 4 * CharsPerLine)
+	STA Screen + 1
+
+	LDX #1
+.filter_loop1
+	JSR WriteFacetToScreen
 	INX
-	LDA BinBuffer + 1
-	JSR WriteHex1
-	LDA BinBuffer
-	PHA
+	CPX #CollectionsFilterNum
+	BNE filter_loop1
+
+.filter_loop2
+	LDY #CollectionsByteOffset
+	LDA (Title), Y
+	BPL title
+	JSR WriteFacetToScreen
+	INC Title
+	BNE filter_loop2
+	INC Title + 1
+	BNE filter_loop2
+
+; Finally go back and print the title (centred)
+.title
+	LDX #CharsPerLine
+	LDY #CollectionsByteOffset
+.title_loop1
+	LDA (Title),Y
+	BMI title_done1
+	INY
+	DEX
+	BNE title_loop1
+
+.title_done1
+	TXA
 	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR WriteHex1
-	PLA
-	JMP WriteHex1
+	ORA #<(ScreenStart + 2 * CharsPerLine)
+	STA Screen
+	LDA #>(ScreenStart + 2 * CharsPerLine)
+	STA Screen + 1
+
+	LDY #CollectionsByteOffset
+.title_loop2
+	LDA (Title),Y
+	BMI title_done2
+	JSR WriteToScreen
+	INY
+	BNE title_loop2
+
+.title_done2
+	LDY #2
+	JSR HighlightRowY
+	JMP Osrdch
+}
 ENDIF
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Help Screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.HelpScreen
+{
+	JSR OscliString
+	EQUS "LOAD HELP", Return
+	JSR Osrdch
+	; fall though to
+}
+
+.ClearScreen
+{
+	LDA #12
+	JMP Oswrch
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Multi Facet Filter Workspace
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; TODO: Move these out of code into some external buffer space
+
+.FacetMasks
+FOR i, 0, CollectionsByteOffset - 1, 1
+	EQUB &00
+NEXT
+.CollectionsFacetMask
+	EQUB &00
+
+.FacetValues
+FOR i, 0, CollectionsByteOffset - 1, 1
+	EQUB &00
+NEXT
+.CollectionsFacetValue
+	EQUB &00
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Multi Facet Filter Fixed Data
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.FilterTypeMask
+	EQUB &01, &02, &04, &08
+	EQUB &10, &20, &40, &80
+
+
+.FacetByteOffsetTable
+	EQUB PubByteOffset
+	EQUB PubByteOffset
+	EQUB GenreByteOffset
+	EQUB ChunkByteOffset
+	EQUB RamByteOffset
+	EQUB RomByteOffset
+	EQUB VersionByteOffset
+	EQUB JoystickByteOffset
+	EQUB CollectionsByteOffset
+
+.FacetMaskTable
+	EQUB PubMask
+	EQUB PubMask
+	EQUB GenreMask
+	EQUB ChunkMask
+	EQUB RamMask
+	EQUB RomMask
+	EQUB VersionMask
+	EQUB JoystickMask
+	EQUB CollectionsMask
+
+.FacetXorTable
+	EQUB PubXor
+	EQUB PubXor
+	EQUB GenreXor
+	EQUB ChunkXor
+	EQUB RamXor
+	EQUB RomXor
+	EQUB VersionXor
+	EQUB JoystickXor
+	EQUB CollectionsXor
+
+;; This is a table of branch offsets used in some self modifyinf code
+;; to avoid the cost of a loop:
+;;     vvvvvv is modified based on the table value
+;; BNE offset
+;; LSR A        ; offset 0 shifts 7 bits
+;; LSR A	; offset 1 shifts 6 bits
+;; LSR A	; offset 2 shifts 5 bits
+;; LSR A	; offset 3 shifts 4 bits
+;; LSR A	; offset 4 shifts 3 bits
+;; LSR A	; offset 5 shifts 2 bits
+;; LSR A	; offset 6 shifts 1 bits
+;; RTS 		; offset 7 shifts 0 bits
+
+.FacetBitOffsetTable
+	EQUB 7 - PubBitOffset
+	EQUB 7 - PubBitOffset
+	EQUB 7 - GenreBitOffset
+	EQUB 7 - ChunkBitOffset
+	EQUB 7 - RamBitOffset
+	EQUB 7 - RomBitOffset
+	EQUB 7 - VersionBitOffset
+	EQUB 7 - JoystickBitOffset
+	EQUB 7 - CollectionsBitOffset
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Multi Facet Filtering Code
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Clear Filter
+;     Y = Filter Number
 .ClearFilterY
 {
 	CPY #0
@@ -1063,8 +1221,9 @@ ENDIF
 	RTS
 }
 
-; Y = Filter Type
-; A = Filter Value
+; Add Filter
+;     Y = Filter Number
+;     A = Filter Value
 .AddFilterY
 {
 	; Shift the value to the right bit position
@@ -1102,10 +1261,7 @@ ENDIF
 	RTS
 }
 
-.FilterTypeMask
-	EQUB &01, &02, &04, &08
-	EQUB &10, &20, &40, &80
-
+; List all filters in human readable form
 .ListFilters
 {
 	LDA #<FacetValues
@@ -1126,221 +1282,205 @@ ENDIF
 	RTS
 }
 
-; X = facet number
-; Facet Value read from (Title)
-.WriteFacetToScreen
+;; Extract the filter value from the current Title
+;; TODO: could self modification could be done less often?
+.ExtractFilterValue
 {
- 	JSR GetAnnotationTable	; Preserves X
-
-	LDY PadTable, X
-	JSR YSpaces		; preserves X
-
-	JSR ScreenStringX	; preserves X
-
-	LDA #':'
-	JSR WriteToScreen	; preserves A, X, Y
-	LDA #' '
-	JSR WriteToScreen	; preserves A, X, Y
-
-	TXA
+	LDA FacetBitOffsetTable, Y
+	STA shift + 1
+	LDA FacetMaskTable, Y
+	STA mask + 1
+	LDA FacetXorTable, Y
+	STA xor + 1
+	LDA FacetByteOffsetTable, Y
 	TAY
-	JSR ExtractTableValue   ; Preserves X, result in A
-
-	JSR GetAnnotationString ; Preserves X, result in TmpPtr
-
-	JSR ScreenString
-	;; Fall through to PadToEOL
-}
-
-.PadToEOL
-{
-.loop
-	LDA Screen
-	AND #&1F
-	BEQ done
-	LDA #' '
-	JSR WriteToScreen
-	BNE loop
-.done
+	LDA (Title), Y
+.mask
+	AND #&00
+.xor
+	EOR #&00
+.shift
+	BNE P%+2
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	LSR A
 	RTS
 }
 
-.YSpaces
-{
-	LDA #' '
-.loop
-	DEY
-	BMI done
-	JSR WriteToScreen	; preserves A, X, Y
-	BNE loop
-.done
-	RTS
-}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Annotations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Filter  Start  Lines
-; Count	  Line	 Per Page
-; 0	  2	 13
-; 1	  2	 13
-; 2	  3	 12
-; 3	  4	 11
-; ...
 
-.CalculateTextWindow
+; Calculate a pointer to the requested annotation table, skipping the length field
+; Get the address of the relevant secondary table for annotations
+; - in normal mode (DisplayMode bit 7 = 0) this is used for rendering the annotation
+; - in update counts mode (DisplayMode bit 7 = 1) this is where the current filter counts are maintained
+
+; X=Annotation type
+.GetAnnotationTable
 {
-	LDA FilterType
-	LDX #$FF
-.loop1
-	INX
-.loop2
-	ASL A
-	BCS loop1
-   	BNE loop2
 	TXA
-	BNE notzero
-	SEC
-.notzero
-	ADC #1
-	STA StartLine
-	LDA #16
-	SBC StartLine		; C=1
-	STA LinesPerPage
+	ASL A
+	TAY
+	INY
+	INY
+	LDA (MenuTablePtr),Y
+	STA AnnotationTable
+	INY
+	LDA (MenuTablePtr),Y
+	STA AnnotationTable + 1
 	RTS
 }
 
-.ScreenLineY
+; A=Annotation id value (7 bits)
+.GetAnnotationRecord
 {
-	LDA #<(ScreenStart)
-	STA Screen
-	LDA #>(ScreenStart)
-	STA Screen+1
-	TYA
 	ASL A
-	ASL A
-	ASL A
-	ASL A
-	ASL A
-	BCC nocarry
-	INC Screen+1
-.nocarry
+	TAY
+	LDA (AnnotationTable), Y
+	STA AnnotationPtr
+	INY
+	LDA (AnnotationTable), Y
+	STA AnnotationPtr + 1
+	RTS
+}
+
+; A=Annotation id value (7 bits)
+.GetAnnotationString
+{
+	JSR GetAnnotationRecord
 	CLC
-	ADC Screen
-	STA Screen
+	LDA Annotation
+	BEQ isShortPub
+	LDA #FacetTitleOffset
+.isShortPub
+	ADC AnnotationPtr
+	STA TmpPtr
+	LDA #0
+	ADC AnnotationPtr + 1
+	STA TmpPtr + 1
 	RTS
 }
 
-.ScreenStringX
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Accumulate the annotation counts
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.AccumulateAnnotationCounts
 {
-	LDA StringTableLSB, X
-	STA TmpPtr
-	LDA StringTableMSB, X
-	STA TmpPtr + 1
-	; fall through to
+	LDY Annotation
+	CPY #CollectionsFilterNum
+	BEQ collection
+
+	JSR ExtractFilterValue
+
+.update_count
+	JSR GetAnnotationRecord
+	LDY #FacetWorkingOffset + 1 ; count is stored at offset 3 (LSB) and 2 (MSB)
+	SEC
+.update_loop
+	LDA (AnnotationPtr),Y
+	ADC #0
+	STA (AnnotationPtr),Y
+	DEY
+	BCS update_loop	; skip back in the rare case of carry
+	RTS 		; (you only get this if you search for <space>)
+
+.collection
+	LDY #CollectionsByteOffset
+.collection_loop
+	LDA (Title),Y
+	BPL done
+	AND #&7F		; TODO: Fix hard-coded mask
+	STY TmpY
+	JSR update_count
+	LDY TmpY
+	INY
+	BNE collection_loop
+.done
+	RTS
 }
 
-.ScreenString
+; Set the first two bytes of each annotation record to 0x80, 0x00
+; We will use these to store counts of the number of search filtered items
+.ClearAnnotationCounts
+{
+	LDX Annotation
+	JSR GetAnnotationTable
+.loop
+	LDY #0
+	LDA (AnnotationTable), Y
+	STA Tmp
+	INY
+	LDA (AnnotationTable), Y
+	STA Tmp + 1
+	BEQ done
+	LDY #FacetWorkingOffset
+	LDA #&80
+	STA (Tmp),Y
+	INY
+	LDA #&00
+	STA (Tmp),Y
+	CLC
+	LDA AnnotationTable
+	ADC #&02
+	STA AnnotationTable
+	BCC loop
+	INC AnnotationTable + 1
+	BNE loop
+.done
+	RTS
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Setup for Page Rendering
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+.SetupRenderingVars
 {
 	LDY #0
-.loop
-	LDA (TmpPtr),Y
-	BMI done
-	BEQ done
-	JSR WriteToScreen
+	STY StartRow + 1
 	INY
-	BNE loop
-.done
+	STY StartRow
+.j1
+	CPY Page
+	BEQ j3
+	CLC
+	LDA StartRow
+	ADC LinesPerPage
+	STA StartRow
+	BCC j2
+	INC StartRow + 1
+.j2
+	INY
+	BNE j1
+
+.j3
+	LDY #&0F
+	LDA #&FF
+.j4
+	STA RowReturnMSB, Y
+	DEY
+	BPL j4
 	RTS
 }
 
-.StringTableLSB
-	EQUB <String0
-	EQUB <String1
-	EQUB <String2
-	EQUB <String3
-	EQUB <String4
-	EQUB <String5
-	EQUB <String6
-	EQUB <String7
-	EQUB <String8
-	EQUB <String9
-	EQUB <String10
-	EQUB <String11
-
-.StringTableMSB
-	EQUB >String0
-	EQUB >String1
-	EQUB >String2
-	EQUB >String3
-	EQUB >String4
-	EQUB >String5
-	EQUB >String6
-	EQUB >String7
-	EQUB >String8
-	EQUB >String9
-	EQUB >String10
-	EQUB >String11
-
-.String0
-	EQUS "TITLE", 0
-
-.String1
-	EQUS "PUBLISHER", 0
-
-.String2
-	EQUS "GENRE", 0
-
-.String3
-	EQUS "CHAPTER", 0
-
-.String4
-	EQUS "RAM NEEDED", 0
-
-.String5
-	EQUS "ROM NEEDED", 0
-
-.String6
-	EQUS "UPDATED", 0
-
-.String7
-	EQUS "JOYSTICK", 0
-
-.String8
-	EQUS "COLLECTION", 0
-
-.String9
-	EQUS "FILTER BY ", 0
-
-.String10
-	EQUS "SORTED BY ", 0
-
-.String11
-	EQUS "  PAGE   /  ", 0
-
-; Padding for the first 9 strings
-
-.PadTable
-	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
-
-.FacetMasks
-FOR i, 0, CollectionsByteOffset - 1, 1
-	EQUB &00
-NEXT
-.CollectionsFacetMask
-	EQUB &00
-
-.FacetValues
-FOR i, 0, CollectionsByteOffset - 1, 1
-	EQUB &00
-NEXT
-.CollectionsFacetValue
-	EQUB &00
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Page Rendering
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Display Mode controls behaviour
 ; Bit 7 - 1=disable rendering (i.e. count only)
 ; Bit 6 - 1=disable search/filtering
 ; Bit 5 - 1=highlight search matches
 
-.WritePage
+.RenderPage
+{
 	LDA SearchBuffer
 	STA SearchFirst
 
@@ -1401,7 +1541,7 @@ NEXT
 	; Increment CurrentSort to point to the next title
 	CLC
 	LDA CurrentSort
-	ADC #$02
+	ADC #&02
 	STA CurrentSort
 	BCC IncSort
 	INC CurrentSort + 1
@@ -1562,7 +1702,6 @@ NEXT
 	RTS
 
 .WriteLine
-
 	; Keep track of how many chars we have available
 
 	LDX #CharsPerLine - 3
@@ -1589,7 +1728,7 @@ NEXT
 
 .NormalAnnotation
 	LDY Annotation
-	JSR ExtractTableValue
+	JSR ExtractFilterValue
 
 	BPL NotNullCollection
 
@@ -1680,7 +1819,6 @@ NEXT
 	LDX TmpX
 	RTS
 
-
 .PossibleMatch
 	PHA
 	TYA
@@ -1708,7 +1846,7 @@ NEXT
 	PLA
 .Match1
 	LDA (Title),Y
-	ORA #$80
+	ORA #&80
 	JSR WriteToScreen
 	INY
 	DEC TmpX
@@ -1716,111 +1854,19 @@ NEXT
 	DEX
 	BEQ WriteTitleHighlight1
 	BNE Match1
-
-.Inkey
-{
-	JSR $FE71
-	BCC done
-	LDY #$ff
-.done
-	RTS
 }
 
-.FacetByteOffsetTable
-	EQUB PubByteOffset
-	EQUB PubByteOffset
-	EQUB GenreByteOffset
-	EQUB ChunkByteOffset
-	EQUB RamByteOffset
-	EQUB RomByteOffset
-	EQUB VersionByteOffset
-	EQUB JoystickByteOffset
-	EQUB CollectionsByteOffset
-
-.FacetMaskTable
-	EQUB PubMask
-	EQUB PubMask
-	EQUB GenreMask
-	EQUB ChunkMask
-	EQUB RamMask
-	EQUB RomMask
-	EQUB VersionMask
-	EQUB JoystickMask
-	EQUB CollectionsMask
-
-.FacetXorTable
-	EQUB PubXor
-	EQUB PubXor
-	EQUB GenreXor
-	EQUB ChunkXor
-	EQUB RamXor
-	EQUB RomXor
-	EQUB VersionXor
-	EQUB JoystickXor
-	EQUB CollectionsXor
-
-;; This is a table of branch offsets used in some self modifyinf code
-;; to avoid the cost of a loop:
-;;     vvvvvv is modified based on the table value
-;; BNE offset
-;; LSR A        ; offset 0 shifts 7 bits
-;; LSR A	; offset 1 shifts 6 bits
-;; LSR A	; offset 2 shifts 5 bits
-;; LSR A	; offset 3 shifts 4 bits
-;; LSR A	; offset 4 shifts 3 bits
-;; LSR A	; offset 5 shifts 2 bits
-;; LSR A	; offset 6 shifts 1 bits
-;; RTS 		; offset 7 shifts 0 bits
-
-.FacetBitOffsetTable
-	EQUB 7 - PubBitOffset
-	EQUB 7 - PubBitOffset
-	EQUB 7 - GenreBitOffset
-	EQUB 7 - ChunkBitOffset
-	EQUB 7 - RamBitOffset
-	EQUB 7 - RomBitOffset
-	EQUB 7 - VersionBitOffset
-	EQUB 7 - JoystickBitOffset
-	EQUB 7 - CollectionsBitOffset
-
-;; Extract Filter/Annotation ID from title table and nomalize
-
-;; TODO: the self modification could be done less often
-;; i.e. when ever Annotation is updated
-
-.ExtractTableValue
-{
-	LDA FacetBitOffsetTable, Y
-	STA shift + 1
-	LDA FacetMaskTable, Y
-	STA mask + 1
-	LDA FacetXorTable, Y
-	STA xor + 1
-	LDA FacetByteOffsetTable, Y
-	TAY
-	LDA (Title), Y
-.mask
-	AND #&00
-.xor
-	EOR #&00
-.shift
-	BNE P%+2
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	RTS
-}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Screen Handling Code
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .WriteToScreen
+{
 	PHA
 	STY TmpY
 	LDY #0
 
-	AND #$BF
+	AND #&BF
 	STA (Screen),Y
 	INC Screen
 	BNE WriteToScreen1
@@ -1828,16 +1874,19 @@ NEXT
 
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
-	AND #$81
+	AND #&81
 	STA Screen + 1
 
 .WriteToScreen1
 	LDY TmpY
 	PLA
 	RTS
-	; Converts the 16-bit value in $BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
+}
 
+
+; Converts the 16-bit value in &BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
 .WriteCount:
+{
 	TXA
 	PHA
 	LDA #'('
@@ -1845,11 +1894,11 @@ NEXT
 	LDX #1
 	JSR WriteDecimal
 	CPX #1
-	BNE NotZero
+	BNE not_zero
 	LDA #'0'
 	STA CountString,X
 	INX
-.NotZero
+.not_zero
 	LDA #')'
 	STA CountString,X
 	INX
@@ -1858,15 +1907,16 @@ NEXT
 	PLA
 	TAX
 	RTS
-
+}
 
 .BinToDecimal8
+{
 	LDA #0
 	STA BcdBuffer
 	STA BcdBuffer+1
 	SED
 	LDY #8
-.BinToDecimal8Loop:
+.loop
 	; Handle the binary bits one at a time
 	ASL BinBuffer
 	; Add into the BCD accumulator
@@ -1877,320 +1927,325 @@ NEXT
 	ADC BcdBuffer+1
 	STA BcdBuffer+1
 	DEY
-	BNE BinToDecimal8Loop
+	BNE loop
 	CLD
 	LDA BcdBuffer
 	RTS
+}
 
-.Search
-
-	LDA DisplayMode
-	ORA #DMHighlightMatches
-	STA DisplayMode
-
-	; Update current results set and number of pages
-	JSR WritePage
-	JSR UpdateTotalPages
-
-	; Returns with Y being the end of the search buffer
-	LDA #$A0
-	JSR ShowCurrentSearch
-
-	; Read a character
-	JSR Osrdch
-
-	; Return cancels the search
-	CMP #&1B
-	BNE NotEscape
-	LDY #0
-	STY SearchBuffer
-	JMP SearchExit
-
-.NotEscape
-	; Return returns with the seach in place
-	CMP #Return
-	BEQ SearchExit
-
-	CMP #$7F
-	BNE Search1
-
-	; Delete at the beginning of the line also terminates the search
-	CPY #0
-	BEQ SearchExit
-
-	DEY
-	LDA #0
-
-.Search1
-
-	STA SearchBuffer,Y
-	INY
-	LDA #0
-	STA SearchBuffer,Y
-
-	JMP Search
-
-.SearchExit
-	CPY #0
-	BNE ShowCurrentSearchNoCursor
-
-.ClearSearchLine
-	LDA #' '
-	LDY #CharsPerLine - 1
-.SearchExit2
-	STA ScreenStart + $1E0,Y
-	DEY
-	BPL SearchExit2
-	RTS
-
-.ShowCurrentSearchNoCursor
-	LDA #$20
-
-.ShowCurrentSearch
-	; Save the cursor
-	PHA
-
-	LDA #<(ScreenStart + $1E0)
-	STA Screen
-	LDA #>(ScreenStart + $1E0)
-	STA Screen + 1
-
-	LDY #0
-.ShowCurrentSearch1
-	LDA SearchString,Y
-	BEQ ShowCurrentSearch2
-	JSR WriteToScreen
-	INY
-	BNE ShowCurrentSearch1
-
-.ShowCurrentSearch2
-	LDY #0
-.ShowCurrentSearch3
-	LDA SearchBuffer,Y
-	CMP #0
-	BEQ ShowCurrentSearch4
-	JSR WriteToScreen
-	INY
-	BNE ShowCurrentSearch3
-
-.ShowCurrentSearch4
-	STY TmpY
-	PLA
-	LDY #0
-	STA (Screen),Y
-	INY
-	LDA #$20
-	STA (Screen),Y
-	LDY TmpY
-	RTS
-
-.SearchString
-	EQUS "  SEARCH="
-	EQUB 0
-
-.UpdateTotalPages
-
-
-	; Write Page to the CountString
-	LDA Page
-	STA BinBuffer
-	LDA #0
-	STA BinBuffer+1
-
-	JSR BinToDecimal8
-
-	; X is used as the index into CountString
-	LDX #0
-
-	; Make sure that we don't suppress zeros
-	LDY #$FF
+.WriteDecimal
+{
+	JSR BinToDecimal16
+	; Set the flag to support suppression of leading zeros
 	STY SuppressFlag
-
-	JSR WriteHex
-
-	; Write the page separator into CountString
-	LDA #'/'
-	LDX #2
-	STA CountString, X
-
-	JSR CalculateNumPages
-
-	; Write the number of pages into to the CountString
-	LDX #3
-	JSR WriteHex
-
-	LDX #0
-.UpdateTotalPages1
-	LDA CountString,X
-	AND #$3F
-	ORA #$80
-	STA ScreenStart + CharsPerLine - 5,X
-	INX
-	CPX #5
-	BNE UpdateTotalPages1
-	RTS
-
-	; Reads the total number of filtered rows returned
-	; Inefficiently divide number of rows by the rows per page
-	; Returns the number of pages in BCD in A
-	; Returns the number of pages in Binary in Y
-.CalculateNumPages
-{
-	SEC
-	LDA TotalItems
-	SBC #1
-	STA BinBuffer
-	LDA TotalItems + 1
-	SBC #0
-	STA BinBuffer+1
-	BCC return_one_page
-
-	LDY #0
-	TYA
+	LDY #2
+	; Output the BcdBuffer digits, MS first
 .loop
-	INY
-	SED
-	CLC
-	ADC #1
-	CLD
-	PHA
-	SEC
-	LDA BinBuffer
-	SBC LinesPerPage
-	STA BinBuffer
-	LDA BinBuffer+1
-	SBC #0
-	STA BinBuffer+1
-	PLA
-	BCS loop
-	RTS
-
-.return_one_page
-	LDY #1
-	TYA
-	RTS
-}
-
-; Calculate a pointer to the requested annotation table, skipping the length field
-; Get the address of the relevant secondary table for annotations
-; - in normal mode (DisplayMode bit 7 = 0) this is used for rendering the annotation
-; - in update counts mode (DisplayMode bit 7 = 1) this is where the current filter counts are maintained
-
-; X=Annotation type
-.GetAnnotationTable
-{
-	TXA
-	ASL A
-	TAY
-	INY
-	INY
-	LDA (MenuTablePtr),Y
-	STA AnnotationTable
-	INY
-	LDA (MenuTablePtr),Y
-	STA AnnotationTable + 1
-	RTS
-}
-
-; A=Annotation id value (7 bits)
-.GetAnnotationRecord
-{
-	ASL A
-	TAY
-	LDA (AnnotationTable), Y
-	STA AnnotationPtr
-	INY
-	LDA (AnnotationTable), Y
-	STA AnnotationPtr + 1
-	RTS
-}
-
-; A=Annotation id value (7 bits)
-.GetAnnotationString
-{
-	JSR GetAnnotationRecord
-	CLC
-	LDA Annotation
-	BEQ isShortPub
-	LDA #FacetTitleOffset
-.isShortPub
-	ADC AnnotationPtr
-	STA TmpPtr
-	LDA #0
-	ADC AnnotationPtr + 1
-	STA TmpPtr + 1
-	RTS
-}
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Accumulate the annotation counts
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-.AccumulateAnnotationCounts
-{
-	LDY Annotation
-	CPY #CollectionsFilterNum
-	BEQ collection
-
-	JSR ExtractTableValue
-
-.update_count
-	JSR GetAnnotationRecord
-	LDY #FacetWorkingOffset + 1 ; count is stored at offset 3 (LSB) and 2 (MSB)
-	SEC
-.update_loop
-	LDA (AnnotationPtr),Y
-	ADC #0
-	STA (AnnotationPtr),Y
+	LDA BcdBuffer,Y
+	JSR WriteHex
 	DEY
-	BCS update_loop	; skip back in the rare case of carry
-	RTS 		; (you only get this if you search for <space>)
+	BPL loop
+	RTS
+}
 
-.collection
-	LDY #CollectionsByteOffset
-.collection_loop
-	LDA (Title),Y
+.BinToDecimal16
+{
+	LDA #0
+	STA BcdBuffer
+	STA BcdBuffer+1
+	STA BcdBuffer+2
+	SED
+	LDY #16
+.loop
+	; Handle the binary bits one at a time
+	ASL BinBuffer
+	ROL BinBuffer+1
+	; Add into the BCD accumulator
+	LDA BcdBuffer
+	ADC BcdBuffer
+	STA BcdBuffer
+	LDA BcdBuffer+1
+	ADC BcdBuffer+1
+	STA BcdBuffer+1
+	LDA BcdBuffer+2
+	ADC BcdBuffer+2
+	STA BcdBuffer+2
+	DEY
+	BNE loop
+	CLD
+	RTS
+}
+
+.WriteHex
+{
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR WriteHex1
+	PLA
+	; fall through to
+}
+
+.WriteHex1
+{
+	AND #&0F
+	BNE hex1
+	; Suppress leading zero
+	BIT SuppressFlag
 	BPL done
-	AND #&7F		; TODO: Fix hard-coded mask
-	STY TmpY
-	JSR update_count
-	LDY TmpY
-	INY
-	BNE collection_loop
+.hex1
+	; Make sure bit 7 of SuppressFlag is set, so we don't suppress further zeros
+	SEC
+	ROR SuppressFlag
+	CMP #10
+	BCC hex2
+	ADC #6
+.hex2
+	ADC #'0'
+	STA CountString,X
+	INX
 .done
 	RTS
 }
 
-; Set the first two bytes of each annotation record to 0x80, 0x00
-; We will use these to store counts of the number of search filtered items
-.ClearAnnotationCounts
+IF (econet = 1)
+.WritePath
 {
-	LDX Annotation
-	JSR GetAnnotationTable
-.loop
-	LDY #0
-	LDA (AnnotationTable), Y
-	STA Tmp
-	INY
-	LDA (AnnotationTable), Y
-	STA Tmp + 1
-	BEQ done
-	LDY #FacetWorkingOffset
-	LDA #&80
-	STA (Tmp),Y
-	INY
-	LDA #&00
-	STA (Tmp),Y
+	SEC
+	ROR SuppressFlag
+	LDA BinBuffer + 1
+	JSR WriteHex1
+	LDA #DirSep
+	STA OscliBuffer, X
+	INX
+	LDA BinBuffer
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR WriteHex1
+	LDA #DirSep
+	STA OscliBuffer, X
+	INX
+	PLA
+	JMP WriteHex1
+}
+ELIF (gosdc = 1)
+.WritePath
+{
+	SEC
+	ROR SuppressFlag
+	LDA #'E'
+	STA OscliBuffer, X
+	INX
+	LDA BinBuffer + 1
+	JSR WriteHex1
+	LDA BinBuffer
+	PHA
+	LSR A
+	LSR A
+	LSR A
+	LSR A
+	JSR WriteHex1
+	PLA
+	JMP WriteHex1
+}
+ENDIF
+
+.HighlightItem
+{
+	LDA Item
 	CLC
-	LDA AnnotationTable
-	ADC #&02
-	STA AnnotationTable
-	BCC loop
-	INC AnnotationTable + 1
+	ADC StartLine
+	TAY
+	; Fall through to...
+}
+
+.HighlightRowY
+{
+	JSR ScreenLineY
+	LDY #2
+.loop1
+	JSR WaitUntilVSync
+	DEY
+	BNE loop1
+
+	LDY #&1F
+.loop2
+	LDA (Screen),Y
+	EOR #&80
+	STA (Screen),Y
+	DEY
+	BPL loop2
+	RTS
+}
+
+
+; X = facet number
+; Facet Value read from (Title)
+.WriteFacetToScreen
+{
+ 	JSR GetAnnotationTable	; Preserves X
+
+	LDY PadTable, X
+	JSR YSpaces		; preserves X
+
+	JSR ScreenStringX	; preserves X
+
+	LDA #':'
+	JSR WriteToScreen	; preserves A, X, Y
+	LDA #' '
+	JSR WriteToScreen	; preserves A, X, Y
+
+	TXA
+	TAY
+	JSR ExtractFilterValue  ; Preserves X, result in A
+
+	JSR GetAnnotationString ; Preserves X, result in TmpPtr
+
+	JSR ScreenString
+	;; Fall through to PadToEOL
+}
+
+.PadToEOL
+{
+.loop
+	LDA Screen
+	AND #&1F
+	BEQ done
+	LDA #' '
+	JSR WriteToScreen
 	BNE loop
 .done
 	RTS
 }
+
+.YSpaces
+{
+	LDA #' '
+.loop
+	DEY
+	BMI done
+	JSR WriteToScreen	; preserves A, X, Y
+	BNE loop
+.done
+	RTS
+}
+
+.ScreenLineY
+{
+	LDA #<(ScreenStart)
+	STA Screen
+	LDA #>(ScreenStart)
+	STA Screen+1
+	TYA
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	ASL A
+	BCC nocarry
+	INC Screen+1
+.nocarry
+	CLC
+	ADC Screen
+	STA Screen
+	RTS
+}
+
+.ScreenStringX
+{
+	LDA StringTableLSB, X
+	STA TmpPtr
+	LDA StringTableMSB, X
+	STA TmpPtr + 1
+	; fall through to
+}
+
+.ScreenString
+{
+	LDY #0
+.loop
+	LDA (TmpPtr),Y
+	BMI done
+	BEQ done
+	JSR WriteToScreen
+	INY
+	BNE loop
+.done
+	RTS
+}
+
+.StringTableLSB
+	EQUB <String0
+	EQUB <String1
+	EQUB <String2
+	EQUB <String3
+	EQUB <String4
+	EQUB <String5
+	EQUB <String6
+	EQUB <String7
+	EQUB <String8
+	EQUB <String9
+	EQUB <String10
+	EQUB <String11
+
+.StringTableMSB
+	EQUB >String0
+	EQUB >String1
+	EQUB >String2
+	EQUB >String3
+	EQUB >String4
+	EQUB >String5
+	EQUB >String6
+	EQUB >String7
+	EQUB >String8
+	EQUB >String9
+	EQUB >String10
+	EQUB >String11
+
+; Padding for the first 9 strings
+.PadTable
+	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
+
+.String0
+	EQUS "TITLE", 0
+
+.String1
+	EQUS "PUBLISHER", 0
+
+.String2
+	EQUS "GENRE", 0
+
+.String3
+	EQUS "CHAPTER", 0
+
+.String4
+	EQUS "RAM NEEDED", 0
+
+.String5
+	EQUS "ROM NEEDED", 0
+
+.String6
+	EQUS "UPDATED", 0
+
+.String7
+	EQUS "JOYSTICK", 0
+
+.String8
+	EQUS "COLLECTION", 0
+
+.String9
+	EQUS "FILTER BY ", 0
+
+.String10
+	EQUS "SORTED BY ", 0
+
+.String11
+	EQUS "  PAGE   /  ", 0
 
 include "common.asm"
 
