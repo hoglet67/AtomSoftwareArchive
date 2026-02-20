@@ -57,7 +57,6 @@ include "chaptervars.asm"
 	; Initialize the variables
 	LDY #0
 	STY SortType
-	STY PageState
 	INY
 	STY Annotation
 
@@ -75,13 +74,12 @@ include "chaptervars.asm"
 ; Main command loop
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.main_loop_redo_counts
+.main_loop_page_state_zero
+	; Reset back to the title page, and refresh everything
+	LDA #0
+	STA PageState
 
-	; Reset the page/item back to the start
-	LDY #&00
-	STY Item
-	INY
-	STY Page
+.main_loop_redo_counts
 
 	; Update the annotation to point to this facet
 	LDY PageState
@@ -105,6 +103,13 @@ include "chaptervars.asm"
 .main_loop_redo_sizes
 	; Calculate LinesPerPage and StartLine from FilterType
 	JSR CalculateTextWindow
+
+.main_loop_reset_position
+	; Reset the page/item back to the start
+	LDY #&00
+	STY Item
+	INY
+	STY Page
 
 .main_loop_render_all
 	; Render the header, including the filter list
@@ -146,6 +151,7 @@ include "chaptervars.asm"
 	JSR HighlightItem
 
 .main_loop_release
+	; Wait for key release, or for auto repeat to start
 	JSR HandleAutoRepeat
 
 .main_loop_scan
@@ -194,12 +200,12 @@ include "chaptervars.asm"
 	; Test if ctrl key is pressed (emulator, scroll down)
 	BIT &b001
 	BVC handle_down_key
-	BVS main_loop_call_inkey		; Branch always
+	BVS call_inkey		; Branch always
 
 .test_for_down_key_original
 	; Test if shift key is pressed (original atom, scroll down)
 	BIT &b001
-	BMI main_loop_call_inkey
+	BMI call_inkey
 
 .handle_down_key
 	; Handle down key, incrementing item
@@ -226,20 +232,22 @@ include "chaptervars.asm"
 	STA Item
 	JMP main_loop_render			; Branch always
 
-.main_loop_call_inkey
+.call_inkey
 	; Call InKey to scan the keyboard
 	JSR Inkey
 
 	CPY #&FF
-	BEQ main_loop_scan		; Branch of no key pressed
+	BEQ main_loop_scan			; Branch of no key pressed
 
 	CPY #&3B				; Escape
 	BNE test_for_filter
 
 	; Escape pressed, if on filter page, return to title page
 	LDA PageState
-	BNE page_state_zero
+	BEQ exit_back_to_splash
+	JMP main_loop_page_state_zero
 
+.exit_back_to_splash
 	; Really exit, changing back to the "root" directory
 	JSR OscliString
 IF (sddos2 = 1 OR sddos3 = 1)
@@ -300,17 +308,7 @@ ENDIF
 	STX Annotation
 	; Page in the appropriate sort table
 	JSR LoadSortTable
-
-.page_state_zero
-	LDA #0
-	STA PageState
-	JMP main_loop_render_all
-
-.jump_main_loop_render
-	JMP main_loop_render
-
-.jump_main_loop_release
-	JMP main_loop_release
+	JMP main_loop_reset_position
 
 .test_for_prev_page
 	CPY #28					; <
@@ -340,6 +338,9 @@ ENDIF
 	STA Page
 .next_page_nowrap
 	JMP set_item_to_zero
+
+.jump_main_loop_release
+	JMP main_loop_release
 
 .test_for_prev_tag
 	LDA PageState				; Tags not used in filter pages
@@ -394,15 +395,12 @@ ENDIF
 	JSR Search
 	JMP main_loop_redo_counts
 
-.jump_main_loop_scan
-	JMP main_loop_scan
-
 .test_for_a_to_m
 	; A..M key pressed (select an item)
 	CPY #33					; A
-	BCC jump_main_loop_scan
+	BCC jump_main_loop_release
 	CPY #46					; M + 1
-	BCS jump_main_loop_scan
+	BCS jump_main_loop_release
 
 	; Make sure that the row is not blank
 	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
@@ -410,7 +408,7 @@ ENDIF
 	SBC #32
 	TAX
 	JSR TestRowXActive
-	BEQ jump_main_loop_scan
+	BEQ jump_main_loop_release
 	STX Item
 
 .handle_select
@@ -422,7 +420,7 @@ ENDIF
 	LDX Item
 	LDA RowReturnLSB, X
 	JSR AddFilterY				; Y = FilterType, A = FilterValue
-	JMP page_state_zero
+	JMP main_loop_page_state_zero
 
 .boot_program
 	JSR GetItemAddress
