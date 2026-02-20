@@ -477,13 +477,11 @@ ENDIF
 
 .FoundRow1
 	; Store current item so that the basic program knows what's on each line
-	LDA RowCount
-	ASL A
-	TAY
+	LDY RowCount
 	LDA CurrentItem
-	STA RowReturnBuf, Y
+	STA RowReturnLSB, Y
 	LDA CurrentItem + 1
-	STA RowReturnBuf + 1, Y
+	STA RowReturnMSB, Y
 
 	; Increment the count of the number of rows displayed
 	INC RowCount

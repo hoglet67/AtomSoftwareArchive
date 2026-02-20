@@ -74,13 +74,12 @@ ENDIF
 
 .STARTOF
 
-;; This needs 26 bytes; to save space we just allow it to overlap the
-;; startup code, which is run just once.
-
-.RowReturnBuf
-;;	SKIP LinesPerPage * 2
-
 .Menu
+
+	RowReturnLSB    = Menu
+	RowReturnMSB    = Menu + 16
+
+	;; vvvvvvvv IMPORTANT: This code gets clobbered by the row return buffer
 
 	;100 *LOAD MNU/MENU1
 	JSR OscliString
@@ -95,6 +94,8 @@ ENDIF
 	;115 *LOAD MNU/MENU2
 	JSR OscliString
 	EQUS "LOAD MENU2", Return
+
+	;; ^^^^^^^^ IMPORTANT code gets clobbered by the row return buffer
 
 	; // Initialize the variables
 	; 120 L=13;S=0;F=0;A=1;G=0;R=#2880;Q=#8F
@@ -469,10 +470,8 @@ ENDIF
 
 	; Search file the filter record address (Title) in the Secondary Table identified by X
 	; (Assumes an 7-bit value)
-	LDA Item
-	ASL A
-	TAY
-	LDA RowReturnBuf, Y
+	LDY Item
+	LDA RowReturnLSB, Y
 
 	; Add the filter
 	LDY PageState
@@ -638,17 +637,13 @@ ENDIF
 
 .GetItemAddress
 {
-	LDA Item		; Item starts at 0
+	LDY Item		; Item starts at 0
+	LDA RowReturnLSB, Y	; RowReturnBuffer stores the item index
 	ASL A
-	TAY
-	LDA RowReturnBuf, Y	; RowReturnBuffer stores the item
 	STA Title
-	LDA RowReturnBuf + 1, Y
-	STA Title + 1
-
-
-	ASL Title		; Double it so it becomes an index into the sort table
-	ROL Title + 1
+	LDA RowReturnMSB, Y
+	ROL A
+	STA Title + 1		; Title now (item << 1)
 
 	CLC			; Now indirect through the sort table
 	LDA Title
@@ -789,10 +784,10 @@ ENDIF
 	BNE LabelJ1
 
 .LabelJ3
-	LDY #31
+	LDY #&0F
 	LDA #&FF
 .LabelJ4
-	STA RowReturnBuf, Y
+	STA RowReturnMSB, Y
 	DEY
 	BPL LabelJ4
 	RTS
@@ -913,9 +908,8 @@ ENDIF
 
 .TestRowActive
 {
-	ASL A
 	TAX
-	LDA RowReturnBuf + 1, X
+	LDA RowReturnMSB, X
 	CMP #&FF
 	RTS
 }
