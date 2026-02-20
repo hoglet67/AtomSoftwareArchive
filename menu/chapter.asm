@@ -2,40 +2,7 @@
 
 include "sysvars.asm"
 
-include "renderer_header.asm"
-
-	KernelOsrdch = $fe94
-	RDCVEC       = $20a
-
-IF (econet = 1 OR gosdc = 1)
-	DirSep = '.'
-ELSE
-	DirSep = '/'
-ENDIF
-
-	AutoRepeat1  = -$200
-	AutoRepeat2  = -$20
-
-; Basic -> Machine Code Variable Mapping
-;
-; A -> Annotation      - the annotation to show on the RHS
-; B -> n/a             - the load address of the MENUMC file
-; C -> SortTablePtr    - the load address of the SORT data file
-; D -> MenuTablePtr    - the load address of the MENU data file
-; E -> FilterString    - current filter record address
-; F -> PageState       - page state variable (0=Normal title selection, F=1,2,3,4,5,6,7,8 showing the filter selection pages)
-; G -> FilterType      - current filter (0=No filter; 1=Publisher, 2=Genre, 3=Chunk, 4=Ram, 5=Rom, 6=Version, 7=Joystick, 8=Collection)
-; H -> FilterVal       - current filter value (as an integer)
-; I -> TmpI            - A temporary variable
-; K                    - The index number of the program about to be *RUN
-; L -> LinesPerPage    - (CONSTANT) The number of lines per page
-; M -> NumPages        - The current number of pages
-; P -> Page            - The current page (1..M)
-; Q -> n/a             - The constant #8f
-; R -> RowReturnBuf    - (CONSTANT) The address of a buffer into which the machine code stores the rendered row addresses
-; S -> SortType        - The current sort order (0=Title,1=Publisher,2=Genre,3=Collection)
-; Y -> Item            - The currently highlighted row (0..L-1)
-; Z -> Sort            - The currently base address of the current sort index or filter pointer table)
+include "chaptervars.asm"
 
 	org Base - 22
 
@@ -71,9 +38,6 @@ ENDIF
 .STARTOF
 
 .Menu
-
-	RowReturnLSB    = Menu
-	RowReturnMSB    = Menu + 16
 
 	;; vvvvvvvv IMPORTANT: This code gets clobbered by the row return buffer
 
@@ -970,7 +934,6 @@ ENDIF
 include "renderer_body.asm"
 
 include "common.asm"
-
 
 .WriteDecimal:
 	JSR BinToDecimal16

@@ -1,43 +1,8 @@
-	KernelOsrdch = $fe94
-	RDCVEC       = $20a
-
 	Base =? $2800
-
-	BannerScroll =? 1
 
 include "sysvars.asm"
 
-; Some local variables
-
-EndPage  = TmpPtr + 2
-Dir      = TmpPtr + 3
-KeyFlag  = TmpPtr + 4
-NumLines = TmpPtr + 5
-Cycle    = TmpPtr + 6
-TxtPtr   = TmpPtr + 8
-FontPtr  = TmpPtr + 10
-
-LoMemBot = TmpPtr + 12
-LoMemTop = TmpPtr + 13
-HiMemBot = TmpPtr + 14
-HiMemTop = TmpPtr + 15
-
-MinChapter = 0			; A
-MaxChapter = 6			; G
-AGDChapter = 2			; C
-ALLChapter = 6			; G
-
-FontHeight       = 9		; height of font
-LinePitch        = 10		; pixel spacing of text lines
-
-ChapterLineStart = 70		; Y pixel row to strike in Chapter A
-ChapterLineWidth = 12		; Y pixels between adjacent text lines
-
-TopWindowStart     = 10
-TopWindowHeight    = 52
-
-BottomWindowStart  = 154
-BottomWindowHeight = 20
+include "menuvars.asm"
 
 	org Base - 22
 
@@ -147,7 +112,7 @@ BottomWindowHeight = 20
 
 	; Render the test results text panel
 
-IF (BannerScroll = 1)
+IF (banner_scroll = 1)
 	LDA #0
 	STA Cycle
 	LDA #&FF	; Make this more negtive to delay panel startup
@@ -254,7 +219,7 @@ ENDIF
 	BPL StrikeLoop1
 
 .MenuMain
-IF (BannerScroll = 1)
+IF (banner_scroll = 1)
 	JSR &FE66
 	JSR Scroll
 	JSR ScanKeyboard
@@ -511,7 +476,7 @@ ENDIF
 
 include "common.asm"
 
-IF (BannerScroll = 1)
+IF (banner_scroll = 1)
 
 .Scroll
 {

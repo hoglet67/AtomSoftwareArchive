@@ -510,7 +510,7 @@ NEXT
 	BEQ WritePageExit
 	LDX #CharsPerLine
 .WritePageEndOfList1
-	LDA #Space
+	LDA #' '
 	JSR WriteToScreen
 	DEX
 	BNE WritePageEndOfList1
@@ -582,7 +582,7 @@ NEXT
 	LDA #64
 	ADC RowCount
 	JSR WriteToScreen
-	LDA #Dot
+	LDA #'.'
 	JSR WriteToScreen
 
 .WriteTitle
@@ -601,7 +601,7 @@ NEXT
 	JSR WriteTitleNoHighlight
 
 .WriteSeperator
-	LDA #Space
+	LDA #' '
 
 .WriteSeperatorLoop
 	JSR WriteToScreen
@@ -894,7 +894,7 @@ NEXT
 	BNE ShowCurrentSearchNoCursor
 
 .ClearSearchLine
-	LDA #Space
+	LDA #' '
 	LDY #CharsPerLine - 1
 .SearchExit2
 	STA ScreenStart + $1E0,Y
