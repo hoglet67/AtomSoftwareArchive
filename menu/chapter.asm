@@ -792,8 +792,9 @@ ENDIF
 	STA BinBuffer
 	LDA #0
 	STA BinBuffer+1
+	STA BinBuffer+2
 
-	JSR BinToDecimal8
+	JSR BinToDecimal16
 
 	; X is used as the index into CountString
 	LDX #0
@@ -1979,30 +1980,6 @@ NEXT
 	RTS
 }
 
-.BinToDecimal8
-{
-	LDA #0
-	STA BcdBuffer
-	STA BcdBuffer+1
-	SED
-	LDY #8
-.loop
-	; Handle the binary bits one at a time
-	ASL BinBuffer
-	; Add into the BCD accumulator
-	LDA BcdBuffer
-	ADC BcdBuffer
-	STA BcdBuffer
-	LDA BcdBuffer+1
-	ADC BcdBuffer+1
-	STA BcdBuffer+1
-	DEY
-	BNE loop
-	CLD
-	LDA BcdBuffer
-	RTS
-}
-
 .WriteDecimal
 {
 	JSR BinToDecimal16
@@ -2043,6 +2020,7 @@ NEXT
 	DEY
 	BNE loop
 	CLD
+	LDA BcdBuffer
 	RTS
 }
 
