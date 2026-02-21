@@ -2115,12 +2115,6 @@ ENDIF
 .HighlightRowY
 {
 	JSR ScreenLineY
-	LDY #2
-.loop1
-	JSR WaitUntilVSync
-	DEY
-	BNE loop1
-
 	LDY #&1F
 .loop2
 	LDA (Screen),Y
