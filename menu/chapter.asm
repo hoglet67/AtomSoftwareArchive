@@ -1190,7 +1190,7 @@ NEXT
 	BNE loop
 	RTS
 .clear_y
-	LDA FilterTypeMask, Y
+	LDA FilterTypeMask - 1, Y
 	EOR #&FF
 	AND FilterType
 	STA FilterType
@@ -1237,7 +1237,7 @@ NEXT
 	STA FacetMasks, X
 
 	; Maintain the bit-per-filter FilterType map for expendiency
-	LDA FilterTypeMask, Y
+	LDA FilterTypeMask - 1, Y
 	ORA FilterType
 	STA FilterType
 	RTS
