@@ -39,7 +39,7 @@ include "chaptervars.asm"
 
 .Menu
 {
-	; vvvvvvvv IMPORTANT: This code gets clobbered by the row return buffer
+	; vvvvvvvv IMPORTANT: This code gets clobbered by the filter state and row return buffer
 
 	JSR OscliString
 	EQUS "LOAD MENU1", Return
@@ -51,8 +51,6 @@ include "chaptervars.asm"
 
 	JSR OscliString
 	EQUS "LOAD MENU2", Return
-
-	; ^^^^^^^^ IMPORTANT code gets clobbered by the row return buffer
 
 	; Initialize the variables
 	LDY #0
@@ -69,6 +67,8 @@ include "chaptervars.asm"
 
 	; Clear all filters
 	JSR ClearAllFilters
+
+	; ^^^^^^^^ IMPORTANT code gets clobbered by the filter state and row return buffer
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Main command loop
@@ -1110,21 +1110,21 @@ ENDIF
 ; Multi Facet Filter Workspace
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; TODO: Move these out of code into some external buffer space
+; These now overlap the startup code
 
-.FacetMasks
-FOR i, 0, CollectionsByteOffset - 1, 1
-	EQUB &00
-NEXT
-.CollectionsFacetMask
-	EQUB &00
-
-.FacetValues
-FOR i, 0, CollectionsByteOffset - 1, 1
-	EQUB &00
-NEXT
-.CollectionsFacetValue
-	EQUB &00
+; .FacetMasks
+; FOR i, 0, CollectionsByteOffset - 1, 1
+; 	EQUB &00
+; NEXT
+; .CollectionsFacetMask
+; 	EQUB &00
+;
+; .FacetValues
+; FOR i, 0, CollectionsByteOffset - 1, 1
+; 	EQUB &00
+; NEXT
+; .CollectionsFacetValue
+; 	EQUB &00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Multi Facet Filter Fixed Data
@@ -1517,7 +1517,7 @@ NEXT
 	INY
 	BNE loop1
 .done1
-	LDY #&0F
+	LDY #MaxItems - 1
 	LDA #&FF
 .loop2
 	STA RowReturnMSB, Y

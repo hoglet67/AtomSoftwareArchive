@@ -99,9 +99,16 @@
 ; Buffering
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	RowReturnLSB		= Base
+	MaxItems		= 16
 
-	RowReturnMSB    	= Base + 16
+	RowReturnLSB		= Base
+	RowReturnMSB    	= Base + MaxItems
+
+	FacetMasks		= Base + MaxItems * 2
+	CollectionsFacetMask 	= FacetMasks + CollectionsByteOffset
+
+	FacetValues		= CollectionsFacetMask + 1
+	CollectionsFacetValue 	= FacetValues + CollectionsByteOffset
 
 IF (econet = 1)
 	SearchBuffer		= &140
@@ -223,7 +230,7 @@ ENDIF
 	SuppressFlag     	= ZeroBase + &2D
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Zero page - very tenporary values
+; Zero page - very temporary values
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	; General purpose temporary poimyer

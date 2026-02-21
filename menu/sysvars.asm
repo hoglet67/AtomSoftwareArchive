@@ -56,3 +56,5 @@ ELSE
 	TmpBase		= &A0
 	ExecAddr     	= &cd ; don't change this, it's what AtoMMC uses
 ENDIF
+
+	FilterBase	= &B0
