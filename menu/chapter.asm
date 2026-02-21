@@ -875,6 +875,9 @@ ENDIF
 	LDX #PageMofNStringNum
 	JSR ScreenStringX
 
+	; Move to next line
+	JSR PadToEOL
+
 	; Display the set of active filters
 	JSR ListFilters
 
@@ -2255,7 +2258,7 @@ ENDIF
 	EQUS "SORTED BY", (' ' + &80)
 
 .String11
-	EQUS "  PAGE   / ", (' ' + &80)
+	EQUS "  PAG", ('E' + &80)
 
 .String12
 	EQUS "  SEARCH", ('=' + &80)
