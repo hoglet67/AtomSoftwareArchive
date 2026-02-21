@@ -1054,13 +1054,9 @@ IF (info_option = 1)
 	LDA #>(ScreenStart + 2 * CharsPerLine)
 	STA Screen + 1
 
+	LDX #CharsPerLine
 	LDY #CollectionsByteOffset
-.title_loop2
-	LDA (Title),Y
-	BMI title_done2
-	JSR WriteToScreen
-	INY
-	BNE title_loop2
+	JSR WriteTitleNoHighlightOffsetY
 
 .title_done2
 	LDY #2
@@ -1831,8 +1827,9 @@ ENDIF
 }
 
 .WriteTitleNoHighlight
-{
 	LDY TitleNameOffset
+.WriteTitleNoHighlightOffsetY
+{
 .loop
 	LDA (Title),Y
 	BMI done
