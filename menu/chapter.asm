@@ -81,21 +81,42 @@ include "chaptervars.asm"
 
 .main_loop_redo_counts
 
-	; Update the annotation to point to this facet
+	; Counts are only needed for the filter pages, not the title page
 	LDY PageState
 	BEQ main_loop_redo_sizes
+
+	; Save the current annotation
 	LDA Annotation
 	PHA
+
+	; Save the current filter mask for the filter controlled by this page
+	LDX FacetByteOffsetTable, Y
+	LDA FacetMasks, X
+	PHA
+
+	; Update the annotation to point to this filter
 	STY Annotation
+
+	; Clear the current filter (if there is one)
+	JSR ClearFilterY
+
 	; Make sure the title table is used, not the facet table
 	LDA SortTablePtr
 	STA Sort
 	LDA SortTablePtr + 1
 	STA Sort + 1
-	; Recalculate Annotation counts the new filter screen
+
+	; Recalculate the filter counts needed for this filter page
 	LDA #DMUpdateCounts
 	STA DisplayMode
 	JSR RenderPage
+
+	; Restore the original filter mask
+	LDY PageState
+	LDX FacetByteOffsetTable, Y
+	PLA
+	STA FacetMasks, X
+
 	; Restore the original annotation the user has chose (to see on the title page)
 	PLA
 	STA Annotation
