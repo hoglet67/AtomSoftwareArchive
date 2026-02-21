@@ -1851,7 +1851,7 @@ ENDIF
 	BPL write_separator_loop
 
 	; Write the annotation
-	JMP ScreenString
+	JMP ScreenStringTmpPtr
 }
 
 .WriteTitleNoHighlight
@@ -2123,7 +2123,7 @@ ENDIF
 
 	JSR GetAnnotationString ; Preserves X, result in TmpPtr
 
-	JSR ScreenString
+	JSR ScreenStringTmpPtr
 	;; Fall through to PadToEOL
 }
 
@@ -2202,7 +2202,7 @@ ENDIF
 	RTS
 }
 
-.ScreenString
+.ScreenStringTmpPtr
 {
 	LDY #0
 .loop
