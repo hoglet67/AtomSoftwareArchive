@@ -798,8 +798,8 @@ ENDIF
 	LDX #0
 
 	; Make sure that we don't suppress zeros
-	LDY #&FF
-	STY SuppressFlag
+	SEC
+	ROR SuppressFlag
 
 	JSR WriteHex
 
