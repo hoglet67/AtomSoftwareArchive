@@ -161,12 +161,8 @@ include "chaptervars.asm"
 	; Render the page (show upto 13 rows, applying current search and filter set)
 	JSR RenderPage
 
-	; Calculate the number of pages (from Total Rows)
-	JSR CalculateNumPages
-	STY NumPages
-
 	; Update the PAGE M and N
-	JSR UpdateTotalPages	; TODO This also call CalculateNumPages which is wasteful
+	JSR UpdateTotalPages
 
 	; On a filter page, try to pre-select the item that matches the current filter
 	LDX PageState
@@ -730,11 +726,16 @@ ENDIF
 }
 
 ; Calculate the number of pages requires to display the current result
-; set, whose size is in TotalItems, by inefficiently dividing by
-; TotalItem by LinesPerPage.
-; Returns the number of pages in BCD in A, and in Binary in Y
+; set, by dividing (TotalItems - 1) by LinesPerPage.
+; On Entry:
+;    TotalItems (16 bits)
+;    LinesPerPage (8 bits)
+; On Exit:
+;    NumPages (8 bits)
 .CalculateNumPages
 {
+	LDY #1
+
 	SEC
 	LDA TotalItems
 	SBC #1
@@ -742,17 +743,10 @@ ENDIF
 	LDA TotalItems + 1
 	SBC #0
 	STA BinBuffer+1
-	BCC return_one_page
-
-	LDY #0
-	TYA
+	BCC done
+	DEY
 .loop
 	INY
-	SED
-	CLC
-	ADC #1
-	CLD
-	PHA
 	SEC
 	LDA BinBuffer
 	SBC LinesPerPage
@@ -760,57 +754,55 @@ ENDIF
 	LDA BinBuffer+1
 	SBC #0
 	STA BinBuffer+1
-	PLA
 	BCS loop
-	RTS
-
-.return_one_page
-	LDY #1
-	TYA
+.done
+	STY NumPages
 	RTS
 }
 
 ; Refreshes the Page M OF N text in the top line
 .UpdateTotalPages
 {
-	; Write Page to the CountString
-	LDA Page
-	STA BinBuffer
+	; Calculate the number of pages (from Total Rows)
+	JSR CalculateNumPages  	  ; TODO: Count inline this
+
+	; Zero the MSBs of the bin buffer, as pages are small
 	LDA #0
 	STA BinBuffer+1
 	STA BinBuffer+2
-
-	JSR BinToDecimal16
-
-	; X is used as the index into CountString
-	LDX #0
 
 	; Make sure that we don't suppress zeros
 	SEC
 	ROR SuppressFlag
 
+	; X is used as the index into CountString
+	LDX #0
+
+	; Write Page to the CountString
+	LDA Page
+	STA BinBuffer
+	JSR BinToDecimal16
 	JSR WriteHex
 
 	; Write the page separator into CountString
 	LDA #'/'
-	LDX #2
 	STA CountString, X
-
-	JSR CalculateNumPages
+	INX
 
 	; Write the number of pages into to the CountString
-	LDX #3
+	LDA NumPages
+	STA BinBuffer
+	JSR BinToDecimal16
 	JSR WriteHex
 
-	LDX #0
+	DEX
 .loop
-	LDA CountString,X
+	LDA CountString, X
 	AND #&3F
 	ORA #&80
 	STA ScreenStart + CharsPerLine - 5, X
-	INX
-	CPX #5
-	BNE loop
+	DEX
+	BPL loop
 	RTS
 }
 
