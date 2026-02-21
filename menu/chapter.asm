@@ -2105,15 +2105,12 @@ ENDIF
 
 .PadToEOL
 {
-.loop
-	LDA Screen
-	AND #&1F
-	BEQ done
-	LDA #' '
-	JSR WriteToScreen
-	BNE loop
-.done
-	RTS
+	LDA #CharsPerLine
+	SEC
+	SBC Screen
+	AND #CharsPerLine - 1
+	TAY
+	; Fall through to
 }
 
 .YSpaces
