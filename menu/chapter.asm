@@ -292,24 +292,29 @@ ENDIF
 	; never returns
 
 .test_for_filter
-	; 0 (16) = title; 1..N = filter
-	CPY #16					; 0
+	; Del (15) 0 (16) = title; 1..N = filter
+	CPY #15					; Del
 	BCC test_for_prev_sort
 	CPY #16+NumFacets+1			; 8
 	BCS test_for_prev_sort
 	TYA
 	SBC #15
-	; At this point A=0, or 1..N
-	BNE change_filter
+	; At this point A=-1, 0, or 1..N
+	BPL change_filter
 
+.clear_filter
 	; Clear filter
 	LDY PageState
 	JSR ClearFilterY			; Y=0 clears all filters, Y<>0 clean filter N; C=1 on exit if nothing changed
 	BCS jump_main_loop_release		; nothing to do!
+	LDA #0
+	STA PageState
 	JMP main_loop_redo_counts
 
 .change_filter
 	; Filter 1..8
+	CMP PageState
+	BEQ jump_main_loop_release		; nothing to do!
 	STA PageState
 	JMP main_loop_redo_counts
 
