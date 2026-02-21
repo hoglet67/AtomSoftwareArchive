@@ -168,6 +168,15 @@ include "chaptervars.asm"
 	; Update the PAGE M and N
 	JSR UpdateTotalPages	; TODO This also call CalculateNumPages which is wasteful
 
+	; On a filter page, try to pre-select the item that matches the current filter
+	LDX PageState
+	BEQ highlight_item
+	JSR GetAnnotationTable
+	JSR FindFilterItem
+	BCS highlight_item
+	STX Item
+
+.highlight_item
 	; Highlight the currently active item
 	JSR HighlightItem
 
@@ -1278,11 +1287,60 @@ NEXT
 	RTS
 }
 
+; Looks up the filter value for the filter specificed by X
+;
+; On entry:
+;     X = filter num (i.e. page state)
+; On exit:
+;     C=0 if found, A=value
+;     C=1 if not found
+.GetFilterValue
+{
+	LDA #<FacetValues
+	STA Title
+	LDA #>FacetValues
+	STA Title + 1
+	LDY FacetByteOffsetTable, X
+	LDA FacetMasks, Y
+	AND FacetMaskTable, X
+	BEQ ExitC1
+	JSR ExtractAnnotationValue
+	CLC
+	RTS
+}
+
+; Looks for the current filter value in the result list
+; On entry:
+;     X = filter num (i.e. page state)
+; On exit:
+;     C=0 if found, A=value, X=position in the results list (0-based)
+;     C=1 if not found
+; TODO: this doesn't currently handle the filter nor being set
+.FindFilterItem
+{
+	JSR GetFilterValue
+	BCS ExitC1
+	STA Tmp
+	LDX #&FF
+.loop	INX
+	LDA RowReturnMSB, X
+	BMI ExitC1
+	LDA RowReturnLSB, X
+	CMP Tmp
+	BNE loop
+	CLC
+	RTS
+}
+
+.ExitC1
+{
+	SEC
+	RTS
+}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Annotations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;; Extract the filter value from the current Title
 .ExtractAnnotationValue
@@ -1305,7 +1363,6 @@ NEXT
 	LSR A
 	RTS
 }
-
 
 ; Calculate a pointer to the requested annotation table, skipping the length field
 ; Get the address of the relevant secondary table for annotations
