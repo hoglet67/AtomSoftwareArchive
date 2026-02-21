@@ -2202,7 +2202,6 @@ ENDIF
 .loop
 	LDA (TmpPtr),Y
 	BMI done
-	BEQ done
 	JSR WriteToScreen
 	INY
 	BNE loop
@@ -2257,49 +2256,49 @@ ENDIF
 	EQUB FilterPad - LEN(CollectionsFilterName)
 
 .String0
-	EQUS TitleName, 0
+	EQUS TitleName, -1
 
 .String1
-	EQUS PubFilterName, 0
+	EQUS PubFilterName, -1
 
 .String2
-	EQUS GenreFilterName, 0
+	EQUS GenreFilterName, -1
 
 .String3
-	EQUS ChunkFilterName, 0
+	EQUS ChunkFilterName, -1
 
 .String4
-	EQUS RamFilterName, 0
+	EQUS RamFilterName, -1
 
 .String5
-	EQUS RomFilterName, 0
+	EQUS RomFilterName, -1
 
 .String6
-	EQUS VersionFilterName, 0
+	EQUS VersionFilterName, -1
 
 .String7
-	EQUS JoystickFilterName, 0
+	EQUS JoystickFilterName, -1
 
 .String8
-	EQUS CollectionsFilterName, 0
+	EQUS CollectionsFilterName, -1
 
 .String9
-	EQUS "FILTER BY ", 0
+	EQUS "FILTER BY ", -1
 
 .String10
-	EQUS "SORTED BY ", 0
+	EQUS "SORTED BY ", -1
 
 .String11
-	EQUS "  PAGE   /  ", 0
+	EQUS "  PAGE   /  ", -1
 
 .String12
-	EQUS "  SEARCH=", 0
+	EQUS "  SEARCH=", -1
 
 .String13
-	EQUS "=", 0
+	EQUS "=", -1
 
 .String14
-	EQUS ": ", 0
+	EQUS ": ", -1
 
 include "common.asm"
 
