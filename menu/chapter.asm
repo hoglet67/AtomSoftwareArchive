@@ -1149,19 +1149,6 @@ NEXT
 	EQUB JoystickXor
 	EQUB CollectionsXor
 
-;; This is a table of branch offsets used in some self modifying code
-;; to avoid the cost of a loop:
-;;     vvvvvv is modified based on the table value
-;; BNE offset
-;; LSR A        ; offset 0 shifts 7 bits
-;; LSR A	; offset 1 shifts 6 bits
-;; LSR A	; offset 2 shifts 5 bits
-;; LSR A	; offset 3 shifts 4 bits
-;; LSR A	; offset 4 shifts 3 bits
-;; LSR A	; offset 5 shifts 2 bits
-;; LSR A	; offset 6 shifts 1 bits
-;; RTS 		; offset 7 shifts 0 bits
-
 .FacetBitOffsetTable
 	EQUB 7 - PubBitOffset
 	EQUB 7 - PubBitOffset
@@ -1268,24 +1255,23 @@ NEXT
 	RTS
 }
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Annotations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Extract the filter value from the current Title
-;; TODO: could self modification could be done less often?
-.ExtractFilterValue
+.ExtractAnnotationValue
 {
-	LDA FacetBitOffsetTable, Y
-	STA shift + 1
-	LDA FacetMaskTable, Y
-	STA mask + 1
-	LDA FacetXorTable, Y
-	STA xor + 1
-	LDA FacetByteOffsetTable, Y
-	TAY
+.*EAVOffset
+	LDY #&00
 	LDA (Title), Y
-.mask
+.*EAVMask
 	AND #&00
-.xor
+.*EAVXor
 	EOR #&00
-.shift
+.*EAVShift
 	BNE P%+2
 	LSR A
 	LSR A
@@ -1297,10 +1283,6 @@ NEXT
 	RTS
 }
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Annotations
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ; Calculate a pointer to the requested annotation table, skipping the length field
 ; Get the address of the relevant secondary table for annotations
@@ -1310,6 +1292,16 @@ NEXT
 ; X=Annotation type
 .GetAnnotationTable
 {
+	; Modify ExtractAnnotationValue (immediately above)
+	LDA FacetByteOffsetTable, X
+	STA EAVOffset + 1
+	LDA FacetMaskTable, X
+	STA EAVMask + 1
+	LDA FacetXorTable, X
+	STA EAVXor + 1
+	LDA FacetBitOffsetTable, X
+	STA EAVShift + 1
+	; Lookup the address of the annotation table
 	TXA
 	ASL A
 	TAY
@@ -1360,7 +1352,7 @@ NEXT
 	CPY #CollectionsFilterNum
 	BEQ collection
 
-	JSR ExtractFilterValue
+	JSR ExtractAnnotationValue
 
 .update_count
 	JSR GetAnnotationRecord
@@ -1711,8 +1703,7 @@ NEXT
 	JMP length_of_annotation
 
 .normal_annotation
-	LDY Annotation
-	JSR ExtractFilterValue
+	JSR ExtractAnnotationValue
 
 	BPL not_null_collection
 
@@ -2088,9 +2079,7 @@ ENDIF
 	LDA #' '
 	JSR WriteToScreen	; preserves A, X, Y
 
-	TXA
-	TAY
-	JSR ExtractFilterValue  ; Preserves X, result in A
+	JSR ExtractAnnotationValue  ; Preserves X, result in A
 
 	JSR GetAnnotationString ; Preserves X, result in TmpPtr
 
