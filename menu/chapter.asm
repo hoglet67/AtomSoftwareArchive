@@ -1532,19 +1532,15 @@ ENDIF
 {
 	BIT DisplayMode
 	BMI exit
-.loop1
+.loop
 	; We have hit the end of the sort list
 	LDA RowCount
 	CMP LinesPerPage
-	BEQ exit
-	LDX #CharsPerLine
-.loop2
-	LDA #' '
-	JSR WriteToScreen
-	DEX
-	BNE loop2
+	BCS exit
+	LDY #CharsPerLine
+	JSR YSpaces
 	INC RowCount
-	BNE loop1
+	BNE loop		; Branch always
 .exit
 	RTS
 }
