@@ -1927,26 +1927,6 @@ NEXT
 ; Screen Handling Code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.WriteToScreen
-{
-	PHA
-	STY TmpY
-	LDY #0
-
-	AND #&BF
-	STA (Screen),Y
-	INC Screen
-	BNE nocarry
-	INC Screen + 1
-	; Ensure we don't overwrite the tables!
-	LDA Screen + 1
-	AND #&81
-	STA Screen + 1
-.nocarry
-	LDY TmpY
-	PLA
-	RTS
-}
 
 ; Converts the 16-bit value in &BinBuffer to "(" <Decimal String> ")" <CR> at Buffer
 .WriteCount
@@ -2189,11 +2169,37 @@ ENDIF
 
 .ScreenStringX
 {
-	LDA StringTableLSB, X
-	STA TmpPtr
-	LDA StringTableMSB, X
-	STA TmpPtr + 1
-	; fall through to
+	LDY StringTable, X
+.loop
+	LDA StringBase, Y
+	BMI done
+	JSR WriteToScreen
+	INY
+	BNE loop
+.done
+	AND #&7F
+	; Fall throught to
+}
+
+.WriteToScreen
+{
+	PHA
+	STY TmpY
+	LDY #0
+
+	AND #&BF
+	STA (Screen),Y
+	INC Screen
+	BNE nocarry
+	INC Screen + 1
+	; Ensure we don't overwrite the tables!
+	LDA Screen + 1
+	AND #&81
+	STA Screen + 1
+.nocarry
+	LDY TmpY
+	PLA
+	RTS
 }
 
 .ScreenString
@@ -2209,39 +2215,23 @@ ENDIF
 	RTS
 }
 
-.StringTableLSB
-	EQUB <String0
-	EQUB <String1
-	EQUB <String2
-	EQUB <String3
-	EQUB <String4
-	EQUB <String5
-	EQUB <String6
-	EQUB <String7
-	EQUB <String8
-	EQUB <String9
-	EQUB <String10
-	EQUB <String11
-	EQUB <String12
-	EQUB <String13
-	EQUB <String14
+.StringTable
+	EQUB String0 - StringBase
+	EQUB String1 - StringBase
+	EQUB String2 - StringBase
+	EQUB String3 - StringBase
+	EQUB String4 - StringBase
+	EQUB String5 - StringBase
+	EQUB String6 - StringBase
+	EQUB String7 - StringBase
+	EQUB String8 - StringBase
+	EQUB String9 - StringBase
+	EQUB String10 - StringBase
+	EQUB String11 - StringBase
+	EQUB String12 - StringBase
+	EQUB String13 - StringBase
+	EQUB String14 - StringBase
 
-.StringTableMSB
-	EQUB >String0
-	EQUB >String1
-	EQUB >String2
-	EQUB >String3
-	EQUB >String4
-	EQUB >String5
-	EQUB >String6
-	EQUB >String7
-	EQUB >String8
-	EQUB >String9
-	EQUB >String10
-	EQUB >String11
-	EQUB >String12
-	EQUB >String13
-	EQUB >String14
 
 ; Padding for the first 9 strings
 .PadTable
@@ -2255,50 +2245,53 @@ ENDIF
 	EQUB FilterPad - LEN(JoystickFilterName)
 	EQUB FilterPad - LEN(CollectionsFilterName)
 
+.StringBase
+
 .String0
-	EQUS TitleName, -1
+	EQUS LEFT$(TitleName, LEN(TitleName) - 1), ASC(RIGHT$(TitleName, 1)) + &80
 
 .String1
-	EQUS PubFilterName, -1
+	EQUS LEFT$(PubFilterName, LEN(PubFilterName) - 1), ASC(RIGHT$(PubFilterName, 1)) + &80
 
 .String2
-	EQUS GenreFilterName, -1
+	EQUS LEFT$(GenreFilterName, LEN(GenreFilterName) - 1), ASC(RIGHT$(GenreFilterName, 1)) + &80
 
 .String3
-	EQUS ChunkFilterName, -1
+	EQUS LEFT$(ChunkFilterName, LEN(ChunkFilterName) - 1), ASC(RIGHT$(ChunkFilterName, 1)) + &80
 
 .String4
-	EQUS RamFilterName, -1
+	EQUS LEFT$(RamFilterName, LEN(RamFilterName) - 1), ASC(RIGHT$(RamFilterName, 1)) + &80
 
 .String5
-	EQUS RomFilterName, -1
+	EQUS LEFT$(RomFilterName, LEN(RomFilterName) - 1), ASC(RIGHT$(RomFilterName, 1)) + &80
 
 .String6
-	EQUS VersionFilterName, -1
+	EQUS LEFT$(VersionFilterName, LEN(VersionFilterName) - 1), ASC(RIGHT$(VersionFilterName, 1)) + &80
 
 .String7
-	EQUS JoystickFilterName, -1
+	EQUS LEFT$(JoystickFilterName, LEN(JoystickFilterName) - 1), ASC(RIGHT$(JoystickFilterName, 1)) + &80
 
 .String8
-	EQUS CollectionsFilterName, -1
+	EQUS LEFT$(CollectionsFilterName, LEN(CollectionsFilterName) - 1), ASC(RIGHT$(CollectionsFilterName, 1)) + &80
 
 .String9
-	EQUS "FILTER BY ", -1
+	EQUS "FILTER BY", (' ' + &80)
 
 .String10
-	EQUS "SORTED BY ", -1
+	EQUS "SORTED BY", (' ' + &80)
 
 .String11
-	EQUS "  PAGE   /  ", -1
+	EQUS "  PAGE   / ", (' ' + &80)
 
 .String12
-	EQUS "  SEARCH=", -1
+	EQUS "  SEARCH", ('=' + &80)
 
 .String13
-	EQUS "=", -1
+	EQUS ('=' + &80)
 
 .String14
-	EQUS ": ", -1
+	EQUS ":", (' ' + &80)
+
 
 include "common.asm"
 
