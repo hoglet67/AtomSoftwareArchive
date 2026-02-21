@@ -101,7 +101,7 @@ include "chaptervars.asm"
 	STA Annotation
 
 .main_loop_redo_sizes
-	; Calculate LinesPerPage and StartLine from FilterType
+	; Calculate LinesPerPage and StartLine from FilterCount
 	JSR CalculateTextWindow
 
 .main_loop_reset_position
@@ -422,7 +422,7 @@ ENDIF
 	; Filter page, so add the filter
 	LDX Item
 	LDA RowReturnLSB, X
-	JSR AddFilterY				; Y = FilterType, A = FilterValue
+	JSR AddFilterY				; Y = FilterNum, A = FilterValue
 	JMP main_loop_page_state_zero
 
 .boot_program
@@ -694,15 +694,9 @@ ENDIF
 ;    ...     ...    ...
 .CalculateTextWindow
 {
-	LDA FilterType
-	LDX #&FF
-.loop1
-	INX
-.loop2
-	ASL A
-	BCS loop1
-   	BNE loop2
-	TXA
+	JSR CountFilters
+	CLC
+	LDA FilterCount
 	BNE notzero
 	SEC
 .notzero
@@ -869,10 +863,6 @@ ENDIF
 	; Print PAGE  OF
 	LDX #11
 	JSR ScreenStringX
-
-	; Test if there is an active filter
-	LDA FilterType
-	BEQ done
 
 	; Display the set of active filters
 	JSR ListFilters
@@ -1109,11 +1099,6 @@ NEXT
 ; Multi Facet Filter Fixed Data
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.FilterTypeMask
-	EQUB &01, &02, &04, &08
-	EQUB &10, &20, &40, &80
-
-
 .FacetByteOffsetTable
 	EQUB PubByteOffset
 	EQUB PubByteOffset
@@ -1172,10 +1157,6 @@ NEXT
 	CPY #0
 	BEQ ClearAllFilters
 	; C = 1 at this point
-	LDA FilterTypeMask - 1, Y
-	EOR #&FF
-	AND FilterType
-	STA FilterType
 	LDX FacetByteOffsetTable, Y
 	LDA FacetMasks, X
 	AND FacetMaskTable, Y
@@ -1190,8 +1171,6 @@ NEXT
 .ClearAllFilters
 {
 	SEC
-	LDA #0
-	STA FilterType
 	LDY #CollectionsByteOffset
 .loop	LDA FacetMasks, Y
 	BEQ next
@@ -1201,6 +1180,23 @@ NEXT
 .next
 	DEY
 	BPL loop
+	RTS
+}
+
+.CountFilters
+{
+	LDA #0
+	STA FilterCount
+	LDY #CollectionsFilterNum
+.loop
+	LDX FacetByteOffsetTable, Y
+	LDA FacetMasks, X
+	AND FacetMaskTable, Y
+	BEQ next
+	INC FilterCount
+.next
+	DEY
+	BNE loop
 	RTS
 }
 
@@ -1237,10 +1233,6 @@ NEXT
 	ORA FacetMasks, X
 	STA FacetMasks, X
 
-	; Maintain the bit-per-filter FilterType map for expendiency
-	LDA FilterTypeMask - 1, Y
-	ORA FilterType
-	STA FilterType
 	RTS
 }
 
@@ -1513,6 +1505,9 @@ NEXT
 	STX CurrentItem
 	STX CurrentItem + 1
 
+	; Make sure FilterCount is up to date
+	JSR CountFilters
+
 	; Default to assuming we are on a facet page
 	LDA #FacetTitleOffset
 	STA TitleNameOffset
@@ -1606,7 +1601,7 @@ NEXT
 ; value (the first char of the title name)
 {
 .filter
-	LDA FilterType
+	LDA FilterCount
 	BEQ match
 	LDY #0
 .loop1

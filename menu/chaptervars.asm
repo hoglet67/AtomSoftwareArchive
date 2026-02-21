@@ -158,8 +158,8 @@ ENDIF
 	; (0 = Titles screen, 1 = Publishers filter screen, ...)
 	PageState        	= ZeroBase + &20
 
-	; A bit mask, one bit per filter (2^0 = Publisher, 2^1 = Genre....)
-	FilterType       	= ZeroBase + &21
+	; The return value of CountFilters
+	FilterCount       	= ZeroBase + &21
 
 	; The sort order the user has chosen
 	; (0 = by Title, 1 = by Publisher, 2 = by Genre, ...)
