@@ -310,7 +310,6 @@ ENDIF
 	STA PageState
 	JMP main_loop_redo_counts
 
-
 .test_for_prev_page
 	CPY #28					; <
 	BNE test_for_next_page
@@ -341,7 +340,8 @@ ENDIF
 	JMP set_item_to_zero
 
 .test_for_prev_tag
-	LDA PageState				; Tags not used in filter pages
+	; On a filter page, skip tests for: Z X [ ] S
+	LDA PageState
 	BNE test_for_help
 
 	LDX Annotation
@@ -381,7 +381,7 @@ ENDIF
 
 .test_for_next_sort
 	CPY #3					; ]
-	BNE test_for_help
+	BNE test_for_search
 	; Increment the current sort, handling wrapping
 	INX
 	CPX #NumFacets + 1
@@ -399,6 +399,19 @@ ENDIF
 	JSR LoadSortTable
 	JMP main_loop_reset_position
 
+.test_for_search
+	; Test for search
+	CPY #51					; S
+	BNE test_for_help
+
+	; Handle search
+	JSR HighlightItem
+	LDA #1
+	STA Page
+	JSR SetupRenderingVars
+	JSR Search
+	JMP main_loop_redo_counts
+
 .test_for_help
 	CPY #31					; /
 	BNE test_for_select
@@ -413,18 +426,6 @@ ENDIF
 	CPY #Return				; <Return>
 	BEQ handle_select
 
-	; Test for search
-	CPY #51					; S
-	BNE test_for_a_to_m
-	; Handle search
-	LDA PageState
-	BNE test_for_a_to_m
-	JSR HighlightItem
-	LDA #1
-	STA Page
-	JSR SetupRenderingVars
-	JSR Search
-	JMP main_loop_redo_counts
 
 .test_for_a_to_m
 	; A..M key pressed (select an item)
