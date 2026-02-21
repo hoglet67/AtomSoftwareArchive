@@ -1821,11 +1821,10 @@ ENDIF
 
 	; Write the seperator and padding
 .write_separator
-	LDA #' '
-.write_separator_loop
-	JSR WriteToScreen
-	DEX
-	BPL write_separator_loop
+	TXA
+	TAY
+	INY
+	JSR YSpaces
 
 	; Write the annotation
 	JMP ScreenStringTmpPtr
