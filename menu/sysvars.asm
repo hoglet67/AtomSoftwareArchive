@@ -14,6 +14,7 @@ gosdc =? 0
 	PlotDriverMS    = &f6d8
 	GraphicsCtrl    = &f6dd
 	WaitUntilVSync  = &fe66
+	Inkey		= &fe71
 	KernelOsrdch	= &fe94
 	Osrdch          = &ffe3
 	Oswrch          = &fff4

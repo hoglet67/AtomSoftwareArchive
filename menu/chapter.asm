@@ -263,9 +263,7 @@ include "chaptervars.asm"
 .call_inkey
 	; Call InKey to scan the keyboard
 	JSR Inkey
-
-	CPY #&FF
-	BEQ main_loop_scan			; Branch of no key pressed
+	BCS main_loop_scan			; Branch of no key pressed
 
 	CPY #&3B				; Escape
 	BNE test_for_filter
@@ -609,15 +607,6 @@ ENDIF
 ; Support code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.Inkey
-{
-	JSR &FE71
-	BCC done
-	LDY #&ff
-.done
-	RTS
-}
-
 ; Translates the Item index (in the RowReturn buffer) to a record address
 .GetItemAddress
 {
@@ -673,8 +662,7 @@ ENDIF
 .loop
 	JSR WaitUntilVSync
 	JSR Inkey
-	CPY #255
-	BNE pressed
+	BCC pressed
 	BIT &b001
 	BPL pressed
 	BVS released
