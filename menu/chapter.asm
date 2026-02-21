@@ -286,9 +286,9 @@ ENDIF
 .test_for_filter
 	; Del (15) 0 (16) = title; 1..N = filter
 	CPY #15					; Del
-	BCC test_for_prev_sort
+	BCC test_for_prev_page
 	CPY #16+NumFacets+1			; 8
-	BCS test_for_prev_sort
+	BCS test_for_prev_page
 	TYA
 	SBC #15
 	; At this point A=-1, 0, or 1..N
@@ -310,35 +310,6 @@ ENDIF
 	STA PageState
 	JMP main_loop_redo_counts
 
-.test_for_prev_sort
-	LDX SortType
-	CPY #1					; [
-	BNE test_for_next_sort
-	; Decrement the current sort, handling wrapping
-	DEX
-	BPL change_sort
-	LDX #NumFacets
-	BNE change_sort				; branch always
-
-.test_for_next_sort
-	CPY #3					; ]
-	BNE test_for_prev_page
-	; Increment the current sort, handling wrapping
-	INX
-	CPX #NumFacets + 1
-	BNE change_sort
-	LDX #0
-
-.change_sort
-	; Action the change of sort, also changing the current annotation ot match
-	STX SortType
-	BNE not_sort_zero
-	INX					; Title sort defaults to long publisher
-.not_sort_zero
-	STX Annotation
-	; Page in the appropriate sort table
-	JSR LoadSortTable
-	JMP main_loop_reset_position
 
 .test_for_prev_page
 	CPY #28					; <
@@ -369,9 +340,6 @@ ENDIF
 .next_page_nowrap
 	JMP set_item_to_zero
 
-.jump_main_loop_release
-	JMP main_loop_release
-
 .test_for_prev_tag
 	LDA PageState				; Tags not used in filter pages
 	BNE test_for_help
@@ -387,7 +355,7 @@ ENDIF
 
 .test_for_next_tag
 	CPY #56					; X
-	BNE test_for_help
+	BNE test_for_prev_sort
 	; Handle next tag
 	INX
 	CPX #NumFacets + 1
@@ -397,6 +365,39 @@ ENDIF
 .change_tag
 	STX Annotation
 	JMP main_loop_render
+
+.jump_main_loop_release
+	JMP main_loop_release
+
+.test_for_prev_sort
+	LDX SortType
+	CPY #1					; [
+	BNE test_for_next_sort
+	; Decrement the current sort, handling wrapping
+	DEX
+	BPL change_sort
+	LDX #NumFacets
+	BNE change_sort				; branch always
+
+.test_for_next_sort
+	CPY #3					; ]
+	BNE test_for_help
+	; Increment the current sort, handling wrapping
+	INX
+	CPX #NumFacets + 1
+	BNE change_sort
+	LDX #0
+
+.change_sort
+	; Action the change of sort, also changing the current annotation ot match
+	STX SortType
+	BNE not_sort_zero
+	INX					; Title sort defaults to long publisher
+.not_sort_zero
+	STX Annotation
+	; Page in the appropriate sort table
+	JSR LoadSortTable
+	JMP main_loop_reset_position
 
 .test_for_help
 	CPY #31					; /
