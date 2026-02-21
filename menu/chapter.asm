@@ -854,7 +854,7 @@ ENDIF
 
 .filter_page
 	; Filter page, print FILTER BY
-	LDX #9
+	LDX #FilterByStringNum
 	JSR ScreenStringX
 
 	; Set Sort to the start of the pointer list in the secondary table
@@ -875,7 +875,7 @@ ENDIF
 
 .title_page
 	; Title page, print SORTED BY
-	LDX #10
+	LDX #SortedByStringNum
 	JSR ScreenStringX
 
 	; Set Sort to the start of the pointer list in the sort table
@@ -896,7 +896,7 @@ ENDIF
 	JSR YSpaces
 
 	; Print PAGE  OF
-	LDX #11
+	LDX #PageMofNStringNum
 	JSR ScreenStringX
 
 	; Display the set of active filters
@@ -993,7 +993,7 @@ ENDIF
 	STA Screen + 1
 
 	; Write "  SEARCH="
-	LDX #12
+	LDX #SearchStringNum
 	JSR ScreenStringX
 
 	; Write the contents of the search buffer
@@ -2276,34 +2276,42 @@ ENDIF
 
 ; Padding for the first 9 strings
 .PadTable
-	EQUB 5, 1, 5, 3, 0, 0, 3, 2, 0
+	EQUB FilterPad - LEN(TitleName)
+	EQUB FilterPad - LEN(PubFilterName)
+	EQUB FilterPad - LEN(GenreFilterName)
+	EQUB FilterPad - LEN(ChunkFilterName)
+	EQUB FilterPad - LEN(RamFilterName)
+	EQUB FilterPad - LEN(RomFilterName)
+	EQUB FilterPad - LEN(VersionFilterName)
+	EQUB FilterPad - LEN(JoystickFilterName)
+	EQUB FilterPad - LEN(CollectionsFilterName)
 
 .String0
-	EQUS "TITLE", 0
+	EQUS TitleName, 0
 
 .String1
-	EQUS "PUBLISHER", 0
+	EQUS PubFilterName, 0
 
 .String2
-	EQUS "GENRE", 0
+	EQUS GenreFilterName, 0
 
 .String3
-	EQUS "CHAPTER", 0
+	EQUS ChunkFilterName, 0
 
 .String4
-	EQUS "RAM NEEDED", 0
+	EQUS RamFilterName, 0
 
 .String5
-	EQUS "ROM NEEDED", 0
+	EQUS RomFilterName, 0
 
 .String6
-	EQUS "UPDATED", 0
+	EQUS VersionFilterName, 0
 
 .String7
-	EQUS "JOYSTICK", 0
+	EQUS JoystickFilterName, 0
 
 .String8
-	EQUS "COLLECTION", 0
+	EQUS CollectionsFilterName, 0
 
 .String9
 	EQUS "FILTER BY ", 0

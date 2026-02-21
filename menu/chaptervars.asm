@@ -72,6 +72,23 @@
 	JoystickFilterNum	= 7
 	CollectionsFilterNum 	= 8
 
+	FilterPad		= 10
+
+	TitleName		= "TITLE"
+	PubFilterName		= "PUBLISHER"
+	GenreFilterName		= "GENRE"
+	ChunkFilterName		= "CHAPTER"
+	RamFilterName		= "RAM NEEDED"
+	RomFilterName		= "ROM NEEDED"
+	VersionFilterName	= "UPDATED"
+	JoystickFilterName	= "JOYSTICK"
+	CollectionsFilterName	= "COLLECTION"
+
+	FilterByStringNum	= 9
+	SortedByStringNum	= 10
+	PageMofNStringNum	= 11
+	SearchStringNum		= 12
+
 	; Field offsets into the secondary table record
 	FacetWorkingOffset	= 0	   ; the on-the-fly calculated  facet count where there is a seach
 	FacetTitleOffset	= 2	   ; the name of the facet itself
