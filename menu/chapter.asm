@@ -844,10 +844,7 @@ ENDIF
 	BNE loop
 
 	; Setup the screen pointer to top left
-	LDA #<ScreenStart
-	STA Screen
-	LDA #>ScreenStart
-	STA Screen + 1
+	JSR ScreenLineY
 
 	; Title page or Filter page?
 	LDA PageState
@@ -988,10 +985,8 @@ ENDIF
 	PHA
 
 	; Move to the bottom row
-	LDA #<(ScreenStart + &1E0)
-	STA Screen
-	LDA #>(ScreenStart + &1E0)
-	STA Screen + 1
+	LDY #15
+	JSR ScreenLineY
 
 	; Write "  SEARCH="
 	LDX #SearchStringNum
@@ -1037,10 +1032,8 @@ IF (info_option = 1)
 	EQUS "LOAD INFO", Return
 
 	; Metata starts on line 4
-	LDA #<(ScreenStart + 4 * CharsPerLine)
-	STA Screen
-	LDA #>(ScreenStart + 4 * CharsPerLine)
-	STA Screen + 1
+	LDY #4
+	JSR ScreenLineY
 
 	LDX #1
 .filter_loop1
@@ -2181,22 +2174,16 @@ ENDIF
 
 .ScreenLineY
 {
-	LDA #<(ScreenStart)
-	STA Screen
-	LDA #>(ScreenStart)
-	STA Screen+1
 	TYA
 	ASL A
 	ASL A
 	ASL A
 	ASL A
 	ASL A
-	BCC nocarry
-	INC Screen+1
-.nocarry
-	CLC
-	ADC Screen
 	STA Screen
+	LDA #>ScreenStart
+	ADC #0
+	STA Screen + 1
 	RTS
 }
 
