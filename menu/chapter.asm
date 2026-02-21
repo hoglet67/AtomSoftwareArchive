@@ -274,10 +274,8 @@ ENDIF
 
 	; Clear filter
 	LDY PageState
-	TYA
-	ORA FilterType
-	BEQ jump_main_loop_release		; nothing to do!
-	JSR ClearFilterY			; Y=0 clears all filters, Y<>0 clean filter N
+	JSR ClearFilterY			; Y=0 clears all filters, Y<>0 clean filter N; C=1 on exit if nothing changed
+	BCS jump_main_loop_release		; nothing to do!
 	JMP main_loop_redo_counts
 
 .change_filter
@@ -1166,29 +1164,41 @@ NEXT
 
 ; Clear Filter
 ;     Y = Filter Number
+;
+; Note, this only clears the FacetMask, as the FacetValue is
+; irrelevant when the mask is zero
 .ClearFilterY
 {
 	CPY #0
 	BEQ ClearAllFilters
+	; C = 1 at this point
 	LDA FilterTypeMask - 1, Y
 	EOR #&FF
 	AND FilterType
 	STA FilterType
 	LDX FacetByteOffsetTable, Y
-	LDA FacetMaskTable, Y
-	EOR #&FF
-	AND FacetMasks, X
+	LDA FacetMasks, X
+	AND FacetMaskTable, Y
+	BEQ done
+ 	EOR FacetMaskTable, Y	; this works because the relevant FacetMasks are all-0 or all-1
 	STA FacetMasks, X
-	; Note, the FacetValue is irrelevant when the mask is zero
+	CLC			; indicate some work was done
+.done
 	RTS
 }
 
 .ClearAllFilters
 {
+	SEC
 	LDA #0
 	STA FilterType
 	LDY #CollectionsByteOffset
-.loop	STA FacetMasks, Y
+.loop	LDA FacetMasks, Y
+	BEQ next
+	CLC			; indicate some work was done
+	LDA #0
+	STA FacetMasks, Y
+.next
 	DEY
 	BPL loop
 	RTS
