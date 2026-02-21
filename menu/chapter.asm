@@ -68,7 +68,7 @@ include "chaptervars.asm"
 	STY SearchBuffer
 
 	; Clear all filters
-	JSR ClearFilterY	; Y=0 clears all filters
+	JSR ClearAllFilters
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Main command loop
@@ -1182,14 +1182,7 @@ NEXT
 .ClearFilterY
 {
 	CPY #0
-	BNE clear_y
-	LDY #CollectionsFilterNum
-.loop
-	JSR clear_y
-	DEY
-	BNE loop
-	RTS
-.clear_y
+	BEQ ClearAllFilters
 	LDA FilterTypeMask - 1, Y
 	EOR #&FF
 	AND FilterType
@@ -1200,6 +1193,17 @@ NEXT
 	AND FacetMasks, X
 	STA FacetMasks, X
 	; Note, the FacetValue is irrelevant when the mask is zero
+	RTS
+}
+
+.ClearAllFilters
+{
+	LDA #0
+	STA FilterType
+	LDY #CollectionsByteOffset
+.loop	STA FacetMasks, Y
+	DEY
+	BPL loop
 	RTS
 }
 
