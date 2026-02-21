@@ -1043,6 +1043,7 @@ IF (info_option = 1)
 
 	LDX #1
 .filter_loop1
+	LDA #FilterSeparator2
 	JSR WriteFacetToScreen
 	INX
 	CPX #CollectionsFilterNum
@@ -1052,6 +1053,7 @@ IF (info_option = 1)
 	LDY #CollectionsByteOffset
 	LDA (Title), Y
 	BPL title
+	LDA #FilterSeparator2
 	JSR WriteFacetToScreen
 	INC Title
 	BNE filter_loop2
@@ -1284,6 +1286,7 @@ NEXT
 	LDA FacetMaskTable, X
 	AND FacetMasks, Y
 	BEQ next
+	LDA #FilterSeparator1
 	JSR WriteFacetToScreen	; preserves X
 .next
 	INX
@@ -2151,10 +2154,13 @@ ENDIF
 }
 
 
+; A = seperator string number
 ; X = facet number
 ; Facet Value read from (Title)
 .WriteFacetToScreen
 {
+	PHA			; save seperator
+
  	JSR GetAnnotationTable	; Preserves X
 
 	LDY PadTable, X
@@ -2162,10 +2168,11 @@ ENDIF
 
 	JSR ScreenStringX	; preserves X
 
-	LDA #':'
-	JSR WriteToScreen	; preserves A, X, Y
-	LDA #' '
-	JSR WriteToScreen	; preserves A, X, Y
+	STX TmpX
+	PLA
+	TAX
+	JSR ScreenStringX
+	LDX TmpX
 
 	JSR ExtractAnnotationValue  ; Preserves X, result in A
 
@@ -2258,6 +2265,8 @@ ENDIF
 	EQUB <String10
 	EQUB <String11
 	EQUB <String12
+	EQUB <String13
+	EQUB <String14
 
 .StringTableMSB
 	EQUB >String0
@@ -2273,6 +2282,8 @@ ENDIF
 	EQUB >String10
 	EQUB >String11
 	EQUB >String12
+	EQUB >String13
+	EQUB >String14
 
 ; Padding for the first 9 strings
 .PadTable
@@ -2324,6 +2335,12 @@ ENDIF
 
 .String12
 	EQUS "  SEARCH=", 0
+
+.String13
+	EQUS "=", 0
+
+.String14
+	EQUS ": ", 0
 
 include "common.asm"
 
