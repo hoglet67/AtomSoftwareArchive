@@ -661,11 +661,11 @@ ENDIF
 	STA Tmp
 .loop
 	JSR WaitUntilVSync
-	JSR Inkey
-	BCC pressed
 	BIT &b001
-	BPL pressed
-	BVS released
+	BPL pressed	; shift
+	BVC pressed	; control
+	JSR Inkey	; C=1 if no key pressed
+	BCS released
 .pressed
 	DEC Tmp
 	BNE loop
