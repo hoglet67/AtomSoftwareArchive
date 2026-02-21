@@ -215,7 +215,6 @@ include "chaptervars.asm"
 	CMP #1
 	BEQ main_loop_release
 	DEC Page
-	JSR HighlightItem
 	LDX LinesPerPage
 	DEX
 	STX Item
@@ -257,7 +256,6 @@ include "chaptervars.asm"
 	BEQ main_loop_release
 	INC Page
 .set_item_to_zero
-	JSR HighlightItem
 	LDA #0
 	STA Item
 	JMP main_loop_render			; Branch always
