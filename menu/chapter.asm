@@ -1416,9 +1416,11 @@ ENDIF
 {
 	JSR GetAnnotationRecord
 	CLC
+	; Special case the Short Publisher table, which doesn't
+	; include the two bytes of counts.
 	LDA Annotation
 	BEQ short_pub
-	LDA #FacetTitleOffset
+	LDA #FacetValueOffset
 .short_pub
 	ADC AnnotationPtr
 	STA TmpPtr
@@ -1439,7 +1441,7 @@ ENDIF
 
 .update_count
 	JSR GetAnnotationRecord
-	LDY #FacetWorkingOffset + 1	; count is stored at offset 3 (LSB) and 2 (MSB)
+	LDY #FacetCountOffset + 1	; count is stored at offset 3 (LSB) and 2 (MSB)
 	SEC
 .update_loop
 	LDA (AnnotationPtr),Y
@@ -1478,7 +1480,7 @@ ENDIF
 	LDA (AnnotationTable), Y
 	STA Tmp + 1
 	BEQ done
-	LDY #FacetWorkingOffset
+	LDY #FacetCountOffset
 	LDA #&80
 	STA (Tmp),Y
 	INY
@@ -1586,7 +1588,7 @@ ENDIF
 	JSR CountFilters
 
 	; Default to assuming we are on a facet page
-	LDA #FacetTitleOffset
+	LDA #FacetValueOffset
 	STA TitleNameOffset
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1624,7 +1626,7 @@ ENDIF
 	BVC find_title
 
 	; Yes, so the match now becomes a non-zero facet count
-	LDY #FacetWorkingOffset
+	LDY #FacetCountOffset
 	LDA (Title), Y
 	AND #&7F
 	BNE matching_row
@@ -1768,7 +1770,7 @@ ENDIF
 	BIT DisplayMode
 	BVC normal_annotation
 
-	LDY #FacetWorkingOffset
+	LDY #FacetCountOffset
 	LDA (Title),Y
 	AND #&7F
 	STA BinBuffer + 1	; MSB first (i.e. count is stored big endian)

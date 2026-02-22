@@ -92,8 +92,8 @@
 	FilterSeparator2	= 14
 
 	; Field offsets into the secondary table record
-	FacetWorkingOffset	= 0	   ; the on-the-fly calculated  facet count where there is a seach
-	FacetTitleOffset	= 2	   ; the name of the facet itself
+	FacetCountOffset	= 0	   ; the on-the-fly calculated  facet count where there is a seach
+	FacetValueOffset	= 2	   ; the name of the facet itself
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Buffering
