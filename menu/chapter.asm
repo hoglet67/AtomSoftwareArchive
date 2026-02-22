@@ -264,14 +264,12 @@ include "chaptervars.asm"
 	; Set the page-change item to the current item
 	LDY Item
 .handle_prev_page
-	; Add -1 to the page
-	LDA #&FF
 	; Set the wrap page to the last page
 	LDX NumPages
 	DEX
-	; Make it so
-	JSR ChangePage
-	JMP main_loop_render
+	; Add -1 to the page
+	LDA #&FF
+	BNE change_page
 
 .test_for_next_page
 	CPY #30					; >
@@ -279,12 +277,25 @@ include "chaptervars.asm"
 	; Set the page-change item to the current item
 	LDY Item
 .handle_next_page
-	; Add +1 to the page
-	LDA #&01
 	; Set the wrap page to the first page
 	LDX #&00
-	; Make it so
-	JSR ChangePage
+	; Add +1 to the page
+	LDA #&01
+	; fall through into change_page
+
+; Helper code to support navigating to the previous or next page
+;     A = &FF for prev page, or A=&01 for next page
+;     X = page number to "wrap"
+;     Y = item number on new page
+.change_page
+	CLC
+	ADC Page
+	CMP NumPages
+	BCC page_valid
+	TXA		; Wrap page number to value in X
+.page_valid
+	STA Page	; Save the new page number
+	STY Item	; Save the new item number
 	JMP main_loop_render
 
 .test_for_escape
@@ -600,24 +611,6 @@ ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Support code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Helper code to support navigating to the previous or next page
-; On entry:
-;     A = &FF for prev page, or A=&01 for next page
-;     X = page number to "wrap"
-;     Y = item number on new page
-.ChangePage
-{
-	CLC
-	ADC Page
-	CMP NumPages
-	BCC ok
-	TXA		; Wrap page number to value in X
-.ok
-	STA Page	; Save the new page number
-	STY Item	; Save the new item number
-	RTS
-}
 
 ; Translates the Item index (in the RowReturn buffer) to a record address
 .GetItemAddress
