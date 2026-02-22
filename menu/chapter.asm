@@ -815,15 +815,17 @@ ENDIF
 
 .RenderHeader
 {
-	; Clear the top half of the screen
-	LDY #CharsPerLine*2
+	; Clear line 1, as it's sometimes left blank
+	LDY #CharsPerLine
 	LDA #' '
 .loop
-	STA ScreenStart - 1, Y
+	STA ScreenStart + CharsPerLine - 1, Y
 	DEY
 	BNE loop
 
 	; Setup the screen pointer to top left
+	; Y is already 0
+	; LDY #0
 	JSR ScreenLineY
 
 	; Title page or Filter page?
