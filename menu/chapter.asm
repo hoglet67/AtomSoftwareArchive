@@ -816,11 +816,11 @@ ENDIF
 .RenderHeader
 {
 	; Clear the top half of the screen
-	LDY #0
+	LDY #CharsPerLine*2
 	LDA #' '
 .loop
-	STA ScreenStart,Y
-	INY
+	STA ScreenStart - 1, Y
+	DEY
 	BNE loop
 
 	; Setup the screen pointer to top left
