@@ -481,8 +481,7 @@ ENDIF
 
 {
 	; Dereference the title to get the 11-bit index number
-	LDX #Title
-	JSR Dereference
+	JSR DereferenceTitle
 
 	; For SDDOS we pack two games per disk
 	LDA Title
@@ -630,15 +629,17 @@ ENDIF
 	LDA Title + 1
 	ADC Sort + 1
 	STA Title + 1		; Title now (item << 1)
-
-	LDX #Title
-	;; Fall through into rereference
+	;; Fall through into DeReferenceTitle
 }
 
-; Dereferences the pointer at zero page location X,X+1
-
-.Dereference
+IF 0
+; Old method that dereferences the pointer at zero page location
+; X,X+1. This ended up only being used for title, so we save a few
+; bytes with a customized version.
+.DereferenceTitle
 {
+	LDX #Title
+.Dereference
 	LDA (0,X)
 	PHA
 	INC 0,X
@@ -649,6 +650,20 @@ ENDIF
 	STA 1,X
 	PLA
 	STA 0,X
+	RTS
+}
+ENDIF
+
+.DereferenceTitle
+{
+	LDY #0
+	LDA (Title), Y
+	PHA
+	INY
+	LDA (Title),Y
+	STA Title + 1
+	PLA
+	STA Title
 	RTS
 }
 
