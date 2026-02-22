@@ -667,27 +667,24 @@ ENDIF
 ; Handles auto repeat
 .HandleAutoRepeat
 {
-	LDA AutoRepeat
-	STA Tmp
 .loop
 	JSR WaitUntilVSync
 	BIT &b001
 	BPL pressed	; shift
 	BVC pressed	; control
 	JSR Inkey	; C=1 if no key pressed
+	; Key was released
+	; Update the auto repeat timer to the delay value
+	LDA #AutoRepeat1
 	BCS released
 .pressed
-	DEC Tmp
+	DEC AutoRepeat
 	BNE loop
 	; Key was not released
 	; Update the auto repeat timer to the repeat value
 	LDA #AutoRepeat2
-	STA AutoRepeat
-	RTS
 .released
-	; Key was released
-	; Update the auto repeat timer to the delay value
-	LDA #AutoRepeat1
+	; Reload Autorepeat for next time
 	STA AutoRepeat
 	RTS
 }
