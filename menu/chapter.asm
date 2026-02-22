@@ -636,6 +636,7 @@ ENDIF
 }
 
 ; Dereferences the pointer at zero page location X,X+1
+
 .Dereference
 {
 	LDA (0,X)
@@ -849,19 +850,11 @@ ENDIF
 	JSR ScreenStringX
 
 	; Set Sort to the start of the pointer list in the secondary table
-	LDA PageState
-	ASL A
-	ADC #2
-	ADC MenuTablePtr
-	STA Sort
-	LDA MenuTablePtr + 1
-	ADC #0
-	STA Sort + 1
-	LDX #Sort
-	JSR Dereference
+	LDX PageState
+	LDY #Sort
+	JSR GetMenuTable
 
 	; Prepare for printing the filter facet name
-	LDX PageState
 	BNE facet	; branch always
 
 .title_page
@@ -1363,18 +1356,32 @@ ENDIF
 	LDA FacetBitOffsetTable, X
 	STA EAVShift + 1
 	; Lookup the address of the annotation table
+	LDY #AnnotationTable
+	; Fall through into
+}
+
+; Place the address of Menu Table X in 0, Y and 1, Y
+; (preserving X)
+
+.GetMenuTable
+{
 	TXA
+	STY lsb+1
+	INY
+	STY msb+1
 	ASL A
+	ADC #2		; Skip the length field
 	TAY
-	INY
+	LDA (MenuTablePtr),Y
+.lsb
+	STA &00
 	INY
 	LDA (MenuTablePtr),Y
-	STA AnnotationTable
-	INY
-	LDA (MenuTablePtr),Y
-	STA AnnotationTable + 1
+.msb
+	STA &01
 	RTS
 }
+
 
 ; A=Annotation id value (7 bits)
 .GetAnnotationRecord
