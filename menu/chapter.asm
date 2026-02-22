@@ -469,7 +469,6 @@ IF (info_option = 1)
    	JSR InfoScreen
 	CMP #&1B
 	BNE boot_continue
-	JSR ClearScreen
 	JMP main_loop_render_all
 .boot_continue
 	JSR GetItemAddress
@@ -502,7 +501,9 @@ IF (sddos2 = 1)
 	ADC #0
 	STA bootnum
 ENDIF
-	JSR ClearScreen
+	; Clear screen
+	LDA #12
+	JSR Oswrch
 
 IF (sddos2 = 1 )
 
@@ -758,7 +759,7 @@ ENDIF
 	DEY
 .loop
 	INY
-	SEC
+	; SEC not needed, as both paths to loop set C=1
 	LDA BinBuffer
 	SBC LinesPerPage
 	STA BinBuffer
@@ -787,7 +788,7 @@ ENDIF
 	ROR SuppressFlag
 
 	; X is used as the index into CountString
-	LDX #0
+	TAX
 
 	; Write Page to the CountString
 	LDA Page
@@ -807,14 +808,14 @@ ENDIF
 	JSR BinToDecimal16
 	JSR WriteHex
 
-	DEX
 .loop
-	LDA CountString, X
+	; Can't assemble "LDA CountString - 1, X" here as CountString=&100
+	EQUB &BD, <(CountString - 1), >(CountString-1)
 	AND #&3F
 	ORA #&80
-	STA ScreenStart + CharsPerLine - 5, X
+	STA ScreenStart + CharsPerLine - 6, X
 	DEX
-	BPL loop
+	BNE loop
 	RTS
 }
 
@@ -885,7 +886,7 @@ ENDIF
 	LDY PadTable, X
 	JSR YSpaces
 
-	; Print PAGE  OF
+	; Print PAGE
 	LDX #PageMofNStringNum
 	JSR ScreenStringX
 
@@ -926,7 +927,7 @@ ENDIF
 	BNE NotEscape
 	LDY #0
 	STY SearchBuffer
-	JMP SearchExit
+	BEQ SearchExit		; Branch always
 
 .NotEscape
 	; Return returns with the seach in place
@@ -1087,14 +1088,7 @@ ENDIF
 {
 	JSR OscliString
 	EQUS "LOAD HELP", Return
-	JSR Osrdch
-	; fall though to
-}
-
-.ClearScreen
-{
-	LDA #12
-	JMP Oswrch
+	JMP Osrdch
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
