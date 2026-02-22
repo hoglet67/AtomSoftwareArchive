@@ -342,7 +342,7 @@ ENDIF
 	JMP main_loop_redo_counts
 
 .change_filter
-	; Filter 1..8
+	; At this point A=0, or 1..N
 	CMP PageState
 	BEQ jump_main_loop_release		; nothing to do!
 	STA PageState
@@ -616,38 +616,22 @@ ENDIF
 .GetItemAddress
 {
 	LDY Item		; Item starts at 0
+
+	LDA RowReturnMSB, Y
+	STA Title + 1
+
 	LDA RowReturnLSB, Y	; RowReturnBuffer stores the item index
 	ASL A
-	STA Title
-	LDA RowReturnMSB, Y
-	ROL A
-	STA Title + 1		; Title now (item << 1)
-
-	CLC			; Now indirect through the sort table
-	LDA Title
+	ROL Title + 1
+	CLC
 	ADC Sort
 	STA Title
 	LDA Title + 1
 	ADC Sort + 1
-	STA Title + 1
+	STA Title + 1		; Title now (item << 1)
 
 	LDX #Title
-	JMP Dereference
-}
-
-
-; Test if row X (0 based) is active
-; On exit:
-;    C=0 if valid
-;    C=1 if invalid
-.TestRowXActive
-{
-	CPX #MaxItems
-	BCS done
-	LDA RowReturnMSB, X
-	CMP #&FF		; C=0 if valid, C=1 if invalid
-.done
-	RTS
+	;; Fall through into rereference
 }
 
 ; Dereferences the pointer at zero page location X,X+1
@@ -663,6 +647,20 @@ ENDIF
 	STA 1,X
 	PLA
 	STA 0,X
+	RTS
+}
+
+; Test if row X (0 based) is active
+; On exit:
+;    C=0 if valid
+;    C=1 if invalid
+.TestRowXActive
+{
+	CPX #MaxItems
+	BCS done
+	LDA RowReturnMSB, X
+	CMP #&FF		; C=0 if valid, C=1 if invalid
+.done
 	RTS
 }
 
