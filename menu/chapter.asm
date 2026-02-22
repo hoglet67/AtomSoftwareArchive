@@ -1255,16 +1255,10 @@ ENDIF
 ; List all filters in human readable form
 .ListFilters
 {
-	LDA #<FacetValues
-	STA Title
-	LDA #>FacetValues
-	STA Title + 1
 	LDX #1
 .loop
-	LDY FacetByteOffsetTable, X
-	LDA FacetMaskTable, X
-	AND FacetMasks, Y
-	BEQ next
+	JSR GetFilterValue
+	BCS next
 	LDA #FilterSeparator1
 	JSR WriteFacetToScreen	; preserves X
 .next
