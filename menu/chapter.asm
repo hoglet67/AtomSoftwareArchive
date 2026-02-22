@@ -127,10 +127,9 @@ include "chaptervars.asm"
 
 .main_loop_reset_position
 	; Reset the page/item back to the start
-	LDY #&00
-	STY Item
-	INY
-	STY Page
+	LDA #&00
+	STA Item
+	STA Page
 
 .main_loop_render_all
 	; Render the header, including the filter list
@@ -166,14 +165,25 @@ include "chaptervars.asm"
 
 	; On a filter page, try to pre-select the item that matches the current filter
 	LDX PageState
-	BEQ highlight_item
+	BEQ select_item
 	JSR GetAnnotationTable
 	JSR FindFilterItem
-	BCS highlight_item
-	STX Item
+	BCS select_item		; C=0 if item found
+	STX Item		; save found item
 
-.highlight_item
+	; Gracefully handle the end of the list
+.select_item
+	LDX Item
+	JSR TestRowXActive
+	BCC highlight_item	; C=0 if item valid
+	DEC Item
+	BPL select_item
+
+	; This can happen if there are no items
+	BMI main_loop_release
+
 	; Highlight the currently active item
+.highlight_item
 	JSR HighlightItem
 
 .main_loop_release
@@ -196,25 +206,20 @@ include "chaptervars.asm"
 	BIT &b001
 	BVS test_for_down_key
 
-.handle_up_key
 	; Handle the up key, decrementing item
-	LDA Item
-	BEQ handle_up_to_previous_page
+.handle_up_key
+	; De-select the existing item
 	JSR HighlightItem
+	; Set the page-change item to the bottom item on the page
+	LDY LinesPerPage
+	DEY
+	; Decrement the item
 	DEC Item
+	; Branch if we have moved off the top bottom of the visible items
+	BMI handle_prev_page
+	; Select the new item
 	JSR HighlightItem
 	BMI main_loop_release	; Branch always
-
-.handle_up_to_previous_page
-	; Handle the up key when at the top of a page
-	LDA Page
-	CMP #1
-	BEQ main_loop_release
-	DEC Page
-	LDX LinesPerPage
-	DEX
-	STX Item
-	BNE main_loop_render			; Branch always
 
 .test_for_down_key
 	; Check for original Atom
@@ -232,35 +237,57 @@ include "chaptervars.asm"
 	BIT &b001
 	BMI call_inkey
 
-.handle_down_key
 	; Handle down key, incrementing item
-	LDX Item
-	INX
-	CPX LinesPerPage
-	BEQ handle_down_to_next_page
-	JSR TestRowXActive
-	BEQ handle_down_to_next_page
+.handle_down_key
+	; De-select the existing item
 	JSR HighlightItem
+	; Set the page-change item to the top item on the page
+	LDY #&00
+	; Decrement the item
 	INC Item
+	; Branch if we have moved off the bottom of the visible items
+	LDX Item
+	JSR TestRowXActive
+	BCS handle_next_page
+	; Select the new item
 	JSR HighlightItem
-	JMP main_loop_release
-
-.handle_down_to_next_page
-	; Handle down key when at the bottom of a page
-	LDA Page
-	CMP NumPages
-	BEQ main_loop_release
-	INC Page
-.set_item_to_zero
-	LDA #0
-	STA Item
-	JMP main_loop_render			; Branch always
+	BMI main_loop_release	; Branch always
 
 .call_inkey
 	; Call InKey to scan the keyboard
 	JSR Inkey
 	BCS main_loop_scan			; Branch of no key pressed
 
+.test_for_prev_page
+	CPY #28					; <
+	BNE test_for_next_page
+	; Set the page-change item to the current item
+	LDY Item
+.handle_prev_page
+	; Add -1 to the page
+	LDA #&FF
+	; Set the wrap page to the last page
+	LDX NumPages
+	DEX
+	; Make it so
+	JSR ChangePage
+	JMP main_loop_render
+
+.test_for_next_page
+	CPY #30					; >
+	BNE test_for_escape
+	; Set the page-change item to the current item
+	LDY Item
+.handle_next_page
+	; Add +1 to the page
+	LDA #&01
+	; Set the wrap page to the first page
+	LDX #&00
+	; Make it so
+	JSR ChangePage
+	JMP main_loop_render
+
+.test_for_escape
 	CPY #&3B				; Escape
 	BNE test_for_filter
 
@@ -286,9 +313,9 @@ ENDIF
 .test_for_filter
 	; Del (15) 0 (16) = title; 1..N = filter
 	CPY #15					; Del
-	BCC test_for_prev_page
+	BCC test_for_prev_tag
 	CPY #16+NumFacets+1			; 8
-	BCS test_for_prev_page
+	BCS test_for_prev_tag
 	TYA
 	SBC #15
 	; At this point A=-1, 0, or 1..N
@@ -309,35 +336,6 @@ ENDIF
 	BEQ jump_main_loop_release		; nothing to do!
 	STA PageState
 	JMP main_loop_redo_counts
-
-.test_for_prev_page
-	CPY #28					; <
-	BNE test_for_next_page
-	; Handle previous page
-	LDA NumPages				; special case there being just one page
-	CMP #1
-	BEQ jump_main_loop_release
-	DEC Page
-	BNE prev_page_nowrap
- 	STA Page
-.prev_page_nowrap
- 	JMP set_item_to_zero
-
-.test_for_next_page
-	CPY #30					; >
-	BNE test_for_prev_tag
-	; Handle next page
-	LDA NumPages				; special case there being just one page
-	CMP #1
-	BEQ jump_main_loop_release
-	INC Page
-	LDA NumPages
-	CMP Page
-	BCS next_page_nowrap
-	LDA #1
-	STA Page
-.next_page_nowrap
-	JMP set_item_to_zero
 
 .test_for_prev_tag
 	; On a filter page, skip tests for: Z X [ ] S
@@ -406,7 +404,7 @@ ENDIF
 
 	; Handle search
 	JSR HighlightItem
-	LDA #1
+	LDA #0
 	STA Page
 	JSR SetupRenderingVars
 	JSR Search
@@ -420,30 +418,28 @@ ENDIF
 	JMP main_loop_render_all		; redraw the whole screen, but counts will be unchanged
 
 .test_for_select
-	; Test for select
+	; Test for select (select current item)
+	LDX Item
 	CPY #0	      	      	      	      	; <Space>
 	BEQ handle_select
 	CPY #Return				; <Return>
 	BEQ handle_select
-
-
-.test_for_a_to_m
-	; A..M key pressed (select an item)
+	; Test for A..M key pressed (select an item)
 	CPY #33					; A
 	BCC jump_main_loop_release
 	CPY #46					; M + 1
 	BCS jump_main_loop_release
-
-	; Make sure that the row is not blank
-	; 670 Y=?Q-33;IF ?(#8040+Y*32)=32 G.c
 	TYA
 	SBC #32
 	TAX
-	JSR TestRowXActive
-	BEQ jump_main_loop_release
-	STX Item
 
 .handle_select
+	; Make sure the selected row actually exists
+	JSR TestRowXActive
+	BCS jump_main_loop_release
+	;
+	STX Item
+
 	; Test whether we are on the title page or a filter page
 	LDY PageState
 	BEQ boot_program
@@ -605,6 +601,24 @@ ENDIF
 ; Support code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Helper code to support navigating to the previous or next page
+; On entry:
+;     A = &FF for prev page, or A=&01 for next page
+;     X = page number to "wrap"
+;     Y = item number on new page
+.ChangePage
+{
+	CLC
+	ADC Page
+	CMP NumPages
+	BCC ok
+	TXA		; Wrap page number to value in X
+.ok
+	STA Page	; Save the new page number
+	STY Item	; Save the new item number
+	RTS
+}
+
 ; Translates the Item index (in the RowReturn buffer) to a record address
 .GetItemAddress
 {
@@ -628,11 +642,18 @@ ENDIF
 	JMP Dereference
 }
 
+
 ; Test if row X (0 based) is active
+; On exit:
+;    C=0 if valid
+;    C=1 if invalid
 .TestRowXActive
 {
+	CPX #MaxItems
+	BCS done
 	LDA RowReturnMSB, X
-	CMP #&FF
+	CMP #&FF		; C=0 if valid, C=1 if invalid
+.done
 	RTS
 }
 
@@ -783,6 +804,7 @@ ENDIF
 	; Write Page to the CountString
 	LDA Page
 	STA BinBuffer
+	INC BinBuffer
 	JSR BinToDecimal16
 	JSR WriteHex
 
@@ -1481,10 +1503,10 @@ ENDIF
 
 .SetupRenderingVars
 {
-	LDY #0
-	STY StartRow + 1
-	INY
+	LDY #1
 	STY StartRow
+	DEY
+	STY StartRow + 1
 .loop1
 	CPY Page
 	BEQ done1
