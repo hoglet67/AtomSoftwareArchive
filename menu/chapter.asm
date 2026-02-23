@@ -435,8 +435,10 @@ ENDIF
 	BEQ handle_select
 	CPY #Return				; <Return>
 	BEQ handle_select
-	; Test for A..M key pressed (select an item)
-	CPY #33					; A
+	; Test for @
+	CPY #32					; @, A-1
+	BEQ handle_select
+	; Test for A..M
 	BCC jump_main_loop_release
 	CPY #46					; M + 1
 	BCS jump_main_loop_release
@@ -452,26 +454,33 @@ ENDIF
 	STX Item
 
 	; Test whether we are on the title page or a filter page
-	LDY PageState
+	LDA PageState
 	BEQ boot_program
 
 	; Filter page, so add the filter
+	TAY
 	LDX Item
 	LDA RowReturnLSB, X
 	JSR AddFilterY				; Y = FilterNum, A = FilterValue
 	JMP main_loop_page_state_zero
 
 .boot_program
-	JSR GetItemAddress
 
-   	; If info option is enabbled, then first show the info screen
-IF (info_option = 1)
+   	; If info option is enabled, then first show the info screen
+IF (info_option > 0)
+  IF (info_option = 2)
+   	CPY #32
+	BEQ boot_info
+        JSR HandleAutoRepeat
+	BCS boot_continue
+  ENDIF
+.boot_info
+	JSR GetItemAddress
    	JSR InfoScreen
 	CMP #&1B
 	BNE boot_continue
 	JMP main_loop_render_all
 .boot_continue
-	JSR GetItemAddress
 ENDIF
 }
 
@@ -480,6 +489,8 @@ ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 {
+	JSR GetItemAddress
+
 	; Dereference the title to get the 11-bit index number
 	JSR DereferenceTitle
 
@@ -1028,7 +1039,7 @@ ENDIF
 ; Info Screen
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-IF (info_option = 1)
+IF (info_option > 0)
 
 .InfoScreen
 {
