@@ -313,7 +313,7 @@ include "chaptervars.asm"
 IF (sddos2 = 1 OR sddos3 = 1)
 	EQUS "DRIVE 0", Return
 ELIF (econet = 1 OR gosdc = 1)
-	EQUS "DIR &", Return
+	EQUS "DIR $", Return
 ELSE
 	EQUS "CWD /", Return
 ENDIF
@@ -609,7 +609,7 @@ IF (sddos2 = 1 OR sddos3 = 1)
 ELIF (econet = 1 OR gosdc = 1)
 
 .run_command
-	EQUS "DIR &.ASA.",0
+	EQUS "DIR $.ASA.",0
 
 ELSE
 
