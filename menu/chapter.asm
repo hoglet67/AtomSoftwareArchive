@@ -2149,12 +2149,12 @@ ENDIF
 
 .YSpaces
 {
-	LDA #' '
 .loop
 	DEY
 	BMI done
-	JSR WriteToScreen	; preserves A, X, Y
-	BNE loop
+	LDA #' '
+	JSR WriteToScreen	; preserves X, Y
+	BNE loop		; Z set by WriteToScreen based on Y
 .done
 	RTS
 }
@@ -2191,22 +2191,18 @@ ENDIF
 
 .WriteToScreen
 {
-	PHA		; TODO: Not really needed (fix YSpaces)
 	STY TmpY
 	LDY #0
-
 	AND #&BF
 	STA (Screen),Y
 	INC Screen
-	BNE nocarry
-	INC Screen + 1	; TODO: Could just EOR with &01 below
+	BNE done
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
-	AND #&81
+	EOR #&01
 	STA Screen + 1
-.nocarry
-	LDY TmpY	; TODO: Not really needed
-	PLA
+.done
+	LDY TmpY
 	RTS
 }
 
