@@ -1483,26 +1483,22 @@ ENDIF
 {
 	LDX Annotation
 	JSR GetAnnotationTable
+	LDX #0
 .loop
-	LDY #0
-	LDA (AnnotationTable), Y
-	STA Tmp
-	INY
-	LDA (AnnotationTable), Y
-	STA Tmp + 1
+	TXA
+	JSR GetAnnotationRecord
 	BEQ done
 	LDY #FacetCountOffset
 	LDA #&80
-	STA (Tmp),Y
-	INY
+	STA (AnnotationPtr),Y
+IF (FacetCountOffset = 0)	; it is zero, and no plans to change this
+	TYA
+ELSE
 	LDA #&00
-	STA (Tmp),Y
-	CLC
-	LDA AnnotationTable
-	ADC #&02
-	STA AnnotationTable
-	BCC loop
-	INC AnnotationTable + 1
+ENDIF
+	INY
+	STA (AnnotationPtr),Y
+	INX
 	BNE loop
 .done
 	RTS
