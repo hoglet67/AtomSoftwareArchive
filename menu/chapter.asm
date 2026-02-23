@@ -477,8 +477,8 @@ IF (info_option > 0)
 .boot_info
 	JSR GetItemAddress
    	JSR InfoScreen
-	CMP #&1B
-	BNE boot_continue
+	CMP #Return
+	BEQ boot_continue
 	JMP main_loop_render_all
 .boot_continue
 ENDIF
