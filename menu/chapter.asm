@@ -1145,17 +1145,6 @@ ENDIF
 	EQUB JoystickMask
 	EQUB CollectionsMask
 
-.FacetXorTable
-	EQUB PubXor
-	EQUB PubXor
-	EQUB GenreXor
-	EQUB ChunkXor
-	EQUB RamXor
-	EQUB RomXor
-	EQUB VersionXor
-	EQUB JoystickXor
-	EQUB CollectionsXor
-
 .FacetBitOffsetTable
 	EQUB 7 - PubBitOffset
 	EQUB 7 - PubBitOffset
@@ -1337,10 +1326,9 @@ ENDIF
 .*EAVOffset
 	LDY #&00
 	LDA (Title), Y
+	PHP
 .*EAVMask
 	AND #&00
-.*EAVXor
-	EOR #&00
 .*EAVShift
 	BNE P%+2
 	LSR A
@@ -1350,6 +1338,7 @@ ENDIF
 	LSR A
 	LSR A
 	LSR A
+	PLP
 	RTS
 }
 
@@ -1366,8 +1355,6 @@ ENDIF
 	STA EAVOffset + 1
 	LDA FacetMaskTable, X
 	STA EAVMask + 1
-	LDA FacetXorTable, X
-	STA EAVXor + 1
 	LDA FacetBitOffsetTable, X
 	STA EAVShift + 1
 	; Lookup the address of the annotation table
@@ -1784,10 +1771,14 @@ ENDIF
 
 .normal_annotation
 	JSR ExtractAnnotationValue
+	; ExtractAnnotationValue flags set based on BYTE read from memory
+	; "Null collection" is indicated by a positive value AND the current Annotation being a Collection
+	BMI not_null_collection
+	LDY Annotation
+	CPY #CollectionsFilterNum
+	BNE not_null_collection
 
-	BPL not_null_collection
-
-	; CollectionIDs always have bit 7 set
+	; CollectionIDs in memory always have bit 7 set
 	; If bit 7 is clear, there is no collection
 	LDA #<null_collection_message
 	STA TmpPtr

@@ -43,16 +43,7 @@
 	RomMask     		= &F8
 	VersionMask     	= &1F
 	JoystickMask  		= &C0
-	CollectionsMask  	= &FF
-
-	PubXor     		= &00
-	GenreXor         	= &00
-	ChunkXor     		= &00
-	RamXor     		= &00
-	RomXor     		= &00
-	VersionXor    		= &00
-	JoystickXor  		= &00
-	CollectionsXor  	= &80
+	CollectionsMask  	= &7F
 
 	PubBitOffset     	= 0
 	GenreBitOffset          = 3
