@@ -473,6 +473,9 @@ IF (info_option > 0)
 	BEQ boot_info
         JSR HandleAutoRepeat
 	BCS boot_continue
+	; Set the long auto repeat delay
+	LDA #AutoRepeat1
+	STA AutoRepeat
   ENDIF
 .boot_info
 	JSR GetItemAddress
