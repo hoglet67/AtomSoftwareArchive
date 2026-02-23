@@ -191,20 +191,16 @@ include "chaptervars.asm"
 	JSR HandleAutoRepeat
 
 .main_loop_scan
-	; Check for original Atom
-	LDA &bd00
-	CMP #&bf
-	BNE test_for_up_key_original
+	LDA #&40      	; 40 (bit 6) is the control key mask
+	LDX &bf00
+	CPX #&bf	; Value on a real Atom is &b1, due to pulldowns on D3..1
+	BNE original_atom
+	ASL A		; 80 (bit 7) is the shift key mask
+.original_atom
 
-	; Test if shift key is pressed (emulator, scroll up)
+	; Test for up key
 	BIT &b001
-	BMI test_for_down_key
-	BPL handle_up_key
-
-.test_for_up_key_original
-	; Test if ctrl key is pressed (original atom, scroll up)
-	BIT &b001
-	BVS test_for_down_key
+	BNE test_for_down_key
 
 	; Handle the up key, decrementing item
 .handle_up_key
@@ -222,20 +218,10 @@ include "chaptervars.asm"
 	BMI main_loop_release	; Branch always
 
 .test_for_down_key
-	; Check for original Atom
-	LDA &bd00
-	CMP #&bf
-	BNE test_for_down_key_original
-
-	; Test if ctrl key is pressed (emulator, scroll down)
+	; Test for up key
+	EOR #&C0   ; This inverts the mask used for the up key (40->80 and 80->40)
 	BIT &b001
-	BVC handle_down_key
-	BVS call_inkey		; Branch always
-
-.test_for_down_key_original
-	; Test if shift key is pressed (original atom, scroll down)
-	BIT &b001
-	BMI call_inkey
+	BNE call_inkey
 
 	; Handle down key, incrementing item
 .handle_down_key
