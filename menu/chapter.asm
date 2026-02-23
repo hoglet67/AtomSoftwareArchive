@@ -2184,13 +2184,14 @@ ENDIF
 	INY
 	BNE loop
 .done
-	AND #&7F
+	; Print the last character
+	AND #&7F    	; TODO: Could always do this in WriteToScreen
 	; Fall throught to
 }
 
 .WriteToScreen
 {
-	PHA
+	PHA		; TODO: Not really needed (fix YSpaces)
 	STY TmpY
 	LDY #0
 
@@ -2198,13 +2199,13 @@ ENDIF
 	STA (Screen),Y
 	INC Screen
 	BNE nocarry
-	INC Screen + 1
+	INC Screen + 1	; TODO: Could just EOR with &01 below
 	; Ensure we don't overwrite the tables!
 	LDA Screen + 1
 	AND #&81
 	STA Screen + 1
 .nocarry
-	LDY TmpY
+	LDY TmpY	; TODO: Not really needed
 	PLA
 	RTS
 }
