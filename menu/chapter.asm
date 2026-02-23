@@ -2075,14 +2075,7 @@ ELIF (gosdc = 1)
 	LDA BinBuffer + 1
 	JSR WriteHex1
 	LDA BinBuffer
-	PHA
-	LSR A
-	LSR A
-	LSR A
-	LSR A
-	JSR WriteHex1
-	PLA
-	JMP WriteHex1
+	JMP WriteHex
 }
 ENDIF
 
