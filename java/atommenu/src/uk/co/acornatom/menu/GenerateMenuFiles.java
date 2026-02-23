@@ -271,8 +271,8 @@ public class GenerateMenuFiles extends GenerateBase {
             // Avoid 2800-31FF (CHAPTER MENU)
             // Avoid 2000-2FFF (SDDOS Catalog Buffer)
             sortTableAddr   = 0x9800 - sortTableLen;
-            titleTableAddr  = 0x3300;
-            titleTableSpace = 0x7000 - 0x3300;
+            titleTableAddr  = 0x3200;
+            titleTableSpace = 0x7000 - 0x3200;
             menuTableAddr   = 0x8200;
             menuTableSpace  = sortTableAddr - menuTableAddr;
         } else {
@@ -280,7 +280,7 @@ public class GenerateMenuFiles extends GenerateBase {
             sortTableAddr   = 0x3C00 - sortTableLen;
             titleTableAddr  = 0x8200;
             titleTableSpace = 0x9800 - titleTableAddr;
-            menuTableAddr   = 0x3300;
+            menuTableAddr   = 0x3200;
             menuTableSpace  = sortTableAddr - menuTableAddr;
         }
 

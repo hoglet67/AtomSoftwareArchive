@@ -6,7 +6,7 @@ include "chaptervars.asm"
 
 	org Base - 22
 
-	guard Base + &B00
+	guard Base + &A00
 
 .STARTOFHEADER
 
