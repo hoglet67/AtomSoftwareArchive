@@ -25,10 +25,16 @@
 	BottomWindowStart  	= 154
 	BottomWindowHeight 	= 20
 
+
+	RamRomTypeNone		= &00
+	RamRomTypeUnknown	= &01
+	RamRomTypeAtom2K15	= &02
+	RamRomTypeYARRB		= &03
+	RamRomTypeTestFault	= &04
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Zero Page
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 	TmpPtr			= ZeroBase
 	EndPage			= ZeroBase + 2
@@ -42,3 +48,4 @@
 	LoMemTop 		= ZeroBase + 13
 	HiMemBot 		= ZeroBase + 14
 	HiMemTop 		= ZeroBase + 15
+	RamRomType		= ZeroBase + 16

@@ -1,4 +1,4 @@
-	Base =? $2800
+Base =? $2800
 
 include "sysvars.asm"
 
@@ -75,6 +75,9 @@ include "menuvars.asm"
 	EQUB 0
 
 .MeetsMinimum
+
+	; Test for a RomRam board
+	JSR RamRomTest
 
 	; Work around for issue with older versions of AtomMMC on some titles (e.g. SUB HUNT)
 	LDA #<KernelOsrdch
@@ -607,7 +610,7 @@ NEXT
 	RTS
 
 .table
-	EQUW PrintRamTest - 1
+	EQUW PrintRomTest - 1
 	EQUW PrintRamTest - 1
 	EQUW PrintHelp1 - 1
 	EQUW PrintHelp2 - 1
@@ -633,76 +636,136 @@ NEXT
 .PrintHelp1
 {
 	JSR ClearTextBuffer
-	LDX #(Help1String - HelpStrings)
+	LDA #Help1StringNum
 	BNE PrintString		; Branch always
 }
 
 .PrintHelp2
 {
 	JSR ClearTextBuffer
-	LDX #(Help2String - HelpStrings)
+	LDA #Help2StringNum
 	BNE PrintString		; Branch always
 }
 
 .PrintHelp3
 {
 	JSR ClearTextBuffer
-	LDX #(Help3String - HelpStrings)
+	LDA #Help3StringNum
 	BNE PrintString		; Branch always
 }
 
 .PrintRamTest
 {
 	JSR ClearTextBuffer
-	LDX #(LowerRAMString - HelpStrings)
+	LDA #LowerRAMStringNum
 	JSR PrintString
 	LDX #LoMemBot
 	JSR PrintBounds
-	LDX #(UpperRAMString - HelpStrings)
+	LDA #UpperRAMStringNum
 	JSR PrintString
 	LDX #HiMemBot
 	JMP PrintBounds
 }
 
+.PrintRomTest
+{
+	JSR ClearTextBuffer
+	LDX #Processor65C02StringNum
+	EQUB &80, &01
+	INX
+	TXA
+	JSR PrintString
+	LDA RamRomType
+	;; Fall through to
+}
+
 .PrintString
 {
+	ASL A
+	TAY
+	LDA HelpStringTable, Y
+	STA TmpPtr
+	LDA HelpStringTable + 1, Y
+	STA TmpPtr + 1
+	LDY #0
 .loop
-	LDA HelpStrings, X
+	LDA (TmpPtr), Y
 	BEQ done
 	JSR TextPrintChar
-	INX
+	INY
 	BNE loop
 .done
 	RTS
 }
 
-.HelpStrings
+RamRomNoneStringNum	  = 0
+RamRomUnknownStringNum 	  = 1
+RamRomAtom2K15StringNum   = 2
+RamRomYARRBStringNum 	  = 3
+RamRomTestFaultStringNum  = 4
+Processor65C02StringNum   = 5
+Processor6502StringNum    = 6
+LowerRAMStringNum 	  = 7
+UpperRAMStringNum 	  = 8
+Help1StringNum 		  = 9
+Help2StringNum 		  = 10
+Help3StringNum 		  = 11
 
-.LowerRAMString
-	EQUS "Lower Text RAM: "
-	EQUB 0
+.HelpStringTable
+{
+	EQUW RamRomNone
+	EQUW RamRomUnknown
+	EQUW RamRomAtom2K15
+	EQUW RamRomYARRB
+	EQUW RamRomTestFault
+	EQUW Processor65C02
+	EQUW Processor6502
+	EQUW LowerRAM
+	EQUW UpperRAM
+	EQUW Help1
+	EQUW Help2
+	EQUW Help3
 
-.UpperRAMString
-	EQUS "Upper Text RAM: "
-	EQUB 0
+.RamRomNone
+	EQUS "RAMROM Board: None", 0
 
-.Help1String
-	EQUS "Press R to load ROMS into a"
-	EQUB 13
-	EQUS "YARRB/Atom2015 RAMROM board."
-	EQUB 0
+.RamRomUnknown
+	EQUS "RAMROM Board: Unknown", 0
 
-.Help2String
-	EQUS "Press Shift+Chapter to enter"
-	EQUB 13
-	EQUS "a chapter that is disabled."
-	EQUB 0
+.RamRomAtom2K15
+	EQUS "RAMROM Board: Atom2K15", 0
 
-.Help3String
-	EQUS "Press ESC to exit to BASIC."
-	EQUB 13
-	EQUS "In a chapter press / for HELP."
-	EQUB 0
+.RamRomYARRB
+	EQUS "RAMROM Board: YARRB", 0
+
+.RamRomTestFault
+	EQUS "RAMROM Board: Test failed", 0
+
+.Processor65C02
+	EQUS "   Processor: 65C02", 13, 0
+
+.Processor6502
+	EQUS "   Processor: 6502", 13, 0
+
+.LowerRAM
+	EQUS "Lower Text RAM: ", 0
+
+.UpperRAM
+	EQUS "Upper Text RAM: ", 0
+
+.Help1
+	EQUS "Press R to load ROMS into a", 13
+	EQUS "YARRB/Atom2015 RAMROM board.", 0
+
+.Help2
+	EQUS "Press Shift+Chapter to enter", 13
+	EQUS "a chapter that is disabled.", 0
+
+.Help3
+	EQUS "Press ESC to exit to BASIC.", 13
+	EQUS "In a chapter press / for HELP.", 0
+
+}
 
 .ClearTextBuffer
 {
@@ -893,6 +956,73 @@ NEXT
 	TAX
 	PLA
 	RTS
+}
+
+
+.RamRomTest
+{
+	LDA #RamRomTypeNone
+	STA RamRomType
+	LDA &BFFE
+	EOR #&80
+	STA &BFFE
+	CMP &BFFE
+	PHP
+	EOR #&80
+	STA &BFFE
+	PLP
+	BEQ LL1
+	AND #&F1
+	CMP #&B1
+	BEQ LL0
+	LDA #RamRomTypeUnknown
+	STA RamRomType
+.LL0
+	RTS
+.LL1
+	AND #&10
+	BNE LL4
+	LDA &BFFE
+	LDX #&5A
+	STX &4000
+	EOR #&01
+	STA &BFFE
+	LDX #&A5
+	STX &4000
+	EOR #&01
+	STA &BFFE
+	LDX &4000
+	CPX #&5A
+	BEQ LL2
+	CPX #&A5
+	BEQ LL3
+	LDA #RamRomTypeTestFault
+	STA RamRomType
+	RTS
+.LL2
+	LDA #RamRomTypeAtom2K15
+	STA RamRomType
+	RTS
+.LL3
+	LDA #RamRomTypeYARRB
+	STA RamRomType
+	RTS
+.LL4
+	LDA &BFFE
+	TAX
+	AND #&FB
+	STA &BFFE
+	LDA &A00
+	EOR #&FF
+	STA &A00
+	CMP &A00
+	PHP
+	EOR #&FF
+	STA &A00
+	STX &BFFE
+	PLP
+	BEQ LL2
+	BNE LL3
 }
 
 
