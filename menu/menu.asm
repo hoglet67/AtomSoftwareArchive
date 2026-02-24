@@ -481,10 +481,13 @@ IF (banner_scroll = 1)
 .Scroll
 {
 	LDA Cycle + 1
-	BPL active
+	AND #&81
+	BEQ active
 	JMP exit
 .active
-	ROR A
+	LDA Cycle + 1
+	AND #&1C
+	CMP #&14
 	BCC scroll_bottom
 
 .scroll_top
@@ -540,8 +543,10 @@ FOR I, 0, 29
 	ROL ScreenStart + &1E - I, X
 NEXT
 	LDA Cycle + 1
-	AND #&01
-	BNE skip
+	AND #&1C
+	EOR #&14
+	BEQ skip
+	; This is needed for the botton panel
 	LDA (TmpPtr),Y
 	ROL A
 	STA (TmpPtr),Y
@@ -572,21 +577,26 @@ NEXT
 	LDA #0
 	STA Cycle
 	; Cycle + 1 controls the scrolling as follows:
-	; - Bit 0   = Bottom (0) vs Top (1)
-	; - Bit 1   = Bottom panel scrollimg in (0) vs out (1)
-	; - Bit 3,2 = 00 = RamTestInfo, 01 = Help1, 10 = Help2, 11 = Help3
+	; - Bit 0      = paused
+	; - Bit 1      = scroll in vs out
+	; - Bit 4..2 = 000 = RamTestInfo, 001 = RomTestInfo, 010 = Help1, 011 = Help2, 100 = Help3, 101 = Top panel
 	; the total sequence takes 4 * 32 = 128s to repeat
 	LDA Cycle + 1
 	CLC
 	ADC #&01
 	STA Cycle + 1
+	; If still negative, we are in initial startup delay period
 	BMI exit2
-	AND #&7F
+	; Wrap at 18 to implement the 6 screen sequence above
+	CMP #&18
+	BCC wrap
+	LDA #&00
+.wrap
 	STA Cycle + 1
 	AND #&03
 	BNE exit2	; xxxxxx00 indicates we need to render the next help panel
 	LDA Cycle + 1
-	AND #&0C
+	AND #&1C
 	LSR A
 	TAX
 	LDA table+1, X
@@ -598,9 +608,13 @@ NEXT
 
 .table
 	EQUW PrintRamTest - 1
+	EQUW PrintRamTest - 1
 	EQUW PrintHelp1 - 1
 	EQUW PrintHelp2 - 1
 	EQUW PrintHelp3 - 1
+	EQUW exit2 - 1
+	EQUW exit2 - 1
+	EQUW exit2 - 1
 }
 
 .ScanKeyboard
@@ -988,7 +1002,5 @@ align &100
 .TextBuffer
 
 .ENDOF
-
-
 
 SAVE STARTOFHEADER, ENDOF
