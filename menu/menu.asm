@@ -481,11 +481,16 @@ include "common.asm"
 
 IF (banner_scroll = 1)
 
+
 .Scroll
 {
 	LDA Cycle + 1
-	AND #&81
+	BMI jump_exit
+	AND #&03
 	BEQ active
+	CMP #&03
+	BEQ active
+.jump_exit
 	JMP exit
 .active
 	LDA Cycle + 1
@@ -583,7 +588,7 @@ NEXT
 	; - Bit 0      = paused
 	; - Bit 1      = scroll in vs out
 	; - Bit 4..2 = 000 = RamTestInfo, 001 = RomTestInfo, 010 = Help1, 011 = Help2, 100 = Help3, 101 = Top panel
-	; the total sequence takes 4 * 32 = 128s to repeat
+	; the total sequence takes 4 * 24 = 96s to repeat
 	LDA Cycle + 1
 	CLC
 	ADC #&01
