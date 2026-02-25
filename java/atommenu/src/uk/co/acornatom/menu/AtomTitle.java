@@ -35,6 +35,9 @@ public class AtomTitle {
     private Set<String> runnables = new HashSet<String>();
     private Set<String> loadables = new HashSet<String>();
 
+    // A flag to indicate the title should not be included in the menu
+    private Boolean disabled;
+
     // These are part of AtomTitle and and filled in as the indexes are built
     private int absoluteAddress;
 
@@ -118,6 +121,7 @@ public class AtomTitle {
 
     public AtomTitle() {
         diskNo = null;
+        disabled = false;
     }
 
     public void setIdentifier(int identifier) {
@@ -379,6 +383,14 @@ public class AtomTitle {
 
     public void setPages98to8F(Boolean ramPages98to8F) {
         this.pages98to8F = ramPages98to8F;
+    }
+
+    public boolean isDisabled() {
+        return this.disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
     }
 
 }

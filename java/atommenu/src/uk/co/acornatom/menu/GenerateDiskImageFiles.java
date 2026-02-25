@@ -41,7 +41,7 @@ public abstract class GenerateDiskImageFiles extends ArchiveGeneratorBase {
 
     @Override
     public void filterTitles(List<AtomTitle> items) throws IOException {
-        filterOZMOOTitles(items);
+        dropOZMOOTitles(items);
         Iterator<AtomTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             AtomTitle item = itemIterator.next();

@@ -186,7 +186,10 @@ public class GenerateAll {
         Map<String, Integer> chapters = new TreeMap<String, Integer>();
         int total = 0;
         for (AtomTitle item : items) {
-            // Count the number of titles in each chapter
+            if (item.isDisabled()) {
+                continue;
+            }
+            // Count the number of enabled titles in each chapter
             String chapter = item.getChapter();
             Integer count = chapters.get(chapter);
             if (count == null) {
@@ -202,6 +205,12 @@ public class GenerateAll {
         }
         System.out.println(    "Total " + total + " titles");
         return chapters;
+    }
+
+    private void enableAllTitles(List<AtomTitle> items) {
+        for (AtomTitle item : items) {
+            item.setDisabled(false);
+        }
     }
 
     public void generateAll(File catalogCSV, Set<Target> userTargets, String version) {
@@ -270,6 +279,9 @@ public class GenerateAll {
                 } else {
                     romBootLoaderBinary = new File(archiveDir, "BOOTROM.bin");
                 }
+
+                // Make sure all titles are enabled by default
+                enableAllTitles(targetItems);
 
                 // Give the generator the opportunity to drop titles it deems are unsupported
                 generator.filterTitles(targetItems);

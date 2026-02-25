@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -232,6 +234,16 @@ public class GenerateMenuFiles extends GenerateBase {
 
     @Override
     public void generateFiles(List<AtomTitle> atomTitles) throws IOException {
+
+        // Drop any titles marked as disabled from inclusion in this menu
+        atomTitles = new ArrayList<AtomTitle>(atomTitles);
+        Iterator<AtomTitle> itemIterator = atomTitles.iterator();
+        while (itemIterator.hasNext()) {
+            AtomTitle item = itemIterator.next();
+            if (item.isDisabled()) {
+                itemIterator.remove();
+            }
+        }
 
         // Sort the master list in title order
         Collections.sort(atomTitles, Comparator.comparing(AtomTitle::getTitle, titleComparator));

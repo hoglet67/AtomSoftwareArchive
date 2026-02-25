@@ -33,7 +33,7 @@ public class GenerateGoSDCFiles extends ArchiveGeneratorBase {
 
     @Override
     public void filterTitles(List<AtomTitle> items) throws IOException {
-        filterOZMOOTitles(items);
+        disableOZMOOTitles(items);
     }
 
     @Override

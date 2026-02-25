@@ -32,7 +32,16 @@ abstract public class ArchiveGeneratorBase extends GenerateBase implements IArch
         }
     }
 
-    protected void filterOZMOOTitles(List<AtomTitle> items) throws IOException {
+    protected void disableOZMOOTitles(List<AtomTitle> items) throws IOException {
+        for (AtomTitle item : items) {
+            if (item.getCollections().contains("OZMOO") ) {
+                item.setDisabled(true);
+                System.out.println("WARNING: disabling title in " + getTarget().name() + " because it's not supported: " + item);
+            }
+        }
+    }
+
+    protected void dropOZMOOTitles(List<AtomTitle> items) throws IOException {
         Iterator<AtomTitle> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             AtomTitle item = itemIterator.next();
