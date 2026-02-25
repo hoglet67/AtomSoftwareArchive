@@ -2827,15 +2827,15 @@ ZISCR",,Test,
 1279,V14B1,Non Comm,Inufuto,SVELLAS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN SVELLAS,SVELLAS,,Test,
 1280,V14B1,Non Comm,Inufuto,AWASS,Game,,32K+6K,,,,,,,,present,Inufuto,INU,8200,*RUN AWASS,AWASS,,Test,
 1281,V14B1,Modern,Non Comm,"RAM Test 00-03,28-3B",Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM060,RAM060,,Test,
-1282,V14B1,Modern,Non Comm,RAM Test 00-3F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM160,RAM160,,Test,
-1283,V14B1,Modern,Non Comm,RAM Test 00-7F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM320,RAM320,,Test,
+1282,V14B1,Modern,Non Comm,RAM Test 00-3F,Utility,Test,32K+6K,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM160,RAM160,,Test,
+1283,V14B1,Modern,Non Comm,RAM Test 00-7F,Utility,Test,32K+6K,,,,,,,,present,David Banks,NC/TEST,9200,*RUN RAM320,RAM320,,Test,
 1284,V14B1,Modern,Non Comm,RAM Test 82-97,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,*RUN RAM006,RAM006,,Test,
-1285,V14B1,Modern,Non Comm,RAM Test 82-9F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,*RUN RAM008,RAM008,,Test,
+1285,V14B1,Modern,Non Comm,RAM Test 82-9F,Utility,Test,6K+8K,,,,,,,,present,David Banks,NC/TEST,8200,*RUN RAM008,RAM008,,Test,
 1286,V14B1,ROMS,Non Comm,"RAM Test 28-3B,82-97",Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM066 8800",AROM066,,Test,
-1287,V14B1,ROMS,Non Comm,"RAM Test 28-3B,82-9F",Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
+1287,V14B1,ROMS,Non Comm,"RAM Test 28-3B,82-9F",Utility,Test,6K+8K,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM068 8800",AROM068,,Test,
-1288,V14B1,ROMS,Non Comm,RAM Test 00-6F,Utility,Test,,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
+1288,V14B1,ROMS,Non Comm,RAM Test 00-6F,Utility,Test,32K+6K,,,,,,,,present,David Banks,NC/TEST,8200,"PRINT TO RUN: LINK#A000
 *LOAD AROM280 8800",AROM280,,Test,
 1289,V14B1,Modern,Non Comm,Atomic RAM Test,Utility,Test,,,,,,,,,present,Kees vas Oss,NC/TEST,8200,"CH.""RAMTEST""",RAMTEST,,Test,
 1290,V14B1,Non Comm,Non Comm,Mandelbrot,Graphics,,,Yes,,,,,,,present,Matalog,NC,8200,"CH.""MANDEL""",MANDEL,,Test,
