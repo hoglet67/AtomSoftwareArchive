@@ -85,6 +85,7 @@ public class AtomTitle {
         longShortPubMap.put("INTERFACE", "TBOI");
         longShortPubMap.put("INUFUTO", "INU");
         longShortPubMap.put("JIM BAGLEY", "JB");
+        longShortPubMap.put("JOHN KORTINK", "JK");
         longShortPubMap.put("LARSOFT", "LS");
         longShortPubMap.put("LEE S/W", "LEE");
         longShortPubMap.put("LEVEL 9", "L9");
