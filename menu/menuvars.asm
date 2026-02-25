@@ -8,6 +8,9 @@
 ; Miscellaneous constants
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+	NumScrollStates		= 7
+	ScrollStateMask		= &0E
+
 	MinChapter		= 0	; A
 	MaxChapter 		= 6	; G
 	AGDChapter 		= 2	; C
@@ -24,7 +27,6 @@
 
 	BottomWindowStart  	= 154
 	BottomWindowHeight 	= 20
-
 
 	RamRomTypeNone		= &00
 	RamRomTypeUnknown	= &01

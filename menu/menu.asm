@@ -118,9 +118,9 @@ include "menuvars.asm"
 	; Render the test results text panel
 
 IF (banner_scroll = 1)
-	LDA #0
+	LDA #&00
 	STA Cycle
-	LDA #&FF	; Make this more negtive to delay panel startup
+	LDA #&00		; Make this negative to delay panel startup
 	STA Cycle + 1
 ENDIF
 
@@ -485,17 +485,15 @@ IF (banner_scroll = 1)
 .Scroll
 {
 	LDA Cycle + 1
-	BMI jump_exit
+	BMI jump_exit		; Negative allows for a longer startup delay if needed
 	AND #&01
-	BNE active
+	BNE active		; xxxxxxx0 is delay, xxxxxxxx1 is scrolling
 .jump_exit
 	JMP exit
 .active
 	LDA Cycle + 1
-	AND #&0E
-	CMP #&0E
-	BEQ jump_exit	; stage 7 is just a delay
-	CMP #&0C
+	AND #ScrollStateMask
+	CMP #(2 * (NumScrollStates - 1))
 	BCC scroll_bottom
 
 .scroll_top
@@ -581,7 +579,7 @@ NEXT
 	INC Cycle
 	LDA Cycle
 	CMP #30*8
-	BNE exit2
+	BCC exit2
 	LDA #0
 	STA Cycle
 	; Cycle + 1 controls the scrolling as follows:
@@ -591,14 +589,17 @@ NEXT
 	INC Cycle + 1
 	; If still negative, we are in initial startup delay period
 	BMI exit2
-	; Wrap at 18 to implement the 6 screen sequence above
+	; Wrap at 0E to implement the 7 screen sequence above
 	LDA Cycle + 1
-	AND #&0F
+	CMP #(NumScrollStates * 2)
+	BCC nowrap
+	LDA #&00
+.nowrap
 	STA Cycle + 1
 	AND #&01
-	BNE exit2	; xxxxxxx0 indicates we need to render the next help panel
+	BEQ exit2	; xxxxxxx1 indicates we need to render the next help panel
 	LDA Cycle + 1
-	AND #&0E
+	AND #ScrollStateMask
 	TAX
 	LDA table+1, X
 	PHA
@@ -657,9 +658,10 @@ NEXT
 
 .stage6
 {
-	RTS
+	RTS				; The last scroll state scrolls the top panel
 }
 
+; Not currently used
 .stage7
 {
 	RTS
@@ -804,12 +806,12 @@ Help3StringNum 		  = 11
 	EQUS "YARRB/Atom2015 RAMROM board.", 0
 
 .Help2
-	EQUS "In a chapter press / for HELP.", 13
-	EQUS "Press ESC to exit to BASIC.", 0
-
-.Help3
 	EQUS "Press Shift+Chapter to enter", 13
 	EQUS "a chapter that is disabled.", 0
+
+.Help3
+	EQUS "In a chapter press / for HELP.", 13
+	EQUS "Press ESC to exit to BASIC.", 0
 }
 
 .CopyBuffer
