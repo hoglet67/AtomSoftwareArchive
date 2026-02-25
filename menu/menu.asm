@@ -6,6 +6,8 @@ include "menuvars.asm"
 
 	org Base - 22
 
+	guard &3C00
+
 .STARTOFHEADER
 
 ; 22 byte ATM header
@@ -120,7 +122,6 @@ IF (banner_scroll = 1)
 	STA Cycle
 	LDA #&FF	; Make this more negtive to delay panel startup
 	STA Cycle + 1
-	JSR PrintRamTest
 ENDIF
 
 	; The AGD chapter needs Video RAM up to 9FFF
@@ -481,21 +482,20 @@ include "common.asm"
 
 IF (banner_scroll = 1)
 
-
 .Scroll
 {
 	LDA Cycle + 1
 	BMI jump_exit
-	AND #&03
-	BEQ active
-	CMP #&03
-	BEQ active
+	AND #&01
+	BNE active
 .jump_exit
 	JMP exit
 .active
 	LDA Cycle + 1
-	AND #&1C
-	CMP #&14
+	AND #&0E
+	CMP #&0E
+	BEQ jump_exit	; stage 7 is just a delay
+	CMP #&0C
 	BCC scroll_bottom
 
 .scroll_top
@@ -551,10 +551,10 @@ FOR I, 0, 29
 	ROL ScreenStart + &1E - I, X
 NEXT
 	LDA Cycle + 1
-	AND #&1C
-	EOR #&14
+	AND #&0C
+	EOR #&0C
 	BEQ skip
-	; This is needed for the botton panel
+	; This is needed for the bottom panel
 	LDA (TmpPtr),Y
 	ROL A
 	STA (TmpPtr),Y
@@ -586,26 +586,19 @@ NEXT
 	STA Cycle
 	; Cycle + 1 controls the scrolling as follows:
 	; - Bit 0      = paused
-	; - Bit 1      = scroll in vs out
-	; - Bit 4..2 = 000 = RamTestInfo, 001 = RomTestInfo, 010 = Help1, 011 = Help2, 100 = Help3, 101 = Top panel
+	; - Bit 3..1 = 000 = RamTestInfo, 001 = RomTestInfo, 010 = Help1, 011 = Help2, 100 = Help3, 101 = Top panel
 	; the total sequence takes 4 * 24 = 96s to repeat
-	LDA Cycle + 1
-	CLC
-	ADC #&01
-	STA Cycle + 1
+	INC Cycle + 1
 	; If still negative, we are in initial startup delay period
 	BMI exit2
 	; Wrap at 18 to implement the 6 screen sequence above
-	CMP #&18
-	BCC wrap
-	LDA #&00
-.wrap
-	STA Cycle + 1
-	AND #&03
-	BNE exit2	; xxxxxx00 indicates we need to render the next help panel
 	LDA Cycle + 1
-	AND #&1C
-	LSR A
+	AND #&0F
+	STA Cycle + 1
+	AND #&01
+	BNE exit2	; xxxxxxx0 indicates we need to render the next help panel
+	LDA Cycle + 1
+	AND #&0E
 	TAX
 	LDA table+1, X
 	PHA
@@ -615,15 +608,63 @@ NEXT
 	RTS
 
 .table
-	EQUW PrintRomTest - 1
-	EQUW PrintRamTest - 1
-	EQUW PrintHelp1 - 1
-	EQUW PrintHelp2 - 1
-	EQUW PrintHelp3 - 1
-	EQUW exit2 - 1
-	EQUW exit2 - 1
-	EQUW exit2 - 1
+	EQUW stage0 - 1
+	EQUW stage1 - 1
+	EQUW stage2 - 1
+	EQUW stage3 - 1
+	EQUW stage4 - 1
+	EQUW stage5 - 1
+	EQUW stage6 - 1
+	EQUW stage7 - 1
 }
+
+.stage0
+{
+  	JMP PrintRomTest
+}
+
+.stage1
+{
+	LDX #>TextBuffer
+	LDY #>TextBuffer2
+	JSR CopyBuffer			; Save the Startdot logo
+	JMP PrintRamTest
+}
+
+.stage2
+{
+	JMP PrintHelp1
+}
+
+.stage3
+{
+	JMP PrintHelp2
+
+}
+
+.stage4
+{
+	JMP PrintHelp3
+
+}
+
+.stage5
+{
+	LDX #>TextBuffer2
+	LDY #>TextBuffer
+	JMP CopyBuffer			; Restore the Startdot logo
+}
+
+.stage6
+{
+	RTS
+}
+
+.stage7
+{
+	RTS
+}
+
 
 .ScanKeyboard
 {
@@ -763,13 +804,30 @@ Help3StringNum 		  = 11
 	EQUS "YARRB/Atom2015 RAMROM board.", 0
 
 .Help2
-	EQUS "Press Shift+Chapter to enter", 13
-	EQUS "a chapter that is disabled.", 0
+	EQUS "In a chapter press / for HELP.", 13
+	EQUS "Press ESC to exit to BASIC.", 0
 
 .Help3
-	EQUS "Press ESC to exit to BASIC.", 13
-	EQUS "In a chapter press / for HELP.", 0
+	EQUS "Press Shift+Chapter to enter", 13
+	EQUS "a chapter that is disabled.", 0
+}
 
+.CopyBuffer
+{
+	STX loop + 2
+	STY loop + 5
+	LDX #3
+	LDY #0
+.loop
+	LDA TextBuffer, Y
+	STA TextBuffer, Y
+	INY
+	BNE loop
+	INC loop + 2
+	INC loop + 5
+	DEX
+	BNE loop
+	RTS
 }
 
 .ClearTextBuffer
@@ -793,6 +851,7 @@ Help3StringNum 		  = 11
 	STA TxtPtr + 1
 	DEX
 	BNE loop1
+	; Fall through to
 }
 
 .HomeTxtPtr
@@ -968,6 +1027,7 @@ Help3StringNum 		  = 11
 {
 	LDA #RamRomTypeNone
 	STA RamRomType
+	; Test if bit 7 of BFFE is writable, which identifies YARRB/Atom2K15
 	LDA &BFFE
 	EOR #&80
 	STA &BFFE
@@ -977,30 +1037,41 @@ Help3StringNum 		  = 11
 	STA &BFFE
 	PLP
 	BEQ LL1
+	; Test if BFFE is returning the undriven value (&B1)
 	AND #&F1
 	CMP #&B1
-	BEQ LL0
+	BEQ LL0		; Undriven, so conclude no board is present
+	; There is a RamRom board, but it's type is unknown (probably Prime's)
 	LDA #RamRomTypeUnknown
 	STA RamRomType
 .LL0
 	RTS
 .LL1
+	; Distinguish between YARRB and an "original" Atom2K15
+	; The test we do depends on BFFE bit 4 (the upper mode bit) which controls the YARRB mode
 	AND #&10
 	BNE LL4
+	; Distinguish between YARRB in Atom RamRom mode and an "original" Atom2K15
+	; Test whether BFFE bit 0 (xma0) controls banked RAM at 0x4000-0x7FFF
+	; If flipping bit 0 switches bank, this is an "original" Atom2K15,
+	; as YARRB doesn't support this capability in Atom RamRom mode.
 	LDA &BFFE
 	LDX #&5A
-	STX &4000
+	STX &4000	; Write 5A
 	EOR #&01
-	STA &BFFE
+	STA &BFFE	; Toggle bank
 	LDX #&A5
-	STX &4000
+	STX &4000	; Write A5
 	EOR #&01
-	STA &BFFE
+	STA &BFFE	; Toggle bank
 	LDX &4000
-	CPX #&5A
+	CPX #&5A	; 5A mean bank switching, so Atom2K15
 	BEQ LL2
-	CPX #&A5
+	CPX #&A5	; A5 means no bank switching, so YARRB
 	BEQ LL3
+	; Anything else is regarded as a failure of the test for now.
+	; Note: this could be triggered by an unknown board that
+	; returned an even value in the upper nibble when BFFE is read.
 	LDA #RamRomTypeTestFault
 	STA RamRomType
 	RTS
@@ -1013,10 +1084,13 @@ Help3StringNum 		  = 11
 	STA RamRomType
 	RTS
 .LL4
+	; Distinguish between YARRB in Atom2K15 mode and a "original" Atom2K15
+	; Test whether clearing BFFE bit 2 (DskRamEn) creates a hole at &A00
+	; (YARRB has this feature; Atom2K15 does not)
 	LDA &BFFE
 	TAX
 	AND #&FB
-	STA &BFFE
+	STA &BFFE	; Clear bit 2 should disable RAM at A00
 	LDA &A00
 	EOR #&FF
 	STA &A00
@@ -1026,8 +1100,8 @@ Help3StringNum 		  = 11
 	STA &A00
 	STX &BFFE
 	PLP
-	BEQ LL2
-	BNE LL3
+	BNE LL3		; Hole is present at A00 (i.e. no RAM), so this must be YARRB
+	BEQ LL2		; Hole is absent at A00 (i.e. still RAM), so this must be an Atom2K15
 }
 
 
@@ -1132,10 +1206,18 @@ Help3StringNum 		  = 11
 	EQUB &00
 ENDIF
 
+
+.ENDOF
+
+
 align &100
 
 .TextBuffer
 
-.ENDOF
+skip &300
+
+.TextBuffer2
+
+skip &300
 
 SAVE STARTOFHEADER, ENDOF

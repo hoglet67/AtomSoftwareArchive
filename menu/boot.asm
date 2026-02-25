@@ -179,18 +179,18 @@ IF (rom = 1)
 
 IF (gosdc = 1)
 
-	LDX #$80
+	LDX #$80		; Write enable RAM at A000
 	STX $BFFF
 
-	LDA $A000
+	LDA $A000		; Test for RAM at A000
 	EOR #$FF
 	STA $A000
 	EOR $A000
 
-	LDX #$81
+	LDX #$81		; Write protect RAM at A000
 	STX $BFFF
 
-	CMP #$00
+	CMP #$00		; 00 indicates RAM was present
 	BNE UEATryOSR
 
 	JSR OsWriteString
@@ -207,7 +207,7 @@ IF (gosdc = 1)
 	STY RomDst
 	STA RomDst + 1
 
-	LDA #$80
+	LDA #$80		; Write enable RAM at A000
 	STA $BFFF
 
 	LDX #$10
@@ -224,7 +224,7 @@ IF (gosdc = 1)
 	DEX
 	BNE UEABytePRO
 
-	LDA #$81
+	LDA #$81		; Write protect RAM at A000
 	STA $BFFF
 
 	JSR OsWriteString
