@@ -222,7 +222,7 @@ include "chaptervars.asm"
 	INC Item
 	; Branch if we have moved off the bottom of the visible items
 	LDX Item
-	JSR TestRowXActive
+	CPX RowCount
 	BCS handle_next_page
 	; Select the new item
 	JSR HighlightItem
@@ -419,14 +419,13 @@ ENDIF
 	BCS jump_main_loop_release
 	TYA
 	SBC #32
-	TAX
 
 .handle_select
 	; Make sure the selected row actually exists
-	JSR TestRowXActive
+	CMP RowCount
 	BCS jump_main_loop_release
 	;
-	STX Item
+	STA Item
 
 	; Test whether we are on the title page or a filter page
 	LDA PageState
@@ -653,16 +652,6 @@ ENDIF
 	STA Title + 1
 	PLA
 	STA Title
-	RTS
-}
-
-; Test if row X (0 based) is active
-; On exit:
-;    C=0 if valid
-;    C=1 if invalid
-.TestRowXActive
-{
-	CPX RowCount
 	RTS
 }
 
@@ -2049,18 +2038,19 @@ ENDIF
 
 .HighlightItem
 {
-	; Gracefully handle the current item being invalid
-	LDX Item
-	INX
-.loop1
-	DEX
-	BMI done		; likely the results list is empty
-	JSR TestRowXActive	; return C=0 if the item is value
-	BCS loop1
+	; Test if the current item is value
+	LDA Item
+	CMP RowCount
+	BCC valid
+	; If not, set the item to the last item in the results list
+	LDA RowCount
+	SBC #1
+	STA Item
+	; If the results list was empty, don't try to highlight
+	BMI done
 
-	; At this point we know the item is valid, so highlight it
-	STX Item		; the item might have changed, so save it
-	TXA
+.valid
+	CLC
 	ADC StartLine
 	TAY
 
