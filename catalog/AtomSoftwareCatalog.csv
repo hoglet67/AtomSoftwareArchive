@@ -2550,63 +2550,78 @@ UFOSCR",,Works,
 1169,V12B1,AGD,AGD,Vampire Vengeance,Game,AGD Pack 62,32K+8K,,,,,,,,present,Kees van Oss,AGD/VAMPIRE,8200,"CH.""VVRUN""","VVCODE
 VVRUN
 VVSCR",,Works,
-1170,V1202,Modern,Non Comm,Adventure,Adventure,OZMOO,32K+6K,,,,,,,,present,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,"VDUMENU
+1170,V1202,Modern,Non Comm,Adventure,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Will Crowther and Don Woods,OZMOO/ADVENT,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1171,V1202,Modern,Non Comm,Alien Research Centre 3,Adventure,OZMOO,32K+6K,,,,,,,,present,John Wilson,OZMOO/ARC3,8200,*RUN VDUMENU,"VDUMENU
+1171,V1202,Modern,Non Comm,Alien Research Centre 3,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,John Wilson,OZMOO/ARC3,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1172,V1202,Modern,Non Comm,Behind Closed Doors 9,Adventure,OZMOO,32K+6K,,,,,,,,present,John Wilson,OZMOO/BCD9,8200,*RUN VDUMENU,"VDUMENU
+1172,V1202,Modern,Non Comm,Behind Closed Doors 9,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,John Wilson,OZMOO/BCD9,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1173,V1202,Modern,Infocom,Beyond Zork,Adventure,OZMOO,32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,"VDUMENU
+1173,V1202,Modern,Infocom,Beyond Zork,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/BEYZORK,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1174,V1202,Modern,Non Comm,Calypso,Adventure,OZMOO,32K+6K,,,,,,,,present,Dave Footitt,OZMOO/CALYPSO,8200,*RUN VDUMENU,"VDUMENU
+1174,V1202,Modern,Non Comm,Calypso,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Dave Footitt,OZMOO/CALYPSO,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1175,V1202,Modern,Non Comm,Hibernated 1 - Dir's Cut,Adventure,OZMOO,32K+6K,,,,,,,,present,Stefan Vogt,OZMOO/HIBER1,8200,*RUN VDUMENU,"VDUMENU
+1175,V1202,Modern,Non Comm,Hibernated 1 - Dir's Cut,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Stefan Vogt,OZMOO/HIBER1,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1176,V1202,Modern,Infocom,Hitchhiker's Guide,Adventure,OZMOO,32K+6K,,,,,,,,present,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN VDUMENU,"VDUMENU
+1176,V1202,Modern,Infocom,Hitchhiker's Guide,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,"Douglas Adams, Steve Meretzky",OZMOO/HITCH,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1177,V1202,Modern,Infocom,Hollywood Hijinx,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN VDUMENU,"VDUMENU
+1177,V1202,Modern,Infocom,Hollywood Hijinx,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,"Dave Anderson, Liz Cyr-Jones",OZMOO/HOLLY,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1178,V1202,Modern,Non Comm,The Job R5,Adventure,OZMOO,32K+6K,,,,,,,,present,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN VDUMENU,"VDUMENU
+1178,V1202,Modern,Non Comm,The Job R5,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Fredrik Ramsberg,OZMOO/THEJOB,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1179,V1202,Modern,Infocom,Leather Goddesses,Adventure,OZMOO,32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/LEATHER,8200,*RUN VDUMENU,"VDUMENU
+1179,V1202,Modern,Infocom,Leather Goddesses,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/LEATHER,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1180,V1202,Modern,Infocom,Planetfall,Adventure,OZMOO,32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/PLANET,8200,*RUN VDUMENU,"VDUMENU
+1180,V1202,Modern,Infocom,Planetfall,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Steve Meretzky,OZMOO/PLANET,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1181,V1202,Modern,Infocom,Wishbringer,Adventure,OZMOO,32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/WISH,8200,*RUN VDUMENU,"VDUMENU
+1181,V1202,Modern,Infocom,Wishbringer,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,Brian Moriarty,OZMOO/WISH,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1182,V1202,Modern,Infocom,Zork1,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN VDUMENU,"VDUMENU
+1182,V1202,Modern,Infocom,Zork1,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK1,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1183,V1202,Modern,Infocom,Zork2,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN VDUMENU,"VDUMENU
+1183,V1202,Modern,Infocom,Zork2,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK2,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
-1184,V1202,Modern,Infocom,Zork3,Adventure,OZMOO,32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN VDUMENU,"VDUMENU
+1184,V1202,Modern,Infocom,Zork3,Adventure,"OZMOO
+TUBE",32K+6K,,,,,,,,present,"Dave Liebling, Marc Blank",OZMOO/ZORK3,8200,*RUN VDUMENU,"VDUMENU
 GAME.DSK
 LOADER
 OZMOO2P",,Test,
