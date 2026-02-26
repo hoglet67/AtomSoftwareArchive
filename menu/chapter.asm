@@ -1030,7 +1030,7 @@ IF (info_option > 0)
 
 	LDX #1
 .filter_loop1
-	LDA #FilterSeparator2
+	LDA #FilterSeparator2Num
 	JSR WriteFacetToScreen
 	INX
 	CPX #CollectionsFilterNum
@@ -1040,7 +1040,7 @@ IF (info_option > 0)
 	LDY #CollectionsByteOffset
 	LDA (Title), Y
 	BPL title
-	LDA #FilterSeparator2
+	LDA #FilterSeparator2Num
 	JSR WriteFacetToScreen
 	INC Title
 	BNE filter_loop2
@@ -1245,7 +1245,7 @@ ENDIF
 .loop
 	JSR GetFilterValue
 	BCS next
-	LDA #FilterSeparator1
+	LDA #FilterSeparator1Num
 	JSR WriteFacetToScreen	; preserves X
 .next
 	INX
@@ -1509,14 +1509,21 @@ ENDIF
 {
 	BIT DisplayMode
 	BMI exit
+	; Test if there are any results
+	LDX RowCount
+	BNE loop
+	; No, then print NO RESULTS
+	LDX #NoResultsNum
+	JSR ScreenStringX
+	JSR PadToEOL
+	LDX #1
+	; If fewer than LinesPerPage results the output blank lines
 .loop
-	; We have hit the end of the sort list
-	LDA RowCount
-	CMP LinesPerPage
+	CPX LinesPerPage
 	BCS exit
 	LDY #CharsPerLine
 	JSR YSpaces
-	INC RowCount
+	INX
 	BNE loop		; Branch always
 .exit
 	RTS
@@ -2202,6 +2209,7 @@ ENDIF
 	EQUB String12 - StringBase
 	EQUB String13 - StringBase
 	EQUB String14 - StringBase
+	EQUB String15 - StringBase
 
 
 ; Padding for the first 9 strings
@@ -2262,6 +2270,9 @@ ENDIF
 
 .String14
 	EQUS ":", (' ' + &80)
+
+.String15
+	EQUS "NO MATCHE", ('S' + &80)
 
 
 include "common.asm"

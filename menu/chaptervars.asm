@@ -79,8 +79,9 @@
 	SortedByStringNum	= 10
 	PageMofNStringNum	= 11
 	SearchStringNum		= 12
-	FilterSeparator1	= 13
-	FilterSeparator2	= 14
+	FilterSeparator1Num	= 13
+	FilterSeparator2Num	= 14
+	NoResultsNum		= 15
 
 	; Field offsets into the secondary table record
 	FacetCountOffset	= 0	   ; the on-the-fly calculated  facet count where there is a seach
