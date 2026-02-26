@@ -405,7 +405,7 @@ ENDIF
 
 .test_for_select
 	; Test for select (select current item)
-	LDX Item
+	LDA Item
 	CPY #0	      	      	      	      	; <Space>
 	BEQ handle_select
 	CPY #Return				; <Return>
