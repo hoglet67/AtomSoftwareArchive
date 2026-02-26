@@ -662,11 +662,7 @@ ENDIF
 ;    C=1 if invalid
 .TestRowXActive
 {
-	CPX #MaxItems
-	BCS done
-	LDA RowReturnMSB, X
-	CMP #&FF		; C=0 if valid, C=1 if invalid
-.done
+	CPX RowCount
 	RTS
 }
 
