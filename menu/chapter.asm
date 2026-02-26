@@ -170,20 +170,9 @@ include "chaptervars.asm"
 	JSR FindFilterItem
 	BCS select_item		; C=0 if item found
 	STX Item		; save found item
-
-	; Gracefully handle the end of the list
 .select_item
-	LDX Item
-	JSR TestRowXActive
-	BCC highlight_item	; C=0 if item valid
-	DEC Item
-	BPL select_item
 
-	; This can happen if there are no items
-	BMI main_loop_release
-
-	; Highlight the currently active item
-.highlight_item
+	; Highlight the currently active item, if there is one and if it's valid
 	JSR HighlightItem
 
 .main_loop_release
@@ -2057,15 +2046,23 @@ ENDIF
 
 .HighlightItem
 {
-	LDA Item
-	CLC
+	; Gracefully handle the current item being invalid
+	LDX Item
+	INX
+.loop1
+	DEX
+	BMI done		; likely the results list is empty
+	JSR TestRowXActive	; return C=0 if the item is value
+	BCS loop1
+
+	; At this point we know the item is valid, so highlight it
+	STX Item		; the item might have changed, so save it
+	TXA
 	ADC StartLine
 	TAY
-	; Fall through to...
-}
 
-.HighlightRowY
-{
+.*HighlightRowY
+
 	JSR ScreenLineY
 	LDY #&1F
 .loop2
@@ -2074,6 +2071,7 @@ ENDIF
 	STA (Screen),Y
 	DEY
 	BPL loop2
+.done
 	RTS
 }
 
