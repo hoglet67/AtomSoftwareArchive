@@ -24,7 +24,7 @@ DUNGEON",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
 15,V1,Comm,Acornsoft,Intergalactic,Adventure,Atom Adventures,,,,,,,,,present,,AS/ADVENT,8200,"*LOAD ADVENTUR
 *RUN INTERGAL","ADVENTUR
 INTERGAL",,Works,https://acornatom.nl/atom_handleidingen/pdf/AdventurePack.pdf
-16,V1,Modern,Acornsoft,Sphinx Adv,Adventure,Atom Adventures,32K+8K,,Yes,No,No,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
+16,V1,Modern,Acornsoft,Sphinx Adv,Adventure,,32K+8K,,Yes,No,No,,,,present,,AS/ADVENT,8200,*RUN SPHINX,"SPHINX
 SPHINX1
 SPHINX2
 SPHINXIN",,Works,
@@ -389,7 +389,7 @@ FIZ-INSTR",,Works,
 255,V2,Comm,Ramtronics,Africa Diamond,Adventure,,,,,,,,,,present,,OTHER,8200,"CH.""AFRICA1""","AFRICA1
 AFRICA2",,Works,
 257,V5,Comm,Superlex,Draw Pic,Graphics,,,,,,,,,,present,,SUP,8200,"CH.""DRAWPIC""",DRAWPIC,,Works,
-259,V5,Comm,???,The I.A Atom Pencil,Graphics,,,,,,,,,,present,,TB,8200,"CH.""PENCIL""",PENCIL,,Works,
+259,V5,Non Comm,Non Comm,The Atomic Pencil,Graphics,,,,,,,,,,present,,TB,8200,"CH.""PENCIL""",PENCIL,,Works,
 260,V5,Comm,A&F S/W,Football Pools,Game,,,,,,,,,,present,,AF,8200,"CH.""POOLS""",POOLS,,Works,
 263,V2,Non Comm,Magnus Olsson,Atomia Akorny,Adventure,,,,,,,,,,present,,MO,8200,*RUN ATOMI,"ATOMI
 ATOMIDAT",,"Works - Dave updated lines 3100,3110 as original relied on an extension ROM to provide RESTORE/READ/DATA at line 3100.",
