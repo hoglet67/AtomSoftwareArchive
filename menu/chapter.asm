@@ -1267,15 +1267,13 @@ ENDIF
 ; On exit:
 ;     C=0 if found, A=value, X=position in the results list (0-based)
 ;     C=1 if not found
-; TODO: this doesn't currently handle the filter nor being set
 .FindFilterItem
 {
 	JSR GetFilterValue
 	BCS ExitC1
 	STA Tmp
-	LDX #&FF
-.loop	INX
-	LDA RowReturnMSB, X
+	LDX RowCount
+.loop	DEX
 	BMI ExitC1
 	LDA RowReturnLSB, X
 	CMP Tmp
@@ -1464,9 +1462,9 @@ ENDIF
 	STY StartRow
 	DEY
 	STY StartRow + 1
-.loop1
+.loop
 	CPY Page
-	BEQ done1
+	BEQ done
 	CLC
 	LDA StartRow
 	ADC LinesPerPage
@@ -1475,14 +1473,8 @@ ENDIF
 	INC StartRow + 1
 .nocarry
 	INY
-	BNE loop1
-.done1
-	LDY #MaxItems - 1
-	LDA #&FF
-.loop2
-	STA RowReturnMSB, Y
-	DEY
-	BPL loop2
+	BNE loop
+.done
 	RTS
 }
 
