@@ -751,14 +751,15 @@ RamRomUnknownStringNum 	  = 1
 RamRomAtom2K15StringNum   = 2
 RamRomYARRBStringNum 	  = 3
 RamRomRamothStringNum 	  = 4
-RamRomTestFaultStringNum  = 5
-Processor65C02StringNum   = 6
-Processor6502StringNum    = 7
-LowerRAMStringNum 	  = 8
-UpperRAMStringNum 	  = 9
-Help1StringNum 		  = 10
-Help2StringNum 		  = 11
-Help3StringNum 		  = 12
+RamRomGoSDCProStringNum	  = 5
+RamRomTestFaultStringNum  = 6
+Processor65C02StringNum   = 7
+Processor6502StringNum    = 8
+LowerRAMStringNum 	  = 9
+UpperRAMStringNum 	  = 10
+Help1StringNum 		  = 11
+Help2StringNum 		  = 12
+Help3StringNum 		  = 13
 
 .HelpStringTable
 {
@@ -767,6 +768,7 @@ Help3StringNum 		  = 12
 	EQUW RamRomAtom2K15
 	EQUW RamRomYARRB
 	EQUW RamRomRamoth
+	EQUW RamRomGoSDCPro
 	EQUW RamRomTestFault
 	EQUW Processor65C02
 	EQUW Processor6502
@@ -790,6 +792,9 @@ Help3StringNum 		  = 12
 
 .RamRomRamoth
 	EQUS "RAMROM Board: Ramoth (Prime)", 0
+
+.RamRomGoSDCPro
+	EQUS "RAMROM Board: GoSDC Pro", 0
 
 .RamRomTestFault
 	EQUS "RAMROM Board: Test failed", 0
@@ -1034,6 +1039,7 @@ Help3StringNum 		  = 12
 {
 	LDA #RamRomTypeNone
 	STA RamRomType
+
 	; Test if bit 7 of BFFE is writable, which identifies YARRB/Atom2K15
 	LDA &BFFE
 	EOR #&80
@@ -1045,13 +1051,13 @@ Help3StringNum 		  = 12
 	PLP
 	BEQ yarrb_or_atom2k15
 
-	; Test specifically for Prime's Rammoth board
-	JSR test_for_ramoth
+	; Test specifically for Prime's Ramoth board
+	JSR TestForRamoth
 	BCS done
 
-	; TODO Test for GoSDC Pro
-	; JSR TestForGoSDCPro
-	; BCD done
+	; Test for GoSDC Pro after Ramoth, otherwise we get a false positive
+	JSR TestForGoSDCPro
+	BCS done
 
 	; Test if BFFE is returning the undriven value (&B1)
 	AND #&F1
@@ -1123,9 +1129,11 @@ Help3StringNum 		  = 12
 	PLP
 	BNE return_yarrb	; Hole is present at A00 (i.e. no RAM), so this must be YARRB
 	BEQ return_atom2k15	; Hole is absent at A00 (i.e. still RAM), so this must be an Atom2K15
+}
 
 	; Test for aliasing between &7000 and &A000 to positively identify Primes's board
-.test_for_ramoth
+.TestForRamoth
+{
 	; C=0 indicates board not found
 	CLC
 	; Save BFFE state (at there may be a ROM loaded into A000)
@@ -1153,7 +1161,7 @@ Help3StringNum 		  = 12
 	BNE no_match
 	INX
 	BNE loop2
-	; Sequence found!
+	; Ramoth found!
 	LDA #RamRomTypeRamoth
 	STA RamRomType
 	SEC
@@ -1173,9 +1181,51 @@ Help3StringNum 		  = 12
 	PLA
 	STA &BFFE
 	RTS
-
 }
 
+
+.TestForGoSDCPro
+{
+	; C=0 indicates board not found
+	CLC
+	; Test RAM with write protection on
+	LDA #&81
+	JSR test_byte
+	; Fail if RAM detected
+	BEQ done
+	; Test RAM with write protection off
+	LDA #&80
+	JSR test_byte
+	; Fail if RAM not detected
+	BNE done
+	; GoSDC Pro found!
+	LDA #RamRomTypeGoSDCPro
+	STA RamRomType
+	SEC
+.done
+	; Leave board write protected
+	LDA #&81
+	STA &BFFF
+	; Leave board with ROM 0 selected
+	LDA #&00
+	STA &BFFF
+	RTS
+
+	; Test A000 byte, none-destructively
+.test_byte
+	STA &BFFF	; set write protect (if this is GoSDCPro)
+	LDX &A000	; save original value
+	TXA
+	EOR #&FF
+	STA &A000	; write the inverse of what was read
+	NOP
+	NOP		; wait a while to avoid bus capacitance affects
+	NOP
+	NOP
+	EOR &A000	; test it Z=1 if RAM; Z=0 if ROM
+	STX &A000	; restore original value without affecting flags
+	RTS
+}
 
 .FontData
 	EQUB &00

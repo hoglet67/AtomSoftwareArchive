@@ -33,7 +33,8 @@
 	RamRomTypeAtom2K15	= &02
 	RamRomTypeYARRB		= &03
 	RamRomTypeRamoth	= &04
-	RamRomTypeTestFault	= &05
+	RamRomTypeGoSDCPro	= &05
+	RamRomTypeTestFault	= &06
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Zero Page
