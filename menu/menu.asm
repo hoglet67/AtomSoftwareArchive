@@ -1038,21 +1038,22 @@ Help3StringNum 		  = 11
 	EOR #&80
 	STA &BFFE
 	PLP
-	BEQ LL1
+	BEQ yarrb_or_atom2k15
 	; Test if BFFE is returning the undriven value (&B1)
 	AND #&F1
 	CMP #&B1
-	BEQ LL0		; Undriven, so conclude no board is present
+	BEQ done		; Undriven, so conclude no board is present
 	; There is a RamRom board, but it's type is unknown (probably Prime's)
 	LDA #RamRomTypeUnknown
 	STA RamRomType
-.LL0
+.done
 	RTS
-.LL1
+
+.yarrb_or_atom2k15
 	; Distinguish between YARRB and an "original" Atom2K15
 	; The test we do depends on BFFE bit 4 (the upper mode bit) which controls the YARRB mode
 	AND #&10
-	BNE LL4
+	BNE test_for_a00_hole
 	; Distinguish between YARRB in Atom RamRom mode and an "original" Atom2K15
 	; Test whether BFFE bit 0 (xma0) controls banked RAM at 0x4000-0x7FFF
 	; If flipping bit 0 switches bank, this is an "original" Atom2K15,
@@ -1068,24 +1069,25 @@ Help3StringNum 		  = 11
 	STA &BFFE	; Toggle bank
 	LDX &4000
 	CPX #&5A	; 5A mean bank switching, so Atom2K15
-	BEQ LL2
+	BEQ return_atom2k15
 	CPX #&A5	; A5 means no bank switching, so YARRB
-	BEQ LL3
+	BEQ return_yarrb
 	; Anything else is regarded as a failure of the test for now.
 	; Note: this could be triggered by an unknown board that
 	; returned an even value in the upper nibble when BFFE is read.
 	LDA #RamRomTypeTestFault
 	STA RamRomType
 	RTS
-.LL2
+.return_atom2k15
 	LDA #RamRomTypeAtom2K15
 	STA RamRomType
 	RTS
-.LL3
+.return_yarrb
 	LDA #RamRomTypeYARRB
 	STA RamRomType
 	RTS
-.LL4
+
+.test_for_a00_hole
 	; Distinguish between YARRB in Atom2K15 mode and a "original" Atom2K15
 	; Test whether clearing BFFE bit 2 (DskRamEn) creates a hole at &A00
 	; (YARRB has this feature; Atom2K15 does not)
@@ -1102,8 +1104,8 @@ Help3StringNum 		  = 11
 	STA &A00
 	STX &BFFE
 	PLP
-	BNE LL3		; Hole is present at A00 (i.e. no RAM), so this must be YARRB
-	BEQ LL2		; Hole is absent at A00 (i.e. still RAM), so this must be an Atom2K15
+	BNE return_yarrb	; Hole is present at A00 (i.e. no RAM), so this must be YARRB
+	BEQ return_atom2k15	; Hole is absent at A00 (i.e. still RAM), so this must be an Atom2K15
 }
 
 
