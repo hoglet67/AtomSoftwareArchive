@@ -750,14 +750,15 @@ RamRomNoneStringNum	  = 0
 RamRomUnknownStringNum 	  = 1
 RamRomAtom2K15StringNum   = 2
 RamRomYARRBStringNum 	  = 3
-RamRomTestFaultStringNum  = 4
-Processor65C02StringNum   = 5
-Processor6502StringNum    = 6
-LowerRAMStringNum 	  = 7
-UpperRAMStringNum 	  = 8
-Help1StringNum 		  = 9
-Help2StringNum 		  = 10
-Help3StringNum 		  = 11
+RamRomRamothStringNum 	  = 4
+RamRomTestFaultStringNum  = 5
+Processor65C02StringNum   = 6
+Processor6502StringNum    = 7
+LowerRAMStringNum 	  = 8
+UpperRAMStringNum 	  = 9
+Help1StringNum 		  = 10
+Help2StringNum 		  = 11
+Help3StringNum 		  = 12
 
 .HelpStringTable
 {
@@ -765,6 +766,7 @@ Help3StringNum 		  = 11
 	EQUW RamRomUnknown
 	EQUW RamRomAtom2K15
 	EQUW RamRomYARRB
+	EQUW RamRomRamoth
 	EQUW RamRomTestFault
 	EQUW Processor65C02
 	EQUW Processor6502
@@ -785,6 +787,9 @@ Help3StringNum 		  = 11
 
 .RamRomYARRB
 	EQUS "RAMROM Board: YARRB", 0
+
+.RamRomRamoth
+	EQUS "RAMROM Board: Ramoth (Prime)", 0
 
 .RamRomTestFault
 	EQUS "RAMROM Board: Test failed", 0
@@ -1039,11 +1044,23 @@ Help3StringNum 		  = 11
 	STA &BFFE
 	PLP
 	BEQ yarrb_or_atom2k15
+
+	; Test specifically for Prime's Rammoth board
+	JSR test_for_ramoth
+	BCS done
+
+	; TODO Test for GoSDC Pro
+	; JSR TestForGoSDCPro
+	; BCD done
+
 	; Test if BFFE is returning the undriven value (&B1)
 	AND #&F1
 	CMP #&B1
 	BEQ done		; Undriven, so conclude no board is present
-	; There is a RamRom board, but it's type is unknown (probably Prime's)
+
+	; TODO: Would it be better to test for a BFFF page register?
+
+	; There is a RamRom board, but it's type is unknown at this point
 	LDA #RamRomTypeUnknown
 	STA RamRomType
 .done
@@ -1106,6 +1123,57 @@ Help3StringNum 		  = 11
 	PLP
 	BNE return_yarrb	; Hole is present at A00 (i.e. no RAM), so this must be YARRB
 	BEQ return_atom2k15	; Hole is absent at A00 (i.e. still RAM), so this must be an Atom2K15
+
+	; Test for aliasing between &7000 and &A000 to positively identify Primes's board
+.test_for_ramoth
+	; C=0 indicates board not found
+	CLC
+	; Save BFFE state (at there may be a ROM loaded into A000)
+	LDA &BFFE
+	PHA
+	; Clear bit 0 (RAM at 7000, ROM at A000)
+	AND #&FE
+	STA &BFFE
+	; Write sequence to &70xx, saveing original contents
+	LDX #0
+.loop1
+	LDA &7000, X
+	STA TextBuffer, X
+	TXA
+	STA &7000, X
+	INX
+	BNE loop1
+	; Set bit 0 (RAM now at A000)
+	LDA &BFFE
+	ORA #1
+	STA &BFFE
+	; Test for sequence at &A0xx
+.loop2	TXA
+	EOR &A000, X
+	BNE no_match
+	INX
+	BNE loop2
+	; Sequence found!
+	LDA #RamRomTypeRamoth
+	STA RamRomType
+	SEC
+.no_match
+	; Clear bit 0 (RAM at 7000, ROM at A000)
+	LDA &BFFE
+	AND #&FE
+	STA &BFFE
+	; Restore original contents
+	LDX #0
+.loop3
+	LDA TextBuffer, X
+	STA &7000, X
+	INX
+	BNE loop3
+	; Restore original BFFE state
+	PLA
+	STA &BFFE
+	RTS
+
 }
 
 

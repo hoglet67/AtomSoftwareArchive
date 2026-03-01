@@ -32,7 +32,8 @@
 	RamRomTypeUnknown	= &01
 	RamRomTypeAtom2K15	= &02
 	RamRomTypeYARRB		= &03
-	RamRomTypeTestFault	= &04
+	RamRomTypeRamoth	= &04
+	RamRomTypeTestFault	= &05
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Zero Page
